@@ -4,30 +4,27 @@ body {
     padding: 0;
     width: 100%;
     height: 100vh;
-    background: #000;
+    background: #141414c4;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .main-container {
     display: grid;
-    grid-template-columns: 4.5fr 1fr;
+    grid-template-columns: calc(100% - 365px) 365px;
     gap: 15px;
     border-radius: 5px;
-    height: 100vh;
-    padding: 10px;
+    padding: 0px 10px;
     box-sizing: border-box;
-    
 }
 
 .element-container {
     padding: 10px;
-    margin: -15px 0px 15px 0px;
-    
+    margin: -5px 0px 10px -30px;
 }
 
 .nav {
   list-style: none;
-  
-  border: 2px solid #000;
   border-radius: 6px 6px 0 0;
 }
 
@@ -44,12 +41,12 @@ body {
     box-shadow: inset 0 0 2px #555;
     height: 30px;
     background: #333;
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#333), to(#111));
+    background-image: linear-gradient(to bottom, #333, #111);
     cursor: pointer;
 }
 .nav li:hover {
-  border-top: 2px solid #333;
-   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#222), to(#333));
+    border-top: 2px solid #333;
+    background-image: linear-gradient(to bottom, #222, #333);
 
 }
 .nav li:first-child {
@@ -66,22 +63,57 @@ body {
     flex-direction: column;
 }
 
+.json-and-buttons-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+    margin-right: 15px;
+}
+
+.buttons-container {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+    justify-content: flex-end;
+}
+
+.json-buttons {
+    width: 160px;
+    height: 39px;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #808080;
+}
+
+.json-buttons:hover {
+    background: #808080;
+    color: black;
+    font-weight: bold;
+}
+
 .json-container {
     background-color: lightgray;
     margin-right: 5px;
-    margin-bottom: 10px;
+    overflow-x: hidden;
     border: 3px solid #808080;
     padding: 5px;
     border-radius: 5px;
-  }
+    flex: 1; 
+    overflow-y: auto;
+}
 
 .container {
     border: 2px solid #808080;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 20px 10px;
-    margin: 10px 5px;
+    margin: 15px 0px;
     position: relative;
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#222), to(#333));
+    background-image: linear-gradient(to bottom, #272727, #4d4b4b);
 }
 
 .container-title {
@@ -93,11 +125,11 @@ body {
     font-size: 18px;
     font-weight: bold;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 
 .glow-on-hover {
+
     width: 200px;
     height: 65px;
     border: none;
@@ -121,20 +153,23 @@ body {
     background-size: 400%;
     z-index: -1;
     filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
+    width: calc(100% + 7px);
+    height: calc(100% + 7px);
     animation: glowing 20s linear infinite;
     opacity: 0;
     transition: opacity .3s ease-in-out;
     border-radius: 10px;
+    
 }
 
 .glow-on-hover:active {
-    color: #000
+    color: #000;
+    
 }
 
 .glow-on-hover:active:after {
     background: transparent;
+    
 }
 
 .glow-on-hover:hover:before {
@@ -151,10 +186,15 @@ body {
     left: 0;
     top: 0;
     border-radius: 10px;
+    border: 1px solid #808080;
 }
 
 @keyframes glowing {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
+}
+
+.icon-attribution {
+    color:#555
 }
