@@ -20,11 +20,37 @@ function handleDragEnd() {
     draggedModule.classList.remove("dragging");
     offsetX = 0;
     offsetY = 0;
+
+    if (draggedModule.shadow) {
+        document.body.removeChild(draggedModule.shadow);
+        draggedModule.shadow = null;
+    }
+
     saveState()
 }
 
 function handleDragOver(event) {
     event.preventDefault();
+
+    if (draggedModule && draggedModule.classList.contains("dragging")) {
+        if (!draggedModule.shadow) {
+            const shadow = draggedModule.cloneNode(true);
+            shadow.classList.remove("dragging");
+            shadow.style.position = "fixed";
+            shadow.style.pointerEvents = "none";
+            shadow.style.opacity = "0.7";
+            shadow.style.zIndex = "1000";
+            shadow.style.transition = "none";
+            shadow.style.transform = "translate(-50%, -50%)"; // Dostosowanie położenia
+
+            document.body.appendChild(shadow);
+            draggedModule.shadow = shadow;
+        }
+        
+        // Aktualizujemy pozycję cienia podczas przeciągania
+        draggedModule.shadow.style.left = event.clientX + "px";
+        draggedModule.shadow.style.top = event.clientY + "px";
+    }
 }
 
 function handleDrop(event) {
@@ -46,6 +72,7 @@ function createDOMEvenets() {
         singleModuleContainer.addEventListener("dragover", handleDragOver);
         singleModuleContainer.addEventListener("drop", handleDrop);
     });
+    document.addEventListener("dragover", handleDragOver);
 }
 
 

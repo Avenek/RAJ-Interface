@@ -261,6 +261,7 @@ body {
 
 .glow-on-hover:hover:before {
     opacity: 1;
+    
 }
 
 .glow-on-hover:after {
@@ -291,6 +292,6 @@ body {
     color:#555
 }
 
-a, img {
+img {
     pointer-events: none;
 }
