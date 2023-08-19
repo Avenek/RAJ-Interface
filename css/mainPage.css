@@ -290,3 +290,7 @@ body {
 .icon-attribution {
     color:#555
 }
+
+a, img {
+    pointer-events: none;
+}
