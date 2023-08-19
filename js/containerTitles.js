@@ -14,6 +14,7 @@ const settingForm = (e) => {
     const titleIndex = Array.from(titles).indexOf(titleDiv);
 
     const input = document.createElement("input");
+    input.style.width = "200px";
     input.type = "text";
     input.value = titleDiv.textContent;
 
@@ -31,11 +32,12 @@ const changeName = (event, titleDiv, input, titleIndex) => {
         if (newValue !== "") {
             titleDiv.textContent = newValue;
             localStorage.setItem(`title-${titleIndex}`, newValue);
-            titleDiv.nextElementSibling.style.display = "none";
             input.remove();
 
         } else {
-            titleDiv.nextElementSibling.style.display = "block";
+            errorInfo = errorInfo = titleDiv.nextElementSibling
+            errorInfo.textContent = "Wprowadź nazwę kategorii!"
+            errorInfo.style.display = "block";
         }
         
     }

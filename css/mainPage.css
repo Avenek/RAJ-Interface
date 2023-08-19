@@ -276,6 +276,11 @@ body {
     border: 1px solid #808080;
 }
 
+.dragging {
+    opacity: 0.5;
+    z-index: 3;
+}
+
 @keyframes glowing {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
