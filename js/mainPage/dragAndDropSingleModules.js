@@ -25,10 +25,9 @@ function handleDragStart(event) {
 
 function handleDragOver(event) {
     event.preventDefault();
-
     if (draggedModule && draggedModule.classList.contains("dragging")) {
-        draggedModule.shadow.style.left = event.clientX + "px";
-        draggedModule.shadow.style.top = event.clientY + "px";
+        draggedModule.shadow.style.left = event.pageX + "px";
+        draggedModule.shadow.style.top = event.pageY + "px";
     }
 }
 
@@ -51,47 +50,68 @@ function handleDrop(event) {
         dropOnEmptyArea(event)
     } 
     else if (event.target.classList.contains("glow-on-hover") && event.currentTarget.classList.contains("single-module-container") && draggedModule && draggedModule !== event.currentTarget){
-        if (event.clientX < event.currentTarget.getBoundingClientRect().left + event.currentTarget.clientWidth / 2) {
-            event.target.parentNode.parentNode.parentNode.insertBefore(draggedModule, event.target.parentNode.parentNode)     
-        } 
-        else {
-            event.target.parentNode.parentNode.parentNode.insertBefore(draggedModule, event.target.parentNode.parentNode.nextSibling)             
-        }
+        dropOnSingleModule(event)
     }
 }
 
 function dropOnEmptyArea(event){
-    if(singleModulesContainers.length===0)
+
+    const moduleContainers = event.target.querySelectorAll(".single-module-container");
+    if(moduleContainers.length===0)
     {
         event.target.append(draggedModule)
         return
     }
     let targetContainer = null
-    for (let i = 1 ; i< singleModulesContainers.length ; i++) {
-        const moduleBeforeRect = singleModulesContainers[i-1].getBoundingClientRect()
-        const moduleRect = singleModulesContainers[i].getBoundingClientRect()
+    for (let i = 1 ; i< moduleContainers.length ; i++) {
+        const moduleBeforeRect = moduleContainers[i-1].getBoundingClientRect()
+        const moduleRect = moduleContainers[i].getBoundingClientRect()
 
-        if (event.clientY > moduleRect.top && event.clientY < moduleRect.bottom) {
-            if(event.clientX < moduleBeforeRect.left)
+        if ((event.pageY > moduleRect.top && event.pageY < moduleRect.bottom) || (event.pageY > moduleBeforeRect.top && event.pageY < moduleBeforeRect.bottom)) {
+            if(event.pageX < moduleBeforeRect.left && moduleRect.top == moduleBeforeRect.top)
             {
-                targetContainer = singleModulesContainers[i-1]
+                targetContainer = moduleContainers[i-1]
                 targetContainer.parentNode.insertBefore(draggedModule, targetContainer)
+                draggedModule.insertAdjacentHTML('afterend', '\n');
                 return
             }
-            else if(event.clientX > moduleRect.right && i == singleModulesContainers.length-1)
+            else if(event.pageX > moduleRect.right && i == moduleContainers.length-1)
             {
-                targetContainer = singleModulesContainers[i]
+                targetContainer = moduleContainers[i]
                 targetContainer.parentNode.append(draggedModule)
+                draggedModule.insertAdjacentHTML('afterend', '\n');
                 return
             }
-            else if(event.clientX > moduleBeforeRect.right && event.clientX < moduleBeforeRect.left)
+            else if((event.pageX > moduleBeforeRect.right && event.pageX < moduleRect.left && moduleRect.top == moduleBeforeRect.top) || (event.pageX > moduleBeforeRect.right && moduleRect.top != moduleBeforeRect.top && event.pageY<moduleBeforeRect.bottom))
             {
-                targetContainer = singleModulesContainers[i]
+                targetContainer = moduleContainers[i]
                 targetContainer.parentNode.insertBefore(draggedModule, targetContainer)
+                draggedModule.insertAdjacentHTML('afterend', '\n');
                 return
-            }   
+            }
         }
     }
+}
+
+function dropOnSingleModule(event)
+{
+    const targetModule = event.target.parentNode.parentNode
+    const targetModuleParent = event.target.parentNode.parentNode.parentNode
+    if(isDroppedOnLeftSide(event))
+    {
+        console.log(1);
+        targetModuleParent.insertBefore(draggedModule, targetModule) 
+        draggedModule.insertAdjacentHTML('afterend', '\n');
+    } 
+    else {
+        console.log(2);
+        targetModuleParent.insertBefore(draggedModule, targetModule.nextSibling)
+        targetModule.insertAdjacentHTML('afterend', '\n');
+    }
+}
+
+function isDroppedOnLeftSide(event){
+    return event.pageX < event.currentTarget.getBoundingClientRect().left + event.currentTarget.clientWidth / 2
 }
 
 function handleDragEnd() {
@@ -139,5 +159,3 @@ function restoreState() {
 }
 
 document.addEventListener("DOMContentLoaded", restoreState());
-
-//localStorage.clear()
