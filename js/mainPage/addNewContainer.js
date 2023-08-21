@@ -3,7 +3,7 @@ const addButton = document.querySelector(".plus-circle")
 function createNewContainer(){
     const containerHTML = `
             <div class="container-title">Nowy kontener</div>
-            <p class="error-info"></p>
+            <p class="error-info hide"></p>
             <button class="edit-icon"><i class="fas fa-cog"></i></button>
             <button class="delete-button">&#128465;</button>
     `;
