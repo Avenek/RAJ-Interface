@@ -1,15 +1,8 @@
 deleteButtons = document.querySelectorAll(".delete-button")
 
-// Sprawdzenie, czy kontener jest pusty
-function isContainerEmpty(container) {
-    const singleModuleContainers = container.querySelectorAll(".single-module-container");
-    return singleModuleContainers.length === 0;
-}
-
 // Obsługa kliknięcia na element "X"
 function handleDeleteClick(event) {
     const container = event.target.parentNode
-    console.log(container);
     container.remove()
     saveState()
 }
@@ -26,6 +19,12 @@ function updateContainerWithDeleteElement(container) {
     else if (!isContainerEmptyValue && !deleteButton.classList.contains("hide")) {
         deleteButton.classList.add("hide")
     }
+}
+
+// Sprawdzenie, czy kontener jest pusty
+function isContainerEmpty(container) {
+    const singleModuleContainers = container.querySelectorAll(".single-module-container");
+    return singleModuleContainers.length === 0;
 }
 
 deleteButtons.forEach(btn => {

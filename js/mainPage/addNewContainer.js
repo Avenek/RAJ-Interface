@@ -1,6 +1,6 @@
 const addButton = document.querySelector(".plus-circle")
 
-const createNewContainer = () => {
+function createNewContainer(){
     const containerHTML = `
             <div class="container-title">Nowy kontener</div>
             <p class="error-info"></p>
@@ -25,20 +25,19 @@ const createNewContainer = () => {
     return newContainer;
 }
 
-const pushNewContainer = () => {
+function pushNewContainer(){
     const containers = document.querySelectorAll(".container")
     if(containers.length<7)
     {
         const newContainer = createNewContainer()
         const mainContainer = document.querySelector(".sraj-modules-container")
         mainContainer.append(newContainer);
+        saveState()
     }
     else
     {
         alert('Nie możesz mieć więcej niż 7 kontenerów.')
     }
-    saveState()
-
 }
 
 addButton.addEventListener("click", pushNewContainer)

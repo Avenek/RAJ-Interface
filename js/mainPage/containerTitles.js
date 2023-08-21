@@ -9,14 +9,11 @@ const defaultTitles = [
 ];
 
 
-const settingForm = (e) => {
+function  settingForm(e){
     const titleDiv = e.target.parentElement.parentElement.querySelector(".container-title");
     const titleIndex = Array.from(titles).indexOf(titleDiv);
 
-    const input = document.createElement("input");
-    input.style.width = "200px";
-    input.type = "text";
-    input.value = titleDiv.textContent;
+    const input = createInput(titleDiv)
 
     input.addEventListener("keyup", (event) => changeName(event, titleDiv, input, titleIndex));
     input.addEventListener("blur", (event) => changeName(event, titleDiv, input, titleIndex));
@@ -26,18 +23,29 @@ const settingForm = (e) => {
     input.focus();
 };
 
-const changeName = (event, titleDiv, input, titleIndex) => {
+function createInput(titleDiv){
+    const input = document.createElement("input");
+    input.style.width = "200px";
+    input.type = "text";
+    input.value = titleDiv.textContent;
+
+    return input
+}
+
+function changeName(event, titleDiv, input, titleIndex){
     if (event.key === "Enter" || event.type === "blur") {
         const newValue = input.value.trim();
+        const errorInfo = titleDiv.nextElementSibling
         if (newValue !== "") {
             titleDiv.textContent = newValue;
             localStorage.setItem(`title-${titleIndex}`, newValue);
+            errorInfo.classList.add("hide")
             input.remove();
 
-        } else {
-            errorInfo = errorInfo = titleDiv.nextElementSibling
+        } 
+        else {
             errorInfo.textContent = "Wprowadź nazwę kategorii!"
-            errorInfo.style.display = "block";
+            errorInfo.classList.remove("hide")
         }
         
     }
