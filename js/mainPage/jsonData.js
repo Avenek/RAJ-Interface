@@ -1,69 +1,165 @@
-jsonText = document.querySelector(".json-text")
-
-const dynamicData = {};
-
-
-class Weather {
-    constructor() {
-      this.list = [];
-    }
-  
-    addWeatherCondition(action, id, speedX = 0, speedY = 0) {
-      this.list.push({ action, id, speedX, speedY });
-    }
-  
-    removeWeatherCondition(index) {
-      if (index >= 0 && index < this.list.length) {
-        this.list.splice(index, 1);
+let dynamicData = {
+  "weather": {
+    "list": [
+      {
+        "action": "CREATE",
+        "name": "Snow",
+        "speedX": 0,
+        "speedY": 0
+      },
+      {
+        "action": "CREATE",
+        "name": "Rain",
+        "speedX": 2,
+        "speedY": -1
       }
+    ]
+  },
+  "mapFilter": {
+    "color": {
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 0.2
     }
-  }
-  
-  class MapFilter {
-    constructor(r, g, b, a) {
-      this.color = { r, g, b, a };
+  },
+    "floatObject": {
+      "list": [
+        {
+          "id": "chmura1",
+          "action": "CREATE",
+          "url": "chmury/obj1.png",
+          "x": 9,
+          "y": 14,
+          "withCreateInstantFadeIn": true,
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 255,
+            "a": 1
+          },
+          "behavior": {
+            "repeat": true,
+            "list": [
+              {
+                "name": "IDLE",
+                "duration": 1
+              },
+              {
+                "name": "ROTATION",
+                "speed": 2,
+                "addAngle": 180
+              },
+              {
+                "name": "IDLE",
+                "duration": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "chmura2",
+          "action": "CREATE",
+          "url": "chmury/obj1.png",
+          "x": 9,
+          "y": 14,
+          "withCreateInstantFadeIn": true,
+          "color": {
+            "r": 0,
+            "g": 255,
+            "b": 0,
+            "a": 1
+          },
+          "behavior": {
+            "repeat": true,
+            "list": [
+              {
+                "name": "IDLE",
+                "duration": 1
+              },
+              {
+                "name": "MOVE_TO_CORDS",
+                "x": 20,
+                "y": 15,
+                "attachRotation": {
+                  "addAngle": 90
+                }
+              },
+              {
+                "name": "IDLE",
+                "duration": 1
+              },
+              {
+                "name": "MOVE_TO_CORDS",
+                "x": 9,
+                "y": 20,
+                "attachRotation": {
+                  "addAngle": -180,
+                  "speed": 0.1
+                }
+              }
+            ]
+          }
+        }
+      ]
     }
-  }
+  };
 
-// Tworzenie instancji klas i dodawanie do dynamicData
-dynamicData.weather = new Weather();
-dynamicData.weather.addWeatherCondition("CREATE", "Snow");
-dynamicData.weather.addWeatherCondition("CREATE", "Rain", 2, -1);
-
-dynamicData.mapFilter = new MapFilter(0, 0, 0, 0.2);
-
-// Serializacja do JSON
-jsonText.textContent = JSON.stringify(dynamicData, null, 2);
-
-const elementContainer = document.querySelector(".element-container");
-
-function createHTMLStructure(data) {
-  const ul = document.createElement("ul");
-
+function createSrajModulesMenu(data) {
+  const ulList = document.querySelector(".sraj-modules-menu");
+  if (ulList.hasChildNodes()) {
+    while (ulList.firstChild) {
+      ulList.removeChild(ulList.firstChild);
+    }
+}
   for (let key in data) {
-    const listItem = document.createElement("li");
-    listItem.textContent = key;
-    console.log(key, data[key]);
-    if (typeof data[key] === "object" && !Array.isArray(data[key])) {
-      const nestedUl = createHTMLStructure(data[key]);
-      if (nestedUl.children.length > 0) {
-        listItem.appendChild(nestedUl);
-        ul.appendChild(listItem);
-      }
-    } else if (Array.isArray(data[key])) {
-      data[key].forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item.name || item.id;
-        ul.appendChild(li);
+    const moduleElement = document.createElement("li");
+    const aMainElement = document.createElement("a");
+    aMainElement.setAttribute("href", `/modules/${key}.html`);
+    aMainElement.textContent = key
+    aMainElement.textContent=key
+    moduleElement.append(aMainElement)
+    moduleElement.addEventListener("click", () => {
+      window.location.href = aMainElement.getAttribute("href");
+    });
+    ulList.append(moduleElement)
+    if(data[key].hasOwnProperty("list"))
+    {
+      const idUL = document.createElement("ul");
+      idUL.classList.add("submenu")
+      const ids = data[key].list.map(item => item.id || item.name);
+      ids.forEach(id => {
+        const liElement = document.createElement("li"); 
+        const aElement = document.createElement("a");
+        aElement.setAttribute("href", `/modules/${key}.html`);
+        aElement.textContent = id
+        liElement.addEventListener("click", () => {
+          window.location.href = aElement.getAttribute("href");
+        });
+        liElement.append(aElement)
+        idUL.append(liElement)
       });
+      moduleElement.appendChild(idUL);
     }
   }
-
-  return ul;
 }
 
+function updateJson()
+{
+  const jsonText = document.querySelector(".json-text")
+  try{
+    jsonText.value = JSON.stringify(dynamicData, null, 2);
+    jsonText.classList.remove("error-json")
+    saveJsonState()
+    createSrajModulesMenu(dynamicData);
+  }
+  catch(error)
+  {
+    jsonText.classList.add("error-json")
+  }
 
-// Tworzenie struktury HTML dla głównych kluczy
-const topLevelUl = createHTMLStructure(dynamicData);
-topLevelUl.classList.add("nav");
-elementContainer.appendChild(topLevelUl);
+}
+
+updateJson()
+
+

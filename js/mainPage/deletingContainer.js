@@ -1,4 +1,4 @@
-deleteButtons = document.querySelectorAll(".delete-button")
+const deleteButtons = document.querySelectorAll(".delete-button")
 
 // Obsługa kliknięcia na element "X"
 function handleDeleteClick(event) {

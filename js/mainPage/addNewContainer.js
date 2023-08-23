@@ -1,4 +1,4 @@
-const addButton = document.querySelector(".plus-circle")
+let addButton = document.querySelector(".plus-circle")
 
 function createNewContainer(){
     const containerHTML = `
@@ -18,8 +18,6 @@ function createNewContainer(){
     const deleteButton = newContainer.querySelector(".delete-button");
     deleteButton.addEventListener("click", handleDeleteClick);
 
-    const titles = document.querySelectorAll(".container-title");
-    const titleIndex = titles.length;
     return newContainer;
 }
 

@@ -1,7 +1,6 @@
 function saveSrajContainerState() {
     const mainContainerHTML = document.querySelector('.sraj-modules-container').innerHTML;
     localStorage.setItem('srajContainerState', mainContainerHTML);
-    console.log(mainContainerHTML);
 }
 
 function restoreSrajContainerState() {
@@ -12,4 +11,20 @@ function restoreSrajContainerState() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", restoreSrajContainerState());
+function saveJsonState() {
+    const jsonText = document.querySelector(".json-text")
+    localStorage.setItem('lastJson', jsonText.value);
+}
+
+function restoreLastJson(){
+    const jsonText = document.querySelector(".json-text")
+    savedJson = localStorage.getItem('lastJson');
+    if(savedJson)
+    {
+    jsonText.value = JSON.stringify(JSON.parse(savedJson), null, 2);
+    createSrajModulesMenu(dynamicData);
+    }
+}
+
+restoreSrajContainerState()
+restoreLastJson()
