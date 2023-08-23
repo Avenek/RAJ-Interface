@@ -20,8 +20,6 @@ function createNewContainer(){
 
     const titles = document.querySelectorAll(".container-title");
     const titleIndex = titles.length;
-    localStorage.setItem(`title-${titleIndex}`, "Nowy kontener");
-
     return newContainer;
 }
 
@@ -32,7 +30,7 @@ function pushNewContainer(){
         const newContainer = createNewContainer()
         const mainContainer = document.querySelector(".sraj-modules-container")
         mainContainer.append(newContainer);
-        saveState()
+        saveSrajContainerState()
     }
     else
     {

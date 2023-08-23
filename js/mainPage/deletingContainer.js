@@ -4,7 +4,7 @@ deleteButtons = document.querySelectorAll(".delete-button")
 function handleDeleteClick(event) {
     const container = event.target.parentNode
     container.remove()
-    saveState()
+    saveSrajContainerState()
 }
 
 // Funkcja, która dodaje element "X" do kontenera w zależności od stanu

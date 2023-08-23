@@ -1,12 +1,5 @@
 const cogWheels = document.querySelectorAll(".edit-icon");
 const titles = document.querySelectorAll(".container-title");
-const defaultTitles = [
-    "Moduły związane z postaciami",
-    "Moduły związane z mapą",
-    "Moduły związane z dialogiem",
-    "Pozostałe",
-    "Klucze funkcyjne"
-];
 
 
 function  settingForm(e){
@@ -38,7 +31,7 @@ function changeName(event, titleDiv, input, titleIndex){
         const errorInfo = titleDiv.nextElementSibling
         if (newValue !== "") {
             titleDiv.textContent = newValue;
-            localStorage.setItem(`title-${titleIndex}`, newValue);
+            saveSrajContainerState()
             errorInfo.classList.add("hide")
             input.remove();
 
@@ -51,13 +44,4 @@ function changeName(event, titleDiv, input, titleIndex){
     }
 };
 
-function setTitles() {
-    for (let i = 0; i < titles.length; i++) {
-        const savedTitle = localStorage.getItem(`title-${i}`);
-        titles[i].textContent = savedTitle || defaultTitles[i];
-    }
-}
-
-// Wywołanie funkcji do ustawiania tytułów po załadowaniu strony
-document.addEventListener("DOMContentLoaded", setTitles);
 cogWheels.forEach((button) => button.addEventListener("click", settingForm));

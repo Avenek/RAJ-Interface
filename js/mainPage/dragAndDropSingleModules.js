@@ -1,4 +1,4 @@
-let singleModulesContainers
+const singleModulesContainers = document.querySelectorAll(".single-module-container");
 const toolTips = document.querySelectorAll(".tool-tip")
 const containerLists = document.querySelectorAll('.container');
 const srajModuleContainers = document.querySelector(".sraj-modules-container")
@@ -123,7 +123,7 @@ function handleDragEnd() {
     }
     updateContainerWithDeleteElement(draggedElementParent)
     updateContainerWithDeleteElement(draggedModule.parentNode)
-    saveState()
+    saveSrajContainerState()
 }
 
 function createDOMEvenets() {
@@ -144,18 +144,4 @@ function createDOMEvenets() {
     })
 }
 
-function saveState() {
-    const mainContainerHTML = document.querySelector('.sraj-modules-container').innerHTML;
-    localStorage.setItem('srajContainerState', mainContainerHTML);
-}
-
-function restoreState() {
-    const mainContainerHTML = localStorage.getItem('srajContainerState');
-    if (mainContainerHTML) {
-        srajModuleContainers.innerHTML = mainContainerHTML;
-    }
-    singleModulesContainers = document.querySelectorAll(".single-module-container");
-    createDOMEvenets()
-}
-
-document.addEventListener("DOMContentLoaded", restoreState());
+document.addEventListener("DOMContentLoaded", createDOMEvenets());

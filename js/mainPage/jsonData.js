@@ -40,10 +40,10 @@ const elementContainer = document.querySelector(".element-container");
 function createHTMLStructure(data) {
   const ul = document.createElement("ul");
 
-  for (const key in data) {
+  for (let key in data) {
     const listItem = document.createElement("li");
     listItem.textContent = key;
-    console.log(listItem.textContent);
+    console.log(key, data[key]);
     if (typeof data[key] === "object" && !Array.isArray(data[key])) {
       const nestedUl = createHTMLStructure(data[key]);
       if (nestedUl.children.length > 0) {
