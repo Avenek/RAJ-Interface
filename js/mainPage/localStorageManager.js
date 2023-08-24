@@ -28,3 +28,5 @@ function restoreLastJson(){
 
 restoreSrajContainerState()
 restoreLastJson()
+
+localStorage.clear()

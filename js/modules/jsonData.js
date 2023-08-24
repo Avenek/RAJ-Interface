@@ -1,4 +1,24 @@
 let dynamicData = {
+  "characterEffect": {
+    "list":[
+      {
+        "action"        : "CREATE",
+        "id"          : "Sralala",
+        "windowTarget"  : "MAP",
+        "effect"        : "TINT",
+        "target"        : {
+          "kind": "NPC", 
+          "id": 1
+        },
+        "params": {
+          "duration": 0.2,
+          "color"   : {"r": 0, "g":0, "b":0},
+          "repeat"  : 2,
+          "delayBefore": 10
+        }
+      }
+    ]
+  },
   "weather": {
     "list": [
       {
@@ -150,14 +170,14 @@ function updateJson()
   try{
     jsonText.value = JSON.stringify(dynamicData, null, 2);
     jsonText.classList.remove("error-json")
-    saveJsonState()
-    createSrajModulesMenu(dynamicData);
+    
   }
   catch(error)
   {
     jsonText.classList.add("error-json")
   }
-
+  saveJsonState()
+  createSrajModulesMenu(dynamicData);
 }
 
 updateJson()
