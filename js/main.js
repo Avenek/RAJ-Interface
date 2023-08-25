@@ -1,11 +1,7 @@
-
-let addButton, deleteButtons, cogWheels
-const srajContainer = document.querySelector(".sraj-modules-container")
- 
+let addButton, deleteButtons, cogWheels, singleModulesContainers, toolTips, srajModuleContainers
 
 function createContainersContent(data)
 {
-    console.log(data.containers);
     let html = ''
     for(const container of data.containers)
     {   
@@ -36,6 +32,9 @@ function getElements(){
     addButton = document.querySelector(".plus-circle")
     deleteButtons = document.querySelectorAll(".delete-button")
     cogWheels = document.querySelectorAll(".edit-icon");
+    singleModulesContainers = document.querySelectorAll(".single-module-container");
+    toolTips = document.querySelectorAll(".tool-tip")
+    srajModuleContainers = document.querySelector(".sraj-modules-container")
 }
 
 function createDOMEvents(){
@@ -44,28 +43,48 @@ function createDOMEvents(){
         btn.addEventListener("click", handleDeleteClick)
     });
     cogWheels.forEach((button) => button.addEventListener("click", settingForm));
+    srajModuleContainers.addEventListener("drop", handleDrop)
+    singleModulesContainers.forEach((singleModuleContainer) => {
+        singleModuleContainer.addEventListener("dragstart", handleDragStart);
+        singleModuleContainer.addEventListener("dragend", handleDragEnd);
+        singleModuleContainer.addEventListener("dragover", handleDragOver);
+        singleModuleContainer.addEventListener("drop", handleDrop);
+    });
+    document.addEventListener("dragover", handleDragOver);
+    toolTips.forEach(toolTip => {
+        toolTip.addEventListener("mouseover", ()=>isHoverToolTip = true)
+        toolTip.addEventListener("mouseout", ()=>isHoverToolTip = false)
+    })
+
 }
 
-if(localStorage.getItem('containerConfig') !== null)
+function loadContent()
 {
-    const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
-    const html = createContainersContent(storedContainers)
-    srajContainer.innerHTML=html
-}
-else {
-    fetch('../config/containers.config')
-    .then(response => response.json())
-    .then(config => {
-      const html = createContainersContent(config)
-      srajContainer.innerHTML = html;
-      localStorage.setItem('containerConfig', JSON.stringify(config));
-    })
-    .catch(error => {
-      console.error('Błąd pobierania:', error);
-    })
+    const srajContainer = document.querySelector(".sraj-modules-container")
+    if(localStorage.getItem('containerConfig') !== null)
+    {
+        const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
+        const html = createContainersContent(storedContainers)
+        srajContainer.innerHTML=html
+    }
+    else {
+        fetch('../config/containers.config')
+        .then(response => response.json())
+        .then(config => {
+        const html = createContainersContent(config)
+        srajContainer.innerHTML = html;
+        localStorage.setItem('containerConfig', JSON.stringify(config));
+        })
+        .catch(error => {
+        console.error('Błąd pobierania:', error);
+        })
+    }
 }
 
+loadContent()
 document.addEventListener("DOMContentLoaded", () => {
     getElements()
     createDOMEvents()
 })
+
+

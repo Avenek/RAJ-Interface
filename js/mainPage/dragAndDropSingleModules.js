@@ -1,21 +1,18 @@
-const singleModulesContainers = document.querySelectorAll(".single-module-container");
-const toolTips = document.querySelectorAll(".tool-tip")
-const containerLists = document.querySelectorAll('.container');
-const srajModuleContainers = document.querySelector(".sraj-modules-container")
 let draggedElementParent;
 let draggedModule = null;
 let isHoverToolTip = false
+let moduleOnRightSide = null
+let moduleOnLeftSide = null
 
 function handleDragStart(event) {
     if(isHoverToolTip)
-    {
+    { 
         event.preventDefault();
         return
     }
     draggedModule = event.currentTarget;
     draggedModule.classList.add("dragging");
     draggedElementParent = draggedModule.parentNode
-    console.log(draggedModule);
 
     if (!draggedModule.shadow) {
         const shadow = createShadowButton()
@@ -63,7 +60,7 @@ function dropOnEmptyArea(event){
         event.target.append(draggedModule)
         return
     }
-    let targetContainer = null
+
     for (let i = 1 ; i< moduleContainers.length ; i++) {
         const moduleBeforeRect = moduleContainers[i-1].getBoundingClientRect()
         const moduleRect = moduleContainers[i].getBoundingClientRect()
@@ -71,23 +68,27 @@ function dropOnEmptyArea(event){
         if ((event.pageY > moduleRect.top && event.pageY < moduleRect.bottom) || (event.pageY > moduleBeforeRect.top && event.pageY < moduleBeforeRect.bottom)) {
             if(event.pageX < moduleBeforeRect.left && moduleRect.top == moduleBeforeRect.top)
             {
-                targetContainer = moduleContainers[i-1]
-                targetContainer.parentNode.insertBefore(draggedModule, targetContainer)
+                moduleOnRightSide = moduleContainers[i-1]
+                moduleOnRightSide.parentNode.insertBefore(draggedModule, moduleOnRightSide)
                 draggedModule.insertAdjacentHTML('afterend', '\n');
+                moduleOnRightSide = draggedModule.nextElementSibling
                 return
             }
             else if(event.pageX > moduleRect.right && i == moduleContainers.length-1)
             {
-                targetContainer = moduleContainers[i]
-                targetContainer.parentNode.append(draggedModule)
+                moduleOnRightSide = moduleContainers[i]
+                moduleOnRightSide.parentNode.append(draggedModule)
                 draggedModule.insertAdjacentHTML('afterend', '\n');
+                moduleOnRightSide = null
+                moduleOnLeftSide = draggedModule.previousElementSibling
                 return
             }
             else if((event.pageX > moduleBeforeRect.right && event.pageX < moduleRect.left && moduleRect.top == moduleBeforeRect.top) || (event.pageX > moduleBeforeRect.right && moduleRect.top != moduleBeforeRect.top && event.pageY<moduleBeforeRect.bottom))
             {
-                targetContainer = moduleContainers[i]
-                targetContainer.parentNode.insertBefore(draggedModule, targetContainer)
+                moduleOnRightSide = moduleContainers[i]
+                moduleOnRightSide.parentNode.insertBefore(draggedModule, moduleOnRightSide)
                 draggedModule.insertAdjacentHTML('afterend', '\n');
+                moduleOnRightSide = draggedModule.nextElementSibling
                 return
             }
         }
@@ -100,14 +101,15 @@ function dropOnSingleModule(event)
     const targetModuleParent = event.target.parentNode.parentNode.parentNode
     if(isDroppedOnLeftSide(event))
     {
-        console.log(1);
         targetModuleParent.insertBefore(draggedModule, targetModule) 
         draggedModule.insertAdjacentHTML('afterend', '\n');
+        moduleOnRightSide = draggedModule.nextElementSibling
     } 
     else {
-        console.log(2);
         targetModuleParent.insertBefore(draggedModule, targetModule.nextSibling)
         targetModule.insertAdjacentHTML('afterend', '\n');
+        moduleOnRightSide = draggedModule.nextElementSibling
+        moduleOnLeftSide = draggedModule.previousElementSibling
     }
 }
 
@@ -124,26 +126,46 @@ function handleDragEnd() {
     }
     updateContainerWithDeleteElement(draggedElementParent)
     updateContainerWithDeleteElement(draggedModule.parentNode)
-    saveSrajContainerState()
+    saveChangesToLocalStorage()
 }
 
-function createDOMEvenets() {
-    srajModuleContainers.addEventListener("drop", handleDrop)
-
-    singleModulesContainers.forEach((singleModuleContainer) => {
-        singleModuleContainer.addEventListener("dragstart", handleDragStart);
-        singleModuleContainer.addEventListener("dragend", handleDragEnd);
-        singleModuleContainer.addEventListener("dragover", handleDragOver);
-        singleModuleContainer.addEventListener("drop", handleDrop);
-    });
+function saveChangesToLocalStorage()
+{
+    const draggedModuleName = draggedModule.querySelector(".glow-on-hover").textContent;
+    const draggedModuleObject = storedContainers.containers
+    .flatMap(container => container.modules)
+    .find(module => module.name === draggedModuleName);
+    for (const container of storedContainers.containers) {
+        const draggedModuleIndex = container.modules.findIndex(module => module.name === draggedModuleName);
+        
+        if (draggedModuleIndex !== -1) {
+          container.modules.splice(draggedModuleIndex, 1);
+          break;
+        }
+    }
     
-    document.addEventListener("dragover", handleDragOver);
-
-    toolTips.forEach(toolTip => {
-        toolTip.addEventListener("mouseover", ()=>isHoverToolTip = true)
-        toolTip.addEventListener("mouseout", ()=>isHoverToolTip = false)
-    })
+     if(moduleOnRightSide!==null)
+     {
+        const rightDestinationModuleName = moduleOnRightSide.querySelector(".glow-on-hover").textContent;
+        for (const container of storedContainers.containers) {
+            const rightDestinationModule = container.modules.findIndex(module => module.name === rightDestinationModuleName);
+            
+            if (rightDestinationModule !== -1) {
+            container.modules.splice(rightDestinationModule, 0, draggedModuleObject);
+            break;
+            }
+        }
+    }
+    else {
+        const leftDestinationModuleName = moduleOnLeftSide.querySelector(".glow-on-hover").textContent;
+        for (const container of storedContainers.containers) {
+            const leftDestinationModule = container.modules.findIndex(module => module.name === leftDestinationModuleName);
+            
+            if (leftDestinationModule !== -1) {
+            container.modules.push(draggedModuleObject)
+            break;
+            }
+        }
+    } 
+    localStorage.setItem('containerConfig', JSON.stringify(storedContainers));
 }
-
-createDOMEvenets()
-console.log(containerLists);
