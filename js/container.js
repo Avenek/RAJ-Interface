@@ -1,4 +1,4 @@
-
+const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
 
 class Container{
     constructor(title, modules) {
@@ -36,8 +36,7 @@ function pushNewContainer(){
         const newContainer = createNewContainer()
         const mainContainer = document.querySelector(".sraj-modules-container")
         mainContainer.append(newContainer);
-        const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
-        storedContainers.containers.push({title: "Nowy kontener", modules:[]})
+        storedContainers.containers.push(new Container("Nowy kontener", []))
         localStorage.setItem('containerConfig', JSON.stringify(storedContainers));
     }
     else
@@ -67,9 +66,7 @@ function isContainerEmpty(container) {
 function handleDeleteClick(event) {
     const container = event.target.parentNode
     container.remove()
-    const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
-
-    deleteContainerTitle = event.target.parentNode.querySelector('.container-title').textContent
+    const deleteContainerTitle = event.target.parentNode.querySelector('.container-title').textContent
     const toDeleteContainer = storedContainers.containers.find(container => (container.title === deleteContainerTitle && container.modules.length === 0));
     if (toDeleteContainer) {
         const indexToDelete = storedContainers.containers.indexOf(toDeleteContainer);
@@ -84,3 +81,47 @@ function handleDeleteClick(event) {
         }
     } 
 }
+
+function  settingForm(e){
+    const titleDiv = e.target.parentElement.parentElement.querySelector(".container-title");
+    const input = createInput(titleDiv)
+    const oldTitle = titleDiv.textContent
+
+    input.addEventListener("keyup", (event) => changeName(event, titleDiv, input, oldTitle));
+    input.addEventListener("blur", (event) => changeName(event, titleDiv, input, oldTitle));
+
+    
+    titleDiv.textContent = "";
+    titleDiv.appendChild(input);
+    input.focus();
+};
+
+function createInput(titleDiv){
+    const input = document.createElement("input");
+    input.style.width = "200px";
+    input.type = "text";
+    input.value = titleDiv.textContent;
+
+    return input
+}
+
+function changeName(event, titleDiv, input, oldTitle){
+    if (event.key === "Enter" || event.type === "blur") {
+        const newValue = input.value.trim();
+        const errorInfo = titleDiv.nextElementSibling
+        console.log(storedContainers.containers.find(container => container.title === newValue)===undefined);
+        if ((newValue !== "" && storedContainers.containers.find(container => container.title === newValue) ===undefined) || newValue===oldTitle) {
+            const changingTitleContainer = storedContainers.containers.find(container => container.title === oldTitle);
+            changingTitleContainer.title = newValue
+            titleDiv.textContent = newValue;
+            localStorage.setItem('containerConfig', JSON.stringify(storedContainers));
+            errorInfo.classList.add("hide")
+            input.remove();  
+        } 
+        else {
+            errorInfo.textContent = "Wprowadź poprawną nazwę kategorii!"
+            errorInfo.classList.remove("hide")
+        }
+        
+    }
+};

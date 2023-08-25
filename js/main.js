@@ -1,5 +1,5 @@
 
-let addButton, deleteButtons
+let addButton, deleteButtons, cogWheels
 const srajContainer = document.querySelector(".sraj-modules-container")
  
 
@@ -33,8 +33,9 @@ function createContainersContent(data)
 }
 
 function getElements(){
-   addButton = document.querySelector(".plus-circle")
-   deleteButtons = document.querySelectorAll(".delete-button")
+    addButton = document.querySelector(".plus-circle")
+    deleteButtons = document.querySelectorAll(".delete-button")
+    cogWheels = document.querySelectorAll(".edit-icon");
 }
 
 function createDOMEvents(){
@@ -42,6 +43,7 @@ function createDOMEvents(){
     deleteButtons.forEach(btn => {
         btn.addEventListener("click", handleDeleteClick)
     });
+    cogWheels.forEach((button) => button.addEventListener("click", settingForm));
 }
 
 if(localStorage.getItem('containerConfig') !== null)
