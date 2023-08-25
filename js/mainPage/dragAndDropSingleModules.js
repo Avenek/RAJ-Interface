@@ -15,6 +15,7 @@ function handleDragStart(event) {
     draggedModule = event.currentTarget;
     draggedModule.classList.add("dragging");
     draggedElementParent = draggedModule.parentNode
+    console.log(draggedModule);
 
     if (!draggedModule.shadow) {
         const shadow = createShadowButton()
@@ -144,4 +145,5 @@ function createDOMEvenets() {
     })
 }
 
-document.addEventListener("DOMContentLoaded", createDOMEvenets());
+createDOMEvenets()
+console.log(containerLists);

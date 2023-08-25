@@ -1,0 +1,69 @@
+
+let addButton, deleteButtons
+const srajContainer = document.querySelector(".sraj-modules-container")
+ 
+
+function createContainersContent(data)
+{
+    console.log(data.containers);
+    let html = ''
+    for(const container of data.containers)
+    {   
+        let containerDiv = `<div class="container">
+        <div class="container-title">${container.title}</div>
+        <p class="error-info hide"></p>
+        <button class="edit-icon"><i class="fas fa-cog"></i></button>`
+        containerDiv+= container.modules.length!==0 ? `<button class="delete-button hide">&#128465;</button>\n` : `<button class="delete-button">&#128465;</button>\n`
+        for(const oneModule of container.modules)
+        {
+            containerDiv += `<div class="single-module-container">
+            <div class="tool-tip">
+                <i class="tool-tip__icon">i</i>
+                <p class="tool-tip__info">
+                  ${oneModule.tipInfo}
+                </p>
+              </div>
+            <a href=""><button class="glow-on-hover" type="button"><img src="obrazki/${oneModule.name.charAt(0).toLowerCase() + oneModule.name.slice(1)}.png" alt=""><br>${oneModule.name}</button></a>
+        </div>\n`
+        }
+        containerDiv+="</div>"
+        html +=containerDiv
+    }
+    return html
+}
+
+function getElements(){
+   addButton = document.querySelector(".plus-circle")
+   deleteButtons = document.querySelectorAll(".delete-button")
+}
+
+function createDOMEvents(){
+    addButton.addEventListener("click", pushNewContainer) 
+    deleteButtons.forEach(btn => {
+        btn.addEventListener("click", handleDeleteClick)
+    });
+}
+
+if(localStorage.getItem('containerConfig') !== null)
+{
+    const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
+    const html = createContainersContent(storedContainers)
+    srajContainer.innerHTML=html
+}
+else {
+    fetch('../config/containers.config')
+    .then(response => response.json())
+    .then(config => {
+      const html = createContainersContent(config)
+      srajContainer.innerHTML = html;
+      localStorage.setItem('containerConfig', JSON.stringify(config));
+    })
+    .catch(error => {
+      console.error('Błąd pobierania:', error);
+    })
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    getElements()
+    createDOMEvents()
+})
