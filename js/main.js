@@ -10,7 +10,7 @@ function loadContent()
         srajContainer.innerHTML=html
     }
     else {
-        fetch('../config/containers.json')
+        fetch('config/containers.json')
         .then(response => response.json())
         .then(config => {
         const html = createContainersContent(config)
