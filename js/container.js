@@ -1,5 +1,3 @@
-const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
-
 class Container{
     constructor(title, modules) {
         this.title = title
