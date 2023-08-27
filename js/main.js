@@ -88,5 +88,3 @@ document.addEventListener("DOMContentLoaded", () => {
     createDOMEvents()
 })
 const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
-
-

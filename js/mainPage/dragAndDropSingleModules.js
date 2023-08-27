@@ -1,8 +1,8 @@
 let draggedElementParent;
 let draggedModule = null;
-let isHoverToolTip = false
 let moduleOnRightSide = null
 let moduleOnLeftSide = null
+let isHoverToolTip = false
 
 function handleDragStart(event) {
     if(isHoverToolTip)
@@ -32,84 +32,93 @@ function handleDragOver(event) {
 function createShadowButton() {
     const shadow = draggedModule.cloneNode(true);
     shadow.classList.remove("dragging");
-    shadow.style.position = "fixed";
-    shadow.style.pointerEvents = "none";
-    shadow.style.opacity = "0.7";
-    shadow.style.zIndex = "1000";
-    shadow.style.transition = "none";
-    shadow.style.transform = "translate(-50%, -50%)";
+    shadow.classList.add("shadow");
 
     return shadow
 }
 
 function handleDrop(event) {
     event.preventDefault()
-    if (event.target.classList.contains("container")) {
+    if (isDroppedOnEmptyArea(event)) {
         dropOnEmptyArea(event)
     } 
-    else if (event.target.classList.contains("glow-on-hover") && event.currentTarget.classList.contains("single-module-container") && draggedModule && draggedModule !== event.currentTarget){
+    else if (isDroppedOnSingleModule(event)){
         dropOnSingleModule(event)
     }
+}
+
+function isDroppedOnEmptyArea(event) {
+    return event.target.classList.contains("container")
+}
+
+function isDroppedOnSingleModule(event) {
+    return event.target.classList.contains("glow-on-hover") && event.currentTarget.classList.contains("single-module-container") && draggedModule && draggedModule !== event.currentTarget
 }
 
 function dropOnEmptyArea(event){
 
     const moduleContainers = event.target.querySelectorAll(".single-module-container");
+    const firstContainerRect = moduleContainers[0].getBoundingClientRect()
+    const lastContainerRect = moduleContainers[moduleContainers.length-1].getBoundingClientRect()
     if(moduleContainers.length===0)
     {
         event.target.append(draggedModule)
         return
     }
+    else if(isDroppedBeforeFirstContainer(event, firstContainerRect))
+    {
+        moduleOnRightSide = moduleContainers[0]
+        insertDraggedBeforeGivenModule(moduleOnRightSide)
+        return
+    }
+    else if(isDroppedAfterLastContainer(event, lastContainerRect))
+    {
+        moduleOnLeftSide = moduleContainers[moduleContainers.length-1]
+        moduleOnLeftSide.parentNode.append(draggedModule)
+        draggedModule.insertAdjacentHTML('afterend', '\n');
+        return
+    }
 
     for (let i = 1 ; i< moduleContainers.length ; i++) {
         const moduleBeforeRect = moduleContainers[i-1].getBoundingClientRect()
-        const moduleRect = moduleContainers[i].getBoundingClientRect()
+        const moduleAfterRect = moduleContainers[i].getBoundingClientRect()
 
-        if ((event.pageY > moduleRect.top && event.pageY < moduleRect.bottom) || (event.pageY > moduleBeforeRect.top && event.pageY < moduleBeforeRect.bottom)) {
-            if(event.pageX < moduleBeforeRect.left && moduleRect.top == moduleBeforeRect.top)
-            {
-                moduleOnRightSide = moduleContainers[i-1]
-                moduleOnRightSide.parentNode.insertBefore(draggedModule, moduleOnRightSide)
-                draggedModule.insertAdjacentHTML('afterend', '\n');
-                moduleOnRightSide = draggedModule.nextElementSibling
-                return
-            }
-            else if(event.pageX > moduleRect.right && i == moduleContainers.length-1)
-            {
-                moduleOnRightSide = moduleContainers[i]
-                moduleOnRightSide.parentNode.append(draggedModule)
-                draggedModule.insertAdjacentHTML('afterend', '\n');
-                moduleOnRightSide = null
-                moduleOnLeftSide = draggedModule.previousElementSibling
-                return
-            }
-            else if((event.pageX > moduleBeforeRect.right && event.pageX < moduleRect.left && moduleRect.top == moduleBeforeRect.top) || (event.pageX > moduleBeforeRect.right && moduleRect.top != moduleBeforeRect.top && event.pageY<moduleBeforeRect.bottom))
-            {
-                moduleOnRightSide = moduleContainers[i]
-                moduleOnRightSide.parentNode.insertBefore(draggedModule, moduleOnRightSide)
-                draggedModule.insertAdjacentHTML('afterend', '\n');
-                moduleOnRightSide = draggedModule.nextElementSibling
-                return
-            }
+        if(isDroppedBetweemTwoContainers(event, moduleBeforeRect, moduleAfterRect)){
+            moduleOnRightSide = moduleContainers[i]
+            insertDraggedBeforeGivenModule(moduleOnRightSide)
+            return
         }
     }
+}
+
+function isDroppedBeforeFirstContainer(event, firstModuleRect){
+    return (event.pageX < firstModuleRect.left && event.pageY > firstModuleRect.top && event.pageY < firstModuleRect.bottom)
+}
+
+function isDroppedAfterLastContainer(event, lastModuleRect){
+    return (event.pageX > lastModuleRect.right && event.pageY > lastModuleRect.top && event.pageY < lastModuleRect.bottom)
+}
+
+function isDroppedBetweemTwoContainers(event, moduleBeforeRect, moduleAfterRect){
+    return (event.pageX > moduleBeforeRect.right && event.pageX < moduleAfterRect.left && event.pageY < moduleAfterRect.bottom) || (event.pageX > moduleBeforeRect.right && moduleAfterRect.top != moduleBeforeRect.top && event.pageY<moduleBeforeRect.bottom) || (event.pageX > moduleBeforeRect.right && moduleAfterRect.top != moduleBeforeRect.top && event.pageY<moduleBeforeRect.bottom) || (event.pageX < moduleAfterRect.left && moduleAfterRect.top != moduleBeforeRect.top && event.pageY<moduleAfterRect.bottom)
+}
+
+function insertDraggedBeforeGivenModule(moduleOnRightSide){
+        moduleOnRightSide.parentNode.insertBefore(draggedModule, moduleOnRightSide)
+        draggedModule.insertAdjacentHTML('afterend', '\n');
 }
 
 function dropOnSingleModule(event)
 {
     const targetModule = event.target.parentNode.parentNode
-    const targetModuleParent = event.target.parentNode.parentNode.parentNode
     if(isDroppedOnLeftSide(event))
     {
-        targetModuleParent.insertBefore(draggedModule, targetModule) 
-        draggedModule.insertAdjacentHTML('afterend', '\n');
+        insertDraggedBeforeGivenModule(targetModule)
         moduleOnRightSide = draggedModule.nextElementSibling
     } 
     else {
-        targetModuleParent.insertBefore(draggedModule, targetModule.nextSibling)
-        targetModule.insertAdjacentHTML('afterend', '\n');
+        insertDraggedBeforeGivenModule(targetModule.nextElementSibling)
         moduleOnRightSide = draggedModule.nextElementSibling
-        moduleOnLeftSide = draggedModule.previousElementSibling
     }
 }
 
@@ -127,6 +136,8 @@ function handleDragEnd() {
     updateContainerWithDeleteElement(draggedElementParent)
     updateContainerWithDeleteElement(draggedModule.parentNode)
     saveChangesToLocalStorage()
+    moduleOnLeftSide = null
+    moduleOnRightSide = null
 }
 
 function saveChangesToLocalStorage()
