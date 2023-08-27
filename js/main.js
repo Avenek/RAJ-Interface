@@ -81,10 +81,13 @@ function createDOMEvents(){
 
 }
 
+function main(){
+    loadContent()
+    document.addEventListener("DOMContentLoaded", () => {
+        getElements()
+        createDOMEvents()
+    })
+}
 
-loadContent()
-document.addEventListener("DOMContentLoaded", () => {
-    getElements()
-    createDOMEvents()
-})
+main();
 const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));

@@ -92,15 +92,21 @@ function dropOnEmptyArea(event){
 }
 
 function isDroppedBeforeFirstContainer(event, firstModuleRect){
-    return (event.pageX < firstModuleRect.left && event.pageY > firstModuleRect.top && event.pageY < firstModuleRect.bottom)
+    return (event.pageX < firstModuleRect.left && isOnTheSameHigh(event, firstModuleRect))
 }
 
 function isDroppedAfterLastContainer(event, lastModuleRect){
-    return (event.pageX > lastModuleRect.right && event.pageY > lastModuleRect.top && event.pageY < lastModuleRect.bottom)
+    return (event.pageX > lastModuleRect.right && isOnTheSameHigh(event, lastModuleRect))
+}
+
+function isOnTheSameHigh(event, moduleRect) {
+    return event.pageY > moduleRect.top && event.pageY < moduleRect.bottom
 }
 
 function isDroppedBetweemTwoContainers(event, moduleBeforeRect, moduleAfterRect){
-    return (event.pageX > moduleBeforeRect.right && event.pageX < moduleAfterRect.left && event.pageY < moduleAfterRect.bottom) || (event.pageX > moduleBeforeRect.right && moduleAfterRect.top != moduleBeforeRect.top && event.pageY<moduleBeforeRect.bottom) || (event.pageX > moduleBeforeRect.right && moduleAfterRect.top != moduleBeforeRect.top && event.pageY<moduleBeforeRect.bottom) || (event.pageX < moduleAfterRect.left && moduleAfterRect.top != moduleBeforeRect.top && event.pageY<moduleAfterRect.bottom)
+    return (event.pageX > moduleBeforeRect.right && event.pageX < moduleAfterRect.left && event.pageY < moduleAfterRect.bottom) 
+|| (event.pageX > moduleBeforeRect.right && moduleAfterRect.top != moduleBeforeRect.top && event.pageY<moduleBeforeRect.bottom) 
+|| (event.pageX < moduleAfterRect.left && moduleAfterRect.top != moduleBeforeRect.top && event.pageY<moduleAfterRect.bottom)
 }
 
 function insertDraggedBeforeGivenModule(moduleOnRightSide){
