@@ -1,3 +1,4 @@
+const jsonText = document.querySelector(".json-text")
 let dynamicData = {
   "characterEffect": {
     "list":[
@@ -125,48 +126,25 @@ let dynamicData = {
     }
   };
 
-function createSrajModulesMenu(data) {
-  const ulList = document.querySelector(".sraj-modules-menu");
-  if (ulList.hasChildNodes()) {
-    while (ulList.firstChild) {
-      ulList.removeChild(ulList.firstChild);
+jsonText.addEventListener("keyup", () => {
+    try {
+        dynamicData = JSON.parse(jsonText.value)
+        jsonText.classList.remove("error-json")
+        saveJsonState()
+        createSrajModulesMenu(dynamicData);
     }
-}
-  for (let key in data) {
-    const moduleElement = document.createElement("li");
-    const aMainElement = document.createElement("a");
-    aMainElement.setAttribute("href", `/modules/${key}.html`);
-    aMainElement.textContent = key
-    aMainElement.textContent=key
-    moduleElement.append(aMainElement)
-    moduleElement.addEventListener("click", () => {
-      window.location.href = aMainElement.getAttribute("href");
-    });
-    ulList.append(moduleElement)
-    if(data[key].hasOwnProperty("list"))
-    {
-      const idUL = document.createElement("ul");
-      idUL.classList.add("submenu")
-      const ids = data[key].list.map(item => item.id || item.name);
-      ids.forEach(id => {
-        const liElement = document.createElement("li"); 
-        const aElement = document.createElement("a");
-        aElement.setAttribute("href", `/modules/${key}.html`);
-        aElement.textContent = id
-        liElement.addEventListener("click", () => {
-          window.location.href = aElement.getAttribute("href");
-        });
-        liElement.append(aElement)
-        idUL.append(liElement)
-      });
-      moduleElement.appendChild(idUL);
+    catch(error){
+        jsonText.classList.add("error-json")
     }
-  }
+})
+
+function saveJsonState() {
+  localStorage.setItem('lastJson', jsonText.value);
 }
 
 function updateJson()
 {
-  const jsonText = document.querySelector(".json-text")
+  jsonText = document.querySelector(".json-text")
   try{
     jsonText.value = JSON.stringify(dynamicData, null, 2);
     jsonText.classList.remove("error-json")
@@ -179,7 +157,3 @@ function updateJson()
   saveJsonState()
   createSrajModulesMenu(dynamicData);
 }
-
-updateJson()
-
-

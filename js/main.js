@@ -1,4 +1,4 @@
-let addButton, deleteButtons, cogWheels, singleModulesContainers, toolTips, srajModuleContainers
+let addButton, deleteButtons, cogWheels, singleModulesContainers, toolTips, srajModuleContainers, jsonButtons
 
 function loadContent()
 {
@@ -6,21 +6,25 @@ function loadContent()
     if(localStorage.getItem('containerConfig') !== null)
     {
         const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
-        const html = createContainersContent(storedContainers)
-        srajContainer.innerHTML=html
+        const srajContainerHtml = createContainersContent(storedContainers)
+        srajContainer.innerHTML=srajContainerHtml
     }
     else {
         fetch('config/containers.json')
         .then(response => response.json())
         .then(config => {
-        const html = createContainersContent(config)
-        srajContainer.innerHTML = html;
+        const srajContainerHtml = createContainersContent(config)
+        srajContainer.innerHTML = srajContainerHtml;
         localStorage.setItem('containerConfig', JSON.stringify(config));
         })
         .catch(error => {
         console.error('Błąd pobierania:', error);
         })
     }
+    const buttonsContainer = document.querySelector(".buttons-container")
+    const jsonButtonsHtml = createJsonButtons()
+    buttonsContainer.innerHTML = jsonButtonsHtml
+    restoreLastJson()
 }
 
 function createContainersContent(data)
@@ -51,6 +55,27 @@ function createContainersContent(data)
     return html
 }
 
+function createJsonButtons()
+{
+    jsonButtonsNames = ["Beautify", "Minify", "Copy", "Clear"]
+    html = ""
+    jsonButtonsNames.forEach(buttonName => {
+        html+= `<button class="json-buttons" type="button">${buttonName}</button>`
+    })
+    return html
+}
+
+function restoreLastJson(){
+    const jsonText = document.querySelector(".json-text")
+    if(localStorage.getItem('lastJson'))
+    {
+        savedJson = localStorage.getItem('lastJson');
+        dynamicData = JSON.parse(savedJson)
+    }
+    jsonText.value = JSON.stringify(dynamicData, null, 2);
+    createSrajModulesMenu(dynamicData);
+  }
+
 function getElements(){
     addButton = document.querySelector(".plus-circle")
     deleteButtons = document.querySelectorAll(".delete-button")
@@ -58,6 +83,7 @@ function getElements(){
     singleModulesContainers = document.querySelectorAll(".single-module-container");
     toolTips = document.querySelectorAll(".tool-tip")
     srajModuleContainers = document.querySelector(".sraj-modules-container")
+    jsonButtons = document.querySelectorAll(".json-buttons")
 }
 
 function createDOMEvents(){
@@ -78,7 +104,7 @@ function createDOMEvents(){
         toolTip.addEventListener("mouseover", ()=>isHoverToolTip = true)
         toolTip.addEventListener("mouseout", ()=>isHoverToolTip = false)
     })
-
+    jsonButtons.forEach(button => button.addEventListener("click", buttonClick))
 }
 
 function main(){

@@ -1,6 +1,3 @@
-const buttons = document.querySelectorAll(".json-buttons")
-let jsonText = document.querySelector(".json-text")
-
 function buttonClick(e) {
     switch(e.target.textContent){
         case "Beautify":
@@ -18,9 +15,7 @@ function buttonClick(e) {
         default:
             console.warn("Nieznany przycisk nad panelem Jsona!");
             break;
-
     }
-
 }
 
 function beautifyJson(){
@@ -46,17 +41,3 @@ function clearJson(){
         updateJson()
     }
 }
-
-buttons.forEach(button => button.addEventListener("click", buttonClick))
-
-jsonText.addEventListener("keyup", () => {
-    try {
-        dynamicData = JSON.parse(jsonText.value)
-        jsonText.classList.remove("error-json")
-        saveJsonState()
-        createSrajModulesMenu(dynamicData);
-    }
-    catch(error){
-        jsonText.classList.add("error-json")
-    }
-})
