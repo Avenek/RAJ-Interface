@@ -14,19 +14,77 @@
                 <ul class="sraj-modules-menu">
                 </ul>
             </div>
-            <div class="sraj-modules-container">
-             <div class="object-configuration">
-                <ul class="object-property-list">
-
-                </ul>
-             </div>
-             <div class="object-key">
+            <div class="configuration-container">
+             <div class="objects-container">
+                <div class="object-list-container">
+                    <div class="container-title">Lista obiektów</div>
+                    <ul class="object-list">
+                        <li>Obiekt1</li>
+                        <li>Obiekt2</li>
+                        <li>Obiekt3</li>
+                        <li>Obiekt1</li>
+                        <li>Obiekt2</li>
+                    </ul>
+                </div>
+                <div class="object-configuration">
+                    <div class="container-title">Konfiguracja obiektu</div>
+                    <div class="drop-down">
+                    <div class="properties-element">
+                        <header>LIST</header>
+                    </div>
+                        <div class="key-menu">
+                            <div class="key-value"><h2 class="property-name">action:</h2>
+                                <label class="radio-button checked">
+                                <input type="radio" name="action" class="radio-input ch">
+                                    CREATE
+                                </label>
+                                <label class="radio-button">
+                                    <input type="radio" name="action" class="radio-input">
+                                    REMOVE
+                                </label>
+                            </div>
+                                <div class="key-value">  <label for="textbox"><h2 class="property-name">id:</h2></label>
+                                    <input type="text" id="textbox" name="textbox">
+                                </div>
+                                <div class="key-value"><h2 class="property-name">windowTarget:</h2>
+                                   <label class="radio-button checked">
+                                    <input type="radio" name="windowTarget" class="radio-input">
+                                    MAP
+                                    </label>
+                                    <label class="radio-button">
+                                    <input type="radio" name="windowTarget" class="radio-input">
+                                        BATTLE
+                                    </label>
+                                </div>
+                                <div class="key-value"><h2 class="property-name">effect:</h2>
+                                    <label class="radio-button">
+                                        <input type="radio" name="effect" class="radio-input">
+                                        TINT
+                                    </label>
+                                    <label class="radio-button">
+                                        <input type="radio" name="effect" class="radio-input">
+                                        TEXT
+                                    </label>
+                                    <label class="radio-button checked">
+                                        <input type="radio" name="effect" class="radio-input">
+                                        ANIMATION
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="properties-element">
+                            <header>TARGET</header>
+                        </div>
+                        <div></div>
                 
+                </div>
+             </div>
+             <div class="object-key">   
                 <div class="key-menu">
-
+                    <div class="container-title">Menu pomocnicze</div>
                 </div>
                 <div class="key-configuration">
-
+                    <div class="container-title">Konfiguracja klucza</div>
                 </div>
 
              </div>   
@@ -43,8 +101,8 @@
         </div>
     </div>
 
-    <script src="../js/modules/jsonData.js"></script>
-    <script src="../js/mainPage/jsonButtons.js"></script>
+    <script src="../js/jsonButtons.js"></script>
+    <script src="../js/jsonData.js"></script>
     <script src="../js/modules/characterEffect.js"></script>
 
 </body>

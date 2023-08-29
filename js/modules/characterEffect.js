@@ -51,5 +51,24 @@ class CharacterEffect {
     objectProperties.append(listID)
   }
 
-createObjectMenu("characterEffect")
+//createObjectMenu("characterEffect")
+function setupRadioButtons(radioButtons) {
+    radioButtons.forEach(radioButton => {
+        radioButton.addEventListener('click', () => {
+            radioButtons.forEach(rb => {
+                rb.parentNode.classList.remove('checked');
+            });
+            radioButton.parentNode.classList.add('checked');
+        });
+    });
+}
 
+// Pobieranie radio buttonów po name
+const actionInputs = document.querySelectorAll('input[name="action"]');
+const windowTargetInputs = document.querySelectorAll('input[name="windowTarget"]');
+const effectInputs = document.querySelectorAll('input[name="effect"]');
+
+// Wywołanie funkcji dla różnych grup radio buttonów
+setupRadioButtons(actionInputs);
+setupRadioButtons(windowTargetInputs);
+setupRadioButtons(effectInputs);
