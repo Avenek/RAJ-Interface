@@ -2,7 +2,7 @@ let addButton, deleteButtons, cogWheels, singleModulesContainers, toolTips, sraj
 
 function loadContent()
 {
-    const srajContainer = document.querySelector(".sraj-modules-container")
+    const srajContainer = document.querySelector(".handle-container")
     if(localStorage.getItem('containerConfig') !== null)
     {
         const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
@@ -29,7 +29,7 @@ function loadContent()
 
 function createContainersContent(data)
 {
-    let html = ''
+    let html ='<div class="sraj-modules-container">'
     for(const container of data.containers)
     {   
         let containerDiv = `<div class="container">
@@ -52,16 +52,7 @@ function createContainersContent(data)
         containerDiv+="</div>"
         html +=containerDiv
     }
-    return html
-}
-
-function createJsonButtons()
-{
-    jsonButtonsNames = ["Beautify", "Minify", "Copy", "Clear"]
-    html = ""
-    jsonButtonsNames.forEach(buttonName => {
-        html+= `<button class="json-buttons" type="button">${buttonName}</button>`
-    })
+    html+="</div>"
     return html
 }
 

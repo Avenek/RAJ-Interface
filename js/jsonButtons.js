@@ -41,3 +41,13 @@ function clearJson(){
         updateJson()
     }
 }
+
+function createJsonButtons()
+{
+    jsonButtonsNames = ["Beautify", "Minify", "Copy", "Clear"]
+    html = ""
+    jsonButtonsNames.forEach(buttonName => {
+        html+= `<button class="json-buttons" type="button">${buttonName}</button>`
+    })
+    return html
+}

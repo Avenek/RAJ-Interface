@@ -1,5 +1,6 @@
 function createSrajModulesMenu(data) {
     const ulList = document.querySelector(".sraj-modules-menu");
+    
     removeAllChildren(ulList)
     for (let key in data) {
       const moduleElement = createLiMenuElement(key, () => {});

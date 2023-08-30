@@ -1,0 +1,55 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "tool-tip": "",
+            "type": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
+                    "type": "options",
+                    "options": [{"name":"CREATE", "checked": true}, {"name":"REMOVE", "checked": false}],
+                    "extraOptions": [{"name":"case", "checked": false}]
+                },
+                {
+                    "name": "id",
+                    "tool-tip": "",
+                    "type": "string"
+                },
+                {
+                    "name": "windowTarget",
+                    "tool-tip": "",
+                    "type": "options",
+                    "options": [{"name":"MAP", "checked": true}, {"name":"BATTE", "checked": false}]
+                },
+                {
+                    "name": "effect",
+                    "tool-tip": "",
+                    "type": "options",
+                    "options": [{"name":"ANIMATION", "checked": true}, {"name":"TEXT", "checked": false}, {"name":"TINT", "checked": false}]
+                },
+                {
+                    "name": "target",
+                    "tool-tip": "",
+                    "type": "subkey",
+                    "properties": [
+                        {
+                            "name": "kind",
+                            "tool-tip": "",
+            
+                            "type": "options",
+                            "options": [{"name":"HERO", "checked": true}, {"name":"NPC", "checked": false},{"name":"FAKE_NPC", "checked": false}]
+                        }
+                    ]
+                },
+                {
+                    "name": "params",
+                    "tool-tip": "",
+                    "type": "subkey",
+                    "properties": []
+                }
+            ]
+        }
+    ]
+}

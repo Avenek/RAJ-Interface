@@ -171,9 +171,9 @@ body {
 .tool-tip {
     position: absolute;
     margin-left: 0.5em;
-    left: 170px;
+    left: 870px;
     top: 5px;
-    ;
+    
   }
   
   .tool-tip .tool-tip__icon {
