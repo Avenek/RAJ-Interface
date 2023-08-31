@@ -370,7 +370,7 @@ body {
     font-size: 0.875em;
     padding: 1em;
     position: absolute;
-    left: 30px;
+    left: -225px;
     top: -22px;
     width: 185px; 
     white-space: normal; 
@@ -379,15 +379,15 @@ body {
   .tool-tip .tool-tip__info:before, .tool-tip .tool-tip__info:after {
     content: "";
     position: absolute;
-    left: -10px;
+    right: -10px;
     top: 7px;
     border-style: solid;
-    border-width: 10px 10px 10px 0;
+    border-width: 10px 0 10px 10px; 
     border-color: transparent #27b1f0;
   }
   .tool-tip .tool-tip__info:after {
-    left: -8px;
-    border-right-color: #262626;
+    right: -10px;
+    border-right-color: #ff0404;
   }
 
   .tool-tip:hover .tool-tip__info, .tool-tip:focus .tool-tip__info {
