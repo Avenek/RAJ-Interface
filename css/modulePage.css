@@ -10,25 +10,46 @@ body {
 
 .main-container {
     display: grid;
-    grid-template-columns: calc(100% - 400px) 400px;
+    grid-template-columns: calc(100% - 365px) 365px;
     gap: 15px;
     border-radius: 5px;
     padding: 0px 10px;
     height: 100vh;
 }
 
-
+.handle-container
+{
+    position: relative;
+    width: 100%;
+}
 .module-container {
     display: grid;
     grid-template-rows: 1fr 10.5fr;
     gap: 15px;
-    margin-bottom: 5px;
 
-    
+    justify-content:unset;
+    height: 100vh;
 }
+
 .element-container {
-    padding: 0px 10px;
-    margin: -20px 0px 10px 20px;
+    padding: 10px;
+
+}
+
+.home {
+    font-size: 30px;
+    color: rgb(150, 150, 150);
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px;
+    border: #969494 solid 1px;
+}
+
+.home:hover{
+    color: rgb(0, 0, 0);
+    border: #000000 solid 1px;
+    background-color: rgba(122, 122, 122, 0.568);
+
 }
 
 .sraj-modules-menu {
@@ -123,16 +144,17 @@ body {
     display: grid;
     grid-template-columns: 4fr 3fr;
     gap: 15px;
-    margin-bottom: 5px;
+
     margin-top: 10px; 
-    height: 99%;
 }
 
 .objects-container {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 25px;  
+    height: 90vh;  
+
 }
 
 .container-title {
@@ -151,10 +173,10 @@ body {
     justify-content: center;
     flex: 1;
     border: 2px solid #808080;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 15px 0px 5px 0px;
     position: relative;
-    background-image: linear-gradient(to bottom, #757474, #4d4b4b);
+    background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
 }
 
 .object-list {
@@ -162,7 +184,7 @@ body {
     list-style: none;
 }
 
-.object-list li {
+.object-list-element{
     color: white;
     text-align: center;
     position: relative;
@@ -178,21 +200,17 @@ body {
     background-image: none;
 }
 
-.object-list li:hover {
-    background-color: rgba(0, 0, 0, 0.582);
-}
-
 .object-configuration  {
-    flex: 7;
+    flex: 10;
     border: 2px solid #808080;
     border-radius: 10px;
-    padding: 20px 0px;
     position: relative;
     background-image: linear-gradient(to bottom, #272727, #4d4b4b);
+    overflow-y: auto;
 }
 
-.properties-element {
-    width: 98%;
+.key {
+    width: 98.2%;
     color: rgb(255, 255, 255);
     font-size: 18px;
     font-weight: bold;
@@ -203,7 +221,7 @@ body {
     border-radius: 8px;
     text-align: center;
     position: relative;
-    margin-top: 5px;
+
 }
 
 .subkey {
@@ -227,8 +245,9 @@ body {
     color: #fff;
     padding: 8px;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
 }
 
 .key-value{
@@ -255,7 +274,7 @@ body {
 
 .radio-button {
     display: inline-block;
-    padding: 5px 20px;
+    padding: 5px 10px;
     margin: 0px 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -275,6 +294,51 @@ body {
     color: white;
     border-color: #000000;
 }
+
+  
+  /* The slider */
+  .slider {
+    position: relative;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #5e0808, #f70f0f);
+    transition: .4s;
+    width: 80px;
+    height: 20px;
+    margin-left: 20px;
+    top: 3px;
+    display: inline-block;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    background-color: rgb(255, 255, 255);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .checkbox-checked{
+    background-image: none;
+    background-image: linear-gradient(to right, #136324, #0ff755);
+  }
+  
+  
+  .checkbox-checked:before {
+    background-image: none;
+    transform: translateX(60px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
 
 .tool-tip {
     position: absolute;
@@ -362,14 +426,15 @@ body {
     cursor: default;
     flex: 1;
     border: 2px solid #808080;
-    padding: 10px 10px 10px 5px;
+    border-radius: 5px;
+    padding: 10px 10px;
     position: relative;
     background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
 }
 
 
 .key-configuration {
-    flex: 7;
+    flex: 10;
     background-color: rgba(0, 0, 0, 0.5);
     border: 2px solid #808080;
     border-radius: 10px;
@@ -382,7 +447,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    width: 400px;
+    width: 360px;
     margin: 5px 15px 0px 5px;
 
 }
@@ -396,7 +461,7 @@ body {
 }
 
 .json-buttons {
-    width: 180px;
+    width: 160px;
     height: 39px;
     color: #fff;
     background: #111;

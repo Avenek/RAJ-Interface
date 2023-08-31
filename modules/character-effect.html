@@ -4,121 +4,20 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>SRAJ Interface</title>
         <script src="https://kit.fontawesome.com/df4af48a32.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../css/modulePage.css">
+        
     </head>
 <body>    
 
     <div class="main-container">
         <div class="module-container">
             <div class="element-container">
-                <ul class="sraj-modules-menu">
-                </ul>
+
             </div>
-            <div class="handle-container">
-                <div class="configuration-container">
-                 <div class="objects-container">
-                    <div class="object-list-container">
-                        <div class="container-title">Lista obiektów</div>
-                        <ul class="object-list">
-                            <li>Obiekt1</li>
-                            <li>Obiekt2</li>
-                            <li>Obiekt3</li>
-                            <li>Obiekt1</li>
-                            <li>Obiekt2</li>
-                        </ul>
-                    </div>
-                    <div class="object-configuration">
-                        <div class="container-title">Konfiguracja obiektu</div>
-                        <div class="properties-element">
-                            <header>LIST</header>
-                        </div>
-                            <div class="key-menu">
-                                <div class="key-value"><h2 class="property-name">action:</h2>
-                                    <div class="tool-tip">
-                                        <i class="tool-tip__icon">i</i>
-                                        <p class="tool-tip__info">
-                                            Efekty możemy tworzyć (CREATE), jeżeli nie chcemy nadpisać i nie wiemy, czy już istnieje (CREATE_IF_NOT_EXIST) albo usuwać (REMOVE) już istniejące lub usuwać jeżeli istnieją (REMOVE_IF_EXIST)
-                                        </p>
-                                      </div>
-                                    <label class="radio-button checked">
-                                    <input type="radio" name="action" class="radio-input ch">
-                                        CREATE
-                                    </label>
-                                    <label class="radio-button">
-                                        <input type="radio" name="action" class="radio-input">
-                                        REMOVE
-                                    </label>
-                                    <div class="case-tip">
-                                        <span class="case-tip__icon">CASE</span>
-                                    </div>
-                                </div>
-                                    <div class="key-value">  <label for="textbox"><h2 class="property-name">id:</h2></label>
-                                        <input type="text" id="textbox" name="textbox">
-                                    </div>
-                                    <div class="key-value"><h2 class="property-name">windowTarget:</h2>
-                                       <label class="radio-button checked">
-                                        <input type="radio" name="windowTarget" class="radio-input">
-                                        MAP
-                                        </label>
-                                        <label class="radio-button">
-                                        <input type="radio" name="windowTarget" class="radio-input">
-                                            BATTLE
-                                        </label>
-                                    </div>
-                                    <div class="key-value"><h2 class="property-name">effect:</h2>
-                                        <label class="radio-button">
-                                            <input type="radio" name="effect" class="radio-input">
-                                            TINT
-                                        </label>
-                                        <label class="radio-button">
-                                            <input type="radio" name="effect" class="radio-input">
-                                            TEXT
-                                        </label>
-                                        <label class="radio-button checked">
-                                            <input type="radio" name="effect" class="radio-input">
-                                            ANIMATION
-                                        </label>
-                                    </div>
-                            <div class="subkey">
-                                <header>TARGET</header>
-                            </div>
-                            <div class="key-menu">
-                                <div class="key-value"><h2 class="property-name">kind:</h2>
-                                    <label class="radio-button">
-                                        <input type="radio" name="effect" class="radio-input">
-                                        HERO
-                                    </label>
-                                    <label class="radio-button">
-                                        <input type="radio" name="effect" class="radio-input">
-                                        NPC
-                                    </label>
-                                    <label class="radio-button checked">
-                                        <input type="radio" name="effect" class="radio-input">
-                                        FAKE_NPC
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                
-                    </div>
-                 </div>
-                 <div class="object-key">
-                    <div class="key-menu">
-                        <div class="container-title">Menu pomocnicze</div>
-                    </div>
-                    <div class="key-configuration">
-                        <div class="container-title">Konfiguracja klucza</div>
-                    </div>
-                 </div>
-                </div>
+            <div class="handle-container">   
             </div>
         </div>
         <div class="json-and-buttons-container">
             <div class="buttons-container">
-                <button class="json-buttons" type="button">Beautify</button>
-                <button class="json-buttons" type="button">Minify</button>
-                <button class="json-buttons" type="button">Copy</button>
-                <button class="json-buttons" type="button">Clear</button>
             </div>
             <div class="json-container"><textarea class="json-text"></textarea></div>
         </div>
@@ -127,8 +26,11 @@
     <script src="../js/jsonButtons.js"></script>
     <script src="../js/jsonData.js"></script>
     <script src="../js/modulesMenu.js"></script>
-    <script src="../js/moduleMain.js"></script>
     <script src="../js/modules/characterEffect.js"></script>
+    <script src="../js/moduleMain.js"></script>
+
+
+
 
 </body>
 </html>
