@@ -9,8 +9,8 @@
                     "name": "action",
                     "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "type": "options",
-                    "options": [{"name":"CREATE", "checked": true}, {"name":"REMOVE", "checked": false}],
-                    "extraOptions": [{"name":"case", "checked": false}]
+                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}]
                 },
                 {
                     "name": "id",
@@ -21,13 +21,13 @@
                     "name": "windowTarget",
                     "tool-tip": "",
                     "type": "options",
-                    "options": [{"name":"MAP", "checked": true}, {"name":"BATTLE", "checked": false}]
+                    "options": [{"name":"MAP"}, {"name":"BATTLE"}]
                 },
                 {
                     "name": "effect",
                     "tool-tip": "",
                     "type": "options",
-                    "options": [{"name":"ANIMATION", "checked": true}, {"name":"TEXT", "checked": false}, {"name":"TINT", "checked": false}]
+                    "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}]
                 },
                 {
                     "name": "target",
@@ -35,13 +35,13 @@
                     "type": "subkey",
                     "properties": [
                         {
-                            "name": "kind",
+                            "name": "target.kind",
                             "tool-tip": "",
                             "type": "options",
-                            "options": [{"name":"HERO", "checked": true}, {"name":"NPC", "checked": false},{"name":"FAKE_NPC", "checked": false}]
+                            "options": [{"name":"HERO"}, {"name":"NPC"},{"name":"FAKE_NPC"}]
                         },
                         {
-                            "name": "id",
+                            "name": "target.id",
                             "tool-tip": "",
                             "hide": true,
                             "type": "string"
@@ -54,12 +54,12 @@
                     "type": "subkey",
                     "properties": [
                         {
-                            "name": "gifUrl",
+                            "name": "params.gifUrl",
                             "tool-tip": "",
                             "type": "string"
                         },
                         {
-                            "name": "repeat",
+                            "name": "params.repeat",
                             "tool-tip": "",
                             "type": "string"
                         },
@@ -72,13 +72,13 @@
                             "type": "number"
                         },
                         {
-                            "name": "position",
+                            "name": "params.position",
                             "tool-tip": "",
                             "type": "options",
-                            "options": [{"name":"CENTER", "checked": true}, {"name":"TOP", "checked": false},{"name":"BOTTOM", "checked": false}, {"name":"LEFT", "checked": false},{"name":"RIGHT", "checked": false}, {"name":"LEFT_HAND", "checked": false},{"name":"RIGHT_HAND", "checked": false}]
+                            "options": [{"name":"CENTER"}, {"name":"TOP"},{"name":"BOTTOM"}, {"name":"LEFT"},{"name":"RIGHT"}, {"name":"LEFT_HAND"},{"name":"RIGHT_HAND"}]
                         },
                         {
-                            "name": "behind",
+                            "name": "params.behind",
                             "tool-tip": "",
                             "type": "bool"
                         },

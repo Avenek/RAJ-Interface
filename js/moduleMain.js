@@ -3,16 +3,17 @@ const moduleObject={
   "action"        : "CREATE",
   "id"          : "Sralala",
   "windowTarget"  : "MAP",
-  "effect"        : "TINT",
+  "effect"        : "ANIMATION",
   "target"        : {
     "kind": "NPC", 
     "id": 1
   },
   "params": {
-    "duration": 0.2,
-    "color"   : {"r": 0, "g":0, "b":0},
-    "repeat"  : 2,
-    "delayBefore": 10
+  "gifUrl": "characterEffects/kup23-pnacza.gif",        
+    "delayAfter": 3,
+    "repeat"  : true,
+    "position": "LEFT_HAND",
+    "behind": true
   }
 }
 
@@ -37,6 +38,7 @@ function loadModuleContent(module)
         handleContainer.innerHTML += fullHtml
         getModuleElements()
         createModuleDOMEvents()
+        fillFormFields(moduleObject);
 
     })
     .catch(error => {
@@ -74,7 +76,7 @@ function createObjectConfigurationContainer(config, moduleObject)
         html+=createObjectConfigurationContainer(property, moduleObject)
         }
         else if (property.type === 'options') {
-            html+=`<div class="key-value ${hideClass}"><h2 class="property-name">${property.name}:</h2>`
+            html+=`<div class="key-value ${hideClass}"><h2 class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</h2>`
             for (const option of property.options) {
               let checkedClass = option.checked ? 'checked' : '';
               html += `<label class="radio-button ${checkedClass}"><input type="radio" name="${property.name}" class="radio-input" ${checkedClass}>${option.name}</label>`;
@@ -90,19 +92,19 @@ function createObjectConfigurationContainer(config, moduleObject)
             html+='</div>'
           } 
         else if (property.type === 'string') {
-          html += `<div class="key-value ${hideClass}"><label for="${property.name}"><span class="property-name">${property.name}:</span></label><input type="text" id="${property.name}" name="${property.name}"></div>`;
+          html += `<div class="key-value ${hideClass}"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="text" id="${property.name}" name="${property.name}"></div>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
         }
         else if(property.type === 'number'){
-          html += `<div class="key-value ${hideClass}"><label for="${property.name}"><span class="property-name">${property.name}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} id="${property.name}" name="${property.name}"></div>`;
+          html += `<div class="key-value ${hideClass}"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} id="${property.name}" name="${property.name}"></div>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
         }
         else if(property.type === 'bool'){
-          html += `<div class="key-value ${hideClass}"><label for="${property.name}"><span class="property-name">${property.name}:</span><span class="slider round"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label></div>`;
+          html += `<div class="key-value ${hideClass}"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span><span class="slider round"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label></div>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
@@ -174,3 +176,49 @@ function main(){
 
 main();
 
+function fillFormFields(data, prefix = "") {
+  for (var key in data) {
+    var value = data[key];
+    var fullKey = prefix + key;
+
+    if (typeof value === "object") {
+      fillFormFields(value, fullKey + ".");
+    } else {
+      var inputElements = document.querySelectorAll('[name="' + fullKey + '"]');
+      
+      if (inputElements.length > 0) {
+        if (inputElements[0].type === "radio") {
+          for (var i = 0; i < inputElements.length; i++) {
+            var inputElement = inputElements[i];
+            if (inputElement.parentNode.textContent === value.toString()) {
+                if(inputElement.type ==="radio"){
+                  inputElement.parentNode.classList.add("checked");
+                }
+                else{
+                  inputElement.parentNode.classList.add("checkbox-checked");
+                }
+              
+            }
+          }
+        } 
+        else if(inputElements[0].type === "checkbox")
+        {
+          for (var i = 0; i < inputElements.length; i++) {
+            var inputElement = inputElements[i];
+            if (value) {
+                  inputElement.previousElementSibling.classList.add("checkbox-checked");
+            }
+          }
+        }
+        
+        else {
+          for (var i = 0; i < inputElements.length; i++) {
+            inputElements[i].value = value;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Wywołanie funkcji wypełniającej pola formularza
