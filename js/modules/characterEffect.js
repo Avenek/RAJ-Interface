@@ -1,29 +1,33 @@
 const objectProperties = document.querySelector(".object-property-list")
 
 class CharacterEffect {
-    constructor(action, id, windowTarget, effect, target, params) {
-      this.action = action;
-      this.id = id;
-      this.windowTarget = windowTarget;
-      this.effect = effect;
-      this.target = target;
-      this.params = params;
+    constructor() {
+      this.action = "CREATE";
+      this.id = "obiekt-1"
+      this.windowTarget = "MAP"
+      this.target = new Target();
+      this.effect = "ANIMATION";
+      this.params = new AnimationParams();
     }
   }
   
   class Target {
-    constructor(kind, id) {
-      this.kind = kind;
-      this.id = id;
+    constructor() {
+      this.kind = "HERO"
+      this.id = ""
     }
   }
   
-  class Params {
-    constructor(duration, color, repeat, delayBefore) {
-      this.duration = duration;
-      this.color = color;
-      this.repeat = repeat;
-      this.delayBefore = delayBefore;
+  class AnimationParams {
+    constructor() {
+      this.gifUrl = "";
+      this.repeat = 1;
+      this.opacity=1;
+      this.position = "CENTER"
+      this.behind = false;
+      this.offsetX = 0;
+      this.offsetY = 0;
+      this.speecchBubble = false;
     }
   }
 

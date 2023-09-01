@@ -141,7 +141,7 @@ body {
 
 .configuration-container {
     display: grid;
-    grid-template-columns: 4fr 3fr;
+    grid-template-columns: auto auto;
     gap: 15px;
 
     margin-top: 10px; 
@@ -554,3 +554,22 @@ ul {
     margin-block-end: 0px;
 }
 
+.single-object-container{
+    position: relative;
+}
+
+
+.single-object-container:hover .delete-icon{
+    display: block;
+}
+
+.delete-icon {
+    display: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    top: 55px;
+    left: 40%;
+
+    position: absolute;
+  }
