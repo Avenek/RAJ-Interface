@@ -1,6 +1,6 @@
 let uniqueNamesSet
 const moduleObject={
-  "action"        : "CREATE",
+  "action"        : "REMOVE",
   "id"          : "Sralala",
   "windowTarget"  : "MAP",
   "effect"        : "ANIMATION",
@@ -69,10 +69,17 @@ function createObjectConfigurationContainer(config, moduleObject)
 {
     let html = ''
     for (const property of config.properties) {
-      const hideClass = property.hide ? "hide" : ""
+      let hideClass = ""
+      if(property.require)
+      {
+        if(!property.require.value.includes(getValueFromObject(moduleObject, property.require.name)))
+        {
+          hideClass = "hide"
+        }
+      }
         if(property.type === "key" || property.type === "subkey"){
         html += `<div class="${property.type} ${hideClass}">
-        <header>${property.name.toUpperCase()}</header></div><div class="key-menu">`
+        <header>${property.name.toUpperCase()}</header></div><div class="key-menu ${hideClass}">`
         html+=createObjectConfigurationContainer(property, moduleObject)
         }
         else if (property.type === 'options') {
@@ -170,12 +177,6 @@ function createModuleDOMEvents(){
   })
 }
 
-function main(){
- loadModuleContent("characterEffect")
-}
-
-main();
-
 function fillFormFields(data, prefix = "") {
   for (var key in data) {
     var value = data[key];
@@ -191,34 +192,44 @@ function fillFormFields(data, prefix = "") {
           for (var i = 0; i < inputElements.length; i++) {
             var inputElement = inputElements[i];
             if (inputElement.parentNode.textContent === value.toString()) {
-                if(inputElement.type ==="radio"){
                   inputElement.parentNode.classList.add("checked");
-                }
-                else{
-                  inputElement.parentNode.classList.add("checkbox-checked");
-                }
-              
             }
           }
         } 
         else if(inputElements[0].type === "checkbox")
         {
-          for (var i = 0; i < inputElements.length; i++) {
-            var inputElement = inputElements[i];
-            if (value) {
-                  inputElement.previousElementSibling.classList.add("checkbox-checked");
+          var inputElement = inputElements[0];
+          if (value) {
+             inputElement.previousElementSibling.classList.add("checkbox-checked");
             }
-          }
         }
-        
         else {
-          for (var i = 0; i < inputElements.length; i++) {
-            inputElements[i].value = value;
-          }
+            inputElements[0].value = value;
         }
       }
     }
   }
 }
 
-// Wywołanie funkcji wypełniającej pola formularza
+function getValueFromObject(obj, key) {
+  const keys = key.split('.');
+  let value = obj;
+
+  for (const k of keys) {
+    if (value && value.hasOwnProperty(k)) {
+      value = value[k];
+    } else {
+      return null;
+    }
+  }
+
+  return value;
+}
+
+
+
+function main(){
+  loadModuleContent("characterEffect")
+ }
+ 
+ main();

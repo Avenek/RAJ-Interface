@@ -43,8 +43,8 @@
                         {
                             "name": "target.id",
                             "tool-tip": "",
-                            "hide": true,
-                            "type": "string"
+                            "type": "string",
+                            "require": {"name": "target.kind", "value": ["NPC", "FAKE_NPC"]}
                         }
                     ]
                 },
@@ -52,6 +52,7 @@
                     "name": "params",
                     "tool-tip": "",
                     "type": "subkey",
+                    "require": {"name": "effect", "value": ["ANIMATION"]},
                     "properties": [
                         {
                             "name": "params.gifUrl",
