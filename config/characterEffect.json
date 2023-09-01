@@ -9,6 +9,7 @@
                     "name": "action",
                     "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "type": "options",
+                    "default": "CREATE",
                     "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}]
                 },
@@ -21,6 +22,7 @@
                     "name": "windowTarget",
                     "tool-tip": "",
                     "type": "options",
+                    "default": "BATTLE",
                     "options": [{"name":"MAP"}, {"name":"BATTLE"}]
                 },
                 {
@@ -49,7 +51,7 @@
                     ]
                 },
                 {
-                    "name": "params",
+                    "name": "animation.params",
                     "tool-tip": "",
                     "type": "subkey",
                     "require": {"name": "effect", "value": ["ANIMATION"]},
@@ -62,7 +64,73 @@
                         {
                             "name": "params.repeat",
                             "tool-tip": "",
+                            "default":1,
                             "type": "string"
+                        },
+                        {
+                            "name": "opacity",
+                            "tool-tip": "",
+                            "min":0,
+                            "max":1,
+                            "step":0.1,
+                            "default":1,
+                            "type": "number"
+                        },
+                        {
+                            "name": "params.position",
+                            "tool-tip": "",
+                            "type": "options",
+                            "options": [{"name":"CENTER"}, {"name":"TOP"},{"name":"BOTTOM"}, {"name":"LEFT"},{"name":"RIGHT"}, {"name":"LEFT_HAND"},{"name":"RIGHT_HAND"}]
+                        },
+                        {
+                            "name": "params.behind",
+                            "tool-tip": "",
+                            "default":false,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "offsetX",
+                            "tool-tip": "",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "default":0,
+                            "type": "number"
+                        },
+                        {
+                            "name": "offsetY",
+                            "tool-tip": "",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "default":0,
+                            "type": "number"
+                        },
+                        {
+                            "name": "speechBubble",
+                            "tool-tip": "",
+                            "default":false,
+                            "type": "bool"
+                        }
+                    ]
+                },
+                {
+                    "name": "tint.params",
+                    "tool-tip": "",
+                    "type": "subkey",
+                    "require": {"name": "effect", "value": ["TINT"]},
+                    "properties": [
+                        {
+                            "name": "params.duration",
+                            "tool-tip": "",
+                            "step":0.1,
+                            "type": "number"
+                        },
+                        {
+                            "name": "params.repeat",
+                            "tool-tip": "",
+                            "step":1,
+                            "type": "number"
                         },
                         {
                             "name": "opacity",

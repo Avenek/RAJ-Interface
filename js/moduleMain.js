@@ -73,13 +73,13 @@ function createObjectConfigurationContainer(config, moduleObject)
     for (const property of config.properties) {
         if(property.type === "key" || property.type === "subkey"){
         html += `<div class="${property.type}">
-        <header>${property.name.toUpperCase()}</header></div><div class="key-menu">`
+        <header data-name="${property.name}">${property.name.substring(property.name.indexOf(".")+1).toUpperCase()}</header></div><div class="key-menu">`
         html+=createObjectConfigurationContainer(property, moduleObject)
         }
         else if (property.type === 'options') {
             html+=`<div class="key-value"><h2 class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</h2>`
             for (const option of property.options) {
-              let checkedClass = option.checked ? 'checked' : '';
+              const checkedClass = property.default ? 'checked' : '';
               html += `<label class="radio-button ${checkedClass}"><input type="radio" name="${property.name}" class="radio-input" ${checkedClass}>${option.name}</label>`;
             }
             if (property.extraOptions) {
@@ -93,19 +93,20 @@ function createObjectConfigurationContainer(config, moduleObject)
             html+='</div>'
           } 
         else if (property.type === 'string') {
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="text" id="${property.name}" name="${property.name}"></div>`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value=${property.default} name="${property.name}"></div>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
         }
         else if(property.type === 'number'){
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} id="${property.name}" name="${property.name}"></div>`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.default} id="${property.name}" name="${property.name}"></div>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
         }
         else if(property.type === 'bool'){
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span><span class="slider round"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label></div>`;
+          const checked =  property.default ? "checkbox-checked" : ""
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label></div>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
@@ -188,6 +189,9 @@ function fillFormFields(data, prefix = "") {
             if (inputElement.parentNode.textContent === value.toString()) {
                   inputElement.parentNode.classList.add("checked");
             }
+            else{
+              inputElement.parentNode.classList.remove("checked");
+            }
           }
         } 
         else if(inputElements[0].type === "checkbox")
@@ -239,11 +243,7 @@ function findReuqireItems(config)
 }
 
 function findHeadersByName(name) {
-  const headers = Array.from(document.querySelectorAll('header'));
-  
-  const filteredHeaders = headers.filter(header => header.textContent === name.toUpperCase());
-  
-  return filteredHeaders;
+  return Array.from(document.querySelectorAll('header[data-name="' + name + '"]'));
 }
 
 // Funkcja do wyszukiwania inputów (elementy z klasą "input" lub "subinput")
@@ -258,6 +258,7 @@ function hideAndRevealRequiredItems(config, moduleObject)
     if(item.type === "key" || item.type === "subkey")
     {
       headers = findHeadersByName(item.name)
+      console.log(headers);
       if(!item.require.value.includes(getValueFromObject(moduleObject, item.require.name)))
       {
           headers.forEach(header => {
@@ -283,7 +284,6 @@ function hideAndRevealRequiredItems(config, moduleObject)
       }
       else{
         inputs = findInputsByName(item.name)
-        console.log(item.name);
         inputs.forEach(input => {
           input.parentNode.classList.remove("hide")
         })
