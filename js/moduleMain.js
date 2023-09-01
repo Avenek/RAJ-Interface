@@ -93,23 +93,26 @@ function createObjectConfigurationContainer(config, moduleObject)
             html+='</div>'
           } 
         else if (property.type === 'string') {
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value=${property.default} name="${property.name}"></div>`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value=${property.default} name="${property.name}">`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
+          html+='</div>'
         }
         else if(property.type === 'number'){
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.default} id="${property.name}" name="${property.name}"></div>`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.default} id="${property.name}" name="${property.name}">`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
+          html+='</div>'
         }
         else if(property.type === 'bool'){
           const checked =  property.default ? "checkbox-checked" : ""
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label></div>`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
+          html+='</div>'
         }
       }
     html += `</div>`;

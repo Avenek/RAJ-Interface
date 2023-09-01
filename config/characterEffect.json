@@ -9,27 +9,29 @@
                     "name": "action",
                     "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "type": "options",
-                    "default": "CREATE",
                     "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
-                    "extraOptions": [{"name":"case"}]
+                    "extraOptions": [{"name":"case"}],
+                    "default": "CREATE"
                 },
                 {
                     "name": "id",
-                    "tool-tip": "",
-                    "type": "string"
+                    "tool-tip": "Nazwa (string lub int) identyfikująca efekt. Umożliwia późniejszego jego usunięciu.",
+                    "type": "string",
+                    "default": "obiekt-1"
                 },
                 {
                     "name": "windowTarget",
-                    "tool-tip": "",
+                    "tool-tip": "Miejsce, w którym będą widoczne efekty.",
                     "type": "options",
-                    "default": "BATTLE",
-                    "options": [{"name":"MAP"}, {"name":"BATTLE"}]
+                    "options": [{"name":"MAP"}],
+                    "default": "MAP"
                 },
                 {
                     "name": "effect",
-                    "tool-tip": "",
+                    "tool-tip": "Rodzaj efektu. Animation stworzy animację na podstawie gifa. TEXT wyświetli boxa nad głową obiektu z zadeklarowanym tekstem. TINT powoduje nakładanie się kolorowego cienia na obiekt.",
                     "type": "options",
-                    "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}]
+                    "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}],
+                    "default": "ANIMATION"
                 },
                 {
                     "name": "target",
@@ -38,13 +40,14 @@
                     "properties": [
                         {
                             "name": "target.kind",
-                            "tool-tip": "",
+                            "tool-tip": "Typ obiektu, na którym chcemy wywołać dany efekt.",
                             "type": "options",
-                            "options": [{"name":"HERO"}, {"name":"NPC"},{"name":"FAKE_NPC"}]
+                            "options": [{"name":"HERO"}, {"name":"NPC"},{"name":"FAKE_NPC"}],
+                            "default": "HERO"
                         },
                         {
                             "name": "target.id",
-                            "tool-tip": "",
+                            "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
                             "type": "string",
                             "require": {"name": "target.kind", "value": ["NPC", "FAKE_NPC"]}
                         }
@@ -58,59 +61,60 @@
                     "properties": [
                         {
                             "name": "params.gifUrl",
-                            "tool-tip": "",
+                            "tool-tip": "Ścieżka do pliku znajdującego się w katalogu grafikiRaj. Przykład: characterEffects/kup23-pnacza.gif",
                             "type": "string"
                         },
                         {
                             "name": "params.repeat",
-                            "tool-tip": "",
-                            "default":1,
-                            "type": "string"
+                            "tool-tip": "ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
+                            "type": "string",
+                            "default": 1
                         },
                         {
                             "name": "opacity",
-                            "tool-tip": "",
+                            "tool-tip": "Alfa - przeźroczystość efektu.",
                             "min":0,
                             "max":1,
                             "step":0.1,
-                            "default":1,
-                            "type": "number"
+                            "type": "number",
+                            "default": 1
                         },
                         {
                             "name": "params.position",
-                            "tool-tip": "",
+                            "tool-tip": "Pozycja względem zadeklarowanego wcześniej targetu.",
                             "type": "options",
-                            "options": [{"name":"CENTER"}, {"name":"TOP"},{"name":"BOTTOM"}, {"name":"LEFT"},{"name":"RIGHT"}, {"name":"LEFT_HAND"},{"name":"RIGHT_HAND"}]
+                            "options": [{"name":"CENTER"}, {"name":"TOP"},{"name":"BOTTOM"}, {"name":"LEFT"},{"name":"RIGHT"}, {"name":"LEFT_HAND"},{"name":"RIGHT_HAND"}],
+                            "default": "CENTER"
                         },
                         {
                             "name": "params.behind",
-                            "tool-tip": "",
-                            "default":false,
-                            "type": "bool"
+                            "tool-tip": "Zaznaczenie tej opcji powoduje renderowanie efektu za postacią.",
+                            "type": "bool",
+                            "default": false
                         },
                         {
                             "name": "offsetX",
-                            "tool-tip": "",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
                             "step":1,
                             "min":-64,
                             "max":64,
-                            "default":0,
-                            "type": "number"
+                            "type": "number",
+                            "default":0
                         },
                         {
                             "name": "offsetY",
-                            "tool-tip": "",
+                            "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
                             "step":1,
                             "min":-64,
                             "max":64,
-                            "default":0,
-                            "type": "number"
+                            "type": "number",
+                            "default":0
                         },
                         {
                             "name": "speechBubble",
-                            "tool-tip": "",
-                            "default":false,
-                            "type": "bool"
+                            "tool-tip": "Zaznaczenie tej opcji powoduje pojawienie się dymku pod renderowaną grafiką.",
+                            "type": "bool",
+                            "default": false
                         }
                     ]
                 },

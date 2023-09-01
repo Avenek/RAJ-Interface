@@ -225,7 +225,7 @@ body {
 }
 
 .subkey {
-    width: 100%;
+    width: 98.5%;
     color: rgb(255, 255, 255);
     font-size: 18px;
     font-weight: bold;
@@ -237,7 +237,7 @@ body {
     text-align: center;
     position: relative;
     margin-top: 5px;
-    margin-left: -5px;
+    margin-left: -1px;
 }
 
 .property-name {
@@ -343,7 +343,7 @@ body {
 
 .tool-tip {
     position: absolute;
-    left: 97%;
+    left: 97.75%;
     top: 5px;
     
   }
@@ -426,8 +426,8 @@ body {
 .key-menu {
     cursor: default;
     flex: 1;
-    border: 2px solid #808080;
     border-radius: 5px;
+    border: 1px solid #a7a5a5;
     padding: 10px 10px;
     position: relative;
     background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
