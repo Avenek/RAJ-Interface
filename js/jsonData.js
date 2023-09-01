@@ -17,6 +17,22 @@ let dynamicData = {
           "repeat"  : 2,
           "delayBefore": 10
         }
+      },
+      {
+        "action"        : "CREATE",
+        "id"          : "Testowy tint",
+        "windowTarget"  : "MAP",
+        "effect"        : "TINT",
+        "target"        : {
+          "kind": "NPC", 
+          "id": 1
+        },
+        "params": {
+          "duration": 0.2,
+          "color"   : {"r": 0, "g":0, "b":0},
+          "repeat"  : 2,
+          "delayBefore": 10
+        }
       }
     ]
   },

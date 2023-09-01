@@ -17,7 +17,7 @@ const moduleObject={
   }
 }
 
-function loadModuleContent(module)
+function loadModuleContent(module, moduleObject)
 {
     const head = document.querySelector("head")
     head.innerHTML+= '<link rel="stylesheet" href="../css/modulePage.css">'
@@ -28,7 +28,7 @@ function loadModuleContent(module)
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
-    fullHtml += createObjectList(module)
+    fullHtml += createObjectList(module, moduleObject)
     fetch(`../config/${module}.json`)
     .then(response => response.json())
     .then(config => {
@@ -39,6 +39,7 @@ function loadModuleContent(module)
         getModuleElements()
         createModuleDOMEvents()
         fillFormFields(moduleObject);
+        hideAndRevealRequiredItems(config, moduleObject)
 
     })
     .catch(error => {
@@ -52,16 +53,17 @@ function loadModuleContent(module)
 
 }
 
-function createObjectList(module)
+function createObjectList(module, moduleObject)
 {
     let objectsContainerHtml = `
     <div class="object-list-container">
         <div class="container-title">Lista obiektów</div>`
     const ids = dynamicData[module].list.map(item => item.id || item.name);
         ids.forEach(id => {
-          objectsContainerHtml+= `<label class="object-list-element"><input type="radio" name="object-list" class="radio-input">${id}</label>`;
+          const checkedClass = id === moduleObject.id || id === moduleObject.name ? "checked" : ""
+          objectsContainerHtml+= `<label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label>`;
         });
-    objectsContainerHtml += '</div>'
+    objectsContainerHtml += '<button class="plus-circle"><i class="fas fa-plus"></i></button></div>'
     return objectsContainerHtml  
 }
 
@@ -69,21 +71,13 @@ function createObjectConfigurationContainer(config, moduleObject)
 {
     let html = ''
     for (const property of config.properties) {
-      let hideClass = ""
-      if(property.require)
-      {
-        if(!property.require.value.includes(getValueFromObject(moduleObject, property.require.name)))
-        {
-          hideClass = "hide"
-        }
-      }
         if(property.type === "key" || property.type === "subkey"){
-        html += `<div class="${property.type} ${hideClass}">
-        <header>${property.name.toUpperCase()}</header></div><div class="key-menu ${hideClass}">`
+        html += `<div class="${property.type}">
+        <header>${property.name.toUpperCase()}</header></div><div class="key-menu">`
         html+=createObjectConfigurationContainer(property, moduleObject)
         }
         else if (property.type === 'options') {
-            html+=`<div class="key-value ${hideClass}"><h2 class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</h2>`
+            html+=`<div class="key-value"><h2 class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</h2>`
             for (const option of property.options) {
               let checkedClass = option.checked ? 'checked' : '';
               html += `<label class="radio-button ${checkedClass}"><input type="radio" name="${property.name}" class="radio-input" ${checkedClass}>${option.name}</label>`;
@@ -99,19 +93,19 @@ function createObjectConfigurationContainer(config, moduleObject)
             html+='</div>'
           } 
         else if (property.type === 'string') {
-          html += `<div class="key-value ${hideClass}"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="text" id="${property.name}" name="${property.name}"></div>`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="text" id="${property.name}" name="${property.name}"></div>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
         }
         else if(property.type === 'number'){
-          html += `<div class="key-value ${hideClass}"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} id="${property.name}" name="${property.name}"></div>`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} id="${property.name}" name="${property.name}"></div>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
         }
         else if(property.type === 'bool'){
-          html += `<div class="key-value ${hideClass}"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span><span class="slider round"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label></div>`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span><span class="slider round"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label></div>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
@@ -226,10 +220,83 @@ function getValueFromObject(obj, key) {
   return value;
 }
 
+function findReuqireItems(config)
+{
+  let objectsWithRequire = [];
+  if (typeof config === 'object') {
+    if (config.hasOwnProperty('require')) {
+      objectsWithRequire.push(config);
+    }
+
+    for (let key in config) {
+      if (config.hasOwnProperty(key)) {
+        objectsWithRequire = objectsWithRequire.concat(findReuqireItems(config[key]));
+      }
+    }
+  }
+
+  return objectsWithRequire
+}
+
+function findHeadersByName(name) {
+  const headers = Array.from(document.querySelectorAll('header'));
+  
+  const filteredHeaders = headers.filter(header => header.textContent === name.toUpperCase());
+  
+  return filteredHeaders;
+}
+
+// Funkcja do wyszukiwania inputów (elementy z klasą "input" lub "subinput")
+function findInputsByName(name) {
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]'));
+}
+
+function hideAndRevealRequiredItems(config, moduleObject)
+{
+  requireItems = findReuqireItems(config)
+  requireItems.forEach(item => {
+    if(item.type === "key" || item.type === "subkey")
+    {
+      headers = findHeadersByName(item.name)
+      if(!item.require.value.includes(getValueFromObject(moduleObject, item.require.name)))
+      {
+          headers.forEach(header => {
+            header.parentNode.classList.add("hide")
+            header.parentNode.nextElementSibling.classList.add("hide")
+          })
+      }
+      else{
+        headers.forEach(header => {
+          header.parentNode.classList.remove("hide")
+          header.parentNode.nextElementSibling.classList.remove("hide")
+        })
+      }
+    }
+    else{
+      if(!item.require.value.includes(getValueFromObject(moduleObject, item.require.name)))
+      {
+        inputs = findInputsByName(item.name)
+        console.log(inputs);
+        inputs.forEach(input => {
+          input.parentNode.classList.add("hide")
+        })
+      }
+      else{
+        inputs = findInputsByName(item.name)
+        console.log(item.name);
+        inputs.forEach(input => {
+          input.parentNode.classList.remove("hide")
+        })
+
+      }
+    }
+
+  })
+}
 
 
 function main(){
-  loadModuleContent("characterEffect")
+  loadModuleContent("characterEffect", moduleObject)
  }
  
  main();
