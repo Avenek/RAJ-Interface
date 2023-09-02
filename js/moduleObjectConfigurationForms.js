@@ -10,7 +10,7 @@ function createObjectConfigurationContainer(config, moduleObject)
         else if (property.type === 'options') {
             html+=`<div class="key-value"><h2 class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</h2>`
             for (const option of property.options) {
-              const checkedClass = property.default ? 'checked' : '';
+              const checkedClass = property.default===option ? 'checked' : '';
               html += `<label class="radio-button ${checkedClass}"><input type="radio" name="${property.name}" class="radio-input" ${checkedClass}>${option.name}</label>`;
             }
             if (property.extraOptions) {
@@ -113,7 +113,7 @@ function fillFormFields(data, prefix = "") {
     return value;
   }
   
-  function findReuqireItems(config)
+  function findReuqiredItems(config)
   {
     let objectsWithRequire = [];
     if (typeof config === 'object') {
@@ -123,7 +123,7 @@ function fillFormFields(data, prefix = "") {
   
       for (let key in config) {
         if (config.hasOwnProperty(key)) {
-          objectsWithRequire = objectsWithRequire.concat(findReuqireItems(config[key]));
+          objectsWithRequire = objectsWithRequire.concat(findReuqiredItems(config[key]));
         }
       }
     }
@@ -165,7 +165,6 @@ function fillFormFields(data, prefix = "") {
         if(!item.require.value.includes(getValueFromObject(moduleObject, item.require.name)))
         {
           inputs = findInputsByName(item.name)
-          console.log(inputs);
           inputs.forEach(input => {
             input.parentNode.classList.add("hide")
           })
@@ -181,3 +180,15 @@ function fillFormFields(data, prefix = "") {
   
     })
   }
+
+  
+function changeValueInJsonRadioButton(event){
+  const key = event.target.name
+  const value = event.target.parentNode.textContent
+  const keys = key.split('.');
+  let currentObject = dynamicData[currentModule].list[objectIndex];
+  for (let i = 0; i < keys.length - 1; i++) {
+    currentObject = currentObject[keys[i]];
+  }
+  currentObject[keys[keys.length - 1]] = value;
+}

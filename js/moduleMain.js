@@ -1,13 +1,17 @@
-let uniqueNamesSet, addObjectPlus, deleteObjectButtons
+let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList
 let currentModule = ""
 let requiredItems;
-
-let moduleObject
+let objectIndex
 
 function loadModuleObject(index, module)
 {
+  objectIndex = index
   currentModule = module
-  moduleObject = dynamicData[currentModule].list[index]
+}
+
+function getCurrentObject()
+{
+  return dynamicData[currentModule].list[objectIndex]
 }
 
 function loadModuleContent()
@@ -22,6 +26,7 @@ function loadModuleContent()
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
+    const moduleObject = getCurrentObject()
     fullHtml += createObjectList(currentModule, moduleObject)
     fetch(`../config/${currentModule}.json`)
     .then(response => response.json())
@@ -33,9 +38,8 @@ function loadModuleContent()
         getModuleElements()
         createModuleDOMEvents()
         fillFormFields(moduleObject);
-        requiredItems = findReuqireItems(config)
+        requiredItems = findReuqiredItems(config)
         hideAndRevealRequiredItems(moduleObject)
-
     })
     .catch(error => {
     console.error('Błąd pobierania:', error);
@@ -67,15 +71,19 @@ function setupRadioButtons(radioButtons) {
           });
           radioButton.parentNode.classList.add('checked');
       });
-      radioButton.addEventListener('change', changeObjectOnList)
+      radioButton.addEventListener('change', (event) => {
+        changeValueInJsonRadioButton(event)
+        hideAndRevealRequiredItems(getCurrentObject())})
   });
 }
 
 
 function getModuleElements(){
-  const radioButtons = document.querySelectorAll('input[type="radio"]');
+  const objectConfigurationContainer = document.querySelector(".object-configuration")
+  const radioButtons = objectConfigurationContainer.querySelectorAll('input[type="radio"]');
   uniqueNamesSet = new Set();
-
+  const objectListContainer = document.querySelector(".object-list-container")
+  radioButtonObjectList = objectListContainer.querySelectorAll('input[type="radio"]')
   radioButtons.forEach(radioButton => {
     const name = radioButton.getAttribute('name');
     if (name && !uniqueNamesSet.has(name)) {
@@ -94,12 +102,15 @@ function createModuleDOMEvents(){
     setupRadioButtons(radioButtons);
   })
 
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]')
+  setupRadioButtonsObjectList(radioButtonObjectList);
+
+  const checkboxes = document.querySelectorAll('.slider')
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener("click", () =>
-    checkbox.previousElementSibling.classList.toggle("checkbox-checked"))
+    checkbox.classList.toggle("checkbox-checked")
+    )
   })
-
+ 
   addObjectPlus.addEventListener("click", addObjectToList)
   deleteObjectButtons.forEach(button => button.addEventListener("click", removeObjectFromList))
 }

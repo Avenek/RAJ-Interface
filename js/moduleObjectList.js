@@ -21,7 +21,7 @@ function addObjectToList(){
     objects.forEach(object => object.classList.remove("checked"))
     objectListContainer.innerHTML+='<div class="single-object-container"><label class="object-list-element checked"><input type="radio" name="object-list" class="radio-input">obiekt-1</label><div class="delete-icon">🗑️</div></div><button class="plus-circle add-object"><i class="fas fa-plus"></i></button></div>'
     const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]')
-    setupRadioButtons(radioButtons);
+    setupRadioButtonsObjectList(radioButtons);
     addObjectPlus = document.querySelector(".add-object")
     addObjectPlus.addEventListener("click", addObjectToList)
     removeObjectButtons = document.querySelectorAll(".delete-icon")
@@ -80,3 +80,15 @@ function changeObjectOnList(event){
     fillFormFields(dynamicData[currentModule].list[index])
     hideAndRevealRequiredItems(dynamicData[currentModule].list[index])
 }
+
+function setupRadioButtonsObjectList(radioButtons) {
+    radioButtons.forEach(radioButton => {
+        radioButton.addEventListener('click', () => {
+            radioButtons.forEach(rb => {
+                rb.parentNode.classList.remove('checked');
+            });
+            radioButton.parentNode.classList.add('checked');
+        });
+        radioButton.addEventListener('change', changeObjectOnList)
+    });
+  }
