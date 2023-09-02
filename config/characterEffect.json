@@ -71,7 +71,7 @@
                             "default": 1
                         },
                         {
-                            "name": "opacity",
+                            "name": "params.opacity",
                             "tool-tip": "Alfa - przeźroczystość efektu.",
                             "min":0,
                             "max":1,
@@ -93,7 +93,7 @@
                             "default": false
                         },
                         {
-                            "name": "offsetX",
+                            "name": "params.offsetX",
                             "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
                             "step":1,
                             "min":-64,
@@ -102,7 +102,7 @@
                             "default":0
                         },
                         {
-                            "name": "offsetY",
+                            "name": "params.offsetY",
                             "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
                             "step":1,
                             "min":-64,
@@ -111,7 +111,7 @@
                             "default":0
                         },
                         {
-                            "name": "speechBubble",
+                            "name": "params.speechBubble",
                             "tool-tip": "Zaznaczenie tej opcji powoduje pojawienie się dymku pod renderowaną grafiką.",
                             "type": "bool",
                             "default": false

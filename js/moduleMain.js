@@ -1,17 +1,13 @@
 let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList
 let currentModule = ""
-let requiredItems;
 let objectIndex
+let requiredItems;
 
 function loadModuleObject(index, module)
 {
   objectIndex = index
   currentModule = module
-}
-
-function getCurrentObject()
-{
-  return dynamicData[currentModule].list[objectIndex]
+  workingObject = dynamicData[currentModule].list[objectIndex]
 }
 
 function loadModuleContent()
@@ -26,20 +22,19 @@ function loadModuleContent()
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
-    const moduleObject = getCurrentObject()
-    fullHtml += createObjectList(currentModule, moduleObject)
+    fullHtml += createObjectList(currentModule, workingObject)
     fetch(`../config/${currentModule}.json`)
     .then(response => response.json())
     .then(config => {
         fullHtml += `<div class="object-configuration">`
-        fullHtml += createObjectConfigurationContainer(config, moduleObject) 
+        fullHtml += createObjectConfigurationContainer(config, workingObject) 
         fullHtml += createKeyMenu()
         handleContainer.innerHTML += fullHtml
         getModuleElements()
         createModuleDOMEvents()
-        fillFormFields(moduleObject);
+        fillFormFields(workingObject);
         requiredItems = findReuqiredItems(config)
-        hideAndRevealRequiredItems(moduleObject)
+        hideAndRevealRequiredItems(workingObject)
     })
     .catch(error => {
     console.error('Błąd pobierania:', error);
@@ -72,9 +67,9 @@ function setupRadioButtons(radioButtons) {
           radioButton.parentNode.classList.add('radio-checked');
       });
       radioButton.addEventListener('change', (event) => {
-        changeValueInJsonRadioButton(event)
-        fillFormFields(getCurrentObject())
-        hideAndRevealRequiredItems(getCurrentObject())})
+        updateObject(event)
+        fillFormFields(workingObject)
+        hideAndRevealRequiredItems(workingObject)})
   });
 }
 

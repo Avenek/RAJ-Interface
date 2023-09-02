@@ -99,21 +99,6 @@ function fillFormFields(data, prefix = "") {
     }
   }
   
-  function getValueFromObject(obj, key) {
-    const keys = key.split('.');
-    let value = obj;
-  
-    for (const k of keys) {
-      if (value && value.hasOwnProperty(k)) {
-        value = value[k];
-      } else {
-        return null;
-      }
-    }
-  
-    return value;
-  }
-  
   function findReuqiredItems(config)
   {
     let objectsWithRequire = [];
@@ -182,14 +167,3 @@ function fillFormFields(data, prefix = "") {
     })
   }
 
-  
-function changeValueInJsonRadioButton(event){
-  const key = event.target.name
-  const value = event.target.parentNode.textContent
-  const keys = key.split('.');
-  let currentObject = dynamicData[currentModule].list[objectIndex];
-  for (let i = 0; i < keys.length - 1; i++) {
-    currentObject = currentObject[keys[i]];
-  }
-  currentObject[keys[keys.length - 1]] = value;
-}

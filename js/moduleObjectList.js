@@ -120,6 +120,8 @@ function removeObjectFromList(event){
 function changeObjectOnList(event){
     const objectId = event.target.parentNode.textContent
     const index = findObjectIndexOnList(currentModule, objectId)
+    objectIndex = index
+    workingObject = dynamicData[currentModule].list[objectIndex]
     fillFormFields(dynamicData[currentModule].list[index])
     hideAndRevealRequiredItems(dynamicData[currentModule].list[index])
 }
