@@ -156,16 +156,22 @@
                             "type": "bool"
                         },
                         {
-                            "name": "offsetX",
+                            "name": "params.offsetX",
                             "tool-tip": "",
                             "step":1,
-                            "type": "number"
+                            "min":-64,
+                            "max":64,
+                            "type": "number",
+                            "default":0
                         },
                         {
                             "name": "offsetY",
                             "tool-tip": "",
                             "step":1,
-                            "type": "number"
+                            "min":-64,
+                            "max":64,
+                            "type": "number",
+                            "default":0
                         },
                         {
                             "name": "speechBubble",

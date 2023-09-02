@@ -10,8 +10,9 @@ function createObjectConfigurationContainer(config, moduleObject)
         else if (property.type === 'options') {
             html+=`<div class="key-value"><h2 class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</h2>`
             for (const option of property.options) {
-              const checkedClass = property.default===option ? 'checked' : '';
-              html += `<label class="radio-button ${checkedClass}"><input type="radio" name="${property.name}" class="radio-input" ${checkedClass}>${option.name}</label>`;
+              const checkedClass = property.default===option ? 'radio-checked' : '';
+              const checked =  property.default===option ? 'checked' : '';
+              html += `<label class="radio-button ${checkedClass}"><input type="radio" name="${property.name}" class="radio-input" ${checked}>${option.name}</label>`;
             }
             if (property.extraOptions) {
               for (const option of property.extraOptions) {
@@ -73,10 +74,10 @@ function fillFormFields(data, prefix = "") {
             for (var i = 0; i < inputElements.length; i++) {
               var inputElement = inputElements[i];
               if (inputElement.parentNode.textContent === value.toString()) {
-                    inputElement.parentNode.classList.add("checked");
+                    inputElement.parentNode.classList.add("radio-checked");
               }
               else{
-                inputElement.parentNode.classList.remove("checked");
+                inputElement.parentNode.classList.remove("radio-checked");
               }
             }
           } 

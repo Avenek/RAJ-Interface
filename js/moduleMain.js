@@ -67,12 +67,13 @@ function setupRadioButtons(radioButtons) {
   radioButtons.forEach(radioButton => {
       radioButton.addEventListener('click', () => {
           radioButtons.forEach(rb => {
-              rb.parentNode.classList.remove('checked');
+              rb.parentNode.classList.remove('radio-checked');
           });
-          radioButton.parentNode.classList.add('checked');
+          radioButton.parentNode.classList.add('radio-checked');
       });
       radioButton.addEventListener('change', (event) => {
         changeValueInJsonRadioButton(event)
+        fillFormFields(getCurrentObject())
         hideAndRevealRequiredItems(getCurrentObject())})
   });
 }

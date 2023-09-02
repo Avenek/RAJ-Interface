@@ -289,7 +289,7 @@ body {
     display: none;
 }
 
-.checked {
+.radio-checked {
     background-color: #9d9fa0;
     color: white;
     border-color: #000000;

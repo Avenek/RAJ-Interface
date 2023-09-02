@@ -6,7 +6,7 @@ function createObjectList(module, moduleObject)
         <div class="container-title">Lista obiektów</div>`
     const ids = dynamicData[module].list.map(item => item.id || item.name);
         ids.forEach(id => {
-          const checkedClass = id === moduleObject.id || id === moduleObject.name ? "checked" : ""
+          const checkedClass = id === moduleObject.id || id === moduleObject.name ? "radio-checked" : ""
           objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="delete-icon">🗑️</div></div>`;
         });
     objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button></div>'
@@ -15,19 +15,79 @@ function createObjectList(module, moduleObject)
 
 function addObjectToList(){
     const objectListContainer = document.querySelector(".object-list-container")
-    const plus = objectListContainer.querySelector(".add-object")
-    plus.remove()
-    objects = objectListContainer.querySelectorAll(".object-list-element")
-    objects.forEach(object => object.classList.remove("checked"))
-    objectListContainer.innerHTML+='<div class="single-object-container"><label class="object-list-element checked"><input type="radio" name="object-list" class="radio-input">obiekt-1</label><div class="delete-icon">🗑️</div></div><button class="plus-circle add-object"><i class="fas fa-plus"></i></button></div>'
+
+    const singleObjectContainer = createObjectContainer()
+    const plusButton =  createNewPlusButton()
+    const deleteButton = createNewDeleteButton()
+    const labelAndRadioButton = createNewLabelAndRadioButton()
+
+    removeCurrentPlusButton(objectListContainer)
+    removeCheckedFromAllRadio(objectListContainer)
+
+    singleObjectContainer.appendChild(labelAndRadioButton);
+    singleObjectContainer.appendChild(deleteButton)
+    objectListContainer.appendChild(singleObjectContainer)
+    objectListContainer.appendChild(plusButton);
+
     const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]')
     setupRadioButtonsObjectList(radioButtons);
-    addObjectPlus = document.querySelector(".add-object")
-    addObjectPlus.addEventListener("click", addObjectToList)
-    removeObjectButtons = document.querySelectorAll(".delete-icon")
-    removeObjectButtons.forEach(button => button.addEventListener("click", removeObjectFromList))
     addObjectToJson(currentModule)
+}
 
+function createObjectContainer(){
+    const singleObjectContainer = document.createElement("div");
+    singleObjectContainer.className = "single-object-container";
+
+    return singleObjectContainer
+}
+
+function createNewLabelAndRadioButton(){
+    const labelElement = document.createElement("label");
+    labelElement.className = "object-list-element radio-checked";
+    const radioInput = document.createElement("input");
+    radioInput.type = "radio";
+    radioInput.name = "object-list";
+    radioInput.className = "radio-input";
+    radioInput.checked = true;
+    labelElement.appendChild(radioInput);
+    labelElement.appendChild(document.createTextNode("obiekt-1"));
+
+    return labelElement
+}
+
+function createNewPlusButton() {
+    const addButton = document.createElement("button");
+    addButton.className = "plus-circle add-object";
+    const plusIcon = document.createElement("i");
+    plusIcon.className = "fas fa-plus";
+    addButton.appendChild(plusIcon);
+    addButton.addEventListener("click", addObjectToList)
+
+    return addButton
+}
+
+function createNewDeleteButton()
+{   
+    const deleteButton = document.createElement("div");
+    deleteButton.className = "delete-icon";
+    deleteButton.textContent = "🗑️";
+    deleteButton.addEventListener("click", removeObjectFromList)
+
+    return deleteButton
+}
+
+function removeCheckedFromAllRadio(objectListContainer)
+{
+    objects = objectListContainer.querySelectorAll(".object-list-element")
+    objects.forEach(object => {
+        object.classList.remove("radio-checked")
+        object.checked=false
+    })
+}
+
+function removeCurrentPlusButton(objectListContainer){
+    const plus = objectListContainer.querySelector(".add-object")
+    plus.remove()
 }
 
 function addObjectToJson(module)
@@ -47,31 +107,14 @@ function removeObjectFromList(event){
     removeObjectFromJson(currentModule, objectId)
     const container = event.target.parentNode
     container.remove()
-    if(container.firstChild.classList.contains("checked"))
+    if(container.firstChild.classList.contains("radio-checked"))
     {
         firstObject = document.querySelector(".object-list-element")
-        firstObject.classList.add("checked")
+        firstObject.classList.add("radio-checked")
         fillFormFields(dynamicData[currentModule].list[0])
         hideAndRevealRequiredItems(dynamicData[currentModule].list[0])
     }
 
-}
-
-function findObjectIndexOnList(module, objectId)
-{
-    const objectList = dynamicData[module].list
-    for (let i = 0; i < objectList.length; i++) {
-        if (objectList[i].id === objectId) {
-          return i
-        }
-      }
-}
-
-function removeObjectFromJson(module, objectId)
-{
-    const objectList = dynamicData[module].list
-    const index = findObjectIndexOnList(module, objectId)
-    objectList.splice(index, 1);
 }
 
 function changeObjectOnList(event){
@@ -85,9 +128,9 @@ function setupRadioButtonsObjectList(radioButtons) {
     radioButtons.forEach(radioButton => {
         radioButton.addEventListener('click', () => {
             radioButtons.forEach(rb => {
-                rb.parentNode.classList.remove('checked');
+                rb.parentNode.classList.remove('radio-checked');
             });
-            radioButton.parentNode.classList.add('checked');
+            radioButton.parentNode.classList.add('radio-checked');
         });
         radioButton.addEventListener('change', changeObjectOnList)
     });
