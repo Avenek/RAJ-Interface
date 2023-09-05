@@ -1,4 +1,4 @@
-const jsonText = document.querySelector(".json-text")
+let jsonText = document.querySelector(".json-text")
 let dynamicData = {
   "characterEffect": {
     "list":[
@@ -161,6 +161,12 @@ function saveJsonState() {
 
 function updateJson()
 {
+  updateJsonTextArea()
+  saveJsonState()
+  createSrajModulesMenu(dynamicData);
+}
+
+function updateJsonTextArea(){
   jsonText = document.querySelector(".json-text")
   try{
     jsonText.value = JSON.stringify(dynamicData, null, 2);
@@ -171,6 +177,5 @@ function updateJson()
   {
     jsonText.classList.add("error-json")
   }
-  saveJsonState()
-  createSrajModulesMenu(dynamicData);
+
 }

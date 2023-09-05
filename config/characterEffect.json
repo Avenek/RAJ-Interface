@@ -126,9 +126,12 @@
                     "properties": [
                         {
                             "name": "params.duration",
-                            "tool-tip": "",
+                            "tool-tip": "Czas trwania efektu w sekundach",
                             "step":0.1,
-                            "type": "number"
+                            "min":0,
+                            "max":999,
+                            "type": "number",
+                            "default":5
                         },
                         {
                             "name": "params.repeat",

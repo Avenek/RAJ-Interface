@@ -1,4 +1,4 @@
-let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList
+let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList
 let currentModule = ""
 let objectIndex
 let requiredItems;
@@ -67,7 +67,7 @@ function setupRadioButtons(radioButtons) {
           radioButton.parentNode.classList.add('radio-checked');
       });
       radioButton.addEventListener('change', (event) => {
-        updateObject(event)
+        updateObjectRadioButton(event)
         fillFormFields(workingObject)
         hideAndRevealRequiredItems(workingObject)})
   });
@@ -89,6 +89,8 @@ function getModuleElements(){
 
   addObjectPlus = document.querySelector(".add-object")
   deleteObjectButtons = document.querySelectorAll(".delete-icon")
+  inputList = document.querySelectorAll('input[type="text"], input[type="number"]')
+  checkboxList = document.querySelectorAll('.slider')
 
 }
 
@@ -100,12 +102,16 @@ function createModuleDOMEvents(){
 
   setupRadioButtonsObjectList(radioButtonObjectList);
 
-  const checkboxes = document.querySelectorAll('.slider')
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener("click", () =>
+  checkboxList.forEach(checkbox => {
+    checkbox.addEventListener("click", (event) => {
     checkbox.classList.toggle("checkbox-checked")
-    )
+    changeValueInJsonCheckbox(event)
+    })
   })
+
+  inputList.forEach(input => input.addEventListener("keyup", (event) => {
+    changeValueInJsonInput(event)
+  }))
  
   addObjectPlus.addEventListener("click", addObjectToList)
   deleteObjectButtons.forEach(button => button.addEventListener("click", removeObjectFromList))
@@ -114,6 +120,13 @@ function createModuleDOMEvents(){
 function main(){
   loadModuleObject(0, "characterEffect")
   loadModuleContent()
+  const jsonText = document.querySelector(".json-text")
+  if(localStorage.getItem('lastJson'))
+  {
+      savedJson = localStorage.getItem('lastJson');
+      dynamicData = JSON.parse(savedJson)
+  }
+  jsonText.value = JSON.stringify(dynamicData, null, 2);
  }
  
  main();

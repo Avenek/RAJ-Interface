@@ -32,10 +32,10 @@ function getValueFromObject(obj, key) {
   return value;
 }
 
-function updateObject(event)
+function updateObjectRadioButton(event)
 {
-  console.log(event.target.type);
   changeValueInJsonRadioButton(event)
+
   const targetKey = event.target.name
   
   requiredItems.forEach(item => {
@@ -65,12 +65,33 @@ function updateObject(event)
       
     }
   })
-  updateDynamicData()
+  updateDynamicDataAndJsonText()
 }
 
 function changeValueInJsonRadioButton(event){
   const key = event.target.name
   const newValue = event.target.parentNode.textContent
+  changeValueInJson(key, newValue)
+
+}
+
+function changeValueInJsonInput(event){
+  const key = event.target.name
+  const newValue = event.target.value
+  changeValueInJson(key, newValue)
+  updateDynamicDataAndJsonText()
+
+}
+
+function changeValueInJsonCheckbox(event){
+  const key = event.target.nextElementSibling.name
+  const newValue = event.target.classList.contains("checkbox-checked") ? true : false
+  changeValueInJson(key, newValue)
+  updateDynamicDataAndJsonText()
+}
+
+function changeValueInJson(key, newValue)
+{
   const keys = key.split('.');
 
   let currentObj = workingObject;
@@ -86,7 +107,6 @@ function changeValueInJsonRadioButton(event){
   const lastKey = keys[keys.length - 1];
   currentObj[lastKey] = newValue;
 }
-
 
 function removeObjectKeyByPath(path) {
   const keys = path.split('.');
@@ -124,9 +144,9 @@ function setObjectKeyByPath(path, value) {
   currentObj[lastKey] = value;
 }
 
-function updateDynamicData(){
+function updateDynamicDataAndJsonText(){
   dynamicData[currentModule].list[objectIndex] = workingObject
-  console.log(dynamicData);
+  updateJsonTextArea()
 }
 
 function createObjectBaseOnConfig(config) {
@@ -147,6 +167,6 @@ function createObjectBaseOnConfig(config) {
     currentObj[paramName] = property.default !== undefined && property.default !== null ? property.default : '';
   }
   const topLevelKeys = Object.keys(result);
-  console.log(result[topLevelKeys[0]]);
+  
   return result[topLevelKeys[0]];
 }
