@@ -13,7 +13,7 @@ let dynamicData = {
         },
         "params": {
           "duration": 0.2,
-          "color"   : {"r": 0, "g":0, "b":0},
+          "color"   : {"r": 0, "g":0, "b":0, "a": 1},
           "repeat"  : 2,
           "delayBefore": 10
         }

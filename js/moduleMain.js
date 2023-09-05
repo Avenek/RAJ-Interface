@@ -1,4 +1,4 @@
-let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList
+let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders
 let currentModule = ""
 let objectIndex
 let requiredItems;
@@ -91,7 +91,7 @@ function getModuleElements(){
   deleteObjectButtons = document.querySelectorAll(".delete-icon")
   inputList = document.querySelectorAll('input[type="text"], input[type="number"]')
   checkboxList = document.querySelectorAll('.slider')
-
+  keyHeaders = document.querySelectorAll(".key, .subkey, .subSubkey")
 }
 
 function createModuleDOMEvents(){
@@ -112,6 +112,10 @@ function createModuleDOMEvents(){
   inputList.forEach(input => input.addEventListener("keyup", (event) => {
     changeValueInJsonInput(event)
   }))
+
+  keyHeaders.forEach(header => {
+    header.addEventListener("click", event => collapseObjectKeys(event))
+  })
  
   addObjectPlus.addEventListener("click", addObjectToList)
   deleteObjectButtons.forEach(button => button.addEventListener("click", removeObjectFromList))

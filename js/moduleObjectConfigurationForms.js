@@ -125,7 +125,6 @@ function fillFormFields(data, prefix = "") {
     return Array.from(document.querySelectorAll('header[data-name="' + name + '"]'));
   }
   
-  // Funkcja do wyszukiwania inputów (elementy z klasą "input" lub "subinput")
   function findInputsByName(name) {
     return Array.from(document.querySelectorAll('input[name="' + name + '"]'));
   }
@@ -171,3 +170,15 @@ function fillFormFields(data, prefix = "") {
     })
   }
 
+function collapseObjectKeys(event){
+  event.target.classList.toggle("collapsed")
+
+  const keyMenu = event.target.nextElementSibling
+  const keyValues = keyMenu.querySelectorAll(".key-value, .subkey, .subSubkey")
+  if(event.target.classList.contains("collapsed")){
+    keyValues.forEach(value => value.classList.add("collapsed-key"))
+  }
+  else{
+    keyValues.forEach(value => value.classList.remove("collapsed-key"))
+  }
+}

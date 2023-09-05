@@ -593,3 +593,11 @@ ul {
 
     position: absolute;
   }
+
+header{
+    pointer-events: none;
+}
+
+.collapsed-key{
+    display: none;
+}
