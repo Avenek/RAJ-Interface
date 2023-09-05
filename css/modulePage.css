@@ -167,7 +167,6 @@ body {
     z-index: 2;
 }
 .object-list-container {
-    display: flex;
     flex: 1;
     border: 2px solid #808080;
     border-radius: 5px;
@@ -179,6 +178,12 @@ body {
 .object-list {
     position: relative;
     list-style: none;
+
+}
+
+.single-object-container{
+    position: relative;
+    display: inline-block;
 }
 
 .object-list-element{
@@ -209,7 +214,6 @@ body {
 }
 
 .key {
-    width: 98.2%;
     color: rgb(255, 255, 255);
     font-size: 18px;
     font-weight: bold;
@@ -224,7 +228,6 @@ body {
 }
 
 .subkey {
-    width: 98.5%;
     color: rgb(255, 255, 255);
     font-size: 18px;
     font-weight: bold;
@@ -240,7 +243,6 @@ body {
 }
 
 .subSubkey {
-    width: 98.5%;
     color: rgb(255, 255, 255);
     font-size: 18px;
     font-weight: bold;
@@ -359,7 +361,7 @@ body {
 
 .tool-tip {
     position: absolute;
-    left: 97%;
+    right: 1%;
     top: 5px;
     
   }
@@ -542,6 +544,7 @@ body {
     font-size: 20px;
     justify-content: center;
     align-items: center;
+    display: inline-block;
 
   }
 
@@ -550,7 +553,10 @@ body {
     cursor: pointer;
   }
 
-
+.fas{
+    
+    text-align: center;
+}
 
 img {
     pointer-events: none;
@@ -570,10 +576,6 @@ ul {
     padding-inline-start: 0px;
     margin-block-start: 0px;
     margin-block-end: 0px;
-}
-
-.single-object-container{
-    position: relative;
 }
 
 

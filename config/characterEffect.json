@@ -48,7 +48,7 @@
                         {
                             "name": "target.id",
                             "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
-                            "type": "string",
+                            "type": "number",
                             "require": {"name": "target.kind", "value": ["NPC", "FAKE_NPC"]}
                         }
                     ]
@@ -262,10 +262,17 @@
                         {
                             "name": "params.text",
                             "tool-tip": "Tablica słów, które są po kolei wyświetlane nad npc.",
-                            "type": "stringTable",
-                            "default":"",
-                            "extraOptions": [{"name":"table"}]
-
+                            "type": "table",
+                            "default":[],
+                            "require": {"name": "params.text", "value": ["click"]},
+                            "properties": [   
+                                {                   
+                                "name": "params.text-",
+                                "tool-tip": "Tekst, który znajdzie się w tablicy do wyświetlenia.",
+                                "type": "string",
+                                "default": ""
+                                }
+                            ]
                         },
                         {
                             "name": "params.duration",

@@ -85,7 +85,7 @@ function changeValueInJsonInput(event){
   catch{
     newValue = event.target.value
   }
-  if(newValue)
+  if(newValue !== null & newValue !== undefined)
   {
     changeValueInJson(key, newValue)
   }
@@ -176,8 +176,13 @@ function createObjectBaseOnConfig(config) {
       }
       currentObj = currentObj[key];
     }
-
+    if(property.hasOwnProperty("properties") && property.type !== "table")
+    {
+      currentObj[paramName] = createObjectBaseOnConfig(property.properties)
+    }
+    else{
     currentObj[paramName] = property.default !== undefined && property.default !== null ? property.default : '';
+    }
   }
   const topLevelKeys = Object.keys(result);
   
