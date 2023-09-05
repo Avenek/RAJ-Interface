@@ -66,7 +66,7 @@
                         },
                         {
                             "name": "params.repeat",
-                            "tool-tip": "ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
+                            "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "type": "string",
                             "default": 1
                         },
@@ -115,6 +115,24 @@
                             "tool-tip": "Zaznaczenie tej opcji powoduje pojawienie się dymku pod renderowaną grafiką.",
                             "type": "bool",
                             "default": false
+                        },
+                        {
+                            "name": "params.delayBefore",
+                            "tool-tip": "Opóźnia odpalenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "type": "number",
+                            "default":0
+                        },
+                        {
+                            "name": "params.delayAfter",
+                            "tool-tip": "Opóźnia zakończenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "type": "number",
+                            "default":0
                         }
                     ]
                 },
@@ -135,32 +153,22 @@
                         },
                         {
                             "name": "params.repeat",
-                            "tool-tip": "",
-                            "step":1,
-                            "type": "number"
+                            "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
+                            "type": "string",
+                            "default": 1
                         },
                         {
-                            "name": "opacity",
-                            "tool-tip": "",
+                            "name": "tintPercent",
+                            "tool-tip": "Procent przejrzystości koloru. Można podawać wartości od 0 do 100.",
                             "min":0,
-                            "max":1,
-                            "step":0.1,
-                            "type": "number"
-                        },
-                        {
-                            "name": "params.position",
-                            "tool-tip": "",
-                            "type": "options",
-                            "options": [{"name":"CENTER"}, {"name":"TOP"},{"name":"BOTTOM"}, {"name":"LEFT"},{"name":"RIGHT"}, {"name":"LEFT_HAND"},{"name":"RIGHT_HAND"}]
-                        },
-                        {
-                            "name": "params.behind",
-                            "tool-tip": "",
-                            "type": "bool"
+                            "max":100,
+                            "step":5,
+                            "type": "number",
+                            "default":100
                         },
                         {
                             "name": "params.offsetX",
-                            "tool-tip": "",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
                             "step":1,
                             "min":-64,
                             "max":64,
@@ -168,8 +176,8 @@
                             "default":0
                         },
                         {
-                            "name": "offsetY",
-                            "tool-tip": "",
+                            "name": "params.offsetY",
+                            "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
                             "step":1,
                             "min":-64,
                             "max":64,
@@ -177,9 +185,71 @@
                             "default":0
                         },
                         {
-                            "name": "speechBubble",
+                            "name": "params.speechBubble",
+                            "tool-tip": "Tworzy dymek pod renderowaną grafiką.",
+                            "type": "bool",
+                            "default": false
+                        },
+                        {
+                            "name": "params.delayBefore",
+                            "tool-tip": "Opóźnia odpalenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "type": "number",
+                            "default":0
+                        },
+                        {
+                            "name": "params.delayAfter",
+                            "tool-tip": "Opóźnia zakończenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "type": "number",
+                            "default":0
+                        },
+                        {
+                            "name": "params.color",
                             "tool-tip": "",
-                            "type": "bool"
+                            "type": "subSubkey",
+                            "properties": [
+                                {
+                                    "name": "params.color.r",
+                                    "tool-tip": "Zmienna r koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "type": "number",
+                                    "default":0
+                                },
+                                {
+                                    "name": "params.color.g",
+                                    "tool-tip": "Zmienna g koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "type": "number",
+                                    "default":0
+                                },
+                                {
+                                    "name": "params.color.b",
+                                    "tool-tip": "Zmienna b koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "type": "number",
+                                    "default":0
+                                },
+                                {
+                                    "name": "params.color.a",
+                                    "tool-tip": "Zmienna a koloru w formacie RGBA - przeźroczystość.",
+                                    "step":0.1,
+                                    "min":0,
+                                    "max":1,
+                                    "type": "number",
+                                    "default":1
+                                }
+                            ]
                         }
                     ]
                 }

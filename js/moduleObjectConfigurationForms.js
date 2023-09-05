@@ -2,7 +2,7 @@ function createObjectConfigurationContainer(config, moduleObject)
 {
     let html = ''
     for (const property of config.properties) {
-        if(property.type === "key" || property.type === "subkey"){
+        if(property.type === "key" || property.type === "subkey" || property.type === "subSubkey"){
         html += `<div class="${property.type}">
         <header data-name="${property.name}">${property.name.substring(property.name.indexOf(".")+1).toUpperCase()}</header></div><div class="key-menu">`
         html+=createObjectConfigurationContainer(property, moduleObject)
@@ -25,14 +25,14 @@ function createObjectConfigurationContainer(config, moduleObject)
             html+='</div>'
           } 
         else if (property.type === 'string') {
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value=${property.default} name="${property.name}">`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value=${property.default} name="${property.name}">`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
           html+='</div>'
         }
         else if(property.type === 'number'){
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.default} id="${property.name}" name="${property.name}">`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.default} id="${property.name}" name="${property.name}">`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
@@ -40,7 +40,7 @@ function createObjectConfigurationContainer(config, moduleObject)
         }
         else if(property.type === 'bool'){
           const checked =  property.default ? "checkbox-checked" : ""
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label>`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label>`;
           if (property['tool-tip']) {
             html += addToolTip(property['tool-tip'])
           }
@@ -92,7 +92,11 @@ function fillFormFields(data, prefix = "") {
               }
           }
           else {
-              inputElements[0].value = value;
+            for (var i = 0; i < inputElements.length; i++) {
+              var inputElement = inputElements[i];
+              inputElement.value = value;
+            }
+             
           }
         }
       }

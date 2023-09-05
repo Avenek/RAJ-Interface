@@ -76,9 +76,22 @@ function changeValueInJsonRadioButton(event){
 }
 
 function changeValueInJsonInput(event){
+
   const key = event.target.name
-  const newValue = event.target.value
-  changeValueInJson(key, newValue)
+  let newValue
+  try{
+    newValue = parseInt(event.target.value)
+  }
+  catch{
+    newValue = event.target.value
+  }
+  if(newValue)
+  {
+    changeValueInJson(key, newValue)
+  }
+  else{
+    removeObjectKeyByPath(key)
+  }
   updateDynamicDataAndJsonText()
 
 }
@@ -115,7 +128,7 @@ function removeObjectKeyByPath(path) {
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
     if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
-      // Ścieżka jest nieprawidłowa, nie ma klucza lub nie jest obiektem, więc nie można usunąć klucza.
+      console.log("Brak podanego klucza.");
       return;
     }
     currentObj = currentObj[currentKey];

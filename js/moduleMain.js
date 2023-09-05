@@ -121,11 +121,6 @@ function main(){
   loadModuleObject(0, "characterEffect")
   loadModuleContent()
   const jsonText = document.querySelector(".json-text")
-  if(localStorage.getItem('lastJson'))
-  {
-      savedJson = localStorage.getItem('lastJson');
-      dynamicData = JSON.parse(savedJson)
-  }
   jsonText.value = JSON.stringify(dynamicData, null, 2);
  }
  
