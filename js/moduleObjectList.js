@@ -100,6 +100,7 @@ function addObjectToJson(module)
             hideAndRevealRequiredItems(newObject)
             break;
     }
+    updateDynamicDataAndJsonText()
 }
 
 function removeObjectFromList(event){
@@ -114,7 +115,7 @@ function removeObjectFromList(event){
         fillFormFields(dynamicData[currentModule].list[0])
         hideAndRevealRequiredItems(dynamicData[currentModule].list[0])
     }
-
+    updateDynamicDataAndJsonText()
 }
 
 function changeObjectOnList(event){

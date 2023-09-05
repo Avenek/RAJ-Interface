@@ -8,7 +8,7 @@ function createObjectConfigurationContainer(config, moduleObject)
         html+=createObjectConfigurationContainer(property, moduleObject)
         }
         else if (property.type === 'options') {
-            html+=`<div class="key-value"><h2 class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</h2>`
+            html+=`<div class="key-value"><header class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</header>`
             for (const option of property.options) {
               const checkedClass = property.default===option ? 'radio-checked' : '';
               const checked =  property.default===option ? 'checked' : '';

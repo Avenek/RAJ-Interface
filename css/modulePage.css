@@ -256,6 +256,7 @@ body {
 }
 
 .property-name {
+    display: inline-block;
     background-color: #29282896;
     color: #fff;
     padding: 8px;
@@ -268,12 +269,12 @@ body {
 
 .key-value{
     text-align: left;
-    height: 15px;
+    height: auto;
     position: relative;
     border: 1px solid #a7a5a5;
-    padding: 15px;
+    padding: 5px;
     font-weight: normal;
-    display: flex;
+    display: block;
     align-items: center;
 }
 
@@ -414,6 +415,7 @@ body {
     margin-left: 50px;
     left: 800px;
     top: 15px;
+    display: inline-block;
   }
   
   .case-tip .case-tip__icon {
