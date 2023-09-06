@@ -19,7 +19,7 @@ function addObjectToList(){
     const singleObjectContainer = createObjectContainer()
     const plusButton =  createNewPlusButton()
     const deleteButton = createNewDeleteButton()
-    const labelAndRadioButton = createNewLabelAndRadioButton()
+    const labelAndRadioButton = createNewLabelAndRadioButton(objectListContainer)
 
     removeCurrentPlusButton(objectListContainer)
     removeCheckedFromAllRadio(objectListContainer)
@@ -31,7 +31,7 @@ function addObjectToList(){
 
     const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]')
     setupRadioButtonsObjectList(radioButtons);
-    addObjectToJson(currentModule)
+    addObjectToJson(currentModule, labelAndRadioButton.textContent)
 }
 
 function createObjectContainer(){
@@ -41,7 +41,7 @@ function createObjectContainer(){
     return singleObjectContainer
 }
 
-function createNewLabelAndRadioButton(){
+function createNewLabelAndRadioButton(objectListContainer){
     const labelElement = document.createElement("label");
     labelElement.className = "object-list-element radio-checked";
     const radioInput = document.createElement("input");
@@ -50,7 +50,9 @@ function createNewLabelAndRadioButton(){
     radioInput.className = "radio-input";
     radioInput.checked = true;
     labelElement.appendChild(radioInput);
-    labelElement.appendChild(document.createTextNode("obiekt-1"));
+    const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
+
+    labelElement.appendChild(document.createTextNode(`obiekt-${radioButtons.length+1}`));
 
     return labelElement
 }
@@ -90,12 +92,14 @@ function removeCurrentPlusButton(objectListContainer){
     plus.remove()
 }
 
-function addObjectToJson(module)
+function addObjectToJson(module, id)
 {
     switch(module){
         case "characterEffect":
-            workingObject = new CharacterEffect()
+            workingObject = new CharacterEffect(id)
             dynamicData["characterEffect"].list.push(workingObject)
+            const index = findObjectIndexOnList(currentModule, id)
+            objectIndex = index
             fillFormFields(workingObject)
             hideAndRevealRequiredItems(workingObject)
             break;
@@ -140,3 +144,10 @@ function setupRadioButtonsObjectList(radioButtons) {
         radioButton.addEventListener('change', changeObjectOnList)
     });
   }
+
+  function updateObjectListText()
+  {
+    const objectListContainer = document.querySelector(".object-list-container")
+    const checkedRadioButton = objectListContainer.querySelector('label.radio-checked > input[type="radio"]');
+    checkedRadioButton.parentElement.firstChild.nextSibling.textContent = workingObject["id"] || workingObject["name"]
+}

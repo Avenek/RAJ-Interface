@@ -1,9 +1,9 @@
 const objectProperties = document.querySelector(".object-property-list")
 
 class CharacterEffect {
-    constructor() {
+    constructor(id) {
       this.action = "CREATE";
-      this.id = "obiekt-1"
+      this.id = id
       this.windowTarget = "MAP"
       this.target = new Target();
       this.effect = "ANIMATION";

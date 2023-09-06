@@ -130,6 +130,7 @@ function createModuleDOMEvents(){
   inputList.forEach(input => input.addEventListener("keyup", (event) => {
     changeValueInJsonInput(event)
     resizeIfIsTooLongValue(event)
+    updateObjectListText()
   }))
 
   keyHeaders.forEach(header => {
