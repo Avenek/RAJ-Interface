@@ -94,10 +94,10 @@ function addObjectToJson(module)
 {
     switch(module){
         case "characterEffect":
-            newObject = new CharacterEffect()
-            dynamicData["characterEffect"].list.push(newObject)
-            fillFormFields(newObject)
-            hideAndRevealRequiredItems(newObject)
+            workingObject = new CharacterEffect()
+            dynamicData["characterEffect"].list.push(workingObject)
+            fillFormFields(workingObject)
+            hideAndRevealRequiredItems(workingObject)
             break;
     }
     updateDynamicDataAndJsonText()

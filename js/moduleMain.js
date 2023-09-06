@@ -3,11 +3,23 @@ let currentModule = ""
 let objectIndex
 let requiredItems;
 
-function loadModuleObject(index, module)
+function loadModuleObject(index, module, hasList = true)
 {
   objectIndex = index
   currentModule = module
-  workingObject = dynamicData[currentModule].list[objectIndex]
+  if(dynamicData.hasOwnProperty(currentModule))
+  {
+    workingObject = dynamicData[currentModule].list[objectIndex]
+  }
+  else if(hasList){
+    dynamicData[currentModule]={}
+    dynamicData[currentModule].list=[]
+  }
+  else{
+    dynamicData[currentModule]={}
+  }
+
+  
 }
 
 function loadModuleContent()
@@ -30,11 +42,16 @@ function loadModuleContent()
         fullHtml += createObjectConfigurationContainer(config, workingObject) 
         fullHtml += createKeyMenu()
         handleContainer.innerHTML += fullHtml
+        requiredItems = findReuqiredItems(config)
         getModuleElements()
+        if(radioButtonObjectList.length ===0)
+        {
+          addObjectToList()
+        }
         createModuleDOMEvents()
         fillFormFields(workingObject);
-        requiredItems = findReuqiredItems(config)
         hideAndRevealRequiredItems(workingObject)
+        
     })
     .catch(error => {
     console.error('Błąd pobierania:', error);
