@@ -26,6 +26,6 @@ class CharacterEffect {
       this.behind = false;
       this.offsetX = 0;
       this.offsetY = 0;
-      this.speecchBubble = false;
+      this.speechBubble = false;
     }
   }

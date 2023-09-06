@@ -149,8 +149,9 @@ function changeObjectOnList(event){
     const index = findObjectIndexOnList(currentModule, objectId)
     objectIndex = index
     workingObject = dynamicData[currentModule].list[objectIndex]
-    fillFormFields(dynamicData[currentModule].list[index])
-    hideAndRevealRequiredItems(dynamicData[currentModule].list[index])
+    fillFormFields(workingObject)
+    hideAndRevealRequiredItems(workingObject)
+    removeDefaultValuesFromJson(workingObject)
 }
 
 function setupRadioButtonsObjectList(radioButtons) {

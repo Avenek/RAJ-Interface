@@ -51,6 +51,8 @@ function updateObjectRadioButton(event)
           const paramName = dotIndex !== -1 ? fullName.substring(dotIndex + 1) : fullName;
           newObject = createObjectBaseOnConfig(item.properties)
           setObjectKeyByPath(paramName, newObject)
+          removeDefaultValuesFromJson(workingObject)
+          
         }
       }
       else {
@@ -205,14 +207,54 @@ function createObjectBaseOnConfig(config) {
     }
     if(property.hasOwnProperty("properties") && property.type !== "table")
     {
-      currentObj[paramName] = createObjectBaseOnConfig(property.properties)
+      const createdObject = createObjectBaseOnConfig(property.properties)
+      const topLevelKeys = Object.keys(createdObject);
+      if(topLevelKeys.length>0){
+        currentObj[paramName] = createdObject[topLevelKeys[0]]
+      }
+      else{
+      currentObj[paramName] = createdObject
+      }
     }
     else{
     currentObj[paramName] = property.default !== undefined && property.default !== null ? property.default : '';
     }
   }
   const topLevelKeys = Object.keys(result);
-  
   return result[topLevelKeys[0]];
 }
 
+function removeDefaultValuesFromJson(data, prefix = "") {
+  for (const key in data) {
+    const value = data[key];
+    const fullKey = prefix + key;
+    let foundObject
+    if (typeof value === "object") {
+      removeDefaultValuesFromJson(value, fullKey + ".");
+    } else {
+      let config = configJson.properties
+      foundObject = findObjectByName(config, fullKey)
+      if(foundObject.default == data[key] && foundObject.type!=="options")
+      {
+        removeObjectKeyByPath(fullKey)
+      }
+      
+    
+    }
+  }
+  updateDynamicDataAndJsonText()
+}
+
+function findObjectByName(properties, targetName) {
+  for (const prop of properties) {
+    if (prop.name === targetName) {
+      return prop;
+    }
+    if (prop.properties) {
+      const foundProp = findObjectByName(prop.properties, targetName);
+      if (foundProp) {
+        return foundProp;
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList, i
 let currentModule = ""
 let objectIndex
 let requiredItems;
+let configJson;
 
 function loadModuleObject(index, module="", hasList = true)
 {
@@ -36,6 +37,7 @@ function loadModuleContent()
     fetch(`../config/${currentModule}.json`)
     .then(response => response.json())
     .then(config => {
+        configJson = config
         fullHtml += `<div class="object-configuration">`
         fullHtml += createObjectConfigurationContainer(config, workingObject) 
         fullHtml += createKeyMenu()
@@ -49,6 +51,7 @@ function loadModuleContent()
         createModuleDOMEvents()
         fillFormFields(workingObject);
         hideAndRevealRequiredItems(workingObject)
+        removeDefaultValuesFromJson(workingObject)
         
     })
     .catch(error => {
@@ -129,6 +132,7 @@ function createModuleDOMEvents(){
     changeValueInJsonInput(event)
     resizeIfIsTooLongValue(event)
     updateObjectListText()
+    removeDefaultValuesFromJson(workingObject)
   }))
 
   keyHeaders.forEach(header => {
