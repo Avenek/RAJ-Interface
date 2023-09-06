@@ -125,6 +125,7 @@ function createModuleDOMEvents(){
     checkbox.addEventListener("click", (event) => {
     checkbox.classList.toggle("checkbox-checked")
     changeValueInJsonCheckbox(event)
+    removeDefaultValuesFromJson(workingObject)
     })
   })
 

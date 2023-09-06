@@ -238,8 +238,6 @@ function removeDefaultValuesFromJson(data, prefix = "") {
       {
         removeObjectKeyByPath(fullKey)
       }
-      
-    
     }
   }
   updateDynamicDataAndJsonText()
