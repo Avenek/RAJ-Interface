@@ -295,10 +295,14 @@ body {
 }
 
 .key-value input {
-    width: 200px; 
+    min-width: 200px;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
+}
+
+.expanded{
+    width: 400px;
 }
 
 .radio-button {
@@ -435,10 +439,11 @@ body {
     font-size: 1rem;
     padding: 0.3rem 3rem;
     transition: 0.2s;
-    margin-left: 15px;
+    margin: 0px 15px;
   }
   
  .extra-option:hover {
+    border: none;
     letter-spacing: 0.1rem;
     padding: 0.4rem 3rem;
     background: var(--clr);
@@ -456,11 +461,13 @@ body {
  .extra-option span {
     position: relative;
     z-index: 1;
+    pointer-events: none;
   }
  .extra-option i {
     position: absolute;
     inset: 0;
     display: block;
+    pointer-events: none;
   }
   
  .extra-option i::before {

@@ -261,19 +261,9 @@
                     "properties": [
                         {
                             "name": "params.text",
-                            "tool-tip": "Tablica słów, które są po kolei wyświetlane nad npc.",
-                            "type": "table",
-                            "default":[],
-                            "extraOptions": [{"name":"table"}],
-                            "require": {"name": "params.text", "value": ["click"]},
-                            "properties": [   
-                                {                   
-                                "name": "params.text-",
-                                "tool-tip": "Tekst, który znajdzie się w tablicy do wyświetlenia.",
-                                "type": "string",
-                                "default": ""
-                                }
-                            ]
+                            "tool-tip": "Tablica słów, które są po kolei wyświetlane nad npc. Oddzielać średnikiem.",
+                            "type": "string",
+                            "default":[]
                         },
                         {
                             "name": "params.duration",

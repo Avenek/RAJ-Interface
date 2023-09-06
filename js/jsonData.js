@@ -6,7 +6,7 @@ let dynamicData = {
         "action"        : "CREATE",
         "id"          : "Sralala",
         "windowTarget"  : "MAP",
-        "effect"        : "TEXT",
+        "effect"        : "TINT",
         "target"        : {
           "kind": "NPC", 
           "id": 1

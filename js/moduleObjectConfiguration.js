@@ -79,15 +79,14 @@ function changeValueInJsonInput(event){
 
   const key = event.target.name
   let newValue
-  try{
-    newValue = parseInt(event.target.value)
-  }
-  catch{
+  newValue = parseFloat(event.target.value)
+  if (isNaN(newValue))
+  {
     newValue = event.target.value
   }
   if(newValue !== null & newValue !== undefined)
   {
-    changeValueInJson(key, newValue)
+    changeValueInJson(key, newValue, event)
   }
   else{
     removeObjectKeyByPath(key)
@@ -99,11 +98,11 @@ function changeValueInJsonInput(event){
 function changeValueInJsonCheckbox(event){
   const key = event.target.nextElementSibling.name
   const newValue = event.target.classList.contains("checkbox-checked") ? true : false
-  changeValueInJson(key, newValue)
+  changeValueInJson(key, newValue, event)
   updateDynamicDataAndJsonText()
 }
 
-function changeValueInJson(key, newValue)
+function changeValueInJson(key, newValue, event)
 {
   const keys = key.split('.');
 
@@ -118,7 +117,32 @@ function changeValueInJson(key, newValue)
   }
 
   const lastKey = keys[keys.length - 1];
-  currentObj[lastKey] = newValue;
+  if(Array.isArray(currentObj[lastKey]))
+  {
+    valuesArray = []
+    newValue = newValue.toString()
+    if(event.target.type==="text")
+    {
+      
+      const splittedValue = newValue.split(";")
+      splittedValue.forEach(value => {
+        valuesArray.push(value)
+      })
+    }
+    else{
+      const splittedValue = newValue.split(";")
+      splittedValue.forEach(value => {
+        parsedValue = parseFloat(value)
+        valuesArray.push(parsedValue)
+      })
+
+    }
+    currentObj[lastKey] = valuesArray  
+  }
+  else{
+    currentObj[lastKey] = newValue;
+  }
+
 }
 
 function removeObjectKeyByPath(path) {
@@ -188,3 +212,4 @@ function createObjectBaseOnConfig(config) {
   
   return result[topLevelKeys[0]];
 }
+

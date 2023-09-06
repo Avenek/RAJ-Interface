@@ -1,0 +1,19 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "tool-tip": "",
+            "type": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
+                    "type": "options",
+                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "default": "CREATE"
+                }
+            ]
+        }
+    ]
+}

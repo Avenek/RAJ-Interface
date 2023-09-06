@@ -17,7 +17,7 @@ function createObjectConfigurationContainer(config, moduleObject)
             }
           } 
         else if (property.type === 'string') {
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value=${property.default} name="${property.name}">`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value="${property.default}" name="${property.name}">`;
 
         }
         else if(property.type === 'number'){
@@ -191,4 +191,26 @@ function collapseObjectKeys(event){
   else{
     keyValues.forEach(value => value.classList.remove("collapsed-key"))
   }
+}
+
+function resizeIfIsTooLongValue(event){
+  if (event.target.value.length > 30) {
+    event.target.classList.add('expanded');
+  } else {
+    event.target.classList.remove('expanded');
+  }
+}
+
+function handleExtraOptionButtonClick(event){
+  console.log(event.target.textContent);
+  switch(event.target.textContent)
+  {
+    case "CASE":
+      break;
+    case "TABLE":
+      break;
+    default:
+      break; 
+  }
+
 }
