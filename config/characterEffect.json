@@ -264,6 +264,7 @@
                             "tool-tip": "Tablica słów, które są po kolei wyświetlane nad npc.",
                             "type": "table",
                             "default":[],
+                            "extraOptions": [{"name":"table"}],
                             "require": {"name": "params.text", "value": ["click"]},
                             "properties": [   
                                 {                   

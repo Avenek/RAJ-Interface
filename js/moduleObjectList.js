@@ -104,18 +104,20 @@ function addObjectToJson(module)
 }
 
 function removeObjectFromList(event){
-    const objectId = event.target.previousElementSibling.textContent
-    removeObjectFromJson(currentModule, objectId)
-    const container = event.target.parentNode
-    container.remove()
-    if(container.firstChild.classList.contains("radio-checked"))
-    {
-        firstObject = document.querySelector(".object-list-element")
-        firstObject.classList.add("radio-checked")
-        fillFormFields(dynamicData[currentModule].list[0])
-        hideAndRevealRequiredItems(dynamicData[currentModule].list[0])
+    if (window.confirm("Czy na pewno chcesz usunąć obiekt?")) {
+        const objectId = event.target.previousElementSibling.textContent
+        removeObjectFromJson(currentModule, objectId)
+        const container = event.target.parentNode
+        container.remove()
+        if(container.firstChild.classList.contains("radio-checked"))
+        {
+            firstObject = document.querySelector(".object-list-element")
+            firstObject.classList.add("radio-checked")
+            fillFormFields(dynamicData[currentModule].list[0])
+            hideAndRevealRequiredItems(dynamicData[currentModule].list[0])
+        }
+        updateDynamicDataAndJsonText()
     }
-    updateDynamicDataAndJsonText()
 }
 
 function changeObjectOnList(event){
