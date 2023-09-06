@@ -182,7 +182,10 @@ function setObjectKeyByPath(path, value) {
 }
 
 function updateDynamicDataAndJsonText(){
+  try{
   dynamicData[currentModule].list[objectIndex] = workingObject
+  }
+  catch{}
   updateJsonTextArea()
 }
 

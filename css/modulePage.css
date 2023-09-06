@@ -424,7 +424,6 @@ body {
   }
 
  .extra-option {
-
     position: relative;
     background: #444;
     color: #fff;
@@ -435,7 +434,7 @@ body {
     font-size: 1rem;
     padding: 0.3rem 3rem;
     transition: 0.2s;
-    margin: 0px 15px;
+    margin-left: 50px;
   }
   
  .extra-option:hover {

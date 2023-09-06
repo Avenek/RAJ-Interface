@@ -14,7 +14,6 @@ class CharacterEffect {
   class Target {
     constructor() {
       this.kind = "HERO"
-      this.id = ""
     }
   }
   
@@ -30,5 +29,3 @@ class CharacterEffect {
       this.speecchBubble = false;
     }
   }
-
-//createObjectMenu("characterEffect")

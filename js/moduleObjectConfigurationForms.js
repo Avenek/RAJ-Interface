@@ -45,6 +45,9 @@ function createObjectConfigurationContainer(config, moduleObject)
               case "table":
                 color = "#0FF0FC"
                 break;
+              case "get random":
+                color = "#FFF01F"
+                break;
               default:
                 color= "#CCFF00"
                 break
@@ -182,7 +185,6 @@ function fillFormFields(data, prefix = "") {
 
 function collapseObjectKeys(event){
   event.target.classList.toggle("collapsed")
-
   const keyMenu = event.target.nextElementSibling
   const keyValues = keyMenu.querySelectorAll(".key-menu, .key-value, .subkey, .subSubkey")
   if(event.target.classList.contains("collapsed")){

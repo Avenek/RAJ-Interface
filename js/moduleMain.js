@@ -3,7 +3,7 @@ let currentModule = ""
 let objectIndex
 let requiredItems;
 
-function loadModuleObject(index, module, hasList = true)
+function loadModuleObject(index, module="", hasList = true)
 {
   objectIndex = index
   currentModule = module
@@ -18,8 +18,6 @@ function loadModuleObject(index, module, hasList = true)
   else{
     dynamicData[currentModule]={}
   }
-
-  
 }
 
 function loadModuleContent()

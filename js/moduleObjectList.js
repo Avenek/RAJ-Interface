@@ -4,12 +4,17 @@ function createObjectList(module, moduleObject)
     let objectsContainerHtml = `
     <div class="object-list-container">
         <div class="container-title">Lista obiektów</div>`
-    const ids = dynamicData[module].list.map(item => item.id || item.name);
-        ids.forEach(id => {
-          const checkedClass = id === moduleObject.id || id === moduleObject.name ? "radio-checked" : ""
-          objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="delete-icon">🗑️</div></div>`;
-        });
-    objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button></div>'
+        try{
+            const ids = dynamicData[module].list.map(item => item.id || item.name);
+            ids.forEach(id => {
+                const checkedClass = id === moduleObject.id || id === moduleObject.name ? "radio-checked" : ""
+                objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="delete-icon">🗑️</div></div>`;
+            });
+            objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button></div>'
+        }
+        catch{
+            return objectsContainerHtml
+        }
     return objectsContainerHtml  
 }
 
@@ -97,6 +102,11 @@ function addObjectToJson(module, id)
     switch(module){
         case "characterEffect":
             workingObject = new CharacterEffect(id)
+            if(!dynamicData.hasOwnProperty(currentModule))
+            {
+                dynamicData[currentModule]={}
+                dynamicData[currentModule].list=[]
+            }
             dynamicData["characterEffect"].list.push(workingObject)
             const index = findObjectIndexOnList(currentModule, id)
             objectIndex = index
@@ -112,15 +122,25 @@ function removeObjectFromList(event){
         const objectId = event.target.previousElementSibling.textContent
         removeObjectFromJson(currentModule, objectId)
         const container = event.target.parentNode
-        container.remove()
         if(container.firstChild.classList.contains("radio-checked"))
         {
-            firstObject = document.querySelector(".object-list-element")
-            firstObject.classList.add("radio-checked")
-            fillFormFields(dynamicData[currentModule].list[0])
-            hideAndRevealRequiredItems(dynamicData[currentModule].list[0])
+            objectIndex = 0
+            const elements = document.querySelectorAll(".object-list-element")
+            if(elements.length>1){
+                elements[0].classList.add("radio-checked")
+                workingObject = dynamicData[currentModule].list[0]
+                fillFormFields(workingObject)
+                hideAndRevealRequiredItems(workingObject)
+            }
+            else{
+                workingObject = null
+                delete dynamicData[currentModule]
+            }
+            updateDynamicDataAndJsonText()
         }
-        updateDynamicDataAndJsonText()
+        container.remove()
+        updateJsonTextArea()
+        
     }
 }
 
