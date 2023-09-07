@@ -297,6 +297,10 @@ body {
     border-radius: 3px;
 }
 
+.key-value input[type="number"] {
+  min-width: 40px;
+}
+
 .expanded{
     width: 400px;
 }
@@ -502,11 +506,11 @@ body {
   }
 
   .extra-option-active{
-    letter-spacing: 0.2rem;
-    padding: 0.5rem 3.1rem;
+    border: none;
+    letter-spacing: 0.1rem;
+    padding: 0.4rem 3rem;
     background: var(--clr);
     color: var(--clr);
-    box-shadow: 0 0 35px var(--clr);
     animation: box 3s infinite;
   }
   
@@ -630,17 +634,15 @@ body {
     margin-left: 23px;
     color: white;
     font-size: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
   }
 
   .plus-circle:hover {
     background-color: #7fdb3496;
     cursor: pointer;
   }
-
-
-.fas{
-    text-align: center;
-}
 
 img {
     pointer-events: none;
@@ -662,6 +664,9 @@ ul {
     margin-block-end: 0px;
 }
 
+.fas{
+  text-align: center;
+}
 
 .single-object-container:hover .delete-icon{
     display: block;

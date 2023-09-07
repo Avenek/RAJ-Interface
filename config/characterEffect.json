@@ -17,7 +17,7 @@
                     "name": "id",
                     "tool-tip": "Nazwa (string lub int) identyfikująca efekt. Umożliwia późniejszego jego usunięciu.",
                     "type": "string",
-                    "default": "obiekt-1"
+                    "default": "obiekt-id"
                 },
                 {
                     "name": "windowTarget",

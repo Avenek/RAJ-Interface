@@ -6,12 +6,73 @@
             "type": "key",
             "properties": [
                 {
-                    "name": "action",
-                    "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
+                    "name": "kind",
+                    "tool-tip": "Możemy zdefiniować jeden z trzech obiektów: ARGUMENT - służy do podania warunku, CONNECTOR - służy do podania operacji logicznej (or - lub, and - i), CONTAINER - elementy zawarte tutaj w liście traktujemy, jakby były zapisane w nawiasie.",
                     "type": "options",
-                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
-                    "extraOptions": [{"name":"case"}],
-                    "default": "CREATE"
+                    "options": [{"name":"ARGUMENT"}, {"name":"CONNECTOR"}, {"name":"CONTAINER"}],
+                    "default": "ARGUMENT"
+                },
+                {
+                    "name": "not",
+                    "tool-tip": "Służy do negacji warunku.",
+                    "type": "bool",
+                    "default": false,
+                    "require": {"name": "kind", "value": ["ARGUMENT"]}
+                },
+                {
+                    "name": "key",
+                    "tool-tip": "Służy do wyboru danego warunku.",
+                    "type": "options",
+                    "options": [{"name":"QUEST"}, {"name":"TOWN"}, {"name":"OUTFIT"}, {"name":"PET"}, {"name":"EXIST_OBJ"}, {"name":"EXIST_OBJ_HAVE_OUTFIT"}],
+                    "default": "QUEST",
+                    "require": {"name": "kind", "value": ["ARGUMENT"]}
+                },
+                {
+                    "name": "quest.name",
+                    "tool-tip": "ACTIVE - quest musi być aktywny, NEVER_OCCUR - quest musi być nierozpoczęty (lub progress pomocniczy >99), FINISH - quest musi być ukończony, NOT_FINISH - quest może być aktywny lub nierozpoczęty, NO_ACTIVE - quest może być nierozpoczęty lub ukończony.",
+                    "type": "options",
+                    "options": [{"name":"ACTIVE"}, {"name":"NEVER_OCCUR"}, {"name":"FINISH"}, {"name":"NOT_FINISH"}, {"name":"NO_ACTIVE"}],
+                    "default": "ACTIVE",
+                    "require": {"name": "key", "value": ["QUEST"]}
+                },
+                {
+                    "name": "town.name",
+                    "tool-tip": "Sraj się wykona, jeżeli wartość klucza będzie jedną z tych zadeklarowanych w tablicy.",
+                    "type": "options",
+                    "options": [{"name":"ONE_OF"}],
+                    "default": "ONE_OF",
+                    "require": {"name": "key", "value": ["TOWN", "OUTFIT", "PET"]}
+                },
+                {
+                    "name": "existObj.name",
+                    "tool-tip": "Sraj się wykona, jeżeli podany obiekt istnieje.",
+                    "type": "options",
+                    "options": [{"name":"FAKE_NPC"}, {"name":"NPC"}, {"name":"FLOAT_OBJECT"}],
+                    "default": "FAKE_NPC",
+                    "require": {"name": "key", "value": ["EXIST_OBJ"]}
+                },
+                {
+                    "name": "existObjHaveOtfit.name",
+                    "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada daną grafikę.",
+                    "type": "options",
+                    "options": [{"name":"FAKE_NPC"}, {"name":"NPC"}],
+                    "default": "FAKE_NPC",
+                    "require": {"name": "key", "value": ["EXIST_OBJ_HAVE_OUTFIT"]}
+                },
+                {
+                    "name": "params",
+                    "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada daną grafikę.",
+                    "type": "string",
+                    "default": [],
+                    "require": {"name": "kind", "value": ["ARGUMENT"]}
+                },
+                {
+                    "name": "connector.name",
+                    "tool-tip": "Służy do wyboru operacji logicznej: OR - lub, AND - i.",
+                    "type": "options",
+                    "options": [{"name":"AND"}, {"name":"OR"}],
+                    "default": "AND",
+                    "require": {"name": "kind", "value": ["CONNECTOR"]}
                 }
             ]
         }

@@ -111,7 +111,7 @@ function addObjectToJson(module, id)
             const index = findObjectIndexOnList(currentModule, id)
             objectIndex = index
             fillFormFields(workingObject)
-            hideAndRevealRequiredItems(workingObject)
+            hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)
             break;
     }
     updateDynamicDataAndJsonText()
@@ -130,7 +130,7 @@ function removeObjectFromList(event){
                 elements[0].classList.add("radio-checked")
                 workingObject = dynamicData[currentModule].list[0]
                 fillFormFields(workingObject)
-                hideAndRevealRequiredItems(workingObject)
+                hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)
             }
             else{
                 workingObject = null
@@ -150,8 +150,8 @@ function changeObjectOnList(event){
     objectIndex = index
     workingObject = dynamicData[currentModule].list[objectIndex]
     fillFormFields(workingObject)
-    hideAndRevealRequiredItems(workingObject)
-    removeDefaultValuesFromJson(workingObject)
+    hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)
+    removeDefaultValuesFromJson(workingObject, configJson.properties)
 }
 
 function setupRadioButtonsObjectList(radioButtons) {

@@ -1,18 +1,18 @@
-function createObjectConfigurationContainer(config, moduleObject)
+function createObjectConfigurationContainer(config)
 {
     let html = ''
     for (const property of config.properties) {
         if(property.type === "key" || property.type === "subkey" || property.type === "subSubkey"){
         html += `<div class="${property.type}">
         <header data-name="${property.name}">${property.name.substring(property.name.indexOf(".")+1).toUpperCase()}</header></div><div class="key-menu">`
-        html+=createObjectConfigurationContainer(property, moduleObject)
+        html+=createObjectConfigurationContainer(property)
         continue;
         }
         else if (property.type === 'options') {
             html+=`<div class="key-value"><header class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</header>`
             for (const option of property.options) {
-              const checkedClass = property.default===option ? 'radio-checked' : '';
-              const checked =  property.default===option ? 'checked' : '';
+              const checkedClass = property.default===option.name ? 'radio-checked' : '';
+              const checked =  property.default===option.name ? 'checked' : '';
               html += `<label class="radio-button ${checkedClass}"><input type="radio" name="${property.name}" class="radio-input" ${checked}>${option.name}</label>`;
             }
           } 
@@ -134,20 +134,20 @@ function fillFormFields(data, prefix = "") {
     return objectsWithRequire
   }
   
-  function findHeadersByName(name) {
-    return Array.from(document.querySelectorAll('header[data-name="' + name + '"]'));
+  function findHeadersByName(name, container) {
+    return Array.from(container.querySelectorAll('header[data-name="' + name + '"]'));
   }
   
-  function findInputsByName(name) {
-    return Array.from(document.querySelectorAll('input[name="' + name + '"]'));
+  function findInputsByName(name, container) {
+    return Array.from(container.querySelectorAll('input[name="' + name + '"]'));
   }
   
-  function hideAndRevealRequiredItems(moduleObject)
+  function hideAndRevealRequiredItems(moduleObject, requiredItems, container)
   {
     requiredItems.forEach(item => {
       if(item.type === "key" || item.type === "subkey")
       {
-        headers = findHeadersByName(item.name)
+        headers = findHeadersByName(item.name, container)
 
         if(!item.require.value.includes(getValueFromObject(moduleObject, item.require.name)))
         {
@@ -166,15 +166,30 @@ function fillFormFields(data, prefix = "") {
       else{
         if(!item.require.value.includes(getValueFromObject(moduleObject, item.require.name)))
         {
-          inputs = findInputsByName(item.name)
+          inputs = findInputsByName(item.name, container)
           inputs.forEach(input => {
-            input.parentNode.classList.add("hide")
+            if(input.type === "radio" || input.type==="checkbox")
+            {
+              input.parentNode.parentNode.classList.add("hide")
+            }
+            else{
+              input.parentNode.classList.add("hide")
+            }
+              
+
           })
         }
         else{
-          inputs = findInputsByName(item.name)
+          inputs = findInputsByName(item.name, container)
           inputs.forEach(input => {
-            input.parentNode.classList.remove("hide")
+            if(input.type === "radio" || input.type==="checkbox")
+            {
+              input.parentNode.parentNode.classList.remove("hide")
+            }
+            else{
+              input.parentNode.classList.remove("hide")
+            }
+
           })
   
         }
@@ -204,15 +219,45 @@ function resizeIfIsTooLongValue(event){
 }
 
 function handleExtraOptionButtonClick(event){
-  console.log(event.target.textContent);
-  switch(event.target.textContent)
+  const container = document.querySelector(".key-configuration")
+  event.target.classList.toggle("extra-option-active")
+  let fullHtml = '<div class="container-title">Konfiguracja klucza</div>'
+  if(event.target.classList.contains("extra-option-active"))
   {
-    case "CASE":
-      break;
-    case "TABLE":
-      break;
-    default:
-      break; 
+      switch(event.target.textContent)
+    {
+      case "CASE":
+        fetch(`../config/case.json`)
+        .then(response => response.json())
+        .then(config => {
+            fullHtml += createObjectConfigurationContainer(config) 
+            container.innerHTML = fullHtml
+            keyRequiredItems = findReuqiredItems(config)
+            if(!workingObject["case"])
+            {
+              workingObject["case"] = {}
+              workingObject["case"].list = []
+              workingObject["case"].list.push(new Case())
+            
+            }
+            updateDynamicDataAndJsonText()
+            fillFormFields(workingObject);
+            hideAndRevealRequiredItems(workingObject.case.list[0], keyRequiredItems, keyContainer)
+            
+        })
+        .catch(error => {
+        console.error('Błąd pobierania:', error);
+        })
+        break;
+      case "TABLE":
+        break;
+      default:
+        break; 
+    }
   }
+  else{
+    container.innerHTML = fullHtml
+  }
+  
 
 }

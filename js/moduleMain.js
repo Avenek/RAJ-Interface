@@ -1,8 +1,11 @@
-let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons
+let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons
 let currentModule = ""
+let workingObject = {}
 let objectIndex
 let requiredItems;
+let keyRequiredItems;
 let configJson;
+let objectContainer, keyContainer
 
 function loadModuleObject(index, module="", hasList = true)
 {
@@ -39,19 +42,16 @@ function loadModuleContent()
     .then(config => {
         configJson = config
         fullHtml += `<div class="object-configuration">`
-        fullHtml += createObjectConfigurationContainer(config, workingObject) 
+        fullHtml += createObjectConfigurationContainer(config) 
         fullHtml += createKeyMenu()
         handleContainer.innerHTML += fullHtml
         requiredItems = findReuqiredItems(config)
         getModuleElements()
-        if(radioButtonObjectList.length ===0)
-        {
-          addObjectToList()
-        }
+        addObjectIfListIsEmpty()
         createModuleDOMEvents()
         fillFormFields(workingObject);
-        hideAndRevealRequiredItems(workingObject)
-        removeDefaultValuesFromJson(workingObject)
+        hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)
+        removeDefaultValuesFromJson(workingObject, configJson.properties)
         
     })
     .catch(error => {
@@ -72,7 +72,6 @@ function createKeyMenu() {
   </div>
   <div class="key-configuration">
       <div class="container-title">Konfiguracja klucza</div>
-
   </div>`
 }
 
@@ -87,14 +86,23 @@ function setupRadioButtons(radioButtons) {
       radioButton.addEventListener('change', (event) => {
         updateObjectRadioButton(event)
         fillFormFields(workingObject)
-        hideAndRevealRequiredItems(workingObject)})
+        hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)})
   });
+}
+
+function addObjectIfListIsEmpty(){
+  if(radioButtonObjectList.length ===0)
+  {
+    addObjectToList()
+  }
 }
 
 
 function getModuleElements(){
-  const objectConfigurationContainer = document.querySelector(".object-configuration")
-  const radioButtons = objectConfigurationContainer.querySelectorAll('input[type="radio"]');
+
+  objectContainer = document.querySelector(".object-configuration")
+  keyContainer = document.querySelector(".key-configuration")
+  const radioButtons = objectContainer.querySelectorAll('input[type="radio"]');
   uniqueNamesSet = new Set();
   const objectListContainer = document.querySelector(".object-list-container")
   radioButtonObjectList = objectListContainer.querySelectorAll('input[type="radio"]')
@@ -111,6 +119,7 @@ function getModuleElements(){
   checkboxList = document.querySelectorAll('.slider')
   keyHeaders = document.querySelectorAll(".key, .subkey, .subSubkey")
   extraOptionsButtons = document.querySelectorAll(".extra-option")
+  jsonButtons = document.querySelectorAll(".json-buttons")
 }
 
 function createModuleDOMEvents(){
@@ -125,7 +134,7 @@ function createModuleDOMEvents(){
     checkbox.addEventListener("click", (event) => {
     checkbox.classList.toggle("checkbox-checked")
     changeValueInJsonCheckbox(event)
-    removeDefaultValuesFromJson(workingObject)
+    removeDefaultValuesFromJson(workingObject, configJson.properties)
     })
   })
 
@@ -133,7 +142,7 @@ function createModuleDOMEvents(){
     changeValueInJsonInput(event)
     resizeIfIsTooLongValue(event)
     updateObjectListText()
-    removeDefaultValuesFromJson(workingObject)
+    removeDefaultValuesFromJson(workingObject, configJson.properties)
   }))
 
   keyHeaders.forEach(header => {
@@ -146,6 +155,7 @@ function createModuleDOMEvents(){
 
   addObjectPlus.addEventListener("click", addObjectToList)
   deleteObjectButtons.forEach(button => button.addEventListener("click", removeObjectFromList))
+  jsonButtons.forEach(button => button.addEventListener("click", buttonClick))
 }
 
 function main(){

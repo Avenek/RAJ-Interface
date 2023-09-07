@@ -1,4 +1,4 @@
-let workingObject = {}
+
 
 function findObjectIndexOnList(module, objectId)
 {
@@ -51,7 +51,7 @@ function updateObjectRadioButton(event)
           const paramName = dotIndex !== -1 ? fullName.substring(dotIndex + 1) : fullName;
           newObject = createObjectBaseOnConfig(item.properties)
           setObjectKeyByPath(paramName, newObject)
-          removeDefaultValuesFromJson(workingObject)
+          removeDefaultValuesFromJson(workingObject, configJson.properties)
           
         }
       }
@@ -224,15 +224,18 @@ function createObjectBaseOnConfig(config) {
   return result[topLevelKeys[0]];
 }
 
-function removeDefaultValuesFromJson(data, prefix = "") {
+function removeDefaultValuesFromJson(data, config, prefix = "") {
   for (const key in data) {
     const value = data[key];
     const fullKey = prefix + key;
     let foundObject
-    if (typeof value === "object") {
-      removeDefaultValuesFromJson(value, fullKey + ".");
+    if(key==="case")
+    {
+      continue
+    }
+    else if (typeof value === "object") {
+      removeDefaultValuesFromJson(value, config, fullKey + ".");
     } else {
-      let config = configJson.properties
       foundObject = findObjectByName(config, fullKey)
       if(foundObject.default == data[key] && foundObject.type!=="options")
       {
