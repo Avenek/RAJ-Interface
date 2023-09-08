@@ -1,19 +1,18 @@
 let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons
 let currentModule = ""
-let workingObject = {}
-let objectIndex
 let requiredItems;
 let keyRequiredItems;
 let configJson;
 let objectContainer, keyContainer
 
-function loadModuleObject(index, module="", hasList = true)
+function loadModuleObject(index, module, hasList = true)
 {
-  objectIndex = index
+  objectContainer = new Container(index)
   currentModule = module
+  objectContainer.className = "object-configuration"
   if(dynamicData.hasOwnProperty(currentModule))
   {
-    workingObject = dynamicData[currentModule].list[objectIndex]
+    objectContainer.workingObject = dynamicData[currentModule].list[index]
   }
   else if(hasList){
     dynamicData[currentModule]={}
@@ -26,32 +25,30 @@ function loadModuleObject(index, module="", hasList = true)
 
 function loadModuleContent()
 {
-    
     const head = document.querySelector("head")
     head.innerHTML+= '<link rel="stylesheet" href="../css/modulePage.css">'
-    const plus = document.querySelector(".plus-circle")
     const home = document.querySelector(".element-container")
     home.innerHTML = '<div class="home"><i class="fa-solid fa-house"></i></div>'
     //plus.remove()
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
-    fullHtml += createObjectList(currentModule, workingObject)
+    fullHtml += createObjectList(currentModule, objectContainer.workingObject)
     fetch(`../config/${currentModule}.json`)
     .then(response => response.json())
     .then(config => {
-        configJson = config
+        objectContainer.jsonConfig = config
         fullHtml += `<div class="object-configuration">`
         fullHtml += createObjectConfigurationContainer(config) 
         fullHtml += createKeyMenu()
         handleContainer.innerHTML += fullHtml
-        requiredItems = findReuqiredItems(config)
+        objectContainer.requiredItems = findReuqiredItems(config)
         getModuleElements()
         addObjectIfListIsEmpty()
         createModuleDOMEvents()
-        fillFormFields(workingObject);
-        hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)
-        removeDefaultValuesFromJson(workingObject, configJson.properties)
+        fillFormFields(objectContainer.workingObject);
+        hideAndRevealRequiredItems(objectContainer)
+        removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
         
     })
     .catch(error => {
@@ -85,8 +82,8 @@ function setupRadioButtons(radioButtons) {
       });
       radioButton.addEventListener('change', (event) => {
         updateObjectRadioButton(event)
-        fillFormFields(workingObject)
-        hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)})
+        fillFormFields(objectContainer.workingObject)
+        hideAndRevealRequiredItems(objectContainer)})
   });
 }
 
@@ -100,7 +97,7 @@ function addObjectIfListIsEmpty(){
 
 function getModuleElements(){
 
-  objectContainer = document.querySelector(".object-configuration")
+  const objectContainer = document.querySelector(".object-configuration")
   keyContainer = document.querySelector(".key-configuration")
   const radioButtons = objectContainer.querySelectorAll('input[type="radio"]');
   uniqueNamesSet = new Set();
@@ -134,7 +131,7 @@ function createModuleDOMEvents(){
     checkbox.addEventListener("click", (event) => {
     checkbox.classList.toggle("checkbox-checked")
     changeValueInJsonCheckbox(event)
-    removeDefaultValuesFromJson(workingObject, configJson.properties)
+    removeDefaultValuesFromJson(objectContainer)
     })
   })
 
@@ -142,7 +139,7 @@ function createModuleDOMEvents(){
     changeValueInJsonInput(event)
     resizeIfIsTooLongValue(event)
     updateObjectListText()
-    removeDefaultValuesFromJson(workingObject, configJson.properties)
+    removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
   }))
 
   keyHeaders.forEach(header => {

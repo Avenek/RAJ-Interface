@@ -11,27 +11,27 @@
                     "type": "options",
                     "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
-                    "default": "CREATE"
+                    "defaultInput": "CREATE"
                 },
                 {
                     "name": "id",
                     "tool-tip": "Nazwa (string lub int) identyfikująca efekt. Umożliwia późniejszego jego usunięciu.",
                     "type": "string",
-                    "default": "obiekt-id"
+                    "defaultInput": "obiekt-id"
                 },
                 {
                     "name": "windowTarget",
                     "tool-tip": "Miejsce, w którym będą widoczne efekty.",
                     "type": "options",
                     "options": [{"name":"MAP"}],
-                    "default": "MAP"
+                    "defaultInput": "MAP"
                 },
                 {
                     "name": "effect",
                     "tool-tip": "Rodzaj efektu. Animation stworzy animację na podstawie gifa. TEXT wyświetli boxa nad głową obiektu z zadeklarowanym tekstem. TINT powoduje nakładanie się kolorowego cienia na obiekt.",
                     "type": "options",
                     "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}],
-                    "default": "ANIMATION"
+                    "defaultInput": "ANIMATION"
                 },
                 {
                     "name": "target",
@@ -43,7 +43,7 @@
                             "tool-tip": "Typ obiektu, na którym chcemy wywołać dany efekt.",
                             "type": "options",
                             "options": [{"name":"HERO"}, {"name":"NPC"},{"name":"FAKE_NPC"}],
-                            "default": "HERO"
+                            "defaultInput": "HERO"
                         },
                         {
                             "name": "target.id",
@@ -68,7 +68,8 @@
                             "name": "params.repeat",
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "type": "string",
-                            "default": 1
+                            "defaultInput": 1,
+                            "defaultSraj": 1
                         },
                         {
                             "name": "params.opacity",
@@ -77,20 +78,23 @@
                             "max":1,
                             "step":0.1,
                             "type": "number",
-                            "default": 1
+                            "defaultInput": 1,
+                            "defaultSraj": 1
+                            
                         },
                         {
                             "name": "params.position",
                             "tool-tip": "Pozycja względem zadeklarowanego wcześniej targetu.",
                             "type": "options",
                             "options": [{"name":"CENTER"}, {"name":"TOP"},{"name":"BOTTOM"}, {"name":"LEFT"},{"name":"RIGHT"}, {"name":"LEFT_HAND"},{"name":"RIGHT_HAND"}],
-                            "default": "CENTER"
+                            "defaultInput": "CENTER"
                         },
                         {
                             "name": "params.behind",
                             "tool-tip": "Zaznaczenie tej opcji powoduje renderowanie efektu za postacią.",
                             "type": "bool",
-                            "default": false
+                            "defaultInput": false,
+                            "defaultSraj": false
                         },
                         {
                             "name": "params.offsetX",
@@ -99,7 +103,8 @@
                             "min":-64,
                             "max":64,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.offsetY",
@@ -108,13 +113,15 @@
                             "min":-64,
                             "max":64,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.speechBubble",
                             "tool-tip": "Zaznaczenie tej opcji powoduje pojawienie się dymku pod renderowaną grafiką.",
                             "type": "bool",
-                            "default": false
+                            "defaultInput": false,
+                            "defaultSraj": false
                         },
                         {
                             "name": "params.delayBefore",
@@ -123,7 +130,8 @@
                             "min":0,
                             "max":999,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.delayAfter",
@@ -132,7 +140,8 @@
                             "min":0,
                             "max":999,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         }
                     ]
                 },
@@ -149,13 +158,15 @@
                             "min":0,
                             "max":999,
                             "type": "number",
-                            "default":5
+                            "defaultInput":1,
+                            "defaultSraj": true
                         },
                         {
                             "name": "params.repeat",
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "type": "string",
-                            "default": 1
+                            "defaultInput": 1,
+                            "defaultSraj": 1
                         },
                         {
                             "name": "tintPercent",
@@ -164,7 +175,8 @@
                             "max":100,
                             "step":5,
                             "type": "number",
-                            "default":100
+                            "defaultInput":100,
+                            "defaultSraj": 100
                         },
                         {
                             "name": "params.offsetX",
@@ -173,7 +185,8 @@
                             "min":-64,
                             "max":64,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.offsetY",
@@ -182,13 +195,15 @@
                             "min":-64,
                             "max":64,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.speechBubble",
                             "tool-tip": "Tworzy dymek pod renderowaną grafiką.",
                             "type": "bool",
-                            "default": false
+                            "defaultInput": false,
+                            "defaultSraj": false
                         },
                         {
                             "name": "params.delayBefore",
@@ -197,7 +212,8 @@
                             "min":0,
                             "max":999,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.delayAfter",
@@ -206,7 +222,8 @@
                             "min":0,
                             "max":999,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.color",
@@ -220,7 +237,7 @@
                                     "min":0,
                                     "max":255,
                                     "type": "number",
-                                    "default":0,
+                                    "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}]
                                 },
                                 {
@@ -230,7 +247,7 @@
                                     "min":0,
                                     "max":255,
                                     "type": "number",
-                                    "default":0,
+                                    "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}]
                                 },
                                 {
@@ -240,7 +257,7 @@
                                     "min":0,
                                     "max":255,
                                     "type": "number",
-                                    "default":0,
+                                    "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}]
                                 },
                                 {
@@ -250,7 +267,7 @@
                                     "min":0,
                                     "max":1,
                                     "type": "number",
-                                    "default":1,
+                                    "defaultInput":1,
                                     "extraOptions": [{"name":"get random"}]
                                 }
                             ]
@@ -267,7 +284,7 @@
                             "name": "params.text",
                             "tool-tip": "Tablica słów, które są po kolei wyświetlane nad npc. Oddzielać średnikiem.",
                             "type": "string",
-                            "default":[]
+                            "defaultInput":[]
                         },
                         {
                             "name": "params.duration",
@@ -276,7 +293,8 @@
                             "min":0,
                             "max":999,
                             "type": "number",
-                            "default":5
+                            "defaultInput":5,
+                            "defaultSraj": 5
                         },
                         {
                             "name": "params.between",
@@ -285,13 +303,15 @@
                             "min":0,
                             "max":999,
                             "type": "number",
-                            "default":5
+                            "defaultInput":5,
+                            "defaultSraj": 5
                         },
                         {
                             "name": "params.repeat",
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "type": "string",
-                            "default": 1
+                            "defaultInput": 1,
+                            "defaultSraj": 1
                         },
                         {
                             "name": "params.height",
@@ -300,13 +320,15 @@
                             "max":100,
                             "step":1,
                             "type": "number",
-                            "default":11
+                            "defaultInput":11,
+                            "defaultSraj": 11
                         },
                         {
                             "name": "params.random",
                             "tool-tip": "Dostępne wartości to: true - powoduje losowanie słów z tablicy text (ilość losowań to długość tablicy text), ONE - losuje tylko jedno słowo z tablicy, false - słowa są wyświetlane po kolei.",
                             "type": "text",
-                            "default": "false"
+                            "defaultInput": false,
+                            "defaultSraj": false
                         },
                         {
                             "name": "params.offsetX",
@@ -315,7 +337,8 @@
                             "min":-64,
                             "max":64,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.offsetY",
@@ -324,13 +347,15 @@
                             "min":-64,
                             "max":64,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.stickMap",
                             "tool-tip": "Jeżeli text zostanie przypięty do obiektu poruszającego się (np. fakeNpc), to w momencie wyzwolenia słowa, zostanie ono przyklejone do mapy",
                             "type": "bool",
-                            "default": false
+                            "defaultInput": false,
+                            "defaultSraj": false
                         },
                         {
                             "name": "params.delayBefore",
@@ -339,7 +364,8 @@
                             "min":0,
                             "max":999,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.delayAfter",
@@ -348,7 +374,8 @@
                             "min":0,
                             "max":999,
                             "type": "number",
-                            "default":0
+                            "defaultInput":0,
+                            "defaultSraj": 0
                         },
                         {
                             "name": "params.color",
@@ -362,7 +389,7 @@
                                     "min":0,
                                     "max":255,
                                     "type": "number",
-                                    "default":0,
+                                    "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}]
                                 },
                                 {
@@ -372,7 +399,7 @@
                                     "min":0,
                                     "max":255,
                                     "type": "number",
-                                    "default":0,
+                                    "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}]
                                 },
                                 {
@@ -382,7 +409,7 @@
                                     "min":0,
                                     "max":255,
                                     "type": "number",
-                                    "default":0,
+                                    "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}]
                                 },
                                 {
@@ -392,7 +419,7 @@
                                     "min":0,
                                     "max":1,
                                     "type": "number",
-                                    "default":1,
+                                    "defaultInput":1,
                                     "extraOptions": [{"name":"get random"}]
                                 }
                             ]

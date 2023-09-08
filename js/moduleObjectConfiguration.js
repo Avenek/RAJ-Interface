@@ -40,18 +40,18 @@ function updateObjectRadioButton(event)
 
   const targetKey = event.target.name
   
-  requiredItems.forEach(item => {
+  objectContainer.requiredItems.forEach(item => {
     if(getValueFromObject(item, "require.name") === targetKey)
     {
-      if(isItemIncluded(item, "require.value", workingObject, targetKey)) {
+      if(isItemIncluded(item, "require.value", objectContainer.workingObject, targetKey)) {
         if(item.type === "subkey"){
           const paramName = getLastPartOfTheName(item.name)
           newObject = createObjectBaseOnConfig(item.properties)
           setObjectKeyByPath(paramName, newObject)
-          removeDefaultValuesFromJson(workingObject, configJson.properties)
+          removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
         }
         else {
-          setObjectKeyByPath(item.name, item.default !== undefined && item.default !== null ? item.default : '')
+          setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '')
         }
       }
       else {
@@ -114,7 +114,7 @@ function changeValueInJson(key, newValue, event)
 {
   const keys = key.split('.');
 
-  let currentObj = workingObject;
+  let currentObj = objectContainer.workingObject;
 
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
@@ -125,7 +125,6 @@ function changeValueInJson(key, newValue, event)
   }
 
   const lastKey = keys[keys.length - 1];
-  console.log(lastKey, currentObj[lastKey]);
   if(Array.isArray(currentObj[lastKey]))
   {
     valuesArray = []
@@ -153,12 +152,11 @@ function changeValueInJson(key, newValue, event)
 
 function removeObjectKeyByPath(path) {
   const keys = path.split('.');
-  let currentObj = workingObject;
+  let currentObj = objectContainer.workingObject;
 
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
     if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
-      console.log("Brak podanego klucza.");
       return;
     }
     currentObj = currentObj[currentKey];
@@ -166,13 +164,22 @@ function removeObjectKeyByPath(path) {
 
   const lastKey = keys[keys.length - 1];
   if (currentObj && typeof currentObj === 'object' && lastKey in currentObj) {
-    delete currentObj[lastKey];
+    if(Object.keys(currentObj).length===1)
+    {
+      const lastDotIndex = path.lastIndexOf(".");
+      const penultimate = path.substring(0, lastDotIndex);
+      removeObjectKeyByPath(penultimate)
+    }
+    else{
+      delete currentObj[lastKey];
+    }
+    
   }
 }
 
 function setObjectKeyByPath(path, value) {
   const keys = path.split('.');
-  let currentObj = workingObject;
+  let currentObj = objectContainer.workingObject;
 
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
@@ -188,7 +195,7 @@ function setObjectKeyByPath(path, value) {
 
 function updateDynamicDataAndJsonText(){
   try{
-  dynamicData[currentModule].list[objectIndex] = workingObject
+  dynamicData[currentModule].list[objectContainer.currentIndex] = objectContainer.workingObject
   }
   catch{}
   updateJsonTextArea()
@@ -199,7 +206,7 @@ function createObjectBaseOnConfig(config) {
 
   for (const property of config) {
     const keys = property.name.split('.');
-    const paramName = keys.pop(); // Pobierz ostatni segment jako nazwę parametru
+    const paramName = keys.pop();
     let currentObj = result;
 
     for (const key of keys) {
@@ -220,7 +227,7 @@ function createObjectBaseOnConfig(config) {
       }
     }
     else{
-    currentObj[paramName] = property.default !== undefined && property.default !== null ? property.default : '';
+    currentObj[paramName] = property.defaultInput !== undefined && property.defaultInput !== null ? property.defaultInput : '';
     }
   }
   const topLevelKeys = Object.keys(result);
@@ -240,7 +247,7 @@ function removeDefaultValuesFromJson(data, config, prefix = "") {
       removeDefaultValuesFromJson(value, config, fullKey + ".");
     } else {
       foundObject = findObjectByName(config, fullKey)
-      if(foundObject.default == data[key] && foundObject.type!=="options")
+      if(foundObject.defaultSraj == data[key] && foundObject.type!=="options")
       {
         removeObjectKeyByPath(fullKey)
       }

@@ -1,3 +1,9 @@
+class Container {
+  constructor(index) {
+    this.currentIndex = index
+  }
+}
+
 class CharacterEffect {
   constructor(id) {
     this.action = "CREATE";

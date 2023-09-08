@@ -101,17 +101,17 @@ function addObjectToJson(module, id)
 {
     switch(module){
         case "characterEffect":
-            workingObject = new CharacterEffect(id)
+            objectContainer.workingObject = new CharacterEffect(id)
             if(!dynamicData.hasOwnProperty(currentModule))
             {
                 dynamicData[currentModule]={}
                 dynamicData[currentModule].list=[]
             }
-            dynamicData["characterEffect"].list.push(workingObject)
+            dynamicData["characterEffect"].list.push(objectContainer.workingObject)
             const index = findObjectIndexOnList(currentModule, id)
-            objectIndex = index
-            fillFormFields(workingObject)
-            hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)
+            objectContainer.currentIndex = index
+            fillFormFields(objectContainer.workingObject)
+            hideAndRevealRequiredItems(objectContainer)
             break;
     }
     updateDynamicDataAndJsonText()
@@ -124,13 +124,13 @@ function removeObjectFromList(event){
         const container = event.target.parentNode
         if(container.firstChild.classList.contains("radio-checked"))
         {
-            objectIndex = 0
+            objectContainer.currentIndex = 0
             const elements = document.querySelectorAll(".object-list-element")
             if(elements.length>1){
                 elements[0].classList.add("radio-checked")
                 workingObject = dynamicData[currentModule].list[0]
                 fillFormFields(workingObject)
-                hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)
+                hideAndRevealRequiredItems(objectContainer)
             }
             else{
                 workingObject = null
@@ -147,11 +147,11 @@ function removeObjectFromList(event){
 function changeObjectOnList(event){
     const objectId = event.target.parentNode.textContent
     const index = findObjectIndexOnList(currentModule, objectId)
-    objectIndex = index
-    workingObject = dynamicData[currentModule].list[objectIndex]
-    fillFormFields(workingObject)
-    hideAndRevealRequiredItems(workingObject, requiredItems, objectContainer)
-    removeDefaultValuesFromJson(workingObject, configJson.properties)
+    objectContainer.currentIndex = index
+    objectContainer.workingObject = dynamicData[currentModule].list[index]
+    fillFormFields(objectContainer.workingObject)
+    hideAndRevealRequiredItems(objectContainer)
+    removeDefaultValuesFromJson(objectContainer.workingObject, configJson.properties)
 }
 
 function setupRadioButtonsObjectList(radioButtons) {
@@ -170,5 +170,5 @@ function setupRadioButtonsObjectList(radioButtons) {
   {
     const objectListContainer = document.querySelector(".object-list-container")
     const checkedRadioButton = objectListContainer.querySelector('label.radio-checked > input[type="radio"]');
-    checkedRadioButton.parentElement.firstChild.nextSibling.textContent = workingObject["id"] || workingObject["name"]
+    checkedRadioButton.parentElement.firstChild.nextSibling.textContent = objectContainer.workingObject["id"] || objectContainer.workingObject["name"]
 }

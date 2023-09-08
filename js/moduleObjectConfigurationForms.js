@@ -11,21 +11,21 @@ function createObjectConfigurationContainer(config)
         else if (property.type === 'options') {
             html+=`<div class="key-value"><header class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</header>`
             for (const option of property.options) {
-              const checkedClass = property.default===option.name ? 'radio-checked' : '';
-              const checked =  property.default===option.name ? 'checked' : '';
+              const checkedClass = property.defaultInput===option.name ? 'radio-checked' : '';
+              const checked =  property.defaultInput===option.name ? 'checked' : '';
               html += `<label class="radio-button ${checkedClass}"><input type="radio" name="${property.name}" class="radio-input" ${checked}>${option.name}</label>`;
             }
           } 
         else if (property.type === 'string') {
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value="${property.default}" name="${property.name}">`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value="${property.defaultInput}" name="${property.name}">`;
 
         }
         else if(property.type === 'number'){
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.default} id="${property.name}" name="${property.name}">`;
+          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.name}" name="${property.name}">`;
 
         }
         else if(property.type === 'bool'){
-          const checked =  property.default ? "checkbox-checked" : ""
+          const checked =  property.defaultInput ? "checkbox-checked" : ""
           html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label>`;
         }
         else if(property.type === 'table'){
@@ -73,19 +73,19 @@ function addToolTip(tip)
 }
 
 function fillFormFields(data, prefix = "") {
-    for (var key in data) {
-      var value = data[key];
-      var fullKey = prefix + key;
+    for (let key in data) {
+      const value = data[key];
+      const fullKey = prefix + key;
   
       if (typeof value === "object") {
         fillFormFields(value, fullKey + ".");
       } else {
-        var inputElements = document.querySelectorAll('[name="' + fullKey + '"]');
+        let inputElements = document.querySelectorAll('[name="' + fullKey + '"]');
         
         if (inputElements.length > 0) {
           if (inputElements[0].type === "radio") {
-            for (var i = 0; i < inputElements.length; i++) {
-              var inputElement = inputElements[i];
+            for (let i = 0; i < inputElements.length; i++) {
+              const inputElement = inputElements[i];
               if (inputElement.parentNode.textContent === value.toString()) {
                     inputElement.parentNode.classList.add("radio-checked");
               }
@@ -96,7 +96,7 @@ function fillFormFields(data, prefix = "") {
           } 
           else if(inputElements[0].type === "checkbox")
           {
-            var inputElement = inputElements[0];
+           const inputElement = inputElements[0];
             if (value) {
                inputElement.previousElementSibling.classList.add("checkbox-checked");
               }
@@ -105,8 +105,8 @@ function fillFormFields(data, prefix = "") {
               }
           }
           else {
-            for (var i = 0; i < inputElements.length; i++) {
-              var inputElement = inputElements[i];
+            for (let i = 0; i < inputElements.length; i++) {
+              const inputElement = inputElements[i];
               inputElement.value = value;
             }
              
@@ -134,22 +134,24 @@ function fillFormFields(data, prefix = "") {
     return objectsWithRequire
   }
   
-  function findHeadersByName(name, container) {
+  function findHeadersByName(name, containerClassName) {
+    const container = document.querySelector(`.${containerClassName}`)
     return Array.from(container.querySelectorAll('header[data-name="' + name + '"]'));
   }
   
-  function findInputsByName(name, container) {
+  function findInputsByName(name, containerClassName) {
+    const container = document.querySelector(`.${containerClassName}`)
     return Array.from(container.querySelectorAll('input[name="' + name + '"]'));
   }
   
-  function hideAndRevealRequiredItems(moduleObject, requiredItems, container)
+  function hideAndRevealRequiredItems(container)
   {
-    requiredItems.forEach(item => {
+    container.requiredItems.forEach(item => {
       if(item.type === "key" || item.type === "subkey")
       {
-        headers = findHeadersByName(item.name, container)
+        headers = findHeadersByName(item.name, container.className)
 
-        if(!item.require.value.includes(getValueFromObject(moduleObject, item.require.name)))
+        if(!item.require.value.includes(getValueFromObject(container.workingObject, item.require.name)))
         {
             headers.forEach(header => {
               header.parentNode.classList.add("hide")
@@ -164,9 +166,9 @@ function fillFormFields(data, prefix = "") {
         }
       }
       else{
-        if(!item.require.value.includes(getValueFromObject(moduleObject, item.require.name)))
+        if(!item.require.value.includes(getValueFromObject(container.workingObject, item.require.name)))
         {
-          inputs = findInputsByName(item.name, container)
+          inputs = findInputsByName(item.name, container.className)
           inputs.forEach(input => {
             if(input.type === "radio" || input.type==="checkbox")
             {
@@ -175,12 +177,10 @@ function fillFormFields(data, prefix = "") {
             else{
               input.parentNode.classList.add("hide")
             }
-              
-
           })
         }
         else{
-          inputs = findInputsByName(item.name, container)
+          inputs = findInputsByName(item.name, container.className)
           inputs.forEach(input => {
             if(input.type === "radio" || input.type==="checkbox")
             {
@@ -189,12 +189,9 @@ function fillFormFields(data, prefix = "") {
             else{
               input.parentNode.classList.remove("hide")
             }
-
           })
-  
         }
       }
-  
     })
   }
 
@@ -232,17 +229,19 @@ function handleExtraOptionButtonClick(event){
         .then(config => {
             fullHtml += createObjectConfigurationContainer(config) 
             container.innerHTML = fullHtml
-            keyRequiredItems = findReuqiredItems(config)
-            if(!workingObject["case"])
+            keyContainer = new Container(0)
+            keyContainer.className = "key-configuration"
+            keyContainer.requiredItems = findReuqiredItems(config)
+            if(!objectContainer.workingObject["case"])
             {
-              workingObject["case"] = {}
-              workingObject["case"].list = []
-              workingObject["case"].list.push(new Case())
-            
+              objectContainer.workingObject["case"] = {}
+              objectContainer.workingObject["case"].list = []
+              keyContainer.workingObject = new Case()
+              objectContainer.workingObject["case"].list.push(keyContainer.workingObject)
             }
             updateDynamicDataAndJsonText()
-            fillFormFields(workingObject);
-            hideAndRevealRequiredItems(workingObject.case.list[0], keyRequiredItems, keyContainer)
+            fillFormFields(objectContainer.workingObject);
+            hideAndRevealRequiredItems(keyContainer)
             
         })
         .catch(error => {
