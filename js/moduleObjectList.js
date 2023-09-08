@@ -111,6 +111,7 @@ function addObjectToJson(module, id)
             const index = findObjectIndexOnList(currentModule, id)
             objectContainer.currentIndex = index
             fillFormFields(objectContainer.workingObject)
+            removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
             hideAndRevealRequiredItems(objectContainer)
             break;
     }
