@@ -223,7 +223,7 @@ function handleExtraOptionButtonClick(event){
   let fullHtml = '<div class="container-title">Konfiguracja klucza</div>'
   if(event.target.classList.contains("menu-active"))
   {
-      switch(event.target.textContent)
+    switch(event.target.textContent)
     {
       case "CASE":
         fetch(`../config/case.json`)
@@ -232,12 +232,12 @@ function handleExtraOptionButtonClick(event){
             
             fullHtml += createObjectConfigurationContainer(config) 
             container.innerHTML = fullHtml
-            keyContainer = new Container(0, "key-configuration")
-            keyContainer.requiredItems = findReuqiredItems(config)
-            keyContainer.hasList = true
-            keyContainer.jsonConfig = config
             if(!objectContainer.workingObject["case"])
             {
+              keyContainer = new Container(0, "key-configuration")
+              keyContainer.requiredItems = findReuqiredItems(config)
+              keyContainer.hasList = true
+              keyContainer.jsonConfig = config
               objectContainer.workingObject["case"] = {}
               objectContainer.workingObject["case"].list = []
               keyContainer.workingObject = new Case()
