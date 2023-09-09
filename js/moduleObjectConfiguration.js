@@ -34,28 +34,27 @@ function getValueFromObject(obj, key) {
   return value;
 }
 
-function updateObjectRadioButton(event)
+function updateObjectRadioButton(event, container)
 {
-  changeValueInJsonRadioButton(event)
+  changeValueInJsonRadioButton(event, container)
 
   const targetKey = event.target.name
-  
-  objectContainer.requiredItems.forEach(item => {
+  container.requiredItems.forEach(item => {
     if(getValueFromObject(item, "require.name") === targetKey)
     {
-      if(isItemIncluded(item, "require.value", objectContainer.workingObject, targetKey)) {
+      if(isItemIncluded(item, "require.value", container.workingObject, targetKey)) {
         if(item.type === "subkey"){
           const paramName = getLastPartOfTheName(item.name)
           newObject = createObjectBaseOnConfig(item.properties)
-          setObjectKeyByPath(paramName, newObject)
-          removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
+          setObjectKeyByPath(paramName, newObject, container)
+          removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
         }
         else {
-          setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '')
+          setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '', container)
         }
       }
       else {
-        removeObjectKeyByPath(item.name)
+        removeObjectKeyByPath(item.name, container)
       }
     }
   })
@@ -73,31 +72,33 @@ function getLastPartOfTheName(fullName){
   return paramName
 }
 
-function changeValueInJsonRadioButton(event){
+function changeValueInJsonRadioButton(event, container){
   const key = event.target.name
   const newValue = event.target.parentNode.textContent
-  changeValueInJson(key, newValue)
+  changeValueInJson(key, newValue, container)
 }
 
-function changeValueInJsonInput(event){
+function changeValueInJsonInput(event, container){
 
   const key = event.target.name
-  const newValue = getValueInGoodType(event.target.value)
+  let newValue = event.target.value
+  console.log(newValue);
 
   if(newValue !== null & newValue !== undefined)
   {
-    changeValueInJson(key, newValue, event)
+    newValue = getValueInGoodType(newValue)
+    changeValueInJson(key, newValue, container)
   }
   else{
-    removeObjectKeyByPath(key)
+    removeObjectKeyByPath(key, container)
   }
   updateDynamicDataAndJsonText()
 }
 
-function changeValueInJsonCheckbox(event){
+function changeValueInJsonCheckbox(event, container){
   const key = event.target.nextElementSibling.name
   const newValue = event.target.classList.contains("checkbox-checked") ? true : false
-  changeValueInJson(key, newValue, event)
+  changeValueInJson(key, newValue, container)
   updateDynamicDataAndJsonText()
 }
 
@@ -110,11 +111,11 @@ function getValueInGoodType(value){
   return newValue
 }
 
-function changeValueInJson(key, newValue, event)
+function changeValueInJson(key, newValue, container)
 {
   const keys = key.split('.');
 
-  let currentObj = objectContainer.workingObject;
+  let currentObj = container.workingObject;
 
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
@@ -129,20 +130,11 @@ function changeValueInJson(key, newValue, event)
   {
     valuesArray = []
     newValue = newValue.toString()
-    if(event.target.type==="text")
-    {
-      const splittedValue = newValue.split(";")
-      splittedValue.forEach(value => {
-        valuesArray.push(value)
+    const splittedValue = newValue.split(";")
+    splittedValue.forEach(value => {
+      parsedValue = getValueInGoodType(value)
+      valuesArray.push(parsedValue)
       })
-    }
-    else{
-      const splittedValue = newValue.split(";")
-      splittedValue.forEach(value => {
-        parsedValue = parseFloat(value)
-        valuesArray.push(parsedValue)
-      })
-    }
     currentObj[lastKey] = valuesArray  
   }
   else{
@@ -150,9 +142,9 @@ function changeValueInJson(key, newValue, event)
   }
 }
 
-function removeObjectKeyByPath(path) {
+function removeObjectKeyByPath(path, container) {
   const keys = path.split('.');
-  let currentObj = objectContainer.workingObject;
+  let currentObj = container.workingObject;
 
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
@@ -168,7 +160,7 @@ function removeObjectKeyByPath(path) {
     {
       const lastDotIndex = path.lastIndexOf(".");
       const penultimate = path.substring(0, lastDotIndex);
-      removeObjectKeyByPath(penultimate)
+      removeObjectKeyByPath(penultimate, container)
     }
     else{
       delete currentObj[lastKey];
@@ -177,9 +169,9 @@ function removeObjectKeyByPath(path) {
   }
 }
 
-function setObjectKeyByPath(path, value) {
+function setObjectKeyByPath(path, value, container) {
   const keys = path.split('.');
-  let currentObj = objectContainer.workingObject;
+  let currentObj = container.workingObject;
 
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
@@ -236,7 +228,7 @@ function createObjectBaseOnConfig(config) {
   return result[topLevelKeys[0]];
 }
 
-function removeDefaultValuesFromJson(data, config, prefix = "") {
+function removeDefaultValuesFromJson(data, config, container, prefix = "") {
   for (const key in data) {
     const value = data[key];
     const fullKey = prefix + key;
@@ -246,12 +238,12 @@ function removeDefaultValuesFromJson(data, config, prefix = "") {
       continue
     }
     else if (typeof value === "object") {
-      removeDefaultValuesFromJson(value, config, fullKey + ".");
-    } else {
+      removeDefaultValuesFromJson(value, config, container, fullKey + ".");
+    } else if(config) {
       foundObject = findObjectByName(config, fullKey)
-      if(foundObject.defaultSraj == data[key] && foundObject.type!=="options")
+      if(foundObject && foundObject.defaultSraj == data[key] && foundObject.type!=="options")
       {
-        removeObjectKeyByPath(fullKey)
+        removeObjectKeyByPath(fullKey, container)
       }
     }
   }

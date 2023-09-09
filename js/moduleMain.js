@@ -1,4 +1,4 @@
-let uniqueNamesSet, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons
+let uniqueNameRadioButtons, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons
 let currentModule = ""
 let requiredItems;
 let keyRequiredItems;
@@ -37,8 +37,6 @@ function loadModuleObject(index, module)
 
 function loadModuleContent()
 {
-    const head = document.querySelector("head")
-    head.innerHTML+= '<link rel="stylesheet" href="../css/modulePage.css">'
     const home = document.querySelector(".element-container")
     home.innerHTML = '<div class="home"><i class="fa-solid fa-house"></i></div>'
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
@@ -54,9 +52,14 @@ function loadModuleContent()
         fullHtml += createKeyMenu()
         handleContainer.innerHTML += fullHtml
         objectContainer.requiredItems = findReuqiredItems(config)
-        getModuleElements()
-        addObjectIfListIsEmpty()
-        createModuleDOMEvents()
+        const container = document.querySelector(".object-configuration")
+        const objectListContainer = document.querySelector(".object-list-container")
+        getModuleElements(container, objectListContainer)
+        addObjectIfListIsEmpty(objectContainer)
+        createModuleDOMEvents(objectContainer)
+        if(!objectContainer.hasList){
+          addObjectPlus.remove()
+        }
         fillFormFields(objectContainer.workingObject);
         hideAndRevealRequiredItems(objectContainer)
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
@@ -83,7 +86,7 @@ function createKeyMenu() {
   </div>`
 }
 
-function setupRadioButtons(radioButtons) {
+function setupRadioButtons(radioButtons, container) {
   radioButtons.forEach(radioButton => {
       radioButton.addEventListener('click', () => {
           radioButtons.forEach(rb => {
@@ -92,79 +95,113 @@ function setupRadioButtons(radioButtons) {
           radioButton.parentNode.classList.add('radio-checked');
       });
       radioButton.addEventListener('change', (event) => {
-        updateObjectRadioButton(event)
-        fillFormFields(objectContainer.workingObject)
-        hideAndRevealRequiredItems(objectContainer)})
+        updateObjectRadioButton(event, container)
+        fillFormFields(container.workingObject)
+        hideAndRevealRequiredItems(container)})
   });
 }
 
-function addObjectIfListIsEmpty(){
+function addObjectIfListIsEmpty(container){
   if(radioButtonObjectList.length ===0)
   {
-    addObjectToList()
+    addObjectToList(container)
   }
 }
 
-
-function getModuleElements(){
-
-  const objectContainer = document.querySelector(".object-configuration")
-  keyContainer = document.querySelector(".key-configuration")
-  const radioButtons = objectContainer.querySelectorAll('input[type="radio"]');
-  uniqueNamesSet = new Set();
-  const objectListContainer = document.querySelector(".object-list-container")
-  radioButtonObjectList = objectListContainer.querySelectorAll('input[type="radio"]')
+function getModuleElements(container, listContainer){
+  getModuleElementsFromContainer(container)
+  getModuleElementsFromObjectList(listContainer)
+  jsonButtons = document.querySelectorAll(".json-buttons")
+}
+function getModuleElementsFromContainer(container){
+  const radioButtons = container.querySelectorAll('input[type="radio"]');
+  uniqueNameRadioButtons = new Set();
   radioButtons.forEach(radioButton => {
     const name = radioButton.getAttribute('name');
-    if (name && !uniqueNamesSet.has(name)) {
-      uniqueNamesSet.add(name);
+    if (name && !uniqueNameRadioButtons.has(name)) {
+      uniqueNameRadioButtons.add(name);
     }
   });
 
-  addObjectPlus = document.querySelector(".add-object")
-  deleteObjectButtons = document.querySelectorAll(".delete-icon")
-  inputList = document.querySelectorAll('input[type="text"], input[type="number"]')
-  checkboxList = document.querySelectorAll('.slider')
-  keyHeaders = document.querySelectorAll(".key, .subkey, .subSubkey")
-  extraOptionsButtons = document.querySelectorAll(".extra-option")
-  jsonButtons = document.querySelectorAll(".json-buttons")
+  inputList = container.querySelectorAll('input[type="text"], input[type="number"]')
+  checkboxList = container.querySelectorAll('.slider')
+  keyHeaders = container.querySelectorAll(".key, .subkey, .subSubkey")
+  extraOptionsButtons = container.querySelectorAll(".extra-option")
 }
 
-function createModuleDOMEvents(){
-  uniqueNamesSet.forEach(name => {
-    const radioButtons = document.querySelectorAll(`input[name="${name}"]`);
-    setupRadioButtons(radioButtons);
-  })
+function getModuleElementsFromObjectList(container){
+  radioButtonObjectList = container.querySelectorAll('input[type="radio"]')
+  addObjectPlus = container.querySelector(".add-object")
+  deleteObjectButtons = container.querySelectorAll(".delete-icon")
+}
 
-  setupRadioButtonsObjectList(radioButtonObjectList);
-
-  checkboxList.forEach(checkbox => {
-    checkbox.addEventListener("click", (event) => {
-    checkbox.classList.toggle("checkbox-checked")
-    changeValueInJsonCheckbox(event)
-    removeDefaultValuesFromJson(objectContainer)
-    })
-  })
-
-  inputList.forEach(input => input.addEventListener("keyup", (event) => {
-    changeValueInJsonInput(event)
-    resizeIfIsTooLongValue(event)
-    updateObjectListText()
-    removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
-  }))
-
-  keyHeaders.forEach(header => {
-    header.addEventListener("click", event => collapseObjectKeys(event))
-  })
- 
-  extraOptionsButtons.forEach(button => {
-    button.addEventListener("click", (event) => handleExtraOptionButtonClick(event))
-  })
-
-  addObjectPlus.addEventListener("click", addObjectToList)
-  deleteObjectButtons.forEach(button => button.addEventListener("click", removeObjectFromList))
+function createModuleDOMEvents(container){
+  createModuleDOMEventFromContainer(container)
+  createModuleDOMEventFromObjectList()
   jsonButtons.forEach(button => button.addEventListener("click", buttonClick))
 }
+
+function createModuleDOMEventFromContainer(container){
+  uniqueNameRadioButtons.forEach(name => {
+    const radioButtons = document.querySelectorAll(`input[name="${name}"]`);
+    setupRadioButtons(radioButtons, container);
+  })
+
+  setupRadioButtonsObjectList(radioButtonObjectList, container);
+
+  if (checkboxList) {
+    checkboxList.forEach(checkbox => {
+      checkbox.removeEventListener("click", (event) => checkboxClickEvent(checkbox, event, container))
+      checkbox.addEventListener("click", (event) => checkboxClickEvent(checkbox, event, container))   
+    })
+  }
+
+  if (inputList) {
+    inputList.forEach(input => {
+      input.removeEventListener("keyup", (event) => inputClickEvent(event, container))
+      input.addEventListener("keyup", (event) => inputClickEvent(event, container))
+      })
+    }
+
+  if (keyHeaders) {
+    keyHeaders.forEach(header => {
+      header.removeEventListener("click", event => collapseObjectKeys(event))
+      header.addEventListener("click", event => collapseObjectKeys(event))
+    })
+  }
+
+  if (extraOptionsButtons) {
+  extraOptionsButtons.forEach(button => {
+    button.removeEventListener("click", (event) => handleExtraOptionButtonClick(event))
+    button.addEventListener("click", (event) => handleExtraOptionButtonClick(event))
+    })
+  }
+}
+
+function createModuleDOMEventFromObjectList(){
+  if (addObjectPlus) {
+    addObjectPlus.removeEventListener("click", addObjectToList)
+    addObjectPlus.addEventListener("click", addObjectToList)
+  }
+  if(deleteObjectButtons){
+    deleteObjectButtons.forEach(button => button.removeEventListener("click", removeObjectFromList))
+    deleteObjectButtons.forEach(button => button.addEventListener("click", removeObjectFromList))
+  }
+}
+
+function checkboxClickEvent(checkbox, event, container){
+    checkbox.classList.toggle("checkbox-checked")
+    changeValueInJsonCheckbox(event, container)
+    removeDefaultValuesFromJson(container)
+}
+
+function inputClickEvent(event, container){
+  changeValueInJsonInput(event, container)
+  resizeIfIsTooLongValue(event)
+  updateObjectListText()
+  removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
+}
+
 
 function main(){
   loadModuleObject(0, "characterEffect")

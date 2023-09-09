@@ -19,11 +19,11 @@ function createObjectList(module, moduleObject)
     return objectsContainerHtml  
 }
 
-function addObjectToList(){
+function addObjectToList(container){
     const objectListContainer = document.querySelector(".object-list-container")
 
     const singleObjectContainer = createObjectContainer()
-    const plusButton =  createNewPlusButton()
+    const plusButton =  createNewPlusButton(container)
     const deleteButton = createNewDeleteButton()
     const labelAndRadioButton = createNewLabelAndRadioButton(objectListContainer)
 
@@ -37,7 +37,7 @@ function addObjectToList(){
 
     const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]')
     setupRadioButtonsObjectList(radioButtons);
-    addObjectToJson(currentModule, labelAndRadioButton.textContent)
+    addObjectToJson(currentModule, labelAndRadioButton.textContent, container)
 }
 
 function createObjectContainer(){
@@ -63,13 +63,13 @@ function createNewLabelAndRadioButton(objectListContainer){
     return labelElement
 }
 
-function createNewPlusButton() {
+function createNewPlusButton(container) {
     const addButton = document.createElement("button");
     addButton.className = "plus-circle add-object";
     const plusIcon = document.createElement("i");
     plusIcon.className = "fas fa-plus";
     addButton.appendChild(plusIcon);
-    addButton.addEventListener("click", addObjectToList)
+    addButton.addEventListener("click", () => addObjectToList(container))
 
     return addButton
 }
@@ -101,7 +101,7 @@ function removeCurrentPlusButton(objectListContainer){
     catch{}
 }
 
-function addObjectToJson(module, id)
+function addObjectToJson(module, id, container)
 {
     const moduleName = module.charAt(0).toUpperCase() + module.substring(1)
     objectContainer.workingObject = new objectDict[moduleName](id);
@@ -114,7 +114,7 @@ function addObjectToJson(module, id)
         dynamicData[currentModule] = objectContainer.workingObject
       }
     fillFormFields(objectContainer.workingObject)
-    removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
+    removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties, container)
     hideAndRevealRequiredItems(objectContainer)
     updateDynamicDataAndJsonText()
 }

@@ -217,6 +217,7 @@ function resizeIfIsTooLongValue(event){
 
 function handleExtraOptionButtonClick(event){
   const container = document.querySelector(".key-configuration")
+  const listContainer = document.querySelector(".key-menu")
   event.target.classList.add("extra-option-active")
   event.target.classList.toggle("menu-active")
   let fullHtml = '<div class="container-title">Konfiguracja klucza</div>'
@@ -228,11 +229,13 @@ function handleExtraOptionButtonClick(event){
         fetch(`../config/case.json`)
         .then(response => response.json())
         .then(config => {
+            
             fullHtml += createObjectConfigurationContainer(config) 
             container.innerHTML = fullHtml
             keyContainer = new Container(0, "key-configuration")
             keyContainer.requiredItems = findReuqiredItems(config)
-            keyContainer.path = objectContainer.path + ".case.list[keyContainer.currentIndex]"
+            keyContainer.hasList = true
+            keyContainer.jsonConfig = config
             if(!objectContainer.workingObject["case"])
             {
               objectContainer.workingObject["case"] = {}
@@ -240,8 +243,10 @@ function handleExtraOptionButtonClick(event){
               keyContainer.workingObject = new Case()
               objectContainer.workingObject["case"].list.push(keyContainer.workingObject)
             }
+            getModuleElements(container, listContainer)
+            createModuleDOMEvents(keyContainer)
             updateDynamicDataAndJsonText()
-            fillFormFields(objectContainer.workingObject);
+            fillFormFields(keyContainer.workingObject);
             hideAndRevealRequiredItems(keyContainer)
             
         })

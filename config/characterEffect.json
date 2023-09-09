@@ -48,7 +48,7 @@
                         {
                             "name": "target.id",
                             "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
-                            "type": "number",
+                            "type": "string",
                             "require": {"name": "target.kind", "value": ["NPC", "FAKE_NPC"]}
                         }
                     ]
