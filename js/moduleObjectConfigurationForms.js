@@ -217,9 +217,10 @@ function resizeIfIsTooLongValue(event){
 
 function handleExtraOptionButtonClick(event){
   const container = document.querySelector(".key-configuration")
-  event.target.classList.toggle("extra-option-active")
+  event.target.classList.add("extra-option-active")
+  event.target.classList.toggle("menu-active")
   let fullHtml = '<div class="container-title">Konfiguracja klucza</div>'
-  if(event.target.classList.contains("extra-option-active"))
+  if(event.target.classList.contains("menu-active"))
   {
       switch(event.target.textContent)
     {
@@ -229,9 +230,9 @@ function handleExtraOptionButtonClick(event){
         .then(config => {
             fullHtml += createObjectConfigurationContainer(config) 
             container.innerHTML = fullHtml
-            keyContainer = new Container(0)
-            keyContainer.className = "key-configuration"
+            keyContainer = new Container(0, "key-configuration")
             keyContainer.requiredItems = findReuqiredItems(config)
+            keyContainer.path = objectContainer.path + ".case.list[keyContainer.currentIndex]"
             if(!objectContainer.workingObject["case"])
             {
               objectContainer.workingObject["case"] = {}

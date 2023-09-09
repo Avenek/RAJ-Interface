@@ -194,10 +194,12 @@ function setObjectKeyByPath(path, value) {
 }
 
 function updateDynamicDataAndJsonText(){
-  try{
-  dynamicData[currentModule].list[objectContainer.currentIndex] = objectContainer.workingObject
+  if(objectContainer.hasList) {
+    dynamicData[currentModule].list[objectContainer.currentIndex] = objectContainer.workingObject
   }
-  catch{}
+  else {
+    dynamicData[currentModule] = objectContainer.workingObject
+  }
   updateJsonTextArea()
 }
 

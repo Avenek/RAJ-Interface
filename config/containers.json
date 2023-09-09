@@ -29,7 +29,7 @@
         },
         {
           "name": "EmoActions",
-          "tipInfo": " Umożliwia podpięcie wcześniej zadeklarowanego dymku do NPC. Stosować tylko i wyłącznie w połączeniu z emoDefinitions."
+          "tipInfo": "Umożliwia podpięcie wcześniej zadeklarowanego dymku do NPC. Stosować tylko i wyłącznie w połączeniu z emoDefinitions."
         }
       ]
     },
@@ -46,7 +46,7 @@
         },
         {
           "name": "MapFilter",
-          "tipInfo": "Nakłada filtr o danym kolorze na ekran gracza."
+          "tipInfo": "Umożliwia nałożenie filtru o danym kolorze na ekran gracza."
         },
         {
           "name": "Night",
@@ -54,7 +54,7 @@
         },
         {
           "name": "ExtraLight",
-          "tipInfo": " Umożliwia tworzenie dodatkowych dziur i świateł na mapie, które nie zostały zadeklarowane w kluczu night. To światło można również przypisać do danego npc."
+          "tipInfo": "Umożliwia tworzenie dodatkowych dziur i świateł na mapie, które nie zostały zadeklarowane w kluczu night. To światło można również przypisać do danego npc."
         },
         {
           "name": "DynamicLight",

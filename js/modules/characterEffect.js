@@ -1,6 +1,7 @@
 class Container {
-  constructor(index) {
+  constructor(index, containerClass) {
     this.currentIndex = index
+    this.className = containerClass
   }
 }
 
@@ -41,7 +42,7 @@ class AnimationParams {
 
 
 
-/*let o = {
+let objectDict = {
 CharacterEffect : class CharacterEffect {
     constructor(id) {
       this.action = "CREATE";
@@ -71,13 +72,6 @@ CharacterEffect : class CharacterEffect {
       this.speechBubble = false;
     }
   }
-
 }
 
-window.SRAJ_MODULES = {}
-
-for (let k in o) {
-  window.SRAJ_MODULES[k] = o[k]
-
-}*/
 

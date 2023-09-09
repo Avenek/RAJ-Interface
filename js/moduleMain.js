@@ -5,22 +5,34 @@ let keyRequiredItems;
 let configJson;
 let objectContainer, keyContainer
 
-function loadModuleObject(index, module, hasList = true)
+function loadModuleObject(index, module)
 {
-  objectContainer = new Container(index)
+  objectContainer = new Container(index, "object-configuration")
   currentModule = module
-  objectContainer.className = "object-configuration"
-  if(dynamicData.hasOwnProperty(currentModule))
-  {
-    objectContainer.workingObject = dynamicData[currentModule].list[index]
-  }
-  else if(hasList){
-    dynamicData[currentModule]={}
-    dynamicData[currentModule].list=[]
-  }
-  else{
-    dynamicData[currentModule]={}
-  }
+  fetch(`../config/modules.json`)
+    .then(response => response.json())
+    .then(config => {
+      const configObject = findObjectByName(config.modules, "characterEffect")
+      if(configObject.hasList){
+        objectContainer.hasList = true
+        if(dynamicData.hasOwnProperty(currentModule))
+        {
+          objectContainer.workingObject = dynamicData[currentModule].list[index]
+        }
+        else {
+          dynamicData[currentModule]={}
+          dynamicData[currentModule].list=[]
+        }
+      }
+      else {
+        objectContainer.hasList = false
+        dynamicData[currentModule]={}
+      }
+        
+    })
+    .catch(error => {
+    console.error('Błąd pobierania:', error);
+    })
 }
 
 function loadModuleContent()
@@ -29,7 +41,6 @@ function loadModuleContent()
     head.innerHTML+= '<link rel="stylesheet" href="../css/modulePage.css">'
     const home = document.querySelector(".element-container")
     home.innerHTML = '<div class="home"><i class="fa-solid fa-house"></i></div>'
-    //plus.remove()
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
