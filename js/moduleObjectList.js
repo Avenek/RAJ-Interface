@@ -151,6 +151,7 @@ function changeObjectOnList(event){
     const index = findObjectIndexOnList(currentModule, objectId)
     objectContainer.currentIndex = index
     objectContainer.workingObject = dynamicData[currentModule].list[index]
+    console.log("teraz");
     fillFormFields(objectContainer.workingObject)
     hideAndRevealRequiredItems(objectContainer)
     removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)

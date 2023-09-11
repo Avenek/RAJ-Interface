@@ -78,15 +78,14 @@ function loadModuleContent()
 
 function createKeyMenu() {
   return `</div><div class="object-key">   
-  <div class="key-menu">
+  <div class="object-list-key">
       <div class="container-title">Menu pomocnicze</div>
   </div>
-  <div class="key-configuration">
-      <div class="container-title">Konfiguracja klucza</div>
-  </div>`
+  <div class="key-configuration"></div>`
 }
 
 function setupRadioButtons(radioButtons, container) {
+
   radioButtons.forEach(radioButton => {
       radioButton.addEventListener('click', () => {
           radioButtons.forEach(rb => {
@@ -97,7 +96,8 @@ function setupRadioButtons(radioButtons, container) {
       radioButton.addEventListener('change', (event) => {
         updateObjectRadioButton(event, container)
         fillFormFields(container.workingObject)
-        hideAndRevealRequiredItems(container)})
+        hideAndRevealRequiredItems(container)}
+      )
   });
 }
 
@@ -113,6 +113,7 @@ function getModuleElements(container, listContainer){
   getModuleElementsFromObjectList(listContainer)
   jsonButtons = document.querySelectorAll(".json-buttons")
 }
+
 function getModuleElementsFromContainer(container){
   const radioButtons = container.querySelectorAll('input[type="radio"]');
   uniqueNameRadioButtons = new Set();
@@ -147,7 +148,7 @@ function createModuleDOMEventFromContainer(container){
     setupRadioButtons(radioButtons, container);
   })
 
-  setupRadioButtonsObjectList(radioButtonObjectList, container);
+  setupRadioButtonsObjectList(radioButtonObjectList);
 
   if (checkboxList) {
     checkboxList.forEach(checkbox => {

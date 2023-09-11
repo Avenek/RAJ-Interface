@@ -39,25 +39,28 @@ function updateObjectRadioButton(event, container)
   changeValueInJsonRadioButton(event, container)
 
   const targetKey = event.target.name
+  const listToSet = []
   container.requiredItems.forEach(item => {
     if(getValueFromObject(item, "require.name") === targetKey)
     {
       if(isItemIncluded(item, "require.value", container.workingObject, targetKey)) {
-        if(item.type === "subkey"){
+
+        if(item.inputType === "subkey"){
           const paramName = getLastPartOfTheName(item.name)
           newObject = createObjectBaseOnConfig(item.properties)
           setObjectKeyByPath(paramName, newObject, container)
           removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
         }
         else {
-          setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '', container)
+          listToSet.push(item)
         }
       }
       else {
-        removeObjectKeyByPath(item.name, container)
+        removeObjectKeyByPath(item.name, container)   
       }
     }
   })
+  listToSet.forEach(item => setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '', container))
   updateDynamicDataAndJsonText()
 }
 
@@ -82,11 +85,10 @@ function changeValueInJsonInput(event, container){
 
   const key = event.target.name
   let newValue = event.target.value
-  console.log(newValue);
 
   if(newValue !== null & newValue !== undefined)
   {
-    newValue = getValueInGoodType(newValue)
+    newValue = getValueInGoodType(key, newValue, container)
     changeValueInJson(key, newValue, container)
   }
   else{
@@ -102,11 +104,17 @@ function changeValueInJsonCheckbox(event, container){
   updateDynamicDataAndJsonText()
 }
 
-function getValueInGoodType(value){
-  newValue = parseFloat(value)
-  if (isNaN(newValue))
+function getValueInGoodType(key, value, container){
+  const configObject = findObjectByName(container.jsonConfig.properties, key)
+  const newValue = value
+  if(configObject.varInput === "number")
   {
-    newValue = value
+    newValue = parseFloat(value)
+    if (isNaN(newValue))
+    {
+      newValue = value
+      console.error("Podana wartość nie jest liczbą!");
+    }
   }
   return newValue
 }
@@ -114,9 +122,7 @@ function getValueInGoodType(value){
 function changeValueInJson(key, newValue, container)
 {
   const keys = key.split('.');
-
   let currentObj = container.workingObject;
-
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
     if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
@@ -132,7 +138,7 @@ function changeValueInJson(key, newValue, container)
     newValue = newValue.toString()
     const splittedValue = newValue.split(";")
     splittedValue.forEach(value => {
-      parsedValue = getValueInGoodType(value)
+      parsedValue = getValueInGoodType(keys, value, container)
       valuesArray.push(parsedValue)
       })
     currentObj[lastKey] = valuesArray  
@@ -180,7 +186,6 @@ function setObjectKeyByPath(path, value, container) {
     }
     currentObj = currentObj[currentKey];
   }
-
   const lastKey = keys[keys.length - 1];
   currentObj[lastKey] = value;
 }
@@ -209,7 +214,7 @@ function createObjectBaseOnConfig(config) {
       }
       currentObj = currentObj[key];
     }
-    if(property.hasOwnProperty("properties") && property.type !== "table")
+    if(property.hasOwnProperty("properties") && property.inputType !== "table")
     {
       const createdObject = createObjectBaseOnConfig(property.properties)
       const topLevelKeys = Object.keys(createdObject);
@@ -241,7 +246,7 @@ function removeDefaultValuesFromJson(data, config, container, prefix = "") {
       removeDefaultValuesFromJson(value, config, container, fullKey + ".");
     } else if(config) {
       foundObject = findObjectByName(config, fullKey)
-      if(foundObject && foundObject.defaultSraj == data[key] && foundObject.type!=="options")
+      if(foundObject && foundObject.defaultSraj == data[key] && foundObject.inputType!=="options")
       {
         removeObjectKeyByPath(fullKey, container)
       }

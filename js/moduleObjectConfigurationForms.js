@@ -2,33 +2,33 @@ function createObjectConfigurationContainer(config)
 {
     let html = ''
     for (const property of config.properties) {
-        if(property.type === "key" || property.type === "subkey" || property.type === "subSubkey"){
-        html += `<div class="${property.type}">
+        if(property.inputType === "key" || property.inputType === "subkey" || property.inputType === "subSubkey"){
+        html += `<div class="${property.inputType}">
         <header data-name="${property.name}">${property.name.substring(property.name.indexOf(".")+1).toUpperCase()}</header></div><div class="key-menu">`
         html+=createObjectConfigurationContainer(property)
         continue;
         }
-        else if (property.type === 'options') {
+        else if (property.inputType === 'options') {
             html+=`<div class="key-value"><header class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</header>`
             for (const option of property.options) {
               const checkedClass = property.defaultInput===option.name ? 'radio-checked' : '';
               const checked =  property.defaultInput===option.name ? 'checked' : '';
-              html += `<label class="radio-button ${checkedClass}"><input type="radio" name="${property.name}" class="radio-input" ${checked}>${option.name}</label>`;
+              html += `<label class="radio-button ${checkedClass}"><input type="radio" data-name="${property.idInput}" name="${property.name}" class="radio-input" ${checked}>${option.name}</label>`;
             }
           } 
-        else if (property.type === 'string') {
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.name}" value="${property.defaultInput}" name="${property.name}">`;
+        else if (property.inputType === 'string') {
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.idInput}">`;
 
         }
-        else if(property.type === 'number'){
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.name}" name="${property.name}">`;
+        else if(property.inputType === 'number'){
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}">`;
 
         }
-        else if(property.type === 'bool'){
+        else if(property.inputType === 'bool'){
           const checked =  property.defaultInput ? "checkbox-checked" : ""
-          html += `<div class="key-value"><label for="${property.name}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.name}" name="${property.name}" class="hide"></label>`;
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.idInput}" name="${property.name}" class="hide"></label>`;
         }
-        else if(property.type === 'table'){
+        else if(property.inputType === 'table'){
           html += `<div class="key-value"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span>`;
         }
         else{
@@ -139,15 +139,15 @@ function fillFormFields(data, prefix = "") {
     return Array.from(container.querySelectorAll('header[data-name="' + name + '"]'));
   }
   
-  function findInputsByName(name, containerClassName) {
+  function findInputsById(name, containerClassName) {
     const container = document.querySelector(`.${containerClassName}`)
-    return Array.from(container.querySelectorAll('input[name="' + name + '"]'));
+    return Array.from(container.querySelectorAll('input[name="' + name + '"], input[data-name="' + name + '"]'));
   }
   
   function hideAndRevealRequiredItems(container)
   {
     container.requiredItems.forEach(item => {
-      if(item.type === "key" || item.type === "subkey")
+      if(item.inputType === "key" || item.inputType === "subkey")
       {
         headers = findHeadersByName(item.name, container.className)
 
@@ -168,7 +168,12 @@ function fillFormFields(data, prefix = "") {
       else{
         if(!item.require.value.includes(getValueFromObject(container.workingObject, item.require.name)))
         {
-          inputs = findInputsByName(item.name, container.className)
+          if(item.idInput){
+            inputs = findInputsById(item.idInput, container.className)
+          }
+          else{
+            inputs = findInputsById(item.name, container.className)
+          }
           inputs.forEach(input => {
             if(input.type === "radio" || input.type==="checkbox")
             {
@@ -180,7 +185,12 @@ function fillFormFields(data, prefix = "") {
           })
         }
         else{
-          inputs = findInputsByName(item.name, container.className)
+          if(item.idInput){
+            inputs = findInputsById(item.idInput, container.className)
+          }
+          else{
+            inputs = findInputsById(item.name, container.className)
+          }
           inputs.forEach(input => {
             if(input.type === "radio" || input.type==="checkbox")
             {
@@ -217,10 +227,10 @@ function resizeIfIsTooLongValue(event){
 
 function handleExtraOptionButtonClick(event){
   const container = document.querySelector(".key-configuration")
-  const listContainer = document.querySelector(".key-menu")
+  const listContainer = document.querySelector(".object-list-key")
   event.target.classList.add("extra-option-active")
   event.target.classList.toggle("menu-active")
-  let fullHtml = '<div class="container-title">Konfiguracja klucza</div>'
+  let fullHtml=""
   if(event.target.classList.contains("menu-active"))
   {
     switch(event.target.textContent)
@@ -247,8 +257,7 @@ function handleExtraOptionButtonClick(event){
             createModuleDOMEvents(keyContainer)
             updateDynamicDataAndJsonText()
             fillFormFields(keyContainer.workingObject);
-            hideAndRevealRequiredItems(keyContainer)
-            
+            hideAndRevealRequiredItems(keyContainer)     
         })
         .catch(error => {
         console.error('Błąd pobierania:', error);

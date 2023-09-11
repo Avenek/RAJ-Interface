@@ -177,6 +177,18 @@ body {
     display: flex;
 }
 
+.object-list-key {
+  flex: 1;
+  border: 2px solid #808080;
+  border-radius: 5px;
+  padding: 15px 0px 5px 0px;
+  position: relative;
+  background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
+  align-items: center;
+  display: flex;
+}
+
+
 .single-object-container{
     position: relative;
     display: inline-block;
@@ -275,6 +287,8 @@ body {
     background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
 }
 
+
+
 .key-value{
     text-align: left;
     height: auto;
@@ -298,7 +312,7 @@ body {
 }
 
 .key-value input[type="number"] {
-  min-width: 40px;
+  min-width: 80px;
 }
 
 .expanded{
@@ -547,13 +561,12 @@ body {
 }
 
 .key-configuration {
-    flex: 10;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: 2px solid #808080;
-    border-radius: 10px;
-    padding: 20px 10px;
-    position: relative;
-    background-image: linear-gradient(to bottom, #272727, #4d4b4b);
+  flex: 10;
+  border: 2px solid #808080;
+  border-radius: 10px;
+  position: relative;
+  background-image: linear-gradient(to bottom, #272727, #4d4b4b);
+  overflow-y: auto;
 }
 
 .json-and-buttons-container {
