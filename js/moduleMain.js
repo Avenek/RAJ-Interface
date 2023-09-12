@@ -22,7 +22,6 @@ function loadModuleObject(index, module)
         else {
           dynamicData[currentModule]={}
           dynamicData[currentModule].list=[]
-
         }
         objectContainer.list = dynamicData[currentModule].list
       }

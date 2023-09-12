@@ -48,7 +48,12 @@ function createNewLabelAndRadioButton(objectListContainer, container){
           break; 
         default:
             const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
-            defaultName = `obiekt-${radioButtons.length}`
+            let number = radioButtons.length
+            defaultName = `obiekt-${number}`
+            while(findObjectIndexOnList(defaultName, container) !== null){
+                number+=1
+                defaultName = `obiekt-${number}`
+            }
           break; 
       }
     
@@ -102,6 +107,11 @@ function addObjectToJson(container, id)
     const moduleName = container.name
     container.workingObject = new objectDict[moduleName](id);
     if(objectContainer.hasList) {
+        if(!dynamicData.hasOwnProperty(currentModule))
+        {
+            dynamicData[currentModule]={}
+            dynamicData[currentModule].list=[]
+        }
         container.list.push(container.workingObject)
         const index = findObjectIndexOnList(id, container)
         container.currentIndex = index
@@ -118,7 +128,7 @@ function addObjectToJson(container, id)
 function removeObjectFromList(event, container){
     if (window.confirm("Czy na pewno chcesz usunąć obiekt?")) {
         const objectId = event.target.previousElementSibling.textContent
-        removeObjectFromJson(objectId, container.list ,container)
+        removeObjectFromJson(objectId, container.list, container)
         const singleContainer = event.target.parentNode
         if(singleContainer.firstChild.classList.contains("radio-checked"))
         {
@@ -142,10 +152,12 @@ function removeObjectFromList(event, container){
                     break;
 
                 }
-                
- 
             }
             updateDynamicDataAndJsonText()
+        }
+        else{
+            const objectId = event.target.parentNode.textContent
+            container.currentIndex = findObjectIndexOnList(objectId, container)
         }
         singleContainer.remove()
         updateJsonTextArea()

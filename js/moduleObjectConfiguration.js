@@ -170,11 +170,13 @@ function changeValueInJson(key, newValue, container)
 }
 
 function updateDynamicDataAndJsonText(){
-  if(objectContainer.hasList) {
-    dynamicData[currentModule].list[objectContainer.currentIndex] = objectContainer.workingObject
-  }
-  else {
-    dynamicData[currentModule] = objectContainer.workingObject
+  if(objectContainer.workingObject){
+    if(objectContainer.hasList && dynamicData[currentModule]) {
+      dynamicData[currentModule].list = objectContainer.list
+    }
+    else {
+      dynamicData[currentModule] = objectContainer.workingObject
+    }
   }
   updateJsonTextArea()
 }
