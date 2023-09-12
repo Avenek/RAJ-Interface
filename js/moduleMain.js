@@ -7,7 +7,7 @@ let objectContainer, keyContainer
 
 function loadModuleObject(index, module)
 {
-  objectContainer = new Container(index, "object-configuration")
+  objectContainer = new ConfigurationContainer(index, "object-configuration", "object-list-container", module)
   currentModule = module
   fetch(`../config/modules.json`)
     .then(response => response.json())
@@ -22,13 +22,15 @@ function loadModuleObject(index, module)
         else {
           dynamicData[currentModule]={}
           dynamicData[currentModule].list=[]
+
         }
+        objectContainer.list = dynamicData[currentModule].list
       }
       else {
         objectContainer.hasList = false
         dynamicData[currentModule]={}
       }
-        
+      loadModuleContent()
     })
     .catch(error => {
     console.error('Błąd pobierania:', error);
@@ -42,7 +44,7 @@ function loadModuleContent()
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
-    fullHtml += createObjectList(currentModule, objectContainer.workingObject)
+    fullHtml += createConfigurationMenu()
     fetch(`../config/${currentModule}.json`)
     .then(response => response.json())
     .then(config => {
@@ -55,13 +57,11 @@ function loadModuleContent()
         const container = document.querySelector(".object-configuration")
         const objectListContainer = document.querySelector(".object-list-container")
         getModuleElements(container, objectListContainer)
+        objectContainer.createObjectList()
         addObjectIfListIsEmpty(objectContainer)
-        createModuleDOMEvents(objectContainer)
-        if(!objectContainer.hasList){
-          addObjectPlus.remove()
-        }
+        createModuleDOMEvents(objectContainer) 
         fillFormFields(objectContainer.workingObject);
-        hideAndRevealRequiredItems(objectContainer)
+        objectContainer.hideAndRevealRequiredItems()
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
         
     })
@@ -76,6 +76,10 @@ function loadModuleContent()
 
 }
 
+function createConfigurationMenu() {
+  return `<div class="object-list-container"><div class="container-title">Menu pomocnicze</div></div>`
+}
+
 function createKeyMenu() {
   return `</div><div class="object-key">   
   <div class="object-list-key">
@@ -85,7 +89,6 @@ function createKeyMenu() {
 }
 
 function setupRadioButtons(radioButtons, container) {
-
   radioButtons.forEach(radioButton => {
       radioButton.addEventListener('click', () => {
           radioButtons.forEach(rb => {
@@ -96,7 +99,7 @@ function setupRadioButtons(radioButtons, container) {
       radioButton.addEventListener('change', (event) => {
         updateObjectRadioButton(event, container)
         fillFormFields(container.workingObject)
-        hideAndRevealRequiredItems(container)}
+        container.hideAndRevealRequiredItems()}
       )
   });
 }
@@ -138,7 +141,7 @@ function getModuleElementsFromObjectList(container){
 
 function createModuleDOMEvents(container){
   createModuleDOMEventFromContainer(container)
-  createModuleDOMEventFromObjectList()
+  createModuleDOMEventFromObjectList(container)
   jsonButtons.forEach(button => button.addEventListener("click", buttonClick))
 }
 
@@ -148,7 +151,7 @@ function createModuleDOMEventFromContainer(container){
     setupRadioButtons(radioButtons, container);
   })
 
-  setupRadioButtonsObjectList(radioButtonObjectList);
+  setupRadioButtonsObjectList(radioButtonObjectList, container);
 
   if (checkboxList) {
     checkboxList.forEach(checkbox => {
@@ -179,21 +182,21 @@ function createModuleDOMEventFromContainer(container){
   }
 }
 
-function createModuleDOMEventFromObjectList(){
+function createModuleDOMEventFromObjectList(container){
   if (addObjectPlus) {
-    addObjectPlus.removeEventListener("click", addObjectToList)
-    addObjectPlus.addEventListener("click", addObjectToList)
+    addObjectPlus.removeEventListener("click", () => addObjectToList(container))
+    addObjectPlus.addEventListener("click", () => addObjectToList(container))
   }
   if(deleteObjectButtons){
-    deleteObjectButtons.forEach(button => button.removeEventListener("click", removeObjectFromList))
-    deleteObjectButtons.forEach(button => button.addEventListener("click", removeObjectFromList))
+    deleteObjectButtons.forEach(button => button.removeEventListener("click", (event) => removeObjectFromList(event, container)))
+    deleteObjectButtons.forEach(button => button.addEventListener("click", (event) => removeObjectFromList(event, container)))
   }
 }
 
 function checkboxClickEvent(checkbox, event, container){
     checkbox.classList.toggle("checkbox-checked")
     changeValueInJsonCheckbox(event, container)
-    removeDefaultValuesFromJson(container)
+    removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
 }
 
 function inputClickEvent(event, container){
@@ -206,7 +209,6 @@ function inputClickEvent(event, container){
 
 function main(){
   loadModuleObject(0, "characterEffect")
-  loadModuleContent()
   const jsonText = document.querySelector(".json-text")
   jsonText.value = JSON.stringify(dynamicData, null, 2);
  }

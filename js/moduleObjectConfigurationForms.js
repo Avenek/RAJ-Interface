@@ -17,7 +17,7 @@ function createObjectConfigurationContainer(config)
             }
           } 
         else if (property.inputType === 'string') {
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.idInput}">`;
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}">`;
 
         }
         else if(property.inputType === 'number'){
@@ -88,9 +88,11 @@ function fillFormFields(data, prefix = "") {
               const inputElement = inputElements[i];
               if (inputElement.parentNode.textContent === value.toString()) {
                     inputElement.parentNode.classList.add("radio-checked");
+                    inputElement.checked = true;
               }
               else{
                 inputElement.parentNode.classList.remove("radio-checked");
+                inputElement.checked = false;
               }
             }
           } 
@@ -141,68 +143,7 @@ function fillFormFields(data, prefix = "") {
   
   function findInputsById(name, containerClassName) {
     const container = document.querySelector(`.${containerClassName}`)
-    return Array.from(container.querySelectorAll('input[name="' + name + '"], input[data-name="' + name + '"]'));
-  }
-  
-  function hideAndRevealRequiredItems(container)
-  {
-    container.requiredItems.forEach(item => {
-      if(item.inputType === "key" || item.inputType === "subkey")
-      {
-        headers = findHeadersByName(item.name, container.className)
-
-        if(!item.require.value.includes(getValueFromObject(container.workingObject, item.require.name)))
-        {
-            headers.forEach(header => {
-              header.parentNode.classList.add("hide")
-              header.parentNode.nextElementSibling.classList.add("hide")
-            })
-        }
-        else{
-          headers.forEach(header => {
-            header.parentNode.classList.remove("hide")
-            header.parentNode.nextElementSibling.classList.remove("hide")
-          })
-        }
-      }
-      else{
-        if(!item.require.value.includes(getValueFromObject(container.workingObject, item.require.name)))
-        {
-          if(item.idInput){
-            inputs = findInputsById(item.idInput, container.className)
-          }
-          else{
-            inputs = findInputsById(item.name, container.className)
-          }
-          inputs.forEach(input => {
-            if(input.type === "radio" || input.type==="checkbox")
-            {
-              input.parentNode.parentNode.classList.add("hide")
-            }
-            else{
-              input.parentNode.classList.add("hide")
-            }
-          })
-        }
-        else{
-          if(item.idInput){
-            inputs = findInputsById(item.idInput, container.className)
-          }
-          else{
-            inputs = findInputsById(item.name, container.className)
-          }
-          inputs.forEach(input => {
-            if(input.type === "radio" || input.type==="checkbox")
-            {
-              input.parentNode.parentNode.classList.remove("hide")
-            }
-            else{
-              input.parentNode.classList.remove("hide")
-            }
-          })
-        }
-      }
-    })
+    return Array.from(container.querySelectorAll('input[id="' + name + '"], input[data-name="' + name + '"]'));
   }
 
 function collapseObjectKeys(event){
@@ -244,20 +185,25 @@ function handleExtraOptionButtonClick(event){
             container.innerHTML = fullHtml
             if(!objectContainer.workingObject["case"])
             {
-              keyContainer = new Container(0, "key-configuration")
+    
+              keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "case")
               keyContainer.requiredItems = findReuqiredItems(config)
               keyContainer.hasList = true
               keyContainer.jsonConfig = config
               objectContainer.workingObject["case"] = {}
               objectContainer.workingObject["case"].list = []
               keyContainer.workingObject = new Case()
+              keyContainer.name = "case"
               objectContainer.workingObject["case"].list.push(keyContainer.workingObject)
+              keyContainer.list = objectContainer.workingObject["case"].list
+  
             }
+            keyContainer.createObjectList()
             getModuleElements(container, listContainer)
             createModuleDOMEvents(keyContainer)
             updateDynamicDataAndJsonText()
             fillFormFields(keyContainer.workingObject);
-            hideAndRevealRequiredItems(keyContainer)     
+            keyContainer.hideAndRevealRequiredItems()    
         })
         .catch(error => {
         console.error('Błąd pobierania:', error);

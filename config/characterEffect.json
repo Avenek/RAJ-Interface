@@ -61,6 +61,7 @@
                             "max":100000,
                             "step":1,
                             "varType": "number",
+                            "defaultInput": 0,
                             "require": {"name": "target.kind", "value": ["NPC"]}
                         },
                         {
@@ -68,6 +69,7 @@
                             "idInput": "id.fakeNpc",
                             "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
                             "inputType": "string",
+                            "defaultInput": "",
                             "require": {"name": "target.kind", "value": ["FAKE_NPC"]}
                         }
                     ]

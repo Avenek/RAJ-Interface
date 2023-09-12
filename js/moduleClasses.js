@@ -1,10 +1,3 @@
-class Container {
-  constructor(index, containerClass) {
-    this.currentIndex = index
-    this.className = containerClass
-  }
-}
-
 class CharacterEffect {
   constructor(id) {
     this.action = "CREATE";
@@ -35,15 +28,18 @@ class AnimationParams {
   }
 }
 
-
-
-
-
-
+class Case {
+  constructor() {
+    this.kind = "ARGUMENT";
+    this.key = "QUEST"
+    this.name = "ACTIVE"
+    this.params = []
+  }
+}
 
 
 let objectDict = {
-CharacterEffect : class CharacterEffect {
+characterEffect : class CharacterEffect {
     constructor(id) {
       this.action = "CREATE";
       this.id = id
@@ -53,23 +49,13 @@ CharacterEffect : class CharacterEffect {
       this.params = new AnimationParams();
     }
   },
-  
-  Target : class Target {
-    constructor() {
-      this.kind = "HERO"
-    }
-  },
-  
-  AnimationParams : class AnimationParams {
-    constructor() {
-      this.gifUrl = "";
-      this.repeat = 1;
-      this.opacity=1;
-      this.position = "CENTER"
-      this.behind = false;
-      this.offsetX = 0;
-      this.offsetY = 0;
-      this.speechBubble = false;
+
+  case : class Case {
+      constructor() {
+        this.kind = "ARGUMENT";
+        this.key = "QUEST"
+        this.name = "ACTIVE"
+        this.params = []
     }
   }
 }

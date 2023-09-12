@@ -1,20 +1,37 @@
 
 
-function findObjectIndexOnList(module, objectId)
+function findObjectIndexOnList(objectId, container)
 {
-    const objectList = dynamicData[module].list
-    for (let i = 0; i < objectList.length; i++) {
-        if (objectList[i].id === objectId) {
-          return i
+    const objectList = container.list
+    switch(container.name){
+      case "case":
+        for (let i = 0; i < objectList.length; i++) {
+          if (objectList[i].kind === objectId) {
+            return i
+          }
         }
-      }
-      return null
+        break;
+      default:
+        for (let i = 0; i < objectList.length; i++) {
+          if (objectList[i].id === objectId) {
+            return i
+          }
+        }
+        for (let i = 0; i < objectList.length; i++) {
+          if (objectList[i].name === objectId) {
+            return i
+          }
+        }
+    }
+    return null
+    
+     
 }
 
-function removeObjectFromJson(module, objectId)
+function removeObjectFromJson(objectId, list, container)
 {
-    const objectList = dynamicData[module].list
-    const index = findObjectIndexOnList(module, objectId)
+    const objectList = list
+    const index = findObjectIndexOnList(objectId, container)
     objectList.splice(index, 1);
 }
 
@@ -30,12 +47,17 @@ function getValueFromObject(obj, key) {
       return null;
     }
   }
-  
   return value;
 }
 
 function updateObjectRadioButton(event, container)
 {
+  const objects = document.querySelectorAll(`input[name='${event.target.name}']`)
+      objects.forEach(object => {
+          object.checked = false;
+      })
+    event.target.checked = true;
+
   changeValueInJsonRadioButton(event, container)
 
   const targetKey = event.target.name
@@ -48,7 +70,7 @@ function updateObjectRadioButton(event, container)
         if(item.inputType === "subkey"){
           const paramName = getLastPartOfTheName(item.name)
           newObject = createObjectBaseOnConfig(item.properties)
-          setObjectKeyByPath(paramName, newObject, container)
+          container.setObjectKeyByPath(paramName, newObject)
           removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
         }
         else {
@@ -56,11 +78,11 @@ function updateObjectRadioButton(event, container)
         }
       }
       else {
-        removeObjectKeyByPath(item.name, container)   
+        container.removeObjectKeyByPath(item.name)
       }
     }
   })
-  listToSet.forEach(item => setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '', container))
+  listToSet.forEach(item => container.setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : ''))
   updateDynamicDataAndJsonText()
 }
 
@@ -82,7 +104,6 @@ function changeValueInJsonRadioButton(event, container){
 }
 
 function changeValueInJsonInput(event, container){
-
   const key = event.target.name
   let newValue = event.target.value
 
@@ -92,7 +113,7 @@ function changeValueInJsonInput(event, container){
     changeValueInJson(key, newValue, container)
   }
   else{
-    removeObjectKeyByPath(key, container)
+    container.removeObjectKeyByPath(key)
   }
   updateDynamicDataAndJsonText()
 }
@@ -106,8 +127,8 @@ function changeValueInJsonCheckbox(event, container){
 
 function getValueInGoodType(key, value, container){
   const configObject = findObjectByName(container.jsonConfig.properties, key)
-  const newValue = value
-  if(configObject.varInput === "number")
+  let newValue = value
+  if(configObject.varType === "number")
   {
     newValue = parseFloat(value)
     if (isNaN(newValue))
@@ -146,48 +167,6 @@ function changeValueInJson(key, newValue, container)
   else{
     currentObj[lastKey] = newValue;
   }
-}
-
-function removeObjectKeyByPath(path, container) {
-  const keys = path.split('.');
-  let currentObj = container.workingObject;
-
-  for (let i = 0; i < keys.length - 1; i++) {
-    const currentKey = keys[i];
-    if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
-      return;
-    }
-    currentObj = currentObj[currentKey];
-  }
-
-  const lastKey = keys[keys.length - 1];
-  if (currentObj && typeof currentObj === 'object' && lastKey in currentObj) {
-    if(Object.keys(currentObj).length===1)
-    {
-      const lastDotIndex = path.lastIndexOf(".");
-      const penultimate = path.substring(0, lastDotIndex);
-      removeObjectKeyByPath(penultimate, container)
-    }
-    else{
-      delete currentObj[lastKey];
-    }
-    
-  }
-}
-
-function setObjectKeyByPath(path, value, container) {
-  const keys = path.split('.');
-  let currentObj = container.workingObject;
-
-  for (let i = 0; i < keys.length - 1; i++) {
-    const currentKey = keys[i];
-    if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
-      currentObj[currentKey] = {};
-    }
-    currentObj = currentObj[currentKey];
-  }
-  const lastKey = keys[keys.length - 1];
-  currentObj[lastKey] = value;
 }
 
 function updateDynamicDataAndJsonText(){
@@ -248,7 +227,7 @@ function removeDefaultValuesFromJson(data, config, container, prefix = "") {
       foundObject = findObjectByName(config, fullKey)
       if(foundObject && foundObject.defaultSraj == data[key] && foundObject.inputType!=="options")
       {
-        removeObjectKeyByPath(fullKey, container)
+        container.removeObjectKeyByPath(fullKey)
       }
     }
   }

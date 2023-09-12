@@ -1,43 +1,28 @@
-
-function createObjectList(module, moduleObject)
-{
-    let objectsContainerHtml = `
-    <div class="object-list-container">
-        <div class="container-title">Lista obiektów</div>`
-        try{
-            const ids = dynamicData[module].list.map(item => item.id || item.name);
-            ids.forEach(id => {
-                const checkedClass = id === moduleObject.id || id === moduleObject.name ? "radio-checked" : ""
-                objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="delete-icon">🗑️</div></div>`;
-            });
-            objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button></div>'
-        }
-        catch(error){
-            objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button></div>'
-            return objectsContainerHtml
-        }
-    return objectsContainerHtml  
-}
-
 function addObjectToList(container){
-    const objectListContainer = document.querySelector(".object-list-container")
-
+    const objectListContainer = document.querySelector(`.${container.listClassName}`)
     const singleObjectContainer = createObjectContainer()
-    const plusButton =  createNewPlusButton(container)
-    const deleteButton = createNewDeleteButton()
-    const labelAndRadioButton = createNewLabelAndRadioButton(objectListContainer)
+    const deleteButton = createNewDeleteButton(container)
+    const labelAndRadioButton = createNewLabelAndRadioButton(objectListContainer, container)
+    let plusButton
+    if(container.hasList)
+    {
+        plusButton = createNewPlusButton(container)
+        removeCurrentPlusButton(objectListContainer)
+    }
 
-    removeCurrentPlusButton(objectListContainer)
     removeCheckedFromAllRadio(objectListContainer)
 
     singleObjectContainer.appendChild(labelAndRadioButton);
     singleObjectContainer.appendChild(deleteButton)
     objectListContainer.appendChild(singleObjectContainer)
+    if(container.hasList)
+    {
     objectListContainer.appendChild(plusButton);
+    }
 
     const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]')
-    setupRadioButtonsObjectList(radioButtons);
-    addObjectToJson(currentModule, labelAndRadioButton.textContent, container)
+    setupRadioButtonsObjectList(radioButtons, container);
+    addObjectToJson(container, labelAndRadioButton.textContent)
 }
 
 function createObjectContainer(){
@@ -47,7 +32,7 @@ function createObjectContainer(){
     return singleObjectContainer
 }
 
-function createNewLabelAndRadioButton(objectListContainer){
+function createNewLabelAndRadioButton(objectListContainer, container){
     const labelElement = document.createElement("label");
     labelElement.className = "object-list-element radio-checked";
     const radioInput = document.createElement("input");
@@ -56,9 +41,19 @@ function createNewLabelAndRadioButton(objectListContainer){
     radioInput.className = "radio-input";
     radioInput.checked = true;
     labelElement.appendChild(radioInput);
-    const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
-
-    labelElement.appendChild(document.createTextNode(`obiekt-${radioButtons.length+1}`));
+    let defaultName="";
+    switch(container.name){
+        case "case":
+            defaultName = 'ARGUMENT'
+          break; 
+        default:
+            const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
+            defaultName = `obiekt-${radioButtons.length}`
+          break; 
+      }
+    
+    
+    labelElement.appendChild(document.createTextNode(defaultName));
 
     return labelElement
 }
@@ -69,17 +64,18 @@ function createNewPlusButton(container) {
     const plusIcon = document.createElement("i");
     plusIcon.className = "fas fa-plus";
     addButton.appendChild(plusIcon);
+    addButton.removeEventListener("click", () => addObjectToList(container))
     addButton.addEventListener("click", () => addObjectToList(container))
 
     return addButton
 }
 
-function createNewDeleteButton()
+function createNewDeleteButton(container)
 {   
     const deleteButton = document.createElement("div");
     deleteButton.className = "delete-icon";
     deleteButton.textContent = "🗑️";
-    deleteButton.addEventListener("click", removeObjectFromList)
+    deleteButton.addEventListener("click", (event) => removeObjectFromList(event, container))
 
     return deleteButton
 }
@@ -101,71 +97,89 @@ function removeCurrentPlusButton(objectListContainer){
     catch{}
 }
 
-function addObjectToJson(module, id, container)
+function addObjectToJson(container, id)
 {
-    const moduleName = module.charAt(0).toUpperCase() + module.substring(1)
-    objectContainer.workingObject = new objectDict[moduleName](id);
+    const moduleName = container.name
+    container.workingObject = new objectDict[moduleName](id);
     if(objectContainer.hasList) {
-        dynamicData[currentModule].list.push(objectContainer.workingObject)
-        const index = findObjectIndexOnList(currentModule, id)
-        objectContainer.currentIndex = index
+        container.list.push(container.workingObject)
+        const index = findObjectIndexOnList(id, container)
+        container.currentIndex = index
       }
       else {
         dynamicData[currentModule] = objectContainer.workingObject
       }
-    fillFormFields(objectContainer.workingObject)
-    removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties, container)
-    hideAndRevealRequiredItems(objectContainer)
+    fillFormFields(container.workingObject)
+    removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
+    container.hideAndRevealRequiredItems()
     updateDynamicDataAndJsonText()
 }
 
-function removeObjectFromList(event){
+function removeObjectFromList(event, container){
     if (window.confirm("Czy na pewno chcesz usunąć obiekt?")) {
         const objectId = event.target.previousElementSibling.textContent
-        removeObjectFromJson(currentModule, objectId)
-        const container = event.target.parentNode
-        if(container.firstChild.classList.contains("radio-checked"))
+        removeObjectFromJson(objectId, container.list ,container)
+        const singleContainer = event.target.parentNode
+        if(singleContainer.firstChild.classList.contains("radio-checked"))
         {
-            objectContainer.currentIndex = 0
-            const elements = document.querySelectorAll(".object-list-element")
+            container.currentIndex = 0
+            const listContainer = document.querySelector(`.${container.listClassName}`)
+            const elements = listContainer.querySelectorAll(".object-list-element")
             if(elements.length>1){
                 elements[0].classList.add("radio-checked")
-                workingObject = dynamicData[currentModule].list[0]
-                fillFormFields(workingObject)
-                hideAndRevealRequiredItems(objectContainer)
+                container.workingObject = dynamicData[currentModule].list[0]
+                fillFormFields(container.workingObject)
+                container.hideAndRevealRequiredItems()
             }
             else{
-                workingObject = null
-                delete dynamicData[currentModule]
+                switch(container.name){
+                    case "case":
+                        objectContainer.removeObjectKeyByPath("case")
+                        break;
+                    default:
+                        container.workingObject = null
+                        delete dynamicData[currentModule]
+                    break;
+
+                }
+                
+ 
             }
             updateDynamicDataAndJsonText()
         }
-        container.remove()
+        singleContainer.remove()
         updateJsonTextArea()
         
     }
 }
 
-function changeObjectOnList(event){
+function changeObjectOnList(event, container){
     const objectId = event.target.parentNode.textContent
-    const index = findObjectIndexOnList(currentModule, objectId)
-    objectContainer.currentIndex = index
-    objectContainer.workingObject = dynamicData[currentModule].list[index]
-    console.log("teraz");
-    fillFormFields(objectContainer.workingObject)
-    hideAndRevealRequiredItems(objectContainer)
-    removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
+    const index = findObjectIndexOnList(objectId, container)
+    container.currentIndex = index
+    container.workingObject = container.list[index]
+    console.log(container);
+    fillFormFields(container.workingObject)
+    container.hideAndRevealRequiredItems()
+    removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties)
 }
 
-function setupRadioButtonsObjectList(radioButtons) {
+function setupRadioButtonsObjectList(radioButtons, container) {
     radioButtons.forEach(radioButton => {
+        radioButton.removeEventListener('click', () => {
+            radioButtons.forEach(rb => {
+                rb.parentNode.classList.remove('radio-checked');
+            });
+            radioButton.parentNode.classList.add('radio-checked');
+        });
         radioButton.addEventListener('click', () => {
             radioButtons.forEach(rb => {
                 rb.parentNode.classList.remove('radio-checked');
             });
             radioButton.parentNode.classList.add('radio-checked');
         });
-        radioButton.addEventListener('change', changeObjectOnList)
+        radioButton.removeEventListener('change', (event) => changeObjectOnList(event, container))
+        radioButton.addEventListener('change', (event) => changeObjectOnList(event, container))
     });
   }
 
