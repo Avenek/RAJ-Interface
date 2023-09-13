@@ -183,28 +183,32 @@ function handleExtraOptionButtonClick(event){
             
             fullHtml += createObjectConfigurationContainer(config) 
             container.innerHTML = fullHtml
+            keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "case")
+            keyContainer.requiredItems = findReuqiredItems(config)
+            keyContainer.hasList = true
+            keyContainer.jsonConfig = config
+            keyContainer.name = "case"
+            keyContainer.event = event.target
             if(!objectContainer.workingObject["case"])
             {
-    
-              keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "case")
-              keyContainer.requiredItems = findReuqiredItems(config)
-              keyContainer.hasList = true
-              keyContainer.jsonConfig = config
               objectContainer.workingObject["case"] = {}
               objectContainer.workingObject["case"].list = []
               keyContainer.workingObject = new Case()
-              keyContainer.name = "case"
-              keyContainer.event = event.target
               objectContainer.workingObject["case"].list.push(keyContainer.workingObject)
-              keyContainer.list = objectContainer.workingObject["case"].list
-  
+             
             }
+            else{
+              keyContainer.workingObject = objectContainer.workingObject["case"].list[0]
+              keyContainer.name = "case"
+            }
+            keyContainer.list = objectContainer.workingObject["case"].list
             keyContainer.createObjectList()
             getModuleElements(container, listContainer)
             createModuleDOMEvents(keyContainer)
             updateDynamicDataAndJsonText()
             fillFormFields(keyContainer.workingObject);
-            keyContainer.hideAndRevealRequiredItems()    
+            keyContainer.hideAndRevealRequiredItems() 
+            saveJsonState()   
         })
         .catch(error => {
         console.error('Błąd pobierania:', error);

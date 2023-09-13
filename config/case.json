@@ -19,6 +19,7 @@
                     "tool-tip": "Służy do negacji warunku.",
                     "inputType": "bool",
                     "defaultInput": false,
+                    "defaultSraj": false,
                     "require": {"name": "kind", "value": ["ARGUMENT", "CONTAINER"]}
                 },
                 {

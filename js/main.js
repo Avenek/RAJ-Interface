@@ -25,6 +25,7 @@ function loadContent()
     const jsonButtonsHtml = createJsonButtons()
     buttonsContainer.innerHTML = jsonButtonsHtml
     restoreLastJson()
+    createSrajModulesMenu(dynamicData);
 }
 
 function createContainersContent(data)
@@ -55,17 +56,6 @@ function createContainersContent(data)
     html+="</div>"
     return html
 }
-
-function restoreLastJson(){
-    const jsonText = document.querySelector(".json-text")
-    if(localStorage.getItem('lastJson'))
-    {
-        savedJson = localStorage.getItem('lastJson');
-        dynamicData = JSON.parse(savedJson)
-    }
-    jsonText.value = JSON.stringify(dynamicData, null, 2);
-    createSrajModulesMenu(dynamicData);
-  }
 
 function getElements(){
     addButton = document.querySelector(".plus-circle")

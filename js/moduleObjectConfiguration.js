@@ -177,6 +177,7 @@ function updateDynamicDataAndJsonText(){
     }
   }
   updateJsonTextArea()
+  saveJsonState()
 }
 
 function createObjectBaseOnConfig(config) {

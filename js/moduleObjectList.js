@@ -25,7 +25,6 @@ function addObjectToList(container){
     addObjectToJson(container, labelAndRadioButton.textContent)
     revealFullForm(container)
     updateJsonTextArea()
-    saveJsonState()
 }
 
 function createObjectContainer(){
@@ -139,6 +138,7 @@ function addObjectToJson(container, id)
     container.hideAndRevealRequiredItems()
     updateDynamicDataAndJsonText()
     hightligthsUsedExtraOption(container)
+    saveJsonState()
 }
 
 function removeObjectFromList(event, container){
@@ -188,6 +188,7 @@ function removeObjectFromList(event, container){
         }
         singleContainer.remove()
         updateJsonTextArea()
+        saveJsonState()
         
     }
 }
