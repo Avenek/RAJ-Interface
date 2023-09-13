@@ -24,6 +24,8 @@ function addObjectToList(container){
     setupRadioButtonsObjectList(radioButtons, container);
     addObjectToJson(container, labelAndRadioButton.textContent)
     revealFullForm(container)
+    updateJsonTextArea()
+    saveJsonState()
 }
 
 function createObjectContainer(){
