@@ -194,6 +194,7 @@ function handleExtraOptionButtonClick(event){
               objectContainer.workingObject["case"].list = []
               keyContainer.workingObject = new Case()
               keyContainer.name = "case"
+              keyContainer.event = event.target
               objectContainer.workingObject["case"].list.push(keyContainer.workingObject)
               keyContainer.list = objectContainer.workingObject["case"].list
   
@@ -217,7 +218,23 @@ function handleExtraOptionButtonClick(event){
   }
   else{
     container.innerHTML = fullHtml
+    listContainer.innerHTML = '<div class="container-title">Menu pomocnicze</div>'
   }
-  
+}
 
+function hideFullForm(container, withPlusButton){
+  const formToHide = document.querySelector(`.${container.className}`)
+  formToHide.firstChild.classList.add("hide")
+  formToHide.firstChild.nextElementSibling.classList.add("hide")
+  if(withPlusButton){
+    const objectList = document.querySelector(`.${container.listClassName}`)
+    const plus = objectList.querySelector(".add-object")
+    plus.remove()
+  }
+}
+
+function revealFullForm(container){
+  const formToHide = document.querySelector(`.${container.className}`)
+  formToHide.firstChild.classList.remove("hide")
+  formToHide.firstChild.nextElementSibling.classList.remove("hide")
 }

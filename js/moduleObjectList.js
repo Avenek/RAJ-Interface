@@ -23,6 +23,7 @@ function addObjectToList(container){
     const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]')
     setupRadioButtonsObjectList(radioButtons, container);
     addObjectToJson(container, labelAndRadioButton.textContent)
+    revealFullForm(container)
 }
 
 function createObjectContainer(){
@@ -106,19 +107,31 @@ function addObjectToJson(container, id)
 {
     const moduleName = container.name
     container.workingObject = new objectDict[moduleName](id);
-    if(objectContainer.hasList) {
-        if(!dynamicData.hasOwnProperty(currentModule))
-        {
-            dynamicData[currentModule]={}
-            dynamicData[currentModule].list=[]
-        }
-        container.list.push(container.workingObject)
-        const index = findObjectIndexOnList(id, container)
-        container.currentIndex = index
-      }
-      else {
-        dynamicData[currentModule] = objectContainer.workingObject
-      }
+    switch(moduleName){
+        case "case":
+            if(!objectContainer.workingObject.hasOwnProperty("case")){
+                objectContainer.workingObject["case"] = {}
+                objectContainer.workingObject["case"].list = []
+            }
+            objectContainer.workingObject["case"].list.push(container.workingObject)
+            const index = findObjectIndexOnList(id, container)
+            container.currentIndex = index
+        default:
+            if(objectContainer.hasList) {
+                if(!dynamicData.hasOwnProperty(currentModule))
+                {
+                    dynamicData[currentModule]={}
+                    dynamicData[currentModule].list=[]
+                }
+                container.list.push(container.workingObject)
+                const index = findObjectIndexOnList(id, container)
+                container.currentIndex = index
+              }
+              else {
+                dynamicData[currentModule] = objectContainer.workingObject
+              }
+    }
+
     fillFormFields(container.workingObject)
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
     container.hideAndRevealRequiredItems()
@@ -128,6 +141,14 @@ function addObjectToJson(container, id)
 function removeObjectFromList(event, container){
     if (window.confirm("Czy na pewno chcesz usunąć obiekt?")) {
         const objectId = event.target.previousElementSibling.textContent
+        switch(container.name)
+        {
+            case "case":
+                removeObjectFromJson(objectId, objectContainer.workingObject.case.list, container)
+            default:
+                removeObjectFromJson(objectId, container.list, container)
+
+        }
         removeObjectFromJson(objectId, container.list, container)
         const singleContainer = event.target.parentNode
         if(singleContainer.firstChild.classList.contains("radio-checked"))
@@ -145,14 +166,17 @@ function removeObjectFromList(event, container){
                 switch(container.name){
                     case "case":
                         objectContainer.removeObjectKeyByPath("case")
+                        hideFullForm(container, true)
+                        keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;
                     default:
                         container.workingObject = null
                         delete dynamicData[currentModule]
+                        hideFullForm(container, false)
                     break;
-
                 }
             }
+
             updateDynamicDataAndJsonText()
         }
         else{
