@@ -45,7 +45,7 @@ function createObjectConfigurationContainer(config)
               case "table":
                 color = "#0FF0FC"
                 break;
-              case "get random":
+              case "random":
                 color = "#FFF01F"
                 break;
               default:
@@ -237,4 +237,43 @@ function revealFullForm(container){
   const formToHide = document.querySelector(`.${container.className}`)
   formToHide.firstChild.classList.remove("hide")
   formToHide.firstChild.nextElementSibling.classList.remove("hide")
+}
+
+function hightligthsUsedExtraOption(container){
+  const configurationContainer = document.querySelector(`.${container.className}`)
+  const extraOptions = configurationContainer.querySelectorAll('.extra-option')
+  let path
+  let object;
+  extraOptions.forEach(button =>{
+    switch(button.textContent){
+      case "CASE":
+        object = container.workingObject
+        path = button.parentElement.firstChild.nextElementSibling.firstChild.name   
+        if(path.indexOf(".")===-1){
+          path = ""
+        }
+        if(path) {
+          object = findObjectByPath(object, path)
+        }
+        if(object && object.hasOwnProperty("case")){
+          button.classList.add("extra-option-active")
+        }
+        break;
+      case "RANDOM":
+        object = container.workingObject
+        path = button.parentElement.firstChild.nextElementSibling.name
+        if(path.indexOf(".")===-1){
+          path = ""
+        }
+        if(path) {
+          object = findObjectByPath(object, path)
+        }
+        if(object && object.hasOwnProperty("getRandom")){
+          button.classList.add("extra-option-active")
+        }
+        break;
+      default:
+        break;
+    }
+  })
 }

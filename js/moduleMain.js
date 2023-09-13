@@ -55,14 +55,14 @@ function loadModuleContent()
         objectContainer.requiredItems = findReuqiredItems(config)
         const container = document.querySelector(".object-configuration")
         const objectListContainer = document.querySelector(".object-list-container")
-        getModuleElements(container, objectListContainer)
         objectContainer.createObjectList()
+        getModuleElements(container, objectListContainer)       
         addObjectIfListIsEmpty(objectContainer)
         createModuleDOMEvents(objectContainer) 
         fillFormFields(objectContainer.workingObject);
         objectContainer.hideAndRevealRequiredItems()
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
-        
+        hightligthsUsedExtraOption(objectContainer)
     })
     .catch(error => {
     console.error('Błąd pobierania:', error);
@@ -207,7 +207,7 @@ function inputClickEvent(event, container){
 
 
 function main(){
-  loadModuleObject(0, "characterEffect")
+  loadModuleObject(localStorage.getItem("index"), localStorage.getItem("module"))
   const jsonText = document.querySelector(".json-text")
   jsonText.value = JSON.stringify(dynamicData, null, 2);
  }

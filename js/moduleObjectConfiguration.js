@@ -23,9 +23,7 @@ function findObjectIndexOnList(objectId, container)
           }
         }
     }
-    return null
-    
-     
+    return null     
 }
 
 function removeObjectFromJson(objectId, list, container)
@@ -248,4 +246,24 @@ function findObjectByName(properties, targetName) {
       }
     }
   }
+}
+
+function findObjectByPath(object, path){
+  if(path)
+  {
+    const keys = path.split('.');
+      let currentObj = object;
+
+      for (let i = 0; i < keys.length - 1; i++) {
+        const currentKey = keys[i];
+        if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
+          currentObj[currentKey] = {};
+        }
+        currentObj = currentObj[currentKey];
+      }
+      const lastKey = keys[keys.length - 1];
+      return currentObj[lastKey]
+  }
+  return currentObj
+
 }

@@ -136,6 +136,7 @@ function addObjectToJson(container, id)
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
     container.hideAndRevealRequiredItems()
     updateDynamicDataAndJsonText()
+    hightligthsUsedExtraOption(container)
 }
 
 function removeObjectFromList(event, container){
@@ -149,7 +150,6 @@ function removeObjectFromList(event, container){
                 removeObjectFromJson(objectId, container.list, container)
 
         }
-        removeObjectFromJson(objectId, container.list, container)
         const singleContainer = event.target.parentNode
         if(singleContainer.firstChild.classList.contains("radio-checked"))
         {
@@ -161,6 +161,7 @@ function removeObjectFromList(event, container){
                 container.workingObject = dynamicData[currentModule].list[0]
                 fillFormFields(container.workingObject)
                 container.hideAndRevealRequiredItems()
+                hightligthsUsedExtraOption(container)
             }
             else{
                 switch(container.name){
@@ -194,10 +195,10 @@ function changeObjectOnList(event, container){
     const index = findObjectIndexOnList(objectId, container)
     container.currentIndex = index
     container.workingObject = container.list[index]
-    console.log(container);
     fillFormFields(container.workingObject)
     container.hideAndRevealRequiredItems()
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties)
+    hightligthsUsedExtraOption(container)
 }
 
 function setupRadioButtonsObjectList(radioButtons, container) {

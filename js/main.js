@@ -46,7 +46,7 @@ function createContainersContent(data)
                   ${oneModule.tipInfo}
                 </p>
               </div>
-            <a href="#"><button class="glow-on-hover" type="button"><img src="obrazki/${oneModule.name.charAt(0).toLowerCase() + oneModule.name.slice(1)}.png" alt=""><br>${oneModule.name}</button></a>
+            <a href="/configuration.html"><button class="glow-on-hover" type="button"><img src="obrazki/${oneModule.name.charAt(0).toLowerCase() + oneModule.name.slice(1)}.png" alt=""><br>${oneModule.name}</button></a>
         </div>\n`
         }
         containerDiv+="</div>"
@@ -85,6 +85,7 @@ function createDOMEvents(){
     });
     cogWheels.forEach((button) => button.addEventListener("click", settingForm));
     srajModuleContainers.addEventListener("drop", handleDrop)
+
     singleModulesContainers.forEach((singleModuleContainer) => {
         singleModuleContainer.addEventListener("dragstart", handleDragStart);
         singleModuleContainer.addEventListener("dragend", handleDragEnd);
@@ -99,8 +100,9 @@ function createDOMEvents(){
     jsonButtons.forEach(button => button.addEventListener("click", buttonClick))
     moduleButtons.forEach(button => {
         button.addEventListener("click", () => {
-            console.log(button.textContent.charAt(0).toLowerCase() + button.textContent.slice(1));
-            loadModuleContent(button.textContent.charAt(0).toLowerCase() + button.textContent.slice(1))})
+            localStorage.setItem("index", 0)
+            localStorage.setItem('module', button.textContent.charAt(0).toLowerCase() + button.textContent.slice(1));
+        })
     })
 }
 
@@ -114,3 +116,4 @@ function main(){
 
 main();
 const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
+
