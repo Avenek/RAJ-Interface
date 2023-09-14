@@ -45,7 +45,7 @@ function loadModuleContent()
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
     fullHtml += createConfigurationMenu()
-    fetch(`../config/${currentModule}.json`)
+    fetch(`config/${currentModule}.json`)
     .then(response => response.json())
     .then(config => {
         objectContainer.jsonConfig = config
