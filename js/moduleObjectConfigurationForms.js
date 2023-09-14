@@ -79,9 +79,9 @@ function fillFormFields(data, prefix = "") {
   
       if (typeof value === "object") {
         fillFormFields(value, fullKey + ".");
-      } else {
+      } 
+      else {
         let inputElements = document.querySelectorAll('[name="' + fullKey + '"]');
-        
         if (inputElements.length > 0) {
           if (inputElements[0].type === "radio") {
             for (let i = 0; i < inputElements.length; i++) {
@@ -110,8 +110,7 @@ function fillFormFields(data, prefix = "") {
             for (let i = 0; i < inputElements.length; i++) {
               const inputElement = inputElements[i];
               inputElement.value = value;
-            }
-             
+            }       
           }
         }
       }
@@ -199,7 +198,6 @@ function handleExtraOptionButtonClick(event){
             }
             else{
               keyContainer.workingObject = objectContainer.workingObject["case"].list[0]
-              keyContainer.name = "case"
             }
             keyContainer.list = objectContainer.workingObject["case"].list
             keyContainer.createObjectList()
@@ -214,6 +212,41 @@ function handleExtraOptionButtonClick(event){
         console.error('Błąd pobierania:', error);
         })
         break;
+        case "RANDOM":
+          fetch(`../config/random.json`)
+          .then(response => response.json())
+          .then(config => {
+              
+              fullHtml += createObjectConfigurationContainer(config) 
+              container.innerHTML = fullHtml
+              keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "random")
+              keyContainer.requiredItems = findReuqiredItems(config)
+              keyContainer.hasList = false
+              keyContainer.jsonConfig = config
+              keyContainer.name = "random"
+              keyContainer.event = event.target
+              const path = keyContainer.event.previousElementSibling.name
+             if(!getValueFromObject(objectContainer.workingObject, path).hasOwnProperty("getRandom"))
+              {
+                keyContainer.workingObject = new GetRandom()
+                objectContainer.setObjectKeyByPath(path, keyContainer.workingObject)
+              }
+              else{
+                keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, path+".getRandom")
+              }
+              keyContainer.createObjectList()
+              getModuleElements(container, listContainer)
+              createModuleDOMEvents(keyContainer)
+              updateDynamicDataAndJsonText()
+              fillFormFields(keyContainer.workingObject);
+              keyContainer.hideAndRevealRequiredItems() 
+              saveJsonState()   
+          })
+          .catch(error => {
+          console.error('Błąd pobierania:', error);
+          })
+          break;
+
       case "TABLE":
         break;
       default:

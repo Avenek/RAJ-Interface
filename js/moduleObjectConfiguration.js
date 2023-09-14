@@ -1,5 +1,3 @@
-
-
 function findObjectIndexOnList(objectId, container)
 {
     const objectList = container.list
@@ -28,9 +26,11 @@ function findObjectIndexOnList(objectId, container)
 
 function removeObjectFromJson(objectId, list, container)
 {
+  if(container.hasList){
     const objectList = list
     const index = findObjectIndexOnList(objectId, container)
     objectList.splice(index, 1);
+  }   
 }
 
 function getValueFromObject(obj, key) {
@@ -107,7 +107,6 @@ function changeValueInJsonInput(event, container){
 
   if(newValue !== null & newValue !== undefined)
   {
-    newValue = getValueInGoodType(key, newValue, container)
     changeValueInJson(key, newValue, container)
   }
   else{
@@ -132,7 +131,6 @@ function getValueInGoodType(key, value, container){
     if (isNaN(newValue))
     {
       newValue = value
-      console.error("Podana wartość nie jest liczbą!");
     }
   }
   return newValue
@@ -157,12 +155,13 @@ function changeValueInJson(key, newValue, container)
     newValue = newValue.toString()
     const splittedValue = newValue.split(";")
     splittedValue.forEach(value => {
-      parsedValue = getValueInGoodType(keys, value, container)
+      parsedValue = getValueInGoodType(key, value, container)
       valuesArray.push(parsedValue)
       })
     currentObj[lastKey] = valuesArray  
   }
   else{
+    newValue = getValueInGoodType(key, newValue, container)
     currentObj[lastKey] = newValue;
   }
 }

@@ -37,6 +37,14 @@ class Case {
   }
 }
 
+class GetRandom {
+  constructor() {
+    this.resultType = "int"
+    this.start = 0
+    this.end = 0
+  }
+}
+
 
 let objectDict = {
 characterEffect : class CharacterEffect {

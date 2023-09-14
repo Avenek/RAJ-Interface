@@ -117,6 +117,7 @@ function addObjectToJson(container, id)
             objectContainer.workingObject["case"].list.push(container.workingObject)
             const index = findObjectIndexOnList(id, container)
             container.currentIndex = index
+            break;
         default:
             if(objectContainer.hasList) {
                 if(!dynamicData.hasOwnProperty(currentModule))
@@ -131,6 +132,7 @@ function addObjectToJson(container, id)
               else {
                 dynamicData[currentModule] = objectContainer.workingObject
               }
+              break;
     }
 
     fillFormFields(container.workingObject)
@@ -148,6 +150,9 @@ function removeObjectFromList(event, container){
         {
             case "case":
                 removeObjectFromJson(objectId, objectContainer.workingObject.case.list, container)
+                break;
+            case "random":
+                break;
             default:
                 removeObjectFromJson(objectId, container.list, container)
 
@@ -172,6 +177,13 @@ function removeObjectFromList(event, container){
                         hideFullForm(container, true)
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;
+                    case "random":
+                        const path = container.event.previousElementSibling.name
+                        const value = findObjectByName(objectContainer.jsonConfig.properties, path).defaultInput
+                        objectContainer.setObjectKeyByPath(path, value)
+                        clearKeyContainers()
+                        keyContainer.event.classList.remove("extra-option-active", "menu-active")
+                        break;
                     default:
                         container.workingObject = null
                         delete dynamicData[currentModule]
@@ -194,14 +206,32 @@ function removeObjectFromList(event, container){
 }
 
 function changeObjectOnList(event, container){
+    if(container === objectContainer)
+    {
+        clearKeyContainers()
+    }
+    
     const objectId = event.target.parentNode.textContent
     const index = findObjectIndexOnList(objectId, container)
     container.currentIndex = index
+    localStorage.setItem("index", index)
     container.workingObject = container.list[index]
     fillFormFields(container.workingObject)
     container.hideAndRevealRequiredItems()
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
     hightligthsUsedExtraOption(container)
+    
+
+}
+
+function clearKeyContainers(){
+    const containerKey = document.querySelector(".key-configuration")
+    const listContainer = document.querySelector(".object-list-key")
+    containerKey.innerHTML = ""
+    listContainer.innerHTML = '<div class="container-title">Menu pomocnicze</div>'
+    const extraOptionButton = keyContainer.event
+    extraOptionButton.classList.remove("extra-option-active")
+    extraOptionButton.classList.remove("menu-active")
 }
 
 function setupRadioButtonsObjectList(radioButtons, container) {
@@ -223,9 +253,15 @@ function setupRadioButtonsObjectList(radioButtons, container) {
     });
   }
 
-  function updateObjectListText()
+  function updateObjectListText(container)
   {
-    const objectListContainer = document.querySelector(".object-list-container")
+    const objectListContainer = document.querySelector(`.${container.listClassName}`)
     const checkedRadioButton = objectListContainer.querySelector('label.radio-checked > input[type="radio"]');
-    checkedRadioButton.parentElement.firstChild.nextSibling.textContent = objectContainer.workingObject["id"] || objectContainer.workingObject["name"]
+    if(container === objectContainer)
+    {
+        checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["id"] || container.workingObject["name"]
+    }
+    else {
+        checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["kind"]
+    }
 }

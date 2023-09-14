@@ -39,7 +39,7 @@ function loadModuleObject(index, module)
 function loadModuleContent()
 {
     const home = document.querySelector(".element-container")
-    home.innerHTML = '<div class="home"><i class="fa-solid fa-house"></i></div>'
+    home.innerHTML = '<div class="home"><a href="/index.html"><button class="home-button"><i class="fa-solid fa-house"></i></button></a></div>'
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
@@ -98,7 +98,8 @@ function setupRadioButtons(radioButtons, container) {
       radioButton.addEventListener('change', (event) => {
         updateObjectRadioButton(event, container)
         fillFormFields(container.workingObject)
-        container.hideAndRevealRequiredItems()}
+        container.hideAndRevealRequiredItems()
+        updateObjectListText(container)}
       )
   });
 }
@@ -201,7 +202,7 @@ function checkboxClickEvent(checkbox, event, container){
 function inputClickEvent(event, container){
   changeValueInJsonInput(event, container)
   resizeIfIsTooLongValue(event)
-  updateObjectListText()
+  updateObjectListText(container)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
 }
 
@@ -216,5 +217,6 @@ function main(){
   const jsonText = document.querySelector(".json-text")
   jsonText.value = JSON.stringify(dynamicData, null, 2);
  }
-
+ 
+//localStorage.clear()
  main();
