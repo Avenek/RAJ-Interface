@@ -100,9 +100,9 @@ function createDOMEvents(){
     anchorHrefs.forEach(a => {
         let currentURL = window.location.href;
         if(currentURL.includes("index.html")){
-            currentURL = currentURL.substring(0, currentURL.indexOf("/index.html"))
+            currentURL = currentURL.substring(0, currentURL.indexOf("index.html"))
         }
-        const newURL = currentURL + '/configuration.html';
+        const newURL = currentURL + 'configuration.html';
         a.href = newURL
     })
 }
