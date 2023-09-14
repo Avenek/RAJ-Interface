@@ -6,7 +6,8 @@ function createSrajModulesMenu(data) {
       const containerElement = document.createElement("div");
       containerElement.classList.add("menu-element")
       const aElement = document.createElement("a");
-      aElement.setAttribute("href", "/configuration.html")
+      aElement.setAttribute("href", "")
+      aElement.classList.add("aLink")
       const moduleElement = document.createElement("button");
       moduleElement.classList.add("button-element")
       moduleElement.textContent = key
@@ -18,7 +19,8 @@ function createSrajModulesMenu(data) {
         const singleObjectElement = document.createElement("div");
         singleObjectElement.classList.add("submenu")
         const aElement = document.createElement("a");
-        aElement.setAttribute("href", "/configuration.html")
+        aElement.setAttribute("href", "")
+        aElement.classList.add("aLink")
         singleObjectElement.append(aElement)
         const ids = data[key].list.map(item => item.id || item.name);
         ids.forEach(id => {
