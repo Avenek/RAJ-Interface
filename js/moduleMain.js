@@ -219,5 +219,5 @@ function main(){
   jsonText.value = JSON.stringify(dynamicData, null, 2);
  }
  
-localStorage.clear()
+//localStorage.clear()
  main();

@@ -1,4 +1,4 @@
-let addButton, deleteButtons, cogWheels, singleModulesContainers, toolTips, srajModuleContainers, jsonButtons, moduleButtons
+let addButton, deleteButtons, cogWheels, singleModulesContainers, toolTips, srajModuleContainers, jsonButtons, moduleButtons, anchorHrefs
 
 function loadContent()
 {
@@ -25,7 +25,7 @@ function loadContent()
     const jsonButtonsHtml = createJsonButtons()
     buttonsContainer.innerHTML = jsonButtonsHtml
     restoreLastJson()
-    createSrajModulesMenu(dynamicData);
+    createSrajModulesMenu(dynamicData);    
 }
 
 function createContainersContent(data)
@@ -47,7 +47,7 @@ function createContainersContent(data)
                   ${oneModule.tipInfo}
                 </p>
               </div>
-            <a href="/configuration.html"><button class="glow-on-hover" type="button"><img src="obrazki/${oneModule.name.charAt(0).toLowerCase() + oneModule.name.slice(1)}.png" alt=""><br>${oneModule.name}</button></a>
+            <a class= "aLink" href="#"><button class="glow-on-hover" type="button"><img src="obrazki/${oneModule.name.charAt(0).toLowerCase() + oneModule.name.slice(1)}.png" alt=""><br>${oneModule.name}</button></a>
         </div>\n`
         }
         containerDiv+="</div>"
@@ -66,6 +66,7 @@ function getElements(){
     srajModuleContainers = document.querySelector(".sraj-modules-container")
     jsonButtons = document.querySelectorAll(".json-buttons")
     moduleButtons = document.querySelectorAll(".glow-on-hover")
+    anchorHrefs = document.querySelectorAll(".aLink");
 }
 
 function createDOMEvents(){
@@ -92,7 +93,17 @@ function createDOMEvents(){
         button.addEventListener("click", () => {
             localStorage.setItem("index", 0)
             localStorage.setItem('module', button.textContent.charAt(0).toLowerCase() + button.textContent.slice(1));
+
         })
+    })
+
+    anchorHrefs.forEach(a => {
+        let currentURL = window.location.href;
+        if(currentURL.includes("index.html")){
+            currentURL = currentURL.substring(0, currentURL.indexOf("/index.html"))
+        }
+        const newURL = currentURL + '/configuration.html';
+        a.href = newURL
     })
 }
 
@@ -104,7 +115,6 @@ function main(){
     })
 }
 
-localStorage.clear()
+//localStorage.clear()
 main();
 const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
-
