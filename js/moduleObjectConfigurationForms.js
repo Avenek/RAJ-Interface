@@ -171,7 +171,7 @@ function handleExtraOptionButtonClick(event){
   listContainer.innerHTML = '<div class="container-title">Menu pomocnicze</div>'
   event.target.classList.add("extra-option-active")
   event.target.classList.toggle("menu-active")
-  if(keyContainer && keyContainer.event){
+  if(keyContainer && keyContainer.event && keyContainer.event!== event.target){
     keyContainer.event.classList.remove("menu-active")
   }
   let fullHtml=""
@@ -237,7 +237,7 @@ function handleExtraOptionButtonClick(event){
                 objectContainer.setObjectKeyByPath(path, keyContainer.workingObject)
               }
               else{
-                keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, path+".getRandom")
+                keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, path)
               }
               keyContainer.createObjectList()
               getModuleElements(container, listContainer)
