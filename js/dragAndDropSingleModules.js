@@ -58,15 +58,16 @@ function isDroppedOnSingleModule(event) {
 function dropOnEmptyArea(event){
 
     const moduleContainers = event.target.querySelectorAll(".single-module-container");
-    const firstContainerRect = moduleContainers[0].getBoundingClientRect()
-    const lastContainerRect = moduleContainers[moduleContainers.length-1].getBoundingClientRect()
     if(moduleContainers.length===0)
     {
         event.target.append(draggedModule)
         return
     }
-    else if(isDroppedBeforeFirstContainer(event, firstContainerRect))
+    const firstContainerRect = moduleContainers[0].getBoundingClientRect()
+    const lastContainerRect = moduleContainers[moduleContainers.length-1].getBoundingClientRect()
+    if(isDroppedBeforeFirstContainer(event, firstContainerRect))
     {
+        
         moduleOnRightSide = moduleContainers[0]
         insertDraggedBeforeGivenModule(moduleOnRightSide)
         return
