@@ -1,4 +1,4 @@
-let uniqueNameRadioButtons, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons
+let uniqueNameRadioButtons, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons, homeLink
 let currentModule = ""
 let requiredItems;
 let keyRequiredItems;
@@ -40,7 +40,7 @@ function loadModuleObject(index, module)
 function loadModuleContent()
 {
     const home = document.querySelector(".element-container")
-    home.innerHTML = '<div class="home"><a href="/index.html"><button class="home-button"><i class="fa-solid fa-house"></i></button></a></div>'
+    home.innerHTML = '<div class="home"><a class="aLink" href="#"><button class="home-button"><i class="fa-solid fa-house"></i></button></a></div>'
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
@@ -116,6 +116,7 @@ function getModuleElements(container, listContainer){
   getModuleElementsFromContainer(container)
   getModuleElementsFromObjectList(listContainer)
   jsonButtons = document.querySelectorAll(".json-buttons")
+  homeLink = document.querySelector(".aLink")
 }
 
 function getModuleElementsFromContainer(container){
@@ -144,6 +145,12 @@ function createModuleDOMEvents(container){
   createModuleDOMEventFromContainer(container)
   createModuleDOMEventFromObjectList(container)
   jsonButtons.forEach(button => button.addEventListener("click", buttonClick))
+  let currentURL = window.location.href;
+        if(currentURL.includes("configuration.html")){
+            currentURL = currentURL.substring(0, currentURL.indexOf("configuration.html"))
+        }
+        const newURL = currentURL
+        homeLink.href = newURL
 }
 
 function createModuleDOMEventFromContainer(container){

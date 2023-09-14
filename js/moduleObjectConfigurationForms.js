@@ -180,7 +180,7 @@ function handleExtraOptionButtonClick(event){
     switch(event.target.textContent)
     {
       case "CASE":
-        fetch(`../config/case.json`)
+        fetch(`config/case.json`)
         .then(response => response.json())
         .then(config => {
             
@@ -217,7 +217,7 @@ function handleExtraOptionButtonClick(event){
         })
         break;
         case "RANDOM":
-          fetch(`../config/random.json`)
+          fetch(`config/random.json`)
           .then(response => response.json())
           .then(config => {
               

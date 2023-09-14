@@ -26,7 +26,7 @@ test('Dodawanie nowego kontenera', () => {
 
   // Sprawdzamy, czy kontener został dodany do DOM
   const containers = document.querySelectorAll('.container');
-  expect(containers.length).toBe(3); // Powinno być 1, ponieważ dodaliśmy jeden kontener
+  expect(containers.length).toBe(3); // Powinno być 3, ponieważ dodaliśmy jeden kontener do dwóch
 
   // Sprawdzamy, czy kontener został dodany do storedContainers
   const storedContainersData = JSON.parse(localStorage.getItem('containerConfig'));
