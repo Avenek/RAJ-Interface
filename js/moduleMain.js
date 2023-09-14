@@ -9,7 +9,7 @@ function loadModuleObject(index, module)
 {
   objectContainer = new ConfigurationContainer(index, "object-configuration", "object-list-container", module)
   currentModule = module
-  fetch(`../config/modules.json`)
+  fetch(`config/modules.json`)
     .then(response => response.json())
     .then(config => {
       const configObject = findObjectByName(config.modules, "characterEffect")
