@@ -87,7 +87,7 @@
                             "tool-tip": "Ścieżka do pliku znajdującego się w katalogu grafikiRaj. Przykład: characterEffects/kup23-pnacza.gif",
                             "inputType": "string",
                             "varType": "string",
-                            "defaultInput": ""
+                            "defaultInput": "characterEffects/.gif"
                         },
                         {
                             "name": "params.repeat",
@@ -343,7 +343,8 @@
                             "tool-tip": "Tablica słów, które są po kolei wyświetlane nad npc. Oddzielać średnikiem.",
                             "inputType": "string",
                             "varType": "string",
-                            "defaultInput":[]
+                            "defaultInput":[],
+                            "inputPlaceholder": "Wartości rozdzielić średnikiem!"
                         },
                         {
                             "name": "params.duration",

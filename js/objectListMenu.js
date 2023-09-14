@@ -1,4 +1,4 @@
-function crgetupeateSrajModulesMenu(data) {
+function createSrajModulesMenu(data) {
     const menu = document.querySelector(".sraj-modules-menu");
     
     removeAllChildren(menu)

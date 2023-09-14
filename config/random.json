@@ -1,7 +1,7 @@
 {
     "properties": [
       {
-        "name": "resultType",
+        "name": "getRandom.resultType",
         "idInput": "resultType",
         "tool-tip": "Typ zmiennej, która ma zostać wylosowana.",
         "inputType": "options",
@@ -9,7 +9,7 @@
         "defaultInput": "int"
       },
       {
-        "name": "start",
+        "name": "getRandom.start",
         "idInput": "start.resulType",
         "tool-tip": "Minimalna wartość do losowania.",
         "min":-999,
@@ -18,10 +18,10 @@
         "inputType": "number",
         "varType": "number",
         "defaultInput": 0,
-        "require": {"name": "resultType", "value": ["int", "float"]}
+        "require": {"name": "getRandom.resultType", "value": ["int", "float"]}
       },
       {
-        "name": "end",
+        "name": "getRandom.end",
         "idInput": "end.resulType",
         "tool-tip": "Maksymalna wartość do losowania.",
         "min":-999,
@@ -30,16 +30,16 @@
         "inputType": "number",
         "varType": "number",
         "defaultInput": 0,
-        "require": {"name": "resultType", "value": ["int", "float"]}
+        "require": {"name": "getRandom.resultType", "value": ["int", "float"]}
       },
       {
-        "name": "options",
+        "name": "getRandom.options",
         "idInput": "options.resultType",
         "tool-tip": "Tablica opcji do wyboru, mogą mieć wymieszane typy. Oddzielać średnikiem.",
         "inputType": "string",
         "varType": "number",
         "defaultInput":[],
-        "require": {"name": "resultType", "value": ["options"]}
+        "require": {"name": "getRandom.resultType", "value": ["options"]}
         }
     ]
   }

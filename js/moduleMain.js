@@ -25,6 +25,7 @@ function loadModuleObject(index, module)
         }
         objectContainer.list = dynamicData[currentModule].list
       }
+      
       else {
         objectContainer.hasList = false
         dynamicData[currentModule]={}
@@ -162,8 +163,8 @@ function createModuleDOMEventFromContainer(container){
 
   if (inputList) {
     inputList.forEach(input => {
-      input.removeEventListener("keyup", (event) => inputClickEvent(event, container))
-      input.addEventListener("keyup", (event) => inputClickEvent(event, container))
+      input.removeEventListener("input", (event) => inputClickEvent(event, container))
+      input.addEventListener("input", (event) => inputClickEvent(event, container))
       })
     }
 
@@ -218,5 +219,5 @@ function main(){
   jsonText.value = JSON.stringify(dynamicData, null, 2);
  }
  
-//localStorage.clear()
+localStorage.clear()
  main();

@@ -104,7 +104,7 @@ function main(){
     })
 }
 
-//localStorage.clear()
+localStorage.clear()
 main();
 const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
 

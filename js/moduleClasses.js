@@ -17,7 +17,7 @@ class Target {
 
 class AnimationParams {
   constructor() {
-    this.gifUrl = "";
+    this.gifUrl = "characterEffects/.gif";
     this.repeat = 1;
     this.opacity=1;
     this.position = "CENTER"

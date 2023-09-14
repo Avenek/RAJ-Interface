@@ -17,12 +17,11 @@ function createObjectConfigurationContainer(config)
             }
           } 
         else if (property.inputType === 'string') {
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}">`;
-
+          const placeholder = property.inputPlaceholder || ""
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}" placeholder="${placeholder}">`;
         }
         else if(property.inputType === 'number'){
           html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}">`;
-
         }
         else if(property.inputType === 'bool'){
           const checked =  property.defaultInput ? "checkbox-checked" : ""
@@ -168,8 +167,13 @@ function resizeIfIsTooLongValue(event){
 function handleExtraOptionButtonClick(event){
   const container = document.querySelector(".key-configuration")
   const listContainer = document.querySelector(".object-list-key")
+  container.innerHTML = ""
+  listContainer.innerHTML = '<div class="container-title">Menu pomocnicze</div>'
   event.target.classList.add("extra-option-active")
   event.target.classList.toggle("menu-active")
+  if(keyContainer && keyContainer.event){
+    keyContainer.event.classList.remove("menu-active")
+  }
   let fullHtml=""
   if(event.target.classList.contains("menu-active"))
   {
@@ -228,7 +232,8 @@ function handleExtraOptionButtonClick(event){
               const path = keyContainer.event.previousElementSibling.name
              if(!getValueFromObject(objectContainer.workingObject, path).hasOwnProperty("getRandom"))
               {
-                keyContainer.workingObject = new GetRandom()
+                keyContainer.workingObject = {"getRandom":{}}
+                keyContainer.workingObject.getRandom = new GetRandom()
                 objectContainer.setObjectKeyByPath(path, keyContainer.workingObject)
               }
               else{
@@ -276,7 +281,7 @@ function revealFullForm(container){
   formToHide.firstChild.nextElementSibling.classList.remove("hide")
 }
 
-function hightligthsUsedExtraOption(container){
+function  hightligthsUsedExtraOption(container){
   const configurationContainer = document.querySelector(`.${container.className}`)
   const extraOptions = configurationContainer.querySelectorAll('.extra-option')
   let path

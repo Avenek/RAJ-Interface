@@ -1,0 +1,13 @@
+{
+  "name": "SRAJ-Interface",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "devDependencies": {
+     "jest": "^29.7.0"
+  }
+}

@@ -257,7 +257,8 @@ function findObjectByPath(object, path){
       for (let i = 0; i < keys.length - 1; i++) {
         const currentKey = keys[i];
         if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
-          currentObj[currentKey] = {};
+          //currentObj[currentKey] = {};
+          return
         }
         currentObj = currentObj[currentKey];
       }

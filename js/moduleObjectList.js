@@ -135,6 +135,7 @@ function addObjectToJson(container, id)
               break;
     }
 
+
     fillFormFields(container.workingObject)
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
     container.hideAndRevealRequiredItems()
