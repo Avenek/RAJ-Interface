@@ -149,9 +149,8 @@ function handleDragEnd() {
 
 function saveChangesToLocalStorage()
 {
-    if(moduleOnLeftSide!==null || moduleOnRightSide !== null)
-    {
-        const draggedModuleName = draggedModule.querySelector(".glow-on-hover").textContent;
+
+    const draggedModuleName = draggedModule.querySelector(".glow-on-hover").textContent;
         const draggedModuleObject = storedContainers.containers
         .flatMap(container => container.modules)
         .find(module => module.name === draggedModuleName);
@@ -163,7 +162,8 @@ function saveChangesToLocalStorage()
             break;
             }
         }
-        
+    if(moduleOnLeftSide!==null || moduleOnRightSide !== null)
+    {
         if(moduleOnRightSide!==null)
         {
             const rightDestinationModuleName = moduleOnRightSide.querySelector(".glow-on-hover").textContent;
@@ -187,6 +187,18 @@ function saveChangesToLocalStorage()
                 }
             }
         } 
-        localStorage.setItem('containerConfig', JSON.stringify(storedContainers));
+      
     }
+    else{
+        const moduleName = draggedModule.parentElement.firstChild.nextElementSibling.textContent;
+        console.log(draggedModule.parentElement.firstChild.nextElementSibling.textContent);
+        for (const container of storedContainers.containers) {
+            console.log(container);
+            if (container.title === moduleName) {
+            container.modules.push(draggedModuleObject)
+            break;
+            }
+        }
+    }
+    localStorage.setItem('containerConfig', JSON.stringify(storedContainers));
 }
