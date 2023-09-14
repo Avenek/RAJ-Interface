@@ -168,6 +168,7 @@ body {
 }
 .object-list-container {
     flex: 1;
+    min-height: 75px;
     border: 2px solid #808080;
     border-radius: 5px;
     padding: 15px 0px 5px 0px;
@@ -179,6 +180,7 @@ body {
 
 .object-list-key {
   flex: 1;
+  min-height: 75px;
   border: 2px solid #808080;
   border-radius: 5px;
   padding: 15px 0px 5px 0px;

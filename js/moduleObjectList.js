@@ -200,7 +200,7 @@ function changeObjectOnList(event, container){
     container.workingObject = container.list[index]
     fillFormFields(container.workingObject)
     container.hideAndRevealRequiredItems()
-    removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties)
+    removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
     hightligthsUsedExtraOption(container)
 }
 

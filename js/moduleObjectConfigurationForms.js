@@ -256,11 +256,17 @@ function hightligthsUsedExtraOption(container){
         if(path.indexOf(".")===-1){
           path = ""
         }
+        else{
+          path = path.substring(0, path.lastIndexOf("."))
+        }
         if(path) {
           object = findObjectByPath(object, path)
         }
         if(object && object.hasOwnProperty("case")){
           button.classList.add("extra-option-active")
+        }
+        else{
+          button.classList.remove("extra-option-active")
         }
         break;
       case "RANDOM":
@@ -274,6 +280,9 @@ function hightligthsUsedExtraOption(container){
         }
         if(object && object.hasOwnProperty("getRandom")){
           button.classList.add("extra-option-active")
+        }
+        else{
+          button.classList.remove("extra-option-active")
         }
         break;
       default:

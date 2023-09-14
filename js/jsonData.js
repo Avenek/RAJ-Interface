@@ -36,20 +36,19 @@ let dynamicData = {
         }
       },
       {
-        "action": "CREATE",
-        "id": "obiekt-1",
-        "windowTarget": "MAP",
-        "target": {
-          "kind": "HERO"
+        "action"        : "CREATE",
+        "id"          : "Sralala",
+        "windowTarget"  : "MAP",
+        "effect"        : "ANIMATION",
+        "target"        : {
+          "kind": "NPC", 
+          "id": 1
         },
-        "effect": "TINT",
         "params": {
-          "color":{
-            "r": 255,
-            "g":0,
-            "b":0,
-            "a":1
-          }
+        "gifUrl": "characterEffects/kup23-pnacza.gif",        
+          "delayAfter": 3,
+          "repeat"  : true,
+          "position": "CENTER" 
         }
       }
     ]

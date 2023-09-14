@@ -208,9 +208,13 @@ function inputClickEvent(event, container){
 
 function main(){
   restoreLastJson()
+  if(!localStorage.getItem("module")){
+    localStorage.setItem("module", "characterEffect")
+    localStorage.setItem("index", 0)
+  }
   loadModuleObject(localStorage.getItem("index"), localStorage.getItem("module"))
   const jsonText = document.querySelector(".json-text")
   jsonText.value = JSON.stringify(dynamicData, null, 2);
  }
- 
+
  main();
