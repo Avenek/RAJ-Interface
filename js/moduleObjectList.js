@@ -166,7 +166,7 @@ function removeObjectFromList(event, container){
             const elements = listContainer.querySelectorAll(".object-list-element")
             if(elements.length>1){
                 elements[0].classList.add("radio-checked")
-                container.workingObject = dynamicData[currentModule].list[0]
+                container.workingObject = container.list[0]
                 fillFormFields(container.workingObject)
                 container.hideAndRevealRequiredItems()
                 hightligthsUsedExtraOption(container)
