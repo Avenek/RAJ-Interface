@@ -138,8 +138,7 @@ class ConfigurationContainer {
             objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button>'
         }
          else{
-          console.log(this.name);
-             objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element radio-checked" checked><input type="radio" name="object-list" class="radio-input">${this.name}</label><div class="delete-icon">🗑️</div></div>`;
+             objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element radio-checked" checked><input type="radio" name="object-list" class="radio-input">${getLastPartOfTheName(this.event.previousElementSibling.name)}</label><div class="delete-icon">🗑️</div></div>`;
         }
       containerList.innerHTML+=objectsContainerHtml 
     }
