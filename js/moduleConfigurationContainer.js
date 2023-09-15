@@ -121,6 +121,7 @@ class ConfigurationContainer {
     createObjectList(){
       const containerList = document.querySelector(`.${this.listClassName}`)
       let objectsContainerHtml = ""
+      let isChecked = false
       if(this.hasList){
         let ids;
         switch(this.name){
@@ -132,7 +133,13 @@ class ConfigurationContainer {
               break;
         }
         ids.forEach(id => {
-            const checkedClass = id === this.workingObject.id || id === this.workingObject.name || this.workingObject.kind ? "radio-checked" : ""
+            let checkedClass = id === this.workingObject.id || id === this.workingObject.name || id === this.workingObject.kind ? "radio-checked" : ""
+            if(checkedClass && !isChecked){
+              isChecked = true
+            }
+            else{
+              checkedClass = ""
+            }
             objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="delete-icon">🗑️</div></div>`;
           });
             objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button>'

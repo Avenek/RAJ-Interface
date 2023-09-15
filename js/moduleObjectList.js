@@ -24,7 +24,6 @@ function addObjectToList(container){
     setupRadioButtonsObjectList(radioButtons, container);
     addObjectToJson(container, labelAndRadioButton.textContent)
     revealFullForm(container)
-    updateJsonTextArea()
 }
 
 function createObjectContainer(){
@@ -132,6 +131,7 @@ function addObjectToJson(container, id)
               else {
                 dynamicData[currentModule] = objectContainer.workingObject
               }
+              clearKeyContainers()
               break;
     }
 
@@ -156,12 +156,13 @@ function removeObjectFromList(event, container){
                 break;
             default:
                 removeObjectFromJson(objectId, container.list, container)
-
+                clearKeyContainers()
         }
         const singleContainer = event.target.parentNode
         if(singleContainer.firstChild.classList.contains("radio-checked"))
         {
             container.currentIndex = 0
+            localStorage.setItem("index", 0)
             const listContainer = document.querySelector(`.${container.listClassName}`)
             const elements = listContainer.querySelectorAll(".object-list-element")
             if(elements.length>1){
@@ -195,10 +196,6 @@ function removeObjectFromList(event, container){
 
             updateDynamicDataAndJsonText()
         }
-        else{
-            const objectId = event.target.parentNode.textContent
-            container.currentIndex = findObjectIndexOnList(objectId, container)
-        }
         singleContainer.remove()
         updateJsonTextArea()
         saveJsonState()
@@ -206,14 +203,20 @@ function removeObjectFromList(event, container){
     }
 }
 
-function changeObjectOnList(event, container){
+function changeObjectOnList(container){
     if(container === objectContainer)
     {
         clearKeyContainers()
     }
-    
-    const objectId = event.target.parentNode.textContent
-    const index = findObjectIndexOnList(objectId, container)
+    const listContainer = document.querySelector(`.${container.listClassName}`)
+    const elements = listContainer.querySelectorAll(".object-list-element")
+    let index
+    for(let i = 0 ; i<elements.length ; i++){
+        if(elements[i].classList.contains("radio-checked")){
+            index = i
+            break;
+        }
+    }
     container.currentIndex = index
     localStorage.setItem("index", index)
     container.workingObject = container.list[index]
@@ -252,8 +255,8 @@ function setupRadioButtonsObjectList(radioButtons, container) {
             });
             radioButton.parentNode.classList.add('radio-checked');
         });
-        radioButton.removeEventListener('change', (event) => changeObjectOnList(event, container))
-        radioButton.addEventListener('change', (event) => changeObjectOnList(event, container))
+        radioButton.removeEventListener('change', () => changeObjectOnList(container))
+        radioButton.addEventListener('change', () => changeObjectOnList(container))
     });
   }
 

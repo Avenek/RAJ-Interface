@@ -81,6 +81,7 @@ function fillFormFields(data, prefix = "") {
       } 
       else {
         let inputElements = document.querySelectorAll('[name="' + fullKey + '"]');
+        console.log(inputElements);
         if (inputElements.length > 0) {
           if (inputElements[0].type === "radio") {
             for (let i = 0; i < inputElements.length; i++) {
