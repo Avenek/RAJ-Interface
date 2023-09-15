@@ -33,7 +33,12 @@ function updateJson()
 {
   updateJsonTextArea()
   saveJsonState()
-  createSrajModulesMenu(dynamicData);
+  try{
+    createSrajModulesMenu(dynamicData);
+  }
+  catch{  
+  }
+  
 }
 
 function updateJsonTextArea(){

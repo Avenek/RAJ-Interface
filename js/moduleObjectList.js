@@ -230,9 +230,12 @@ function clearKeyContainers(){
     const listContainer = document.querySelector(".object-list-key")
     containerKey.innerHTML = ""
     listContainer.innerHTML = '<div class="container-title">Menu pomocnicze</div>'
-    const extraOptionButton = keyContainer.event
-    extraOptionButton.classList.remove("extra-option-active")
-    extraOptionButton.classList.remove("menu-active")
+    if(keyContainer){
+        const extraOptionButton = keyContainer.event
+        extraOptionButton.classList.remove("extra-option-active")
+        extraOptionButton.classList.remove("menu-active")
+    }
+    
 }
 
 function setupRadioButtonsObjectList(radioButtons, container) {

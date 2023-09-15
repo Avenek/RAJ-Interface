@@ -38,6 +38,19 @@ function clearJson(){
     if (window.confirm("Czy na pewno chcesz wyczyścić pole Json?\nPS. Ctrl+z nie przywróci go już z powrotem.")) {
         localStorage.setItem('clearedJson', jsonText.value);
         dynamicData = {}
+        try{
+            objectContainer.workingObject = {}
+            objectContainer.list = []
+            objectContainer.event = null
+            const listContainer = document.querySelector(`.${objectContainer.listClassName}`)
+            const elements = listContainer.querySelectorAll(".object-list-element")
+            elements.forEach(element => element.remove())
+            clearKeyContainers()
+            hideFullForm(objectContainer, false)
+        }
+        catch(error){
+            console.log(error);
+        }
         updateJson()
     }
 }

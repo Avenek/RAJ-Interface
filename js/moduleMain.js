@@ -145,6 +145,8 @@ function createModuleDOMEvents(container){
   createModuleDOMEventFromContainer(container)
   createModuleDOMEventFromObjectList(container)
   jsonButtons.forEach(button => button.addEventListener("click", buttonClick))
+  
+  
   let currentURL = window.location.href;
         if(currentURL.includes("configuration.html")){
             currentURL = currentURL.substring(0, currentURL.indexOf("configuration.html"))
