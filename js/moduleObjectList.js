@@ -218,7 +218,9 @@ function changeObjectOnList(container){
         }
     }
     container.currentIndex = index
-    localStorage.setItem("index", index)
+    if(container === objectContainer){
+        localStorage.setItem("index", index)
+    }
     container.workingObject = container.list[index]
     fillFormFields(container.workingObject)
     container.hideAndRevealRequiredItems()

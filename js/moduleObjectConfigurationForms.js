@@ -76,12 +76,11 @@ function fillFormFields(data, prefix = "") {
       const value = data[key];
       const fullKey = prefix + key;
   
-      if (typeof value === "object") {
+      if (typeof value === "object" && !Array.isArray(value)) {
         fillFormFields(value, fullKey + ".");
       } 
       else {
-        let inputElements = document.querySelectorAll('[name="' + fullKey + '"]');
-        console.log(inputElements);
+        let inputElements = document.querySelectorAll('input[name="' + fullKey + '"]');
         if (inputElements.length > 0) {
           if (inputElements[0].type === "radio") {
             for (let i = 0; i < inputElements.length; i++) {
