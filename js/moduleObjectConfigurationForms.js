@@ -108,7 +108,13 @@ function fillFormFields(data, prefix = "") {
           else {
             for (let i = 0; i < inputElements.length; i++) {
               const inputElement = inputElements[i];
+              if(Array.isArray(value)){
+                inputElement.value = value.join(";")
+              }
+              else {
               inputElement.value = value;
+              }
+              
             }       
           }
         }
@@ -210,7 +216,9 @@ function handleExtraOptionButtonClick(event){
             updateDynamicDataAndJsonText()
             fillFormFields(keyContainer.workingObject);
             keyContainer.hideAndRevealRequiredItems() 
+            checkEmptyInputsAndShowErrors(keyContainer)
             saveJsonState()   
+            
         })
         .catch(error => {
         console.error('Błąd pobierania:', error);
@@ -245,6 +253,7 @@ function handleExtraOptionButtonClick(event){
               updateDynamicDataAndJsonText()
               fillFormFields(keyContainer.workingObject);
               keyContainer.hideAndRevealRequiredItems() 
+              checkEmptyInputsAndShowErrors(keyContainer)
               saveJsonState()   
           })
           .catch(error => {

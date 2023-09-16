@@ -101,6 +101,7 @@ function setupRadioButtons(radioButtons, container) {
         updateObjectRadioButton(event, container)
         fillFormFields(container.workingObject)
         container.hideAndRevealRequiredItems()
+        removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
         updateObjectListText(container)}
       )
   });

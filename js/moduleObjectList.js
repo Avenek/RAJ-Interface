@@ -226,8 +226,6 @@ function changeObjectOnList(container){
     container.hideAndRevealRequiredItems()
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
     hightligthsUsedExtraOption(container)
-    
-
 }
 
 function clearKeyContainers(){
