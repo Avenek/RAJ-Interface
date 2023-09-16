@@ -64,6 +64,7 @@ function loadModuleContent()
         objectContainer.hideAndRevealRequiredItems()
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
         hightligthsUsedExtraOption(objectContainer)
+        checkEmptyInputsAndShowErrors(objectContainer)
     })
     .catch(error => {
     console.error('Błąd pobierania:', error);
@@ -214,7 +215,7 @@ function inputClickEvent(event, container){
   resizeIfIsTooLongValue(event)
   updateObjectListText(container)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
-  showErrorIfInputIsEmpty(event)
+  showErrorIfInputIsEmpty(event.target)
 }
 
 

@@ -329,8 +329,7 @@ function  hightligthsUsedExtraOption(container){
   })
 }
 
-function showErrorIfInputIsEmpty(event){
-  const targetInput =  event.target
+function showErrorIfInputIsEmpty(targetInput){
   if(targetInput.value===""){
     targetInput.classList.add("error")
     targetInput.nextElementSibling.classList.remove("hide")
@@ -339,5 +338,16 @@ function showErrorIfInputIsEmpty(event){
     targetInput.classList.remove("error")
     targetInput.nextElementSibling.classList.add("hide")
   }
+
+}
+
+function checkEmptyInputsAndShowErrors(container){
+  const inputContainer = document.querySelector(`.${container.className}`)
+  const inputList = inputContainer.querySelectorAll('input[type="number"], input[type="text"]')
+  inputList.forEach(input => {
+    if(!input.parentElement.classList.contains("hide") && !input.parentElement.parentElement.classList.contains("hide")){
+      showErrorIfInputIsEmpty(input);
+    }   
+  })
 
 }
