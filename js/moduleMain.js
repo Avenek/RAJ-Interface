@@ -214,6 +214,7 @@ function inputClickEvent(event, container){
   resizeIfIsTooLongValue(event)
   updateObjectListText(container)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
+  showErrorIfInputIsEmpty(event)
 }
 
 

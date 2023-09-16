@@ -549,10 +549,20 @@ body {
     word-break: break-all;
 }
 
-.error-json {
+.error{
     background-color: rgb(240, 143, 143);
-    border: 1px solid #ff0000;
 }
+.error-info {
+  display: block;
+  width: 300px;
+  font-weight: bold;
+  color: #ff000d; 
+  padding: 5px;
+  border-radius: 5px; 
+  margin-top: 0px;
+  margin-left: 5px; 
+}
+
 .plus-circle {
     position: relative;
     width: 30px;

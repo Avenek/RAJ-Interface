@@ -127,10 +127,20 @@ function getValueInGoodType(key, value, container){
   let newValue = value
   if(configObject.varType === "number")
   {
-    newValue = parseFloat(value)
-    if (isNaN(newValue))
+    if(newValue === "false")
     {
-      newValue = value
+      newValue = false
+    }
+    else if(newValue==="true")
+    {
+      newValue = true
+    }
+    else{
+      newValue = parseFloat(value)
+      if (isNaN(newValue))
+      {
+        newValue = value
+      }
     }
   }
   return newValue
@@ -225,7 +235,7 @@ function removeDefaultValuesFromJson(data, config, container, prefix = "") {
       removeDefaultValuesFromJson(value, config, container, fullKey + ".");
     } else if(config) {
       foundObject = findObjectByName(config, fullKey)
-      if(foundObject && foundObject.defaultSraj == data[key] && foundObject.inputType!=="options")
+      if(foundObject && foundObject.defaultSraj === data[key] && foundObject.inputType!=="options")
       {
         container.removeObjectKeyByPath(fullKey)
       }

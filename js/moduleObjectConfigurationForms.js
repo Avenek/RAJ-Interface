@@ -18,10 +18,10 @@ function createObjectConfigurationContainer(config)
           } 
         else if (property.inputType === 'string') {
           const placeholder = property.inputPlaceholder || ""
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}" placeholder="${placeholder}">`;
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}" placeholder="${placeholder}"><span class="error-info hide">Pole jest obligatoryjne i nie może być puste!</span>`;
         }
         else if(property.inputType === 'number'){
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}">`;
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}"><span class="error-info hide">Pole jest obligatoryjne i nie może być puste!</span>`;
         }
         else if(property.inputType === 'bool'){
           const checked =  property.defaultInput ? "checkbox-checked" : ""
@@ -327,4 +327,17 @@ function  hightligthsUsedExtraOption(container){
         break;
     }
   })
+}
+
+function showErrorIfInputIsEmpty(event){
+  const targetInput =  event.target
+  if(targetInput.value===""){
+    targetInput.classList.add("error")
+    targetInput.nextElementSibling.classList.remove("hide")
+  }
+  else{
+    targetInput.classList.remove("error")
+    targetInput.nextElementSibling.classList.add("hide")
+  }
+
 }
