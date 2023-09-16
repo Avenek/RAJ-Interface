@@ -34,16 +34,20 @@ body {
     padding: 10px;
 
 }
+.home {
+  display: flex; 
+  align-items: center; 
+}
 
 .home-button{
   font-size: 30px;
   color: rgb(150, 150, 150);
-  display: inline-block;
+  display: flex;
   cursor: pointer;
   padding: 5px;
   border: #969494 solid 1px;
   background: #000000;
-
+  justify-content: left;
 }
 
 .home-button:hover{
@@ -52,6 +56,24 @@ body {
     background-color: rgba(122, 122, 122, 0.568);
 
 }
+
+.module-title {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  color: #bebebe;
+  text-align: center;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(24, 24, 24, 0.7),
+  0 0 20px rgba(0, 255, 0, 0.7),
+  0 0 30px rgba(0, 0, 255, 0.7),
+  0 0 40px rgba(255, 255, 0, 0.7),
+  0 0 50px rgba(255, 0, 255, 0.7),
+  0 0 60px rgba(0, 255, 255, 0.7);
+}
+
 
 .configuration-container {
     display: grid;

@@ -40,7 +40,7 @@ function loadModuleObject(index, module)
 function loadModuleContent()
 {
     const home = document.querySelector(".element-container")
-    home.innerHTML = '<div class="home"><a class="aLink" href="#"><button class="home-button"><i class="fa-solid fa-house"></i></button></a></div>'
+    home.innerHTML = `<div class="home"><a class="aLink" href="#"><button class="home-button"><i class="fa-solid fa-house"></i></button></a><span class="module-title">${currentModule}</span></div>`
     let fullHtml = `<div class="configuration-container"><div class="objects-container">`
     const handleContainer = document.querySelector(".handle-container")
     removeAllChildren(handleContainer)
