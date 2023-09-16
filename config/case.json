@@ -10,7 +10,7 @@
                     "idInput": "kind",
                     "tool-tip": "Możemy zdefiniować jeden z trzech obiektów: ARGUMENT - służy do podania warunku, CONNECTOR - służy do podania operacji logicznej (or - lub, and - i), CONTAINER - elementy zawarte tutaj w liście traktujemy, jakby były zapisane w nawiasie.",
                     "inputType": "options",
-                    "options": [{"name":"ARGUMENT"}, {"name":"CONNECTOR"}, {"name":"CONTAINER"}],
+                    "options": [{"name":"ARGUMENT"}, {"name":"CONNECTOR"}],
                     "defaultInput": "ARGUMENT"
                 },
                 {
