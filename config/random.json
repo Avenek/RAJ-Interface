@@ -5,39 +5,64 @@
         "idInput": "resultType",
         "tool-tip": "Typ zmiennej, która ma zostać wylosowana.",
         "inputType": "options",
+        "varType": ["string"],
         "options": [{"name":"int"}, {"name":"float"}, {"name":"options"}],
         "defaultInput": "int"
       },
       {
         "name": "getRandom.start",
-        "idInput": "start.resulType",
+        "idInput": "start.int",
         "tool-tip": "Minimalna wartość do losowania.",
         "min":-999,
         "max":999,
         "step":1,
         "inputType": "number",
-        "varType": "number",
+        "varType": ["int"],
         "defaultInput": 0,
-        "require": {"name": "getRandom.resultType", "value": ["int", "float"]}
+        "require": {"name": "getRandom.resultType", "value": ["int"]}
+      },
+      {
+        "name": "getRandom.start",
+        "idInput": "start.float",
+        "tool-tip": "Minimalna wartość do losowania.",
+        "min":-999,
+        "max":999,
+        "step":1,
+        "inputType": "number",
+        "varType": ["float"],
+        "defaultInput": 0,
+        "require": {"name": "getRandom.resultType", "value": ["float"]}
       },
       {
         "name": "getRandom.end",
-        "idInput": "end.resulType",
+        "idInput": "end.int",
         "tool-tip": "Maksymalna wartość do losowania.",
         "min":-999,
         "max":999,
         "step":1,
         "inputType": "number",
-        "varType": "number",
-        "defaultInput": 0,
-        "require": {"name": "getRandom.resultType", "value": ["int", "float"]}
+        "varType": ["int"],
+        "defaultInput": 1,
+        "require": {"name": "getRandom.resultType", "value": ["int"]}
+      },
+      {
+        "name": "getRandom.end",
+        "idInput": "end.float",
+        "tool-tip": "Maksymalna wartość do losowania.",
+        "min":-999,
+        "max":999,
+        "step":1,
+        "inputType": "number",
+        "varType": ["float"],
+        "defaultInput": 1,
+        "require": {"name": "getRandom.resultType", "value": ["float"]}
       },
       {
         "name": "getRandom.options",
         "idInput": "options.resultType",
         "tool-tip": "Tablica opcji do wyboru, mogą mieć wymieszane typy. Oddzielać średnikiem.",
         "inputType": "string",
-        "varType": "number",
+        "varType": ["number", "string"],
         "defaultInput":[],
         "require": {"name": "getRandom.resultType", "value": ["options"]}
         }

@@ -125,24 +125,37 @@ function changeValueInJsonCheckbox(event, container){
 function getValueInGoodType(key, value, container){
   const configObject = findObjectByName(container.jsonConfig.properties, key)
   let newValue = value
-  if(configObject.varType === "number")
-  {
+  if(configObject.varType.includes("bool")){
     if(newValue === "false")
     {
       newValue = false
+      return newValue
     }
     else if(newValue==="true")
     {
       newValue = true
+      return newValue
     }
-    else{
-      newValue = parseFloat(value)
+  }
+
+  if(configObject.varType.includes("float")){
+    newValue = parseFloat(value)
       if (isNaN(newValue))
       {
         newValue = value
       }
-    }
+      return newValue
   }
+
+  if(configObject.varType.includes("int")){
+    newValue = parseInt(value)
+    if (isNaN(newValue))
+    {
+      newValue = value
+    }
+    return newValue
+  }
+  
   return newValue
 }
 

@@ -180,7 +180,7 @@ function removeObjectFromList(event, container){
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;
                     case "random":
-                        const path = container.event.previousElementSibling.name
+                        const path = container.event.previousElementSibling.previousElementSibling.name
                         const value = findObjectByName(objectContainer.jsonConfig.properties, path).defaultInput
                         objectContainer.setObjectKeyByPath(path, value)
                         clearKeyContainers()
@@ -268,7 +268,7 @@ function setupRadioButtonsObjectList(radioButtons, container) {
     {
         checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["id"] || container.workingObject["name"]
     }
-    else {
+    else if(container.hasList){
         checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["kind"]
     }
 }

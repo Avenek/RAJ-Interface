@@ -10,6 +10,7 @@
                     "idInput": "action",
                     "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
                     "defaultInput": "CREATE"
@@ -19,7 +20,7 @@
                     "idInput": "id",
                     "tool-tip": "Nazwa identyfikująca efekt. Umożliwia późniejszego jego usunięciu.",
                     "inputType": "string",
-                    "varType": "string",
+                    "varType": ["string"],
                     "defaultInput": "obiekt-id"
                 },
                 {
@@ -27,6 +28,7 @@
                     "idInput": "windowTarget",
                     "tool-tip": "Miejsce, w którym będą widoczne efekty.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"MAP"}],
                     "defaultInput": "MAP"
                 },
@@ -35,6 +37,7 @@
                     "idInput": "effect",
                     "tool-tip": "Rodzaj efektu. Animation stworzy animację na podstawie gifa. TEXT wyświetli boxa nad głową obiektu z zadeklarowanym tekstem. TINT powoduje nakładanie się kolorowego cienia na obiekt.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}],
                     "defaultInput": "ANIMATION"
                 },
@@ -49,6 +52,7 @@
                             "idInput": "target.kind",
                             "tool-tip": "Typ obiektu, na którym chcemy wywołać dany efekt.",
                             "inputType": "options",
+                            "varType": ["string"],
                             "options": [{"name":"HERO"}, {"name":"NPC"},{"name":"FAKE_NPC"}],
                             "defaultInput": "HERO"
                         },
@@ -60,7 +64,7 @@
                             "min":0,
                             "max":100000,
                             "step":1,
-                            "varType": "number",
+                            "varType": ["int"],
                             "defaultInput": 0,
                             "require": {"name": "target.kind", "value": ["NPC"]}
                         },
@@ -69,6 +73,7 @@
                             "idInput": "id.fakeNpc",
                             "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
                             "inputType": "string",
+                            "varType": ["int", "string"],
                             "defaultInput": "",
                             "require": {"name": "target.kind", "value": ["FAKE_NPC"]}
                         }
@@ -86,7 +91,7 @@
                             "idInput": "animation.gifUrl",
                             "tool-tip": "Ścieżka do pliku znajdującego się w katalogu grafikiRaj. Przykład: characterEffects/kup23-pnacza.gif",
                             "inputType": "string",
-                            "varType": "string",
+                            "varType": ["string"],
                             "defaultInput": "characterEffects/.gif"
                         },
                         {
@@ -94,7 +99,7 @@
                             "idInput": "animation.repeat",
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "inputType": "string",
-                            "varType": "number",
+                            "varType": ["int", "bool"],
                             "defaultInput": 1,
                             "defaultSraj": 1
                         },
@@ -106,7 +111,7 @@
                             "max":1,
                             "step":0.1,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput": 1,
                             "defaultSraj": 1
                             
@@ -116,6 +121,7 @@
                             "idInput": "animation.position",
                             "tool-tip": "Pozycja względem zadeklarowanego wcześniej targetu.",
                             "inputType": "options",
+                            "varType": ["string"],
                             "options": [{"name":"CENTER"}, {"name":"TOP"},{"name":"BOTTOM"}, {"name":"LEFT"},{"name":"RIGHT"}, {"name":"LEFT_HAND"},{"name":"RIGHT_HAND"}],
                             "defaultInput": "CENTER"
                         },
@@ -124,6 +130,7 @@
                             "idInput": "animation.behind",
                             "tool-tip": "Zaznaczenie tej opcji powoduje renderowanie efektu za postacią.",
                             "inputType": "bool",
+                            "varType": ["bool"],
                             "defaultInput": false,
                             "defaultSraj": false
                         },
@@ -135,7 +142,7 @@
                             "min":-64,
                             "max":64,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["int"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -147,7 +154,7 @@
                             "min":-64,
                             "max":64,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["int"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -156,6 +163,7 @@
                             "idInput": "animation.speechBubble",
                             "tool-tip": "Zaznaczenie tej opcji powoduje pojawienie się dymku pod renderowaną grafiką.",
                             "inputType": "bool",
+                            "varType": ["bool"],
                             "defaultInput": false,
                             "defaultSraj": false
                         },
@@ -167,7 +175,7 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -179,7 +187,7 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         }
@@ -199,7 +207,7 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":5,
                             "defaultSraj": "true"
                         },
@@ -208,7 +216,7 @@
                             "idInput": "tint.repeat",
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "inputType": "string",
-                            "varType": "number",
+                            "varType": ["int", "bool"],
                             "defaultInput": 1,
                             "defaultSraj": 1
                         },
@@ -220,7 +228,7 @@
                             "max":100,
                             "step":5,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":60,
                             "defaultSraj": 60
                         },
@@ -232,7 +240,7 @@
                             "min":-64,
                             "max":64,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["int"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -244,7 +252,7 @@
                             "min":-64,
                             "max":64,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["int"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -256,7 +264,7 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -268,7 +276,7 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -286,7 +294,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": "number",
+                                    "varType": ["int"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"random"}]
                                 },
@@ -298,7 +306,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": "number",
+                                    "varType": ["int"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"random"}]
                                 },
@@ -310,7 +318,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": "number",
+                                    "varType": ["int"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"random"}]
                                 },
@@ -322,7 +330,7 @@
                                     "min":0,
                                     "max":1,
                                     "inputType": "number",
-                                    "varType": "number",
+                                    "varType": ["float"],
                                     "defaultInput":1,
                                     "extraOptions": [{"name":"random"}]
                                 }
@@ -342,7 +350,7 @@
                             "idInput": "text.text",
                             "tool-tip": "Tablica słów, które są po kolei wyświetlane nad npc. Oddzielać średnikiem.",
                             "inputType": "string",
-                            "varType": "string",
+                            "varType": ["string"],
                             "defaultInput":[],
                             "inputPlaceholder": "Wartości rozdzielić średnikiem!"
                         },
@@ -354,7 +362,7 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":5,
                             "defaultSraj": 5
                         },
@@ -366,7 +374,7 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":5,
                             "defaultSraj": 5
                         },
@@ -375,7 +383,7 @@
                             "idInput": "text.repeat",
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "inputType": "string",
-                            "varType": "string",
+                            "varType": ["int", "bool"],
                             "defaultInput": 1,
                             "defaultSraj": 1
                         },
@@ -387,7 +395,7 @@
                             "max":100,
                             "step":1,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["int"],
                             "defaultInput":11,
                             "defaultSraj": 11
                         },
@@ -396,7 +404,7 @@
                             "idInput": "text.random",
                             "tool-tip": "Dostępne wartości to: true - powoduje losowanie słów z tablicy text (ilość losowań to długość tablicy text), ONE - losuje tylko jedno słowo z tablicy, false - słowa są wyświetlane po kolei.",
                             "inputType": "string",
-                            "varType": "string",
+                            "varType": ["string", "bool"],
                             "defaultInput": false,
                             "defaultSraj": false
                         },
@@ -408,7 +416,7 @@
                             "min":-64,
                             "max":64,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["int"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -420,7 +428,7 @@
                             "min":-64,
                             "max":64,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["int"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -428,7 +436,7 @@
                             "name": "params.stickMap",
                             "idInput": "text.stickMap",
                             "tool-tip": "Jeżeli text zostanie przypięty do obiektu poruszającego się (np. fakeNpc), to w momencie wyzwolenia słowa, zostanie ono przyklejone do mapy",
-                            "inputType": "bool",
+                            "varType": ["bool"],
                             "defaultInput": false,
                             "defaultSraj": false
                         },
@@ -440,7 +448,7 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -452,7 +460,7 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": "number",
+                            "varType": ["float"],
                             "defaultInput":0,
                             "defaultSraj": 0
                         },
@@ -470,7 +478,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": "number",
+                                    "varType": ["int"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"random"}]
                                 },
@@ -482,7 +490,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": "number",
+                                    "varType": ["int"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"random"}]
                                 },
@@ -494,7 +502,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": "number",
+                                    "varType": ["int"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"random"}]
                                 },
@@ -506,7 +514,7 @@
                                     "min":0,
                                     "max":1,
                                     "inputType": "number",
-                                    "varType": "number",
+                                    "varType": ["float"],
                                     "defaultInput":1,
                                     "extraOptions": [{"name":"random"}]
                                 }

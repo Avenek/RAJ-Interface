@@ -10,6 +10,7 @@
                     "idInput": "kind",
                     "tool-tip": "Możemy zdefiniować jeden z trzech obiektów: ARGUMENT - służy do podania warunku, CONNECTOR - służy do podania operacji logicznej (or - lub, and - i), CONTAINER - elementy zawarte tutaj w liście traktujemy, jakby były zapisane w nawiasie.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"ARGUMENT"}, {"name":"CONNECTOR"}],
                     "defaultInput": "ARGUMENT"
                 },
@@ -18,6 +19,7 @@
                     "idInput": "argument.not",
                     "tool-tip": "Służy do negacji warunku.",
                     "inputType": "bool",
+                    "varType": ["bool"],
                     "defaultInput": false,
                     "defaultSraj": false,
                     "require": {"name": "kind", "value": ["ARGUMENT", "CONTAINER"]}
@@ -27,6 +29,7 @@
                     "idInput": "argument.key",
                     "tool-tip": "Służy do wyboru danego warunku.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"QUEST"}, {"name":"TOWN"}, {"name":"OUTFIT"}, {"name":"PET"}, {"name":"EXIST_OBJ"}, {"name":"EXIST_OBJ_HAVE_OUTFIT"}],
                     "defaultInput": "QUEST",
                     "require": {"name": "kind", "value": ["ARGUMENT"]}
@@ -36,6 +39,7 @@
                     "idInput": "quest.name",
                     "tool-tip": "ACTIVE - quest musi być aktywny, NEVER_OCCUR - quest musi być nierozpoczęty (lub progress pomocniczy >99), FINISH - quest musi być ukończony, NOT_FINISH - quest może być aktywny lub nierozpoczęty, NO_ACTIVE - quest może być nierozpoczęty lub ukończony.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"ACTIVE"}, {"name":"NEVER_OCCUR"}, {"name":"FINISH"}, {"name":"NOT_FINISH"}, {"name":"NO_ACTIVE"}],
                     "defaultInput": "ACTIVE",
                     "require": {"name": "key", "value": ["QUEST"]}
@@ -45,6 +49,7 @@
                     "idInput": "town.name",
                     "tool-tip": "Sraj się wykona, jeżeli wartość klucza będzie jedną z tych zadeklarowanych w tablicy.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"ONE_OF"}],
                     "defaultInput": "ONE_OF",
                     "require": {"name": "key", "value": ["TOWN", "OUTFIT", "PET"]}
@@ -54,6 +59,7 @@
                     "idInput": "existobj.name",
                     "tool-tip": "Sraj się wykona, jeżeli podany obiekt istnieje.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"FAKE_NPC"}, {"name":"NPC"}, {"name":"FLOAT_OBJECT"}],
                     "defaultInput": "FAKE_NPC",
                     "require": {"name": "key", "value": ["EXIST_OBJ"]}
@@ -63,6 +69,7 @@
                     "idInput": "existObjHaveOut.name",
                     "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada daną grafikę.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"FAKE_NPC"}, {"name":"NPC"}],
                     "defaultInput": "FAKE_NPC",
                     "require": {"name": "key", "value": ["EXIST_OBJ_HAVE_OUTFIT"]}
@@ -72,7 +79,7 @@
                     "idInput": "argument.params",
                     "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada składową z tablicy. Rozdzielać średnikiem!",
                     "inputType": "string",
-                    "varType": "number",
+                    "varType": "int",
                     "defaultInput": [],
                     "require": {"name": "kind", "value": ["ARGUMENT"]}
                 },
@@ -81,6 +88,7 @@
                     "idInput": "connector.name",
                     "tool-tip": "Służy do wyboru operacji logicznej: OR - lub, AND - i.",
                     "inputType": "options",
+                    "varType": ["string"],
                     "options": [{"name":"AND"}, {"name":"OR"}],
                     "defaultInput": "AND",
                     "require": {"name": "kind", "value": ["CONNECTOR"]}

@@ -55,7 +55,7 @@ function createObjectConfigurationContainer(config)
             }
           }
         if (property['tool-tip']) {
-          html += addToolTip(property['tool-tip'])
+          html += addToolTip(property)
         }
         html+='</div>'
       }
@@ -63,11 +63,11 @@ function createObjectConfigurationContainer(config)
     return html;
 }
 
-function addToolTip(tip)
+function addToolTip(property)
 {
    return `<div class="tool-tip">
      <i class="tool-tip__icon">i</i>
-     <p class="tool-tip__info">${tip}</p>
+     <p class="tool-tip__info"><b>Typ zmiennej</b>: ${property.varType.join(", ")}<br><b>Wymagania</b>: <br><b>Opis</b>: ${property['tool-tip']}</p>
    </div>`
 }
 
@@ -237,7 +237,7 @@ function handleExtraOptionButtonClick(event){
               keyContainer.jsonConfig = config
               keyContainer.name = "random"
               keyContainer.event = event.target
-              const path = keyContainer.event.previousElementSibling.name
+              const path = keyContainer.event.previousElementSibling.previousElementSibling.name
              if(!getValueFromObject(objectContainer.workingObject, path).hasOwnProperty("getRandom"))
               {
                 keyContainer.workingObject = {"getRandom":{}}
