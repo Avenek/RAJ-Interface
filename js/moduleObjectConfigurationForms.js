@@ -358,5 +358,9 @@ function checkEmptyInputsAndShowErrors(container){
       showErrorIfInputIsEmpty(input);
     }   
   })
+}
 
+function isDataValid(config, input){
+  const configObject = findObjectByProperty(config.properties, input.id, "idInput")
+  return false
 }

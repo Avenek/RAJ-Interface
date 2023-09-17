@@ -12,7 +12,7 @@ function loadModuleObject(index, module)
   fetch('config/modules.json')
     .then(response => response.json())
     .then(config => {
-      const configObject = findObjectByName(config.modules, "characterEffect")
+      const configObject = findObjectByProperty(config.modules, "characterEffect", "name")
       if(configObject.hasList){
         objectContainer.hasList = true
         if(dynamicData.hasOwnProperty(currentModule))

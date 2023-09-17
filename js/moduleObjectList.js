@@ -181,7 +181,7 @@ function removeObjectFromList(event, container){
                         break;
                     case "random":
                         const path = container.event.previousElementSibling.previousElementSibling.name
-                        const value = findObjectByName(objectContainer.jsonConfig.properties, path).defaultInput
+                        const value = findObjectByProperty(objectContainer.jsonConfig.properties, path, "name").defaultInput
                         objectContainer.setObjectKeyByPath(path, value)
                         clearKeyContainers()
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")

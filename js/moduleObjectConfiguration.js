@@ -123,7 +123,7 @@ function changeValueInJsonCheckbox(event, container){
 }
 
 function getValueInGoodType(key, value, container){
-  const configObject = findObjectByName(container.jsonConfig.properties, key)
+  const configObject = findObjectByProperty(container.jsonConfig.properties, key, "name")
   let newValue = value
   if(configObject.varType.includes("bool")){
     if(newValue === "false")
@@ -155,7 +155,7 @@ function getValueInGoodType(key, value, container){
     }
     return newValue
   }
-  
+
   return newValue
 }
 
@@ -247,7 +247,7 @@ function removeDefaultValuesFromJson(data, config, container, prefix = "") {
     else if (typeof value === "object") {
       removeDefaultValuesFromJson(value, config, container, fullKey + ".");
     } else if(config) {
-      foundObject = findObjectByName(config, fullKey)
+      foundObject = findObjectByProperty(config, fullKey, "name")
       if(foundObject && foundObject.defaultSraj === data[key] && foundObject.inputType!=="options")
       {
         container.removeObjectKeyByPath(fullKey)
@@ -257,13 +257,13 @@ function removeDefaultValuesFromJson(data, config, container, prefix = "") {
   updateDynamicDataAndJsonText()
 }
 
-function findObjectByName(properties, targetName) {
+function findObjectByProperty(properties, targetName, property) {
   for (const prop of properties) {
-    if (prop.name === targetName) {
+    if (prop[property] === targetName) {
       return prop;
     }
     if (prop.properties) {
-      const foundProp = findObjectByName(prop.properties, targetName);
+      const foundProp = findObjectByProperty(prop.properties, targetName, property);
       if (foundProp) {
         return foundProp;
       }
@@ -289,5 +289,4 @@ function findObjectByPath(object, path){
       return currentObj[lastKey]
   }
   return currentObj
-
-}
+} 
