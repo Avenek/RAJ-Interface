@@ -21,7 +21,8 @@
                     "tool-tip": "Nazwa identyfikująca efekt. Umożliwia późniejszego jego usunięciu.",
                     "inputType": "string",
                     "varType": ["string"],
-                    "defaultInput": "obiekt-id"
+                    "defaultInput": "obiekt-id",
+                    "validation":[{"forType": "string", "name": "unique"}]
                 },
                 {
                     "name": "windowTarget",
@@ -62,11 +63,12 @@
                             "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
                             "inputType": "number",
                             "min":0,
-                            "max":100000,
+                            "max":500000,
                             "step":1,
                             "varType": ["int"],
                             "defaultInput": 0,
-                            "require": {"name": "target.kind", "value": ["NPC"]}
+                            "require": {"name": "target.kind", "value": ["NPC"]},
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "target.id",
@@ -99,9 +101,12 @@
                             "idInput": "animation.repeat",
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "inputType": "string",
-                            "varType": ["int", "bool"],
+                            "min":1,
+                            "max":100,
+                            "varType": ["int", "boolean"],
                             "defaultInput": 1,
-                            "defaultSraj": 1
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]
                         },
                         {
                             "name": "params.opacity",
@@ -111,9 +116,10 @@
                             "max":1,
                             "step":0.1,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput": 1,
-                            "defaultSraj": 1
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                             
                         },
                         {
@@ -129,8 +135,8 @@
                             "name": "params.behind",
                             "idInput": "animation.behind",
                             "tool-tip": "Zaznaczenie tej opcji powoduje renderowanie efektu za postacią.",
-                            "inputType": "bool",
-                            "varType": ["bool"],
+                            "inputType": "boolean",
+                            "varType": ["boolean"],
                             "defaultInput": false,
                             "defaultSraj": false
                         },
@@ -144,7 +150,8 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.offsetY",
@@ -156,14 +163,15 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.speechBubble",
                             "idInput": "animation.speechBubble",
                             "tool-tip": "Zaznaczenie tej opcji powoduje pojawienie się dymku pod renderowaną grafiką.",
-                            "inputType": "bool",
-                            "varType": ["bool"],
+                            "inputType": "boolean",
+                            "varType": ["boolean"],
                             "defaultInput": false,
                             "defaultSraj": false
                         },
@@ -175,9 +183,10 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.delayAfter",
@@ -187,9 +196,10 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         }
                     ]
                 },
@@ -207,18 +217,20 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput":5,
-                            "defaultSraj": "true"
+                            "defaultSraj": "true",
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.repeat",
                             "idInput": "tint.repeat",
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "inputType": "string",
-                            "varType": ["int", "bool"],
+                            "varType": ["int", "boolean"],
                             "defaultInput": 1,
-                            "defaultSraj": 1
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]
                         },
                         {
                             "name": "tintPercent",
@@ -228,9 +240,10 @@
                             "max":100,
                             "step":5,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["int"],
                             "defaultInput":60,
-                            "defaultSraj": 60
+                            "defaultSraj": 60,
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.offsetX",
@@ -242,7 +255,8 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.offsetY",
@@ -254,7 +268,8 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.delayBefore",
@@ -264,9 +279,10 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.delayAfter",
@@ -276,9 +292,10 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.color",
@@ -296,7 +313,8 @@
                                     "inputType": "number",
                                     "varType": ["int"],
                                     "defaultInput":0,
-                                    "extraOptions": [{"name":"random"}]
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
                                 },
                                 {
                                     "name": "params.color.g",
@@ -308,7 +326,8 @@
                                     "inputType": "number",
                                     "varType": ["int"],
                                     "defaultInput":0,
-                                    "extraOptions": [{"name":"random"}]
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
                                 },
                                 {
                                     "name": "params.color.b",
@@ -320,7 +339,8 @@
                                     "inputType": "number",
                                     "varType": ["int"],
                                     "defaultInput":0,
-                                    "extraOptions": [{"name":"random"}]
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
                                 },
                                 {
                                     "name": "params.color.a",
@@ -330,9 +350,10 @@
                                     "min":0,
                                     "max":1,
                                     "inputType": "number",
-                                    "varType": ["float"],
+                                    "varType": ["float", "int"],
                                     "defaultInput":1,
-                                    "extraOptions": [{"name":"random"}]
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                                 }
                             ]
                         }
@@ -362,9 +383,10 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput":5,
-                            "defaultSraj": 5
+                            "defaultSraj": 5,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.between",
@@ -374,18 +396,20 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput":5,
-                            "defaultSraj": 5
+                            "defaultSraj": 5,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.repeat",
                             "idInput": "text.repeat",
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "inputType": "string",
-                            "varType": ["int", "bool"],
+                            "varType": ["int", "boolean"],
                             "defaultInput": 1,
-                            "defaultSraj": 1
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]
                         },
                         {
                             "name": "params.height",
@@ -397,16 +421,18 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":11,
-                            "defaultSraj": 11
+                            "defaultSraj": 11,
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.random",
                             "idInput": "text.random",
                             "tool-tip": "Dostępne wartości to: true - powoduje losowanie słów z tablicy text (ilość losowań to długość tablicy text), ONE - losuje tylko jedno słowo z tablicy, false - słowa są wyświetlane po kolei.",
                             "inputType": "string",
-                            "varType": ["string", "bool"],
+                            "varType": ["string", "boolean"],
                             "defaultInput": false,
-                            "defaultSraj": false
+                            "defaultSraj": false,
+                            "validation":[{"forType": "string", "name": "equal", "value": "ONE"}]
                         },
                         {
                             "name": "params.offsetX",
@@ -418,7 +444,8 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.offsetY",
@@ -430,13 +457,14 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.stickMap",
                             "idInput": "text.stickMap",
                             "tool-tip": "Jeżeli text zostanie przypięty do obiektu poruszającego się (np. fakeNpc), to w momencie wyzwolenia słowa, zostanie ono przyklejone do mapy",
-                            "varType": ["bool"],
+                            "varType": ["boolean"],
                             "defaultInput": false,
                             "defaultSraj": false
                         },
@@ -448,9 +476,10 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.delayAfter",
@@ -460,9 +489,10 @@
                             "min":0,
                             "max":999,
                             "inputType": "number",
-                            "varType": ["float"],
+                            "varType": ["float", "int"],
                             "defaultInput":0,
-                            "defaultSraj": 0
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
                             "name": "params.color",
@@ -480,7 +510,8 @@
                                     "inputType": "number",
                                     "varType": ["int"],
                                     "defaultInput":0,
-                                    "extraOptions": [{"name":"random"}]
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
                                 },
                                 {
                                     "name": "params.color.g",
@@ -492,7 +523,8 @@
                                     "inputType": "number",
                                     "varType": ["int"],
                                     "defaultInput":0,
-                                    "extraOptions": [{"name":"random"}]
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
                                 },
                                 {
                                     "name": "params.color.b",
@@ -504,7 +536,8 @@
                                     "inputType": "number",
                                     "varType": ["int"],
                                     "defaultInput":0,
-                                    "extraOptions": [{"name":"random"}]
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
                                 },
                                 {
                                     "name": "params.color.a",
@@ -514,9 +547,10 @@
                                     "min":0,
                                     "max":1,
                                     "inputType": "number",
-                                    "varType": ["float"],
+                                    "varType": ["float", "int"],
                                     "defaultInput":1,
-                                    "extraOptions": [{"name":"random"}]
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                                 }
                             ]
                         }

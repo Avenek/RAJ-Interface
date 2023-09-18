@@ -41,7 +41,7 @@ class GetRandom {
   constructor() {
     this.resultType = "int"
     this.start = 0
-    this.end = 0
+    this.end = 1
   }
 }
 

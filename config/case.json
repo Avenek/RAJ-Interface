@@ -79,9 +79,12 @@
                     "idInput": "argument.params",
                     "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada składową z tablicy. Rozdzielać średnikiem!",
                     "inputType": "string",
-                    "varType": "int",
+                    "varType": ["int"],
+                    "min":1,
+                    "max": 15000,
                     "defaultInput": [],
-                    "require": {"name": "kind", "value": ["ARGUMENT"]}
+                    "require": {"name": "kind", "value": ["ARGUMENT"]},
+                    "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
                     "name": "name",

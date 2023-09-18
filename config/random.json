@@ -19,7 +19,8 @@
         "inputType": "number",
         "varType": ["int"],
         "defaultInput": 0,
-        "require": {"name": "getRandom.resultType", "value": ["int"]}
+        "require": {"name": "getRandom.resultType", "value": ["int"]},
+        "validation":[{"forType": "int", "name": "minMax"}, {"forType": "int", "name": "lessThan", "value": "getRandom.end"}]
       },
       {
         "name": "getRandom.start",
@@ -31,7 +32,8 @@
         "inputType": "number",
         "varType": ["float"],
         "defaultInput": 0,
-        "require": {"name": "getRandom.resultType", "value": ["float"]}
+        "require": {"name": "getRandom.resultType", "value": ["float"]},
+        "validation":[{"forType": "float", "name": "minMax"}, {"forType": "float", "name": "lessThan", "value": "getRandom.end"}]
       },
       {
         "name": "getRandom.end",
@@ -43,7 +45,8 @@
         "inputType": "number",
         "varType": ["int"],
         "defaultInput": 1,
-        "require": {"name": "getRandom.resultType", "value": ["int"]}
+        "require": {"name": "getRandom.resultType", "value": ["int"]},
+        "validation":[{"forType": "int", "name": "minMax"}, {"forType": "int", "name": "moreThan", "value": "getRandom.start"}]
       },
       {
         "name": "getRandom.end",
@@ -55,7 +58,8 @@
         "inputType": "number",
         "varType": ["float"],
         "defaultInput": 1,
-        "require": {"name": "getRandom.resultType", "value": ["float"]}
+        "require": {"name": "getRandom.resultType", "value": ["float"]},
+        "validation":[{"forType": "float", "name": "minMax"}, {"forType": "float", "name": "moreThan", "value": "getRandom.start"}]
       },
       {
         "name": "getRandom.options",

@@ -65,6 +65,7 @@ function loadModuleContent()
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
         hightligthsUsedExtraOption(objectContainer)
         checkEmptyInputsAndShowErrors(objectContainer)
+        inputList.forEach(input => isDataValid(objectContainer, input))
     })
     .catch(error => {
     console.error('Błąd pobierania:', error);
@@ -167,28 +168,27 @@ function createModuleDOMEventFromContainer(container){
 
   if (checkboxList) {
     checkboxList.forEach(checkbox => {
-      checkbox.removeEventListener("click", (event) => checkboxClickEvent(checkbox, event, container))
       checkbox.addEventListener("click", (event) => checkboxClickEvent(checkbox, event, container))   
     })
   }
 
   if (inputList) {
     inputList.forEach(input => {
-      input.removeEventListener("input", (event) => inputClickEvent(event, container))
       input.addEventListener("input", (event) => inputClickEvent(event, container))
+      input.addEventListener("blur", (event) => {
+        showErrorIfInputIsEmpty(event.target)
+        isDataValid(container, event.target) })
       })
     }
 
   if (keyHeaders) {
     keyHeaders.forEach(header => {
-      header.removeEventListener("click", event => collapseObjectKeys(event))
       header.addEventListener("click", event => collapseObjectKeys(event))
     })
   }
 
   if (extraOptionsButtons) {
   extraOptionsButtons.forEach(button => {
-    button.removeEventListener("click", (event) => handleExtraOptionButtonClick(event))
     button.addEventListener("click", (event) => handleExtraOptionButtonClick(event))
     })
   }
@@ -196,11 +196,9 @@ function createModuleDOMEventFromContainer(container){
 
 function createModuleDOMEventFromObjectList(container){
   if (addObjectPlus) {
-    addObjectPlus.removeEventListener("click", () => addObjectToList(container))
     addObjectPlus.addEventListener("click", () => addObjectToList(container))
   }
   if(deleteObjectButtons){
-    deleteObjectButtons.forEach(button => button.removeEventListener("click", (event) => removeObjectFromList(event, container)))
     deleteObjectButtons.forEach(button => button.addEventListener("click", (event) => removeObjectFromList(event, container)))
   }
 }
@@ -216,7 +214,6 @@ function inputClickEvent(event, container){
   resizeIfIsTooLongValue(event)
   updateObjectListText(container)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
-  showErrorIfInputIsEmpty(event.target)
 }
 
 

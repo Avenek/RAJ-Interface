@@ -18,10 +18,10 @@ function createObjectConfigurationContainer(config)
           } 
         else if (property.inputType === 'string') {
           const placeholder = property.inputPlaceholder || ""
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}" placeholder="${placeholder}"><span class="error-info hide">Pole jest obligatoryjne i nie może być puste!</span>`;
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}" placeholder="${placeholder}"><span class="error-info hide"></span>`;
         }
         else if(property.inputType === 'number'){
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}"><span class="error-info hide">Pole jest obligatoryjne i nie może być puste!</span>`;
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
         }
         else if(property.inputType === 'bool'){
           const checked =  property.defaultInput ? "checkbox-checked" : ""
@@ -218,6 +218,7 @@ function handleExtraOptionButtonClick(event){
             keyContainer.hideAndRevealRequiredItems() 
             checkEmptyInputsAndShowErrors(keyContainer)
             saveJsonState()   
+            inputList.forEach(input => isDataValid(keyContainer, input))   
             
         })
         .catch(error => {
@@ -254,7 +255,8 @@ function handleExtraOptionButtonClick(event){
               fillFormFields(keyContainer.workingObject);
               keyContainer.hideAndRevealRequiredItems() 
               checkEmptyInputsAndShowErrors(keyContainer)
-              saveJsonState()   
+              saveJsonState()
+              inputList.forEach(input => isDataValid(keyContainer, input))   
           })
           .catch(error => {
           console.error('Błąd pobierania:', error);
@@ -336,31 +338,4 @@ function  hightligthsUsedExtraOption(container){
         break;
     }
   })
-}
-
-function showErrorIfInputIsEmpty(targetInput){
-  if(targetInput.value===""){
-    targetInput.classList.add("error")
-    targetInput.nextElementSibling.classList.remove("hide")
-  }
-  else{
-    targetInput.classList.remove("error")
-    targetInput.nextElementSibling.classList.add("hide")
-  }
-
-}
-
-function checkEmptyInputsAndShowErrors(container){
-  const inputContainer = document.querySelector(`.${container.className}`)
-  const inputList = inputContainer.querySelectorAll('input[type="number"], input[type="text"]')
-  inputList.forEach(input => {
-    if(!input.parentElement.classList.contains("hide") && !input.parentElement.parentElement.classList.contains("hide")){
-      showErrorIfInputIsEmpty(input);
-    }   
-  })
-}
-
-function isDataValid(config, input){
-  const configObject = findObjectByProperty(config.properties, input.id, "idInput")
-  return false
 }

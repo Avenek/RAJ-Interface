@@ -576,7 +576,7 @@ body {
 }
 .error-info {
   display: block;
-  width: 300px;
+  font-weight: bold;
   color: #ff000d; 
   padding: 5px;
   border-radius: 5px; 
