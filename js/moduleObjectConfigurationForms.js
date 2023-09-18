@@ -174,7 +174,7 @@ function handleExtraOptionButtonClick(event){
   const container = document.querySelector(".key-configuration")
   const listContainer = document.querySelector(".object-list-key")
   container.innerHTML = ""
-  listContainer.innerHTML = '<div class="container-title">Menu pomocnicze</div>'
+  listContainer.innerHTML = '<div class="container-title">Menu obiektów</div>'
   event.target.classList.add("extra-option-active")
   event.target.classList.toggle("menu-active")
   if(keyContainer && keyContainer.event && keyContainer.event!== event.target){
@@ -271,7 +271,7 @@ function handleExtraOptionButtonClick(event){
   }
   else{
     container.innerHTML = fullHtml
-    listContainer.innerHTML = '<div class="container-title">Menu pomocnicze</div>'
+    listContainer.innerHTML = '<div class="container-title">Menu obiektów</div>'
   }
 }
 

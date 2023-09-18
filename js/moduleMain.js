@@ -79,13 +79,13 @@ function loadModuleContent()
 }
 
 function createConfigurationMenu() {
-  return `<div class="object-list-container"><div class="container-title">Menu pomocnicze</div></div>`
+  return `<div class="object-list-container"><div class="container-title">Menu obiektów</div></div>`
 }
 
 function createKeyMenu() {
   return `</div><div class="object-key">   
   <div class="object-list-key">
-      <div class="container-title">Menu pomocnicze</div>
+      <div class="container-title">Menu obiektów</div>
   </div>
   <div class="key-configuration"></div>`
 }

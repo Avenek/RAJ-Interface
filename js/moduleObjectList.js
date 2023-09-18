@@ -232,7 +232,7 @@ function clearKeyContainers(){
     const containerKey = document.querySelector(".key-configuration")
     const listContainer = document.querySelector(".object-list-key")
     containerKey.innerHTML = ""
-    listContainer.innerHTML = '<div class="container-title">Menu pomocnicze</div>'
+    listContainer.innerHTML = '<div class="container-title">Menu obiektów</div>'
     if(keyContainer){
         const extraOptionButton = keyContainer.event
         extraOptionButton.classList.remove("extra-option-active")
