@@ -21,7 +21,7 @@ function createObjectConfigurationContainer(config)
           html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}" placeholder="${placeholder}"><span class="error-info hide"></span>`;
         }
         else if(property.inputType === 'number'){
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step==${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
+          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step=${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
         }
         else if(property.inputType === 'bool'){
           const checked =  property.defaultInput ? "checkbox-checked" : ""
@@ -338,4 +338,14 @@ function  hightligthsUsedExtraOption(container){
         break;
     }
   })
+}
+
+function removeActiveExtraOption(event, config){
+  const input = event.target
+  const configObject = findObjectByProperty(config, input.id, "idInput")
+  if(configObject.hasOwnProperty("extraOptions")){
+    const extraOptionButton = input.nextElementSibling.nextElementSibling
+    clearKeyContainers()
+    extraOptionButton.classList.remove("extra-option-active", "menu-active")
+  }
 }

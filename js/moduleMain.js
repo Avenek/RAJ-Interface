@@ -64,8 +64,8 @@ function loadModuleContent()
         objectContainer.hideAndRevealRequiredItems()
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
         hightligthsUsedExtraOption(objectContainer)
-        checkEmptyInputsAndShowErrors(objectContainer)
         inputList.forEach(input => isDataValid(objectContainer, input))
+        checkEmptyInputsAndShowErrors(objectContainer) 
     })
     .catch(error => {
     console.error('Błąd pobierania:', error);
@@ -176,8 +176,9 @@ function createModuleDOMEventFromContainer(container){
     inputList.forEach(input => {
       input.addEventListener("input", (event) => inputClickEvent(event, container))
       input.addEventListener("blur", (event) => {
+        isDataValid(container, event.target) 
         showErrorIfInputIsEmpty(event.target)
-        isDataValid(container, event.target) })
+        })
       })
     }
 
@@ -214,6 +215,7 @@ function inputClickEvent(event, container){
   resizeIfIsTooLongValue(event)
   updateObjectListText(container)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
+  removeActiveExtraOption(event, container.jsonConfig.properties)
 }
 
 
