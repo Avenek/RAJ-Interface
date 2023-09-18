@@ -65,9 +65,68 @@ function createObjectConfigurationContainer(config)
 
 function addToolTip(property)
 {
+  let requirementsInfo = "";
+  let message
+  if(property.hasOwnProperty('validation')){
+    property['validation'].forEach(valid => {
+      switch(valid.name){
+        case "minMax":
+          message = `Wartość powinna zawierać się w przedziale od ${property.min} do ${property.max}!`
+          if(!requirementsInfo.includes(message)){
+            requirementsInfo += '<br>'+ message
+          }
+          break;
+        case "unique":
+          message = "Wartość tego pola powinna być unikalna i nie może się powtarzać w innych obiektach!"
+           if(!requirementsInfo.includes(message)){
+            requirementsInfo += '<br>'+ message
+          }
+          break;
+        case "notEqual":
+          message = `Wartość tego pola powinna być różna od ${valid.value}!`
+           if(!requirementsInfo.includes(message)){
+            requirementsInfo += '<br>'+ message
+          }
+          break;
+        case "equal":
+          message = `Wartość tego pola powinna być równa ${valid.value}!`
+           if(!requirementsInfo.includes(message)){
+            requirementsInfo += '<br>'+ message
+          }
+          break;
+        case "moreThan":
+          message = `Wartość tego pola powinna być większa od `
+          if(typeof valid.value === "number"){
+            message +=  `wartości ${valid.value}!`
+            }
+           else{
+            message += `wartości klucza ${valid.value}!`
+           }
+           if(!requirementsInfo.includes(message)){
+            requirementsInfo += '<br>'+ message
+          }
+            break;
+        case "lessThan":
+          message = `Wartość tego pola powinna być większa od `
+          if(typeof valid.value === "number"){
+            message +=  `wartości ${valid.value}!`
+           }
+         else{
+             message += `wartości klucza ${valid.value}!`
+           }
+          if(!requirementsInfo.includes(message)){
+            requirementsInfo += '<br>'+ message
+          }
+            break;
+        default:
+          break;
+     }
+    })
+  }
+
    return `<div class="tool-tip">
      <i class="tool-tip__icon">i</i>
-     <p class="tool-tip__info"><b>Typ zmiennej</b>: ${property.varType.join(", ")}<br><b>Wymagania</b>: <br><b>Opis</b>: ${property['tool-tip']}</p>
+     <p class="tool-tip__info"><b>Typ zmiennej</b>: ${property.varType.join(", ")}<br><b>Wymagania</b>: ${requirementsInfo.substring(4) || "brak"}<br><b>Opis</b>: ${property['tool-tip']}</p>
    </div>`
 }
 
