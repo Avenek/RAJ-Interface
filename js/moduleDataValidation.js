@@ -130,7 +130,10 @@ function showError(targetInput, message){
         hideError(input)
       }
     }
-
+    else if(inputValue.length===0){
+      errorMessage = "Pole jest obligatoryjne i nie może być puste!"
+        showError(input, errorMessage)
+    }
     else if(valueType !== "object"){
         errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${configObject.varType.join(", ")}`
         showError(input, errorMessage)
@@ -198,3 +201,8 @@ function showError(targetInput, message){
         return value < validValue
     }
   }
+
+  function add(a, b) {
+    return a + b;
+  }
+  
