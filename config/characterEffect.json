@@ -228,6 +228,8 @@
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "inputType": "string",
                             "varType": ["int", "boolean"],
+                            "min":1,
+                            "max":100,
                             "defaultInput": 1,
                             "defaultSraj": 1,
                             "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]
@@ -407,6 +409,8 @@
                             "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
                             "inputType": "string",
                             "varType": ["int", "boolean"],
+                            "min":1,
+                            "max":100,
                             "defaultInput": 1,
                             "defaultSraj": 1,
                             "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]

@@ -63,9 +63,9 @@ function loadModuleContent()
         fillFormFields(objectContainer.workingObject);
         objectContainer.hideAndRevealRequiredItems()
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
-        hightligthsUsedExtraOption(objectContainer)
+        hightligthsUsedExtraOption(objectContainer) 
         inputList.forEach(input => isDataValid(objectContainer, input))
-        checkEmptyInputsAndShowErrors(objectContainer) 
+
     })
     .catch(error => {
     console.error('Błąd pobierania:', error);
@@ -177,7 +177,6 @@ function createModuleDOMEventFromContainer(container){
       input.addEventListener("input", (event) => inputClickEvent(event, container))
       input.addEventListener("blur", (event) => {
         isDataValid(container, event.target) 
-        showErrorIfInputIsEmpty(event.target)
         })
       })
     }

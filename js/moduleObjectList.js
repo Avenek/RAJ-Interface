@@ -165,8 +165,9 @@ function removeObjectFromList(event, container){
             localStorage.setItem("index", 0)
             const listContainer = document.querySelector(`.${container.listClassName}`)
             const elements = listContainer.querySelectorAll(".object-list-element")
-            if(elements.length>1){
-                elements[0].classList.add("radio-checked")
+            console.log(elements);
+            if(elements.length>=1){
+                elements[1].classList.add("radio-checked")
                 container.workingObject = container.list[0]
                 fillFormFields(container.workingObject)
                 container.hideAndRevealRequiredItems()

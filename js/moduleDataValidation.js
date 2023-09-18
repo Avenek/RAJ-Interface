@@ -37,13 +37,23 @@ function showError(targetInput, message){
     if(!configObject.hasOwnProperty("validation")){
       return
     }
-    const inputValue = getValueFromObject(container.workingObject, input.name)
-    let valueType = checkValueType(inputValue)
+    const valuesFromInput = []
+    let inputValue = getValueInGoodType(input.name, input.value, container)
+    input.value = inputValue
+    if(Array.isArray(inputValue)){
+      valuesFromInput = inputValue
+    }
+    else{
+      valuesFromInput.push(inputValue)
+    }
+    valuesFromInput.forEach(value => {
+      inputValue = value
+      let valueType = checkValueType(inputValue)
     if(configObject.varType.includes(valueType) && valueType !== "object"){
+      let isValid = true;
+      let errorMessage;
       for(const valid of configObject.validation){
         if(valid.forType === valueType){
-          let isValid = true;
-          let errorMessage;
           switch(valid.name){
             case "minMax":
               isValid = minMaxValid(configObject, inputValue)
@@ -98,26 +108,34 @@ function showError(targetInput, message){
           } 
           if(!isValid){
             showError(input, errorMessage)
+            break;
+          }
+          else if(inputValue === ""){
+            errorMessage = "Pole jest obligatoryjne i nie może być puste!"
+            showError(input, errorMessage)
           }
           else{
             hideError(input)
           }
         } 
       }
+      if(!isValid){
+        showError(input, errorMessage)
+      }
+      else if(inputValue === ""){
+        errorMessage = "Pole jest obligatoryjne i nie może być puste!"
+        showError(input, errorMessage)
+      }
+      else{
+        hideError(input)
+      }
     }
-    else if(Array.isArray(inputValue)){
-        for(let i = 0 ; i< inputValue.length ; i ++){
-            if(!configObject.varType.includes(checkValueType(inputValue[i]))){
-                errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${configObject.varType.join(", ")}`
-                showError(input, errorMessage)
-            }
-        }
-       
-    }
+
     else if(valueType !== "object"){
         errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${configObject.varType.join(", ")}`
         showError(input, errorMessage)
     }
+    })
   }
   
   function checkValueType(value){

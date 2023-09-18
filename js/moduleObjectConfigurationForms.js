@@ -83,13 +83,13 @@ function addToolTip(property)
           }
           break;
         case "notEqual":
-          message = `Wartość tego pola powinna być różna od ${valid.value}!`
+          message = `Wartość tego pola dla typu ${valid.forType} powinna być różna od ${valid.value}!`
            if(!requirementsInfo.includes(message)){
             requirementsInfo += '<br>'+ message
           }
           break;
         case "equal":
-          message = `Wartość tego pola powinna być równa ${valid.value}!`
+          message = `Wartość tego pola dla typu ${valid.forType} powinna być równa ${valid.value}!`
            if(!requirementsInfo.includes(message)){
             requirementsInfo += '<br>'+ message
           }
@@ -275,7 +275,6 @@ function handleExtraOptionButtonClick(event){
             updateDynamicDataAndJsonText()
             fillFormFields(keyContainer.workingObject);
             keyContainer.hideAndRevealRequiredItems() 
-            checkEmptyInputsAndShowErrors(keyContainer)
             saveJsonState()   
             inputList.forEach(input => isDataValid(keyContainer, input))   
             
@@ -313,7 +312,6 @@ function handleExtraOptionButtonClick(event){
               updateDynamicDataAndJsonText()
               fillFormFields(keyContainer.workingObject);
               keyContainer.hideAndRevealRequiredItems() 
-              checkEmptyInputsAndShowErrors(keyContainer)
               saveJsonState()
               inputList.forEach(input => isDataValid(keyContainer, input))   
           })
