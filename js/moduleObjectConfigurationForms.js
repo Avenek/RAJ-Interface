@@ -21,11 +21,19 @@ function createObjectConfigurationContainer(config)
           html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}" placeholder="${placeholder}"><span class="error-info hide"></span>`;
         }
         else if(property.inputType === 'number'){
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step=${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
+          if(property.defaultInput === ""){
+            html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step=${property.step} min=${property.min} max=${property.max} value id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
+          }
+          else{
+            html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step=${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
+          }
         }
-        else if(property.inputType === 'bool'){
+        else if(property.inputType === 'boolean'){
           const checked =  property.defaultInput ? "checkbox-checked" : ""
           html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.idInput}" name="${property.name}" class="hide"></label>`;
+        }
+        else if(property.inputType === 'empty'){
+          html += `<div class="key-value"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span>`;
         }
         else if(property.inputType === 'table'){
           html += `<div class="key-value"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span>`;
@@ -95,7 +103,12 @@ function addToolTip(property)
           }
           break;
         case "equal":
-          message = `Wartość tego pola dla typu ${valid.forType} powinna być równa ${valid.value}!`
+          if(valid.value === ""){
+            message = `Wartość tego pola dla typu ${valid.forType} powinna być pusta!`
+          }
+          else{
+            message = `Wartość tego pola dla typu ${valid.forType} powinna być równa ${valid.value}!`
+          }
            if(!requirementsInfo.includes(message)){
             requirementsInfo += '<br>'+ message
           }
@@ -250,7 +263,7 @@ function handleExtraOptionButtonClick(event){
   {
     switch(event.target.textContent)
     {
-      case "CASE":
+      case "case":
         fetch(`config/case.json`)
         .then(response => response.json())
         .then(config => {
@@ -289,7 +302,7 @@ function handleExtraOptionButtonClick(event){
         console.error('Błąd pobierania:', error);
         })
         break;
-        case "RANDOM":
+        case "random":
           fetch(`config/random.json`)
           .then(response => response.json())
           .then(config => {
@@ -325,7 +338,43 @@ function handleExtraOptionButtonClick(event){
           console.error('Błąd pobierania:', error);
           })
           break;
-
+          case "behavior":
+            fetch(`config/${currentModule+"Behavior"}.json`)
+            .then(response => response.json())
+            .then(config => {
+                fullHtml += createObjectConfigurationContainer(config) 
+                container.innerHTML = fullHtml
+                keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "behavior")
+                keyContainer.requiredItems = findReuqiredItems(config)
+                keyContainer.hasList = true
+                keyContainer.jsonConfig = config
+                keyContainer.name = "behavior"
+                keyContainer.event = event.target
+                console.log(objectContainer);
+                if(objectContainer.workingObject["behavior"].list.length === 0)
+                {
+                  keyContainer.workingObject = new FakeNpcBehavior()
+ 
+                  objectContainer.workingObject["behavior"].list.push(keyContainer.workingObject)
+                }
+                else{
+                  keyContainer.workingObject = objectContainer.workingObject["behavior"].list[0]
+                }
+                keyContainer.list = objectContainer.workingObject["behavior"].list
+                keyContainer.createObjectList()
+                getModuleElements(container, listContainer)
+                createModuleDOMEvents(keyContainer)
+                updateDynamicDataAndJsonText()
+                fillFormFields(keyContainer.workingObject);
+                keyContainer.hideAndRevealRequiredItems() 
+                saveJsonState()   
+                inputList.forEach(input => isDataValid(keyContainer, input))   
+                
+            })
+            .catch(error => {
+            console.error('Błąd pobierania:', error);
+            })
+            break;
       case "TABLE":
         break;
       default:
@@ -351,6 +400,7 @@ function hideFullForm(container, withPlusButton){
 
 function revealFullForm(container){
   const formToHide = document.querySelector(`.${container.className}`)
+  console.log(formToHide);
   formToHide.firstChild.classList.remove("hide")
   formToHide.firstChild.nextElementSibling.classList.remove("hide")
 }
@@ -362,18 +412,10 @@ function  hightligthsUsedExtraOption(container){
   let object;
   extraOptions.forEach(button =>{
     switch(button.textContent){
-      case "CASE":
+      case "case":
         object = container.workingObject
         path = button.parentElement.firstChild.nextElementSibling.firstChild.name   
-        if(path.indexOf(".")===-1){
-          path = ""
-        }
-        else{
-          path = path.substring(0, path.lastIndexOf("."))
-        }
-        if(path) {
-          object = findObjectByPath(object, path)
-        }
+
         if(object && object.hasOwnProperty("case")){
           button.classList.add("extra-option-active")
         }
@@ -381,7 +423,7 @@ function  hightligthsUsedExtraOption(container){
           button.classList.remove("extra-option-active")
         }
         break;
-      case "RANDOM":
+      case "random":
         object = container.workingObject
         path = button.parentElement.firstChild.nextElementSibling.name
         if(path.indexOf(".")===-1){
@@ -397,6 +439,16 @@ function  hightligthsUsedExtraOption(container){
           button.classList.remove("extra-option-active")
         }
         break;
+        case "behavior":
+          object = container.workingObject
+          path = button.parentElement.firstChild.nextElementSibling.name   
+          if(object && object.hasOwnProperty("behavior")){
+            button.classList.add("extra-option-active")
+          }
+          else{
+            button.classList.remove("extra-option-active")
+          }
+          break;
       default:
         break;
     }

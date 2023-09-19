@@ -66,6 +66,7 @@ class ConfigurationContainer {
           {
             if(item.idInput){
               inputs = findInputsById(item.idInput, this.className)
+              console.log(inputs);
             }
             else{
               inputs = findInputsById(item.name, this.className)
@@ -128,6 +129,7 @@ class ConfigurationContainer {
           case "case":
             ids = this.list.map(item => item.kind);
             break;  
+            break;
             default:
               ids = this.list.map(item => item.id || item.name);
               break;

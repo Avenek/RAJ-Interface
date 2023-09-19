@@ -125,7 +125,6 @@ body {
   display: flex;
 }
 
-
 .single-object-container{
     position: relative;
     display: inline-block;
@@ -137,8 +136,9 @@ body {
     text-align: center;
     position: relative;
     list-style: none;
-    width: 100px;
+    min-width: 100px;
     height: 30px;
+    padding: 0px 5px;
     margin: 0px 10px;
     cursor: pointer;
     border-radius: 6px;

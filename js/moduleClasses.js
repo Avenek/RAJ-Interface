@@ -35,11 +35,19 @@ class FakeNpc {
     this.x = 0
     this.y = 0
     this.img = "/npc/test.gif"
-    this.behavior = new FakeNpcBehavior();
+    this.behavior = new Behavior();
   }
 }
 
-class FakeNpcBehavior {
+class FakeNpcBehavior{
+  constructor(){
+    this.name = "WALK"
+    this.x = 0
+    this.y = 0
+  }
+}
+
+class Behavior {
   constructor() {
     this.repeat = 1
     this.list = []
@@ -96,16 +104,23 @@ let objectDict = {
         this.x = 0
         this.y = 0
         this.img = "/npc/test.gif"
-        this.behavior = new FakeNpcBehavior();
+        this.behavior = new Behavior();
       }
     },
     
-    fakeNpcBehavior: class FakeNpcBehavior {
+    behavior: class Behavior {
       constructor() {
         this.repeat = 1
         this.list = []
       }
+    },
+  
+  fakeNpcBehavior: class FakeNpcBehavior{
+    constructor(){
+      this.name = "WALK"
+      this.x = 0
+      this.y = 0
     }
   }
-  
 
+}

@@ -54,6 +54,7 @@ function showError(targetInput, message){
       let errorMessage;
       for(const valid of configObject.validation){
         if(valid.forType === valueType){
+          console.log(valid);
           switch(valid.name){
             case "minMax":
               isValid = minMaxValid(configObject, inputValue)
@@ -122,7 +123,7 @@ function showError(targetInput, message){
       if(!isValid){
         showError(input, errorMessage)
       }
-      else if(inputValue === ""){
+      else if(inputValue === "" && configObject.defaultSraj !== ""){
         errorMessage = "Pole jest obligatoryjne i nie może być puste!"
         showError(input, errorMessage)
       }

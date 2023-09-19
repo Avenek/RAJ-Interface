@@ -47,6 +47,9 @@ function createNewLabelAndRadioButton(objectListContainer, container){
         case "case":
             defaultName = 'ARGUMENT'
           break; 
+        case "behavior":
+            defaultName = 'WALK'
+            break;
         default:
             const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
             let number = radioButtons.length
@@ -105,8 +108,18 @@ function removeCurrentPlusButton(objectListContainer){
 
 function addObjectToJson(container, id)
 {
-    const moduleName = container.name
-    container.workingObject = new objectDict[moduleName](id);
+    let moduleName
+    if(container.name === "behavior"){
+      moduleName = currentModule+"Behavior"
+      container.workingObject = new objectDict[moduleName]();
+      moduleName = "behavior"
+    }
+    else{
+       moduleName = container.name
+       container.workingObject = new objectDict[moduleName](id);
+    }
+    
+    let index
     switch(moduleName){
         case "case":
             if(!objectContainer.workingObject.hasOwnProperty("case")){
@@ -114,9 +127,14 @@ function addObjectToJson(container, id)
                 objectContainer.workingObject["case"].list = []
             }
             objectContainer.workingObject["case"].list.push(container.workingObject)
-            const index = findObjectIndexOnList(id, container)
+            index = findObjectIndexOnList(id, container)
             container.currentIndex = index
             break;
+         case "behavior":
+            objectContainer.workingObject["behavior"].list.push(container.workingObject)
+            index = findObjectIndexOnList(id, container)
+            container.currentIndex = index
+            break;    
         default:
             if(objectContainer.hasList) {
                 if(!dynamicData.hasOwnProperty(currentModule))
@@ -152,6 +170,9 @@ function removeObjectFromList(event, container){
             case "case":
                 removeObjectFromJson(objectId, objectContainer.workingObject.case.list, container)
                 break;
+            case "behavior":
+                removeObjectFromJson(objectId, objectContainer.workingObject.behavior.list, container)
+                break;
             case "random":
                 break;
             default:
@@ -165,7 +186,6 @@ function removeObjectFromList(event, container){
             localStorage.setItem("index", 0)
             const listContainer = document.querySelector(`.${container.listClassName}`)
             const elements = listContainer.querySelectorAll(".object-list-element")
-            console.log(elements);
             if(elements.length>1){
                 elements[1].classList.add("radio-checked")
                 container.workingObject = container.list[0]
@@ -177,6 +197,10 @@ function removeObjectFromList(event, container){
                 switch(container.name){
                     case "case":
                         objectContainer.removeObjectKeyByPath("case")
+                        hideFullForm(container, true)
+                        keyContainer.event.classList.remove("extra-option-active", "menu-active")
+                        break;
+                    case "behavior":
                         hideFullForm(container, true)
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;
@@ -265,11 +289,15 @@ function setupRadioButtonsObjectList(radioButtons, container) {
   {
     const objectListContainer = document.querySelector(`.${container.listClassName}`)
     const checkedRadioButton = objectListContainer.querySelector('label.radio-checked > input[type="radio"]');
-    if(container === objectContainer)
-    {
-        checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["id"] || container.workingObject["name"]
-    }
-    else if(container.hasList){
-        checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["kind"]
+    switch(container.name === "case"){
+        case "case":
+            checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["kind"]
+            break;
+        case "behavior":
+            checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["name"]
+            break;
+        default:
+            checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["id"] || container.workingObject["name"]
+            break;
     }
 }
