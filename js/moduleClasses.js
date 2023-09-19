@@ -1,6 +1,6 @@
 class CharacterEffect {
   constructor(id) {
-    this.action = "CREATE";
+    this.action = "CREATE_IF_NOT_EXIST";
     this.id = id
     this.windowTarget = "MAP"
     this.target = new Target();
@@ -28,6 +28,24 @@ class AnimationParams {
   }
 }
 
+class FakeNpc {
+  constructor(id) {
+    this.action = "CREATE_IF_NOT_EXIST";
+    this.id = id
+    this.x = 0
+    this.y = 0
+    this.img = "/npc/test.gif"
+    this.behavior = new FakeNpcBehavior();
+  }
+}
+
+class FakeNpcBehavior {
+  constructor() {
+    this.repeat = 1
+    this.list = []
+  }
+}
+
 class Case {
   constructor() {
     this.kind = "ARGUMENT";
@@ -46,26 +64,48 @@ class GetRandom {
 }
 
 
-let objectDict = {
-characterEffect : class CharacterEffect {
-    constructor(id) {
-      this.action = "CREATE";
-      this.id = id
-      this.windowTarget = "MAP"
-      this.target = new Target();
-      this.effect = "ANIMATION";
-      this.params = new AnimationParams();
-    }
-  },
 
-  case : class Case {
+
+
+
+let objectDict = {
+  characterEffect : class CharacterEffect {
+      constructor(id) {
+        this.action = "CREATE_IF_NOT_EXIST";
+        this.id = id
+        this.windowTarget = "MAP"
+        this.target = new Target();
+        this.effect = "ANIMATION";
+        this.params = new AnimationParams();
+      }
+    },
+  
+    case : class Case {
+        constructor() {
+          this.kind = "ARGUMENT";
+          this.key = "QUEST"
+          this.name = "ACTIVE"
+          this.params = []
+      }
+    },
+
+    fakeNpc: class FakeNpc {
+      constructor(id) {
+        this.action = "CREATE_IF_NOT_EXIST";
+        this.id = id
+        this.x = 0
+        this.y = 0
+        this.img = "/npc/test.gif"
+        this.behavior = new FakeNpcBehavior();
+      }
+    },
+    
+    fakeNpcBehavior: class FakeNpcBehavior {
       constructor() {
-        this.kind = "ARGUMENT";
-        this.key = "QUEST"
-        this.name = "ACTIVE"
-        this.params = []
+        this.repeat = 1
+        this.list = []
+      }
     }
   }
-}
-
+  
 

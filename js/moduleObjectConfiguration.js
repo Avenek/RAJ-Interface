@@ -254,7 +254,7 @@ function removeDefaultValuesFromJson(data, config, container, prefix = "") {
       removeDefaultValuesFromJson(value, config, container, fullKey + ".");
     } else if(config) {
       foundObject = findObjectByProperty(config, fullKey, "name")
-      if(foundObject && foundObject.defaultSraj === data[key] && foundObject.inputType!=="options")
+      if(foundObject && foundObject.defaultSraj === data[key])
       {
         container.removeObjectKeyByPath(fullKey)
       }

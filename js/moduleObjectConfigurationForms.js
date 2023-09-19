@@ -47,11 +47,17 @@ function createObjectConfigurationContainer(config)
               case "random":
                 color = "#FFF01F"
                 break;
+              case "random first index":
+                color = "#CCFF00"
+                break;
+              case "behavior":
+                color = "#0096FF"
+                break;
               default:
-                color= "#CCFF00"
+                color= "#8A2BE2"
                 break
             }
-            html += `<button class="extra-option" style="--clr:${color}"><span>${option.name.toUpperCase()}</span><i></i></button>`;
+            html += `<button class="extra-option" style="--clr:${color}"><span>${option.name}</span><i></i></button>`;
             }
           }
         if (property['tool-tip']) {

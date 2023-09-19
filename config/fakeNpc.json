@@ -1,0 +1,132 @@
+{
+    "properties":[
+        {
+            "name": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "FakeNpc możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE_IF_NOT_EXIST"}, {"name":"REMOVE_IF_EXIST"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE_IF_NOT_EXIST"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca fakeNpc. Umożliwia późniejszego jego usunięciu.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "x",
+                    "idInput": "x",
+                    "tool-tip": "Wartość kordu x, na którym ma się pojawić fakeNpc.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "y",
+                    "idInput": "y",
+                    "tool-tip": "Wartość kordu y, na którym ma się pojawić fakeNpc.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "dir",
+                    "idInput": "dir",
+                    "tool-tip": "Kierunek, w który ma być obrócony fakeNPC w momencie tworzenia.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"N"}, {"name":"E"}, {"name":"S"}, {"name":"W"}],
+                    "defaultInput": "S",
+                    "defaultSraj": "S"
+                },
+                {
+                    "name": "img",
+                    "idInput": "img",
+                    "tool-tip": "Ścieżka do grafiki dla fakeNPC. Grafiki są pobierane z katalogu /postacie.",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": "/npc/test.gif"
+                },
+                {
+                    "name": "speed",
+                    "idInput": "speed",
+                    "tool-tip": "Szybkość chodzenia przez fakeNPC. Gracz porusza się z prędkością 4.9.",
+                    "min":0.1,
+                    "max":10,
+                    "step":0.1,
+                    "inputType": "number",
+                    "varType": ["float"],
+                    "defaultInput": 4.9,
+                    "defaultSraj": 4.9,
+                    "validation":[{"forType": "float", "name": "minMax"}]
+                },
+                {
+                    "name": "ignoreUpdateCollisionAndStartEndPos",
+                    "idInput": "ignoreUpdateCollisionAndStartEndPos",
+                    "tool-tip": "Flaga, która ustawiona na true pozwala ignorować kolizje stworzone przez NPC przy tworzeniu fakeNPC, oraz przy docelowych kordach dla danego zachowania. Używamy jej, jeżeli chcemy zabić danego NPC i od razu stworzyć fakeNPC w jego miejsce.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
+                },
+                {
+                    "name": "instantCreateFadeIn",
+                    "idInput": "instantCreateFadeIn",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że fakeNpc pojawia się natychmiastowo bez efekty wyłaniania się. Stosować głównie, jeżeli tworzymy fakeNPC na kordach, gdzie już stoi dany NPC.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
+                },
+                {
+                    "name": "instantRemoveFadeOut",
+                    "idInput": "instantRemoveFadeOut",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że fakeNpc usuwa się natychmiastowo bez efekty chowania się. Stosować głównie, jeżeli usuwamy fakeNPC na kordach, gdzie już stoi dany NPC.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
+                },
+                {
+                    "name": "behavior",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "behavior.repeat",
+                            "idInput": "behavior.repeat",
+                            "tool-tip": "Ilość powtórzeń całej tablicy zachowań, jeżeli damy wartość true to nieskończoność.",
+                            "inputType": "string",
+                            "varType": ["int", "boolean"],
+                            "min":1,
+                            "max":100,
+                            "defaultInput": 1,
+                            "defaultSraj": 1,
+                            "extraOptions": [{"name":"random first index"}, {"name":"behavior"}],
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -11,18 +11,18 @@
                     "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "options": [{"name":"CREATE_IF_NOT_EXIST"}, {"name":"REMOVE_IF_EXIST"}],
                     "extraOptions": [{"name":"case"}],
-                    "defaultInput": "CREATE"
+                    "defaultInput": "CREATE_IF_NOT_EXIST"
                 },
                 {
                     "name": "id",
                     "idInput": "id",
                     "tool-tip": "Nazwa identyfikująca efekt. Umożliwia późniejszego jego usunięciu.",
                     "inputType": "string",
-                    "varType": ["string"],
+                    "varType": ["string", "int"],
                     "defaultInput": "obiekt-id",
-                    "validation":[{"forType": "string", "name": "unique"}]
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
                 },
                 {
                     "name": "windowTarget",

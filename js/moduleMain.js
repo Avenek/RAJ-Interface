@@ -62,7 +62,7 @@ function loadModuleContent()
         createModuleDOMEvents(objectContainer) 
         fillFormFields(objectContainer.workingObject);
         objectContainer.hideAndRevealRequiredItems()
-        removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties)
+        removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties, objectContainer)
         hightligthsUsedExtraOption(objectContainer) 
         inputList.forEach(input => isDataValid(objectContainer, input))
 
