@@ -23,7 +23,7 @@ class ConfigurationContainer {
         }
         currentObj = currentObj[currentKey];
       }
-    
+
       const lastKey = keys[keys.length - 1];
       if (currentObj && typeof currentObj === 'object' && lastKey in currentObj) {
         if(Object.keys(currentObj).length===1)
@@ -66,7 +66,6 @@ class ConfigurationContainer {
           {
             if(item.idInput){
               inputs = findInputsById(item.idInput, this.className)
-              console.log(inputs);
             }
             else{
               inputs = findInputsById(item.name, this.className)
@@ -129,7 +128,6 @@ class ConfigurationContainer {
           case "case":
             ids = this.list.map(item => item.kind);
             break;  
-            break;
             default:
               ids = this.list.map(item => item.id || item.name);
               break;
@@ -147,7 +145,16 @@ class ConfigurationContainer {
             objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button>'
         }
          else{
-             objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element radio-checked" checked><input type="radio" name="object-list" class="radio-input">${getLastPartOfTheName(this.event.previousElementSibling.previousElementSibling.name)}</label><div class="delete-icon">🗑️</div></div>`;
+          let name
+          try{
+            name = getLastPartOfTheName(this.event.previousElementSibling.previousElementSibling.name)
+          }
+          //Dla Randomfirstindex
+          catch{
+            name = getLastPartOfTheName(this.event.previousElementSibling.textContent)
+            name = name.substring(0, name.length-1)
+          }
+             objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element radio-checked" checked><input type="radio" name="object-list" class="radio-input">${name}</label><div class="delete-icon">🗑️</div></div>`;
         }
       containerList.innerHTML+=objectsContainerHtml 
     }

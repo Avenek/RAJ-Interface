@@ -37,13 +37,14 @@ function showError(targetInput, message){
     if(!configObject.hasOwnProperty("validation")){
       return
     }
-    const valuesFromInput = []
-    let inputValue = getValueInGoodType(input.name, input.value, container)
-    input.value = inputValue
-    if(Array.isArray(inputValue)){
-      valuesFromInput = inputValue
+    let valuesFromInput = []
+    let inputValue
+    if(Array.isArray(getValueFromObject(container.workingObject, input.name))){
+      valuesFromInput = input.value.split(";")
     }
     else{
+      inputValue = getValueInGoodType(input.name, input.value, container)
+      input.value = inputValue
       valuesFromInput.push(inputValue)
     }
     valuesFromInput.forEach(value => {
@@ -54,7 +55,6 @@ function showError(targetInput, message){
       let errorMessage;
       for(const valid of configObject.validation){
         if(valid.forType === valueType){
-          console.log(valid);
           switch(valid.name){
             case "minMax":
               isValid = minMaxValid(configObject, inputValue)
@@ -71,13 +71,13 @@ function showError(targetInput, message){
             case "notEqual":
               isValid = notEqualValid(valid, inputValue)
               if(!isValid){
-                errorMessage = `Wartość tego pola powinna być różna od ${valid.value}!`
+                errorMessage = `Wartość tego pola powinna być różna od ${valid.value.join(", ")}!`
               }
               break;
             case "equal":
               isValid = equalValid(valid, inputValue)
               if(!isValid){
-                errorMessage = `Wartość tego pola powinna być równa ${valid.value}!`
+                errorMessage = `Wartość tego pola powinna być równa ${valid.value.join(", ")}!`
               }
               break;
             case "moreThan":
@@ -123,7 +123,7 @@ function showError(targetInput, message){
       if(!isValid){
         showError(input, errorMessage)
       }
-      else if(inputValue === "" && configObject.defaultSraj !== ""){
+      else if(inputValue === "" && !configObject.canBeEmpty){
         errorMessage = "Pole jest obligatoryjne i nie może być puste!"
         showError(input, errorMessage)
       }
@@ -170,11 +170,11 @@ function showError(targetInput, message){
   }
   
   function notEqualValid(validObject, value){
-    return value !== validObject.value
+    return !validObject.value.includes(value)
   }
   
   function equalValid(validObject, value){
-    return value === validObject.value
+    return validObject.value.includes(value)
   }
 
   function moreThanValid(validObject, value, container){

@@ -66,8 +66,9 @@
         "idInput": "options.resultType",
         "tool-tip": "Tablica opcji do wyboru, mogą mieć wymieszane typy. Oddzielać średnikiem.",
         "inputType": "string",
-        "varType": ["number", "string"],
+        "varType": ["int", "float", "string"],
         "defaultInput":[],
+        "inputPlaceholder": "Wartości rozdzielić średnikiem!",
         "require": {"name": "getRandom.resultType", "value": ["options"]}
         }
     ]

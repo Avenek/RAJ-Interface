@@ -274,7 +274,6 @@ function handleExtraOptionButtonClick(event){
             keyContainer.requiredItems = findReuqiredItems(config)
             keyContainer.hasList = true
             keyContainer.jsonConfig = config
-            keyContainer.name = "case"
             keyContainer.event = event.target
             if(!objectContainer.workingObject["case"])
             {
@@ -313,7 +312,6 @@ function handleExtraOptionButtonClick(event){
               keyContainer.requiredItems = findReuqiredItems(config)
               keyContainer.hasList = false
               keyContainer.jsonConfig = config
-              keyContainer.name = "random"
               keyContainer.event = event.target
               const path = keyContainer.event.previousElementSibling.previousElementSibling.name
              if(!getValueFromObject(objectContainer.workingObject, path).hasOwnProperty("getRandom"))
@@ -348,7 +346,6 @@ function handleExtraOptionButtonClick(event){
                 keyContainer.requiredItems = findReuqiredItems(config)
                 keyContainer.hasList = true
                 keyContainer.jsonConfig = config
-                keyContainer.name = "behavior"
                 keyContainer.event = event.target
                 console.log(objectContainer);
                 if(objectContainer.workingObject["behavior"].list.length === 0)
@@ -375,6 +372,39 @@ function handleExtraOptionButtonClick(event){
             console.error('Błąd pobierania:', error);
             })
             break;
+            case "random first index":
+              fetch(`config/randomFirstIndex.json`)
+              .then(response => response.json())
+              .then(config => {
+                  fullHtml += createObjectConfigurationContainer(config) 
+                  container.innerHTML = fullHtml
+                  keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "randomFirstIndex")
+                  keyContainer.requiredItems = findReuqiredItems(config)
+                  keyContainer.hasList = false
+                  keyContainer.jsonConfig = config
+                  keyContainer.event = event.target
+                  const path = "behavior.randomFirstIndex"
+                 if(!objectContainer.workingObject["behavior"].hasOwnProperty("randomFirstIndex"))
+                  {
+                    keyContainer.workingObject = {"forActions": []}
+                    objectContainer.setObjectKeyByPath(path, keyContainer.workingObject)
+                  }
+                  else{
+                    keyContainer.workingObject = objectContainer.workingObject["behavior"].randomFirstIndex
+                  }
+                  keyContainer.createObjectList()
+                  getModuleElements(container, listContainer)
+                  createModuleDOMEvents(keyContainer)
+                  updateDynamicDataAndJsonText()
+                  fillFormFields(keyContainer.workingObject);
+                  keyContainer.hideAndRevealRequiredItems() 
+                  saveJsonState()
+                  inputList.forEach(input => isDataValid(keyContainer, input))   
+              })
+              .catch(error => {
+              console.error('Błąd pobierania:', error);
+              })
+              break;
       case "TABLE":
         break;
       default:
@@ -414,8 +444,6 @@ function  hightligthsUsedExtraOption(container){
     switch(button.textContent){
       case "case":
         object = container.workingObject
-        path = button.parentElement.firstChild.nextElementSibling.firstChild.name   
-
         if(object && object.hasOwnProperty("case")){
           button.classList.add("extra-option-active")
         }
@@ -440,8 +468,7 @@ function  hightligthsUsedExtraOption(container){
         }
         break;
         case "behavior":
-          object = container.workingObject
-          path = button.parentElement.firstChild.nextElementSibling.name   
+          object = container.workingObject 
           if(object && object.hasOwnProperty("behavior")){
             button.classList.add("extra-option-active")
           }
@@ -449,6 +476,15 @@ function  hightligthsUsedExtraOption(container){
             button.classList.remove("extra-option-active")
           }
           break;
+          case "random first index":
+            object = container.workingObject  
+            if(object && object.behavior.hasOwnProperty("randomFirstIndex")){
+              button.classList.add("extra-option-active")
+            }
+            else{
+              button.classList.remove("extra-option-active")
+            }
+            break;
       default:
         break;
     }

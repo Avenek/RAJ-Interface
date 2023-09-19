@@ -121,7 +121,7 @@
                             "max":100,
                             "defaultInput": 1,
                             "defaultSraj": 1,
-                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
                         },
                         {
                             "name": "behavior.list",

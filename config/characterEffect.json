@@ -106,7 +106,7 @@
                             "varType": ["int", "boolean"],
                             "defaultInput": 1,
                             "defaultSraj": 1,
-                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
                         },
                         {
                             "name": "params.opacity",
@@ -232,7 +232,7 @@
                             "max":100,
                             "defaultInput": 1,
                             "defaultSraj": 1,
-                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
                         },
                         {
                             "name": "tintPercent",
@@ -413,7 +413,7 @@
                             "max":100,
                             "defaultInput": 1,
                             "defaultSraj": 1,
-                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": true}]
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
                         },
                         {
                             "name": "params.height",
@@ -436,7 +436,7 @@
                             "varType": ["string", "boolean"],
                             "defaultInput": false,
                             "defaultSraj": false,
-                            "validation":[{"forType": "string", "name": "equal", "value": "ONE"}]
+                            "validation":[{"forType": "string", "name": "equal", "value": ["ONE"]}]
                         },
                         {
                             "name": "params.offsetX",

@@ -175,6 +175,8 @@ function removeObjectFromList(event, container){
                 break;
             case "random":
                 break;
+            case "randomFirstIndex":
+                break;
             default:
                 removeObjectFromJson(objectId, container.list, container)
                 clearKeyContainers()
@@ -208,6 +210,11 @@ function removeObjectFromList(event, container){
                         const path = container.event.previousElementSibling.previousElementSibling.name
                         const value = findObjectByProperty(objectContainer.jsonConfig.properties, path, "name").defaultInput
                         objectContainer.setObjectKeyByPath(path, value)
+                        clearKeyContainers()
+                        keyContainer.event.classList.remove("extra-option-active", "menu-active")
+                        break;
+                    case "randomFirstIndex":
+                       objectContainer.removeObjectKeyByPath("behavior.randomFirstIndex")
                         clearKeyContainers()
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;
@@ -289,7 +296,8 @@ function setupRadioButtonsObjectList(radioButtons, container) {
   {
     const objectListContainer = document.querySelector(`.${container.listClassName}`)
     const checkedRadioButton = objectListContainer.querySelector('label.radio-checked > input[type="radio"]');
-    switch(container.name === "case"){
+    if(container.hasList){
+    switch(container.name){
         case "case":
             checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["kind"]
             break;
@@ -299,5 +307,6 @@ function setupRadioButtonsObjectList(radioButtons, container) {
         default:
             checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["id"] || container.workingObject["name"]
             break;
-    }
+        }
+    }   
 }

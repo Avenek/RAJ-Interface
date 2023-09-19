@@ -73,9 +73,10 @@
                     "step":0.1,
                     "inputType": "number",
                     "varType": ["float", "string"],
+                    "canBeEmpty": true,
                     "defaultInput": "",
                     "defaultSraj": "",
-                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": ""}],
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
                     "require": {"name": "name", "value": ["WALK"]}
                 },
                 {
