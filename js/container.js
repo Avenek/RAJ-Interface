@@ -107,7 +107,6 @@ function changeName(event, titleDiv, input, oldTitle){
     if (event.key === "Enter" || event.type === "blur") {
         const newValue = input.value.trim();
         const errorInfo = titleDiv.nextElementSibling
-        console.log(storedContainers.containers.find(container => container.title === newValue)===undefined);
         if ((newValue !== "" && storedContainers.containers.find(container => container.title === newValue) ===undefined) || newValue===oldTitle) {
             const changingTitleContainer = storedContainers.containers.find(container => container.title === oldTitle);
             changingTitleContainer.title = newValue

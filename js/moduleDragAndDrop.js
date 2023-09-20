@@ -93,7 +93,6 @@ function dropOnSingleModule(event)
         moduleOnRightSide = draggedModule.nextElementSibling
     } 
     else if(isDroppedOnRightSideLastModule(event, moduleContainers)){
-        console.log(targetModule);
         moduleOnLeftSide = moduleContainers[moduleContainers.length-1]
         moduleOnLeftSide.parentNode.append(draggedModule)
         insertDraggedBeforeGivenModule(targetModule.nextElementSibling)
@@ -115,7 +114,6 @@ function dropOnContainer(event)
         moduleOnRightSide = draggedModule.nextElementSibling
     } 
     else if(isDroppedOnRightSideLastModule(event, moduleContainers)){
-        console.log(targetModule);
         moduleOnLeftSide = moduleContainers[moduleContainers.length-1]
         moduleOnLeftSide.parentNode.append(draggedModule)
         insertDraggedBeforeGivenModule(targetModule.previousElementSibling)

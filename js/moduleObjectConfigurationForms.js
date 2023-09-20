@@ -346,7 +346,6 @@ function handleExtraOptionButtonClick(event){
                 keyContainer.hasList = true
                 keyContainer.jsonConfig = config
                 keyContainer.event = event.target
-                console.log(objectContainer);
                 if(objectContainer.workingObject["behavior"].list.length === 0)
                 {
                   keyContainer.workingObject = new FakeNpcBehavior()
@@ -429,7 +428,6 @@ function hideFullForm(container, withPlusButton){
 
 function revealFullForm(container){
   const formToHide = document.querySelector(`.${container.className}`)
-  console.log(formToHide);
   formToHide.firstChild.classList.remove("hide")
   formToHide.firstChild.nextElementSibling.classList.remove("hide")
 }

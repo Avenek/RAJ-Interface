@@ -20,7 +20,6 @@ function createShadowButton() {
 
 
 function isDroppedBeforeFirstContainer(event, firstModuleRect){
-    console.log(firstModuleRect);
     return (event.pageX < firstModuleRect.left && isOnTheSameHigh(event, firstModuleRect))
 }
 

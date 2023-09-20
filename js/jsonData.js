@@ -6,7 +6,6 @@ jsonText.addEventListener("keyup", () => {
         dynamicData = JSON.parse(jsonText.value)
         jsonText.classList.remove("error-json")
         saveJsonState()
-        console.log("test");
         createSrajModulesMenu(dynamicData);
     }
     catch(error){
