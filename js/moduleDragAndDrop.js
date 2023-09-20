@@ -93,9 +93,10 @@ function dropOnSingleModule(event)
         moduleOnRightSide = draggedModule.nextElementSibling
     } 
     else if(isDroppedOnRightSideLastModule(event, moduleContainers)){
+        console.log(targetModule);
         moduleOnLeftSide = moduleContainers[moduleContainers.length-1]
         moduleOnLeftSide.parentNode.append(draggedModule)
-        insertDraggedBeforeGivenModule(targetModule.previousElementSibling)
+        insertDraggedBeforeGivenModule(targetModule.nextElementSibling)
     }
     else{
         insertDraggedBeforeGivenModule(targetModule.nextElementSibling)
