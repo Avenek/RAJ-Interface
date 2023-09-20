@@ -74,10 +74,10 @@
                     "max":10,
                     "step":0.1,
                     "inputType": "number",
-                    "varType": ["float"],
+                    "varType": ["float", "int"],
                     "defaultInput": 4.9,
                     "defaultSraj": 4.9,
-                    "validation":[{"forType": "float", "name": "minMax"}]
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                 },
                 {
                     "name": "ignoreUpdateCollisionAndStartEndPos",

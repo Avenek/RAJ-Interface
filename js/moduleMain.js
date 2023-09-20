@@ -201,6 +201,17 @@ function createModuleDOMEventFromObjectList(container){
   if(deleteObjectButtons){
     deleteObjectButtons.forEach(button => button.addEventListener("click", (event) => removeObjectFromList(event, container)))
   }
+
+  if(keyContainer && keyContainer.name === "behavior"){
+    const container = document.querySelector('.object-list-key')
+    container.addEventListener("dragend", handleDragEnd);
+    container.addEventListener("drop", handleDrop);
+    const objectListElements = container.querySelectorAll(`.single-object-container`);
+    objectListElements.forEach((objectListElement) => {
+      objectListElement.addEventListener("dragstart", handleDragStart);
+  });
+  document.addEventListener("dragover", handleDragOver);
+  }
 }
 
 function checkboxClickEvent(checkbox, event, container){

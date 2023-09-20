@@ -165,8 +165,7 @@ function isInteger(num) {
 }
 
 
-function changeValueInJson(key, newValue, container)
-{
+function changeValueInJson(key, newValue, container){
   const keys = key.split('.');
   let currentObj = container.workingObject;
   for (let i = 0; i < keys.length - 1; i++) {
@@ -193,6 +192,34 @@ function changeValueInJson(key, newValue, container)
     newValue = getValueInGoodType(key, newValue, container)
     currentObj[lastKey] = newValue;
   }
+  makeKeyOrder(container)
+}
+
+function makeKeyOrder(container){
+  if(container.workingObject.hasOwnProperty("behavior")){
+    moveToLastPlaceInJson(container, "behavior")
+    if(container.workingObject.behavior.hasOwnProperty("list")){
+      moveToLastPlaceInJson(container, "behavior.list")
+    }
+  }
+}
+function moveToLastPlaceInJson(container, path){
+  const keys = path.split('.');
+  let currentObj = container.workingObject;
+
+  for (let i = 0; i < keys.length - 1; i++) {
+    const currentKey = keys[i];
+    if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
+      console.error("Podana ścieżka jest nieprawidłowa. Nie znaleziono podanego klucza. " + path + " " + currentObj);
+      return
+    }
+    currentObj = currentObj[currentKey];
+  }
+    const lastKey = keys[keys.length - 1];
+    currentObj = currentObj[lastKey]
+    const temp = currentObj
+    container.removeObjectKeyByPath(path)
+    container.setObjectKeyByPath(path, temp)
 }
 
 function updateDynamicDataAndJsonText(){

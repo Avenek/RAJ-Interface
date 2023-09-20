@@ -29,7 +29,7 @@ function addObjectToList(container){
 function createObjectContainer(){
     const singleObjectContainer = document.createElement("div");
     singleObjectContainer.className = "single-object-container";
-
+    singleObjectContainer.addEventListener("dragstart", handleDragStart);
     return singleObjectContainer
 }
 

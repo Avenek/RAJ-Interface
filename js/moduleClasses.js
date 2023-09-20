@@ -41,16 +41,16 @@ class FakeNpc {
 
 class FakeNpcBehavior{
   constructor(){
-    this.name = "WALK"
-    this.x = 0
-    this.y = 0
+    this.name = "IDLE"
+    this.duration = 5
+    this.dir = "S"
   }
 }
 
 class Behavior {
   constructor() {
     this.repeat = 1
-    this.list = []
+    this.list = [new(FakeNpcBehavior)]
   }
 }
 

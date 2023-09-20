@@ -30,7 +30,7 @@ class ConfigurationContainer {
         {
           const lastDotIndex = path.lastIndexOf(".");
           const penultimate = path.substring(0, lastDotIndex);
-          removeObjectKeyByPath(penultimate)
+          this.removeObjectKeyByPath(penultimate)
         }
         else{
           delete currentObj[lastKey];
@@ -104,6 +104,7 @@ class ConfigurationContainer {
     }
 
     setObjectKeyByPath(path, value) {
+
       const keys = path.split('.');
       let currentObj = this.workingObject;
     
@@ -140,7 +141,8 @@ class ConfigurationContainer {
             else{
               checkedClass = ""
             }
-            objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="delete-icon">🗑️</div></div>`;
+            const drag = this.name === "behavior" ? "true" : "false"
+            objectsContainerHtml+= `<div draggable=${drag} class="single-object-container" ><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="delete-icon">🗑️</div></div>`;
           });
             objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button>'
         }

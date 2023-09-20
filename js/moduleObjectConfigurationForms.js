@@ -281,7 +281,7 @@ function handleExtraOptionButtonClick(event){
               objectContainer.workingObject["case"].list = []
               keyContainer.workingObject = new Case()
               objectContainer.workingObject["case"].list.push(keyContainer.workingObject)
-             
+              makeKeyOrder(objectContainer)
             }
             else{
               keyContainer.workingObject = objectContainer.workingObject["case"].list[0]
@@ -305,7 +305,6 @@ function handleExtraOptionButtonClick(event){
           fetch(`config/random.json`)
           .then(response => response.json())
           .then(config => {
-              
               fullHtml += createObjectConfigurationContainer(config) 
               container.innerHTML = fullHtml
               keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "random")
@@ -351,7 +350,6 @@ function handleExtraOptionButtonClick(event){
                 if(objectContainer.workingObject["behavior"].list.length === 0)
                 {
                   keyContainer.workingObject = new FakeNpcBehavior()
- 
                   objectContainer.workingObject["behavior"].list.push(keyContainer.workingObject)
                 }
                 else{
@@ -388,6 +386,7 @@ function handleExtraOptionButtonClick(event){
                   {
                     keyContainer.workingObject = {"forActions": []}
                     objectContainer.setObjectKeyByPath(path, keyContainer.workingObject)
+                    makeKeyOrder(objectContainer)
                   }
                   else{
                     keyContainer.workingObject = objectContainer.workingObject["behavior"].randomFirstIndex
@@ -469,7 +468,7 @@ function  hightligthsUsedExtraOption(container){
         break;
         case "behavior":
           object = container.workingObject 
-          if(object && object.hasOwnProperty("behavior")){
+          if(object && object.behavior.list.length>0){
             button.classList.add("extra-option-active")
           }
           else{

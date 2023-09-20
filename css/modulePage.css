@@ -603,6 +603,11 @@ body {
     cursor: pointer;
   }
 
+  .dragging {
+    opacity: 0.5;
+    z-index: 3;
+}
+
 img {
     pointer-events: none;
 }

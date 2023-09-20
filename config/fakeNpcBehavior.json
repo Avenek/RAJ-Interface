@@ -12,7 +12,7 @@
                     "inputType": "options",
                     "varType": ["string"],
                     "options": [{"name":"IDLE"}, {"name":"WALK"}, {"name":"TP"}, {"name":"WALK_START"}, {"name":"TP_START"}, {"name":"WALK_AND_TP_START"}],
-                    "defaultInput": "WALK"
+                    "defaultInput": "IDLE"
                 },
                 {
                     "name": "duration",
