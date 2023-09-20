@@ -102,27 +102,25 @@ body {
     z-index: 2;
 }
 .object-list-container {
-    flex: 1;
     min-height: 75px;
     border: 2px solid #808080;
     border-radius: 5px;
-    padding: 15px 0px 5px 0px;
+    padding: 25px 0px 5px 0px;
     position: relative;
     background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
     align-items: center;
-    display: flex;
+    display: inline-block;
 }
 
 .object-list-key {
-  flex: 1;
   min-height: 75px;
   border: 2px solid #808080;
   border-radius: 5px;
-  padding: 15px 0px 5px 0px;
+  padding: 25px 0px 5px 0px;
   position: relative;
   background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
   align-items: center;
-  display: flex;
+  display: inline-block;
 }
 
 .single-object-container{
@@ -131,22 +129,21 @@ body {
 }
 
 .object-list-element{
-    display: flex;
+    top: 5px;
+    display: inline-block;
     color: white;
     text-align: center;
     position: relative;
     list-style: none;
-    min-width: 100px;
+    min-width: 80px;
     height: 30px;
     padding: 0px 5px;
-    margin: 0px 10px;
+    margin: 5px 10px 25px 10px;
     cursor: pointer;
     border-radius: 6px;
     border: #808080 solid 2px;
     background-color: rgb(0, 0, 0);
-    background-image: none;
-    justify-content: center;
-    align-items: center;
+    line-height: 27px;
 }
 
 .object-configuration  {
@@ -585,17 +582,19 @@ body {
 }
 
 .plus-circle {
+  top:5px;
     position: relative;
     width: 30px;
     height: 30px;
     background-color: #7fdb34cc;
     border-radius: 50%;
-    margin-left: 23px;
+    margin-left: 13px;
     color: white;
     font-size: 20px;
     text-align: center;
-    display: flex;
-    justify-content: center;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 30px;
   }
 
   .plus-circle:hover {
@@ -637,6 +636,7 @@ ul {
 }
 
 .delete-icon {
+    top: 45px;
     width: 60px;
     display: none;
     text-align: center;

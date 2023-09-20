@@ -144,7 +144,7 @@ class ConfigurationContainer {
             const drag = this.name === "behavior" ? "true" : "false"
             objectsContainerHtml+= `<div draggable=${drag} class="single-object-container" ><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="delete-icon">🗑️</div></div>`;
           });
-            objectsContainerHtml += '<button class="plus-circle add-object"><i class="fas fa-plus"></i></button>'
+            objectsContainerHtml += '<div class="plus-circle add-object"><span class="fas fa-plus"></span></div>'
         }
          else{
           let name

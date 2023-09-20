@@ -80,7 +80,6 @@ function dropOnEmptyArea(event){
 
 function insertDraggedBeforeGivenModule(moduleOnRightSide){
         moduleOnRightSide.parentNode.insertBefore(draggedModule, moduleOnRightSide)
-        draggedModule.insertAdjacentHTML('afterend', '\n');
 }
 
 function dropOnSingleModule(event)
@@ -96,7 +95,7 @@ function dropOnSingleModule(event)
     else if(isDroppedOnRightSideLastModule(event, moduleContainers)){
         moduleOnLeftSide = moduleContainers[moduleContainers.length-1]
         moduleOnLeftSide.parentNode.append(draggedModule)
-        insertDraggedBeforeGivenModule(targetModule.nextElementSibling)
+        insertDraggedBeforeGivenModule(targetModule.previousElementSibling)
     }
     else{
         insertDraggedBeforeGivenModule(targetModule.nextElementSibling)
@@ -115,9 +114,10 @@ function dropOnContainer(event)
         moduleOnRightSide = draggedModule.nextElementSibling
     } 
     else if(isDroppedOnRightSideLastModule(event, moduleContainers)){
+        console.log(targetModule);
         moduleOnLeftSide = moduleContainers[moduleContainers.length-1]
         moduleOnLeftSide.parentNode.append(draggedModule)
-        insertDraggedBeforeGivenModule(targetModule.nextElementSibling)
+        insertDraggedBeforeGivenModule(targetModule.previousElementSibling)
     }
     else{
         insertDraggedBeforeGivenModule(targetModule.nextElementSibling)
@@ -126,7 +126,6 @@ function dropOnContainer(event)
 }
 
 function isDroppedOnLeftSide(event){
-    console.log(event.target);
     return event.pageX < event.target.getBoundingClientRect().left + event.target.clientWidth / 2
 }
 

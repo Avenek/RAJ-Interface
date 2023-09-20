@@ -1,6 +1,6 @@
 function addObjectToList(container){
     const objectListContainer = document.querySelector(`.${container.listClassName}`)
-    const singleObjectContainer = createObjectContainer()
+    const singleObjectContainer = createObjectContainer(container)
     const deleteButton = createNewDeleteButton(container)
     const labelAndRadioButton = createNewLabelAndRadioButton(objectListContainer, container)
     let plusButton
@@ -26,10 +26,13 @@ function addObjectToList(container){
     revealFullForm(container)
 }
 
-function createObjectContainer(){
+function createObjectContainer(container){
     const singleObjectContainer = document.createElement("div");
     singleObjectContainer.className = "single-object-container";
-    singleObjectContainer.addEventListener("dragstart", handleDragStart);
+    if(container.name === "behavior"){
+        singleObjectContainer.addEventListener("dragstart", handleDragStart);
+        singleObjectContainer.draggable = true
+    }
     return singleObjectContainer
 }
 
@@ -68,9 +71,9 @@ function createNewLabelAndRadioButton(objectListContainer, container){
 }
 
 function createNewPlusButton(container) {
-    const addButton = document.createElement("button");
+    const addButton = document.createElement("div");
     addButton.className = "plus-circle add-object";
-    const plusIcon = document.createElement("i");
+    const plusIcon = document.createElement("span");
     plusIcon.className = "fas fa-plus";
     addButton.appendChild(plusIcon);
     addButton.removeEventListener("click", () => addObjectToList(container))
