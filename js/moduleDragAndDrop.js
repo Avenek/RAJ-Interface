@@ -152,6 +152,7 @@ function changeInBehaviorList()
     const list = objectContainer.workingObject.behavior.list
     const [movedItem] = list.splice(startIndex, 1);
     list.splice(endIndex, 0, movedItem);
+    keyContainer.currentIndex = endIndex
     updateDynamicDataAndJsonText()
 }
 
