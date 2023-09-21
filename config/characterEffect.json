@@ -22,7 +22,7 @@
                     "inputType": "string",
                     "varType": ["string", "int"],
                     "defaultInput": "obiekt-id",
-                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
                 },
                 {
                     "name": "windowTarget",

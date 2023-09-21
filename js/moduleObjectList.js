@@ -51,7 +51,7 @@ function createNewLabelAndRadioButton(objectListContainer, container){
             defaultName = 'ARGUMENT'
           break; 
         case "behavior":
-            defaultName = 'WALK'
+            defaultName = 'IDLE'
             break;
         default:
             const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
@@ -113,12 +113,21 @@ function addObjectToJson(container, id)
 {
     let moduleName
     if(container.name === "behavior"){
-      moduleName = currentModule+"Behavior"
+        if(currentModule === "callInstantBehaviorFakeNpc"){
+            moduleName = 'fakeNpcBehavior'
+        }
+        else{
+            moduleName = currentModule+"Behavior"
+        }
+
       container.workingObject = new objectDict[moduleName]();
+
       moduleName = "behavior"
     }
     else{
+
        moduleName = container.name
+
        container.workingObject = new objectDict[moduleName](id);
     }
     
@@ -134,7 +143,12 @@ function addObjectToJson(container, id)
             container.currentIndex = index
             break;
          case "behavior":
-            objectContainer.workingObject["behavior"].list.push(container.workingObject)
+            if(currentModule === "callInstantBehaviorFakeNpc"){
+                objectContainer.workingObject.list.push(container.workingObject)
+            }
+            else{
+                objectContainer.workingObject["behavior"].list.push(container.workingObject)
+            }
             index = findObjectIndexOnList(id, container)
             container.currentIndex = index
             break;    
@@ -174,7 +188,13 @@ function removeObjectFromList(event, container){
                 removeObjectFromJson(objectId, objectContainer.workingObject.case.list, container)
                 break;
             case "behavior":
-                removeObjectFromJson(objectId, objectContainer.workingObject.behavior.list, container)
+                if(currentModule === "callInstantBehaviorFakeNpc"){
+                    removeObjectFromJson(objectId, objectContainer.workingObject.list, container)
+                }
+                else{
+                    removeObjectFromJson(objectId, objectContainer.workingObject.behavior.list, container)
+                }
+                
                 break;
             case "random":
                 break;

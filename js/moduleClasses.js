@@ -54,6 +54,14 @@ class Behavior {
   }
 }
 
+class CallInstantBehaviorFakeNpc{
+  constructor(id) {
+  this.id = id
+  this.repeat = 1
+  this.list = [new(FakeNpcBehavior)]
+  }
+}
+
 class Case {
   constructor() {
     this.kind = "ARGUMENT";
@@ -121,6 +129,13 @@ let objectDict = {
       this.x = 0
       this.y = 0
     }
-  }
+  },
 
+  callInstantBehaviorFakeNpc : class CallInstantBehaviorFakeNpc{
+    constructor(id) {
+    this.id = id
+    this.repeat = 1
+    this.list = [new(FakeNpcBehavior)]
+    }
+  }
 }

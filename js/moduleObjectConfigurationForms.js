@@ -336,7 +336,11 @@ function handleExtraOptionButtonClick(event){
           })
           break;
           case "behavior":
-            fetch(`config/${currentModule+"Behavior"}.json`)
+            let configFile = `${currentModule+"Behavior"}`
+            if(currentModule === "callInstantBehaviorFakeNpc"){
+              configFile = 'fakeNpcBehavior'
+            }
+            fetch(`config/${configFile}.json`)
             .then(response => response.json())
             .then(config => {
                 fullHtml += createObjectConfigurationContainer(config) 
@@ -346,6 +350,17 @@ function handleExtraOptionButtonClick(event){
                 keyContainer.hasList = true
                 keyContainer.jsonConfig = config
                 keyContainer.event = event.target
+                if(currentModule === "callInstantBehaviorFakeNpc"){
+                  if(objectContainer.workingObject.list.length === 0){
+                  keyContainer.workingObject = new FakeNpcBehavior()
+                  objectContainer.workingObject.list.push(keyContainer.workingObject)
+                }
+                else{
+                  keyContainer.workingObject = objectContainer.workingObject.list[0]
+                }
+                keyContainer.list = objectContainer.workingObject.list
+                }
+                else{
                 if(objectContainer.workingObject["behavior"].list.length === 0)
                 {
                   keyContainer.workingObject = new FakeNpcBehavior()
@@ -355,6 +370,8 @@ function handleExtraOptionButtonClick(event){
                   keyContainer.workingObject = objectContainer.workingObject["behavior"].list[0]
                 }
                 keyContainer.list = objectContainer.workingObject["behavior"].list
+              }
+                
                 keyContainer.createObjectList()
                 getModuleElements(container, listContainer)
                 createModuleDOMEvents(keyContainer)
@@ -466,11 +483,21 @@ function  hightligthsUsedExtraOption(container){
         break;
         case "behavior":
           object = container.workingObject 
-          if(object && object.behavior.list.length>0){
-            button.classList.add("extra-option-active")
+          if(currentModule === "callInstantBehaviorFakeNpc"){
+            if(object && object.list.length>0){
+              button.classList.add("extra-option-active")
+            }
+            else{
+              button.classList.remove("extra-option-active")
+            }
           }
           else{
-            button.classList.remove("extra-option-active")
+            if(object && object.behavior.list.length>0){
+              button.classList.add("extra-option-active")
+            }
+            else{
+              button.classList.remove("extra-option-active")
+            }
           }
           break;
           case "random first index":
