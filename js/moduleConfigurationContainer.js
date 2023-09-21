@@ -41,13 +41,22 @@ class ConfigurationContainer {
 
     hideAndRevealRequiredItems()
     {
+      debugger
+      let allConditionsAreMet
       this.requiredItems.forEach(item => {
-        item.require.forEach(require => {
+        allConditionsAreMet = true
         if(item.inputType === "key" || item.inputType === "subkey")
         {
-          const headers = findHeadersByName(item.name, this.className)
-
-          if(!require.value.includes(getValueFromObject(this.workingObject, require.name)))
+          const headers = findHeadersById(item.idInput, this.className)
+          for(let i = 0 ; i < item.require.length ; i++) {
+            debugger
+            if(!item.require[i].value.includes(getValueFromObject(this.workingObject, item.require[i].name))){
+              allConditionsAreMet = false
+              break;
+            }
+          }
+          console.log(item, allConditionsAreMet);
+          if(!allConditionsAreMet)
           {
               headers.forEach(header => {
                 header.parentNode.classList.add("hide")
@@ -63,7 +72,13 @@ class ConfigurationContainer {
         }
         else{
           let inputs
-          if(!require.value.includes(getValueFromObject(this.workingObject, require.name)))
+          for(let i = 0 ; i < item.require.length ; i++) {
+            if(!item.require[i].value.includes(getValueFromObject(this.workingObject, item.require[i].name))){
+              allConditionsAreMet = false
+              break;
+            }
+          }
+          if(!allConditionsAreMet)
           {
             if(item.idInput){
               inputs = findInputsById(item.idInput, this.className)
@@ -76,7 +91,6 @@ class ConfigurationContainer {
               {
                 input.parentNode.parentNode.classList.add("hide")
                 input.checked = false
-                
               }
               else{
                 input.parentNode.classList.add("hide")
@@ -101,7 +115,6 @@ class ConfigurationContainer {
             })
           }
         }
-      })
       })
     }
 

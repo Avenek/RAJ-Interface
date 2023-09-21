@@ -2,6 +2,7 @@
     "properties":[
         {
             "name": "list",
+            "idInput": "list",
             "tool-tip": "",
             "inputType": "key",
             "properties": [

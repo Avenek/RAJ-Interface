@@ -4,7 +4,7 @@ function createObjectConfigurationContainer(config)
     for (const property of config.properties) {
         if(property.inputType === "key" || property.inputType === "subkey" || property.inputType === "subSubkey"){
         html += `<div class="${property.inputType}">
-        <header data-name="${property.name}">${property.name.substring(property.name.indexOf(".")+1).toUpperCase()}</header></div><div class="key-menu">`
+        <header data-name="${property.idInput}">${property.name.substring(property.name.indexOf(".")+1).toUpperCase()}</header></div><div class="key-menu">`
         html+=createObjectConfigurationContainer(property)
         continue;
         }
@@ -218,7 +218,7 @@ function fillFormFields(data, prefix = "") {
     return objectsWithRequire
   }
   
-  function findHeadersByName(name, containerClassName) {
+  function findHeadersById(name, containerClassName) {
     const container = document.querySelector(`.${containerClassName}`)
     return Array.from(container.querySelectorAll('header[data-name="' + name + '"]'));
   }

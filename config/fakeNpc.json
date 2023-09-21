@@ -2,6 +2,7 @@
     "properties":[
         {
             "name": "list",
+            "idInput": "list",
             "tool-tip": "",
             "inputType": "key",
             "properties": [
@@ -136,6 +137,7 @@
                             "idInput": "behavior.list",
                             "inputType": "empty",
                             "varType": ["list"],
+                            "defaultInput": [],
                             "tool-tip": "Za pomocą RANDOM FIRST INDEX można zadeklarować tablicę nazw zachowań - ustawiając filtr tylko na konkretny typ zachowań, spośród której zostanie wylosowana akcja, od której fakeNpc zacznie swoje zachowanie. Jeżeli zostawimy obiekt pusty, to wylosowane zostanie dowolne zachowanie.",
                             "extraOptions": [{"name":"random first index"}, {"name":"behavior"}]
                         }

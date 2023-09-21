@@ -60,27 +60,49 @@ function updateObjectRadioButton(event, container)
 
   const targetKey = event.target.name
   const listToSet = []
+  let allConditionsAreMet
   container.requiredItems.forEach(item => {
-    if(getValueFromObject(item, "require.name") === targetKey)
-    {
-      if(isItemIncluded(item, "require.value", container.workingObject, targetKey)) {
-
+    allConditionsAreMet = true
+    if(item.idInput === "animation.params"){
+      debugger
+    }
+    for(let i = 0 ; i < item.require.length ; i++) {
+      
+      if(getValueFromObject(item.require[i], "name") === targetKey)
+      { 
+        allConditionsAreMet = true
+        if(!(isItemIncluded(item.require[i], "value", container.workingObject, targetKey)))
+        {
+          allConditionsAreMet = false
+          break
+        }
+      }
+      else if((isItemIncluded(item.require[i], "value", container.workingObject, item.require[i].name))){
+        allConditionsAreMet = true
+      }
+      else{
+        allConditionsAreMet = false
+        break;
+      }
+    }
+      if(allConditionsAreMet) {
         if(item.inputType === "subkey"){
-          const paramName = getLastPartOfTheName(item.name)
+          const paramName = item.name
           newObject = createObjectBaseOnConfig(item.properties)
+          listToSet.push({"name": paramName, "value":newObject})
           container.setObjectKeyByPath(paramName, newObject)
           removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
         }
-        else {
-          listToSet.push(item)
+        else if(!listToSet.includes(item) && getValueFromObject(container.workingObject, item.name) === null){
+          listToSet.push({"name": item.name, "value": item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : ''})
+          container.setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '')
         }
       }
       else {
         container.removeObjectKeyByPath(item.name)
       }
-    }
   })
-  listToSet.forEach(item => container.setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : ''))
+  listToSet.forEach(item => container.setObjectKeyByPath(item.name, item.value))
   updateDynamicDataAndJsonText()
 }
 

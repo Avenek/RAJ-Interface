@@ -96,7 +96,8 @@ body {
 }
 
 .single-object-menu {
-    width: 130px;
+    text-align: center;
+    min-width: 130px;
     margin-left: 1px;
     padding: 8px;
     margin-bottom: 5px;

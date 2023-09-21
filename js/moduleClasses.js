@@ -100,6 +100,14 @@ class NpcTarget {
   }
 }
 
+class Weather{
+  constructor(){
+    this.action = "CREATE"
+    this.name = "Rain"
+    this.speedX = 1
+    this.speedY = 1
+  }
+}
 
 
 class Case {
@@ -200,6 +208,15 @@ let objectDict = {
       this.action = "CREATE"
       this.name = "obiekt-0"
       this.target = new NpcTarget()
+    }
+  },
+
+  weather : class Weather{
+    constructor(){
+      this.action = "CREATE"
+      this.name = "Rain"
+      this.speedX = 1
+      this.speedY = 1
     }
   }
 }

@@ -2,6 +2,7 @@
     "properties": [
         {
             "name": "list",
+            "idInput": "list",
             "tool-tip": "",
             "inputType": "key",
             "properties": [
@@ -85,7 +86,7 @@
                     "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
                 {
-                    "name": "animation.params",
+                    "name": "params",
                     "idInput": "animation.params",
                     "tool-tip": "",
                     "inputType": "subkey",
@@ -207,7 +208,8 @@
                     ]
                 },
                 {
-                    "name": "tint.params",
+                    "name": "params",
+                    "idInput": "tint.params",
                     "tool-tip": "",
                     "inputType": "subkey",
                     "require": [{"name": "effect", "value": ["TINT"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
@@ -365,7 +367,7 @@
                     ]
                 },
                 {
-                    "name": "text.params",
+                    "name": "params",
                     "idInput": "text.params",
                     "tool-tip": "",
                     "inputType": "subkey",

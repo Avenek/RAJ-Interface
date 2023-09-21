@@ -56,6 +56,9 @@ function createNewLabelAndRadioButton(objectListContainer, container){
         case "characterHide":
             defaultName = "HERO"
             break;
+        case "weather":
+            defaultName = "Rain"
+            break;
         default:
             const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
             let number = radioButtons.length
