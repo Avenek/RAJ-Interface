@@ -42,11 +42,12 @@ class ConfigurationContainer {
     hideAndRevealRequiredItems()
     {
       this.requiredItems.forEach(item => {
+        item.require.forEach(require => {
         if(item.inputType === "key" || item.inputType === "subkey")
         {
           const headers = findHeadersByName(item.name, this.className)
 
-          if(!item.require.value.includes(getValueFromObject(this.workingObject, item.require.name)))
+          if(!require.value.includes(getValueFromObject(this.workingObject, require.name)))
           {
               headers.forEach(header => {
                 header.parentNode.classList.add("hide")
@@ -62,7 +63,7 @@ class ConfigurationContainer {
         }
         else{
           let inputs
-          if(!item.require.value.includes(getValueFromObject(this.workingObject, item.require.name)))
+          if(!require.value.includes(getValueFromObject(this.workingObject, require.name)))
           {
             if(item.idInput){
               inputs = findInputsById(item.idInput, this.className)
@@ -101,6 +102,7 @@ class ConfigurationContainer {
           }
         }
       })
+      })
     }
 
     setObjectKeyByPath(path, value) {
@@ -126,7 +128,7 @@ class ConfigurationContainer {
       if(this.hasList){
         let ids;
         switch(this.name){
-          case "case":
+          case "case", "characterHide":
             ids = this.list.map(item => item.kind);
             break;  
             default:

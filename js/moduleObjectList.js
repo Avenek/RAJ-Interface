@@ -53,6 +53,9 @@ function createNewLabelAndRadioButton(objectListContainer, container){
         case "behavior":
             defaultName = 'IDLE'
             break;
+        case "characterHide":
+            defaultName = "HERO"
+            break;
         default:
             const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
             let number = radioButtons.length
@@ -321,7 +324,7 @@ function setupRadioButtonsObjectList(radioButtons, container) {
     const checkedRadioButton = objectListContainer.querySelector('label.radio-checked > input[type="radio"]');
     if(container.hasList){
     switch(container.name){
-        case "case":
+        case "case", "characterHide":
             checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["kind"]
             break;
         case "behavior":

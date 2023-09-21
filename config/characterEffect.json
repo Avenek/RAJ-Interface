@@ -31,7 +31,8 @@
                     "inputType": "options",
                     "varType": ["string"],
                     "options": [{"name":"MAP"}],
-                    "defaultInput": "MAP"
+                    "defaultInput": "MAP",
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
                 {
                     "name": "effect",
@@ -40,7 +41,8 @@
                     "inputType": "options",
                     "varType": ["string"],
                     "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}],
-                    "defaultInput": "ANIMATION"
+                    "defaultInput": "ANIMATION",
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
                 {
                     "name": "target",
@@ -67,7 +69,7 @@
                             "step":1,
                             "varType": ["int"],
                             "defaultInput": 0,
-                            "require": {"name": "target.kind", "value": ["NPC"]},
+                            "require": [{"name": "target.kind", "value": ["NPC"]}],
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
@@ -77,16 +79,17 @@
                             "inputType": "string",
                             "varType": ["int", "string"],
                             "defaultInput": "",
-                            "require": {"name": "target.kind", "value": ["FAKE_NPC"]}
+                            "require": [{"name": "target.kind", "value": ["FAKE_NPC"]}]
                         }
-                    ]
+                    ],
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
                 {
                     "name": "animation.params",
                     "idInput": "animation.params",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": {"name": "effect", "value": ["ANIMATION"]},
+                    "require": [{"name": "effect", "value": ["ANIMATION"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
                     "properties": [
                         {
                             "name": "params.gifUrl",
@@ -207,7 +210,7 @@
                     "name": "tint.params",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": {"name": "effect", "value": ["TINT"]},
+                    "require": [{"name": "effect", "value": ["TINT"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
                     "properties": [
                         {
                             "name": "params.duration",
@@ -366,7 +369,7 @@
                     "idInput": "text.params",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": {"name": "effect", "value": ["TEXT"]},
+                    "require": [{"name": "effect", "value": ["TEXT"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
                     "properties": [
                         {
                             "name": "params.text",

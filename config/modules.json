@@ -17,10 +17,6 @@
             "hasList": true
           },
           {
-            "name": "battleEvents",
-            "hasList": false
-          },
-          {
             "name": "emoDefinitions",
             "hasList": true
           },

@@ -62,6 +62,18 @@ class CallInstantBehaviorFakeNpc{
   }
 }
 
+class CharacterHide{
+  constructor() {
+    this.action = "CREATE"
+    this.kind = "HERO"
+    this.showTip = false
+    }
+}
+
+
+
+
+
 class Case {
   constructor() {
     this.kind = "ARGUMENT";
@@ -137,5 +149,13 @@ let objectDict = {
     this.repeat = 1
     this.list = [new(FakeNpcBehavior)]
     }
+  },
+  
+  characterHide: class CharacterHide{
+    constructor() {
+      this.action = "CREATE"
+      this.kind = "HERO"
+      this.showTip = false
+      }
   }
 }

@@ -20,10 +20,6 @@
           "tipInfo": "Umożliwia ukrywanie fakeNPC, HERO, Peta, NPC na mapie, minimapie oraz opcjonalnie ich tipu po najechaniu na chowany obiekt."
         },
         {
-          "name": "BattleEvents",
-          "tipInfo": "Umożliwia podpięcie dowolnego SRAJa do eventów związanych z rozpoczęciem walki i śmiercią potwora. Efekt jest widoczny tylko i wyłącznie dla gracza toczącego walkę."
-        },
-        {
           "name": "EmoDefinitions",
           "tipInfo": "Umożliwia deklarację niestandardowego dymku. Stosować tylko i wyłącznie w połączeniu z emoActions."
         },
