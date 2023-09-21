@@ -45,10 +45,6 @@
           "tipInfo": "Umożliwia nałożenie filtru o danym kolorze na ekran gracza."
         },
         {
-          "name": "Night",
-          "tipInfo": "Umożliwia stworzenie nocy opcjonalnie z cyklem dobowym, mgły czy innego filtru nałożonego na ekran wraz z wyciętymi dziurami oraz światłami."
-        },
-        {
           "name": "ExtraLight",
           "tipInfo": "Umożliwia tworzenie dodatkowych dziur i świateł na mapie, które nie zostały zadeklarowane w kluczu night. To światło można również przypisać do danego npc."
         },

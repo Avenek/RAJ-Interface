@@ -150,6 +150,7 @@ function addToolTip(property)
 }
 
 function fillFormFields(data, prefix = "") {
+  console.log(data);
     for (let key in data) {
       const value = data[key];
       const fullKey = prefix + key;
@@ -434,8 +435,10 @@ function handleExtraOptionButtonClick(event){
 
 function hideFullForm(container, withPlusButton){
   const formToHide = document.querySelector(`.${container.className}`)
-  formToHide.firstChild.classList.add("hide")
-  formToHide.firstChild.nextElementSibling.classList.add("hide")
+  const fornmChildren = formToHide.children
+  Array.from(fornmChildren).forEach(child => {
+    child.classList.add("hide");
+  });
   if(withPlusButton){
     const objectList = document.querySelector(`.${container.listClassName}`)
     const plus = objectList.querySelector(".add-object")
@@ -445,8 +448,10 @@ function hideFullForm(container, withPlusButton){
 
 function revealFullForm(container){
   const formToHide = document.querySelector(`.${container.className}`)
-  formToHide.firstChild.classList.remove("hide")
-  formToHide.firstChild.nextElementSibling.classList.remove("hide")
+  const fornmChildren = formToHide.children
+  Array.from(fornmChildren).forEach(child => {
+    child.classList.remove("hide");
+  });
 }
 
 function  hightligthsUsedExtraOption(container){

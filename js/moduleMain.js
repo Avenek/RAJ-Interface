@@ -12,7 +12,7 @@ function loadModuleObject(index, module)
   fetch('config/modules.json')
     .then(response => response.json())
     .then(config => {
-      const configObject = findObjectByProperty(config.modules, "characterEffect", "name")
+      const configObject = findObjectByProperty(config.modules, module, "name")
       if(configObject.hasList){
         objectContainer.hasList = true
         if(dynamicData.hasOwnProperty(currentModule))
@@ -28,6 +28,7 @@ function loadModuleObject(index, module)
       
       else {
         objectContainer.hasList = false
+        objectContainer.workingObject = {}
         dynamicData[currentModule]={}
       }
       loadModuleContent()
@@ -109,6 +110,7 @@ function setupRadioButtons(radioButtons, container) {
 }
 
 function addObjectIfListIsEmpty(container){
+  console.log(radioButtonObjectList);
   if(radioButtonObjectList.length ===0)
   {
     addObjectToList(container)

@@ -109,6 +109,18 @@ class Weather{
   }
 }
 
+class EarthQuake{
+  constructor(){
+    this.duration = 0.1
+    this.quantity = 5
+    this.frequency = 0.7
+    this.power = 10
+  }
+}
+
+
+
+
 
 class Case {
   constructor() {
@@ -217,6 +229,15 @@ let objectDict = {
       this.name = "Rain"
       this.speedX = 1
       this.speedY = 1
+    }
+  },
+
+  earthQuake : class EarthQuake{
+    constructor(){
+      this.duration = 0.1
+      this.quantity = 5
+      this.frequency = 0.7
+      this.power = 10
     }
   }
 }

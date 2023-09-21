@@ -9,6 +9,9 @@ function addObjectToList(container){
         plusButton = createNewPlusButton(container)
         removeCurrentPlusButton(objectListContainer)
     }
+    else{
+        removeCurrentPlusButton(objectListContainer)
+    }
 
     removeCheckedFromAllRadio(objectListContainer)
 
@@ -58,6 +61,9 @@ function createNewLabelAndRadioButton(objectListContainer, container){
             break;
         case "weather":
             defaultName = "Rain"
+            break;
+        case "earthQuake":
+            defaultName = "earthQuake"
             break;
         default:
             const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
@@ -252,6 +258,10 @@ function removeObjectFromList(event, container){
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;
                     default:
+                        if(!container.hasList){
+                            const plusButton = createNewPlusButton(container)
+                            listContainer.appendChild(plusButton)
+                        }
                         container.workingObject = null
                         delete dynamicData[currentModule]
                         hideFullForm(container, false)
