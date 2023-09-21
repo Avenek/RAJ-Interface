@@ -41,7 +41,6 @@ class ConfigurationContainer {
 
     hideAndRevealRequiredItems()
     {
-      debugger
       let allConditionsAreMet
       this.requiredItems.forEach(item => {
         allConditionsAreMet = true
@@ -49,13 +48,11 @@ class ConfigurationContainer {
         {
           const headers = findHeadersById(item.idInput, this.className)
           for(let i = 0 ; i < item.require.length ; i++) {
-            debugger
             if(!item.require[i].value.includes(getValueFromObject(this.workingObject, item.require[i].name))){
               allConditionsAreMet = false
               break;
             }
           }
-          console.log(item, allConditionsAreMet);
           if(!allConditionsAreMet)
           {
               headers.forEach(header => {

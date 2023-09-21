@@ -23,7 +23,7 @@
                     "varType": ["boolean"],
                     "defaultInput": false,
                     "defaultSraj": false,
-                    "require": {"name": "kind", "value": ["ARGUMENT", "CONTAINER"]}
+                    "require": [{"name": "kind", "value": ["ARGUMENT", "CONTAINER"]}]
                 },
                 {
                     "name": "key",
@@ -33,7 +33,7 @@
                     "varType": ["string"],
                     "options": [{"name":"QUEST"}, {"name":"TOWN"}, {"name":"OUTFIT"}, {"name":"PET"}, {"name":"EXIST_OBJ"}, {"name":"EXIST_OBJ_HAVE_OUTFIT"}],
                     "defaultInput": "QUEST",
-                    "require": {"name": "kind", "value": ["ARGUMENT"]}
+                    "require": [{"name": "kind", "value": ["ARGUMENT"]}]
                 },
                 {
                     "name": "name",
@@ -43,7 +43,7 @@
                     "varType": ["string"],
                     "options": [{"name":"ACTIVE"}, {"name":"NEVER_OCCUR"}, {"name":"FINISH"}, {"name":"NOT_FINISH"}, {"name":"NO_ACTIVE"}],
                     "defaultInput": "ACTIVE",
-                    "require": {"name": "key", "value": ["QUEST"]}
+                    "require": [{"name": "key", "value": ["QUEST"]}]
                 },
                 {
                     "name": "name",
@@ -53,7 +53,7 @@
                     "varType": ["string"],
                     "options": [{"name":"ONE_OF"}],
                     "defaultInput": "ONE_OF",
-                    "require": {"name": "key", "value": ["TOWN", "OUTFIT", "PET"]}
+                    "require": [{"name": "key", "value": ["TOWN", "OUTFIT", "PET"]}]
                 },
                 {
                     "name": "name",
@@ -63,7 +63,7 @@
                     "varType": ["string"],
                     "options": [{"name":"FAKE_NPC"}, {"name":"NPC"}, {"name":"FLOAT_OBJECT"}],
                     "defaultInput": "FAKE_NPC",
-                    "require": {"name": "key", "value": ["EXIST_OBJ"]}
+                    "require": [{"name": "key", "value": ["EXIST_OBJ"]}]
                 },
                 {
                     "name": "name",
@@ -73,7 +73,7 @@
                     "varType": ["string"],
                     "options": [{"name":"FAKE_NPC"}, {"name":"NPC"}],
                     "defaultInput": "FAKE_NPC",
-                    "require": {"name": "key", "value": ["EXIST_OBJ_HAVE_OUTFIT"]}
+                    "require": [{"name": "key", "value": ["EXIST_OBJ_HAVE_OUTFIT"]}]
                 },
                 {
                     "name": "params",
@@ -85,7 +85,7 @@
                     "max": 15000,
                     "defaultInput": [],
                     "inputPlaceholder": "Wartości rozdzielić średnikiem!",
-                    "require": {"name": "kind", "value": ["ARGUMENT"]},
+                    "require": [{"name": "kind", "value": ["ARGUMENT"]}],
                     "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
@@ -96,7 +96,7 @@
                     "varType": ["string"],
                     "options": [{"name":"AND"}, {"name":"OR"}],
                     "defaultInput": "AND",
-                    "require": {"name": "kind", "value": ["CONNECTOR"]}
+                    "require": [{"name": "kind", "value": ["CONNECTOR"]}]
                 }
             ]
         }
