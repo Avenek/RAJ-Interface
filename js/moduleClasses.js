@@ -85,6 +85,20 @@ class EmoDefinitionsParams{
   }
 }
 
+class EmoActions{
+  constructor(){
+    this.action = "CREATE"
+    this.name = "obiekt-0"
+    this.target = new NpcTarget()
+  }
+}
+
+class NpcTarget {
+  constructor() {
+    this.kind = "NPC"
+    this.id = 0
+  }
+}
 
 
 
@@ -170,7 +184,7 @@ let objectDict = {
       this.action = "CREATE"
       this.kind = "HERO"
       this.showTip = false
-      }
+    }
   },
 
   emoDefinitions : class EmoDefinitions{
@@ -178,6 +192,14 @@ let objectDict = {
       this.name = "obiekt-0"
       this.priority = 90
       this.params = new EmoDefinitionsParams()
-      }
+    }
+  },
+
+  emoActions : class EmoActions{
+    constructor(){
+      this.action = "CREATE"
+      this.name = "obiekt-0"
+      this.target = new NpcTarget()
+    }
   }
 }
