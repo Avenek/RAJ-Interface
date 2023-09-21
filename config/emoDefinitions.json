@@ -1,0 +1,57 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "name",
+                    "idInput": "name",
+                    "tool-tip": "Nazwa identyfikująca emotkę. Za pomocą tej nazwy będzie się tworzyć emocję w emoActions.",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": "obiekt-id",
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "string", "name": "notEqual", "value": ["MAIL", "INKEEPER", "DEPO_CLAN", "AUCTION", "DEPO", "SHOP", "HEAL", "DAILY_QUEST", "NORMAL_QUEST", "NPC_TALK"]}]
+                },
+                {
+                    "name": "priority",
+                    "idInput": "priority",
+                    "tool-tip": "Order wyświetlania, jeżeli jest kilka notyfikacji. Spis priorytetów notyfikacji z klienta znajduje się w dokumentacji.",
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": "90",
+                    "min":0,
+                    "max":150,
+                    "step":5,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "params",
+                    "idInput": "params",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "params.action",
+                            "idInput": "params.action",
+                            "tool-tip": "Na razie tylko opcja OnSelf jest dostępna i powoduje, że dymek pojawi się nad główką zadeklarowanego w emoActions NPC.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"onSelf"}],
+                            "defaultInput": "onSelf"
+                        },
+                        {
+                            "name": "params.filename",
+                            "idInput": "params.filename",
+                            "tool-tip": "Plik musi znajdować się w pliku z emocjami klientowymi. Podajemy tylko jego samą nazwę + rozszerzenie. O wgranie pliku uderzać do MzR.",
+                            "inputType": "string",
+                            "varType": ["string"],
+                            "defaultInput": "battle.gif"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

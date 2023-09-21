@@ -70,6 +70,20 @@ class CharacterHide{
     }
 }
 
+class EmoDefinitions{
+  constructor() {
+    this.name = "obiekt-0"
+    this.priority = 90
+    this.params = new EmoDefinitionsParams()
+    }
+}
+
+class EmoDefinitionsParams{
+  constructor(){
+    this.action = "onSelf"
+    this.filename = "battle.gif"
+  }
+}
 
 
 
@@ -150,12 +164,20 @@ let objectDict = {
     this.list = [new(FakeNpcBehavior)]
     }
   },
-  
-  characterHide: class CharacterHide{
+
+  characterHide : class CharacterHide{
     constructor() {
       this.action = "CREATE"
       this.kind = "HERO"
       this.showTip = false
+      }
+  },
+
+  emoDefinitions : class EmoDefinitions{
+    constructor() {
+      this.name = "obiekt-0"
+      this.priority = 90
+      this.params = new EmoDefinitionsParams()
       }
   }
 }

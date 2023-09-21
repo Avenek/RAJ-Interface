@@ -197,7 +197,6 @@ function removeObjectFromList(event, container){
                 else{
                     removeObjectFromJson(objectId, objectContainer.workingObject.behavior.list, container)
                 }
-                
                 break;
             case "random":
                 break;
@@ -210,12 +209,17 @@ function removeObjectFromList(event, container){
         const singleContainer = event.target.parentNode
         if(singleContainer.firstChild.classList.contains("radio-checked"))
         {
-            container.currentIndex = 0
+            
             localStorage.setItem("index", 0)
             const listContainer = document.querySelector(`.${container.listClassName}`)
             const elements = listContainer.querySelectorAll(".object-list-element")
             if(elements.length>1){
-                elements[1].classList.add("radio-checked")
+                if(container.currentIndex === 0){
+                    elements[1].classList.add("radio-checked")
+                }
+                else{
+                    elements[0].classList.add("radio-checked")
+                }
                 container.workingObject = container.list[0]
                 fillFormFields(container.workingObject)
                 container.hideAndRevealRequiredItems()
@@ -254,6 +258,7 @@ function removeObjectFromList(event, container){
 
             updateDynamicDataAndJsonText()
         }
+        container.currentIndex = 0
         singleContainer.remove()
         updateJsonTextArea()
         saveJsonState()
