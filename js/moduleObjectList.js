@@ -1,8 +1,9 @@
-function addObjectToList(container){
+function addObjectToList(container, event = "", isCopy = false){
     const objectListContainer = document.querySelector(`.${container.listClassName}`)
     const singleObjectContainer = createObjectContainer(container)
+    const copyButton = createNewCopyButton(container)
     const deleteButton = createNewDeleteButton(container)
-    const labelAndRadioButton = createNewLabelAndRadioButton(objectListContainer, container)
+    const labelAndRadioButton = createNewLabelAndRadioButton(objectListContainer, container, isCopy, event)
     let plusButton
     if(container.hasList)
     {
@@ -16,16 +17,25 @@ function addObjectToList(container){
     removeCheckedFromAllRadio(objectListContainer)
 
     singleObjectContainer.appendChild(labelAndRadioButton);
+    singleObjectContainer.appendChild(copyButton)
     singleObjectContainer.appendChild(deleteButton)
     objectListContainer.appendChild(singleObjectContainer)
     if(container.hasList)
     {
-    objectListContainer.appendChild(plusButton);
+        objectListContainer.appendChild(plusButton);
     }
 
     const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]')
     setupRadioButtonsObjectList(radioButtons, container);
-    addObjectToJson(container, labelAndRadioButton.textContent)
+    
+    if(isCopy){
+        copyObject(event, container)
+    }
+    else{
+        let moduleName = createWorkingObjectAndReturnModuleName(container, labelAndRadioButton.textContent)
+        addObjectToJson(container, moduleName)
+    }
+    inputList.forEach(input => isDataValid(container, input))
     revealFullForm(container)
 }
 
@@ -39,7 +49,7 @@ function createObjectContainer(container){
     return singleObjectContainer
 }
 
-function createNewLabelAndRadioButton(objectListContainer, container){
+function createNewLabelAndRadioButton(objectListContainer, container, isCopy, event =""){
     const labelElement = document.createElement("label");
     labelElement.className = "object-list-element radio-checked";
     const radioInput = document.createElement("input");
@@ -48,7 +58,21 @@ function createNewLabelAndRadioButton(objectListContainer, container){
     radioInput.className = "radio-input";
     radioInput.checked = true;
     labelElement.appendChild(radioInput);
-    let defaultName="";
+    let defaultName = ""
+    if(isCopy){
+        defaultName = event.target.parentElement.firstChild.textContent
+    }
+    else{
+        defaultName = pickDefaultUniqueName(container, objectListContainer)
+    }
+    
+    labelElement.appendChild(document.createTextNode(defaultName));
+
+    return labelElement
+}
+
+function pickDefaultUniqueName(container, objectListContainer){
+    let defaultName = ""
     switch(container.name){
         case "case":
             defaultName = 'ARGUMENT'
@@ -74,12 +98,8 @@ function createNewLabelAndRadioButton(objectListContainer, container){
                 defaultName = `obiekt-${number}`
             }
           break; 
-      }
-    
-    
-    labelElement.appendChild(document.createTextNode(defaultName));
-
-    return labelElement
+    }  
+    return defaultName      
 }
 
 function createNewPlusButton(container) {
@@ -103,6 +123,16 @@ function createNewDeleteButton(container)
     return deleteButton
 }
 
+function createNewCopyButton(container){
+    const copyButton = document.createElement("div");
+    copyButton.className = "copy-icon";
+    copyButton.textContent = "⧉"
+    copyButton.addEventListener("click", (event) => addObjectToList(container, event, true))
+
+    return copyButton
+
+}
+
 function removeCheckedFromAllRadio(objectListContainer)
 {
     objects = objectListContainer.querySelectorAll(".object-list-element")
@@ -120,24 +150,16 @@ function removeCurrentPlusButton(objectListContainer){
     catch{}
 }
 
-function addObjectToJson(container, id)
+function copyObject(event, container){
+    const objectListElement = event.target.parentNode.firstChild
+    const index = findObjectIndexOnList(objectListElement, container)
+    container.workingObject = JSON.parse(JSON.stringify(container.list[index]))
+    container.currentIndex = container.list.length-1
+    addObjectToJson(container, container.name)
+}
+
+function addObjectToJson(container, moduleName)
 {
-    let moduleName
-    if(container.name === "behavior"){
-        if(currentModule === "callInstantBehaviorFakeNpc"){
-            moduleName = 'fakeNpcBehavior'
-        }
-        else{
-            moduleName = currentModule+"Behavior"
-        }
-      container.workingObject = new objectDict[moduleName]();
-      moduleName = "behavior"
-    }
-    else{
-       moduleName = container.name
-       container.workingObject = new objectDict[moduleName](id);
-    }
-    
     const objectListContainer = document.querySelector(`.${container.listClassName}`)
     const objects = objectListContainer.querySelectorAll(".object-list-element")
     let index = objects.length -1
@@ -189,9 +211,29 @@ function addObjectToJson(container, id)
     saveJsonState()
 }
 
+function createWorkingObjectAndReturnModuleName(container, id){
+    let moduleName
+    if(container.name === "behavior"){
+        if(currentModule === "callInstantBehaviorFakeNpc"){
+            moduleName = 'fakeNpcBehavior'
+        }
+        else{
+            moduleName = currentModule+"Behavior"
+        }
+      container.workingObject = new objectDict[moduleName]();
+      moduleName = "behavior"
+    }
+    else{
+       moduleName = container.name
+       container.workingObject = new objectDict[moduleName](id);
+    }
+    return moduleName
+}
+
 function removeObjectFromList(event, container){
     if (window.confirm("Czy na pewno chcesz usunąć obiekt?")) {
-        const object = event.target.previousElementSibling
+        const object = event.target.previousElementSibling.previousElementSibling
+        console.log(object);
         switch(container.name)
         {
             case "case":
@@ -306,6 +348,7 @@ function changeObjectOnList(event, container){
     fillFormFields(container)
     container.hideAndRevealRequiredItems()
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
+    inputList.forEach(input => isDataValid(container, input))
     hightligthsUsedExtraOption(container)
 }
 

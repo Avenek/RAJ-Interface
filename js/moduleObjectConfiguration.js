@@ -62,7 +62,6 @@ function getValueFromObject(obj, key) {
 
 function updateObjectRadioButton(event, container)
 {
-  debugger
   const objects = document.querySelectorAll(`input[name='${event.target.name}']`)
       objects.forEach(object => {
           object.checked = false;

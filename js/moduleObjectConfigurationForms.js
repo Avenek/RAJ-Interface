@@ -625,7 +625,7 @@ function  hightligthsUsedExtraOption(container){
             }
           }
           else if(currentModule==="behaviorDynamicLight"){
-            if(object && object.d.behavior.list.length>0){
+            if(object.d && object.d.behavior && object.d.behavior.list && object.d.behavior.list.length>0){
               button.classList.add("extra-option-active")
             }
             else{
@@ -665,8 +665,7 @@ function  hightligthsUsedExtraOption(container){
         break;
       case "light":
         object = container.workingObject
-  
-        if(object && object.d.hasOwnProperty("light")){
+        if(object.d && object.d.hasOwnProperty("light")){
           button.classList.add("extra-option-active")
         }
         else{

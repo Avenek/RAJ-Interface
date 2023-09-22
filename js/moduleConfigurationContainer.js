@@ -168,7 +168,7 @@ class ConfigurationContainer {
               checkedClass = ""
             }
             const drag = this.name === "behavior" ? "true" : "false"
-            objectsContainerHtml+= `<div draggable=${drag} class="single-object-container" ><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="delete-icon">🗑️</div></div>`;
+            objectsContainerHtml+= `<div draggable=${drag} class="single-object-container" ><label class="object-list-element ${checkedClass}"><input type="radio" name="object-list" class="radio-input">${id}</label><div class="copy-icon">⧉</div><div class="delete-icon">🗑️</div></div>`;
           });
             objectsContainerHtml += '<div class="plus-circle add-object"><span class="fas fa-plus"></span></div>'
         }
@@ -183,7 +183,7 @@ class ConfigurationContainer {
               name = getLastPartOfTheName(this.event.previousElementSibling.textContent)
               name = name.substring(0, name.length-1)
             }
-            objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element radio-checked" checked><input type="radio" name="object-list" class="radio-input">${name}</label><div class="delete-icon">🗑️</div></div>`;
+            objectsContainerHtml+= `<div class="single-object-container"><label class="object-list-element radio-checked" checked><input type="radio" name="object-list" class="radio-input">${name}</label><div class="copy-icon">⧉</div><div class="delete-icon">🗑️</div></div>`;
           }
         }
       containerList.innerHTML+=objectsContainerHtml 

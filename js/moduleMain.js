@@ -1,4 +1,4 @@
-let uniqueNameRadioButtons, addObjectPlus, deleteObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons, homeLink
+let uniqueNameRadioButtons, addObjectPlus, deleteObjectButtons, copyObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons, homeLink
 let currentModule = ""
 let requiredItems;
 let keyRequiredItems;
@@ -143,6 +143,7 @@ function getModuleElementsFromObjectList(container){
   radioButtonObjectList = container.querySelectorAll('input[type="radio"]')
   addObjectPlus = container.querySelector(".add-object")
   deleteObjectButtons = container.querySelectorAll(".delete-icon")
+  copyObjectButtons = container.querySelectorAll(".copy-icon")
 }
 
 function createModuleDOMEvents(container){
@@ -202,6 +203,9 @@ function createModuleDOMEventFromObjectList(container){
   if(deleteObjectButtons){
     deleteObjectButtons.forEach(button => button.addEventListener("click", (event) => removeObjectFromList(event, container)))
   }
+  if(copyObjectButtons){
+    copyObjectButtons.forEach(button => button.addEventListener("click", (event) => addObjectToList(container, event, true)))
+  }
 
   if(keyContainer && keyContainer.name === "behavior"){
     const container = document.querySelector('.object-list-key')
@@ -213,6 +217,7 @@ function createModuleDOMEventFromObjectList(container){
   });
   document.addEventListener("dragover", handleDragOver);
   }
+
 }
 
 function checkboxClickEvent(checkbox, event, container){
