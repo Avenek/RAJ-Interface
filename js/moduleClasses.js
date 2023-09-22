@@ -35,7 +35,7 @@ class FakeNpc {
     this.x = 0
     this.y = 0
     this.img = "/npc/test.gif"
-    this.behavior = new Behavior();
+    this.behavior = new BehaviorFakeNpc();
   }
 }
 
@@ -47,7 +47,7 @@ class FakeNpcBehavior{
   }
 }
 
-class Behavior {
+class BehaviorFakeNpc {
   constructor() {
     this.repeat = 1
     this.list = [new(FakeNpcBehavior)]
@@ -157,6 +157,41 @@ class DynamicLightData{
   }
 }
 
+class BehaviorDynamicLight{
+  constructor(id) {
+    this.action = "CREATE"
+    this.id = id
+    this.d = new ExtraLightData()
+  }
+}
+
+class BehaviorDynamicLightData{
+  constructor(id) {
+    this.x = 0
+    this.y = 0
+    this.r = 30
+    this.offsetX = 0
+    this.offsetY = 0
+    this.gradientPercent1 = 40
+    this.gradientPercent2 = 40
+    this.behavior = new BehaviorLight();
+  }
+}
+
+class BehaviorLight {
+  constructor() {
+    this.repeat = 1
+    this.list = [new BehaviorDynamicLightBehavior()]
+  }
+}
+
+class BehaviorDynamicLightBehavior{
+  constructor(){
+    this.name = "IDLE"
+    this.duration = 5
+  }
+}
+
 class Case {
   constructor() {
     this.kind = "ARGUMENT";
@@ -244,7 +279,7 @@ let objectDict = {
         this.x = 0
         this.y = 0
         this.img = "/npc/test.gif"
-        this.behavior = new Behavior();
+        this.behavior = new BehaviorFakeNpc();
       }
     },
     
@@ -327,6 +362,21 @@ let objectDict = {
       this.id = id
       this.master = new DynamicLightMaster()
       this.d = new DynamicLightData()
+    }
+  },
+
+  behaviorDynamicLight : class BehaviorDynamicLight{
+    constructor(id) {
+      this.action = "CREATE"
+      this.id = id
+      this.d = new BehaviorDynamicLightData()
+    }
+  },
+
+  behaviorDynamicLightBehavior : class BehaviorDynamicLightBehavior{
+    constructor(){
+      this.name = "IDLE"
+      this.duration = 5
     }
   }
 }

@@ -1,4 +1,16 @@
-function findObjectIndexOnList(objectId, container)
+function findObjectIndexOnList(object, container)
+{
+  const objectListContainer = document.querySelector(`.${container.listClassName}`)
+    const objects = objectListContainer.querySelectorAll(".object-list-element")
+   for(let i = 0 ; i < objects.length ; i ++){
+    if(object === objects[i]){
+      return i
+    }
+   }
+   return null
+}
+
+function findObjectIndexOnListById(objectId, container)
 {
     const objectList = container.list
     switch(container.name){
@@ -24,11 +36,11 @@ function findObjectIndexOnList(objectId, container)
     return null     
 }
 
-function removeObjectFromJson(objectId, list, container)
+function removeObjectFromJson(object, list, container)
 {
   if(container.hasList){
     const objectList = list
-    const index = findObjectIndexOnList(objectId, container)
+    const index = findObjectIndexOnList(object, container)
     objectList.splice(index, 1);
   }   
 }
@@ -50,6 +62,7 @@ function getValueFromObject(obj, key) {
 
 function updateObjectRadioButton(event, container)
 {
+  debugger
   const objects = document.querySelectorAll(`input[name='${event.target.name}']`)
       objects.forEach(object => {
           object.checked = false;
@@ -77,7 +90,7 @@ function updateObjectRadioButton(event, container)
         allConditionsAreMet = true
       }
       else{
-        allConditionsAreMet = false
+        allConditionsAreMet = falsex
         break;
       }
     }
@@ -100,7 +113,7 @@ function updateObjectRadioButton(event, container)
   })
   listToSet.forEach(item => container.setObjectKeyByPath(item.name, item.value))
   changeValueInJsonRadioButton(event, container)
-  fillFormFields(container.workingObject)
+  fillFormFields(container)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
   updateDynamicDataAndJsonText()
   container.hideAndRevealRequiredItems()
@@ -124,7 +137,6 @@ function changeValueInJsonRadioButton(event, container){
 }
 
 function changeValueInJsonInput(event, container){
-  debugger
   const key = event.target.name
   let newValue = event.target.value
 
@@ -235,6 +247,12 @@ function makeKeyOrder(container){
         moveToLastPlaceInJson(objectContainer, "d.light.color")
       }
     }
+    if(objectContainer.workingObject.d.hasOwnProperty("behavior")){
+      moveToLastPlaceInJson(objectContainer, "d.behavior")
+      if(objectContainer.workingObject.d.behavior.hasOwnProperty("list")){
+        moveToLastPlaceInJson(objectContainer, "d.behavior.list")
+      }
+    }
   }
 }
 
@@ -245,7 +263,7 @@ function moveToLastPlaceInJson(container, path){
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
     if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
-      console.error("Podana ścieżka jest nieprawidłowa. Nie znaleziono podanego klucza. " + path + " " + currentObj);
+      console.error("Podana ścieżka jest nieprawidłowa. Nie znaleziono podanego klucza. " + path);
       return
     }
     currentObj = currentObj[currentKey];

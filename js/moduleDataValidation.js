@@ -32,7 +32,6 @@ function showError(targetInput, message){
   
   
   function isDataValid(container, input){
-    //"validation":{"forType": "float", "name": "minMax"}
     const configObject = findObjectByProperty(container.jsonConfig.properties, input.id, "idInput")
     if(!configObject.hasOwnProperty("validation")){
       return
@@ -111,7 +110,7 @@ function showError(targetInput, message){
             showError(input, errorMessage)
             break;
           }
-          else if(inputValue === ""){
+          else if(inputValue === "" && !configObject.canBeEmpty){
             errorMessage = "Pole jest obligatoryjne i nie może być puste!"
             showError(input, errorMessage)
           }
@@ -131,11 +130,11 @@ function showError(targetInput, message){
         hideError(input)
       }
     }
-    else if(inputValue.length===0){
+    else if(inputValue.length===0 && !configObject.canBeEmpty){
       errorMessage = "Pole jest obligatoryjne i nie może być puste!"
         showError(input, errorMessage)
     }
-    else if(valueType !== "object"){
+    else if(valueType !== "object" && !configObject.canBeEmpty){
         errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${configObject.varType.join(", ")}`
         showError(input, errorMessage)
     }
@@ -144,7 +143,6 @@ function showError(targetInput, message){
   
   function checkValueType(value){
     let valueType = typeof value
-    console.log(valueType);
     if(valueType === "number"){
       if(isInteger(value)){
         valueType = "int" 

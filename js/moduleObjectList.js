@@ -69,7 +69,7 @@ function createNewLabelAndRadioButton(objectListContainer, container){
             const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
             let number = radioButtons.length
             defaultName = `obiekt-${number}`
-            while(findObjectIndexOnList(defaultName, container) !== null){
+            while(findObjectIndexOnListById(defaultName, container) !== null){
                 number+=1
                 defaultName = `obiekt-${number}`
             }
@@ -88,7 +88,6 @@ function createNewPlusButton(container) {
     const plusIcon = document.createElement("span");
     plusIcon.className = "fas fa-plus";
     addButton.appendChild(plusIcon);
-    addButton.removeEventListener("click", () => addObjectToList(container))
     addButton.addEventListener("click", () => addObjectToList(container))
 
     return addButton
@@ -131,19 +130,18 @@ function addObjectToJson(container, id)
         else{
             moduleName = currentModule+"Behavior"
         }
-
       container.workingObject = new objectDict[moduleName]();
-
       moduleName = "behavior"
     }
     else{
-
        moduleName = container.name
-
        container.workingObject = new objectDict[moduleName](id);
     }
     
-    let index
+    const objectListContainer = document.querySelector(`.${container.listClassName}`)
+    const objects = objectListContainer.querySelectorAll(".object-list-element")
+    let index = objects.length -1
+   
     switch(moduleName){
         case "case":
             if(!objectContainer.workingObject.hasOwnProperty("case")){
@@ -151,17 +149,18 @@ function addObjectToJson(container, id)
                 objectContainer.workingObject["case"].list = []
             }
             objectContainer.workingObject["case"].list.push(container.workingObject)
-            index = findObjectIndexOnList(id, container)
             container.currentIndex = index
             break;
          case "behavior":
             if(currentModule === "callInstantBehaviorFakeNpc"){
                 objectContainer.workingObject.list.push(container.workingObject)
             }
+            else if(currentModule === "behaviorDynamicLight"){
+                objectContainer.workingObject.d.behavior.list.push(container.workingObject)
+            }
             else{
                 objectContainer.workingObject["behavior"].list.push(container.workingObject)
             }
-            index = findObjectIndexOnList(id, container)
             container.currentIndex = index
             break;    
         default:
@@ -172,7 +171,6 @@ function addObjectToJson(container, id)
                     dynamicData[currentModule].list=[]
                 }
                 container.list.push(container.workingObject)
-                const index = findObjectIndexOnList(id, container)
                 container.currentIndex = index
               }
               else {
@@ -183,7 +181,7 @@ function addObjectToJson(container, id)
     }
 
 
-    fillFormFields(container.workingObject)
+    fillFormFields(container)
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
     container.hideAndRevealRequiredItems()
     updateDynamicDataAndJsonText()
@@ -193,24 +191,27 @@ function addObjectToJson(container, id)
 
 function removeObjectFromList(event, container){
     if (window.confirm("Czy na pewno chcesz usunąć obiekt?")) {
-        const objectId = event.target.previousElementSibling.textContent
+        const object = event.target.previousElementSibling
         switch(container.name)
         {
             case "case":
-                removeObjectFromJson(objectId, objectContainer.workingObject.case.list, container)
+                removeObjectFromJson(object, objectContainer.workingObject.case.list, container)
                 break;
             case "behavior":
                 if(currentModule === "callInstantBehaviorFakeNpc"){
-                    removeObjectFromJson(objectId, objectContainer.workingObject.list, container)
+                    removeObjectFromJson(object, objectContainer.workingObject.list, container)
+                }
+                else if (currentModule === "behaviorDynamicLight"){
+                    removeObjectFromJson(object, objectContainer.workingObject.d.behavior.list, container)
                 }
                 else{
-                    removeObjectFromJson(objectId, objectContainer.workingObject.behavior.list, container)
+                    removeObjectFromJson(object, objectContainer.workingObject.behavior.list, container)
                 }
                 break;
             case "random", "randomFirstIndex", "getCharacterData", "light", "master":
                 break;
             default:
-                removeObjectFromJson(objectId, container.list, container)
+                removeObjectFromJson(object, container.list, container)
                 clearKeyContainers()
         }
         const singleContainer = event.target.parentNode
@@ -218,6 +219,7 @@ function removeObjectFromList(event, container){
         {
             
             localStorage.setItem("index", 0)
+            
             const listContainer = document.querySelector(`.${container.listClassName}`)
             const elements = listContainer.querySelectorAll(".object-list-element")
             if(elements.length>1){
@@ -228,7 +230,8 @@ function removeObjectFromList(event, container){
                     elements[0].classList.add("radio-checked")
                 }
                 container.workingObject = container.list[0]
-                fillFormFields(container.workingObject)
+                container.currentIndex = 0
+                fillFormFields(container)
                 container.hideAndRevealRequiredItems()
                 hightligthsUsedExtraOption(container)
             }
@@ -267,7 +270,7 @@ function removeObjectFromList(event, container){
                         break;
                     default:
                         if(!container.hasList){
-                            const plusButton = createNewPlusButton(container)
+                            const plusButton = createNewPlusButton(container, event)
                             listContainer.appendChild(plusButton)
                         }
                         container.workingObject = null
@@ -287,26 +290,20 @@ function removeObjectFromList(event, container){
     }
 }
 
-function changeObjectOnList(container){
+function changeObjectOnList(event, container){
     if(container === objectContainer)
     {
         clearKeyContainers()
     }
-    const listContainer = document.querySelector(`.${container.listClassName}`)
-    const elements = listContainer.querySelectorAll(".object-list-element")
-    let index
-    for(let i = 0 ; i<elements.length ; i++){
-        if(elements[i].classList.contains("radio-checked")){
-            index = i
-            break;
-        }
-    }
+    const radioButtonObject = event.target.parentElement
+    let index = findObjectIndexOnList(radioButtonObject, container)
     container.currentIndex = index
     if(container === objectContainer){
         localStorage.setItem("index", index)
     }
     container.workingObject = container.list[index]
-    fillFormFields(container.workingObject)
+
+    fillFormFields(container)
     container.hideAndRevealRequiredItems()
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
     hightligthsUsedExtraOption(container)
@@ -327,20 +324,13 @@ function clearKeyContainers(){
 
 function setupRadioButtonsObjectList(radioButtons, container) {
     radioButtons.forEach(radioButton => {
-        radioButton.removeEventListener('click', () => {
-            radioButtons.forEach(rb => {
-                rb.parentNode.classList.remove('radio-checked');
-            });
-            radioButton.parentNode.classList.add('radio-checked');
-        });
         radioButton.addEventListener('click', () => {
             radioButtons.forEach(rb => {
                 rb.parentNode.classList.remove('radio-checked');
             });
             radioButton.parentNode.classList.add('radio-checked');
         });
-        radioButton.removeEventListener('change', () => changeObjectOnList(container))
-        radioButton.addEventListener('change', () => changeObjectOnList(container))
+        radioButton.addEventListener('change', (event) => changeObjectOnList(event, container))
     });
   }
 

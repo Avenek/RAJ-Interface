@@ -61,7 +61,7 @@ function loadModuleContent()
         getModuleElements(container, objectListContainer)       
         addObjectIfListIsEmpty(objectContainer)
         createModuleDOMEvents(objectContainer) 
-        fillFormFields(objectContainer.workingObject);
+        fillFormFields(objectContainer);
         objectContainer.hideAndRevealRequiredItems()
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties, objectContainer)
         hightligthsUsedExtraOption(objectContainer) 
@@ -101,7 +101,7 @@ function setupRadioButtons(radioButtons, container) {
       });
       radioButton.addEventListener('change', (event) => {
         updateObjectRadioButton(event, container)
-        fillFormFields(container.workingObject)
+        fillFormFields(container)
         container.hideAndRevealRequiredItems()
         removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
         updateObjectListText(container)}

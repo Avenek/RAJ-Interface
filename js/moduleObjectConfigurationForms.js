@@ -158,56 +158,64 @@ function addToolTip(property)
    </div>`
 }
 
-function fillFormFields(data, prefix = "") {
-    for (let key in data) {
-      const value = data[key];
-      const fullKey = prefix + key;
-  
-      if (typeof value === "object" && !Array.isArray(value)) {
-        fillFormFields(value, fullKey + ".");
+function fillFormFields(container) {
+  let inputContainer = document.querySelector(`.${container.className}`)
+  let inputElements = inputContainer.querySelectorAll('input');
+  inputElements.forEach(input => {
+    if(!input.classList.contains("hide")){
+      if (input.type === "radio") {
+        const inputLabel = input.parentNode
+          if(inputLabel.textContent === getValueFromObject(container.workingObject, input.name)) {
+            inputLabel.classList.add("radio-checked");
+            input.checked = true;
+          }
+          else{
+            inputLabel.classList.remove("radio-checked");
+            input.checked = false;
+          }
       } 
-      else {
-        let inputElements = document.querySelectorAll('input[name="' + fullKey + '"]');
-        if (inputElements.length > 0) {
-          if (inputElements[0].type === "radio") {
-            for (let i = 0; i < inputElements.length; i++) {
-              const inputElement = inputElements[i];
-              if (inputElement.parentNode.textContent === value.toString()) {
-                    inputElement.parentNode.classList.add("radio-checked");
-                    inputElement.checked = true;
-              }
-              else{
-                inputElement.parentNode.classList.remove("radio-checked");
-                inputElement.checked = false;
-              }
-            }
-          } 
-          else if(inputElements[0].type === "checkbox")
-          {
-           const inputElement = inputElements[0];
-            if (value) {
-               inputElement.previousElementSibling.classList.add("checkbox-checked");
-              }
-              else{
-                inputElement.previousElementSibling.classList.remove("checkbox-checked");
-              }
+      else if(input.type === "checkbox"){
+        const inputSpan = input.previousElementSibling
+        const bool = getValueFromObject(container.workingObject, input.name)
+        if(bool !== null){
+          if(bool){
+            inputSpan.classList.add("checkbox-checked");
+            input.checked = true
           }
-          else {
-            for (let i = 0; i < inputElements.length; i++) {
-              const inputElement = inputElements[i];
-              if(Array.isArray(value)){
-                inputElement.value = value.join(";")
-              }
-              else {
-              inputElement.value = value;
-              }
-              
-            }       
+          else{
+            inputSpan.classList.remove("checkbox-checked");
+            input.checked = false
           }
+        }
+        else{
+          const defaultValue = findObjectByProperty(container.jsonConfig.properties, input.name, "name")
+          if(defaultValue && defaultValue.defaultSraj){
+            inputSpan.classList.add("checkbox-checked");
+            input.checked = true
+          }
+          else{
+            inputSpan.classList.remove("checkbox-checked");
+            input.checked = false
+          }
+
+        }
+      }
+      else{
+        const value = getValueFromObject(container.workingObject, input.name)
+        if(value !== null && Array.isArray(value)){
+          input.value = value.join(";")
+        }
+        else if(value !== null){
+        input.value = value;
+        }
+        else{
+          const defaultValue = findObjectByProperty(container.jsonConfig.properties, input.name, "name")
+          input.value = defaultValue.defaultSraj
         }
       }
     }
-  }
+  })
+}
   
   function findReuqiredItems(config)
   {
@@ -300,7 +308,7 @@ function handleExtraOptionButtonClick(event){
             getModuleElements(container, listContainer)
             createModuleDOMEvents(keyContainer)
             updateDynamicDataAndJsonText()
-            fillFormFields(keyContainer.workingObject);
+            fillFormFields(keyContainer);
             keyContainer.hideAndRevealRequiredItems() 
             makeKeyOrder(objectContainer)
             saveJsonState()   
@@ -336,7 +344,7 @@ function handleExtraOptionButtonClick(event){
               getModuleElements(container, listContainer)
               createModuleDOMEvents(keyContainer)
               updateDynamicDataAndJsonText()
-              fillFormFields(keyContainer.workingObject);
+              fillFormFields(keyContainer);
               keyContainer.hideAndRevealRequiredItems() 
               saveJsonState()
               inputList.forEach(input => isDataValid(keyContainer, input))   
@@ -370,6 +378,17 @@ function handleExtraOptionButtonClick(event){
                 }
                 keyContainer.list = objectContainer.workingObject.list
                 }
+                else if(currentModule === "behaviorDynamicLight"){
+                  if(objectContainer.workingObject.d["behavior"].list.length === 0)
+                {
+                  keyContainer.workingObject = new behaviorDynamicLightBehavior()
+                  objectContainer.workingObject.d["behavior"].list.push(keyContainer.workingObject)
+                }
+                else{
+                  keyContainer.workingObject = objectContainer.workingObject.d["behavior"].list[0]
+                }
+                keyContainer.list = objectContainer.workingObject.d["behavior"].list
+                }
                 else{
                 if(objectContainer.workingObject["behavior"].list.length === 0)
                 {
@@ -387,7 +406,7 @@ function handleExtraOptionButtonClick(event){
                 createModuleDOMEvents(keyContainer)
                 makeKeyOrder(objectContainer)
                 updateDynamicDataAndJsonText()
-                fillFormFields(keyContainer.workingObject);
+                fillFormFields(keyContainer);
                 keyContainer.hideAndRevealRequiredItems() 
                 saveJsonState()   
                 inputList.forEach(input => isDataValid(keyContainer, input))   
@@ -422,7 +441,7 @@ function handleExtraOptionButtonClick(event){
                   getModuleElements(container, listContainer)
                   createModuleDOMEvents(keyContainer)
                   updateDynamicDataAndJsonText()
-                  fillFormFields(keyContainer.workingObject);
+                  fillFormFields(keyContainer);
                   keyContainer.hideAndRevealRequiredItems() 
                   saveJsonState()
                   inputList.forEach(input => isDataValid(keyContainer, input))   
@@ -456,7 +475,7 @@ function handleExtraOptionButtonClick(event){
                     getModuleElements(container, listContainer)
                     createModuleDOMEvents(keyContainer)
                     updateDynamicDataAndJsonText()
-                    fillFormFields(keyContainer.workingObject);
+                    fillFormFields(keyContainer);
                     keyContainer.hideAndRevealRequiredItems() 
                     removeDefaultValuesFromJson(keyContainer.workingObject, keyContainer.jsonConfig.properties, keyContainer)
                     saveJsonState()
@@ -490,7 +509,7 @@ function handleExtraOptionButtonClick(event){
                       createModuleDOMEvents(keyContainer)
                       makeKeyOrder(objectContainer)
                       updateDynamicDataAndJsonText()
-                      fillFormFields(keyContainer.workingObject);
+                      fillFormFields(keyContainer);
                       keyContainer.hideAndRevealRequiredItems() 
                       removeDefaultValuesFromJson(keyContainer.workingObject, keyContainer.jsonConfig.properties, keyContainer)
                       saveJsonState()
@@ -524,7 +543,7 @@ function handleExtraOptionButtonClick(event){
                         createModuleDOMEvents(keyContainer)
                         makeKeyOrder(objectContainer)
                         updateDynamicDataAndJsonText()
-                        fillFormFields(keyContainer.workingObject);
+                        fillFormFields(keyContainer);
                         keyContainer.hideAndRevealRequiredItems() 
                         saveJsonState()
                         inputList.forEach(input => isDataValid(keyContainer, input))   
@@ -599,6 +618,14 @@ function  hightligthsUsedExtraOption(container){
           object = container.workingObject 
           if(currentModule === "callInstantBehaviorFakeNpc"){
             if(object && object.list.length>0){
+              button.classList.add("extra-option-active")
+            }
+            else{
+              button.classList.remove("extra-option-active")
+            }
+          }
+          else if(currentModule==="behaviorDynamicLight"){
+            if(object && object.d.behavior.list.length>0){
               button.classList.add("extra-option-active")
             }
             else{
