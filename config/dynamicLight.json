@@ -12,7 +12,7 @@
                     "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE"}, {"name":"REMOVE_IF_EXIST"}],
+                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
                     "defaultInput": "CREATE"
                 },
@@ -28,11 +28,28 @@
                 {
                     "name": "master",
                     "idInput": "master",
-                    "inputType": "empty",
-                    "varType": ["master"],
-                    "tool-tip": "Opcjonalnie możemy zdefiniować mastera. Aktualnie można użyć tylko: THIS_NPC_INSTANCE. Oznacza to, że w momencie zabicia naszego mastera, światło również zniknie. Gdy on się odrodzi, to światło również.",
-                    "extraOptions": [{"name":"master"}],
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "master.kind",
+                            "idInput": "master.kind",
+                            "tool-tip": "Należy zdefiniować tutaj obiekt, do którego będzie przypięte światło.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"HERO"}, {"name":"FAKE_NPC"}, {"name":"FLOAT_OBJECT"}],
+                            "defaultInput": "CREATE"
+                        },
+                        {
+                            "name": "master.id",
+                            "idInput": "master.id",
+                            "tool-tip": "ID obiektu, do którego chcemy przypiąć światło.",
+                            "inputType": "string",
+                            "varType": ["int", "string"],
+                            "defaultInput": "",
+                            "require": [{"name": "master.kind", "value": ["FAKE_NPC", "FLOAT_OBJECT"]}]
+                        }
+                    ]
                 },
                 {
                     "name": "d",
@@ -42,34 +59,6 @@
                     "require": [{"name": "action", "value": ["CREATE"]}],
                     "properties": [
                         {
-                            "name": "d.x",
-                            "idInput": "d.x",
-                            "tool-tip": "Wartość kordu x, na którym należy wyciąć dziurę w nocy.",
-                            "min":0,
-                            "max":100,
-                            "step":1,
-                            "inputType": "number",
-                            "varType": ["int"],
-                            "defaultInput": 0,
-                            "require": [{"name": "master", "value": [""]}],
-                            "extraOptions": [{"name":"get character data"}],
-                            "validation":[{"forType": "int", "name": "minMax"}]
-                        },
-                        {
-                            "name": "d.y",
-                            "idInput": "d.y",
-                            "tool-tip": "Wartość kordu y, na którym należy wyciąć dziurę w nocy.",
-                            "min":0,
-                            "max":100,
-                            "step":1,
-                            "inputType": "number",
-                            "varType": ["int"],
-                            "defaultInput": 0,
-                            "require": [{"name": "master", "value": [""]}],
-                            "extraOptions": [{"name":"get character data"}],
-                            "validation":[{"forType": "int", "name": "minMax"}]
-                        },
-                        {
                             "name": "d.r",
                             "idInput": "d.r",
                             "tool-tip": "Promień dziury, która ma zostać wycięta.",
@@ -78,8 +67,7 @@
                             "step":10,
                             "inputType": "number",
                             "varType": ["int"],
-                            "defaultInput": 30,
-                            "defaultSraj": 30,
+                            "defaultInput": 100,
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {

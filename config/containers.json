@@ -53,6 +53,14 @@
           "tipInfo": "Umożliwia stworzenie dziur oraz świateł, które będą się poruszać wraz z daną postacią (fakeNPC lub Hero)."
         },
         {
+          "name": "BehaviorDynamicLight",
+          "tipInfo": "Umożliwia stworzenie dziur oraz świateł, które będą posiadały swoje zachowania, dzięki którym ich pozycja i rozmiar będą mogły ulec zmianie. Uwaga! Wyświetlanie świateł dynamicznych jest bardzo kosztowne. Nie można przesadzić z ilością. Jeżeli potrzebujesz światła, które nie musi się przemieszczać, użyj zwykłych świateł albo extraLight!"
+        },
+        {
+          "name": "Zoom",
+          "tipInfo": "Umożliwia przybliżanie interfejsu gry."
+        },
+        {
           "name": "ScreenEffects",
           "tipInfo": "Umożliwia stworzenie przyciemnień na ekranie, przechodzenia z jednego backgroundu w drugi, błysk flesza, poruszania dziurami po ekranie i nakładanie na siebie kilku efektów."
         },

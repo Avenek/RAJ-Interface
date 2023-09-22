@@ -53,6 +53,14 @@
             "hasList": true
           },
           {
+            "name": "behaviorDynamicLight",
+            "hasList": true
+          },
+          {
+            "name": "zoom",
+            "hasList": false
+          },
+          {
             "name": "screenEffects",
             "hasList": true
           },

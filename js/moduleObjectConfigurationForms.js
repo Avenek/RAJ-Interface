@@ -513,7 +513,7 @@ function handleExtraOptionButtonClick(event){
                         keyContainer.event = event.target
                        if(!objectContainer.workingObject.hasOwnProperty("master"))
                         {
-                          keyContainer.workingObject = new Master()
+                          keyContainer.workingObject = new ExtraLightMaster()
                           objectContainer.setObjectKeyByPath("master", keyContainer.workingObject)
                         }
                         else{
@@ -638,6 +638,7 @@ function  hightligthsUsedExtraOption(container){
         break;
       case "light":
         object = container.workingObject
+  
         if(object && object.d.hasOwnProperty("light")){
           button.classList.add("extra-option-active")
         }

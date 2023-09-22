@@ -48,7 +48,7 @@ function showError(targetInput, message){
       valuesFromInput.push(inputValue)
     }
     valuesFromInput.forEach(value => {
-      inputValue = value
+      inputValue = getValueInGoodType(input.name, value, container)
       let valueType = checkValueType(inputValue)
     if(configObject.varType.includes(valueType) && valueType !== "object"){
       let isValid = true;
@@ -144,6 +144,7 @@ function showError(targetInput, message){
   
   function checkValueType(value){
     let valueType = typeof value
+    console.log(valueType);
     if(valueType === "number"){
       if(isInteger(value)){
         valueType = "int" 

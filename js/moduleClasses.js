@@ -138,7 +138,24 @@ class ExtraLightData{
   }
 }
 
+class DynamicLight{
+  constructor (id) {
+    this.action = "CREATE"
+    this.id = id
+    this.master = new DynamicLightMaster()
+    this.d = new DynamicLightData()
+  }
+}
 
+class DynamicLightData{
+  constructor(){
+    this.r = 100
+    this.offsetX = 0
+    this.offsetY = 0
+    this.gradientPercent1 = 40
+    this.gradientPercent2 = 40
+  }
+}
 
 class Case {
   constructor() {
@@ -183,11 +200,18 @@ class Color{
   }
 }
 
-class Master{
+class ExtraLightMaster{
   constructor(){
     this.kind = "THIS_NPC_INSTANCE"
   }
 }
+
+class DynamicLightMaster{
+  constructor(){
+    this.kind = "HERO"
+  }
+}
+
 
 
 
@@ -294,6 +318,15 @@ let objectDict = {
       this.action = "CREATE"
       this.id = id
       this.d = new ExtraLightData()
+    }
+  },
+
+  dynamicLight : class DynamicLight{
+    constructor (id) {
+      this.action = "CREATE"
+      this.id = id
+      this.master = new DynamicLightMaster()
+      this.d = new DynamicLightData()
     }
   }
 }
