@@ -49,7 +49,6 @@ class ConfigurationContainer {
           const headers = findHeadersById(item.idInput, this.className)
           for(let i = 0 ; i < item.require.length ; i++) {
             const valueInObject = getValueFromObject(this.workingObject, item.require[i].name)
-            console.log(item);
             if(valueInObject !==null){
              if(!item.require[i].value.includes(valueInObject)){
               allConditionsAreMet = false
@@ -85,7 +84,7 @@ class ConfigurationContainer {
               break;
             }
           }
-            else if(!item.require[i].value.includes(findObjectByProperty(this.jsonConfig.properties, item.require[i].name, "name").defaultSraj)){
+            else if(findObjectByProperty(this.jsonConfig.properties, item.require[i].name, "name").defaultSraj && !item.require[i].value.includes(findObjectByProperty(this.jsonConfig.properties, item.require[i].name, "name").defaultSraj)){
               allConditionsAreMet = false
               break;
             }

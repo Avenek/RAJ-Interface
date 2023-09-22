@@ -64,6 +64,12 @@ function createObjectConfigurationContainer(config)
               case "get character data":
                 color= "#8A2BE2"
                 break;
+              case "master":
+                color="#c0c0c0"
+                break;
+              case "light":
+                color= "#FFA500"
+                break;
               default:
                 color= "#FF1493"
                 break
@@ -458,6 +464,39 @@ function handleExtraOptionButtonClick(event){
                 console.error('Błąd pobierania:', error);
                 })
                 break;
+                case "light":
+                  fetch(`config/light.json`)
+                  .then(response => response.json())
+                  .then(config => {
+                      fullHtml += createObjectConfigurationContainer(config) 
+                      container.innerHTML = fullHtml
+                      keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "light")
+                      keyContainer.requiredItems = findReuqiredItems(config)
+                      keyContainer.hasList = false
+                      keyContainer.jsonConfig = config
+                      keyContainer.event = event.target
+                     if(!getValueFromObject(objectContainer.workingObject, "d").hasOwnProperty("light"))
+                      {
+                        keyContainer.workingObject = new Light()
+                        objectContainer.setObjectKeyByPath("d.light", keyContainer.workingObject)
+                      }
+                      else{
+                        keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, "d.light")
+                      }
+                      keyContainer.createObjectList()
+                      getModuleElements(container, listContainer)
+                      createModuleDOMEvents(keyContainer)
+                      updateDynamicDataAndJsonText()
+                      fillFormFields(keyContainer.workingObject);
+                      keyContainer.hideAndRevealRequiredItems() 
+                      removeDefaultValuesFromJson(keyContainer.workingObject, keyContainer.jsonConfig.properties, keyContainer)
+                      saveJsonState()
+                      inputList.forEach(input => isDataValid(keyContainer, input))   
+                  })
+                  .catch(error => {
+                  console.error('Błąd pobierania:', error);
+                  })
+                  break;
       case "TABLE":
         break;
       default:
@@ -561,6 +600,15 @@ function  hightligthsUsedExtraOption(container){
           button.classList.remove("extra-option-active")
         }
         break;
+      case "light":
+        object = container.workingObject
+        if(object && object.d.hasOwnProperty("light")){
+          button.classList.add("extra-option-active")
+        }
+        else{
+          button.classList.remove("extra-option-active")
+        }
+        break;
       default:
         break;
     }
@@ -572,7 +620,9 @@ function removeActiveExtraOption(event, config){
   const configObject = findObjectByProperty(config, input.id, "idInput")
   if(configObject.hasOwnProperty("extraOptions")){
     const extraOptionButton = input.nextElementSibling.nextElementSibling
+    if(extraOptionButton.classList.contains("menu-active")){
     clearKeyContainers()
     extraOptionButton.classList.remove("extra-option-active", "menu-active")
+  }
   }
 }

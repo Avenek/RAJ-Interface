@@ -118,7 +118,25 @@ class EarthQuake{
   }
 }
 
+class ExtraLight{
+  constructor(id){
+    this.action = "CREATE"
+    this.id = id
+    this.d = new ExtraLightData()
+  }
+}
 
+class ExtraLightData{
+  constructor(){
+    this.x = 0
+    this.y = 0
+    this.r = 30
+    this.offsetX = 0
+    this.offsetY = 0
+    this.gradientPercent1 = 40
+    this.gradientPercent2 = 40
+  }
+}
 
 
 
@@ -148,6 +166,22 @@ class GetCharacterData {
   }
 }
 
+class Light{
+  constructor(){
+    this.onlyNight = true,
+    this.r = 20
+    this.color = new Color()
+  }
+}
+
+class Color{
+  constructor() {
+    this.r = 0
+    this.g = 0
+    this.b = 0
+    this.a = 1
+  }
+}
 
 
 
@@ -247,6 +281,14 @@ let objectDict = {
       this.quantity = 5
       this.frequency = 0.7
       this.power = 10
+    }
+  },
+
+  extraLight : class ExtraLight{
+    constructor(id){
+      this.action = "CREATE"
+      this.id = id
+      this.d = new ExtraLightData()
     }
   }
 }

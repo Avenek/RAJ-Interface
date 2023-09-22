@@ -124,6 +124,7 @@ function changeValueInJsonRadioButton(event, container){
 }
 
 function changeValueInJsonInput(event, container){
+  debugger
   const key = event.target.name
   let newValue = event.target.value
 
@@ -220,13 +221,24 @@ function changeValueInJson(key, newValue, container){
 }
 
 function makeKeyOrder(container){
-  if(container.workingObject.hasOwnProperty("behavior")){
+  if(objectContainer.workingObject.hasOwnProperty("behavior")){
     moveToLastPlaceInJson(container, "behavior")
-    if(container.workingObject.behavior.hasOwnProperty("list")){
+    if(objectContainer.workingObject.behavior.hasOwnProperty("list")){
       moveToLastPlaceInJson(container, "behavior.list")
     }
   }
+  if(objectContainer.workingObject.hasOwnProperty("d")){
+    console.log("test");
+    moveToLastPlaceInJson(objectContainer, "d")
+    if(objectContainer.workingObject.d.hasOwnProperty("light")){
+      moveToLastPlaceInJson(objectContainer, "d.light")
+      if(objectContainer.workingObject.d.light.hasOwnProperty("color")){
+        moveToLastPlaceInJson(objectContainer, "d.light.color")
+      }
+    }
+  }
 }
+
 function moveToLastPlaceInJson(container, path){
   const keys = path.split('.');
   let currentObj = container.workingObject;
