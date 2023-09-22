@@ -48,7 +48,15 @@ class ConfigurationContainer {
         {
           const headers = findHeadersById(item.idInput, this.className)
           for(let i = 0 ; i < item.require.length ; i++) {
-            if(!item.require[i].value.includes(getValueFromObject(this.workingObject, item.require[i].name))){
+            const valueInObject = getValueFromObject(this.workingObject, item.require[i].name)
+            console.log(item);
+            if(valueInObject !==null){
+             if(!item.require[i].value.includes(valueInObject)){
+              allConditionsAreMet = false
+              break;
+            }
+          }
+          else if(!item.require[i].value.includes(findObjectByProperty(this.jsonConfig.properties, item.require[i].name, "name").defaultSraj)){
               allConditionsAreMet = false
               break;
             }
@@ -70,7 +78,14 @@ class ConfigurationContainer {
         else{
           let inputs
           for(let i = 0 ; i < item.require.length ; i++) {
-            if(!item.require[i].value.includes(getValueFromObject(this.workingObject, item.require[i].name))){
+            const valueInObject = getValueFromObject(this.workingObject, item.require[i].name)
+            if(valueInObject !==null){
+             if(!item.require[i].value.includes(valueInObject)){
+              allConditionsAreMet = false
+              break;
+            }
+          }
+            else if(!item.require[i].value.includes(findObjectByProperty(this.jsonConfig.properties, item.require[i].name, "name").defaultSraj)){
               allConditionsAreMet = false
               break;
             }

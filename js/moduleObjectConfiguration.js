@@ -56,16 +56,12 @@ function updateObjectRadioButton(event, container)
       })
     event.target.checked = true;
 
-  changeValueInJsonRadioButton(event, container)
-
   const targetKey = event.target.name
   const listToSet = []
   let allConditionsAreMet
   container.requiredItems.forEach(item => {
+    changeValueInJsonRadioButton(event, container)
     allConditionsAreMet = true
-    if(item.idInput === "animation.params"){
-      debugger
-    }
     for(let i = 0 ; i < item.require.length ; i++) {
       
       if(getValueFromObject(item.require[i], "name") === targetKey)
@@ -88,12 +84,12 @@ function updateObjectRadioButton(event, container)
       if(allConditionsAreMet) {
         if(item.inputType === "subkey"){
           const paramName = item.name
-          newObject = createObjectBaseOnConfig(item.properties)
-          listToSet.push({"name": paramName, "value":newObject})
+          const isKeyContainerWithNoList = (container === keyContainer && !container.hasList)
+          const newObject = createObjectBaseOnConfig(item.properties, isKeyContainerWithNoList)
+          listToSet.push({"name": paramName, "value": newObject})
           container.setObjectKeyByPath(paramName, newObject)
-          removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
         }
-        else if(!listToSet.includes(item) && getValueFromObject(container.workingObject, item.name) === null){
+        else if(!listToSet.includes(item)){
           listToSet.push({"name": item.name, "value": item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : ''})
           container.setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '')
         }
@@ -103,7 +99,11 @@ function updateObjectRadioButton(event, container)
       }
   })
   listToSet.forEach(item => container.setObjectKeyByPath(item.name, item.value))
+  changeValueInJsonRadioButton(event, container)
+  fillFormFields(container.workingObject)
+  removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
   updateDynamicDataAndJsonText()
+  container.hideAndRevealRequiredItems()
 }
 
 function isItemIncluded(item, path, object, key){
@@ -111,7 +111,7 @@ function isItemIncluded(item, path, object, key){
 }
 
 function getLastPartOfTheName(fullName){
-  const dotIndex = fullName.indexOf('.');
+  const dotIndex = fullName.lastIndexOf('.');
   const paramName = dotIndex !== -1 ? fullName.substring(dotIndex + 1) : fullName;
 
   return paramName
@@ -135,6 +135,7 @@ function changeValueInJsonInput(event, container){
     container.removeObjectKeyByPath(key)
   }
   updateDynamicDataAndJsonText()
+  container.hideAndRevealRequiredItems()
 }
 
 function changeValueInJsonCheckbox(event, container){
@@ -142,6 +143,7 @@ function changeValueInJsonCheckbox(event, container){
   const newValue = event.target.classList.contains("checkbox-checked") ? true : false
   changeValueInJson(key, newValue, container)
   updateDynamicDataAndJsonText()
+  container.hideAndRevealRequiredItems()
 }
 
 function getValueInGoodType(key, value, container){
@@ -257,8 +259,8 @@ function updateDynamicDataAndJsonText(){
   saveJsonState()
 }
 
-function createObjectBaseOnConfig(config) {
-  const result = {};
+function createObjectBaseOnConfig(config, isKeyContainerWithNoList) {
+  let result = {};
 
   for (const property of config) {
     const keys = property.name.split('.');
@@ -286,9 +288,14 @@ function createObjectBaseOnConfig(config) {
     currentObj[paramName] = property.defaultInput !== undefined && property.defaultInput !== null ? property.defaultInput : '';
     }
   }
-  const topLevelKeys = Object.keys(result);
+  let topLevelKeys = Object.keys(result);
+  if(isKeyContainerWithNoList){
+    result = result[topLevelKeys[0]]
+    topLevelKeys = Object.keys(result);
+  }
   return result[topLevelKeys[0]];
 }
+
 
 function removeDefaultValuesFromJson(data, config, container, prefix = "") {
   for (const key in data) {

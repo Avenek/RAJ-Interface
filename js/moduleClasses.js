@@ -139,6 +139,15 @@ class GetRandom {
   }
 }
 
+class GetCharacterData {
+  constructor(path) {
+    this.kind = "HERO"
+    this.toGet = path
+    this.modify = 0
+    this. rotation = {"x":0, "y":0}
+  }
+}
+
 
 
 

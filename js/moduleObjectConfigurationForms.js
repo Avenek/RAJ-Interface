@@ -61,8 +61,11 @@ function createObjectConfigurationContainer(config)
               case "behavior":
                 color = "#0096FF"
                 break;
-              default:
+              case "get character data":
                 color= "#8A2BE2"
+                break;
+              default:
+                color= "#FF1493"
                 break
             }
             html += `<button class="extra-option" style="--clr:${color}"><span>${option.name}</span><i></i></button>`;
@@ -150,7 +153,6 @@ function addToolTip(property)
 }
 
 function fillFormFields(data, prefix = "") {
-  console.log(data);
     for (let key in data) {
       const value = data[key];
       const fullKey = prefix + key;
@@ -421,6 +423,41 @@ function handleExtraOptionButtonClick(event){
               console.error('Błąd pobierania:', error);
               })
               break;
+              case "get character data":
+                fetch(`config/getCharacterData.json`)
+                .then(response => response.json())
+                .then(config => {
+                    fullHtml += createObjectConfigurationContainer(config) 
+                    container.innerHTML = fullHtml
+                    keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "getCharacterData")
+                    keyContainer.requiredItems = findReuqiredItems(config)
+                    keyContainer.hasList = false
+                    keyContainer.jsonConfig = config
+                    keyContainer.event = event.target
+                    const path = keyContainer.event.previousElementSibling.previousElementSibling.name
+                   if(!getValueFromObject(objectContainer.workingObject, path).hasOwnProperty("getCharacterData"))
+                    {
+                      keyContainer.workingObject = {"getCharacterData":{}}
+                      keyContainer.workingObject.getCharacterData = new GetCharacterData(getLastPartOfTheName(path))
+                      objectContainer.setObjectKeyByPath(path, keyContainer.workingObject)
+                    }
+                    else{
+                      keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, path)
+                    }
+                    keyContainer.createObjectList()
+                    getModuleElements(container, listContainer)
+                    createModuleDOMEvents(keyContainer)
+                    updateDynamicDataAndJsonText()
+                    fillFormFields(keyContainer.workingObject);
+                    keyContainer.hideAndRevealRequiredItems() 
+                    removeDefaultValuesFromJson(keyContainer.workingObject, keyContainer.jsonConfig.properties, keyContainer)
+                    saveJsonState()
+                    inputList.forEach(input => isDataValid(keyContainer, input))   
+                })
+                .catch(error => {
+                console.error('Błąd pobierania:', error);
+                })
+                break;
       case "TABLE":
         break;
       default:
@@ -473,9 +510,6 @@ function  hightligthsUsedExtraOption(container){
       case "random":
         object = container.workingObject
         path = button.parentElement.firstChild.nextElementSibling.name
-        if(path.indexOf(".")===-1){
-          path = ""
-        }
         if(path) {
           object = findObjectByPath(object, path)
         }
@@ -514,6 +548,19 @@ function  hightligthsUsedExtraOption(container){
               button.classList.remove("extra-option-active")
             }
             break;
+      case "get character data":
+        object = container.workingObject
+        path = button.parentElement.firstChild.nextElementSibling.name || button.parentElement.firstChild.textContent
+        if(path) {
+          object = findObjectByPath(object, path)
+        }
+        if(object && object.hasOwnProperty("getCharacterData")){
+          button.classList.add("extra-option-active")
+        }
+        else{
+          button.classList.remove("extra-option-active")
+        }
+        break;
       default:
         break;
     }

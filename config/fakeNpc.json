@@ -35,6 +35,7 @@
                     "inputType": "number",
                     "varType": ["int"],
                     "defaultInput": 0,
+                    "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
                     "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
@@ -48,6 +49,7 @@
                     "inputType": "number",
                     "varType": ["int"],
                     "defaultInput": 0,
+                    "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
                     "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
@@ -60,6 +62,7 @@
                     "options": [{"name":"N"}, {"name":"E"}, {"name":"S"}, {"name":"W"}],
                     "defaultInput": "S",
                     "defaultSraj": "S",
+                    "extraOptions": [{"name":"get character data"}],
                     "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
                 {
@@ -69,6 +72,7 @@
                     "inputType": "string",
                     "varType": ["string"],
                     "defaultInput": "/npc/test.gif",
+                    "extraOptions": [{"name":"get character data"}],
                     "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
                 {

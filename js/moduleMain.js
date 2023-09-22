@@ -110,7 +110,6 @@ function setupRadioButtons(radioButtons, container) {
 }
 
 function addObjectIfListIsEmpty(container){
-  console.log(radioButtonObjectList);
   if(radioButtonObjectList.length ===0)
   {
     addObjectToList(container)
