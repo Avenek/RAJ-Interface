@@ -207,7 +207,7 @@ function removeObjectFromList(event, container){
                     removeObjectFromJson(objectId, objectContainer.workingObject.behavior.list, container)
                 }
                 break;
-            case "random", "randomFirstIndex", "getCharacterData", "light":
+            case "random", "randomFirstIndex", "getCharacterData", "light", "master":
                 break;
             default:
                 removeObjectFromJson(objectId, container.list, container)
@@ -257,6 +257,11 @@ function removeObjectFromList(event, container){
                         break;
                     case "light":
                         objectContainer.removeObjectKeyByPath("d.light")
+                        clearKeyContainers()
+                        keyContainer.event.classList.remove("extra-option-active", "menu-active")
+                        break;
+                    case "master":
+                        objectContainer.removeObjectKeyByPath("master")
                         clearKeyContainers()
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;

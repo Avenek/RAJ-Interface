@@ -302,6 +302,7 @@ function handleExtraOptionButtonClick(event){
             updateDynamicDataAndJsonText()
             fillFormFields(keyContainer.workingObject);
             keyContainer.hideAndRevealRequiredItems() 
+            makeKeyOrder(objectContainer)
             saveJsonState()   
             inputList.forEach(input => isDataValid(keyContainer, input))   
             
@@ -384,6 +385,7 @@ function handleExtraOptionButtonClick(event){
                 keyContainer.createObjectList()
                 getModuleElements(container, listContainer)
                 createModuleDOMEvents(keyContainer)
+                makeKeyOrder(objectContainer)
                 updateDynamicDataAndJsonText()
                 fillFormFields(keyContainer.workingObject);
                 keyContainer.hideAndRevealRequiredItems() 
@@ -486,6 +488,7 @@ function handleExtraOptionButtonClick(event){
                       keyContainer.createObjectList()
                       getModuleElements(container, listContainer)
                       createModuleDOMEvents(keyContainer)
+                      makeKeyOrder(objectContainer)
                       updateDynamicDataAndJsonText()
                       fillFormFields(keyContainer.workingObject);
                       keyContainer.hideAndRevealRequiredItems() 
@@ -497,6 +500,39 @@ function handleExtraOptionButtonClick(event){
                   console.error('Błąd pobierania:', error);
                   })
                   break;
+                  case "master":
+                    fetch(`config/${currentModule}Master.json`)
+                    .then(response => response.json())
+                    .then(config => {
+                        fullHtml += createObjectConfigurationContainer(config) 
+                        container.innerHTML = fullHtml
+                        keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "master")
+                        keyContainer.requiredItems = findReuqiredItems(config)
+                        keyContainer.hasList = false
+                        keyContainer.jsonConfig = config
+                        keyContainer.event = event.target
+                       if(!objectContainer.workingObject.hasOwnProperty("master"))
+                        {
+                          keyContainer.workingObject = new Master()
+                          objectContainer.setObjectKeyByPath("master", keyContainer.workingObject)
+                        }
+                        else{
+                          keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, "master")
+                        }
+                        keyContainer.createObjectList()
+                        getModuleElements(container, listContainer)
+                        createModuleDOMEvents(keyContainer)
+                        makeKeyOrder(objectContainer)
+                        updateDynamicDataAndJsonText()
+                        fillFormFields(keyContainer.workingObject);
+                        keyContainer.hideAndRevealRequiredItems() 
+                        saveJsonState()
+                        inputList.forEach(input => isDataValid(keyContainer, input))   
+                    })
+                    .catch(error => {
+                    console.error('Błąd pobierania:', error);
+                    })
+                    break;
       case "TABLE":
         break;
       default:
@@ -609,6 +645,14 @@ function  hightligthsUsedExtraOption(container){
           button.classList.remove("extra-option-active")
         }
         break;
+      case "master":
+        object = container.workingObject
+        if(object && object.hasOwnProperty("master")){
+          button.classList.add("extra-option-active")
+        }
+        else{
+          button.classList.remove("extra-option-active")
+        }
       default:
         break;
     }

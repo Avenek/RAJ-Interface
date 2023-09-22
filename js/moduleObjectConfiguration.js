@@ -228,7 +228,6 @@ function makeKeyOrder(container){
     }
   }
   if(objectContainer.workingObject.hasOwnProperty("d")){
-    console.log("test");
     moveToLastPlaceInJson(objectContainer, "d")
     if(objectContainer.workingObject.d.hasOwnProperty("light")){
       moveToLastPlaceInJson(objectContainer, "d.light")

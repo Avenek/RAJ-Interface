@@ -183,6 +183,11 @@ class Color{
   }
 }
 
+class Master{
+  constructor(){
+    this.kind = "THIS_NPC_INSTANCE"
+  }
+}
 
 
 
