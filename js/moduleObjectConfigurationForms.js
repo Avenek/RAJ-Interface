@@ -381,7 +381,7 @@ function handleExtraOptionButtonClick(event){
                 else if(currentModule === "behaviorDynamicLight"){
                   if(objectContainer.workingObject.d["behavior"].list.length === 0)
                 {
-                  keyContainer.workingObject = new behaviorDynamicLightBehavior()
+                  keyContainer.workingObject = new BehaviorDynamicLightBehavior()
                   objectContainer.workingObject.d["behavior"].list.push(keyContainer.workingObject)
                 }
                 else{

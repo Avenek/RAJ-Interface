@@ -670,6 +670,10 @@ ul {
     color: #0ff755;
   }
 
+  .single-object-container:hover .delete-icon:not(.copy-icon + .delete-icon) {
+    left: 15%;
+}
+
 header{
     pointer-events: none;
 }

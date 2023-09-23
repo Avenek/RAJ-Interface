@@ -36,10 +36,10 @@
             "max":999,
             "step":1,
             "inputType": "number",
-            "varType": ["float"],
+            "varType": ["float", "int"],
             "defaultInput": 0,
             "require": [{"name": "getRandom.resultType", "value": ["float"]}],
-            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "float", "name": "lessThan", "value": "getRandom.end"}]
+            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "float", "name": "lessThan", "value": "getRandom.end"}, {"forType": "int", "name": "minMax"}, {"forType": "int", "name": "lessThan", "value": "getRandom.end"}]
           },
           {
             "name": "getRandom.end",
@@ -62,10 +62,10 @@
             "max":999,
             "step":1,
             "inputType": "number",
-            "varType": ["float"],
+            "varType": ["float", "int"],
             "defaultInput": 1,
             "require": [{"name": "getRandom.resultType", "value": ["float"]}],
-            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "float", "name": "moreThan", "value": "getRandom.start"}]
+            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "float", "name": "moreThan", "value": "getRandom.start"}, {"forType": "int", "name": "minMax"}, {"forType": "int", "name": "moreThan", "value": "getRandom.start"}]
           },
           {
             "name": "getRandom.options",

@@ -72,6 +72,7 @@ function updateObjectRadioButton(event, container)
   const listToSet = []
   let allConditionsAreMet
   container.requiredItems.forEach(item => {
+    debugger
     changeValueInJsonRadioButton(event, container)
     allConditionsAreMet = true
     for(let i = 0 ; i < item.require.length ; i++) {
@@ -89,20 +90,23 @@ function updateObjectRadioButton(event, container)
         allConditionsAreMet = true
       }
       else{
-        allConditionsAreMet = falsex
+        allConditionsAreMet = false
         break;
       }
     }
       if(allConditionsAreMet) {
         if(item.inputType === "subkey"){
           const paramName = item.name
-          const isKeyContainerWithNoList = (container === keyContainer && !container.hasList)
-          const newObject = createObjectBaseOnConfig(item.properties, isKeyContainerWithNoList)
+          const newObject = createObjectBaseOnConfig(item.properties, container)
           listToSet.push({"name": paramName, "value": newObject})
           container.setObjectKeyByPath(paramName, newObject)
         }
-        else if(!listToSet.includes(item)){
-          listToSet.push({"name": item.name, "value": item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : ''})
+        else if(!listToSet.includes(item) && item.inputType !== "empty"){
+          let value = getValueFromObject(container.workingObject, item.name)
+          if(value === null){
+            value = item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : ''
+          }
+          listToSet.push({"name": item.name, "value": value})
           container.setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '')
         }
       }
@@ -112,10 +116,11 @@ function updateObjectRadioButton(event, container)
   })
   listToSet.forEach(item => container.setObjectKeyByPath(item.name, item.value))
   changeValueInJsonRadioButton(event, container)
-  fillFormFields(container)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
+  fillFormFields(container)
   updateDynamicDataAndJsonText()
   container.hideAndRevealRequiredItems()
+  inputList.forEach(input => isDataValid(container, input))
 }
 
 function isItemIncluded(item, path, object, key){
@@ -287,41 +292,28 @@ function updateDynamicDataAndJsonText(){
   saveJsonState()
 }
 
-function createObjectBaseOnConfig(config, isKeyContainerWithNoList) {
+function createObjectBaseOnConfig(config, container) {
   let result = {};
-
+  let currentObj = result;
   for (const property of config) {
-    const keys = property.name.split('.');
-    const paramName = keys.pop();
-    let currentObj = result;
-
-    for (const key of keys) {
-      if (!currentObj[key] || typeof currentObj[key] !== 'object') {
-        currentObj[key] = {};
-      }
-      currentObj = currentObj[key];
-    }
-    if(property.hasOwnProperty("properties") && property.inputType !== "table")
+    const key = getLastPartOfTheName(property.name)
+    if(property.hasOwnProperty("properties"))
     {
-      const createdObject = createObjectBaseOnConfig(property.properties)
-      const topLevelKeys = Object.keys(createdObject);
-      if(topLevelKeys.length>0){
-        currentObj[paramName] = createdObject[topLevelKeys[0]]
+      const createdObject = createObjectBaseOnConfig(property.properties, container)
+      currentObj[key] = createdObject
+    }
+    else if(property.inputType!=="empty" || property.hasOwnProperty("defaultInput")){
+      const value = getValueFromObject(container.workingObject, property.name)
+      if(value !== null){
+        currentObj[key] = value
       }
       else{
-      currentObj[paramName] = createdObject
+        currentObj[key] = property.defaultInput !== undefined && property.defaultInput !== null ? property.defaultInput : '';
       }
-    }
-    else{
-    currentObj[paramName] = property.defaultInput !== undefined && property.defaultInput !== null ? property.defaultInput : '';
+    
     }
   }
-  let topLevelKeys = Object.keys(result);
-  if(isKeyContainerWithNoList){
-    result = result[topLevelKeys[0]]
-    topLevelKeys = Object.keys(result);
-  }
-  return result[topLevelKeys[0]];
+  return result
 }
 
 

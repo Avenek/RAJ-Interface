@@ -110,7 +110,7 @@ function showError(targetInput, message){
             showError(input, errorMessage)
             break;
           }
-          else if(inputValue === "" && !configObject.canBeEmpty){
+          else if(inputValue === "" && !configObject.canBeEmpty && input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active")){
             errorMessage = "Pole jest obligatoryjne i nie może być puste!"
             showError(input, errorMessage)
           }
@@ -122,7 +122,7 @@ function showError(targetInput, message){
       if(!isValid){
         showError(input, errorMessage)
       }
-      else if(inputValue === "" && !configObject.canBeEmpty){
+      else if(inputValue === "" && !configObject.canBeEmpty && input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active")){
         errorMessage = "Pole jest obligatoryjne i nie może być puste!"
         showError(input, errorMessage)
       }
@@ -130,7 +130,7 @@ function showError(targetInput, message){
         hideError(input)
       }
     }
-    else if(inputValue.length===0 && !configObject.canBeEmpty){
+    else if(inputValue.length===0 && !configObject.canBeEmpty && input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active")){
       errorMessage = "Pole jest obligatoryjne i nie może być puste!"
         showError(input, errorMessage)
     }

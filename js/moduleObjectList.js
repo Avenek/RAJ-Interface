@@ -1,13 +1,14 @@
 function addObjectToList(container, event = "", isCopy = false){
     const objectListContainer = document.querySelector(`.${container.listClassName}`)
     const singleObjectContainer = createObjectContainer(container)
-    const copyButton = createNewCopyButton(container)
     const deleteButton = createNewDeleteButton(container)
     const labelAndRadioButton = createNewLabelAndRadioButton(objectListContainer, container, isCopy, event)
     let plusButton
+    let copyButton
     if(container.hasList)
     {
         plusButton = createNewPlusButton(container)
+        copyButton = createNewCopyButton(container)
         removeCurrentPlusButton(objectListContainer)
     }
     else{
@@ -17,7 +18,10 @@ function addObjectToList(container, event = "", isCopy = false){
     removeCheckedFromAllRadio(objectListContainer)
 
     singleObjectContainer.appendChild(labelAndRadioButton);
+    if(container.hasList)
+    {
     singleObjectContainer.appendChild(copyButton)
+    }
     singleObjectContainer.appendChild(deleteButton)
     objectListContainer.appendChild(singleObjectContainer)
     if(container.hasList)
