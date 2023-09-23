@@ -207,6 +207,14 @@ class CameraTarget{
   }
 }
 
+class Zoom{
+  constructor(){
+    this.action = "CREATE"
+    this.duration = true
+    this.zoom = 2
+    this.speed = 2
+  }
+}
 
 
 
@@ -404,6 +412,15 @@ let objectDict = {
     constructor(){
       this.duration = 0
       this.target = new CameraTarget()
+    }
+  },
+
+  zoom : class Zoom{
+    constructor(){
+      this.action = "CREATE"
+      this.duration = true
+      this.zoom = 2
+      this.speed = 2
     }
   }
 }

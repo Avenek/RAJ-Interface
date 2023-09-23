@@ -181,6 +181,7 @@ function changeValueInJsonCheckbox(event, container){
 
 function getValueInGoodType(key, value, container){
   const configObject = findObjectByProperty(container.jsonConfig.properties, key, "name")
+  console.log(configObject, key);
   let newValue = value
   if(configObject.varType.includes("boolean")){
     if(newValue === "false")

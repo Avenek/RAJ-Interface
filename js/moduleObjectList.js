@@ -90,11 +90,8 @@ function pickDefaultUniqueName(container, objectListContainer){
         case "weather":
             defaultName = "Rain"
             break;
-        case "earthQuake":
-            defaultName = "earthQuake"
-            break;
-        case "camera":
-            defaultName = "camera"
+        case "earthQuake", "camera", "zoom":
+            defaultName = container.name
             break;
         default:
             const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');

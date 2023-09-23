@@ -11,7 +11,7 @@
                     "idInput": "duration",
                     "tool-tip": "Czas trwania jednego wstrząsu w sekundach.",
                     "step":0.1,
-                    "min":0,
+                    "min":0.1,
                     "max":5,
                     "inputType": "number",
                     "varType": ["float", "int"],
