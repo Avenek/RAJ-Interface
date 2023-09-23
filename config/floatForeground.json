@@ -1,0 +1,76 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Efekty możemy tworzyć albo usuwać.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca efekt. Umożliwia późniejszego jego usunięciu.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "xVector",
+                    "idInput": "xVector",
+                    "tool-tip": "Prędkość w poziomie z jaką i w którą stronę będzie się przemieszczać wzorzec po ekranie.",
+                    "min":-5,
+                    "max":5,
+                    "step":0.1,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput": 0.2,
+                    "defaultSraj": 0.2,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "action", "value": ["CREATE"]}]
+                },
+                {
+                    "name": "yVector",
+                    "idInput": "yVector",
+                    "tool-tip": "Prędkość w pionie z jaką i w którą stronę będzie się przemieszczać wzorzec po ekranie.",
+                    "min":-5,
+                    "max":5,
+                    "step":0.1,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput": -0.1,
+                    "defaultSraj": -0.1,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "action", "value": ["CREATE"]}]
+                },
+                {
+                    "name": "url",
+                    "idInput": "url",
+                    "tool-tip": "Ścieżka do grafiki wzorca. Przykład: chmury/mgla1.png",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": "chmury/mgla1.png",
+                    "require": [{"name": "action", "value": ["CREATE"]}]
+                },
+                {
+                    "name": "color",
+                    "idInput": "color",
+                    "tool-tip": "",
+                    "inputType": "empty",
+                    "extraOptions": [{"name":"color"}],
+                    "require": [{"name": "action", "value": ["CREATE"]}]
+                }
+            ]
+        }
+    ]
+}

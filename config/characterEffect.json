@@ -124,7 +124,6 @@
                             "defaultInput": 1,
                             "defaultSraj": 1,
                             "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
-                            
                         },
                         {
                             "name": "params.position",

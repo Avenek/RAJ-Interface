@@ -216,6 +216,15 @@ class Zoom{
   }
 }
 
+class FloatForeground{
+  constructor(id) {
+    this.action = "CREATE"
+    this.id = id
+    this.xVector = 0.2
+    this.yVector = -0.1
+    this.url = "chmury/mgla1.png"
+  }
+}
 
 
 
@@ -422,5 +431,16 @@ let objectDict = {
       this.zoom = 2
       this.speed = 2
     }
+  },
+
+  floatForeground : class FloatForeground{
+    constructor(id) {
+      this.action = "CREATE"
+      this.id = id
+      this.xVector = 0.2
+      this.yVector = -0.1
+      this.url = "chmury/mgla1.png"
+    }
   }
+  
 }

@@ -2,7 +2,7 @@ function createObjectConfigurationContainer(config)
 {
     let html = ''
     for (const property of config.properties) {
-        if(property.inputType === "key" || property.inputType === "subkey" || property.inputType === "subSubkey"){
+        if(property.inputType === "key" || property.inputType === "subkey" || property.inputType === "subSubkey" || property.inputType === "table"){
         html += `<div class="${property.inputType}">
         <header data-name="${property.idInput}">${property.name.substring(property.name.indexOf(".")+1).toUpperCase()}</header></div><div class="key-menu">`
         html+=createObjectConfigurationContainer(property)
@@ -33,9 +33,6 @@ function createObjectConfigurationContainer(config)
           html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.idInput}" name="${property.name}" class="hide"></label>`;
         }
         else if(property.inputType === 'empty'){
-          html += `<div class="key-value"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span>`;
-        }
-        else if(property.inputType === 'table'){
           html += `<div class="key-value"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span>`;
         }
         else{
@@ -69,6 +66,9 @@ function createObjectConfigurationContainer(config)
                 break;
               case "light":
                 color= "#FFA500"
+                break;
+              case "color":
+                color = "#FFC0CB"
                 break;
               default:
                 color= "#FF1493"
@@ -201,6 +201,7 @@ function fillFormFields(container) {
         }
       }
       else{
+        console.log(container.workingObject, input.name);
         const value = getValueFromObject(container.workingObject, input.name)
         if(value !== null && Array.isArray(value)){
           input.value = value.join(";")
@@ -495,6 +496,31 @@ function handleExtraOptionButtonClick(event){
                     console.error('Błąd pobierania:', error);
                     })
                     break;
+                    case "color":
+                      fetch(`config/color.json`)
+                      .then(response => response.json())
+                      .then(config => {
+                          fullHtml += createObjectConfigurationContainer(config) 
+                          container.innerHTML = fullHtml
+                          keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "color")
+                          keyContainer.requiredItems = findReuqiredItems(config)
+                          keyContainer.hasList = false
+                          keyContainer.jsonConfig = config
+                          keyContainer.event = event.target
+                         if(!objectContainer.workingObject.hasOwnProperty("color"))
+                         {
+                           keyContainer.workingObject = new Color()
+                           objectContainer.setObjectKeyByPath("color", keyContainer.workingObject)
+                         }
+                         else{
+                           keyContainer.workingObject = objectContainer.workingObject.color
+                          }
+                        configKeyContainer(container, listContainer)
+                    })
+                      .catch(error => {
+                      console.error('Błąd pobierania:', error);
+                      })
+                      break;
       case "TABLE":
         break;
       default:
@@ -604,6 +630,11 @@ function isExtraButtonUsed(button, container){
     case "master":
       object = container.workingObject
       isUsed = object && object.hasOwnProperty("master")
+      break;
+    case "color":
+      object = container.workingObject
+      isUsed = object && object.hasOwnProperty("color")
+      break;
     default:
       break;
   }

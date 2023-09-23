@@ -237,7 +237,6 @@ function createWorkingObjectAndReturnModuleName(container, id){
 function removeObjectFromList(event, container){
     if (window.confirm("Czy na pewno chcesz usunąć obiekt?")) {
         const object = event.target.previousElementSibling.previousElementSibling
-        console.log(object);
         switch(container.name)
         {
             case "case":
@@ -254,7 +253,7 @@ function removeObjectFromList(event, container){
                     removeObjectFromJson(object, objectContainer.workingObject.behavior.list, container)
                 }
                 break;
-            case "random", "randomFirstIndex", "getCharacterData", "light", "master":
+            case "random", "randomFirstIndex", "getCharacterData", "light", "master", "color":
                 break;
             default:
                 removeObjectFromJson(object, container.list, container)
@@ -311,6 +310,11 @@ function removeObjectFromList(event, container){
                         break;
                     case "master":
                         objectContainer.removeObjectKeyByPath("master")
+                        clearKeyContainers()
+                        keyContainer.event.classList.remove("extra-option-active", "menu-active")
+                        break;
+                    case "color":
+                        objectContainer.removeObjectKeyByPath("color")
                         clearKeyContainers()
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;
