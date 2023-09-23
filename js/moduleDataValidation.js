@@ -11,9 +11,7 @@ function showError(targetInput, message){
   }
   
   function checkEmptyInputsAndShowErrors(container){
-    const inputContainer = document.querySelector(`.${container.className}`)
-    const inputList = inputContainer.querySelectorAll('input[type="number"], input[type="text"]')
-    inputList.forEach(input => {
+    container.inputList.forEach(input => {
       if(!input.parentElement.classList.contains("hide") && !input.parentElement.parentElement.classList.contains("hide")){
         showErrorIfInputIsEmpty(input)
       }   

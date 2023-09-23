@@ -298,22 +298,12 @@ function handleExtraOptionButtonClick(event){
               objectContainer.workingObject["case"].list = []
               keyContainer.workingObject = new Case()
               objectContainer.workingObject["case"].list.push(keyContainer.workingObject)
-              makeKeyOrder(objectContainer)
             }
             else{
               keyContainer.workingObject = objectContainer.workingObject["case"].list[0]
             }
-            keyContainer.list = objectContainer.workingObject["case"].list
-            keyContainer.createObjectList()
-            getModuleElements(container, listContainer)
-            createModuleDOMEvents(keyContainer)
-            updateDynamicDataAndJsonText()
-            fillFormFields(keyContainer);
-            keyContainer.hideAndRevealRequiredItems() 
-            makeKeyOrder(objectContainer)
-            saveJsonState()   
-            inputList.forEach(input => isDataValid(keyContainer, input))   
-            
+            keyContainer.list =  objectContainer.workingObject["case"].list
+            configKeyContainer(container, listContainer)
         })
         .catch(error => {
         console.error('Błąd pobierania:', error);
@@ -340,14 +330,7 @@ function handleExtraOptionButtonClick(event){
               else{
                 keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, path)
               }
-              keyContainer.createObjectList()
-              getModuleElements(container, listContainer)
-              createModuleDOMEvents(keyContainer)
-              updateDynamicDataAndJsonText()
-              fillFormFields(keyContainer);
-              keyContainer.hideAndRevealRequiredItems() 
-              saveJsonState()
-              inputList.forEach(input => isDataValid(keyContainer, input))   
+              configKeyContainer(container, listContainer)
           })
           .catch(error => {
           console.error('Błąd pobierania:', error);
@@ -373,10 +356,10 @@ function handleExtraOptionButtonClick(event){
                   keyContainer.workingObject = new FakeNpcBehavior()
                   objectContainer.workingObject.list.push(keyContainer.workingObject)
                 }
-                else{
-                  keyContainer.workingObject = objectContainer.workingObject.list[0]
-                }
-                keyContainer.list = objectContainer.workingObject.list
+                  else{
+                    keyContainer.workingObject = objectContainer.workingObject.list[0]
+                  }
+                  keyContainer.list = objectContainer.workingObject.list
                 }
                 else if(currentModule === "behaviorDynamicLight"){
                   if(objectContainer.workingObject.d["behavior"].list.length === 0)
@@ -399,18 +382,8 @@ function handleExtraOptionButtonClick(event){
                   keyContainer.workingObject = objectContainer.workingObject["behavior"].list[0]
                 }
                 keyContainer.list = objectContainer.workingObject["behavior"].list
-              }
-                
-                keyContainer.createObjectList()
-                getModuleElements(container, listContainer)
-                createModuleDOMEvents(keyContainer)
-                makeKeyOrder(objectContainer)
-                updateDynamicDataAndJsonText()
-                fillFormFields(keyContainer);
-                keyContainer.hideAndRevealRequiredItems() 
-                saveJsonState()   
-                inputList.forEach(input => isDataValid(keyContainer, input))   
-                
+              }          
+              configKeyContainer(container, listContainer)     
             })
             .catch(error => {
             console.error('Błąd pobierania:', error);
@@ -432,19 +405,11 @@ function handleExtraOptionButtonClick(event){
                   {
                     keyContainer.workingObject = {"forActions": []}
                     objectContainer.setObjectKeyByPath(path, keyContainer.workingObject)
-                    makeKeyOrder(objectContainer)
                   }
                   else{
                     keyContainer.workingObject = objectContainer.workingObject["behavior"].randomFirstIndex
                   }
-                  keyContainer.createObjectList()
-                  getModuleElements(container, listContainer)
-                  createModuleDOMEvents(keyContainer)
-                  updateDynamicDataAndJsonText()
-                  fillFormFields(keyContainer);
-                  keyContainer.hideAndRevealRequiredItems() 
-                  saveJsonState()
-                  inputList.forEach(input => isDataValid(keyContainer, input))   
+                  configKeyContainer(container, listContainer)
               })
               .catch(error => {
               console.error('Błąd pobierania:', error);
@@ -470,16 +435,8 @@ function handleExtraOptionButtonClick(event){
                     }
                     else{
                       keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, path)
-                    }
-                    keyContainer.createObjectList()
-                    getModuleElements(container, listContainer)
-                    createModuleDOMEvents(keyContainer)
-                    updateDynamicDataAndJsonText()
-                    fillFormFields(keyContainer);
-                    keyContainer.hideAndRevealRequiredItems() 
-                    removeDefaultValuesFromJson(keyContainer.workingObject, keyContainer.jsonConfig.properties, keyContainer)
-                    saveJsonState()
-                    inputList.forEach(input => isDataValid(keyContainer, input))   
+                    } 
+                    configKeyContainer(container, listContainer)
                 })
                 .catch(error => {
                 console.error('Błąd pobierania:', error);
@@ -504,16 +461,7 @@ function handleExtraOptionButtonClick(event){
                       else{
                         keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, "d.light")
                       }
-                      keyContainer.createObjectList()
-                      getModuleElements(container, listContainer)
-                      createModuleDOMEvents(keyContainer)
-                      makeKeyOrder(objectContainer)
-                      updateDynamicDataAndJsonText()
-                      fillFormFields(keyContainer);
-                      keyContainer.hideAndRevealRequiredItems() 
-                      removeDefaultValuesFromJson(keyContainer.workingObject, keyContainer.jsonConfig.properties, keyContainer)
-                      saveJsonState()
-                      inputList.forEach(input => isDataValid(keyContainer, input))   
+                      configKeyContainer(container, listContainer)
                   })
                   .catch(error => {
                   console.error('Błąd pobierania:', error);
@@ -538,15 +486,7 @@ function handleExtraOptionButtonClick(event){
                         else{
                           keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, "master")
                         }
-                        keyContainer.createObjectList()
-                        getModuleElements(container, listContainer)
-                        createModuleDOMEvents(keyContainer)
-                        makeKeyOrder(objectContainer)
-                        updateDynamicDataAndJsonText()
-                        fillFormFields(keyContainer);
-                        keyContainer.hideAndRevealRequiredItems() 
-                        saveJsonState()
-                        inputList.forEach(input => isDataValid(keyContainer, input))   
+                        configKeyContainer(container, listContainer)
                     })
                     .catch(error => {
                     console.error('Błąd pobierania:', error);
@@ -557,11 +497,25 @@ function handleExtraOptionButtonClick(event){
       default:
         break; 
     }
+    
   }
   else{
     container.innerHTML = fullHtml
     listContainer.innerHTML = '<div class="container-title">Menu obiektów</div>'
   }
+}
+
+function configKeyContainer(container, listContainer){
+  keyContainer.createObjectList()
+    getModuleElements(container, listContainer, keyContainer)
+    createModuleDOMEvents(keyContainer)
+    makeKeyOrder(objectContainer)
+    updateDynamicDataAndJsonText()
+    fillFormFields(keyContainer);
+    keyContainer.hideAndRevealRequiredItems() 
+    removeDefaultValuesFromJson(keyContainer.workingObject, keyContainer.jsonConfig.properties, keyContainer)
+    saveJsonState()
+    keyContainer.inputList.forEach(input => isDataValid(keyContainer, input)) 
 }
 
 function hideFullForm(container, withPlusButton){
@@ -588,102 +542,69 @@ function revealFullForm(container){
 function  hightligthsUsedExtraOption(container){
   const configurationContainer = document.querySelector(`.${container.className}`)
   const extraOptions = configurationContainer.querySelectorAll('.extra-option')
-  let path
-  let object;
+
+  
   extraOptions.forEach(button =>{
-    switch(button.textContent){
-      case "case":
-        object = container.workingObject
-        if(object && object.hasOwnProperty("case")){
-          button.classList.add("extra-option-active")
-        }
-        else{
-          button.classList.remove("extra-option-active")
-        }
-        break;
-      case "random":
-        object = container.workingObject
-        path = button.parentElement.firstChild.nextElementSibling.name
-        if(path) {
-          object = findObjectByPath(object, path)
-        }
-        if(object && object.hasOwnProperty("getRandom")){
-          button.classList.add("extra-option-active")
-        }
-        else{
-          button.classList.remove("extra-option-active")
-        }
-        break;
-        case "behavior":
-          object = container.workingObject 
-          if(currentModule === "callInstantBehaviorFakeNpc"){
-            if(object && object.list.length>0){
-              button.classList.add("extra-option-active")
-            }
-            else{
-              button.classList.remove("extra-option-active")
-            }
-          }
-          else if(currentModule==="behaviorDynamicLight"){
-            if(object.d && object.d.behavior && object.d.behavior.list && object.d.behavior.list.length>0){
-              button.classList.add("extra-option-active")
-            }
-            else{
-              button.classList.remove("extra-option-active")
-            }
-          }
-          else{
-            if(object && object.behavior.list.length>0){
-              button.classList.add("extra-option-active")
-            }
-            else{
-              button.classList.remove("extra-option-active")
-            }
-          }
-          break;
-          case "random first index":
-            object = container.workingObject  
-            if(object && object.behavior.hasOwnProperty("randomFirstIndex")){
-              button.classList.add("extra-option-active")
-            }
-            else{
-              button.classList.remove("extra-option-active")
-            }
-            break;
-      case "get character data":
-        object = container.workingObject
-        path = button.parentElement.firstChild.nextElementSibling.name || button.parentElement.firstChild.textContent
-        if(path) {
-          object = findObjectByPath(object, path)
-        }
-        if(object && object.hasOwnProperty("getCharacterData")){
-          button.classList.add("extra-option-active")
-        }
-        else{
-          button.classList.remove("extra-option-active")
-        }
-        break;
-      case "light":
-        object = container.workingObject
-        if(object.d && object.d.hasOwnProperty("light")){
-          button.classList.add("extra-option-active")
-        }
-        else{
-          button.classList.remove("extra-option-active")
-        }
-        break;
-      case "master":
-        object = container.workingObject
-        if(object && object.hasOwnProperty("master")){
-          button.classList.add("extra-option-active")
-        }
-        else{
-          button.classList.remove("extra-option-active")
-        }
-      default:
-        break;
+    isUsed = isExtraButtonUsed(button, container)
+    if(isUsed){
+      button.classList.add("extra-option-active")
+    }
+    else{
+      button.classList.remove("extra-option-active")
     }
   })
+}
+
+function isExtraButtonUsed(button, container){
+  let path, object, isUsed
+  switch(button.textContent){
+    case "case":
+      object = container.workingObject
+      isUsed = object && object.hasOwnProperty("case")
+      break;
+    case "random":
+      object = container.workingObject
+      path = button.parentElement.firstChild.nextElementSibling.name
+      if(path) {
+        object = findObjectByPath(object, path)
+      }
+      isUsed = object && object.hasOwnProperty("getRandom")
+      break;
+      case "behavior":
+        object = container.workingObject 
+        if(currentModule === "callInstantBehaviorFakeNpc"){
+          isUsed = object && object.list.length>0
+        }
+        else if(currentModule==="behaviorDynamicLight"){
+          isUsed = object.d && object.d.behavior && object.d.behavior.list && object.d.behavior.list.length>0
+        }
+        else{
+          isUsed = object && object.behavior.list.length>0
+        }
+        break;
+        case "random first index":
+          object = container.workingObject  
+          isUsed = object && object.behavior.hasOwnProperty("randomFirstIndex")
+          break;
+    case "get character data":
+      object = container.workingObject
+      path = button.parentElement.firstChild.nextElementSibling.name || button.parentElement.firstChild.textContent
+      if(path) {
+        object = findObjectByPath(object, path)
+      }
+      isUsed = object && object.hasOwnProperty("getCharacterData")
+      break;
+    case "light":
+      object = container.workingObject
+      isUsed = object.d && object.d.hasOwnProperty("light")
+      break;
+    case "master":
+      object = container.workingObject
+      isUsed = object && object.hasOwnProperty("master")
+    default:
+      break;
+  }
+  return isUsed
 }
 
 function removeActiveExtraOption(event, config){

@@ -1,4 +1,4 @@
-let uniqueNameRadioButtons, addObjectPlus, deleteObjectButtons, copyObjectButtons, radioButtonObjectList, inputList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons, homeLink
+let uniqueNameRadioButtons, addObjectPlus, deleteObjectButtons, copyObjectButtons, radioButtonObjectList, checkboxList, keyHeaders, extraOptionsButtons, jsonButtons, homeLink
 let currentModule = ""
 let requiredItems;
 let keyRequiredItems;
@@ -58,14 +58,14 @@ function loadModuleContent()
         const container = document.querySelector(".object-configuration")
         const objectListContainer = document.querySelector(".object-list-container")
         objectContainer.createObjectList()
-        getModuleElements(container, objectListContainer)       
+        getModuleElements(container, objectListContainer, objectContainer)       
         addObjectIfListIsEmpty(objectContainer)
         createModuleDOMEvents(objectContainer) 
         fillFormFields(objectContainer);
         objectContainer.hideAndRevealRequiredItems()
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties, objectContainer)
         hightligthsUsedExtraOption(objectContainer) 
-        inputList.forEach(input => isDataValid(objectContainer, input))
+        objectContainer.inputList.forEach(input => isDataValid(objectContainer, input))
 
     })
     .catch(error => {
@@ -116,14 +116,14 @@ function addObjectIfListIsEmpty(container){
   }
 }
 
-function getModuleElements(container, listContainer){
-  getModuleElementsFromContainer(container)
+function getModuleElements(container, listContainer, objContainer){
+  getModuleElementsFromContainer(container, objContainer)
   getModuleElementsFromObjectList(listContainer)
   jsonButtons = document.querySelectorAll(".json-buttons")
   homeLink = document.querySelector(".aLink")
 }
 
-function getModuleElementsFromContainer(container){
+function getModuleElementsFromContainer(container, objContainer){
   const radioButtons = container.querySelectorAll('input[type="radio"]');
   uniqueNameRadioButtons = new Set();
   radioButtons.forEach(radioButton => {
@@ -133,7 +133,7 @@ function getModuleElementsFromContainer(container){
     }
   });
 
-  inputList = container.querySelectorAll('input[type="text"], input[type="number"]')
+  objContainer.inputList = container.querySelectorAll('input[type="text"], input[type="number"]')
   checkboxList = container.querySelectorAll('.slider')
   keyHeaders = container.querySelectorAll(".key, .subkey, .subSubkey")
   extraOptionsButtons = container.querySelectorAll(".extra-option")
@@ -174,8 +174,8 @@ function createModuleDOMEventFromContainer(container){
     })
   }
 
-  if (inputList) {
-    inputList.forEach(input => {
+  if (container.inputList) {
+    container.inputList.forEach(input => {
       input.addEventListener("input", (event) => inputClickEvent(event, container))
       input.addEventListener("blur", (event) => {
         isDataValid(container, event.target) 

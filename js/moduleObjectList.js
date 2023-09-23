@@ -39,7 +39,7 @@ function addObjectToList(container, event = "", isCopy = false){
         let moduleName = createWorkingObjectAndReturnModuleName(container, labelAndRadioButton.textContent)
         addObjectToJson(container, moduleName)
     }
-    inputList.forEach(input => isDataValid(container, input))
+    container.inputList.forEach(input => isDataValid(container, input))
     revealFullForm(container)
 }
 
@@ -352,7 +352,7 @@ function changeObjectOnList(event, container){
     fillFormFields(container)
     container.hideAndRevealRequiredItems()
     removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
-    inputList.forEach(input => isDataValid(container, input))
+    container.inputList.forEach(input => isDataValid(container, input))
     hightligthsUsedExtraOption(container)
 }
 

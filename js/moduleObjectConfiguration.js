@@ -72,7 +72,6 @@ function updateObjectRadioButton(event, container)
   const listToSet = []
   let allConditionsAreMet
   container.requiredItems.forEach(item => {
-    debugger
     changeValueInJsonRadioButton(event, container)
     allConditionsAreMet = true
     for(let i = 0 ; i < item.require.length ; i++) {
@@ -118,9 +117,17 @@ function updateObjectRadioButton(event, container)
   changeValueInJsonRadioButton(event, container)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
   fillFormFields(container)
+  hightligthsUsedExtraOption(container)
+  const button = document.querySelector(".menu-active")
+  if(button){
+    const isUsed = isExtraButtonUsed(button, container)
+    if(!isUsed){
+      clearKeyContainers()
+    }
+  }
   updateDynamicDataAndJsonText()
   container.hideAndRevealRequiredItems()
-  inputList.forEach(input => isDataValid(container, input))
+  container.inputList.forEach(input => isDataValid(container, input))
 }
 
 function isItemIncluded(item, path, object, key){
