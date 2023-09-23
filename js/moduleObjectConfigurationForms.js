@@ -210,7 +210,10 @@ function fillFormFields(container) {
         }
         else{
           const defaultValue = findObjectByProperty(container.jsonConfig.properties, input.name, "name")
-          input.value = defaultValue.defaultSraj
+          if(defaultValue){
+            input.value = defaultValue.defaultSraj
+          }
+         
         }
       }
     }

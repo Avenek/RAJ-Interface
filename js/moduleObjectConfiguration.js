@@ -67,12 +67,37 @@ function updateObjectRadioButton(event, container)
           object.checked = false;
       })
     event.target.checked = true;
+  removeAndAddKeysByRequirements(event, container, event.target.type)
+  changeValueInJsonRadioButton(event, container)
+  removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
+  fillFormFields(container)
+  hightligthsUsedExtraOption(container)
+  const button = document.querySelector(".menu-active")
+  if(button){
+    const isUsed = isExtraButtonUsed(button, container)
+    if(!isUsed){
+      clearKeyContainers()
+    }
+  }
+  updateDynamicDataAndJsonText()
+  container.hideAndRevealRequiredItems()
+  container.inputList.forEach(input => isDataValid(container, input))
+}
 
+function removeAndAddKeysByRequirements(event, container, inputType){
   const targetKey = event.target.name
   const listToSet = []
   let allConditionsAreMet
   container.requiredItems.forEach(item => {
-    changeValueInJsonRadioButton(event, container)
+    if(inputType === "radio"){
+      changeValueInJsonRadioButton(event, container)
+    }
+    else{
+      const key = event.target.nextElementSibling.name
+      const newValue = event.target.classList.contains("checkbox-checked") ? true : false
+      changeValueInJson(key, newValue, container)
+    }
+    
     allConditionsAreMet = true
     for(let i = 0 ; i < item.require.length ; i++) {
       
@@ -114,20 +139,6 @@ function updateObjectRadioButton(event, container)
       }
   })
   listToSet.forEach(item => container.setObjectKeyByPath(item.name, item.value))
-  changeValueInJsonRadioButton(event, container)
-  removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
-  fillFormFields(container)
-  hightligthsUsedExtraOption(container)
-  const button = document.querySelector(".menu-active")
-  if(button){
-    const isUsed = isExtraButtonUsed(button, container)
-    if(!isUsed){
-      clearKeyContainers()
-    }
-  }
-  updateDynamicDataAndJsonText()
-  container.hideAndRevealRequiredItems()
-  container.inputList.forEach(input => isDataValid(container, input))
 }
 
 function isItemIncluded(item, path, object, key){
@@ -163,9 +174,7 @@ function changeValueInJsonInput(event, container){
 }
 
 function changeValueInJsonCheckbox(event, container){
-  const key = event.target.nextElementSibling.name
-  const newValue = event.target.classList.contains("checkbox-checked") ? true : false
-  changeValueInJson(key, newValue, container)
+  removeAndAddKeysByRequirements(event, container, event.target.type)
   updateDynamicDataAndJsonText()
   container.hideAndRevealRequiredItems()
 }

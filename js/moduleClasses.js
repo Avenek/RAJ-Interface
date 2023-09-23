@@ -192,6 +192,26 @@ class BehaviorDynamicLightBehavior{
   }
 }
 
+class Camera{
+  constructor(){
+    this.duration = 0
+    this.target = new CameraTarget()
+  }
+}
+
+class CameraTarget{
+  constructor(){
+    this.kind = "MAP"
+    this.x = 0
+    this.y = 0
+  }
+}
+
+
+
+
+
+
 class Case {
   constructor() {
     this.kind = "ARGUMENT";
@@ -377,6 +397,13 @@ let objectDict = {
     constructor(){
       this.name = "IDLE"
       this.duration = 5
+    }
+  },
+
+  camera : class Camera{
+    constructor(){
+      this.duration = 0
+      this.target = new CameraTarget()
     }
   }
 }

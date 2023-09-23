@@ -57,6 +57,10 @@
           "tipInfo": "Umożliwia stworzenie dziur oraz świateł, które będą posiadały swoje zachowania, dzięki którym ich pozycja i rozmiar będą mogły ulec zmianie. Uwaga! Wyświetlanie świateł dynamicznych jest bardzo kosztowne. Nie można przesadzić z ilością. Jeżeli potrzebujesz światła, które nie musi się przemieszczać, użyj zwykłych świateł albo extraLight!"
         },
         {
+          "name": "Camera",
+          "tipInfo": "Umożliwia sterowanie kamerą poprzez przeniesienie jej w dane miejsce, bądź też przypięcie do poruszającego się obiektu."
+        },
+        {
           "name": "Zoom",
           "tipInfo": "Umożliwia przybliżanie interfejsu gry."
         },
@@ -100,10 +104,6 @@
         {
           "name": "Dialogue",
           "tipInfo": "Umożliwia zmianę nagłówka okna dialogowego na dowolny tekst."
-        },
-        {
-          "name": "Camera",
-          "tipInfo": "Umożliwia sterowanie kamerą poprzez przeniesienie jej w dane miejsce, bądź też przypięcie do poruszającego się obiektu."
         },
         {
           "name": "YellowMessage",
