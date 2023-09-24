@@ -146,7 +146,7 @@ function showError(targetInput, message){
       errorMessage = "Pole jest obligatoryjne i nie może być puste!"
         showError(input, errorMessage)
     }
-    else if(valueType !== "object" && !configObject.canBeEmpty){
+    else if(valueType !== "object" && !configObject.canBeEmpty && !(input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active"))){
         errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${configObject.varType.join(", ")}`
         showError(input, errorMessage)
     }
