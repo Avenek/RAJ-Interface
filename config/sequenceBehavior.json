@@ -43,14 +43,6 @@
                     "defaultInput": 1,
                     "defaultSraj": 1,
                     "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
-                },
-                {
-                    "name": "external_properties",
-                    "idInput": "external_properties",
-                    "inputType": "empty",
-                    "varType": ["list"],
-                    "defaultInput": {},
-                    "tool-tip": "NIEOBSŁUGIWANE"
                 }
             ]
         }

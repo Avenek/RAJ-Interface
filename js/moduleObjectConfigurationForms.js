@@ -685,12 +685,12 @@ function isExtraButtonUsed(button, container){
           isUsed = object.d && object.d.behavior && object.d.behavior.list && object.d.behavior.list.length>0
         }
         else{
-          isUsed = object && object.behavior.list.length>0
+          isUsed = object && object.behavior && object.behavior.list && object.behavior.list.length>0
         }
         break;
         case "random first index":
           object = objectContainer.workingObject  
-          isUsed = object && object.behavior.hasOwnProperty("randomFirstIndex")
+          isUsed = object && object.behavior && object.behavior.hasOwnProperty("randomFirstIndex")
           break;
     case "get character data":
       object = objectContainer.workingObject

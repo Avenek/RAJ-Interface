@@ -298,7 +298,6 @@ class BehaviorSequence {
 
 class SequenceBehavior{
   constructor(){
-    this.external_properties = {}
   }
 }
 
@@ -307,6 +306,17 @@ class MapFilter{
     this.color = new Color()
   }
 }
+
+class AreaTrigger{
+  constructor(id){
+    this.action = "CREATE"
+    this.id = id
+    this.kind = "ON_IN"
+    this.x = 0
+    this.y = 0
+  }
+}
+
 
 class Case {
   constructor() {
@@ -587,13 +597,22 @@ let objectDict = {
   
   sequenceBehavior : class SequenceBehavior{
     constructor(){
-      this.external_properties = {}
     }
   },
 
   mapFilter : class MapFilter{
     constructor(){
       this.color = new Color()
+    }
+  },
+
+  areaTrigger : class AreaTrigger{
+    constructor(id){
+      this.action = "CREATE"
+      this.id = id
+      this.kind = "ON_IN"
+      this.x = 0
+      this.y = 0
     }
   }
   
