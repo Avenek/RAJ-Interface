@@ -651,7 +651,7 @@ function  hightligthsUsedExtraOption(container){
 
   
   extraOptions.forEach(button =>{
-    isUsed = isExtraButtonUsed(button, container)
+    isUsed = isExtraButtonUsed(button)
     if(isUsed){
       button.classList.add("extra-option-active")
     }
@@ -661,7 +661,7 @@ function  hightligthsUsedExtraOption(container){
   })
 }
 
-function isExtraButtonUsed(button, container){
+function isExtraButtonUsed(button){
   let path, object, isUsed
   switch(button.textContent){
     case "case":

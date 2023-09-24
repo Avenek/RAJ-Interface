@@ -259,7 +259,12 @@ function removeObjectFromList(event, container){
                     removeObjectFromJson(object, objectContainer.workingObject.behavior.list, container)
                 }
                 break;
-            case "random", "randomFirstIndex", "getCharacterData", "light", "master", "color":
+            case "random":
+            case "randomFirstIndex":
+            case "getCharacterData": 
+            case "light":
+            case "master":
+            case "color":
                 break;
             default:
                 removeObjectFromJson(object, container.list, container)
@@ -297,7 +302,8 @@ function removeObjectFromList(event, container){
                         hideFullForm(container, true)
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;
-                    case "random", "getCharacterData":
+                    case "random":
+                    case "getCharacterData":
                         const path = container.event.previousElementSibling.previousElementSibling.name
                         const value = findObjectByProperty(objectContainer.jsonConfig.properties, path, "name").defaultInput
                         objectContainer.setObjectKeyByPath(path, value)
