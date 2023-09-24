@@ -90,7 +90,7 @@ function pickDefaultUniqueName(container, objectListContainer){
         case "weather":
             defaultName = "Rain"
             break;
-        case "earthQuake", "camera", "zoom", "dialogue", "yellowMessage":
+        case "earthQuake", "camera", "zoom", "dialogue", "yellowMessage", "interface_skin":
             defaultName = container.name
             break;
         default:
@@ -409,5 +409,5 @@ function setupRadioButtonsObjectList(radioButtons, container) {
             checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["id"] || container.workingObject["name"]
             break;
         }
-    }   
+    }
 }

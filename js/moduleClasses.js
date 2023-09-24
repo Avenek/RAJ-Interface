@@ -281,6 +281,28 @@ class YellowMessage{
   }
 }
 
+class Sequence{
+  constructor(id){
+    this.action = "CREATE_IF_NOT_EXIST"
+    this.id = id
+    this.behavior = new BehaviorSequence();
+  }
+}
+
+class BehaviorSequence {
+  constructor() {
+    this.repeat = 1
+    this.list = [new(SequenceBehavior)]
+  }
+}
+
+class SequenceBehavior{
+  constructor(){
+    this.external_properties = {}
+  }
+}
+
+
 
 class Case {
   constructor() {
@@ -548,6 +570,20 @@ let objectDict = {
     constructor(){
       this.action = "CREATE"
       this.text = ""
+    }
+  },
+
+  sequence : class Sequence{
+    constructor(id){
+      this.action = "CREATE_IF_NOT_EXIST"
+      this.id = id
+      this.behavior = new BehaviorSequence();
+    }
+  },
+  
+  sequenceBehavior : class SequenceBehavior{
+    constructor(){
+      this.external_properties = {}
     }
   }
   

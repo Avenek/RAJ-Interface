@@ -107,10 +107,6 @@
       "title": "Pozostałe",
       "modules": [
         {
-          "name": "Interface_skin",
-          "tipInfo": "Umożliwia zmianę koloru interfejsu (są problemy z grafiką niektórych elementów - korzystanie niezalecane)."
-        },
-        {
           "name": "Sequence",
           "tipInfo": "Umożliwia łańcuchowe wywoływanie efektów po sobie na podstawie czasu. W momencie minięcia duration danego zachowania sekwencja przechodzi do kolejnego lub powtarza aktualne."
         }

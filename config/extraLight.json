@@ -19,7 +19,7 @@
                 {
                     "name": "id",
                     "idInput": "id",
-                    "tool-tip": "Nazwa identyfikująca światło. Umożliwia późniejszego jego usunięciu.",
+                    "tool-tip": "Nazwa identyfikująca światło. Umożliwia późniejsze jego usunięciu.",
                     "inputType": "string",
                     "varType": ["string", "int"],
                     "defaultInput": "obiekt-id",

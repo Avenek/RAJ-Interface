@@ -253,7 +253,6 @@ function changeValueInJson(key, newValue, container){
 }
 
 function makeKeyOrder(){
-  debugger
   if(objectContainer.workingObject.hasOwnProperty("behavior")){
     moveToLastPlaceInJson("behavior")
     if(objectContainer.workingObject.behavior.hasOwnProperty("list")){
@@ -275,14 +274,17 @@ function makeKeyOrder(){
       }
     }
   }
-    if(objectContainer.workingObject.hasOwnProperty("source")){
-      moveToLastPlaceInJson("source")
-    }
+  if(objectContainer.workingObject.hasOwnProperty("source")){
+    moveToLastPlaceInJson("source")
+  }
+  if(keyContainer && keyContainer.workingObject.hasOwnProperty("external_properties")){
+    moveToLastPlaceInJson("external_properties", keyContainer)
+  }
 }
 
-function moveToLastPlaceInJson(path){
+function moveToLastPlaceInJson(path, container = objectContainer){
   const keys = path.split('.');
-  let currentObj = objectContainer.workingObject;
+  let currentObj = container.workingObject
 
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
@@ -295,8 +297,8 @@ function moveToLastPlaceInJson(path){
     const lastKey = keys[keys.length - 1];
     currentObj = currentObj[lastKey]
     const temp = currentObj
-    objectContainer.removeObjectKeyByPath(path)
-    objectContainer.setObjectKeyByPath(path, temp)
+    container.removeObjectKeyByPath(path)
+    container.setObjectKeyByPath(path, temp)
 }
 
 function updateDynamicDataAndJsonText(){

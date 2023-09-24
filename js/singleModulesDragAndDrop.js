@@ -48,14 +48,19 @@ function dropOnEmptyArea(event){
     const lastContainerRect = moduleContainers[moduleContainers.length-1].getBoundingClientRect()
     if(isDroppedBeforeFirstContainer(event, firstContainerRect))
     {
-        
         moduleOnRightSide = moduleContainers[0]
+        if(moduleOnRightSide === draggedModule){
+            moduleOnRightSide = moduleContainers[1]
+        }
         insertDraggedBeforeGivenModule(moduleOnRightSide)
         return
     }
     else if(isDroppedAfterLastContainer(event, lastContainerRect))
     {
         moduleOnLeftSide = moduleContainers[moduleContainers.length-1]
+        if(moduleOnLeftSide === draggedModule){
+            moduleOnLeftSide = moduleContainers[moduleContainers.length-2]
+        }
         moduleOnLeftSide.parentNode.append(draggedModule)
         draggedModule.insertAdjacentHTML('afterend', '\n');
         return
@@ -127,6 +132,7 @@ function handleDragEnd() {
 
 function saveChangesToLocalStorage()
 {
+
     const draggedModuleName = draggedModule.querySelector(".glow-on-hover").textContent;
         const draggedModuleObject = storedContainers.containers
         .flatMap(container => container.modules)
