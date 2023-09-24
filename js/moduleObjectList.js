@@ -402,6 +402,9 @@ function setupRadioButtonsObjectList(radioButtons, container) {
         case "behavior":
             checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["name"]
             break;
+        case "yellowMessage":
+            checkedRadioButton.parentElement.firstChild.nextSibling.textContent = "yellowMessage"
+            break;
         default:
             checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["id"] || container.workingObject["name"]
             break;

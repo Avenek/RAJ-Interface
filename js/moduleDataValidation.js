@@ -36,13 +36,16 @@ function showError(targetInput, message){
     if(!configObject.hasOwnProperty("validation")){
       if((inputValue === "" || inputValue.length===0) && !configObject.canBeEmpty){
         if(input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active")){
+          hideError(input)
           return
         }
         else{
           errorMessage = "Pole jest obligatoryjne i nie może być puste!"
           showError(input, errorMessage)
+          return
         }
       }
+      hideError(input)
       return
     }
     let valuesFromInput = []

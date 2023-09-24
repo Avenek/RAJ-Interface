@@ -274,6 +274,12 @@ class Dialogue{
   }
 }
 
+class YellowMessage{
+  constructor(){
+    this.action = "CREATE"
+    this.text = ""
+  }
+}
 
 
 class Case {
@@ -535,6 +541,13 @@ let objectDict = {
     constructor(){
       this.action = "UPDATE"
       this.header = {"text": ""}
+    }
+  },
+
+  yellowMessage : class YellowMessage{
+    constructor(){
+      this.action = "CREATE"
+      this.text = ""
     }
   }
   
