@@ -318,6 +318,11 @@ function removeObjectFromList(event, container){
                         clearKeyContainers()
                         keyContainer.event.classList.remove("extra-option-active", "menu-active")
                         break;
+                    case "source":
+                        objectContainer.removeObjectKeyByPath("source")
+                        clearKeyContainers()
+                        keyContainer.event.classList.remove("extra-option-active", "menu-active")
+                        break;
                     default:
                         if(!container.hasList){
                             const plusButton = createNewPlusButton(container, event)

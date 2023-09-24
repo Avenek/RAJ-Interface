@@ -94,6 +94,9 @@ function createObjectConfigurationContainer(config)
               case "color":
                 color = "#FFC0CB"
                 break;
+              case "source":
+                color = "#964B00"
+                break;
               default:
                 color= "#FF1493"
                 break
@@ -570,6 +573,31 @@ function handleExtraOptionButtonClick(event){
                       console.error('Błąd pobierania:', error);
                       })
                       break;
+                      case "source":
+                        fetch(`config/source.json`)
+                        .then(response => response.json())
+                        .then(config => {
+                            fullHtml += createObjectConfigurationContainer(config) 
+                            container.innerHTML = fullHtml
+                            keyContainer = new ConfigurationContainer(0, "key-configuration", "object-list-key", "source")
+                            keyContainer.requiredItems = findReuqiredItems(config)
+                            keyContainer.hasList = false
+                            keyContainer.jsonConfig = config
+                            keyContainer.event = event.target
+                           if(!objectContainer.workingObject.hasOwnProperty("source"))
+                            {
+                              keyContainer.workingObject = new Source()
+                              objectContainer.setObjectKeyByPath("source", keyContainer.workingObject)
+                            }
+                            else{
+                              keyContainer.workingObject = getValueFromObject(objectContainer.workingObject, "source")
+                            }
+                            configKeyContainer(container, listContainer)
+                        })
+                        .catch(error => {
+                        console.error('Błąd pobierania:', error);
+                        })
+                        break;
       case "TABLE":
         break;
       default:
@@ -683,6 +711,10 @@ function isExtraButtonUsed(button, container){
     case "color":
       object = objectContainer.workingObject
       isUsed = object && object.hasOwnProperty("color")
+      break;
+    case "source":
+      object = objectContainer.workingObject
+      isUsed = object && object.hasOwnProperty("source")
       break;
     default:
       break;

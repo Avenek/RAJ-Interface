@@ -251,6 +251,15 @@ class FloatObjectBehavior{
   }
 }
 
+class Sound{
+  constructor(id){
+    this.action = "CREATE"
+    this.id = id
+    this.url = "burza01.mp3"
+  }
+}
+
+
 
 
 class Case {
@@ -308,6 +317,13 @@ class DynamicLightMaster{
   }
 }
 
+class Source{
+  constructor(){
+    this.x = 0
+    this.y = 0
+    this.range = 5
+  }
+}
 
 
 
@@ -483,6 +499,13 @@ let objectDict = {
       this.name = "IDLE"
       this.duration = 5
     }
+  },
+
+  sound : class Sound{
+    constructor(id){
+      this.action = "CREATE"
+      this.id = id
+      this.url = "burza01.mp3"
+    }
   }
-  
 }

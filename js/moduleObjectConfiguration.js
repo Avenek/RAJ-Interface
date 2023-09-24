@@ -162,7 +162,7 @@ function changeValueInJsonInput(event, container){
   const key = event.target.name
   let newValue = event.target.value
 
-  if(newValue !== null & newValue !== undefined)
+  if(newValue !== null && newValue !== undefined)
   {
     changeValueInJson(key, newValue, container)
   }
@@ -253,6 +253,7 @@ function changeValueInJson(key, newValue, container){
 }
 
 function makeKeyOrder(){
+  debugger
   if(objectContainer.workingObject.hasOwnProperty("behavior")){
     moveToLastPlaceInJson("behavior")
     if(objectContainer.workingObject.behavior.hasOwnProperty("list")){
@@ -274,6 +275,9 @@ function makeKeyOrder(){
       }
     }
   }
+    if(objectContainer.workingObject.hasOwnProperty("source")){
+      moveToLastPlaceInJson("source")
+    }
 }
 
 function moveToLastPlaceInJson(path){

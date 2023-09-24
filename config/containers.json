@@ -77,14 +77,6 @@
           "tipInfo": "Umożliwia tworzenie przesuwających się obiektów, które nie zwracają uwagi na kolizje i mogą się poruszać po całej mapie bez ograniczeń."
         },
         {
-          "name": "Programmer",
-          "tipInfo": "Umożliwia wyzwolenie SRAJa w konkretnym momencie, o konkretnych godzinach, powtarzające się o danym czasie, itd."
-        },
-        {
-          "name": "MapEvents",
-          "tipInfo": "Umożliwia wywołanie SRAJa wraz ze śmiercią danego NPC, który będzie widoczny dla wszystkich graczy na mapie."
-        },
-        {
           "name": "Sound",
           "tipInfo": "Umożliwia stworzenie dźwięku na mapie opcjonalnie podając jego źródło, zasięg oraz głośność."
         },
