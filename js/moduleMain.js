@@ -60,7 +60,7 @@ function loadModuleContent()
         objectContainer.createObjectList()
         getModuleElements(container, objectListContainer, objectContainer)       
         addObjectIfListIsEmpty(objectContainer)
-        createModuleDOMEvents(objectContainer) 
+        createModuleDOMEvents(objectContainer)
         fillFormFields(objectContainer);
         objectContainer.hideAndRevealRequiredItems()
         removeDefaultValuesFromJson(objectContainer.workingObject, objectContainer.jsonConfig.properties, objectContainer)

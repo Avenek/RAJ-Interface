@@ -16,6 +16,19 @@
                     "defaultInput": "IDLE"
                 },
                 {
+                    "name": "repeat",
+                    "idInput": "repeat",
+                    "tool-tip": "Ilość powtórzeń zachowania, jeżeli damy wartość true to nieskończoność.",
+                    "inputType": "string",
+                    "min":1,
+                    "max":100,
+                    "varType": ["int", "boolean"],
+                    "defaultInput": 1,
+                    "defaultSraj": 1,
+                    "require": [{"name": "name", "value": ["IDLE", "WALK_AND_TP_START"]}],
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                },
+                {
                     "name": "duration",
                     "idInput": "idle.duration",
                     "tool-tip": "Czas, na jak długo fakeNpc ma stać w miejscu.",
@@ -73,11 +86,11 @@
                     "max":10,
                     "step":0.1,
                     "inputType": "number",
-                    "varType": ["float", "string"],
+                    "varType": ["float", "int", "string"],
                     "canBeEmpty": true,
                     "defaultInput": "",
                     "defaultSraj": "",
-                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
                     "require": [{"name": "name", "value": ["WALK"]}]
                 },
                 {

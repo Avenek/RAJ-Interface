@@ -3,13 +3,21 @@ function createObjectConfigurationContainer(config)
     let html = ''
     for (const property of config.properties) {
         if(property.inputType === "key" || property.inputType === "subkey" || property.inputType === "subSubkey" || property.inputType === "table"){
-        html += `<div class="${property.inputType}">
-        <header data-name="${property.idInput}">${property.name.substring(property.name.indexOf(".")+1).toUpperCase()}</header></div><div class="key-menu">`
-        html+=createObjectConfigurationContainer(property)
-        continue;
+          let collapsed = ""
+          if(property.defaultCollapsed){
+            collapsed = "collapsed"
+        }
+          html += `<div class="${property.inputType} ${collapsed}">
+            <header data-name="${property.idInput}">${property.name.substring(property.name.indexOf(".")+1).toUpperCase()}</header></div><div class="key-menu">`
+          html+=createObjectConfigurationContainer(property)
+          continue;
         }
         else if (property.inputType === 'options') {
-            html+=`<div class="key-value"><header class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</header>`
+          let collapsed = ""
+          if(property.defaultCollapsed){
+            collapsed = "collapsed-key"
+            }
+            html+=`<div class="key-value ${collapsed}"><header class="property-name">${property.name.substring(property.name.indexOf(".")+1)}:</header>`
             for (const option of property.options) {
               const checkedClass = property.defaultInput===option.name ? 'radio-checked' : '';
               const checked =  property.defaultInput===option.name ? 'checked' : '';
@@ -17,23 +25,39 @@ function createObjectConfigurationContainer(config)
             }
           } 
         else if (property.inputType === 'string') {
+          let collapsed = ""
+          if(property.defaultCollapsed){
+            collapsed = "collapsed-key"
+            }
           const placeholder = property.inputPlaceholder || ""
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}" placeholder="${placeholder}"><span class="error-info hide"></span>`;
+          html += `<div class="key-value ${collapsed}"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="text" id="${property.idInput}" value="${property.defaultInput}" name="${property.name}" placeholder="${placeholder}"><span class="error-info hide"></span>`;
         }
         else if(property.inputType === 'number'){
+          let collapsed = ""
+          if(property.defaultCollapsed){
+            collapsed = "collapsed-key"
+            }
           if(property.defaultInput === ""){
-            html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step=${property.step} min=${property.min} max=${property.max} value id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
+            html += `<div class="key-value ${collapsed}"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step=${property.step} min=${property.min} max=${property.max} value id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
           }
           else{
-            html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step=${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
+            html += `<div class="key-value ${collapsed}"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input type="number" step=${property.step} min=${property.min} max=${property.max} value=${property.defaultInput} id="${property.idInput}" name="${property.name}"><span class="error-info hide"></span>`;
           }
         }
         else if(property.inputType === 'boolean'){
+          let collapsed = ""
+          if(property.defaultCollapsed){
+            collapsed = "collapsed-key"
+            }
           const checked =  property.defaultInput ? "checkbox-checked" : ""
-          html += `<div class="key-value"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.idInput}" name="${property.name}" class="hide"></label>`;
+          html += `<div class="key-value ${collapsed}"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span><span class="slider round ${checked}"></span><input checked type="checkbox" id="${property.idInput}" name="${property.name}" class="hide"></label>`;
         }
         else if(property.inputType === 'empty'){
-          html += `<div class="key-value"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span>`;
+          let collapsed = ""
+          if(property.defaultCollapsed){
+            collapsed = "collapsed-key"
+            }
+          html += `<div class="key-value ${collapsed}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span>`;
         }
         else{
           continue;
@@ -151,7 +175,6 @@ function addToolTip(property)
      }
     })
   }
-
    return `<div class="tool-tip">
      <i class="tool-tip__icon">i</i>
      <p class="tool-tip__info"><b>Typ zmiennej</b>: ${property.varType.join(", ")}<br><b>Wymagania</b>: ${requirementsInfo.substring(4) || "brak"}<br><b>Opis</b>: ${property['tool-tip']}</p>
@@ -165,7 +188,10 @@ function fillFormFields(container) {
     if(!input.classList.contains("hide")){
       if (input.type === "radio") {
         const inputLabel = input.parentNode
-          if(inputLabel.textContent === getValueFromObject(container.workingObject, input.name)) {
+        const objectValue = getValueFromObject(container.workingObject, input.name)
+        if(objectValue !== null){
+          if(inputLabel.textContent === objectValue) {
+            
             inputLabel.classList.add("radio-checked");
             input.checked = true;
           }
@@ -173,6 +199,19 @@ function fillFormFields(container) {
             inputLabel.classList.remove("radio-checked");
             input.checked = false;
           }
+        }
+        else{
+          const defaultValue = findObjectByProperty(container.jsonConfig.properties, input.name, "name")
+          if(defaultValue && defaultValue.defaultSraj && defaultValue.defaultSraj === inputLabel.textContent){
+            inputLabel.classList.add("radio-checked");
+            input.checked = true;
+          }
+          else{
+            inputLabel.classList.remove("radio-checked");
+            input.checked = false;
+          }
+        }
+          
       } 
       else if(input.type === "checkbox"){
         const inputSpan = input.previousElementSibling
@@ -201,7 +240,6 @@ function fillFormFields(container) {
         }
       }
       else{
-        console.log(container.workingObject, input.name);
         const value = getValueFromObject(container.workingObject, input.name)
         if(value !== null && Array.isArray(value)){
           input.value = value.join(";")
@@ -376,6 +414,17 @@ function handleExtraOptionButtonClick(event){
                 }
                 keyContainer.list = objectContainer.workingObject.d["behavior"].list
                 }
+                else if(currentModule === "floatObject"){
+                  if(objectContainer.workingObject["behavior"].list.length === 0)
+                {
+                  keyContainer.workingObject = new FloatObjectBehavior()
+                  objectContainer.workingObject["behavior"].list.push(keyContainer.workingObject)
+                }
+                else{
+                  keyContainer.workingObject = objectContainer.workingObject["behavior"].list[0]
+                }
+                keyContainer.list = objectContainer.workingObject["behavior"].list
+                }
                 else{
                 if(objectContainer.workingObject["behavior"].list.length === 0)
                 {
@@ -394,7 +443,7 @@ function handleExtraOptionButtonClick(event){
             })
             break;
             case "random first index":
-              fetch(`config/randomFirstIndex.json`)
+              fetch(`config/${currentModule}RandomFirstIndex.json`)
               .then(response => response.json())
               .then(config => {
                   fullHtml += createObjectConfigurationContainer(config) 
@@ -538,7 +587,7 @@ function configKeyContainer(container, listContainer){
   keyContainer.createObjectList()
     getModuleElements(container, listContainer, keyContainer)
     createModuleDOMEvents(keyContainer)
-    makeKeyOrder(objectContainer)
+    makeKeyOrder()
     updateDynamicDataAndJsonText()
     fillFormFields(keyContainer);
     keyContainer.hideAndRevealRequiredItems() 
@@ -588,11 +637,11 @@ function isExtraButtonUsed(button, container){
   let path, object, isUsed
   switch(button.textContent){
     case "case":
-      object = container.workingObject
+      object = objectContainer.workingObject
       isUsed = object && object.hasOwnProperty("case")
       break;
     case "random":
-      object = container.workingObject
+      object = objectContainer.workingObject
       path = button.parentElement.firstChild.nextElementSibling.name
       if(path) {
         object = findObjectByPath(object, path)
@@ -600,7 +649,7 @@ function isExtraButtonUsed(button, container){
       isUsed = object && object.hasOwnProperty("getRandom")
       break;
       case "behavior":
-        object = container.workingObject 
+        object = objectContainer.workingObject 
         if(currentModule === "callInstantBehaviorFakeNpc"){
           isUsed = object && object.list.length>0
         }
@@ -612,11 +661,11 @@ function isExtraButtonUsed(button, container){
         }
         break;
         case "random first index":
-          object = container.workingObject  
+          object = objectContainer.workingObject  
           isUsed = object && object.behavior.hasOwnProperty("randomFirstIndex")
           break;
     case "get character data":
-      object = container.workingObject
+      object = objectContainer.workingObject
       path = button.parentElement.firstChild.nextElementSibling.name || button.parentElement.firstChild.textContent
       if(path) {
         object = findObjectByPath(object, path)
@@ -624,15 +673,15 @@ function isExtraButtonUsed(button, container){
       isUsed = object && object.hasOwnProperty("getCharacterData")
       break;
     case "light":
-      object = container.workingObject
+      object = objectContainer.workingObject
       isUsed = object.d && object.d.hasOwnProperty("light")
       break;
     case "master":
-      object = container.workingObject
+      object = objectContainer.workingObject
       isUsed = object && object.hasOwnProperty("master")
       break;
     case "color":
-      object = container.workingObject
+      object = objectContainer.workingObject
       isUsed = object && object.hasOwnProperty("color")
       break;
     default:

@@ -236,6 +236,7 @@ body {
 
 .key-value label {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .key-value input {
@@ -387,6 +388,7 @@ body {
     padding: 0.3rem 3rem;
     transition: 0.2s;
     margin-left: 50px;
+    cursor: pointer;
   }
   
  .extra-option:hover {

@@ -1,0 +1,231 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "name",
+                    "idInput": "name",
+                    "tool-tip": "Nazwa zachowania: FADE_IN - pojawienie się obiektu, FADE_OUT - zniknięcie obiektu, IDLE - stanie w miejscu, MOVE_TO_CORDS - przelecenie do konkretnego miejsca, TP_TO_CORDS - przeniesienie w konkretne miejsce, MOVE_FROM_VECTOR - poruszanie się za pomocą wartości wektorów, TP_ON_OTHER_SIDE - przeniesienie na drugą stronę mapy, ROTATION - obrót obiektu o zadeklarowany kąt.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"FADE_IN"}, {"name":"FADE_OUT"}, {"name":"IDLE"}, {"name":"MOVE_TO_CORDS"}, {"name":"TP_TO_CORDS"}, {"name":"MOVE_FROM_VECTORS"}, {"name":"TP_ON_OTHER_SIDE"}, {"name":"ROTATION"}],
+                    "defaultInput": "IDLE"
+                },
+                {
+                    "name": "repeat",
+                    "idInput": "repeat",
+                    "tool-tip": "Ilość powtórzeń zachowania, jeżeli damy wartość true to nieskończoność.",
+                    "inputType": "string",
+                    "min":1,
+                    "max":100,
+                    "varType": ["int", "boolean"],
+                    "defaultInput": 1,
+                    "defaultSraj": 1,
+                    "require": [{"name": "name", "value": ["FADE_IN", "FADE_OUT", "IDLE", "ROTATION"]}],
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                },
+                {
+                    "name": "instant",
+                    "idInput": "fade.instant",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że obiekt zniknie/pojawi się od razu z docelową przeźroczystością.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "name", "value": ["FADE_IN", "FADE_OUT"]}]
+                },
+                {
+                    "name": "duration",
+                    "idInput": "idle.duration",
+                    "tool-tip": "Czas, na jak długo obiekt ma stać w miejscu.",
+                    "step":1,
+                    "min":0,
+                    "max":999,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput":5,
+                    "defaultSraj": 5,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "name", "value": ["IDLE"]}]
+                },
+                {
+                    "name": "x",
+                    "idInput": "moveCords.x",
+                    "tool-tip": "Wartość kordu x, na który ma przelecieć obiekt.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "name", "value": ["MOVE_TO_CORDS"]}]
+                },
+                {
+                    "name": "y",
+                    "idInput": "moveCords.y",
+                    "tool-tip": "Wartość kordu y, na który ma przelecieć obiekt.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "name", "value": ["MOVE_TO_CORDS"]}]
+                },
+                {
+                    "name": "speed",
+                    "idInput": "moveCords.speed",
+                    "tool-tip": "Szybkość poruszania się obiektu.",
+                    "min":0.1,
+                    "max":10,
+                    "step":0.1,
+                    "inputType": "number",
+                    "varType": ["float", "string"],
+                    "canBeEmpty": true,
+                    "defaultInput": 2,
+                    "defaultSraj": 2,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
+                    "require": [{"name": "name", "value": ["MOVE_TO_CORDS"]}]
+                },
+                {
+                    "name": "x",
+                    "idInput": "tp.x",
+                    "tool-tip": "Wartość kordu x, na który ma zostać przeniesiony obiekt.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "name", "value": ["TP_TO_CORDS"]}]
+                },
+                {
+                    "name": "y",
+                    "idInput": "tp.y",
+                    "tool-tip": "Wartość kordu y, na który ma zostać przeniesiony obiekt.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "name", "value": ["TP_TO_CORDS"]}]
+                },
+                {
+                    "name": "xVector",
+                    "idInput": "move.xVector",
+                    "tool-tip": "Określa kierunek oraz prędkość w poziomie, z jaką będzie się poruszał obiekt. Po wyjściu za ekran, aby powtórzyć efekt, trzeba jako kolejne zachowanie dać TP_ON_OTHER_SIDE.",
+                    "step":0.5,
+                    "min":-10,
+                    "max":10,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput":1,
+                    "require": [{"name": "name", "value": ["MOVE_FROM_VECTORS"]}],
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "yVector",
+                    "idInput": "move.yVector",
+                    "tool-tip": "Określa kierunek oraz prędkość w pionie, z jaką będzie się poruszał obiekt. Po wyjściu za ekran, aby powtórzyć efekt, trzeba jako kolejne zachowanie dać TP_ON_OTHER_SIDE.",
+                    "step":0.5,
+                    "min":-10,
+                    "max":10,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput":-1,
+                    "require": [{"name": "name", "value": ["MOVE_FROM_VECTORS"]}],
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "speed",
+                    "idInput": "rotation.speed",
+                    "tool-tip": "Szybkość rotacji obiektu.",
+                    "min":0.1,
+                    "max":10,
+                    "step":0.1,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "canBeEmpty": true,
+                    "defaultInput": 0.5,
+                    "defaultSraj": 0.5,
+                    "validation":[{"forType": "float", "name": "minMax"},{"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "name", "value": ["ROTATION"]}]
+                },
+                {
+                    "name": "setAngle",
+                    "idInput": "rotation.setAngle",
+                    "tool-tip": "Ustawia kąt obrócenia obiektu na daną wartość w stopniach.",
+                    "min":-360,
+                    "max":360,
+                    "step":10,
+                    "inputType": "number",
+                    "varType": ["int", "string"],
+                    "canBeEmpty": true,
+                    "defaultInput": 90,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
+                    "require": [{"name": "name", "value": ["ROTATION"]}, {"name": "addAngle", "value": [""]}]
+                },
+                {
+                    "name": "setAngle",
+                    "idInput": "rotation.setAngle",
+                    "tool-tip": "Kąt w stopniach, o który należy obrócić obiekt zgodnie ze wskazówkami zegara. Można podać zarówno liczbę dodatnią (obrót w prawo) lub liczbę ujemną (obrót w lewo). Będzie dodawało podaną wartość do aktualnego obrócenia.",
+                    "min":-360,
+                    "max":360,
+                    "step":10,
+                    "inputType": "number",
+                    "varType": ["int", "string"],
+                    "canBeEmpty": true,
+                    "defaultInput": 90,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
+                    "require": [{"name": "name", "value": ["ROTATION"]}, {"name": "setAngle", "value": [""]}]
+                },
+                {
+                    "name": "rotationOffset",
+                    "tool-tip": "Środek ciężkości obracanego obiektu. Domyślnie jest jest to środek obiektu (szerokość/2, wysokość/2)",
+                    "inputType": "subkey",
+                    "defaultCollapsed": true,
+                    "properties": [
+                        {
+                            "name": "x",
+                            "idInput": "x",
+                            "tool-tip": "Zmiana miejsca środka ciężkości w poziomie.",
+                            "inputType": "string",
+                            "varType": ["int"],
+                            "defaultCollapsed": true,
+                            "canBeEmpty": true,
+                            "min":1,
+                            "max":300,
+                            "defaultInput": "",
+                            "defaultSraj": "",
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
+                        },
+                        {
+                            "name": "y",
+                            "idInput": "y",
+                            "tool-tip": "Zmiana miejsca środka ciężkości w pionie",
+                            "inputType": "string",
+                            "varType": ["int"],
+                            "defaultCollapsed": true,
+                            "canBeEmpty": true,
+                            "min":1,
+                            "max":300,
+                            "defaultInput": "",
+                            "defaultSraj": "",
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
+                        }
+                    ],
+                    "require": [{"name": "name", "value": ["ROTATION"]}]
+                }
+            ]
+        }
+    ]
+}

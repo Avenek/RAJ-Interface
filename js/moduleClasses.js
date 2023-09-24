@@ -226,6 +226,30 @@ class FloatForeground{
   }
 }
 
+class FloatObject{
+  constructor(id){
+    this.action="CREATE_IF_NOT_EXIST"
+    this.id = id
+    this.x = 0
+    this.y = 0
+    this.url = "chmury/obj1.png"
+    this.behavior = new BehaviorFloatObject();
+  }
+}
+
+class BehaviorFloatObject {
+  constructor() {
+    this.repeat = 1
+    this.list = [new(FloatObjectBehavior)]
+  }
+}
+
+class FloatObjectBehavior{
+  constructor(){
+    this.name = "IDLE"
+    this.duration = 5
+  }
+}
 
 
 
@@ -440,6 +464,24 @@ let objectDict = {
       this.xVector = 0.2
       this.yVector = -0.1
       this.url = "chmury/mgla1.png"
+    }
+  },
+
+  floatObject : class FloatObject{
+    constructor(id){
+      this.action="CREATE_IF_NOT_EXIST"
+      this.id = id
+      this.x = 0
+      this.y = 0
+      this.url = "chmury/obj1.png"
+      this.behavior = new BehaviorFloatObject();
+    }
+  },
+  
+  floatObjectBehavior : class FloatObjectBehavior{
+    constructor(){
+      this.name = "IDLE"
+      this.duration = 5
     }
   }
   

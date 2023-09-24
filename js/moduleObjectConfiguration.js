@@ -249,36 +249,36 @@ function changeValueInJson(key, newValue, container){
     newValue = getValueInGoodType(key, newValue, container)
     currentObj[lastKey] = newValue;
   }
-  makeKeyOrder(container)
+  makeKeyOrder()
 }
 
-function makeKeyOrder(container){
+function makeKeyOrder(){
   if(objectContainer.workingObject.hasOwnProperty("behavior")){
-    moveToLastPlaceInJson(container, "behavior")
+    moveToLastPlaceInJson("behavior")
     if(objectContainer.workingObject.behavior.hasOwnProperty("list")){
-      moveToLastPlaceInJson(container, "behavior.list")
+      moveToLastPlaceInJson("behavior.list")
     }
   }
   if(objectContainer.workingObject.hasOwnProperty("d")){
-    moveToLastPlaceInJson(objectContainer, "d")
+    moveToLastPlaceInJson("d")
     if(objectContainer.workingObject.d.hasOwnProperty("light")){
-      moveToLastPlaceInJson(objectContainer, "d.light")
+      moveToLastPlaceInJson("d.light")
       if(objectContainer.workingObject.d.light.hasOwnProperty("color")){
-        moveToLastPlaceInJson(objectContainer, "d.light.color")
+        moveToLastPlaceInJson("d.light.color")
       }
     }
     if(objectContainer.workingObject.d.hasOwnProperty("behavior")){
-      moveToLastPlaceInJson(objectContainer, "d.behavior")
+      moveToLastPlaceInJson("d.behavior")
       if(objectContainer.workingObject.d.behavior.hasOwnProperty("list")){
-        moveToLastPlaceInJson(objectContainer, "d.behavior.list")
+        moveToLastPlaceInJson("d.behavior.list")
       }
     }
   }
 }
 
-function moveToLastPlaceInJson(container, path){
+function moveToLastPlaceInJson(path){
   const keys = path.split('.');
-  let currentObj = container.workingObject;
+  let currentObj = objectContainer.workingObject;
 
   for (let i = 0; i < keys.length - 1; i++) {
     const currentKey = keys[i];
@@ -291,8 +291,8 @@ function moveToLastPlaceInJson(container, path){
     const lastKey = keys[keys.length - 1];
     currentObj = currentObj[lastKey]
     const temp = currentObj
-    container.removeObjectKeyByPath(path)
-    container.setObjectKeyByPath(path, temp)
+    objectContainer.removeObjectKeyByPath(path)
+    objectContainer.setObjectKeyByPath(path, temp)
 }
 
 function updateDynamicDataAndJsonText(){
