@@ -24,7 +24,7 @@ function createSrajModulesMenu(data) {
         aElement.setAttribute("draggable", "false")
         aElement.classList.add("aLink")
         singleObjectElement.append(aElement)
-        const ids = data[key].list.map(item => item.id || item.name || item.kind);
+        const ids = data[key].list.map(item => item.id || item.name || item.kind || item.action);
         ids.forEach(id => {
           const element = document.createElement("div")
           element.textContent = id

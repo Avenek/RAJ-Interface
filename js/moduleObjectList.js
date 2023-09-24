@@ -77,6 +77,7 @@ function createNewLabelAndRadioButton(objectListContainer, container, isCopy, ev
 
 function pickDefaultUniqueName(container, objectListContainer){
     let defaultName = ""
+    debugger
     switch(container.name){
         case "case":
             defaultName = 'ARGUMENT'
@@ -90,9 +91,14 @@ function pickDefaultUniqueName(container, objectListContainer){
         case "weather":
             defaultName = "Rain"
             break;
-        case "earthQuake", "camera", "zoom", "dialogue", "yellowMessage", "interface_skin":
-            defaultName = container.name
-            break;
+            case "earthQuake":
+            case "camera":
+            case "zoom":
+            case "dialogue":
+            case "yellowMessage":
+            case "mapFilter":
+                defaultName = container.name;
+                break;
         default:
             const radioButtons = objectListContainer.querySelectorAll('input[type="radio"]');
             let number = radioButtons.length
@@ -396,14 +402,16 @@ function setupRadioButtonsObjectList(radioButtons, container) {
     const checkedRadioButton = objectListContainer.querySelector('label.radio-checked > input[type="radio"]');
     if(container.hasList){
     switch(container.name){
-        case "case", "characterHide":
+        case "case":
+        case "characterHide":
             checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["kind"]
             break;
         case "behavior":
             checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["name"]
             break;
         case "yellowMessage":
-            checkedRadioButton.parentElement.firstChild.nextSibling.textContent = "yellowMessage"
+        case "dialogue":
+            checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.name
             break;
         default:
             checkedRadioButton.parentElement.firstChild.nextSibling.textContent = container.workingObject["id"] || container.workingObject["name"]

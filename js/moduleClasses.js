@@ -302,7 +302,11 @@ class SequenceBehavior{
   }
 }
 
-
+class MapFilter{
+  constructor(){
+    this.color = new Color()
+  }
+}
 
 class Case {
   constructor() {
@@ -584,6 +588,12 @@ let objectDict = {
   sequenceBehavior : class SequenceBehavior{
     constructor(){
       this.external_properties = {}
+    }
+  },
+
+  mapFilter : class MapFilter{
+    constructor(){
+      this.color = new Color()
     }
   }
   
