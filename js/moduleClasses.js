@@ -259,6 +259,20 @@ class Sound{
   }
 }
 
+class MapMusic{
+  constructor(id){
+    this.action = "CREATE"
+    this.id = id
+    this.file = "burza01.mp3"
+  }
+}
+
+class Dialogue{
+  constructor(){
+    this.action = "UPDATE"
+    this.header = {"text": ""}
+  }
+}
 
 
 
@@ -507,5 +521,21 @@ let objectDict = {
       this.id = id
       this.url = "burza01.mp3"
     }
+  },
+
+  mapMusic: class MapMusic{
+    constructor(id){
+      this.action = "CREATE"
+      this.id = id
+      this.file = "burza01.mp3"
+    }
+  },
+
+  dialogue : class Dialogue{
+    constructor(){
+      this.action = "UPDATE"
+      this.header = {"text": ""}
+    }
   }
+  
 }

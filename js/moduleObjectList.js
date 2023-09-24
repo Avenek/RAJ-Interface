@@ -90,7 +90,7 @@ function pickDefaultUniqueName(container, objectListContainer){
         case "weather":
             defaultName = "Rain"
             break;
-        case "earthQuake", "camera", "zoom":
+        case "earthQuake", "camera", "zoom", "dialogue", "yellowMessage":
             defaultName = container.name
             break;
         default:

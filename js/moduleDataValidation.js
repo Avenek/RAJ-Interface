@@ -31,11 +31,22 @@ function showError(targetInput, message){
   
   function isDataValid(container, input){
     const configObject = findObjectByProperty(container.jsonConfig.properties, input.id, "idInput")
+    let inputValue
+    inputValue = getValueInGoodType(input.name, input.value, container)
     if(!configObject.hasOwnProperty("validation")){
+      if((inputValue === "" || inputValue.length===0) && !configObject.canBeEmpty){
+        if(input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active")){
+          return
+        }
+        else{
+          errorMessage = "Pole jest obligatoryjne i nie może być puste!"
+          showError(input, errorMessage)
+        }
+      }
       return
     }
     let valuesFromInput = []
-    let inputValue
+    
     if(Array.isArray(getValueFromObject(container.workingObject, input.name))){
       valuesFromInput = input.value.split(";")
     }
@@ -108,7 +119,7 @@ function showError(targetInput, message){
             showError(input, errorMessage)
             break;
           }
-          else if(inputValue === "" && !configObject.canBeEmpty && input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active")){
+          else if(inputValue === "" && !configObject.canBeEmpty && !(input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active"))){
             errorMessage = "Pole jest obligatoryjne i nie może być puste!"
             showError(input, errorMessage)
           }
@@ -120,7 +131,7 @@ function showError(targetInput, message){
       if(!isValid){
         showError(input, errorMessage)
       }
-      else if(inputValue === "" && !configObject.canBeEmpty && input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active")){
+      else if(inputValue === "" && !configObject.canBeEmpty && !(input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active"))){
         errorMessage = "Pole jest obligatoryjne i nie może być puste!"
         showError(input, errorMessage)
       }
@@ -128,13 +139,16 @@ function showError(targetInput, message){
         hideError(input)
       }
     }
-    else if(inputValue.length===0 && !configObject.canBeEmpty && input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active")){
+    else if(inputValue.length===0 && !configObject.canBeEmpty && !(input.parentElement.querySelector("button") !== null && input.parentElement.querySelector("button").classList.contains("extra-option-active"))){
       errorMessage = "Pole jest obligatoryjne i nie może być puste!"
         showError(input, errorMessage)
     }
     else if(valueType !== "object" && !configObject.canBeEmpty){
         errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${configObject.varType.join(", ")}`
         showError(input, errorMessage)
+    }
+    else{
+      hideError(input)
     }
     })
   }
