@@ -8,6 +8,7 @@ function loadContent()
         const storedContainers = JSON.parse(localStorage.getItem('containerConfig'));
         const srajContainerHtml = createContainersContent(storedContainers)
         srajContainer.innerHTML=srajContainerHtml
+        loadPage()
     }
     else {
         fetch('config/containers.json')
@@ -16,16 +17,12 @@ function loadContent()
         const srajContainerHtml = createContainersContent(config)
         srajContainer.innerHTML = srajContainerHtml;
         localStorage.setItem('containerConfig', JSON.stringify(config));
+        loadPage()
         })
         .catch(error => {
         console.error('Błąd pobierania:', error);
         })
     }
-    const buttonsContainer = document.querySelector(".buttons-container")
-    const jsonButtonsHtml = createJsonButtons()
-    buttonsContainer.innerHTML = jsonButtonsHtml
-    restoreLastJson()
-    createSrajModulesMenu(dynamicData);    
 }
 
 function createContainersContent(data)
@@ -107,12 +104,18 @@ function createDOMEvents(){
     })
 }
 
+function loadPage(){
+    const buttonsContainer = document.querySelector(".buttons-container")
+    const jsonButtonsHtml = createJsonButtons()
+    buttonsContainer.innerHTML = jsonButtonsHtml
+    restoreLastJson()
+    createSrajModulesMenu(dynamicData);    
+    getElements()
+    createDOMEvents()
+}
+
 function main(){
     loadContent()
-    document.addEventListener("DOMContentLoaded", () => {
-        getElements()
-        createDOMEvents()
-    })
 }
 
 //localStorage.clear()
