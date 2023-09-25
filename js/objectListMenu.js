@@ -60,7 +60,7 @@ function addEventOnClick() {
       localStorage.setItem("index", 0)
       localStorage.setItem('module', module.firstChild.firstChild.textContent);  
     })
-    const objects = document.querySelectorAll(".single-object-menu");
+    const objects = module.querySelectorAll(".single-object-menu");
     const objectsArray = Array.from(objects)
     objectsArray.forEach(object =>{
       object.addEventListener("click", () => {

@@ -12,6 +12,7 @@ function loadModuleObject(index, module)
   fetch('config/modules.json')
     .then(response => response.json())
     .then(config => {
+      debugger
       const configObject = findObjectByProperty(config.modules, module, "name")
       if(configObject.hasList){
         objectContainer.hasList = true
@@ -25,11 +26,17 @@ function loadModuleObject(index, module)
         }
         objectContainer.list = dynamicData[currentModule].list
       }
-      
       else {
         objectContainer.hasList = false
+        if(dynamicData.hasOwnProperty(currentModule))
+        {
+          objectContainer.workingObject = dynamicData[currentModule]
+        }
+        else{
         objectContainer.workingObject = {}
         dynamicData[currentModule]={}
+        }
+        
       }
       loadModuleContent()
     })
