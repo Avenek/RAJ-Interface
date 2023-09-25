@@ -12,7 +12,6 @@ function loadModuleObject(index, module)
   fetch('config/modules.json')
     .then(response => response.json())
     .then(config => {
-      debugger
       const configObject = findObjectByProperty(config.modules, module, "name")
       if(configObject.hasList){
         objectContainer.hasList = true

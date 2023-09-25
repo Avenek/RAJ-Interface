@@ -85,6 +85,7 @@ function updateObjectRadioButton(event, container)
 }
 
 function removeAndAddKeysByRequirements(event, container, inputType){
+
   const targetKey = event.target.name
   const listToSet = []
   let allConditionsAreMet
@@ -97,7 +98,14 @@ function removeAndAddKeysByRequirements(event, container, inputType){
       const newValue = event.target.classList.contains("checkbox-checked") ? true : false
       changeValueInJson(key, newValue, container)
     }
-    
+    let idInput 
+    if(event.target.getAttribute('data-name')){
+      idInput = event.target.getAttribute('data-name')
+    }
+    else if(event.target.parentNode.firstChild.nextElementSibling.nextElementSibling.getAttribute('id')){
+     idInput = event.target.parentNode.firstChild.nextElementSibling.nextElementSibling.getAttribute('id')
+    }
+    if(idInput !== item.idInput){
     allConditionsAreMet = true
     for(let i = 0 ; i < item.require.length ; i++) {
       
@@ -126,17 +134,32 @@ function removeAndAddKeysByRequirements(event, container, inputType){
           container.setObjectKeyByPath(paramName, newObject)
         }
         else if(!listToSet.includes(item) && item.inputType !== "empty"){
+          debugger
+          let isValueCorrect = false
           let value = getValueFromObject(container.workingObject, item.name)
-          if(value === null){
+          if(item.inputType === "options")
+          {
+            for(let i = 0 ; i < item.options.length ; i++){
+              if(item.options[i].name === value){
+                isValueCorrect = true
+                break;
+              }
+              else{
+                isValueCorrect = false
+              }
+            }
+          }
+          if(value === null || !isValueCorrect){
             value = item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : ''
           }
           listToSet.push({"name": item.name, "value": value})
-          container.setObjectKeyByPath(item.name, item.defaultInput !== undefined && item.defaultInput !== null ? item.defaultInput : '')
+          container.setObjectKeyByPath(item.name, value)
         }
       }
       else {
         container.removeObjectKeyByPath(item.name)
       }
+    }
   })
   listToSet.forEach(item => container.setObjectKeyByPath(item.name, item.value))
 }
