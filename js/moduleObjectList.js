@@ -77,7 +77,6 @@ function createNewLabelAndRadioButton(objectListContainer, container, isCopy, ev
 
 function pickDefaultUniqueName(container, objectListContainer){
     let defaultName = ""
-    debugger
     switch(container.name){
         case "case":
             defaultName = 'ARGUMENT'

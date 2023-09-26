@@ -622,6 +622,7 @@ function configKeyContainer(container, listContainer){
     removeDefaultValuesFromJson(keyContainer.workingObject, keyContainer.jsonConfig.properties, keyContainer)
     saveJsonState()
     keyContainer.inputList.forEach(input => isDataValid(keyContainer, input)) 
+    debugger
 }
 
 function hideFullForm(container, withPlusButton){

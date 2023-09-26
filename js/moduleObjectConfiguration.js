@@ -85,7 +85,6 @@ function updateObjectRadioButton(event, container)
 }
 
 function removeAndAddKeysByRequirements(event, container, inputType){
-
   const targetKey = event.target.name
   const listToSet = []
   let allConditionsAreMet
@@ -93,7 +92,7 @@ function removeAndAddKeysByRequirements(event, container, inputType){
     if(inputType === "radio"){
       changeValueInJsonRadioButton(event, container)
     }
-    else{
+    else if(inputType === "checkbox"){
       const key = event.target.nextElementSibling.name
       const newValue = event.target.classList.contains("checkbox-checked") ? true : false
       changeValueInJson(key, newValue, container)
@@ -134,7 +133,6 @@ function removeAndAddKeysByRequirements(event, container, inputType){
           container.setObjectKeyByPath(paramName, newObject)
         }
         else if(!listToSet.includes(item) && item.inputType !== "empty"){
-          debugger
           let isValueCorrect = false
           let value = getValueFromObject(container.workingObject, item.name)
           if(item.inputType === "options")
@@ -246,6 +244,7 @@ function isInteger(num) {
 
 
 function changeValueInJson(key, newValue, container){
+  debugger
   const keys = key.split('.');
   let currentObj = container.workingObject;
   for (let i = 0; i < keys.length - 1; i++) {

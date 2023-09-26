@@ -167,8 +167,9 @@ function createModuleDOMEvents(container){
 }
 
 function createModuleDOMEventFromContainer(container){
+  const currentContainer = document.querySelector(`.${container.className}`)
   uniqueNameRadioButtons.forEach(name => {
-    const radioButtons = document.querySelectorAll(`input[name="${name}"]`);
+    const radioButtons = currentContainer.querySelectorAll(`input[name="${name}"]`);
     setupRadioButtons(radioButtons, container);
   })
 
