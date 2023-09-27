@@ -78,13 +78,14 @@ class ConfigurationContainer {
           let inputs
           for(let i = 0 ; i < item.require.length ; i++) {
             const valueInObject = getValueFromObject(this.workingObject, item.require[i].name)
+            const requireObject = findObjectByProperty(this.jsonConfig.properties, item.require[i].name, "name")
             if(valueInObject !==null){
              if(!item.require[i].value.includes(valueInObject)){
               allConditionsAreMet = false
               break;
             }
           }
-            else if(findObjectByProperty(this.jsonConfig.properties, item.require[i].name, "name").defaultSraj && !item.require[i].value.includes(findObjectByProperty(this.jsonConfig.properties, item.require[i].name, "name").defaultSraj)){
+            else if(requireObject && requireObject.defaultSraj && !item.require[i].value.includes(requireObject.defaultSraj)){
               allConditionsAreMet = false
               break;
             }
