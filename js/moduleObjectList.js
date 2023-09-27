@@ -289,6 +289,7 @@ function removeObjectFromList(event, container){
                 fillFormFields(container)
                 container.hideAndRevealRequiredItems()
                 hightligthsUsedExtraOption(container)
+                container.inputList.forEach(input => isDataValid(objectContainer, input))
             }
             else{
                 switch(container.name){
