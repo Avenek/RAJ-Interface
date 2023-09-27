@@ -271,7 +271,7 @@ function fillFormFields(container) {
       }
   
       for (let key in config) {
-        if (config.hasOwnProperty(key)) {
+        if (config.hasOwnProperty(key) && config[key] ) {
           objectsWithRequire = objectsWithRequire.concat(findReuqiredItems(config[key]));
         }
       }
@@ -622,7 +622,6 @@ function configKeyContainer(container, listContainer){
     removeDefaultValuesFromJson(keyContainer.workingObject, keyContainer.jsonConfig.properties, keyContainer)
     saveJsonState()
     keyContainer.inputList.forEach(input => isDataValid(keyContainer, input)) 
-    debugger
 }
 
 function hideFullForm(container, withPlusButton){

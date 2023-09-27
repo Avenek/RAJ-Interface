@@ -66,9 +66,9 @@ function updateObjectRadioButton(event, container)
       objects.forEach(object => {
           object.checked = false;
       })
-    event.target.checked = true;
-  removeAndAddKeysByRequirements(event, container, event.target.type)
+  event.target.checked = true;
   changeValueInJsonRadioButton(event, container)
+  removeAndAddKeysByRequirements(event, container, event.target.type)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
   fillFormFields(container)
   hightligthsUsedExtraOption(container)
@@ -88,15 +88,8 @@ function removeAndAddKeysByRequirements(event, container, inputType){
   const targetKey = event.target.name
   const listToSet = []
   let allConditionsAreMet
-  if(inputType === "radio"){
-    changeValueInJsonRadioButton(event, container)
-  }
-  else if(inputType === "checkbox"){
-    const key = event.target.nextElementSibling.name
-    const newValue = event.target.classList.contains("checkbox-checked") ? true : false
-    changeValueInJson(key, newValue, container)
-  }
   container.requiredItems.forEach(item => {
+    debugger
     if(inputType === "radio"){
       changeValueInJsonRadioButton(event, container)
     }
@@ -203,6 +196,9 @@ function changeValueInJsonInput(event, container){
 }
 
 function changeValueInJsonCheckbox(event, container){
+  const key = event.target.nextElementSibling.name
+  const newValue = event.target.classList.contains("checkbox-checked") ? true : false
+  changeValueInJson(key, newValue, container)
   removeAndAddKeysByRequirements(event, container, event.target.nextElementSibling.type)
   updateDynamicDataAndJsonText()
   container.hideAndRevealRequiredItems()
@@ -252,7 +248,6 @@ function isInteger(num) {
 
 
 function changeValueInJson(key, newValue, container){
-  debugger
   const keys = key.split('.');
   let currentObj = container.workingObject;
   for (let i = 0; i < keys.length - 1; i++) {
