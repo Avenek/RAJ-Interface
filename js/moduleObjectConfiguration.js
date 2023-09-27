@@ -134,7 +134,7 @@ function removeAndAddKeysByRequirements(event, container, inputType){
           container.setObjectKeyByPath(paramName, newObject)
         }
         else if(!listToSet.includes(item) && item.inputType !== "empty"){
-          let isValueCorrect = false
+          let isValueCorrect = true
           let value = getValueFromObject(container.workingObject, item.name)
           if(item.inputType === "options")
           {
