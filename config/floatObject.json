@@ -33,7 +33,8 @@
                     "varType": ["string"],
                     "options": [{"name":"SPRITE"}, {"name":"GIF"}, {"name":"FAKE_NPC"}],
                     "defaultInput": "SPRITE",
-                    "defaultSraj": "SPRITE"
+                    "defaultSraj": "SPRITE",
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
                 {
                     "name": "x",
@@ -83,6 +84,7 @@
                     "varType": ["int"],
                     "defaultInput":0,
                     "defaultSraj": 0,
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
                     "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
@@ -96,6 +98,7 @@
                     "varType": ["int"],
                     "defaultInput":0,
                     "defaultSraj": 0,
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
                     "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {

@@ -57,7 +57,7 @@ function createObjectConfigurationContainer(config)
           if(property.defaultCollapsed){
             collapsed = "collapsed-key"
             }
-          html += `<div class="key-value ${collapsed}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span>`;
+          html += `<div class="key-value ${collapsed}"><label for="${property.idInput}"><span class="property-name">${property.name.substring(property.name.lastIndexOf(".")+1)}:</span></label><input class="hide" type="text" id="${property.idInput}" value="" name="${property.name}"><span class="error-info hide"></span>`;
         }
         else{
           continue;
