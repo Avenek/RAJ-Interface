@@ -89,7 +89,6 @@ function removeAndAddKeysByRequirements(event, container, inputType){
   const listToSet = []
   let allConditionsAreMet
   container.requiredItems.forEach(item => {
-    debugger
     if(inputType === "radio"){
       changeValueInJsonRadioButton(event, container)
     }

@@ -31,6 +31,9 @@ function showError(targetInput, message){
   
   function isDataValid(container, input){
     const configObject = findObjectByProperty(container.jsonConfig.properties, input.id, "idInput")
+    if(configObject.inputType === "empty"){
+      return
+    }
     let inputValue
     inputValue = getValueInGoodType(input.name, input.value, container)
     if(!configObject.hasOwnProperty("validation")){
