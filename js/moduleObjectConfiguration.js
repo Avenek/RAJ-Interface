@@ -206,6 +206,9 @@ function changeValueInJsonCheckbox(event, container){
 
 function getValueInGoodType(key, value, container){
   const configObject = findObjectByProperty(container.jsonConfig.properties, key, "name")
+  if(configObject.inputType === "empty"){
+    return
+  }
   let newValue = value
   if(configObject.varType.includes("boolean")){
     if(newValue === "false")
@@ -237,7 +240,6 @@ function getValueInGoodType(key, value, container){
     }
     return newValue
   }
-
   return newValue
 }
 
