@@ -69,6 +69,7 @@ function updateObjectRadioButton(event, container)
   event.target.checked = true;
   changeValueInJsonRadioButton(event, container)
   removeAndAddKeysByRequirements(event, container, event.target.type)
+  changeValueInJsonRadioButton(event, container)
   removeDefaultValuesFromJson(container.workingObject, container.jsonConfig.properties, container)
   fillFormFields(container)
   hightligthsUsedExtraOption(container)
@@ -249,6 +250,7 @@ function isInteger(num) {
 
 
 function changeValueInJson(key, newValue, container){
+  debugger
   const keys = key.split('.');
   let currentObj = container.workingObject;
   for (let i = 0; i < keys.length - 1; i++) {
