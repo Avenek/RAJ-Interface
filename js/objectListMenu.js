@@ -34,6 +34,15 @@ function createSrajModulesMenu(data) {
         containerElement.appendChild(singleObjectElement);
       }
     }
+    anchorHrefs = document.querySelectorAll(".aLink");
+    anchorHrefs.forEach(a => {
+        let currentURL = window.location.href;
+        if(currentURL.includes("index.html")){
+            currentURL = currentURL.substring(0, currentURL.indexOf("index.html"))
+        }
+        const newURL = currentURL + 'configuration.html';
+        a.href = newURL
+    })
     addEventOnClick()
 }
   
