@@ -250,7 +250,6 @@ function isInteger(num) {
 
 
 function changeValueInJson(key, newValue, container){
-  debugger
   const keys = key.split('.');
   let currentObj = container.workingObject;
   for (let i = 0; i < keys.length - 1; i++) {

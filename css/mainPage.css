@@ -83,9 +83,9 @@ body {
     content: "";
     position: absolute;
     top: 45px;
-    height: 12px;
+    height: 15px;
     display: inline-block;
-    width: 115px;
+    width: 180px;
 }
 
 .menu-element:hover .submenu {
