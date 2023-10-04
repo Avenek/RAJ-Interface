@@ -175,8 +175,8 @@
                     "require": [{"name": "name", "value": ["ROTATION"]}, {"name": "addAngle", "value": [""]}]
                 },
                 {
-                    "name": "setAngle",
-                    "idInput": "rotation.setAngle",
+                    "name": "addAngle",
+                    "idInput": "rotation.addAngle",
                     "tool-tip": "Kąt w stopniach, o który należy obrócić obiekt zgodnie ze wskazówkami zegara. Można podać zarówno liczbę dodatnią (obrót w prawo) lub liczbę ujemną (obrót w lewo). Będzie dodawało podaną wartość do aktualnego obrócenia.",
                     "min":-360,
                     "max":360,
@@ -195,8 +195,8 @@
                     "defaultCollapsed": true,
                     "properties": [
                         {
-                            "name": "x",
-                            "idInput": "x",
+                            "name": "rotationOffset.x",
+                            "idInput": "rotationOffset.x",
                             "tool-tip": "Zmiana miejsca środka ciężkości w poziomie.",
                             "inputType": "string",
                             "varType": ["int"],
@@ -209,8 +209,8 @@
                             "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
                         },
                         {
-                            "name": "y",
-                            "idInput": "y",
+                            "name": "rotationOffset.y",
+                            "idInput": "rotationOffset.y",
                             "tool-tip": "Zmiana miejsca środka ciężkości w pionie",
                             "inputType": "string",
                             "varType": ["int"],
