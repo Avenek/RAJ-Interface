@@ -278,7 +278,7 @@ function removeObjectFromList(event, container){
             const listContainer = document.querySelector(`.${container.listClassName}`)
             const elements = listContainer.querySelectorAll(".object-list-element")
             if(elements.length>1){
-                if(container.currentIndex === 0){
+                if(container.currentIndex == 0){
                     elements[1].classList.add("radio-checked")
                 }
                 else{
