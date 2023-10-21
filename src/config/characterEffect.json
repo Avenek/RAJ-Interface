@@ -1,0 +1,569 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE_IF_NOT_EXIST"}, {"name":"REMOVE_IF_EXIST"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE_IF_NOT_EXIST"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca efekt. Umożliwia późniejsze jego usunięciu.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "windowTarget",
+                    "idInput": "windowTarget",
+                    "tool-tip": "Miejsce, w którym będą widoczne efekty.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"MAP"}],
+                    "defaultInput": "MAP",
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                },
+                {
+                    "name": "effect",
+                    "idInput": "effect",
+                    "tool-tip": "Rodzaj efektu. Animation stworzy animację na podstawie gifa. TEXT wyświetli boxa nad głową obiektu z zadeklarowanym tekstem. TINT powoduje nakładanie się kolorowego cienia na obiekt.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}],
+                    "defaultInput": "ANIMATION",
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                },
+                {
+                    "name": "target",
+                    "idInput": "target",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "target.kind",
+                            "idInput": "target.kind",
+                            "tool-tip": "Typ obiektu, na którym chcemy wywołać dany efekt.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"HERO"}, {"name":"NPC"},{"name":"FAKE_NPC"}],
+                            "defaultInput": "HERO"
+                        },
+                        {
+                            "name": "target.id",
+                            "idInput": "id.npc",
+                            "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
+                            "inputType": "number",
+                            "min":0,
+                            "max":500000,
+                            "step":1,
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "require": [{"name": "target.kind", "value": ["NPC"]}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "target.id",
+                            "idInput": "id.fakeNpc",
+                            "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
+                            "inputType": "string",
+                            "varType": ["int", "string"],
+                            "defaultInput": "",
+                            "require": [{"name": "target.kind", "value": ["FAKE_NPC"]}]
+                        }
+                    ],
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                },
+                {
+                    "name": "params",
+                    "idInput": "animation.params",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "require": [{"name": "effect", "value": ["ANIMATION"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
+                    "properties": [
+                        {
+                            "name": "params.gifUrl",
+                            "idInput": "animation.gifUrl",
+                            "tool-tip": "Ścieżka do pliku znajdującego się w katalogu grafikiRaj. Przykład: characterEffects/kup23-pnacza.gif",
+                            "inputType": "string",
+                            "varType": ["string"],
+                            "defaultInput": "characterEffects/.gif"
+                        },
+                        {
+                            "name": "params.repeat",
+                            "idInput": "animation.repeat",
+                            "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
+                            "inputType": "string",
+                            "min":1,
+                            "max":100,
+                            "varType": ["int", "boolean"],
+                            "defaultInput": 1,
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                        },
+                        {
+                            "name": "params.opacity",
+                            "idInput": "animation.opacity",
+                            "tool-tip": "Alfa - przeźroczystość efektu.",
+                            "min":0,
+                            "max":1,
+                            "step":0.1,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput": 1,
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.position",
+                            "idInput": "animation.position",
+                            "tool-tip": "Pozycja względem zadeklarowanego wcześniej targetu.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"CENTER"}, {"name":"TOP"},{"name":"BOTTOM"}, {"name":"LEFT"},{"name":"RIGHT"}, {"name":"LEFT_HAND"},{"name":"RIGHT_HAND"}],
+                            "defaultInput": "CENTER"
+                        },
+                        {
+                            "name": "params.behind",
+                            "idInput": "animation.behind",
+                            "tool-tip": "Zaznaczenie tej opcji powoduje renderowanie efektu za postacią.",
+                            "inputType": "boolean",
+                            "varType": ["boolean"],
+                            "defaultInput": false,
+                            "defaultSraj": false
+                        },
+                        {
+                            "name": "params.offsetX",
+                            "idInput": "animation.offsetX",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.offsetY",
+                            "idInput": "animation.offsetY",
+                            "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.speechBubble",
+                            "idInput": "animation.speechBubble",
+                            "tool-tip": "Zaznaczenie tej opcji powoduje pojawienie się dymku pod renderowaną grafiką.",
+                            "inputType": "boolean",
+                            "varType": ["boolean"],
+                            "defaultInput": false,
+                            "defaultSraj": false
+                        },
+                        {
+                            "name": "params.delayBefore",
+                            "idInput": "animation.delayBefore",
+                            "tool-tip": "Opóźnia odpalenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.delayAfter",
+                            "idInput": "animation.delayAfter",
+                            "tool-tip": "Opóźnia zakończenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        }
+                    ]
+                },
+                {
+                    "name": "params",
+                    "idInput": "tint.params",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "require": [{"name": "effect", "value": ["TINT"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
+                    "properties": [
+                        {
+                            "name": "params.duration",
+                            "idInput": "tint.duration",
+                            "tool-tip": "Czas trwania efektu w sekundach.",
+                            "step":0.5,
+                            "min":0.1,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":5,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.repeat",
+                            "idInput": "tint.repeat",
+                            "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
+                            "inputType": "string",
+                            "varType": ["int", "boolean"],
+                            "min":1,
+                            "max":100,
+                            "defaultInput": 1,
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                        },
+                        {
+                            "name": "params.tintPercent",
+                            "idInput": "tint.tintPercent",
+                            "tool-tip": "Procent przejrzystości koloru. Można podawać wartości od 0 do 100.",
+                            "min":0,
+                            "max":100,
+                            "step":5,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 60,
+                            "defaultSraj": 60,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.offsetX",
+                            "idInput": "tint.offsetX",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.offsetY",
+                            "idInput": "tint.offsetY",
+                            "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.delayBefore",
+                            "idInput": "tint.delayBefore",
+                            "tool-tip": "Opóźnia odpalenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.delayAfter",
+                            "idInput": "tint.delayAfter",
+                            "tool-tip": "Opóźnia zakończenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.color",
+                            "idInput": "tint.color",
+                            "tool-tip": "",
+                            "inputType": "subSubkey",
+                            "properties": [
+                                {
+                                    "name": "params.color.r",
+                                    "idInput": "tint.color.r",
+                                    "tool-tip": "Zmienna r koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.g",
+                                    "idInput": "tint.color.g",
+                                    "tool-tip": "Zmienna g koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.b",
+                                    "idInput": "tint.color.b",
+                                    "tool-tip": "Zmienna b koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.a",
+                                    "idInput": "tint.color.a",
+                                    "tool-tip": "Zmienna a koloru w formacie RGBA - przeźroczystość.",
+                                    "step":0.1,
+                                    "min":0,
+                                    "max":1,
+                                    "inputType": "number",
+                                    "varType": ["float", "int"],
+                                    "defaultInput":1,
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "params",
+                    "idInput": "text.params",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "require": [{"name": "effect", "value": ["TEXT"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
+                    "properties": [
+                        {
+                            "name": "params.text",
+                            "idInput": "text.text",
+                            "tool-tip": "Tablica słów, które są po kolei wyświetlane nad npc. Oddzielać średnikiem.",
+                            "inputType": "string",
+                            "varType": ["string"],
+                            "defaultInput":[],
+                            "inputPlaceholder": "Wartości rozdzielić średnikiem!"
+                        },
+                        {
+                            "name": "params.duration",
+                            "idInput": "text.duration",
+                            "tool-tip": "Czas trwania efektu w sekundach.",
+                            "step":0.5,
+                            "min":0.1,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":5,
+                            "defaultSraj": 5,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.between",
+                            "idInput": "text.between",
+                            "tool-tip": "Czas między wyświetlaniem słów.",
+                            "step":0.1,
+                            "min":0,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":5,
+                            "defaultSraj": 5,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.repeat",
+                            "idInput": "text.repeat",
+                            "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
+                            "inputType": "string",
+                            "varType": ["int", "boolean"],
+                            "min":1,
+                            "max":100,
+                            "defaultInput": 1,
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                        },
+                        {
+                            "name": "params.height",
+                            "idInput": "text.height",
+                            "tool-tip": "Wielkość czcionki.",
+                            "min":1,
+                            "max":100,
+                            "step":1,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":11,
+                            "defaultSraj": 11,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.random",
+                            "idInput": "text.random",
+                            "tool-tip": "Dostępne wartości to: true - powoduje losowanie słów z tablicy text (ilość losowań to długość tablicy text), ONE - losuje tylko jedno słowo z tablicy, false - słowa są wyświetlane po kolei.",
+                            "inputType": "string",
+                            "varType": ["string", "boolean"],
+                            "defaultInput": false,
+                            "defaultSraj": false,
+                            "validation":[{"forType": "string", "name": "equal", "value": ["ONE"]}]
+                        },
+                        {
+                            "name": "params.offsetX",
+                            "idInput": "text.offsetX",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.offsetY",
+                            "idInput": "text.offsetY",
+                            "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.stickMap",
+                            "idInput": "text.stickMap",
+                            "tool-tip": "Jeżeli text zostanie przypięty do obiektu poruszającego się (np. fakeNpc), to w momencie wyzwolenia słowa, zostanie ono przyklejone do mapy",
+                            "varType": ["boolean"],
+                            "defaultInput": false,
+                            "defaultSraj": false
+                        },
+                        {
+                            "name": "params.delayBefore",
+                            "idInput": "text.delayBefore",
+                            "tool-tip": "Opóźnia odpalenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.delayAfter",
+                            "idInput": "text.delayAfter",
+                            "tool-tip": "Opóźnia zakończenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.color",
+                            "idInput": "text.color",
+                            "tool-tip": "",
+                            "inputType": "subSubkey",
+                            "properties": [
+                                {
+                                    "name": "params.color.r",
+                                    "idInput": "text.color.r",
+                                    "tool-tip": "Zmienna r koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.g",
+                                    "idInput": "text.color.g",
+                                    "tool-tip": "Zmienna g koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.b",
+                                    "idInput": "text.color.b",
+                                    "tool-tip": "Zmienna b koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.a",
+                                    "idInput": "text.color.a",
+                                    "tool-tip": "Zmienna a koloru w formacie RGBA - przeźroczystość.",
+                                    "step":0.1,
+                                    "min":0,
+                                    "max":1,
+                                    "inputType": "number",
+                                    "varType": ["float", "int"],
+                                    "defaultInput":1,
+                                    "extraOptions": [{"name":"random"}],
+                                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

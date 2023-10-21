@@ -1,0 +1,50 @@
+{
+    "properties":[
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties":[
+                {
+                    "name": "delayBefore",
+                    "idInput": "delayBefore",
+                    "tool-tip": "Opóźnia odpalenie tego zachowanie o podaną ilość sekund.",
+                    "step":1,
+                    "min":0,
+                    "max":999,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput":0,
+                    "defaultSraj": 0,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "duration",
+                    "idInput": "duration",
+                    "tool-tip": "Czas w sekundach, po którym przejdzie do następnego zachowania.",
+                    "step":0.5,
+                    "min":0.1,
+                    "max":999,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput":5,
+                    "defaultSraj": 5,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "repeat",
+                    "idInput": "repeat",
+                    "tool-tip": "Ilość powtórzeń danego zachowania, jeżeli damy wartość true to nieskończoność.",
+                    "inputType": "string",
+                    "varType": ["int", "boolean"],
+                    "min":1,
+                    "max":100,
+                    "defaultInput": 1,
+                    "defaultSraj": 1,
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                }
+            ]
+        }
+    ]
+}

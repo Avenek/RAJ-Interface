@@ -1,0 +1,60 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Emocję możemy tworzyć, bądź też usuwać. Zarówno tę zadeklarowaną już w kliencie (spis nazw w dokumentacji) lub swoją własną wcześniej zdefiniowaną.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "name",
+                    "idInput": "name",
+                    "tool-tip": "Nazwa identyfikująca emotkę, którą wcześniej zadeklarowaliśmy lub tę z klienta (spis znajduje się w dokumentacji).",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": "obiekt-id",
+                    "validation":[{"forType": "string", "name": "unique"}]
+                },
+                {
+                    "name": "target",
+                    "idInput": "target",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "target.kind",
+                            "idInput": "target.kind",
+                            "tool-tip": "Typ obiektu, na którym chcemy wywołać dany efekt.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"NPC"}],
+                            "defaultInput": "NPC"
+                        },
+                        {
+                            "name": "target.id",
+                            "idInput": "target.id",
+                            "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
+                            "inputType": "number",
+                            "min":0,
+                            "max":500000,
+                            "step":1,
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

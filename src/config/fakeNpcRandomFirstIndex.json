@@ -1,0 +1,23 @@
+{
+    "properties": [
+        {
+            "name": "randomFirsIndex",
+            "idInput": "menu",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties":[
+                {
+                    "name": "forActions",
+                    "idInput": "forActions",
+                    "tool-tip": "Tablica stringów z nazwami zachowań, które ustawiamy jako filtr do wyszukania.",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "inputPlaceholder": "Wartości rozdzielić średnikiem!",
+                    "canBeEmpty": true,
+                    "defaultInput":[],
+                    "validation":[{"forType": "string", "name": "equal", "value": ["", "IDLE", "WALK", "TP", "WALK_START", "TP_START", "WALK_AND_TP_START"]}]
+                }
+            ]
+        }
+    ]
+}

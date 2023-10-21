@@ -1,0 +1,47 @@
+{
+    "name": "source",
+    "idInput": "source",
+    "tool-tip": "",
+    "inputType": "key",
+    "properties": [
+        {
+            "name": "x",
+            "idInput": "x",
+            "tool-tip": "Wartość kordu x źródła dźwięku. Im gracz będzie bliżej, tym dźwięk będzie głośniejszy.",
+            "min":0,
+            "max":100,
+            "step":1,
+            "inputType": "number",
+            "varType": ["int"],
+            "defaultInput": "",
+            "defaultSraj": "",
+            "validation":[{"forType": "int", "name": "minMax"}]
+        },
+        {
+            "name": "y",
+            "idInput": "y",
+            "tool-tip": "Wartość kordu y źródła dźwięku. Im gracz będzie bliżej, tym dźwięk będzie głośniejszy.",
+            "min":0,
+            "max":100,
+            "step":1,
+            "inputType": "number",
+            "varType": ["int"],
+            "defaultInput": "",
+            "defaultSraj": "",
+            "validation":[{"forType": "int", "name": "minMax"}]
+        },
+        {
+            "name": "range",
+            "idInput": "range",
+            "tool-tip": "Promień od źródła dźwięku, w obrębie którego jest słyszany dźwięk.",
+            "min":0,
+            "max":100,
+            "step":1,
+            "inputType": "number",
+            "varType": ["int"],
+            "defaultInput": "",
+            "defaultSraj": "",
+            "validation":[{"forType": "int", "name": "minMax"}]
+        }
+    ]
+}

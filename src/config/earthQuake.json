@@ -1,0 +1,61 @@
+{
+    "properties": [
+        {
+            "name": "earthquake",
+            "idInput": "menu",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "duration",
+                    "idInput": "duration",
+                    "tool-tip": "Czas trwania jednego wstrząsu w sekundach.",
+                    "step":0.1,
+                    "min":0.1,
+                    "max":5,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput": 0.1,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "quantity",
+                    "idInput": "quantity",
+                    "tool-tip": "Ilość wstrząsów. 0 oznacza nieskończonosć.",
+                    "step":1,
+                    "min":0,
+                    "max":50,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 5,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "frequency",
+                    "idInput": "frequency",
+                    "tool-tip": "Odstęp czasu między wstrząsami w sekundach.",
+                    "step":0.1,
+                    "min":0,
+                    "max":10,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput": 0.7,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "power",
+                    "idInput": "power",
+                    "tool-tip": "Moc wstrząsów.",
+                    "step":5,
+                    "min":1,
+                    "max":100,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 10,
+                    "defaultSraj": 10,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                }
+            ]
+        }
+    ]
+}

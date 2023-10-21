@@ -1,0 +1,139 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Światło możemy tworzyć, jeżeli nie istnieje żadne o podanym id albo usuwać jeżeli istnieje o danym id.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca światło. Umożliwia późniejsze jego usunięciu.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "master",
+                    "idInput": "master",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "master.kind",
+                            "idInput": "master.kind",
+                            "tool-tip": "Należy zdefiniować tutaj obiekt, do którego będzie przypięte światło.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"HERO"}, {"name":"FAKE_NPC"}, {"name":"FLOAT_OBJECT"}],
+                            "defaultInput": "CREATE"
+                        },
+                        {
+                            "name": "master.id",
+                            "idInput": "master.id",
+                            "tool-tip": "ID obiektu, do którego chcemy przypiąć światło.",
+                            "inputType": "string",
+                            "varType": ["int", "string"],
+                            "defaultInput": "",
+                            "require": [{"name": "master.kind", "value": ["FAKE_NPC", "FLOAT_OBJECT"]}]
+                        }
+                    ]
+                },
+                {
+                    "name": "d",
+                    "idInput": "d",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "require": [{"name": "action", "value": ["CREATE"]}],
+                    "properties": [
+                        {
+                            "name": "d.r",
+                            "idInput": "d.r",
+                            "tool-tip": "Promień dziury, która ma zostać wycięta.",
+                            "min":0,
+                            "max":400,
+                            "step":10,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 100,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "d.offsetX",
+                            "idInput": "d.offsetX",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "d.offsetY",
+                            "idInput": "d.offsetY",
+                            "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "d.gradientPercent1",
+                            "idInput": "d.gradientPercent1",
+                            "tool-tip": "Jeden z dwóch gradientów. Określa, jak mocno miga światło.",
+                            "step":5,
+                            "min":0,
+                            "max":100,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":40,
+                            "defaultSraj": 40,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "d.gradientPercent2",
+                            "idInput": "d.gradientPercent2",
+                            "tool-tip": "Jeden z dwóch gradientów. Określa, jak mocno miga światło.",
+                            "step":5,
+                            "min":0,
+                            "max":100,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":40,
+                            "defaultSraj": 40,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "d.light",
+                            "idInput": "d.light",
+                            "inputType": "empty",
+                            "varType": ["light"],
+                            "tool-tip": "Opcjonalnie możemy zdefiniować światło, które pojawi się wewnątrz wyciętej dziury.",
+                            "extraOptions": [{"name":"light"}],
+                            "require": [{"name": "action", "value": ["CREATE"]}]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

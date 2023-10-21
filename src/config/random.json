@@ -1,0 +1,83 @@
+{
+    "properties": [
+      {
+        "name": "get random",
+        "idInput": "menu",
+        "tool-tip": "",
+        "inputType": "key",
+        "properties":[
+          {
+            "name": "getRandom.resultType",
+            "idInput": "resultType",
+            "tool-tip": "Typ zmiennej, która ma zostać wylosowana.",
+            "inputType": "options",
+            "varType": ["string"],
+            "options": [{"name":"int"}, {"name":"float"}, {"name":"options"}],
+            "defaultInput": "int"
+          },
+          {
+            "name": "getRandom.start",
+            "idInput": "start.int",
+            "tool-tip": "Minimalna wartość do losowania.",
+            "min":-999,
+            "max":999,
+            "step":1,
+            "inputType": "number",
+            "varType": ["int"],
+            "defaultInput": 0,
+            "require": [{"name": "getRandom.resultType", "value": ["int"]}],
+            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "int", "name": "lessThan", "value": "getRandom.end"}]
+          },
+          {
+            "name": "getRandom.start",
+            "idInput": "start.float",
+            "tool-tip": "Minimalna wartość do losowania.",
+            "min":-999,
+            "max":999,
+            "step":1,
+            "inputType": "number",
+            "varType": ["float", "int"],
+            "defaultInput": 0,
+            "require": [{"name": "getRandom.resultType", "value": ["float"]}],
+            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "float", "name": "lessThan", "value": "getRandom.end"}, {"forType": "int", "name": "minMax"}, {"forType": "int", "name": "lessThan", "value": "getRandom.end"}]
+          },
+          {
+            "name": "getRandom.end",
+            "idInput": "end.int",
+            "tool-tip": "Maksymalna wartość do losowania.",
+            "min":-999,
+            "max":999,
+            "step":1,
+            "inputType": "number",
+            "varType": ["int"],
+            "defaultInput": 1,
+            "require": [{"name": "getRandom.resultType", "value": ["int"]}],
+            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "int", "name": "moreThan", "value": "getRandom.start"}]
+          },
+          {
+            "name": "getRandom.end",
+            "idInput": "end.float",
+            "tool-tip": "Maksymalna wartość do losowania.",
+            "min":-999,
+            "max":999,
+            "step":1,
+            "inputType": "number",
+            "varType": ["float", "int"],
+            "defaultInput": 1,
+            "require": [{"name": "getRandom.resultType", "value": ["float"]}],
+            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "float", "name": "moreThan", "value": "getRandom.start"}, {"forType": "int", "name": "minMax"}, {"forType": "int", "name": "moreThan", "value": "getRandom.start"}]
+          },
+          {
+            "name": "getRandom.options",
+            "idInput": "options.resultType",
+            "tool-tip": "Tablica opcji do wyboru, mogą mieć wymieszane typy. Oddzielać średnikiem.",
+            "inputType": "string",
+            "varType": ["int", "float", "string"],
+            "defaultInput":[],
+            "inputPlaceholder": "Wartości rozdzielić średnikiem!",
+            "require": [{"name": "getRandom.resultType", "value": ["options"]}]
+          }
+        ]
+      }
+    ]
+  }

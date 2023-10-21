@@ -1,0 +1,63 @@
+{
+    "properties":[
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Możemy stworzyć obiekt chowający dany obiekt w grze, bądź też usunąć go i odkryć dany obiekt w grze, jeżeli był uprzednio schowany.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "kind",
+                    "idInput": "kind",
+                    "tool-tip": "Typ obiektu, który chcemy schować.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"HERO"}, {"name":"NPC"}, {"name":"PET"},{"name":"FAKE_NPC"}],
+                    "defaultInput": "HERO"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id.npc",
+                    "tool-tip": "ID NPC, którego chcemy schować.",
+                    "inputType": "number",
+                    "min":0,
+                    "max":500000,
+                    "step":1,
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "require": [{"name": "kind", "value": ["NPC"]}],
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "id",
+                    "idInput": "id.fakeNpc",
+                    "tool-tip": "ID fakeNpc, którego chcemy schować.",
+                    "inputType": "string",
+                    "varType": ["int", "string"],
+                    "defaultInput": "",
+                    "require": [{"name": "kind", "value": ["FAKE_NPC"]}]
+                },
+                {
+                    "name": "showTip",
+                    "idInput": "showTip",
+                    "tool-tip": "Flaga informująca o tym, czy schować tip po najechaniu myszką na dany obiekt.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "action", "value": ["CREATE"]}]
+                }
+            ]
+        }
+    ]
+}
