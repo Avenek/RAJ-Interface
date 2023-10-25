@@ -1,17 +1,26 @@
-class homeView{
+class homeView extends pageView{
     constructor(){
-        this.root = document.querySelector(".home-root")
-        this.dataObjectBox = root.querySelector(".data-object-box")
-        this.modulesBox = root.querySelector(".modules-box")
-        this.jsonDataBox = root.querySelector(".json-data-box")
+        super() 
+    }
+
+    render(){
+        this.createPageElements()
+        this.appendElements()
         this.dataObjectBoxView = new dataObjectBoxView(this.dataObjectBox)
         this.modulesBoxView = new modulesBoxView(this.modulesBox)
         this.jsonDataBoxView = new jsonDataBoxView(this.jsonDataBox)
     }
 
-    render(dataObjectList, modulesList, jsonData){
-        this.dataObjectBoxView.create(dataObjectList)
-        this.modulesBoxView.create(modulesList)
-        this.jsonDataBoxView.create(jsonData)
+    createPageElements(){
+        this.modulesContainer = this.createElement("div", "modules-container")
+        this.dataObjectBox = this.createElement("div", "data-object-box")
+        this.modulesBox = this.createElement("div", "modules-box")
+        this.jsonDataBox = this.createElement("div", "json-data-box")
+    }
+
+    appendElements(){
+        this.root.innerHTML = ""
+        this.modulesContainer.append(this.dataObjectBox, this.modulesBox)
+        this.root.append(this.modulesContainer, this.jsonDataBox)
     }
 }

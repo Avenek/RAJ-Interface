@@ -1,33 +1,24 @@
-class formView{
-    constructor(){
-        this.root = document.querySelector(".form-root")
-        
+class formView extends pageView{
+    constructor(){  
+        super()
     }
 
     render(){
-        this.createElements()
+        this.createPageElements()
         this.appendElements()
     }
 
-    createElements(){
-        this.headerPanel = document.createElement("div")
-        this.headerPanel.classList.add("header-panel")
-        this.formContainer = document.createElement("div")
-        this.formContainer.classList.add("form-container")
-        this.moduleObjectConfiguration = document.createElement("div")
-        this.moduleObjectConfiguration.classList.add("module-object-configuration", "object-configuration")
-        this.moduleObjectIdBox = document.createElement("div")
-        this.moduleObjectIdBox.classList.add("module-object-id-box", "object-id-box")
-        this.moduleObjectForm = document.createElement("div")
-        this.moduleObjectForm.classList.add("module-object-form", "object-form")
-        this.extraOptionConfiguration = document.createElement("div")
-        this.extraOptionConfiguration.classList.add("extra-option-configuration", "object-configuration")
-        this.extraOptionIdBox = document.createElement("div")
-        this.extraOptionIdBox.classList.add("extra-option-id-box", "object-id-box")
-        this.extraOptionForm = document.createElement("div")
-        this.extraOptionForm.classList.add("extra-option-form", "object-form")
-        this.jsonDataBox = document.createElement("div")
-        this.jsonDataBox.classList.add("json-data-box")
+    createPageElements(){
+        this.configurationContainer = this.createElement("div", "configuration-container")
+        this.headerPanel = this.createElement("div", "header-panel")
+        this.formContainer = this.createElement("div", "form-container")
+        this.moduleObjectConfiguration = this.createElement("div", "module-object-configuration", "object-configuration")
+        this.moduleObjectIdBox = this.createElement("div", "module-object-id-box", "object-id-box")
+        this.moduleObjectForm = this.createElement("div", "module-object-form", "object-form")
+        this.extraOptionConfiguration = this.createElement("div", "extra-option-configuration", "object-configuration")
+        this.extraOptionIdBox = this.createElement("div", "extra-option-id-box", "object-id-box")
+        this.extraOptionForm = this.createElement("div", "extra-option-form", "object-form")
+        this.jsonDataBox = this.createElement("div", "json-data-box")
     }
 
     appendElements(){
@@ -35,6 +26,7 @@ class formView{
         this.moduleObjectConfiguration.append(this.moduleObjectIdBox, this.moduleObjectForm)
         this.extraOptionConfiguration.append(this.extraOptionIdBox, this.extraOptionForm)
         this.formContainer.append(this.moduleObjectConfiguration, this.extraOptionConfiguration)
-        this.root.append(this.headerPanel, this.formContainer, this.jsonDataBox)
+        this.configurationContainer.append(this.headerPanel, this.formContainer)
+        this.root.append(this.configurationContainer, this.jsonDataBox)
     }
 }
