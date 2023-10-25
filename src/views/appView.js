@@ -1,6 +1,6 @@
-class appView {
+class AppView {
     constructor(){
-        this.home = new homeView();
-        this.form = new formView();
+        this.home = new HomeView();
+        this.form = new FormView();
     }
 }

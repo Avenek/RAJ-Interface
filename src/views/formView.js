@@ -1,4 +1,4 @@
-class formView extends pageView{
+class FormView extends View{
     constructor(){  
         super()
     }

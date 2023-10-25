@@ -1,4 +1,4 @@
-class jsonDataBoxView{
+class JsonDataBoxView{
     constructor(jsonDataBox){
        this.jsonDataBox = jsonDataBox
     }

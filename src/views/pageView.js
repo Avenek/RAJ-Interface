@@ -1,11 +1,14 @@
-class pageView{
+class View{
     constructor(){
         this.root = document.querySelector(".root")
     }
 
     createElement(tag, ...className) {
         const element = document.createElement(tag)
-        element.classList.add(className)
+        if(className.length>0){
+          element.classList.add(className)
+        }
+        
 
         return element
       }

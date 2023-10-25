@@ -1,4 +1,4 @@
-class modulesBoxView{
+class ModulesBoxView{
     constructor(dataObjectBox){
        this.modulesBox = dataObjectBox
     }
