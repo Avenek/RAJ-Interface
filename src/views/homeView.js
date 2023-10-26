@@ -3,7 +3,7 @@ class HomeView extends View{
         super() 
     }
 
-    render(){
+    render = () => {
         this.createPageElements()
         this.appendElements()
         this.dataObjectsBoxView = new DataObjectsBoxView(this.dataObjectsBox)

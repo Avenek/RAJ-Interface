@@ -8,7 +8,7 @@ class FormView extends View{
         this.appendElements()
     }
 
-    createPageElements(){
+    createPageElements = () =>{
         this.configurationContainer = this.createElement("div", "configuration-container")
         this.headerPanel = this.createElement("div", "header-panel")
         this.formContainer = this.createElement("div", "form-container")

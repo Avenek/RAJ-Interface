@@ -8,4 +8,5 @@ class AppController {
     }
   }
 
+  localStorage.clear()
   const app = new AppController(new AppView(), new AppModel())

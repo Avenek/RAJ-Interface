@@ -6,7 +6,7 @@ class DataObjectsBoxController {
         
     }
     
-    dataObjectsListChanged(dataObjectsList){
+    dataObjectsListChanged = (dataObjectsList) => {
         this.view.displayDataObjects(dataObjectsList)
       }
   }

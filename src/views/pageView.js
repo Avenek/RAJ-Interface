@@ -3,7 +3,7 @@ class View{
         this.root = document.querySelector(".root")
     }
 
-    createElement(tag, ...className) {
+    createElement = (tag, ...className) => {
         const element = document.createElement(tag)
         if(className.length>0){
           element.classList.add(className)
@@ -14,7 +14,7 @@ class View{
       }
     
       // Retrieve an element from the DOM
-      getElement(selector) {
+      getElement = (selector) => {
         const element = this.root.querySelector(selector)
     
         return element

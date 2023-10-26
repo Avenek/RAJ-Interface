@@ -1,6 +1,8 @@
 class AppModel {
     constructor() {
-      this.home = new HomeModel()
-      this.form = new FormModel()
+      this.jsonData = JSON.parse(localStorage.getItem('lastJson')) || {}
+      this.home = new HomeModel(this.jsonData)
+      this.form = new FormModel(this.jsonData)
+      
     }
 }

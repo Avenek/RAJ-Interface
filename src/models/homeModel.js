@@ -1,5 +1,7 @@
 class HomeModel {
-    constructor() {
-      this.dataObjectsBoxModel = new DataObjectsBoxModel()
+    constructor(jsonData) {
+      this.jsonData = jsonData
+      this.dataObjectsBoxModel = new DataObjectsBoxModel(jsonData)
+      this.modulesBoxModel = new ModulesBoxModel()
     }
 }

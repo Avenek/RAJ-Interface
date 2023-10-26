@@ -1,5 +1,5 @@
 class FormModel {
-    constructor() {
-      
+    constructor(jsonData) {
+        this.jsonData = jsonData
     }
 }
