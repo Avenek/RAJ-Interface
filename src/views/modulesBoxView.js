@@ -42,8 +42,9 @@ class ModulesBoxView extends View{
     bindDeleteContainer = (handler) => {
         this.modulesBox.addEventListener("click", event => {
             if (event.target.className === 'delete-button') {
-            const containerTitle = event.target.parentElement.firstElementChild.textContent
-                handler(containerTitle)
+            const container = event.target.parentElement
+            const index = this.getIndexElement(this.modulesBox, "container", container)
+                handler(index)
             }
         })
     }
@@ -56,21 +57,22 @@ class ModulesBoxView extends View{
         })
     }
 
-    settingForm(e, handler){
-        const titleDiv = e.target.parentElement.firstElementChild
+    settingForm(event, handler){
+        const titleDiv = event.target.parentElement.firstElementChild
         const input = this.createInput(titleDiv)
         const oldTitle = titleDiv.textContent
         titleDiv.textContent = "";
         titleDiv.appendChild(input);
         input.focus();
-
+        const container = event.target.parentElement
+        const index = this.getIndexElement(this.modulesBox, "container", container)
         input.addEventListener("keyup", (event) => {
             if (event.key === "Enter") {
-                handler(oldTitle, input.value)
+                handler(index, input.value)
             }
         })
         input.addEventListener("blur", () => {
-            handler(oldTitle, input.value)
+            handler(index, input.value)
         })
         
     };
@@ -90,33 +92,122 @@ class ModulesBoxView extends View{
                 this.handleDragStart(event)
             }
         })
+        this.root.addEventListener("mousemove", event => {
+            this.dragAndDrop.handleDragOver(event)
+        })
+        this.root.addEventListener('mouseup', event => { 
+            this.handleDrop(event, handler) 
+        });
     }
 
     handleDragStart = (event) => {
         this.dragAndDrop.draggedModule = event.target;
         this.dragAndDrop.draggedModule.classList.add("dragging")
-        this.root.addEventListener("mousemove", event => {
-            this.dragAndDrop.handleDragOver(event)
-        })
-        this.root.addEventListener('mouseup', event => { this.handleDrop(event) });
+        
         this.dragAndDrop.createShadowButton()
     }
 
-    handleDrop = (event) => {
+    handleDrop = (event, handler) => {
         this.dragAndDrop.draggedModule.classList.remove("dragging")
-        this.root.removeEventListener('mousemove', this.handleDragOver);
-        this.root.removeEventListener('mouseup', this.handleDrop);
+
         this.dragAndDrop.shadow.remove()
-        if (this.dragAndDrop.isDroppedOnEmptyArea(event)) {
-            this.dragAndDrop.dropOnEmptyArea(event)
+        if (this.isDroppedOnEmptyArea(event)) {
+            handler(this.dropOnEmptyArea(event))
         } 
-        else if (this.dragAndDrop.isDroppedOnSingleModule(event)){
-            this.dragAndDrop.dropOnSingleModule(event)
+        else if (this.isDroppedOnSingleModule(event)){
+            handler(this.dropOnSingleModule(event))
+        }
+    }
+
+    isDroppedOnEmptyArea = (event) => {
+        return event.target.classList.contains("container")
+    }
+    
+    isDroppedOnSingleModule = (event) => {
+        return event.target.classList.contains("glow-on-hover") && this.draggedModule !== event.target
+    }
+    
+    dropOnEmptyArea = (event) => {
+        const fromContainer = this.dragAndDrop.draggedModule.parentElement.parentElement
+        const fromContainerIndex = this.getIndexElement(this.modulesBox, "container", fromContainer)
+        const fromDraggedModuleIndex = this.getIndexElement(fromContainer, "glow-on-hover", this.dragAndDrop.draggedModule)
+        const toContainer = event.target
+        const toContainerIndex = this.getIndexElement(this.modulesBox, "container", toContainer)
+        const indexData = {
+            "fromContainer": fromContainerIndex,
+            "fromDraggedModule": fromDraggedModuleIndex,
+            "toContainer": toContainerIndex
         }
 
-
-        
-        
+        const moduleContainers = event.target.querySelectorAll(".single-module-container");
+        if(moduleContainers.length===0)
+        {
+            indexData.moveTo = 0
+            return indexData
+        }
+        const firstContainerRect = moduleContainers[0].getBoundingClientRect()
+        const lastContainerRect = moduleContainers[moduleContainers.length-1].getBoundingClientRect()
+        if(this.dragAndDrop.isDroppedBeforeFirstContainer(event, firstContainerRect))
+        {
+            indexData.moveTo = 0
+            return indexData
+        }
+        else if(this.dragAndDrop.isDroppedAfterLastContainer(event, lastContainerRect))
+        {
+            indexData.moveTo = moduleContainers.length
+            return indexData
+        }
+    
+        for (let i = 1 ; i< moduleContainers.length ; i++) {
+            const moduleBeforeRect = moduleContainers[i-1].getBoundingClientRect()
+            const moduleAfterRect = moduleContainers[i].getBoundingClientRect()
+    
+            if(this.dragAndDrop.isDroppedBetweemTwoContainers(event, moduleBeforeRect, moduleAfterRect)){
+                indexData.moveTo = i
+                return indexData
+            }
+        }
     }
+    
+    dropOnSingleModule = (event) => {
+        const fromContainer = this.dragAndDrop.draggedModule.parentElement.parentElement
+        const fromContainerIndex = this.getIndexElement(this.modulesBox, "container", fromContainer)
+        const fromDraggedModuleIndex = this.getIndexElement(fromContainer, "glow-on-hover", this.dragAndDrop.draggedModule)
+        const toContainer = event.target.parentElement.parentElement
+        const toContainerIndex = this.getIndexElement(this.modulesBox, "container", toContainer)
+        const indexData = {
+            "fromContainer": fromContainerIndex,
+            "fromDraggedModule": fromDraggedModuleIndex,
+            "toContainer": toContainerIndex
+        }
+        
+        const moduleContainers = toContainer.querySelectorAll(".glow-on-hover");
+        if(this.isDroppedOnLeftSide(event))
+        {
+            const targetModuleIndex = this.getIndexElement(toContainer, "glow-on-hover", event.target)
+            indexData.moveTo = targetModuleIndex
+            return indexData
+        } 
+        else if(this.isDroppedOnRightSideLastModule(event, moduleContainers)){
+            indexData.moveTo = moduleContainers.length
+            return indexData
+        }
+        else{
+            const targetModuleIndex = this.getIndexElement(toContainer, "glow-on-hover", event.target)
+            indexData.moveTo = targetModuleIndex + 1
+            return indexData
+        }
+    }
+    
+    isDroppedOnLeftSide = (event) => {
+        return event.pageX < event.target.getBoundingClientRect().left + event.target.clientWidth / 2
+    }
+    
+    isDroppedOnRightSideLastModule = (event, moduleContainers) => {
+        const lastContainerRect = moduleContainers[moduleContainers.length-1].getBoundingClientRect()
+        const targetContainerRect = event.target.getBoundingClientRect()
+        return event.pageX > targetContainerRect.right - event.target.clientWidth / 2 && targetContainerRect.left === lastContainerRect.left && targetContainerRect.bottom === lastContainerRect.bottom
+    }
+
 
 }

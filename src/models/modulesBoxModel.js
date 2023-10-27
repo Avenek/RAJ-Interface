@@ -38,7 +38,6 @@ class ModulesBoxModel{
         if(this.findContainerIndexByTitle("Nowy kontener") === -1){
             newContainer = { 
                 "title": "Nowy kontener",
-                "error": "",
                 "modules": []
             }
         }
@@ -49,7 +48,6 @@ class ModulesBoxModel{
             }
             newContainer = { 
                 "title": `Nowy kontener_${i}`,
-                "error": "",
                 "modules": []
             }
         }
@@ -58,23 +56,25 @@ class ModulesBoxModel{
         return newContainer
     }
 
-    deleteContainer = (name) => {
-        const index = this.findContainerIndexByTitle(name)
+    deleteContainer = (index) => {
         this.modulesList.containers.splice(index, 1);
         this.modulesListChanged(this.modulesList)
     }
 
-    updateNameContainer = (containerName, newName) => {
+    updateNameContainer = (index, newName) => {
         newName = newName.trim()
-        const index = this.findContainerIndexByTitle(containerName)
-        if((newName && this.findContainerIndexByTitle(newName) === -1) || containerName === newName){
+        if((newName && this.findContainerIndexByTitle(newName) === -1) || this.modulesList.containers[index].title === newName){
             this.modulesList.containers[index].title = newName
+            this.modulesListChanged(this.modulesList)
         }
-        this.modulesListChanged(this.modulesList)
+        
     }    
 
-    dropContainer = () => {
-
+    dropContainer = (indexData) => {
+        const draggedElement = this.modulesList.containers[indexData.fromContainer].modules[indexData.fromDraggedModule]
+        this.modulesList.containers[indexData.toContainer].modules.splice(indexData.moveTo, 0, draggedElement);
+        this.modulesList.containers[indexData.fromContainer].modules.splice(indexData.fromDraggedModule, 1);
+        this.modulesListChanged(this.modulesList)
     }
 
     findContainerIndexByTitle = (title) => {

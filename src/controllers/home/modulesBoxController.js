@@ -26,8 +26,8 @@ class ModulesBoxController {
     handleUpdateNameContainer = (containerName, newName) => {
         this.model.updateNameContainer(containerName, newName)
     }
-    handleDragAndDrop = () => {
-        this.model.dropContainer()
+    handleDragAndDrop = (indexData) => {
+        this.model.dropContainer(indexData)
     }
       
   }

@@ -124,15 +124,8 @@ body {
     border-radius: 5px;
 }
 
-.error-info {
-    display: block;
-    background-color: #ff9999;
-    color: #d8000c; 
-    padding: 10px; 
-    border: 1px solid #c0c0c0; 
-    border-radius: 5px; 
-    margin-bottom: 15px;
-    margin-left: 10px; 
+.input-update-container{
+    width: 200px;
 }
 
 .edit-button {
@@ -305,9 +298,6 @@ body {
     background-color: #d32f2f;
 }
 
-
-
-
 .json-data-box {
     display: flex;
     flex-direction: column;
@@ -338,7 +328,6 @@ body {
     align-items: center;
     font-size: 13px;
     font-family: Arial, Helvetica, sans-serif;
-
 }
 
 .json-button:hover {
@@ -380,34 +369,8 @@ body {
     border: 1px solid #ff0000;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.sraj-modules-menu > li:first-child {
-    border-radius: 6px 0 0 0;
-}
-
-.sraj-modules-menu > li:last-child {
-    border-radius: 0 6px 0 0;
-    border-right: 0 solid #000;
-}
-
-
-
-
 .dragging {
-    opacity: 0.5;
+    opacity: 0.7;
     z-index: 3;
 }
 
@@ -415,7 +378,7 @@ body {
     position: fixed;
     pointer-events: none;
     opacity: 0.7;
-    z-index: 100;
+    z-index: 4;
     transition: none;
     translate: -50% -50%;
 }
@@ -436,10 +399,4 @@ img {
 
 .hide {
     display: none;
-}
-
-a {
-    background-color: initial;
-    color: inherit;
-    text-decoration: none;
 }
