@@ -80,7 +80,5 @@ class ModulesBoxModel{
     findContainerIndexByTitle = (title) => {
         return this.modulesList.containers.findIndex(container => container.title === title);
     }
-    
-
 
 }
