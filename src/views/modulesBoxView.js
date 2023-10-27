@@ -3,6 +3,7 @@ class ModulesBoxView extends View{
         super()
        this.modulesBox = modulesBox
        this.plusButton = this.createElement("div", "plus-circle")
+       this.dragAndDrop = new DragAndDrop()
     }
 
     displayModulesBox = (modulesList) => {

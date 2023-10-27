@@ -1,8 +1,12 @@
 class DataObjectsBoxModel{
     constructor(jsonData){
         this.jsonData = jsonData
-        this.dataObjectsList = this.createDataObjectsList()
+        this.createDataObjectsList()
     }
+
+    bindObjectsListChanged = (callback) => {
+        this.modulesListChanged = callback
+      }
 
     createDataObjectsList = () => {
         const dataObjectsList = []
@@ -11,7 +15,7 @@ class DataObjectsBoxModel{
             dataObjectsList.push({"keyName": key, "objectNames": ids})
         }
 
-        return dataObjectsList
+        this.dataObjectsList = dataObjectsList
     }
 
 

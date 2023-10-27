@@ -1,7 +1,8 @@
 class JsonDataBoxController {
-    constructor(view, model) {
+    constructor(view, model, dataObjectsBox) {
         this.view = view
         this.model = model
+        this.dataObjectsBox = dataObjectsBox
         this.jsonDataChanged(this.model.jsonData, this.model.isBeautified, this.model.errorMode)
         this.model.bindJsonDataChanged(this.jsonDataChanged)
         this.view.bindBeautifyJsonData(this.handleBeautifyJsonData)
@@ -13,6 +14,8 @@ class JsonDataBoxController {
 
     jsonDataChanged = (jsonData, isBeautified, errorMode) => {
         this.view.displayJsonDataBox(jsonData, isBeautified, errorMode)
+        this.dataObjectsBox.model.jsonData = this.model.jsonData
+        this.dataObjectsBox.model.modulesListChanged()
     }
 
     handleBeautifyJsonData = () => {

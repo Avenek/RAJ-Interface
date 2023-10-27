@@ -5,6 +5,7 @@ class DataObjectsBoxView extends View{
     }
 
     displayDataObjects = (dataObjectsList) => {
+        this.dataObjectsBox.innerHTML = ""
         dataObjectsList.forEach(key => {
             const keyMenu = this.createElement("div", "key-menu")
             const keyElement = this.createElement("div", "key-element");

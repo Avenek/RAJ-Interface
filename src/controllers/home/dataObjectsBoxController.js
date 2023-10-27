@@ -2,11 +2,12 @@ class DataObjectsBoxController {
     constructor(view, model) {
         this.view = view
         this.model = model
-        this.dataObjectsListChanged(this.model.dataObjectsList)
-        
+        this.objectsListChanged()
+        this.model.bindObjectsListChanged(this.objectsListChanged)
     }
     
-    dataObjectsListChanged = (dataObjectsList) => {
-        this.view.displayDataObjects(dataObjectsList)
+    objectsListChanged = () => {
+        this.model.createDataObjectsList()
+        this.view.displayDataObjects(this.model.dataObjectsList)
       }
   }
