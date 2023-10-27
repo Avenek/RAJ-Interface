@@ -27,6 +27,7 @@ class JsonDataBoxModel{
     clearJsonData = () => {
         if (window.confirm("Czy na pewno chcesz wyczyścić pole Json?\nPS. Ctrl+z nie przywróci go już z powrotem.")) {
             this.jsonData = {}
+            localStorage.setItem('lastJson', jsonData);
             this.jsonDataChanged(this.jsonData, this.isBeautified, this.errorMode)
         }
     }
@@ -34,6 +35,7 @@ class JsonDataBoxModel{
     modifyJsonData = (jsonData) => {
         try {
             this.jsonData = JSON.parse(jsonData)
+            localStorage.setItem('lastJson', jsonData);
             this.errorMode = false
         }
         catch{

@@ -4,13 +4,14 @@ class ModulesBoxController {
         this.model = model
         this.modulesListChanged(this.model.modulesList)
         this.model.bindModulesListChanged(this.modulesListChanged)
+        this.view.bindDeleteContainer(this.handleDeleteContainer)
         this.view.bindAddContainer(this.handleAddContainer)
+        this.view.bindUpdateNameContainer(this.handleUpdateNameContainer)
     }
     
     modulesListChanged = (modulesList) => {
         this.view.displayModulesBox(modulesList)
-        this.view.bindDeleteContainer(this.handleDeleteContainer)
-        this.view.bindUpdateNameContainer(this.handleUpdateNameContainer)
+        localStorage.setItem('containerConfig', JSON.stringify(modulesList));
     }
 
     handleAddContainer = () => {

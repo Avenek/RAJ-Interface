@@ -26,7 +26,6 @@ class ModulesBoxModel{
             const newContainer = this.createNewContainer()
             this.modulesList.containers.push(newContainer)
             this.modulesListChanged(this.modulesList)
-            localStorage.setItem('containerConfig', JSON.stringify(this.modulesList));
         }
         else
         {

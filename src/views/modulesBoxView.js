@@ -39,23 +39,19 @@ class ModulesBoxView extends View{
     }
 
     bindDeleteContainer = (handler) => {
-        this.deleteButtons = this.modulesBox.querySelectorAll(".delete-button");
-        this.deleteButtons.forEach(button => {
-            button.addEventListener("click", event => {
-                event.preventDefault()
-                const containerTitle = event.target.parentElement.firstElementChild.textContent
-                  handler(containerTitle)
-              })
+        this.modulesBox.addEventListener("click", event => {
+            if (event.target.className === 'delete-button') {
+            const containerTitle = event.target.parentElement.firstElementChild.textContent
+                handler(containerTitle)
+            }
         })
     }
 
     bindUpdateNameContainer = (handler) => {
-        this.editButtons = this.modulesBox.querySelectorAll(".edit-button")
-        this.editButtons.forEach(button => {
-            button.addEventListener("click", event => {
-                event.preventDefault()
+        this.modulesBox.addEventListener("click", event => {
+            if (event.target.className === 'edit-button') {
                 this.settingForm(event, handler)
-            })
+            }
         })
     }
 
