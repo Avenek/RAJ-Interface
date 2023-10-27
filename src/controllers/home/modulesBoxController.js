@@ -7,6 +7,7 @@ class ModulesBoxController {
         this.view.bindDeleteContainer(this.handleDeleteContainer)
         this.view.bindAddContainer(this.handleAddContainer)
         this.view.bindUpdateNameContainer(this.handleUpdateNameContainer)
+        this.view.bindDragAndDrop(this.handleDragAndDrop)
     }
     
     modulesListChanged = (modulesList) => {
@@ -24,6 +25,9 @@ class ModulesBoxController {
 
     handleUpdateNameContainer = (containerName, newName) => {
         this.model.updateNameContainer(containerName, newName)
+    }
+    handleDragAndDrop = () => {
+        this.model.dropContainer()
     }
       
   }

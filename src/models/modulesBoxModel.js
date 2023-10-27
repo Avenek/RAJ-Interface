@@ -34,11 +34,26 @@ class ModulesBoxModel{
     }
 
     createNewContainer = () => {
-        const newContainer = { 
-            "title": "Nowy kontener",
-            "error": "",
-            "modules": []
+        let newContainer
+        if(this.findContainerIndexByTitle("Nowy kontener") === -1){
+            newContainer = { 
+                "title": "Nowy kontener",
+                "error": "",
+                "modules": []
+            }
         }
+        else{
+            let i = 1
+            while(this.findContainerIndexByTitle(`Nowy kontener_${i}`) !== -1){
+                i++
+            }
+            newContainer = { 
+                "title": `Nowy kontener_${i}`,
+                "error": "",
+                "modules": []
+            }
+        }
+        
 
         return newContainer
     }
@@ -57,6 +72,10 @@ class ModulesBoxModel{
         }
         this.modulesListChanged(this.modulesList)
     }    
+
+    dropContainer = () => {
+
+    }
 
     findContainerIndexByTitle = (title) => {
         return this.modulesList.containers.findIndex(container => container.title === title);

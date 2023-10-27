@@ -84,4 +84,39 @@ class ModulesBoxView extends View{
         return input
     }
 
+    bindDragAndDrop = (handler) => {
+        this.modulesBox.addEventListener("mousedown", event => {
+            if (event.target.className === 'glow-on-hover') {
+                this.handleDragStart(event)
+            }
+        })
+    }
+
+    handleDragStart = (event) => {
+        this.dragAndDrop.draggedModule = event.target;
+        this.dragAndDrop.draggedModule.classList.add("dragging")
+        this.root.addEventListener("mousemove", event => {
+            this.dragAndDrop.handleDragOver(event)
+        })
+        this.root.addEventListener('mouseup', event => { this.handleDrop(event) });
+        this.dragAndDrop.createShadowButton()
+    }
+
+    handleDrop = (event) => {
+        this.dragAndDrop.draggedModule.classList.remove("dragging")
+        this.root.removeEventListener('mousemove', this.handleDragOver);
+        this.root.removeEventListener('mouseup', this.handleDrop);
+        this.dragAndDrop.shadow.remove()
+        if (this.dragAndDrop.isDroppedOnEmptyArea(event)) {
+            this.dragAndDrop.dropOnEmptyArea(event)
+        } 
+        else if (this.dragAndDrop.isDroppedOnSingleModule(event)){
+            this.dragAndDrop.dropOnSingleModule(event)
+        }
+
+
+        
+        
+    }
+
 }
