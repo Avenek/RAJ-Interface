@@ -79,7 +79,7 @@ class ModulesBoxView extends View{
     };
     
     createInput(titleDiv){
-        const input = document.createElement("input");
+        const input = this.createElement("input");
         input.style.width = "200px";
         input.type = "text";
         input.value = titleDiv.textContent;
