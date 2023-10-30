@@ -52,9 +52,10 @@ class ModulesBoxModel{
             }
         }
         
-
         return newContainer
     }
+
+    
 
     deleteContainer = (index) => {
         this.modulesList.containers.splice(index, 1);
@@ -71,9 +72,13 @@ class ModulesBoxModel{
     }    
 
     dropContainer = (indexData) => {
+        if(indexData.fromContainer === indexData.toContainer && indexData.moveTo>0){
+            indexData.moveTo -= 1
+        }
         const draggedElement = this.modulesList.containers[indexData.fromContainer].modules[indexData.fromDraggedModule]
-        this.modulesList.containers[indexData.toContainer].modules.splice(indexData.moveTo, 0, draggedElement);
         this.modulesList.containers[indexData.fromContainer].modules.splice(indexData.fromDraggedModule, 1);
+        this.modulesList.containers[indexData.toContainer].modules.splice(indexData.moveTo, 0, draggedElement);
+
         this.modulesListChanged(this.modulesList)
     }
 

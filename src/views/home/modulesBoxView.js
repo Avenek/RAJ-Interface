@@ -17,11 +17,12 @@ class ModulesBoxView extends View{
             for(const singleModule of container.modules)
             {
                 containerDiv += `<div class="single-module-container">
+                <div class="drag-button">↕</div>
                 <div class="tool-tip">
                     <div class="tool-tip-icon">i</div>
                     <p class="tool-tip-info">${singleModule.tipInfo}</p>
                   </div>
-                <div class="glow-on-hover"><img src="assets/pictures/${singleModule.name.charAt(0).toLowerCase() + singleModule.name.slice(1)}.png" alt="${singleModule.name}"><br>${singleModule.name}</div>
+                <div class="glow-on-hover" draggable="true"><img src="assets/pictures/${singleModule.name.charAt(0).toLowerCase() + singleModule.name.slice(1)}.png" alt="${singleModule.name}"><br>${singleModule.name}</div>
             </div>\n`
             }
             containerDiv+="</div>"
@@ -88,8 +89,9 @@ class ModulesBoxView extends View{
 
     bindDragAndDrop = (handler) => {
         this.modulesBox.addEventListener("mousedown", event => {
-            if (event.target.className === 'glow-on-hover') {
+            if (event.target.className === 'drag-button') {
                 this.handleDragStart(event)
+                this.dragAndDrop.handleDragOver(event)
             }
         })
         this.root.addEventListener("mousemove", event => {
@@ -98,24 +100,27 @@ class ModulesBoxView extends View{
         this.root.addEventListener('mouseup', event => { 
             this.handleDrop(event, handler) 
         });
+        
     }
 
     handleDragStart = (event) => {
-        this.dragAndDrop.draggedModule = event.target;
+        this.dragAndDrop.draggedModule = event.target.parentElement;
         this.dragAndDrop.draggedModule.classList.add("dragging")
-        
         this.dragAndDrop.createShadowButton()
     }
 
     handleDrop = (event, handler) => {
-        this.dragAndDrop.draggedModule.classList.remove("dragging")
+        if(this.dragAndDrop.draggedModule){
+            this.dragAndDrop.draggedModule.classList.remove("dragging")
 
-        this.dragAndDrop.shadow.remove()
-        if (this.isDroppedOnEmptyArea(event)) {
-            handler(this.dropOnEmptyArea(event))
-        } 
-        else if (this.isDroppedOnSingleModule(event)){
-            handler(this.dropOnSingleModule(event))
+            this.dragAndDrop.shadow.remove()
+            if (this.isDroppedOnEmptyArea(event)) {
+                handler(this.dropOnEmptyArea(event))
+            } 
+            else if (this.isDroppedOnSingleModule(event)){
+                handler(this.dropOnSingleModule(event))
+            }
+            this.dragAndDrop.draggedModule = null
         }
     }
 
@@ -128,9 +133,9 @@ class ModulesBoxView extends View{
     }
     
     dropOnEmptyArea = (event) => {
-        const fromContainer = this.dragAndDrop.draggedModule.parentElement.parentElement
+        const fromContainer = this.dragAndDrop.draggedModule.parentElement
         const fromContainerIndex = this.getIndexElement(this.modulesBox, "container", fromContainer)
-        const fromDraggedModuleIndex = this.getIndexElement(fromContainer, "glow-on-hover", this.dragAndDrop.draggedModule)
+        const fromDraggedModuleIndex = this.getIndexElement(fromContainer, "single-module-container", this.dragAndDrop.draggedModule)
         const toContainer = event.target
         const toContainerIndex = this.getIndexElement(this.modulesBox, "container", toContainer)
         const indexData = {
@@ -170,9 +175,9 @@ class ModulesBoxView extends View{
     }
     
     dropOnSingleModule = (event) => {
-        const fromContainer = this.dragAndDrop.draggedModule.parentElement.parentElement
+        const fromContainer = this.dragAndDrop.draggedModule.parentElement
         const fromContainerIndex = this.getIndexElement(this.modulesBox, "container", fromContainer)
-        const fromDraggedModuleIndex = this.getIndexElement(fromContainer, "glow-on-hover", this.dragAndDrop.draggedModule)
+        const fromDraggedModuleIndex = this.getIndexElement(fromContainer, "single-module-container", this.dragAndDrop.draggedModule)
         const toContainer = event.target.parentElement.parentElement
         const toContainerIndex = this.getIndexElement(this.modulesBox, "container", toContainer)
         const indexData = {

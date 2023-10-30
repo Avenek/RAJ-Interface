@@ -1,6 +1,7 @@
 class HomeView extends View{
     constructor(){
         super() 
+        this.render()
     }
 
     render = () => {
