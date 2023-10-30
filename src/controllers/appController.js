@@ -2,14 +2,21 @@ class AppController {
     constructor(appView, appModel) {
       this.view = appView
       this.model = appModel
-      this.view.home.render()
-      this.home = new HomeController(this.view.home, this.model.home)
-      this.form = new FormController(this.view.form, this.model.form)
+      this.isExternalProperties = false
+      this.home = new HomeController(this.view.home, this.model.home, this.isExternalProperties)
       this.view.bindClickModule(this.handleClickModule)
     }
 
-    handleClickModule = () => {
-      this.view.form.render()
+    handleClickModule = (module, id = 0) => {
+      this.model.form.headerPanelModel.module = module
+      this.model.form.objectId = id
+      this.form = new FormController(this.view.form, this.model.form)
+      this.form.view.headerPanelView.bindClickHome(this.handleClickHome)
+  }
+
+  handleClickHome = () => {
+    this.home = new HomeController(this.view.home, this.model.home, this.isExternalProperties)
+    this.view.bindClickModule(this.handleClickModule)
   }
 }
 

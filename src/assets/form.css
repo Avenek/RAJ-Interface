@@ -30,25 +30,30 @@ body {
     height: 100vh;
 }
 
-.element-container {
+.header-panel {
     padding: 10px;
+    display: flex; 
+    align-items: center; 
 
-}
-.home {
-  display: flex; 
-  align-items: center; 
 }
 
 .home-button{
+  position: relative;
   font-size: 30px;
   color: rgb(150, 150, 150);
   display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   padding: 5px;
   border: #969494 solid 1px;
   background: #000000;
-  justify-content: left;
+  height: 30px;
+  width: 34px;
+
 }
+
+
 
 .home-button:hover{
     color: rgb(0, 0, 0);
@@ -75,7 +80,7 @@ body {
 }
 
 
-.configuration-container {
+.module-container {
     display: grid;
     grid-template-columns: auto auto;
     gap: 15px;
@@ -211,7 +216,7 @@ body {
     margin-right: 10px;
 }
 
-.key-menu {
+/*.key-menu {
     cursor: default;
     flex: 1;
     border-radius: 5px;
@@ -219,7 +224,7 @@ body {
     padding: 10px 10px;
     position: relative;
     background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
-}
+}*/
 
 
 

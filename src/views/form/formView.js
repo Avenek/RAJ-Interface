@@ -6,6 +6,7 @@ class FormView extends View{
     render(){
         this.createPageElements()
         this.appendElements()
+        this.headerPanelView = new HeaderPanelView(this.headerPanel)
     }
 
     createPageElements = () =>{

@@ -85,7 +85,7 @@ body {
     border-radius: 6px;
     margin-top: 60px;
     margin-left: 15px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .object-id-element {
@@ -149,12 +149,10 @@ body {
 
 .drag-button {
     position: absolute;
-    background-color: rgba(151, 151, 151, 0.945);
+    background-color: rgb(126, 126, 126);
     left: 15px;
-    z-index: 2;
+    z-index: 1;
     top: 10px;
-    height: 15px;
-    line-height: 1em;
     text-align: center;
     width: 20px;
     height: 20px;
