@@ -10,12 +10,17 @@ class DataObjectsBoxModel{
 
     createDataObjectsList = () => {
         const dataObjectsList = []
-        for (let key in this.jsonData){
-            const ids = this.jsonData[key].list.map(item => item.id || item.name || item.kind || item.action);
-            dataObjectsList.push({"keyName": key, "objectNames": ids})
+        try{
+            for (let key in this.jsonData){
+                const ids = this.jsonData[key].list.map(item => item.id || item.name || item.kind || item.action);
+                dataObjectsList.push({"keyName": key, "objectNames": ids})
+            }
+            this.dataObjectsList = dataObjectsList
         }
+        catch{}
 
-        this.dataObjectsList = dataObjectsList
+
+        
     }
 
 

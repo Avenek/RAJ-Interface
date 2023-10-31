@@ -72,7 +72,7 @@ class ModulesBoxModel{
     }    
 
     dropContainer = (indexData) => {
-        if(indexData.fromContainer === indexData.toContainer && indexData.moveTo>0){
+        if(indexData.fromContainer === indexData.toContainer && indexData.fromDraggedModule < indexData.moveTo){
             indexData.moveTo -= 1
         }
         const draggedElement = this.modulesList.containers[indexData.fromContainer].modules[indexData.fromDraggedModule]

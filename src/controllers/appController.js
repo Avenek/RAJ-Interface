@@ -7,8 +7,8 @@ class AppController {
     }
 
     handleClickModule = (module, id = 0) => {
-      this.model.form.headerPanelModel.module = module
-      this.model.form.objectId = id
+      this.view.form = new FormView()
+      this.model.form = new FormModel(this.model.jsonData, module, id)
       this.form = new FormController(this.view.form, this.model.form)
       this.form.view.headerPanelView.bindClickHome(this.handleClickHome)
   }

@@ -4,5 +4,6 @@ class FormController {
       this.view = view
       this.view.render()
       this.headerPanel = new HeaderPanelController(this.view.headerPanelView, this.model.headerPanelModel)
+      this.moduleObjectIdBox = new ModuleObjectIdBoxController(this.view.moduleObjectIdBoxView, this.model.moduleObjectIdBoxModel)
     }
   }

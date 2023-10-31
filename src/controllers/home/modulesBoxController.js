@@ -19,12 +19,12 @@ class ModulesBoxController {
         this.model.addContainer()
     }
 
-    handleDeleteContainer = (name) => {
-        this.model.deleteContainer(name)
+    handleDeleteContainer = (index) => {
+        this.model.deleteContainer(index)
     }
 
-    handleUpdateNameContainer = (containerName, newName) => {
-        this.model.updateNameContainer(containerName, newName)
+    handleUpdateNameContainer = (index, newName) => {
+        this.model.updateNameContainer(index, newName)
     }
     handleDragAndDrop = (indexData) => {
         this.model.dropContainer(indexData)

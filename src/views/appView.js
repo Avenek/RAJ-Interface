@@ -2,7 +2,6 @@ class AppView extends View{
     constructor(){
         super()
         this.home = new HomeView();
-        this.form = new FormView();
     }
 
     bindClickModule = (handler) =>{
