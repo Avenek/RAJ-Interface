@@ -2,7 +2,6 @@ class AppController {
     constructor(appView, appModel) {
       this.view = appView
       this.model = appModel
-      this.isExternalProperties = false
       this.home = new HomeController(this.view.home, this.model.home, this.isExternalProperties)
       this.view.bindClickModule(this.handleClickModule)
     }

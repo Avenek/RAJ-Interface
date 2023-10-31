@@ -8,7 +8,7 @@ body {
     overflow-x: hidden;
 }
 
-.main-container {
+.root {
     display: grid;
     grid-template-columns: calc(100% - 365px) 365px;
     gap: 15px;
@@ -17,12 +17,7 @@ body {
     height: 100vh;
 }
 
-.handle-container
-{
-    position: relative;
-    width: 100%;
-}
-.module-container {
+.configuration-container {
     display: grid;
     grid-template-rows: 1fr 10.5fr;
     gap: 15px;
@@ -34,7 +29,6 @@ body {
     padding: 10px;
     display: flex; 
     align-items: center; 
-
 }
 
 .home-button{
@@ -50,16 +44,12 @@ body {
   background: #000000;
   height: 30px;
   width: 34px;
-
 }
-
-
 
 .home-button:hover{
     color: rgb(0, 0, 0);
     border: #000000 solid 1px;
     background-color: rgba(122, 122, 122, 0.568);
-
 }
 
 .module-title {
@@ -79,21 +69,45 @@ body {
   0 0 60px rgba(0, 255, 255, 0.7);
 }
 
-
-.module-container {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 15px;
-    margin-top: 10px; 
+.form-container{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 15px;
+  margin-top: 10px; 
 }
 
-.objects-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;  
-    height: 90vh;  
+.object-configuration {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;  
+  height: 89vh;  
 }
+
+.object-id-box {
+  min-height: 75px;
+  border: 2px solid #808080;
+  border-radius: 5px;
+  padding: 25px 0px 5px 0px;
+  position: relative;
+  background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
+  align-items: center;
+  display: inline-block;
+}
+
+.object-form  {
+  flex: 10;
+  border: 2px solid #808080;
+  border-radius: 10px;
+  position: relative;
+  background-image: linear-gradient(to bottom, #272727, #4d4b4b);
+  overflow-y: auto;
+}
+
+
+
+
+
 
 .container-title {
     background-color: #dbd8d8;
@@ -106,27 +120,8 @@ body {
     border-radius: 5px;
     z-index: 2;
 }
-.object-list-container {
-    min-height: 75px;
-    border: 2px solid #808080;
-    border-radius: 5px;
-    padding: 25px 0px 5px 0px;
-    position: relative;
-    background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
-    align-items: center;
-    display: inline-block;
-}
 
-.object-list-key {
-  min-height: 75px;
-  border: 2px solid #808080;
-  border-radius: 5px;
-  padding: 25px 0px 5px 0px;
-  position: relative;
-  background-image: linear-gradient(to bottom, #555555b6, #4d4b4bc0);
-  align-items: center;
-  display: inline-block;
-}
+
 
 .single-object-container{
     position: relative;
@@ -151,14 +146,6 @@ body {
     line-height: 27px;
 }
 
-.object-configuration  {
-    flex: 10;
-    border: 2px solid #808080;
-    border-radius: 10px;
-    position: relative;
-    background-image: linear-gradient(to bottom, #272727, #4d4b4b);
-    overflow-y: auto;
-}
 
 .key {
     color: rgb(255, 255, 255);
@@ -510,74 +497,6 @@ body {
   overflow-y: auto;
 }
 
-.json-and-buttons-container {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    width: 360px;
-    margin: 5px 15px 0px 5px;
-
-}
-
-.buttons-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 10px;
-    justify-content: flex-end;
-}
-
-.json-buttons {
-    width: 160px;
-    height: 39px;
-    color: #fff;
-    background: #111;
-    cursor: pointer;
-    border-radius: 10px;
-    border: 1px solid #808080;
-}
-
-.json-buttons:hover {
-    background: #808080;
-    color: black;
-    font-weight: bold;
-}
-
-.json-container {
-    margin-right: 5px;
-    overflow: hidden;
-    flex: 1;
-    border: none;
-}
-
-.json-text {
-    margin-right: 5px;
-    padding: 0px 5px;
-    border-radius: 5px;
-    border: 3px solid #808080;
-    background-color: lightgray;
-    resize: none;
-    outline: none;
-    width: 95.5%;
-    font-family: monospace;
-    font-size: 14px;
-    line-height: 1.4;
-    height: 99%;
-    overflow-y: auto;
-}
-
-
-.wrap-json
-{
-    white-space: normal;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-all;
-}
-
-.error{
-    background-color: rgb(240, 143, 143);
-}
 .error-info {
   display: block;
   font-weight: bold;
