@@ -20,7 +20,6 @@ class DataObjectsBoxModel{
         .catch(error => {
         console.error('Błąd pobierania:', error);
         })
-
     }
 
     createDataObjectsList = () => {
@@ -38,9 +37,6 @@ class DataObjectsBoxModel{
                 dataObjects.push({"keyName": key, "objectNames": []})
             } 
         }
-        
         this.dataObjectsList = dataObjects
     }
-
-
 }

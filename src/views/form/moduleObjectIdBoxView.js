@@ -7,6 +7,7 @@ class ModuleObjectIdBoxView extends View{
     }
 
     displayObjectIdBox = (objectIdList) => {
+        this.objectIdBox.innerHTML = ""
         const titleElement = this.createElement("div", "container-title")
         titleElement.textContent = "Menu obiektów"
         this.objectIdBox.append(titleElement)
@@ -24,22 +25,24 @@ class ModuleObjectIdBoxView extends View{
             else{
                 containerElement.append(idElement)
             }
-            
             this.objectIdBox.append(containerElement, this.plusButton)
         })
     }
 
     bindCheckObjectId = (handler) => {
-        this.plusButton.addEventListener("click", event => {
-          event.preventDefault()
-            handler()
+        this.objectIdBox.addEventListener("click", event => {
+            if (event.target.className === 'object-id') {
+                const index = this.getIndexElement(this.objectIdBox, 'object-id', event.target)
+                handler(index)
+            }
         })
     }
 
     bindAddObjectId = (handler) => {
-        this.plusButton.addEventListener("click", event => {
-          event.preventDefault()
-            handler()
+        this.objectIdBox.addEventListener("click", event => {
+            if (event.target.className === 'object-id-plus-circle') {
+                handler()
+            }
         })
     }
 
