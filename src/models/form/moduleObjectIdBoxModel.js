@@ -21,7 +21,7 @@ class ModuleObjectIdBoxModel{
 
     createObjectIdList = (jsonData, module, id, hasList) => {
         const idList = []
-        const ids = jsonData[module].list.map(item => item.id || item.name || item.kind || item.action);
+        const ids = jsonData.data[module].list.map(item => item.id || item.name || item.kind || item.action);
         ids.forEach(id => {
             idList.push({"name": id, "isChecked": false})
         })

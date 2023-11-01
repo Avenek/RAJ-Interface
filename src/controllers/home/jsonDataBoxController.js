@@ -13,7 +13,7 @@ class JsonDataBoxController {
     }
 
     jsonDataChanged = (jsonData, isBeautified, errorMode) => {
-        this.view.displayJsonDataBox(jsonData, isBeautified, errorMode)
+        this.view.updateJsonData(jsonData, isBeautified, errorMode)
         this.dataObjectsBox.model.jsonData = this.model.jsonData
         this.dataObjectsBox.model.dataObjectsListChanged()
     }

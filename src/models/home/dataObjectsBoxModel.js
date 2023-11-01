@@ -24,11 +24,11 @@ class DataObjectsBoxModel{
 
     createDataObjectsList = () => {
         const dataObjects = []
-        for(let key in this.jsonData){
+        for(let key in this.jsonData.data){
             const hasList = this.listConfig.modules.find(object => object.name === key).hasList;
             if(hasList){
                 try{
-                    const ids = this.jsonData[key].list.map(item => item.id || item.name || item.kind || item.action);
+                    const ids = this.jsonData.data[key].list.map(item => item.id || item.name || item.kind || item.action);
                     dataObjects.push({"keyName": key, "objectNames": ids})
                 }
                 catch{}

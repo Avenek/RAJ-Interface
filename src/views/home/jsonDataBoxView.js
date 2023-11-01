@@ -21,11 +21,11 @@ class JsonDataBoxView extends View{
             this.jsonDataArea.classList.remove("error-json")
             if(isBeautified){
                 this.jsonDataArea.classList.remove("wrap-json")
-                this.jsonDataArea.value = JSON.stringify(jsonData, null, 2)
+                this.jsonDataArea.value = JSON.stringify(jsonData.data, null, 2)
             }
             else{
                 this.jsonDataArea.classList.add("wrap-json")
-                this.jsonDataArea.value = JSON.stringify(jsonData)
+                this.jsonDataArea.value = JSON.stringify(jsonData.data)
             }
         }
         else{
@@ -34,6 +34,23 @@ class JsonDataBoxView extends View{
         this.buttonsContainer.append(this.beautifyButton, this.minifyButton, this.copyButton, this.clearButton)
         this.jsonDataContainer.append(this.jsonDataArea)
         this.jsonDataBox.append(this.buttonsContainer, this.jsonDataContainer)
+    }
+
+    updateJsonData = (jsonData, isBeautified, errorMode) => {
+        if(!errorMode){
+            this.jsonDataArea.classList.remove("error-json")
+            if(isBeautified){
+                this.jsonDataArea.classList.remove("wrap-json")
+                this.jsonDataArea.value = JSON.stringify(jsonData.data, null, 2)
+            }
+            else{
+                this.jsonDataArea.classList.add("wrap-json")
+                this.jsonDataArea.value = JSON.stringify(jsonData.data)
+            }
+        }
+        else{
+            this.jsonDataArea.classList.add("error-json")
+        }
     }
 
     bindBeautifyJsonData = (handler) => {
