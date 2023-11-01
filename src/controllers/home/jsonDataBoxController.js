@@ -3,7 +3,7 @@ class JsonDataBoxController {
         this.view = view
         this.model = model
         this.dataObjectsBox = dataObjectsBox
-        this.jsonDataChanged(this.model.jsonData, this.model.isBeautified, this.model.errorMode)
+        this.view.displayJsonDataBox(this.model.jsonData, this.model.isBeautified, this.model.errorMode)
         this.model.bindJsonDataChanged(this.jsonDataChanged)
         this.view.bindBeautifyJsonData(this.handleBeautifyJsonData)
         this.view.bindMinifyJsonData(this.handleMinifyJsonData)
@@ -15,7 +15,7 @@ class JsonDataBoxController {
     jsonDataChanged = (jsonData, isBeautified, errorMode) => {
         this.view.displayJsonDataBox(jsonData, isBeautified, errorMode)
         this.dataObjectsBox.model.jsonData = this.model.jsonData
-        this.dataObjectsBox.model.modulesListChanged()
+        this.dataObjectsBox.model.dataObjectsListChanged()
     }
 
     handleBeautifyJsonData = () => {

@@ -14,6 +14,8 @@ class AppController {
   }
 
   handleClickHome = () => {
+    this.view.home = new HomeView()
+    this.model.home = new HomeModel(this.model.jsonData)
     this.home = new HomeController(this.view.home, this.model.home, this.isExternalProperties)
     this.view.bindClickModule(this.handleClickModule)
   }

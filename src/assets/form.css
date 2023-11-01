@@ -168,7 +168,6 @@ display: block;
   left: 15%;
 }
 
-
 .object-id-plus-circle {
   top:5px;
   position: relative;
@@ -187,7 +186,7 @@ display: block;
   cursor: pointer;
 }
 
-.plus-circle:hover {
+.object-id-plus-circle:hover {
     background-color: #7fdb3496;
     cursor: pointer;
   }
@@ -201,22 +200,22 @@ display: block;
   overflow-y: auto;
 }
 
-
-
-
-
-
 .container-title {
-    background-color: #dbd8d8;
-    padding: 5px 10px;
-    position: absolute;
-    top: -15px;
-    left: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
-    z-index: 2;
+  background-color: #dbd8d8;
+  padding: 5px 10px;
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  z-index: 2;
 }
+
+
+
+
+
 
 .key {
     color: rgb(255, 255, 255);

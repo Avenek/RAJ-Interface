@@ -1,26 +1,45 @@
 class DataObjectsBoxModel{
     constructor(jsonData){
         this.jsonData = jsonData
-        this.createDataObjectsList()
+        this.dataObjectsList = []
+        this.listConfig = null
+        this.fetchDataAndCreateDataObjectsList()
     }
 
     bindObjectsListChanged = (callback) => {
-        this.modulesListChanged = callback
+        this.dataObjectsListChanged = callback
       }
 
+    fetchDataAndCreateDataObjectsList = () => {
+        fetch('config/modules.json')
+        .then(response => response.json())
+        .then(config => {
+            this.listConfig = config
+            this.dataObjectsListChanged()
+        })
+        .catch(error => {
+        console.error('Błąd pobierania:', error);
+        })
+
+    }
+
     createDataObjectsList = () => {
-        const dataObjectsList = []
-        try{
-            for (let key in this.jsonData){
-                const ids = this.jsonData[key].list.map(item => item.id || item.name || item.kind || item.action);
-                dataObjectsList.push({"keyName": key, "objectNames": ids})
+        const dataObjects = []
+        for(let key in this.jsonData){
+            const hasList = this.listConfig.modules.find(object => object.name === key).hasList;
+            if(hasList){
+                try{
+                    const ids = this.jsonData[key].list.map(item => item.id || item.name || item.kind || item.action);
+                    dataObjects.push({"keyName": key, "objectNames": ids})
+                }
+                catch{}
             }
-            this.dataObjectsList = dataObjectsList
+            else{
+                dataObjects.push({"keyName": key, "objectNames": []})
+            } 
         }
-        catch{}
-
-
         
+        this.dataObjectsList = dataObjects
     }
 
 

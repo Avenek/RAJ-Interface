@@ -2,7 +2,6 @@ class ModuleObjectIdBoxController {
     constructor(view, model) {
         this.view = view
         this.model = model
-        this.objectIdListChanged(this.model.objectIdList)
         this.model.bindObjectIdListChanged(this.objectIdListChanged)
         this.view.bindCheckObjectId(this.handleCheckObjectId)
         this.view.bindDeleteObjectId(this.handleDeleteObjectId)
