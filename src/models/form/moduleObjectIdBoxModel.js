@@ -11,9 +11,14 @@ class ModuleObjectIdBoxModel{
         const idList = []
         let ids
         if(params.hasList){
+            if(this.jsonData.data[params.module] === undefined){
+                const name = this.pickDefaultUniqueName()
+                this.jsonData.addObject(this.container, name)
+            }
             ids = this.jsonData.data[params.module].list.map(item => item.id || item.name || item.kind || item.action);
         }
         else{
+            this.jsonData.addObject(this.container)
             ids = [params.module]
         }
         ids.forEach(id => {
@@ -41,6 +46,7 @@ class ModuleObjectIdBoxModel{
         this.uncheckedCurrentObject()
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonData.modulePathParams.objectId = this.objectIdList.length - 1
+        this.jsonData.addObject(this.container, name)
     }
 
     cloneObjectId = (index) => {
@@ -84,13 +90,17 @@ class ModuleObjectIdBoxModel{
                     defaultName = container.name;
                     break;
             default:
-                let number =  this.objectIdList.length
-                defaultName = `obiekt-${number}`
-                while(this.objectIdList.find(object => object.name === defaultName) !== undefined){
-                    console.log(this.objectIdList.find(object => object.name === defaultName));
-                    number+=1
+                let number
+                if(this.objectIdList) {
+                    number = this.objectIdList.length
                     defaultName = `obiekt-${number}`
+                    while(this.objectIdList.find(object => object.name === defaultName) !== undefined){
+                        number+=1
+                        defaultName = `obiekt-${number}`
+                    }
                 }
+                else defaultName = `obiekt-0`
+                
               break; 
         }  
         return defaultName      

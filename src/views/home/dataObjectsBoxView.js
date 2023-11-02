@@ -11,13 +11,15 @@ class DataObjectsBoxView extends View{
             const keyElement = this.createElement("div", "key-element");
             keyElement.textContent = `${key.keyName}`          
             keyMenu.append(keyElement)
-            const objectIdsMenu = this.createElement("div", "object-ids-menu")
-            key.objectNames.forEach(objectId => {
-                const objectIdElement = this.createElement("div", "object-id-element");
-                objectIdElement.textContent = objectId
-                objectIdsMenu.append(objectIdElement)
-            })
-            keyMenu.append(objectIdsMenu)
+            if(key.objectNames.length > 0){
+                const objectIdsMenu = this.createElement("div", "object-ids-menu")
+                key.objectNames.forEach(objectId => {
+                    const objectIdElement = this.createElement("div", "object-id-element");
+                    objectIdElement.textContent = objectId
+                    objectIdsMenu.append(objectIdElement)
+                })
+                keyMenu.append(objectIdsMenu)
+            }
             this.dataObjectsBox.append(keyMenu);
         })        
     }
