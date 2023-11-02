@@ -1,14 +1,9 @@
-class JsonDataBoxController {
+class JsonDataBoxHomeController extends JsonDataBoxController{
     constructor(view, model, dataObjectsBox) {
-        this.view = view
-        this.model = model
+        super(view, model)
         this.dataObjectsBox = dataObjectsBox
         this.view.displayJsonDataBox(this.model.jsonData, this.model.isBeautified, this.model.errorMode)
         this.model.bindJsonDataChanged(this.jsonDataChanged)
-        this.view.bindBeautifyJsonData(this.handleBeautifyJsonData)
-        this.view.bindMinifyJsonData(this.handleMinifyJsonData)
-        this.view.bindCopyJsonData(this.handleCopyJsonData)
-        this.view.bindClearJsonData(this.handleClearJsonData)
         this.view.bindModifyJsonData(this.handleModifyJsonData)
     }
 
@@ -16,22 +11,6 @@ class JsonDataBoxController {
         this.view.updateJsonData(jsonData, isBeautified, errorMode)
         this.dataObjectsBox.model.jsonData = this.model.jsonData
         this.dataObjectsBox.model.dataObjectsListChanged()
-    }
-
-    handleBeautifyJsonData = () => {
-        this.model.beautifyJsonData()
-    }
-
-    handleMinifyJsonData = () => {
-        this.model.minifyJsonData()
-    }
-
-    handleCopyJsonData = () => {
-        this.model.copyJsonData()
-    }
-
-    handleClearJsonData = () => {
-        this.model.clearJsonData()
     }
 
     handleModifyJsonData = (jsonData) => {

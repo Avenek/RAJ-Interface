@@ -9,7 +9,7 @@ class HomeView extends View{
         this.appendElements()
         this.dataObjectsBoxView = new DataObjectsBoxView(this.dataObjectsBox)
         this.modulesBoxView = new ModulesBoxView(this.modulesBox)
-        this.jsonDataBoxView = new JsonDataBoxView(this.jsonDataBox)
+        this.jsonDataBoxView = new JsonDataBoxHomeView(this.jsonDataBox)
     }
 
     createPageElements(){

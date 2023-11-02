@@ -1,7 +1,8 @@
 class ModuleObjectIdBoxModel{
-    constructor(jsonData, container){
+    constructor(jsonData, container, jsonDataBox){
         this.jsonData = jsonData
         this.container = container
+        this.jsonDataBox = jsonDataBox
         this.hasList = true
         this.createObjectIdList()
     }
@@ -47,6 +48,7 @@ class ModuleObjectIdBoxModel{
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonData.modulePathParams.objectId = this.objectIdList.length - 1
         this.jsonData.addObject(this.container, name)
+        this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
     }
 
     cloneObjectId = (index) => {

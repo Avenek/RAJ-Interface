@@ -3,6 +3,6 @@ class HomeModel {
       this.jsonData = jsonData
       this.dataObjectsBoxModel = new DataObjectsBoxModel(jsonData)
       this.modulesBoxModel = new ModulesBoxModel()
-      this.jsonDataBoxModel = new JsonDataBoxModel(jsonData)
+      this.jsonDataBoxModel = new JsonDataBoxHomeModel(jsonData)
     }
 }

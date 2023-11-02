@@ -1,8 +1,7 @@
-class JsonDataBoxModel{
+class JsonDataBoxFormModel{
     constructor(jsonData){
         this.jsonData = jsonData
         this.isBeautified = true;
-        this.errorMode = false;
     }
 
     bindJsonDataChanged = (callback) => {
@@ -11,12 +10,12 @@ class JsonDataBoxModel{
 
     beautifyJsonData = () => {
         this.isBeautified = true;
-        this.jsonDataChanged(this.jsonData, this.isBeautified, this.errorMode)
+        this.jsonDataChanged(this.jsonData, this.isBeautified)
     }
 
     minifyJsonData = () => {
         this.isBeautified = false;
-        this.jsonDataChanged(this.jsonData, this.isBeautified, this.errorMode)
+        this.jsonDataChanged(this.jsonData, this.isBeautified)
     }
 
     copyJsonData = () => {
@@ -28,22 +27,7 @@ class JsonDataBoxModel{
         if (window.confirm("Czy na pewno chcesz wyczyścić pole Json?\nPS. Ctrl+z nie przywróci go już z powrotem.")) {
             this.jsonData.data = {}
             localStorage.setItem('lastJson', this.jsonData);
-            this.jsonDataChanged(this.jsonData, this.isBeautified, this.errorMode)
+            this.jsonDataChanged(this.jsonData, this.isBeautified)
         }
     }
-
-    modifyJsonData = (jsonData) => {
-        try {
-            this.jsonData.data = JSON.parse(jsonData)
-            localStorage.setItem('lastJson', this.jsonData);
-            this.errorMode = false
-        }
-        catch{
-            this.jsonData.data = JSON.stringify(jsonData)
-            this.errorMode = true
-        }
-        this.jsonDataChanged(this.jsonData, this.isBeautified, this.errorMode)
-    }
-
-
 }
