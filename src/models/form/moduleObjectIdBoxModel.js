@@ -33,18 +33,18 @@ class ModuleObjectIdBoxModel{
     }
 
     checkObjectId = (index) => {
-        this.objectIdList.objectId.forEach(id => {
-            id.isChecked = false
-        })
+        this.uncheckedCurrentObject()
         this.objectIdList.objectId[index].isChecked = true
+        this.jsonData.modulePathParams.objectId = index
         this.objectIdListChanged(this.objectIdList)
     }
 
     addObjectId = () => {
         const name = this.pickDefaultUniqueName()
-        this.objectIdList.objectId.push({"name": name, "isChecked": false})
+        this.objectIdList.objectId.push({"name": name, "isChecked": true})
+        this.uncheckedCurrentObject()
         this.objectIdListChanged(this.objectIdList)
-        this.jsonData.modulePathParams.objectId = 3
+        this.jsonData.modulePathParams.objectId = this.objectIdList.objectId.length - 1
     }
 
     cloneObjectId = (index) => {
@@ -57,7 +57,12 @@ class ModuleObjectIdBoxModel{
 
     updateNameObjectId = (index, newName) => {
         
-    }    
+    }  
+    
+    uncheckedCurrentObject(){
+        const currentIndex = this.jsonData.modulePathParams.objectId
+        this.objectIdList.objectId[currentIndex].isChecked = false
+    }
 
     pickDefaultUniqueName(){
         let defaultName = ""

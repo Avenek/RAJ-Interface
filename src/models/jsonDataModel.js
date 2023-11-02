@@ -3,13 +3,13 @@ class JsonDataModel {
       this.data = JSON.parse(localStorage.getItem('lastJson')) || {};
       this.modulePathParams = {
         "module": null,
-        "objectID": null,
+        "objectId": null,
         "hasList": true
       }
       this.modulePath = ""
       this.extraOptionPathParams = {
         "module": null,
-        "objectID": null,
+        "objectId": null,
         "hasList": true
       }
       this.extraOptionPath = ""
