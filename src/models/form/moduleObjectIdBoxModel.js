@@ -46,17 +46,27 @@ class ModuleObjectIdBoxModel{
         this.objectIdList.push({"name": name, "isChecked": true})
         this.uncheckedCurrentObject()
         this.objectIdListChanged(this.objectIdList, this.hasList)
-        this.jsonData.modulePathParams.objectId = this.objectIdList.length - 1
         this.jsonData.addObject(this.container, name)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
     }
 
     cloneObjectId = (index) => {
-        
+        this.objectIdList.push({"name": this.objectIdList[index].name, "isChecked": true})
+        this.uncheckedCurrentObject()
+        this.objectIdListChanged(this.objectIdList, this.hasList)
+        this.jsonData.cloneObject(this.container, index)
+        this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
     }
 
     deleteObjectId = (index) => {
-
+        if(this.objectIdList[index].isChecked){
+            this.objectIdList[0].isChecked = true
+            this.jsonData.modulePathParams.objectId = 0
+        }
+        this.objectIdList.splice(index, 1)
+        this.jsonData.deleteObject(this.container, index)
+        this.objectIdListChanged(this.objectIdList, this.hasList)
+        this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
     }
 
     updateNameObjectId = (index, newName) => {

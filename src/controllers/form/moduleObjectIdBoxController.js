@@ -34,5 +34,4 @@ class ModuleObjectIdBoxController {
     handleUpdateNameObjectId = (index, newName) => {
         this.model.updateNameObjectId(index, newName)
     }
-      
   }

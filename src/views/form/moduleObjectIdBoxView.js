@@ -25,8 +25,9 @@ class ModuleObjectIdBoxView extends View{
             else{
                 containerElement.append(idElement)
             }
-            this.objectIdBox.append(containerElement, this.plusButton)
+            this.objectIdBox.append(containerElement)
         })
+        this.objectIdBox.append(this.plusButton)
     }
 
     bindCheckObjectId = (handler) => {
@@ -47,24 +48,29 @@ class ModuleObjectIdBoxView extends View{
     }
 
     bindCloneObjectId = (handler) => {
-        this.plusButton.addEventListener("click", event => {
-          event.preventDefault()
-            handler()
+        this.objectIdBox.addEventListener("click", event => {
+            if (event.target.className === 'object-id-copy-button') {
+                const index = this.getIndexElement(this.objectIdBox, "single-object-id-container", event.target.parentElement)
+                handler(index)
+            }
         })
     }
 
     bindDeleteObjectId = (handler) => {
         this.objectIdBox.addEventListener("click", event => {
-            if (event.target.className === 'delete-button') {
-                handler(index)
+            if (event.target.className === 'object-id-delete-button') {
+                if (window.confirm("Czy na pewno chcesz usunąć obiekt?")) {
+                    const index = this.getIndexElement(this.objectIdBox, "single-object-id-container", event.target.parentElement)
+                    handler(index)
+                }
             }
         })
     }
 
     bindUpdateNameObjectId = (handler) => {
         this.objectIdBox.addEventListener("click", event => {
-            if (event.target.className === 'edit-button') {
-                
+            if (event.target.className === 'test') {
+                 handler(index)
             }
         })
     }

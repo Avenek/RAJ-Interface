@@ -70,7 +70,7 @@ class JsonDataModel {
       return this.extraOptionPathParams
     }
 
-    addObject(container, name = ""){
+    addObject = (container, name = "") => {
       const params = this.getParams(container)
       if(container === "module"){
         if(params.hasList){
@@ -104,7 +104,28 @@ class JsonDataModel {
           this.modulePathParams.workingObject[params.module] = params.workingObject
         }
       }
-    
-      
+      params.objectId = params.workingList.length - 1
+    }
+
+    cloneObject = (container, index) => {
+      const params = this.getParams(container)
+      params.workingObject = JSON.parse(JSON.stringify(params.workingList[index]))
+      params.workingList.push(params.workingObject)
+      params.objectId = params.workingList.length - 1
+    }
+
+    deleteObject = (container, index) => {
+      const params = this.getParams(container)
+      params.workingList.splice(index, 1)
+      if(params.workingList.length === 0){
+        params.workingObject = null
+        params.workingList = null
+        if(container === "module"){
+          delete this.data[params.module]
+        }
+        else{
+          delete this.modulePathParams.workingObject[params.module]
+        }
+      }
     }
   }

@@ -1,5 +1,5 @@
 class HeaderPanelModel{
-    constructor(){
-        this.module = ""
+    constructor(module){
+        this.module = module
     }
 }
