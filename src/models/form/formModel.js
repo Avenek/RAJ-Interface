@@ -1,9 +1,7 @@
 class FormModel {
-    constructor(jsonData, module, id) {
+    constructor(jsonData) {
         this.jsonData = jsonData
-        this.module = module
-        this.objectId = id
-        this.headerPanelModel = new HeaderPanelModel(this.module)
-        this.moduleObjectIdBoxModel = new ModuleObjectIdBoxModel(this.jsonData, this.module, this.objectId)
+        this.headerPanelModel = new HeaderPanelModel(this.jsonData.module)
+        this.moduleObjectIdBoxModel = new ModuleObjectIdBoxModel(this.jsonData)
     }
 }

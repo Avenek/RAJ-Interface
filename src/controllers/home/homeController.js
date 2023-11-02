@@ -1,8 +1,7 @@
 class HomeController {
-    constructor(view, model, isExternalProperties) {
+    constructor(view, model) {
       this.view = view
       this.model = model
-      this.isExternalProperties = isExternalProperties
       this.view.render()
       this.dataObjectsBox = new DataObjectsBoxController(this.view.dataObjectsBoxView, this.model.dataObjectsBoxModel)
       this.modulesBox = new ModulesBoxController(this.view.modulesBoxView, this.model.modulesBoxModel)

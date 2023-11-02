@@ -8,7 +8,9 @@ class AppController {
 
     handleClickModule = (module, id = 0) => {
       this.view.form = new FormView()
-      this.model.form = new FormModel(this.model.jsonData, module, id)
+      this.model.jsonData.modulePathParams.module = module
+      this.model.jsonData.modulePathParams.objectId = id
+      this.model.form = new FormModel(this.model.jsonData)
       this.form = new FormController(this.view.form, this.model.form)
       this.form.view.headerPanelView.bindClickHome(this.handleClickHome)
   }
@@ -16,7 +18,7 @@ class AppController {
   handleClickHome = () => {
     this.view.home = new HomeView()
     this.model.home = new HomeModel(this.model.jsonData)
-    this.home = new HomeController(this.view.home, this.model.home, this.isExternalProperties)
+    this.home = new HomeController(this.view.home, this.model.home)
     this.view.bindClickModule(this.handleClickModule)
   }
 }

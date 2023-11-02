@@ -1,17 +1,16 @@
 class ModuleObjectIdBoxModel{
-    constructor(jsonData, module, id){
-        this.objectIdList = null
-        this.module = module
-        this.fetchDataAndCreateObjectIdList(jsonData, module, id)
+    constructor(jsonData){
+        this.jsonData = jsonData
+        this.fetchDataAndCreateObjectIdList()
     }
 
-    fetchDataAndCreateObjectIdList = (jsonData, module, id) => {
+    fetchDataAndCreateObjectIdList = () => {
         fetch('config/modules.json')
         .then(response => response.json())
         .then(config => {
-            const moduleObject = config.modules.find(object => object.name === module);
+            const moduleObject = config.modules.find(object => object.name === this.jsonData.modulePathParams.module);
             const hasList = moduleObject.hasList
-            this.createObjectIdList(jsonData, module, id, hasList)
+            this.createObjectIdList(hasList)
             this.objectIdListChanged(this.objectIdList)
         })
         .catch(error => {
@@ -19,13 +18,13 @@ class ModuleObjectIdBoxModel{
         })
     }
 
-    createObjectIdList = (jsonData, module, id, hasList) => {
+    createObjectIdList = (hasList) => {
         const idList = []
-        const ids = jsonData.data[module].list.map(item => item.id || item.name || item.kind || item.action);
+        const ids = this.jsonData.data[this.jsonData.modulePathParams.module].list.map(item => item.id || item.name || item.kind || item.action);
         ids.forEach(id => {
             idList.push({"name": id, "isChecked": false})
         })
-        idList[id].isChecked = true
+        idList[this.jsonData.modulePathParams.objectId].isChecked = true
         this.objectIdList = {"hasList": hasList, "objectId": idList}
     }
 
@@ -45,6 +44,7 @@ class ModuleObjectIdBoxModel{
         const name = this.pickDefaultUniqueName()
         this.objectIdList.objectId.push({"name": name, "isChecked": false})
         this.objectIdListChanged(this.objectIdList)
+        this.jsonData.modulePathParams.objectId = 3
     }
 
     cloneObjectId = (index) => {
