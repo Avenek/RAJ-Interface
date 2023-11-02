@@ -8,8 +8,8 @@ class AppController {
 
     handleClickModule = (module, id = 0) => {
       this.view.form = new FormView()
-      this.model.jsonData.modulePathParams.module = module
-      this.model.jsonData.modulePathParams.objectId = id
+      this.model.jsonData.setParams("module", module, id)
+      this.model.jsonData.updatePaths()
       this.model.form = new FormModel(this.model.jsonData)
       this.form = new FormController(this.view.form, this.model.form)
       this.form.view.headerPanelView.bindClickHome(this.handleClickHome)

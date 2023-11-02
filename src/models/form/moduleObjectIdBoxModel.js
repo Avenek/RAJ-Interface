@@ -1,31 +1,27 @@
 class ModuleObjectIdBoxModel{
-    constructor(jsonData){
+    constructor(jsonData, container){
         this.jsonData = jsonData
-        this.fetchDataAndCreateObjectIdList()
+        this.container = container
+        this.hasList = true
+        this.createObjectIdList()
     }
 
-    fetchDataAndCreateObjectIdList = () => {
-        fetch('config/modules.json')
-        .then(response => response.json())
-        .then(config => {
-            const moduleObject = config.modules.find(object => object.name === this.jsonData.modulePathParams.module);
-            const hasList = moduleObject.hasList
-            this.createObjectIdList(hasList)
-            this.objectIdListChanged(this.objectIdList)
-        })
-        .catch(error => {
-        console.error('Błąd pobierania:', error);
-        })
-    }
-
-    createObjectIdList = (hasList) => {
+    createObjectIdList = () => {
+        const params = this.jsonData.getParams(this.container)
         const idList = []
-        const ids = this.jsonData.data[this.jsonData.modulePathParams.module].list.map(item => item.id || item.name || item.kind || item.action);
+        let ids
+        if(params.hasList){
+            ids = this.jsonData.data[params.module].list.map(item => item.id || item.name || item.kind || item.action);
+        }
+        else{
+            ids = [params.module]
+        }
         ids.forEach(id => {
             idList.push({"name": id, "isChecked": false})
         })
-        idList[this.jsonData.modulePathParams.objectId].isChecked = true
-        this.objectIdList = {"hasList": hasList, "objectId": idList}
+        idList[params.objectId].isChecked = true
+        this.objectIdList = idList
+        this.hasList = params.hasList
     }
 
     bindObjectIdListChanged = (callback) => {
@@ -34,17 +30,17 @@ class ModuleObjectIdBoxModel{
 
     checkObjectId = (index) => {
         this.uncheckedCurrentObject()
-        this.objectIdList.objectId[index].isChecked = true
+        this.objectIdList[index].isChecked = true
         this.jsonData.modulePathParams.objectId = index
-        this.objectIdListChanged(this.objectIdList)
+        this.objectIdListChanged(this.objectIdList, this.hasList)
     }
 
     addObjectId = () => {
         const name = this.pickDefaultUniqueName()
-        this.objectIdList.objectId.push({"name": name, "isChecked": true})
+        this.objectIdList.push({"name": name, "isChecked": true})
         this.uncheckedCurrentObject()
-        this.objectIdListChanged(this.objectIdList)
-        this.jsonData.modulePathParams.objectId = this.objectIdList.objectId.length - 1
+        this.objectIdListChanged(this.objectIdList, this.hasList)
+        this.jsonData.modulePathParams.objectId = this.objectIdList.length - 1
     }
 
     cloneObjectId = (index) => {
@@ -60,8 +56,8 @@ class ModuleObjectIdBoxModel{
     }  
     
     uncheckedCurrentObject(){
-        const currentIndex = this.jsonData.modulePathParams.objectId
-        this.objectIdList.objectId[currentIndex].isChecked = false
+        const currentIndex = this.jsonData.getParams(this.container).objectId
+        this.objectIdList[currentIndex].isChecked = false
     }
 
     pickDefaultUniqueName(){
@@ -88,10 +84,10 @@ class ModuleObjectIdBoxModel{
                     defaultName = container.name;
                     break;
             default:
-                let number =  this.objectIdList.objectId.length
+                let number =  this.objectIdList.length
                 defaultName = `obiekt-${number}`
-                while(this.objectIdList.objectId.find(object => object.name === defaultName) !== undefined){
-                    console.log(this.objectIdList.objectId.find(object => object.name === defaultName));
+                while(this.objectIdList.find(object => object.name === defaultName) !== undefined){
+                    console.log(this.objectIdList.find(object => object.name === defaultName));
                     number+=1
                     defaultName = `obiekt-${number}`
                 }

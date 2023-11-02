@@ -6,16 +6,16 @@ class ModuleObjectIdBoxView extends View{
        this.plusButton.textContent = "+"
     }
 
-    displayObjectIdBox = (objectIdList) => {
+    displayObjectIdBox = (objectIdList, hasList) => {
         this.objectIdBox.innerHTML = ""
         const titleElement = this.createElement("div", "container-title")
         titleElement.textContent = "Menu obiektów"
         this.objectIdBox.append(titleElement)
-        objectIdList.objectId.forEach(id => {
+        objectIdList.forEach(id => {
             const containerElement = this.createElement("div", "single-object-id-container")
             const idElement = id.isChecked ? this.createElement("div", "object-id", "option-checked") : this.createElement("div", "object-id")
             idElement.textContent = id.name
-            if(objectIdList.hasList){
+            if(hasList){
                 const copyButton = this.createElement("div", "object-id-copy-button")
                 copyButton.textContent = "⧉"
                 const deleteButton = this.createElement("div", "object-id-delete-button")

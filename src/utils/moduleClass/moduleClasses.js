@@ -381,9 +381,6 @@ class Source{
   }
 }
 
-
-
-
 let objectDict = {
   characterEffect : class CharacterEffect {
       constructor(id) {
