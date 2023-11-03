@@ -7,6 +7,10 @@ class ObjectFormModel{
         this.fetchConfigAndCreateObjectFormList()
     }
 
+    bindObjectFormChanged = (callback) => {
+        this.objectFormChanged = callback
+    }
+
     fetchConfigAndCreateObjectFormList = () => {
         const module = this.jsonData.modulePathParams.module
         fetch(`config/${module}.json`)
@@ -14,7 +18,7 @@ class ObjectFormModel{
         .then(config => {
             this.config = config
             this.createObjectFormList(this.config)
-            //uzupełnić pola
+            console.log(this.objectFormList);
             //Sprawdzić wymagania - dodać hide
             //Zwalidować dane
             //Podświetlić extra-option
@@ -27,27 +31,49 @@ class ObjectFormModel{
 
     createObjectFormList = (config) => {
         for (const property of config.properties) {
-            const propertyObject = this.createObjectProperty(property)
-            this.objectFormList.push(propertyObject)
-            if(propertyObject.hasOwnProperty("properties")){
-                this.createObjectFormList(property)
-            }
+            this.createObjectProperty(property)
+            this.objectFormList.push(property)
         }
     }
 
     createObjectProperty = (property) => {
-        const propertyObject = JSON.parse(JSON.stringify(property))
-        propertyObject.value = propertyObject.defaultInput
-        delete propertyObject.defaultInput
-        propertyObject.hide = false
-        propertyObject.isError = false
-        propertyObject.errorMessage = ""
+        for(const prop of property.properties){
+            this.fillPropertyValue(prop)
+            this.propertyValidation(prop)
+        }
+
+
+
+
+
+
+            /*
+            if(propertyObject.extraOptions)
+            {
+                this.hightligthsUsedExtraOption(propertyObject)
+            }
+        propertyObject.isCollapsed = this.isPropertyCollapsed(propertyObject)
+        propertyObject.hide = this.ifMeetsRequirements(propertyObject)*/
         
-        return propertyObject
     }
 
-    bindObjectFormChanged = (callback) => {
-        this.objectFormChanged = callback
+    fillPropertyValue = (propertyObject) => {
+        const value = this.jsonData.getValueFromWorkingObject(this.container, propertyObject.name) || propertyObject.defaultInput
+        if(propertyObject.inputType === "options"){
+            propertyObject.options.forEach(option => {
+                option.isChecked = option.name === value
+              });
+        }
+        else if(value){
+            propertyObject.value = value
+        } 
     }
+
+    propertyValidation = (property) => {
+        const dataValidation = new DataValidation(property, this.jsonData, this.container)
+        const validateSummary = dataValidation.validateData()
+        property.isValid = validateSummary.isValid
+        property.errorMessage = validateSummary.errorMessage
+      }
 
 }

@@ -128,4 +128,25 @@ class JsonDataModel {
         }
       }
     }
+
+    getValueFromObject = (obj, key) => {
+      const params = this.getParams(obj)
+      const keys = key.split('.');
+      let value = params.workingObject;
+      
+      for (const k of keys) {
+        if (value && value.hasOwnProperty(k)) {
+          value = value[k];
+        } 
+        else {
+          return null;
+        }
+      }
+      return value;
+    }
+
+    getValueFromWorkingObject = (container, key) => {
+      const params = this.getParams(container)
+      return this.getValueFromObject(params.workingObject, key);
+    }
   }
