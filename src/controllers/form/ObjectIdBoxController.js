@@ -1,4 +1,4 @@
-class ModuleObjectIdBoxController {
+class ObjectIdBoxController {
     constructor(view, model) {
         this.view = view
         this.model = model

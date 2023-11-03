@@ -1,4 +1,4 @@
-class ModuleObjectIdBoxModel{
+class ObjectIdBoxModel{
     constructor(jsonData, container, jsonDataBox){
         this.jsonData = jsonData
         this.container = container

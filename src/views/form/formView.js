@@ -7,7 +7,7 @@ class FormView extends View{
         this.createPageElements()
         this.appendElements()
         this.headerPanelView = new HeaderPanelView(this.headerPanel)
-        this.moduleObjectIdBoxView = new ModuleObjectIdBoxView(this.moduleObjectIdBox)
+        this.moduleObjectIdBoxView = new ObjectIdBoxView(this.moduleObjectIdBox)
         this.jsonDataBoxView = new JsonDataBoxFormView(this.jsonDataBox)
     }
 

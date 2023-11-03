@@ -1,4 +1,4 @@
-class ModuleObjectIdBoxView extends View{
+class ObjectIdBoxView extends View{
     constructor(objectIdBox){
         super()
        this.objectIdBox = objectIdBox
