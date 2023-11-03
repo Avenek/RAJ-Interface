@@ -59,11 +59,12 @@ class ModuleObjectIdBoxModel{
     }
 
     deleteObjectId = (index) => {
-        if(this.objectIdList[index].isChecked){
+        const isChecked = this.objectIdList[index].isChecked
+        this.objectIdList.splice(index, 1)
+        if(isChecked){
             this.objectIdList[0].isChecked = true
             this.jsonData.modulePathParams.objectId = 0
         }
-        this.objectIdList.splice(index, 1)
         this.jsonData.deleteObject(this.container, index)
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
