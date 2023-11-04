@@ -17,11 +17,8 @@ class ObjectFormModel{
         .then(response => response.json())
         .then(config => {
             this.config = config
+            this.configUtils = new ConfigUtils(config)
             this.createObjectFormList(this.config)
-            console.log(this.objectFormList);
-            //Sprawdzić wymagania - dodać hide
-            //Zwalidować dane
-            //Podświetlić extra-option
             this.objectFormChanged()
         })
         .catch(error => {
@@ -34,27 +31,22 @@ class ObjectFormModel{
             this.createObjectProperty(property)
             this.objectFormList.push(property)
         }
+        this.requiredItems = this.findReuqiredItems(this.objectFormList)
+        this.hideAndRevealRequiredItems()
+        console.log(this.objectFormList);
     }
 
     createObjectProperty = (property) => {
         for(const prop of property.properties){
+            prop.hide = false
             this.fillPropertyValue(prop)
             this.propertyValidation(prop)
-        }
-
-
-
-
-
-
-            /*
-            if(propertyObject.extraOptions)
+            if(prop.extraOptions)
             {
-                this.hightligthsUsedExtraOption(propertyObject)
+                this.hightligthsUsedExtraOption(prop)
             }
-        propertyObject.isCollapsed = this.isPropertyCollapsed(propertyObject)
-        propertyObject.hide = this.ifMeetsRequirements(propertyObject)*/
-        
+            propertyObject.isCollapsed = prop.defaultCollapsed ? true : false
+        } 
     }
 
     fillPropertyValue = (propertyObject) => {
@@ -74,6 +66,45 @@ class ObjectFormModel{
         const validateSummary = dataValidation.validateData()
         property.isValid = validateSummary.isValid
         property.errorMessage = validateSummary.errorMessage
-      }
+    }
+
+    findReuqiredItems = (objectFormList) => {
+        let objectsWithRequire = [];
+        if (typeof objectFormList === 'object') {
+          if (objectFormList.hasOwnProperty('require')) {
+            objectsWithRequire.push(objectFormList);
+          }
+      
+          for (let key in objectFormList) {
+            if (objectFormList.hasOwnProperty(key) && objectFormList[key] ) {
+              objectsWithRequire = objectsWithRequire.concat(this.findReuqiredItems(objectFormList[key]));
+            }
+          }
+        }
+        return objectsWithRequire
+    }
+
+    hideAndRevealRequiredItems()
+    {
+      let allConditionsAreMet
+      this.requiredItems.forEach(item => {
+        allConditionsAreMet = true
+          for(let i = 0 ; i < item.require.length ; i++) {
+            const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, item.require[i].name)
+            const requireObject = this.configUtils.findObjectByProperty(this.config.properties, item.require[i].name, "name")
+            if(valueInObject){
+                if(!item.require[i].value.includes(valueInObject)){
+                allConditionsAreMet = false
+                break;
+                }
+            }
+            else if(requireObject && requireObject.defaultSraj && !item.require[i].value.includes(requireObject.defaultSraj)){
+              allConditionsAreMet = false
+              break;
+            }
+        }
+        item.hide = !allConditionsAreMet
+      })
+    }
 
 }

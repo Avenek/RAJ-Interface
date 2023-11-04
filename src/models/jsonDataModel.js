@@ -130,10 +130,8 @@ class JsonDataModel {
     }
 
     getValueFromObject = (obj, key) => {
-      const params = this.getParams(obj)
       const keys = key.split('.');
-      let value = params.workingObject;
-      
+      let value = obj
       for (const k of keys) {
         if (value && value.hasOwnProperty(k)) {
           value = value[k];
