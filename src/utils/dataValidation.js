@@ -1,8 +1,9 @@
 class DataValidation{
-    constructor(property, jsonData, container) {
+    constructor(property, jsonData, container, configUtils) {
         this.property = property
         this.jsonData = jsonData
         this.container = container
+        this.configUtils = configUtils
     }
 
     validateData = () => {
@@ -131,7 +132,7 @@ class DataValidation{
         else{
             validValue = this.jsonData.getValueFromWorkingObject(this.container, validObject.value)
             if(validValue === null || validValue === NaN || validValue === undefined){
-                validValue = this.property.defaultSraj
+                validValue = this.configUtils.findObjectByProperty(this.configUtils.config, validObject.value, "name").defaultSraj
             }
             const isValid = value > validValue
             errorMessage = isValid ? "" : `Wartość tego pola powinna być większa od wartości klucza ${validObject.value}!`
@@ -150,7 +151,7 @@ class DataValidation{
         else{
             validValue = this.jsonData.getValueFromWorkingObject(this.container, validObject.value)
             if(validValue === null || validValue === NaN || validValue === undefined){
-                validValue = this.property.defaultSraj
+                validValue = this.configUtils.findObjectByProperty(this.configUtils.config, validObject.value, "name").defaultSraj
             }
             const isValid = value < validValue
             errorMessage = isValid ? "" : `Wartość tego pola powinna być mniejsza od wartości klucza ${validObject.value}!`
