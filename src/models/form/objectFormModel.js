@@ -19,7 +19,6 @@ class ObjectFormModel{
             this.config = config
             this.configUtils = new ConfigUtils(config)
             this.createObjectFormList(this.config)
-            this.objectFormChanged()
         })
         .catch(error => {
         console.error('Błąd pobierania:', error);
@@ -27,13 +26,15 @@ class ObjectFormModel{
     }
 
     createObjectFormList = (config) => {
+        this.objectFormList = []
         for (const property of config.properties) {
             this.createObjectProperty(property)
             this.objectFormList.push(property)
         }
-        this.requiredItems = this.findReuqiredItems(this.objectFormList)
+        this.requiredItems = this.findItemsByProperty(this.objectFormList, "require")
         this.hideAndRevealRequiredItems()
-        console.log(this.objectFormList);
+        this.hightligthsUsedExtraOption()
+        this.objectFormChanged()
     }
 
     createObjectProperty = (property) => {
@@ -41,11 +42,6 @@ class ObjectFormModel{
             prop.hide = false
             this.fillPropertyValue(prop)
             this.propertyValidation(prop)
-            if(prop.extraOptions)
-            {
-                this.hightligthsUsedExtraOption(prop)
-            }
-            propertyObject.isCollapsed = prop.defaultCollapsed ? true : false
         } 
     }
 
@@ -68,24 +64,23 @@ class ObjectFormModel{
         property.errorMessage = validateSummary.errorMessage
     }
 
-    findReuqiredItems = (objectFormList) => {
+    findItemsByProperty = (objectFormList, property) => {
         let objectsWithRequire = [];
         if (typeof objectFormList === 'object') {
-          if (objectFormList.hasOwnProperty('require')) {
+          if (objectFormList.hasOwnProperty(property)) {
             objectsWithRequire.push(objectFormList);
           }
       
           for (let key in objectFormList) {
             if (objectFormList.hasOwnProperty(key) && objectFormList[key] ) {
-              objectsWithRequire = objectsWithRequire.concat(this.findReuqiredItems(objectFormList[key]));
+              objectsWithRequire = objectsWithRequire.concat(this.findItemsByProperty(objectFormList[key], property));
             }
           }
         }
         return objectsWithRequire
     }
 
-    hideAndRevealRequiredItems()
-    {
+    hideAndRevealRequiredItems = () => {
       let allConditionsAreMet
       this.requiredItems.forEach(item => {
         allConditionsAreMet = true
@@ -105,6 +100,22 @@ class ObjectFormModel{
         }
         item.hide = !allConditionsAreMet
       })
+    }
+
+    hightligthsUsedExtraOption = () => {
+        const items = this.findItemsByProperty(this.objectFormList, "extraOptions")
+        items.forEach(item => {
+            item.extraOptions.forEach(extraOption => {
+                let path = item.inputType === "empty" ? item.name + "." + extraOption.name : extraOption.name
+                const extraOptionValue = this.jsonData.getValueFromWorkingObject(this.container, path)
+                if(Array.isArray(extraOptionValue)){
+                    extraOption.isUsed = extraOptionValue.length > 0
+                }
+                else{
+                    extraOption.isUsed = extraOptionValue ? true : false
+                }
+            }) 
+        })
     }
 
 }
