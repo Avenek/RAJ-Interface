@@ -34,14 +34,19 @@ class ObjectFormModel{
         this.requiredItems = this.findItemsByProperty(this.objectFormList, "require")
         this.hideAndRevealRequiredItems()
         this.hightligthsUsedExtraOption()
-        this.objectFormChanged()
+        this.objectFormChanged(this.objectFormList)
     }
 
     createObjectProperty = (property) => {
         for(const prop of property.properties){
+            if(prop.properties){
+                this.createObjectProperty(prop)
+            }
             prop.hide = false
             this.fillPropertyValue(prop)
-            this.propertyValidation(prop)
+            if(prop.validation){
+                this.propertyValidation(prop)
+            }
         } 
     }
 
@@ -70,7 +75,6 @@ class ObjectFormModel{
           if (objectFormList.hasOwnProperty(property)) {
             objectsWithRequire.push(objectFormList);
           }
-      
           for (let key in objectFormList) {
             if (objectFormList.hasOwnProperty(key) && objectFormList[key] ) {
               objectsWithRequire = objectsWithRequire.concat(this.findItemsByProperty(objectFormList[key], property));
@@ -81,19 +85,17 @@ class ObjectFormModel{
     }
 
     hideAndRevealRequiredItems = () => {
-      let allConditionsAreMet
       this.requiredItems.forEach(item => {
-        allConditionsAreMet = true
+        let allConditionsAreMet = true
           for(let i = 0 ; i < item.require.length ; i++) {
-            const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, item.require[i].name)
-            const requireObject = this.configUtils.findObjectByProperty(this.config.properties, item.require[i].name, "name")
-            if(valueInObject){
-                if(!item.require[i].value.includes(valueInObject)){
+            const requireItem = item.require[i]
+            const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, requireItem.name)
+            const requireObject = this.configUtils.findObjectByProperty(this.config.properties, requireItem.name, "name")
+            if(valueInObject && !requireItem.value.includes(valueInObject)){
                 allConditionsAreMet = false
                 break;
-                }
             }
-            else if(requireObject && requireObject.defaultSraj && !item.require[i].value.includes(requireObject.defaultSraj)){
+            else if(requireObject && requireObject.defaultSraj && !requireItem.value.includes(requireObject.defaultSraj)){
               allConditionsAreMet = false
               break;
             }

@@ -470,6 +470,7 @@
                         {
                             "name": "params.stickMap",
                             "idInput": "text.stickMap",
+                            "inputType": "boolean",
                             "tool-tip": "Jeżeli text zostanie przypięty do obiektu poruszającego się (np. fakeNpc), to w momencie wyzwolenia słowa, zostanie ono przyklejone do mapy",
                             "varType": ["boolean"],
                             "defaultInput": false,

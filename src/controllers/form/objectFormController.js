@@ -3,7 +3,6 @@ class ObjectFormController {
         this.view = view
         this.model = model
         this.model.bindObjectFormChanged(this.objectFormChanged)
-        this.model.objectFormChanged(this.model.objectFormList)
     }
     
     objectFormChanged = (objectFormList) => {
