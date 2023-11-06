@@ -13,7 +13,7 @@ class ObjectFormView extends View{
         for (const property of objectFormList) {
             const isHide = property.hide ? " hide" : ""
             if(property.inputType.includes("key")){
-                const isCollapsed = property.isCollapsed ? " collapsed" : ""
+                const isCollapsed = property.isCollapsed || ""
                 const headerName = property.name.substring(property.name.indexOf(".")+1).toUpperCase()
                 html += `<div class="property-form${isCollapsed}${isHide}"><div class="${property.inputType}" id="${property.idInput}">${headerName}</div><div class="property-menu">`
                 html += this.createObjectForm(property.properties)
@@ -28,26 +28,26 @@ class ObjectFormView extends View{
                 }
             }
             else if(property.inputType === "string"){
-                const isCollapsed = property.isCollapsed ? " collapsed-key" : ""
+                const isCollapsed = property.isCollapsed || ""
                 const placeholder = property.inputPlaceholder || ""
                 const isError = property.hide ? "" : " hide"
                 const keyName = property.name.substring(property.name.indexOf(".")+1)
                 html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><span class="error-info${isError}">${property.errorMessage || ""}</span>`;
             }
             else if(property.inputType === "number"){
-                const isCollapsed = property.isCollapsed ? " collapsed-key" : ""
+                const isCollapsed = property.isCollapsed || ""
                 const isError = property.hide ? "" : " hide"
                 const keyName = property.name.substring(property.name.indexOf(".")+1)
                 html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="number" id="${property.idInput}" step=${property.step} min=${property.min} max=${property.max} value="${property.value}" name="${property.name}"><span class="error-info${isError}">${property.errorMessage || ""}</span>`;
             } 
             else if(property.inputType === "boolean"){
-                const isCollapsed = property.isCollapsed ? " collapsed-key" : ""
+                const isCollapsed = property.isCollapsed || ""
                 const isChecked = property.value ? ' slider-checked' : '';
                 const keyName = property.name.substring(property.name.indexOf(".")+1)
                 html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><div class="slider round${isChecked} id="${property.idInput}" name="${property.name}"></div>`;
             }
             else if(property.inputType === "empty"){
-                const isCollapsed = property.isCollapsed ? " collapsed-key" : ""
+                const isCollapsed = property.isCollapsed || ""
                 const keyName = property.name.substring(property.name.indexOf(".")+1)
                 html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div>`;
             } 
@@ -165,6 +165,16 @@ class ObjectFormView extends View{
         <i class="property-tool-tip-icon">i</i>
         <p class="property-tool-tip-info"><b>Typ zmiennej</b>: ${property.varType.join(", ")}<br><b>Wymagania</b>: ${requirementsInfo.substring(4) || "brak"}<br><b>Opis</b>: ${property['tool-tip']}</p>
       </div>`
+    }
+
+    bindCollapseProperty = (handler) =>{
+      this.moduleObjectForm.addEventListener("click", event => {
+        const targetClasses = event.target.classList
+        if (targetClasses.contains('key') || targetClasses.contains('subkey') || targetClasses.contains('subSubkey')) {
+            handler(event.target.id)
+        }
+    })  
+
     }
     
 }

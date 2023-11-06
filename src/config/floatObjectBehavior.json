@@ -192,7 +192,7 @@
                     "name": "rotationOffset",
                     "tool-tip": "Środek ciężkości obracanego obiektu. Domyślnie jest jest to środek obiektu (szerokość/2, wysokość/2)",
                     "inputType": "subkey",
-                    "isCollapsed": true,
+                    "isCollapsed": "collapsed",
                     "properties": [
                         {
                             "name": "rotationOffset.x",
@@ -200,7 +200,7 @@
                             "tool-tip": "Zmiana miejsca środka ciężkości w poziomie.",
                             "inputType": "string",
                             "varType": ["int"],
-                            "isCollapsed": true,
+                            "isCollapsed": "collapsed-key",
                             "canBeEmpty": true,
                             "min":1,
                             "max":300,
@@ -214,7 +214,7 @@
                             "tool-tip": "Zmiana miejsca środka ciężkości w pionie",
                             "inputType": "string",
                             "varType": ["int"],
-                            "isCollapsed": true,
+                            "isCollapsed": "collapsed-key",
                             "canBeEmpty": true,
                             "min":1,
                             "max":300,

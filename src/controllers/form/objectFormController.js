@@ -3,11 +3,15 @@ class ObjectFormController {
         this.view = view
         this.model = model
         this.model.bindObjectFormChanged(this.objectFormChanged)
+        this.view.bindCollapseProperty(this.handleCollapseProperty)
     }
     
     objectFormChanged = (objectFormList) => {
         this.view.displayObjectForm(objectFormList)
     }
 
+    handleCollapseProperty = (id) => {
+        this.model.collapseProperty(id)
+    }
     
   }

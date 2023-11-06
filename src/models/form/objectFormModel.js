@@ -121,4 +121,35 @@ class ObjectFormModel{
         })
     }
 
+    collapseProperty = (id) => {
+        const configUtils = new ConfigUtils(this.config)
+        const targetProperty = configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        let keyCollapsed
+        if(targetProperty.isCollapsed){
+            targetProperty.isCollapsed = ""
+            keyCollapsed = ""
+        }
+        else{
+            targetProperty.isCollapsed = " collapsed"
+            keyCollapsed = " collapsed-key"
+        }
+        targetProperty.properties.forEach(property => {
+            property.isCollapsed = keyCollapsed
+            if(property.properties){
+                this.collapseAllPropertiesInProperty(property, keyCollapsed)
+            }
+        })
+
+        this.objectFormChanged(this.objectFormList)
+    }
+
+    collapseAllPropertiesInProperty = (property, isCollapsed) => {
+        property.properties.forEach(prop => {
+            prop.isCollapsed = isCollapsed
+            if(prop.properties){
+                this.collapseAllPropertiesInProperty(prop, isCollapsed)
+            }
+        })
+    }
+
 }
