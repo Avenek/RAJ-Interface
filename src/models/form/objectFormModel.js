@@ -44,6 +44,7 @@ class ObjectFormModel{
             }
             prop.hide = false
             this.fillPropertyValue(prop)
+            this.resizeIfIsTooLongValue(prop)
             if(prop.validation){
                 this.propertyValidation(prop)
             }
@@ -122,8 +123,7 @@ class ObjectFormModel{
     }
 
     collapseProperty = (id) => {
-        const configUtils = new ConfigUtils(this.config)
-        const targetProperty = configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         let keyCollapsed
         if(targetProperty.isCollapsed){
             targetProperty.isCollapsed = ""
@@ -151,5 +151,11 @@ class ObjectFormModel{
             }
         })
     }
+
+    resizeIfIsTooLongValue = (property) => {
+        if(property.value){
+            property.isExpanded = property.value.length > 30
+        }
+      }
 
 }

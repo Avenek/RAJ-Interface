@@ -31,8 +31,9 @@ class ObjectFormView extends View{
                 const isCollapsed = property.isCollapsed || ""
                 const placeholder = property.inputPlaceholder || ""
                 const isError = property.hide ? "" : " hide"
+                const isExpanded = property.isExpanded ? "expanded" : ""
                 const keyName = property.name.substring(property.name.indexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><span class="error-info${isError}">${property.errorMessage || ""}</span>`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="${isExpanded}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><span class="error-info${isError}">${property.errorMessage || ""}</span>`;
             }
             else if(property.inputType === "number"){
                 const isCollapsed = property.isCollapsed || ""
@@ -58,7 +59,8 @@ class ObjectFormView extends View{
             if(property.extraOptions) {
               for (const option of property.extraOptions) {
                 const color = this.getExtraButtonColor(option.name)
-                html += `<div class="extra-option" style="--clr:${color}"><span>${option.name}</span><i></i></div>`;
+                const isUsed = option.isUsed ? " extra-option-active" : ""
+                html += `<div class="extra-option${isUsed}" style="--clr:${color}"><span>${option.name}</span><i></i></div>`;
                 }
             }
             if (property['tool-tip']) {
@@ -167,14 +169,23 @@ class ObjectFormView extends View{
       </div>`
     }
 
-    bindCollapseProperty = (handler) =>{
+    bindCollapseProperty = (handler) => {
       this.moduleObjectForm.addEventListener("click", event => {
         const targetClasses = event.target.classList
         if (targetClasses.contains('key') || targetClasses.contains('subkey') || targetClasses.contains('subSubkey')) {
             handler(event.target.id)
         }
-    })  
+      })  
+    }
 
+    binbdResizeIfIsTooLongValue = (handler) => {
+      this.moduleObjectForm.addEventListener("keyup", event => { 
+        if (event.target.type === "text") {
+          const isTooLong = event.target.value.length > 30
+          if(isTooLong) event.target.classList.add("expanded")
+          else event.target.classList.remove("expanded")
+        }
+      })  
     }
     
 }
