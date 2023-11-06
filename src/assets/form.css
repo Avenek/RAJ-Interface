@@ -360,14 +360,14 @@ display: block;
     background-image: none;
   }
 
-.tool-tip {
+.property-tool-tip {
     position: absolute;
     right: 1%;
     top: 5px;
     
   }
   
-  .tool-tip .tool-tip__icon {
+  .property-tool-tip .property-tool-tip-icon {
     position: relative;
     background: #27b1f0;
     border-radius: 10px;
@@ -381,7 +381,7 @@ display: block;
     z-index: 1;
   }
 
-  .tool-tip .tool-tip__info {
+  .property-tool-tip .property-tool-tip-info {
     display: none;
     background: #262626e5;
     color: white;
@@ -396,7 +396,7 @@ display: block;
     white-space: normal; 
     z-index: 2;
   }
-  .tool-tip .tool-tip__info:before, .tool-tip .tool-tip__info:after {
+  .property-tool-tip .property-tool-tip-info:before, .property-tool-tip .property-tool-tip-info:after {
     content: "";
     position: absolute;
     right: -10px;
@@ -405,12 +405,12 @@ display: block;
     border-width: 10px 0 10px 10px; 
     border-color: transparent #27b1f0;
   }
-  .tool-tip .tool-tip__info:after {
+  .property-tool-tip .property-tool-tip-info:after {
     right: -10px;
     border-right-color: #ff0404;
   }
 
-  .tool-tip:hover .tool-tip__info, .tool-tip:focus .tool-tip__info {
+  .property-tool-tip:hover .property-tool-tip-info, .property-tool-tip:focus .property-tool-tip-info {
     display: inline-block;
   }
 

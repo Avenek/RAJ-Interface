@@ -62,7 +62,7 @@ class ObjectFormView extends View{
                 }
             }
             if (property['tool-tip']) {
-              
+              html += this.addToolTip(property)
             }
             html+= "</div>"
         }
@@ -71,31 +71,100 @@ class ObjectFormView extends View{
     }
 
     getExtraButtonColor = (name) => {
-        switch(name){
-            case "case":
-              return "#FF3131"
-            case "table":
-              return "#0FF0FC"
-            case "random":
-              return "#FFF01F"
-            case "random first index":
-              return "#CCFF00"
-            case "behavior":
-              return "#0096FF"
-            case "get character data":
-              return "#8A2BE2"
-            case "master":
-              return"#c0c0c0"
-            case "light":
-              return "#FFA500"
-            case "color":
-              return "#FFC0CB"
-            case "source":
-              return "#964B00"
-            default:
-              return "#FF1493"
-          }
+      switch(name){
+        case "case":
+          return "#FF3131"
+        case "table":
+          return "#0FF0FC"
+        case "random":
+          return "#FFF01F"
+        case "random first index":
+          return "#CCFF00"
+        case "behavior":
+          return "#0096FF"
+        case "get character data":
+          return "#8A2BE2"
+        case "master":
+          return"#c0c0c0"
+        case "light":
+          return "#FFA500"
+        case "color":
+          return "#FFC0CB"
+        case "source":
+          return "#964B00"
+        default:
+          return "#FF1493"
+      }
     }
 
+    addToolTip = (property) =>{
+      let requirementsInfo = "";
+      let message
+      if(property.hasOwnProperty('validation')){
+        property['validation'].forEach(valid => {
+          switch(valid.name){
+            case "minMax":
+              message = `Wartość powinna zawierać się w przedziale od ${property.min} do ${property.max}!`
+              if(!requirementsInfo.includes(message)){
+                requirementsInfo += '<br>'+ message
+              }
+              break;
+            case "unique":
+              message = "Wartość tego pola powinna być unikalna i nie może się powtarzać w innych obiektach!"
+              if(!requirementsInfo.includes(message)){
+                requirementsInfo += '<br>'+ message
+              }
+              break;
+            case "notEqual":
+              message = `Wartość tego pola dla typu ${valid.forType} powinna być różna od ${valid.value}!`
+              if(!requirementsInfo.includes(message)){
+                requirementsInfo += '<br>'+ message
+              }
+              break;
+            case "equal":
+              if(valid.value === ""){
+                message = `Wartość tego pola dla typu ${valid.forType} powinna być pusta!`
+              }
+              else{
+                message = `Wartość tego pola dla typu ${valid.forType} powinna być równa ${valid.value}!`
+              }
+              if(!requirementsInfo.includes(message)){
+                requirementsInfo += '<br>'+ message
+              }
+              break;
+            case "moreThan":
+              message = `Wartość tego pola powinna być większa od `
+              if(typeof valid.value === "number"){
+                message +=  `wartości ${valid.value}!`
+                }
+              else{
+                message += `wartości klucza ${valid.value}!`
+              }
+              if(!requirementsInfo.includes(message)){
+                requirementsInfo += '<br>'+ message
+              }
+              break;
+            case "lessThan":
+              message = `Wartość tego pola powinna być większa od `
+              if(typeof valid.value === "number"){
+                message +=  `wartości ${valid.value}!`
+              }
+            else{
+                message += `wartości klucza ${valid.value}!`
+              }
+              if(!requirementsInfo.includes(message)){
+                requirementsInfo += '<br>'+ message
+              }
+              break;
+            default:
+              break;
+          }
+        })
+      }
+      return `<div class="property-tool-tip">
+        <i class="property-tool-tip-icon">i</i>
+        <p class="property-tool-tip-info"><b>Typ zmiennej</b>: ${property.varType.join(", ")}<br><b>Wymagania</b>: ${requirementsInfo.substring(4) || "brak"}<br><b>Opis</b>: ${property['tool-tip']}</p>
+      </div>`
+    }
     
 }
