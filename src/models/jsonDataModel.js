@@ -104,7 +104,7 @@ class JsonDataModel {
           this.modulePathParams.workingObject[params.module] = params.workingObject
         }
       }
-      params.objectId = params.workingList.length - 1
+      params.objectId = params.hasList ? params.workingList.length - 1 : 0
     }
 
     cloneObject = (container, index) => {
@@ -116,10 +116,21 @@ class JsonDataModel {
 
     deleteObject = (container, index) => {
       const params = this.getParams(container)
-      params.workingList.splice(index, 1)
-      if(params.workingList.length === 0){
+      if(params.hasList){
+        params.workingList.splice(index, 1)
+        if(params.workingList.length === 0){
+          params.workingObject = null
+          params.workingList = null
+          if(container === "module"){
+            delete this.data[params.module]
+          }
+          else{
+            delete this.modulePathParams.workingObject[params.module]
+          }
+        }
+      }
+      else{
         params.workingObject = null
-        params.workingList = null
         if(container === "module"){
           delete this.data[params.module]
         }
@@ -127,6 +138,7 @@ class JsonDataModel {
           delete this.modulePathParams.workingObject[params.module]
         }
       }
+      
     }
 
     getValueFromObject = (obj, key) => {

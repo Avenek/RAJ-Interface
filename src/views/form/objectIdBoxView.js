@@ -15,19 +15,21 @@ class ObjectIdBoxView extends View{
             const containerElement = this.createElement("div", "single-object-id-container")
             const idElement = id.isChecked ? this.createElement("div", "object-id", "option-checked") : this.createElement("div", "object-id")
             idElement.textContent = id.name
+            const deleteButton = this.createElement("div", "object-id-delete-button")
+            deleteButton.textContent = "🗑️"
             if(hasList){
                 const copyButton = this.createElement("div", "object-id-copy-button")
                 copyButton.textContent = "⧉"
-                const deleteButton = this.createElement("div", "object-id-delete-button")
-                deleteButton.textContent = "🗑️"
                 containerElement.append(idElement, copyButton, deleteButton)
             }
             else{
-                containerElement.append(idElement)
+                containerElement.append(idElement, deleteButton)
             }
             this.objectIdBox.append(containerElement)
         })
-        this.objectIdBox.append(this.plusButton)
+        if(hasList || objectIdList.length === 0){
+            this.objectIdBox.append(this.plusButton)
+        }
     }
 
     bindCheckObjectId = (handler) => {

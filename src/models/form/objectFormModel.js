@@ -51,15 +51,16 @@ class ObjectFormModel{
     }
 
     fillPropertyValue = (propertyObject) => {
-        const value = this.jsonData.getValueFromWorkingObject(this.container, propertyObject.name) || propertyObject.defaultInput
+        let keyValue = this.jsonData.getValueFromWorkingObject(this.container, propertyObject.name) || propertyObject.defaultSraj || propertyObject.defaultInput
         if(propertyObject.inputType === "options"){
             propertyObject.options.forEach(option => {
-                option.isChecked = option.name === value
+                option.isChecked = option.name === keyValue
               });
         }
-        else if(value){
-            propertyObject.value = value
-        } 
+        else if(keyValue !== null && keyValue !== undefined){
+            propertyObject.value = keyValue
+        }
+        
     }
 
     propertyValidation = (property) => {

@@ -17,14 +17,14 @@ class ObjectIdBoxModel{
                 this.jsonData.addObject(this.container, name)
             }
             ids = this.jsonData.data[params.module].list.map(item => item.id || item.name || item.kind || item.action);
+            ids.forEach(id => {
+                idList.push({"name": id, "isChecked": false})
+            })
         }
         else{
             this.jsonData.addObject(this.container)
-            ids = [params.module]
+            idList.push({"name": params.module, "isChecked": true})
         }
-        ids.forEach(id => {
-            idList.push({"name": id, "isChecked": false})
-        })
         idList[params.objectId].isChecked = true
         this.objectIdList = idList
         this.hasList = params.hasList
@@ -59,9 +59,10 @@ class ObjectIdBoxModel{
     }
 
     deleteObjectId = (index) => {
+        console.log(this.objectIdList);
         const isChecked = this.objectIdList[index].isChecked
         this.objectIdList.splice(index, 1)
-        if(isChecked){
+        if(isChecked && this.objectIdList.length>0){
             this.objectIdList[0].isChecked = true
             this.jsonData.modulePathParams.objectId = 0
         }

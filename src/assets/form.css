@@ -290,7 +290,7 @@ display: block;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s;
-  background-color: #5f60617c;
+  background-color: #494949b4;
   color: white;
   border-color: #000000;
   margin: 3px 5px;
@@ -333,13 +333,13 @@ display: block;
     transition: .4s;
   }
   
-  .checkbox-checked{
+  .slider-checked{
     background-image: none;
     background-image: linear-gradient(to right, #136324, #0ff755);
   }
   
   
-  .checkbox-checked:before {
+  .slider-checked:before {
     background-image: none;
     transform: translateX(60px);
   }
@@ -415,6 +415,7 @@ display: block;
   }
 
  .extra-option {
+  display: inline-block;
     position: relative;
     background: #444;
     color: #fff;
@@ -450,6 +451,7 @@ display: block;
     z-index: 1;
     pointer-events: none;
   }
+
  .extra-option i {
     position: absolute;
     inset: 0;
@@ -570,10 +572,6 @@ a {
     background-color: initial;
     color: inherit;
     text-decoration: none;
-}
-
-header{
-    pointer-events: none;
 }
 
 .collapsed-key{
