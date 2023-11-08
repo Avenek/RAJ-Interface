@@ -175,4 +175,32 @@ class JsonDataModel {
       const lastKey = keys[keys.length - 1];
       currentObj[lastKey] = value;
     }
+
+    removeObjectKeyByPath(container, path) {
+      const params = this.getParams(container)
+      let currentObj = params.workingObject;
+      const keys = path.split('.');
+      for (let i = 0; i < keys.length - 1; i++) {
+        const currentKey = keys[i];
+        if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
+          return;
+        }
+        currentObj = currentObj[currentKey];
+      }
+
+      const lastKey = keys[keys.length - 1];
+      if (currentObj && typeof currentObj === 'object' && lastKey in currentObj) {
+        if(Object.keys(currentObj).length===1)
+        {
+          const lastDotIndex = path.lastIndexOf(".");
+          const penultimate = path.substring(0, lastDotIndex);
+          this.removeObjectKeyByPath(penultimate)
+        }
+        else{
+          delete currentObj[lastKey];
+        }
+        
+      }
+    }
+
   }

@@ -167,7 +167,14 @@ class ObjectFormModel{
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         const valueInGoodType = this.configUtils.getValueInGoodType(targetProperty.name, value)
         targetProperty.value = valueInGoodType
-        this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, valueInGoodType)
-        this.jsonDataBox.jsonDataChanged((this.jsonData, this.isBeautified))
+        if(targetProperty.defaultSraj && valueInGoodType !== targetProperty.defaultSraj){
+            this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, valueInGoodType)
+            this.jsonDataBox.jsonDataChanged((this.jsonData, this.isBeautified))
+        }
+        else if(targetProperty.defaultSraj && valueInGoodType === targetProperty.defaultSraj){
+            this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
+            this.jsonDataBox.jsonDataChanged((this.jsonData, this.isBeautified))
+        }
+        
     }
 }
