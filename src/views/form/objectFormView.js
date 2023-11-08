@@ -197,7 +197,6 @@ class ObjectFormView extends View{
     }
 
     bindUnfocusInput = (handler) => {
-      console.log("KKKKKKKK");
       this.moduleObjectForm.addEventListener("blur", event => { 
         if (event.currentTarget.tagName === 'INPUT') {
           handler(event.target.id)

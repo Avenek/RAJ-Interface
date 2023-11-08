@@ -235,9 +235,7 @@ class ObjectFormModel{
     }
 
     unfocusInput = (id) => {
-        console.log("TEST");
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
-        
         if(targetProperty.validation){
             this.propertyValidation(targetProperty)
         }

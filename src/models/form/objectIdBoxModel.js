@@ -63,7 +63,6 @@ class ObjectIdBoxModel{
     }
 
     deleteObjectId = (index) => {
-        console.log(this.objectIdList);
         const isChecked = this.objectIdList[index].isChecked
         this.objectIdList.splice(index, 1)
         if(isChecked && this.objectIdList.length>0){
