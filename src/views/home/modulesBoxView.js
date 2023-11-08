@@ -97,7 +97,7 @@ class ModulesBoxView extends View{
         this.modulesBox.addEventListener("mousemove", event => {
             this.dragAndDrop.handleDragOver(event)
         })
-        this.root.addEventListener('mouseup', event => { 
+        this.modulesBox.addEventListener('mouseup', event => { 
             this.handleDrop(event, handler) 
         });
         

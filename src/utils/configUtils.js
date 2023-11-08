@@ -53,6 +53,16 @@ class ConfigUtils{
         }
         return newValue
       }
+
+      if(Array.isArray(configObject.defaultInput)){
+        newValue = value.split(";")
+        if(configObject.varType.includes("int")){
+          newValue.forEach(value => parseInt(value))
+        }
+        else if(configObject.varType.includes("float")){
+          newValue.forEach(value => parseFloat(value))
+        }
+      }
       return newValue
     }
 

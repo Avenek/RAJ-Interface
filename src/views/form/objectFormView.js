@@ -169,7 +169,7 @@ class ObjectFormView extends View{
       </div>`
     }
 
-    bindCollapseProperty = (handler) => {
+   bindCollapseProperty = (handler) => {
       this.moduleObjectForm.addEventListener("click", event => {
         const targetClasses = event.target.classList
         if (targetClasses.contains('key') || targetClasses.contains('subkey') || targetClasses.contains('subSubkey')) {
@@ -197,9 +197,9 @@ class ObjectFormView extends View{
     }
 
     bindUnfocusInput = (handler) => {
+      console.log("KKKKKKKK");
       this.moduleObjectForm.addEventListener("blur", event => { 
-        console.log("TEST");
-        if (event.target.tagName === 'INPUT') {
+        if (event.currentTarget.tagName === 'INPUT') {
           handler(event.target.id)
         }
       })  

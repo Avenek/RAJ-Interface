@@ -224,7 +224,7 @@ class ObjectFormModel{
         targetProperty.value = valueInGoodType
         if(valueInGoodType !== targetProperty.defaultSraj){
             this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, valueInGoodType)
-            targetProperty.value = value
+            targetProperty.value = valueInGoodType
             this.jsonDataBox.jsonDataChanged()
         }
         else if(valueInGoodType === targetProperty.defaultSraj){
@@ -235,8 +235,9 @@ class ObjectFormModel{
     }
 
     unfocusInput = (id) => {
-        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         console.log("TEST");
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        
         if(targetProperty.validation){
             this.propertyValidation(targetProperty)
         }
