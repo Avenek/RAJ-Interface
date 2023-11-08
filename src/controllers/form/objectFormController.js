@@ -4,7 +4,8 @@ class ObjectFormController {
         this.model = model
         this.model.bindObjectFormChanged(this.objectFormChanged)
         this.view.bindCollapseProperty(this.handleCollapseProperty)
-        this.view.binbdResizeIfIsTooLongValue(this.handleResizeIfIsTooLongValue)
+        this.view.bindResizeIfIsTooLongValue(this.handleResizeIfIsTooLongValue)
+        this.view.bindEnterValueInInput(this.handleEnterValueInInput)
     }
     
     objectFormChanged = (objectFormList) => {
@@ -15,4 +16,12 @@ class ObjectFormController {
         this.model.collapseProperty(id)
     }
 
+    handleResizeIfIsTooLongValue = (id, isTooLong) => {
+        this.model.resizeIfIsTooLongValue(id, isTooLong)
+    }
+
+    handleEnterValueInInput = (id, value) => {
+        this.model.enterValueInInput(id, value)
+    }
+    
   }

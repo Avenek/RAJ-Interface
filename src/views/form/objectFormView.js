@@ -178,12 +178,20 @@ class ObjectFormView extends View{
       })  
     }
 
-    binbdResizeIfIsTooLongValue = (handler) => {
+    bindResizeIfIsTooLongValue = (handler) => {
       this.moduleObjectForm.addEventListener("keyup", event => { 
         if (event.target.type === "text") {
           const isTooLong = event.target.value.length > 30
-          if(isTooLong) event.target.classList.add("expanded")
-          else event.target.classList.remove("expanded")
+          isTooLong ? event.target.classList.add("expanded") : event.target.classList.remove("expanded")
+          handler(event.target.id)
+        }
+      })  
+    }
+
+    bindEnterValueInInput = (handler) => {
+      this.moduleObjectForm.addEventListener("keyup", event => { 
+        if (event.target.tagName === 'INPUT') {
+          handler(event.target.id, event.target.value)
         }
       })  
     }

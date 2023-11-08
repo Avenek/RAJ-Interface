@@ -5,7 +5,7 @@ class JsonDataBoxFormController extends JsonDataBoxController{
         this.model.bindJsonDataChanged(this.jsonDataChanged)
     }
 
-    jsonDataChanged = (jsonData, isBeautified) => {
-        this.view.updateJsonData(jsonData, isBeautified)
+    jsonDataChanged = () => {
+        this.view.updateJsonData(this.model.jsonData, this.model.isBeautified)
     }
 }

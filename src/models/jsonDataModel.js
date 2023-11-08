@@ -159,4 +159,20 @@ class JsonDataModel {
       const params = this.getParams(container)
       return this.getValueFromObject(params.workingObject, key);
     }
+
+    setObjectKeyByPath = (container, path, value) => {
+      const keys = path.split('.');
+      const params = this.getParams(container)
+      let currentObj = params.workingObject;
+    
+      for (let i = 0; i < keys.length - 1; i++) {
+        const currentKey = keys[i];
+        if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
+          currentObj[currentKey] = {};
+        }
+        currentObj = currentObj[currentKey];
+      }
+      const lastKey = keys[keys.length - 1];
+      currentObj[lastKey] = value;
+    }
   }

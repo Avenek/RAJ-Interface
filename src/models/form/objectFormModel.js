@@ -44,7 +44,7 @@ class ObjectFormModel{
             }
             prop.hide = false
             this.fillPropertyValue(prop)
-            this.resizeIfIsTooLongValue(prop)
+            this.addExpandedKey(prop)
             if(prop.validation){
                 this.propertyValidation(prop)
             }
@@ -152,10 +152,22 @@ class ObjectFormModel{
         })
     }
 
-    resizeIfIsTooLongValue = (property) => {
+    addExpandedKey = (property) => {
         if(property.value){
             property.isExpanded = property.value.length > 30
         }
-      }
+    }
 
+    resizeIfIsTooLongValue = (id) => {
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        this.addExpandedKey(targetProperty)
+    }
+
+    enterValueInInput= (id, value) => {
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        const valueInGoodType = this.configUtils.getValueInGoodType(targetProperty.name, value)
+        targetProperty.value = valueInGoodType
+        this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, valueInGoodType)
+        this.jsonDataBox.jsonDataChanged((this.jsonData, this.isBeautified))
+    }
 }

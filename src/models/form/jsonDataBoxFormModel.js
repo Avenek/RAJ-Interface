@@ -10,12 +10,12 @@ class JsonDataBoxFormModel{
 
     beautifyJsonData = () => {
         this.isBeautified = true;
-        this.jsonDataChanged(this.jsonData, this.isBeautified)
+        this.jsonDataChanged()
     }
 
     minifyJsonData = () => {
         this.isBeautified = false;
-        this.jsonDataChanged(this.jsonData, this.isBeautified)
+        this.jsonDataChanged()
     }
 
     copyJsonData = () => {
@@ -27,7 +27,7 @@ class JsonDataBoxFormModel{
         if (window.confirm("Czy na pewno chcesz wyczyścić pole Json?\nPS. Ctrl+z nie przywróci go już z powrotem.")) {
             this.jsonData.data = {}
             localStorage.setItem('lastJson', this.jsonData);
-            this.jsonDataChanged(this.jsonData, this.isBeautified)
+            this.jsonDataChanged()
         }
     }
 }
