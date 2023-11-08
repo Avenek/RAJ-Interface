@@ -23,7 +23,7 @@ class ObjectFormView extends View{
                 const keyName = property.name.substring(property.name.indexOf(".")+1)
                 html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div>`
                 for (const option of property.options) {
-                  const isChecked = option.isChecked ? ' option-checked' : '';
+                  const isChecked = option.name === property.value ? ' option-checked' : '';
                   html += `<div class="radio-button${isChecked}" id="${property.idInput}">${option.name}</div>`;
                 }
             }

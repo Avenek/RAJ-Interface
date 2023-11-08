@@ -53,12 +53,7 @@ class ObjectFormModel{
 
     fillPropertyValue = (propertyObject) => {
         let keyValue = this.jsonData.getValueFromWorkingObject(this.container, propertyObject.name) || propertyObject.defaultSraj || propertyObject.defaultInput
-        if(propertyObject.inputType === "options"){
-            propertyObject.options.forEach(option => {
-                option.isChecked = option.name === keyValue
-              });
-        }
-        else if(keyValue !== null && keyValue !== undefined){
+        if(keyValue !== null && keyValue !== undefined){
             propertyObject.value = keyValue
         }
         
@@ -113,19 +108,29 @@ class ObjectFormModel{
             if(item.properties){
                 const valueObject = this.createObjectBaseOnConfig(item.properties)
                 this.jsonData.setObjectKeyByPath(this.container, item.name, valueObject)
-                listToSet.push({"name": item.name, "value": valueObject})
+                listToSet.push({"name": item.name, "id": item.idInput, "value": valueObject})
             }
             else{
                 this.jsonData.setObjectKeyByPath(this.container, item.name, item.defaultInput)
-                listToSet.push({"name": item.name, "value": item.defaultInput})
+                listToSet.push({"name": item.name,  "id": item.idInput, "value": item.defaultInput})
             }
             
         }
+        else if(allConditionsAreMet){
+            const value = this.jsonData.getValueFromWorkingObject(this.container, item.name)
+            listToSet.push({"name": item.name, "id": item.idInput, "value": value})
+        } 
         else if(!allConditionsAreMet){
             this.jsonData.removeObjectKeyByPath(this.container, item.name)
+            const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, item.idInput, "idInput")
+            targetProperty.value = ""
         }
       })
-      listToSet.forEach(item =>this.jsonData.setObjectKeyByPath(this.container, item.name, item.value))
+      listToSet.forEach(key => {
+        this.jsonData.setObjectKeyByPath(this.container, key.name, key.value)
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
+        targetProperty.value = key.value
+      })
       this.jsonDataBox.jsonDataChanged()
     }
 
@@ -146,10 +151,10 @@ class ObjectFormModel{
             }
             else{
               currentObj[key] = property.defaultInput !== undefined && property.defaultInput !== null ? property.defaultInput : '';
-              if(currentObj[key] === property.defaultSraj){
+            }
+            if(currentObj[key] === property.defaultSraj){
                 delete currentObj[key]
               }
-            }
           
           }
         }
@@ -219,10 +224,12 @@ class ObjectFormModel{
         targetProperty.value = valueInGoodType
         if(valueInGoodType !== targetProperty.defaultSraj){
             this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, valueInGoodType)
+            targetProperty.value = value
             this.jsonDataBox.jsonDataChanged()
         }
         else if(valueInGoodType === targetProperty.defaultSraj){
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
+            targetProperty.value = ""
             this.jsonDataBox.jsonDataChanged()
         }
     }
@@ -243,10 +250,12 @@ class ObjectFormModel{
         targetProperty.options.find(option => option.name === value).isChecked = true;
         if(value !== targetProperty.defaultSraj){
             this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, value)
+            targetProperty.value = value
             this.jsonDataBox.jsonDataChanged()
         }
         else if(value === targetProperty.defaultSraj){
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
+            targetProperty.value = ""
             this.jsonDataBox.jsonDataChanged()
         }
         this.hideAndRevealRequiredItems()
