@@ -6,6 +6,7 @@ class ObjectFormController {
         this.view.bindCollapseProperty(this.handleCollapseProperty)
         this.view.bindResizeIfIsTooLongValue(this.handleResizeIfIsTooLongValue)
         this.view.bindEnterValueInInput(this.handleEnterValueInInput)
+        this.view.bindCheckOption(this.handleCheckOption)
     }
     
     objectFormChanged = (objectFormList) => {
@@ -21,7 +22,10 @@ class ObjectFormController {
     }
 
     handleEnterValueInInput = (id, value) => {
-        this.model.enterValueInInput(id, value)
+        this.model.enterValue(id, value)
     }
     
+    handleCheckOption = (id, value) => {
+        this.model.checkOption(id, value)
+    }
   }

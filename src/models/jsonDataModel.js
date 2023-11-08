@@ -194,7 +194,7 @@ class JsonDataModel {
         {
           const lastDotIndex = path.lastIndexOf(".");
           const penultimate = path.substring(0, lastDotIndex);
-          this.removeObjectKeyByPath(penultimate)
+          this.removeObjectKeyByPath(container, penultimate)
         }
         else{
           delete currentObj[lastKey];

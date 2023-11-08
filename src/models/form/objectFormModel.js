@@ -103,6 +103,14 @@ class ObjectFormModel{
             }
         }
         item.hide = !allConditionsAreMet
+        if(allConditionsAreMet && this.jsonData.getValueFromWorkingObject(this.container, item.name) === null)
+        {
+            this.jsonData.setObjectKeyByPath(this.container, item.name, item.value)
+        }
+        else{
+            this.jsonData.removeObjectKeyByPath(this.container, item.name)
+        }
+        this.jsonDataBox.jsonDataChanged()
       })
     }
 
@@ -163,18 +171,33 @@ class ObjectFormModel{
         this.addExpandedKey(targetProperty)
     }
 
-    enterValueInInput = (id, value) => {
+    enterValue = (id, value) => {
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         const valueInGoodType = this.configUtils.getValueInGoodType(targetProperty.name, value)
         targetProperty.value = valueInGoodType
-        if(targetProperty.defaultSraj && valueInGoodType !== targetProperty.defaultSraj){
+        if(valueInGoodType !== targetProperty.defaultSraj){
             this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, valueInGoodType)
-            this.jsonDataBox.jsonDataChanged((this.jsonData, this.isBeautified))
+            this.jsonDataBox.jsonDataChanged()
         }
-        else if(targetProperty.defaultSraj && valueInGoodType === targetProperty.defaultSraj){
+        else if(valueInGoodType === targetProperty.defaultSraj){
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
-            this.jsonDataBox.jsonDataChanged((this.jsonData, this.isBeautified))
+            this.jsonDataBox.jsonDataChanged()
         }
-        
+    }
+
+    checkOption = (id, value) => {
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        targetProperty.options.forEach(option => option.isChecked = false)
+        targetProperty.options.find(option => option.name === value).isChecked = true;
+        if(value !== targetProperty.defaultSraj){
+            this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, value)
+            this.jsonDataBox.jsonDataChanged()
+        }
+        else if(value === targetProperty.defaultSraj){
+            this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
+            this.jsonDataBox.jsonDataChanged()
+        }
+        this.hideAndRevealRequiredItems()
+        this.objectFormChanged(this.objectFormList)
     }
 }

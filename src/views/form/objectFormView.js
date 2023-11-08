@@ -195,5 +195,13 @@ class ObjectFormView extends View{
         }
       })  
     }
+
+    bindCheckOption = (handler) => {
+      this.moduleObjectForm.addEventListener("click", event => { 
+        if (event.target.classList.contains("radio-button")) {
+          handler(event.target.id, event.target.textContent)
+        }
+      })  
+    }
     
 }
