@@ -196,6 +196,15 @@ class ObjectFormView extends View{
       })  
     }
 
+    bindUnfocusInput = (handler) => {
+      this.moduleObjectForm.addEventListener("blur", event => { 
+        console.log("TEST");
+        if (event.target.tagName === 'INPUT') {
+          handler(event.target.id)
+        }
+      })  
+    }
+
     bindCheckOption = (handler) => {
       this.moduleObjectForm.addEventListener("click", event => { 
         if (event.target.classList.contains("radio-button")) {

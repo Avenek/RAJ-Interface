@@ -6,6 +6,7 @@ class ObjectFormController {
         this.view.bindCollapseProperty(this.handleCollapseProperty)
         this.view.bindResizeIfIsTooLongValue(this.handleResizeIfIsTooLongValue)
         this.view.bindEnterValueInInput(this.handleEnterValueInInput)
+        this.view.bindUnfocusInput(this.handleUnfocusInput)
         this.view.bindCheckOption(this.handleCheckOption)
     }
     
@@ -23,6 +24,10 @@ class ObjectFormController {
 
     handleEnterValueInInput = (id, value) => {
         this.model.enterValue(id, value)
+    }
+
+    handleUnfocusInput = (id) => {
+        this.model.unfocusInput(id)
     }
     
     handleCheckOption = (id, value) => {

@@ -87,6 +87,7 @@ class ObjectFormModel{
     }
 
     hideAndRevealRequiredItems = () => {
+        const listToSet = []
       this.requiredItems.forEach(item => {
         let allConditionsAreMet = true
           for(let i = 0 ; i < item.require.length ; i++) {
@@ -101,18 +102,59 @@ class ObjectFormModel{
               allConditionsAreMet = false
               break;
             }
+            else if(valueInObject === null && requireObject && requireObject.defaultSraj === undefined){
+                allConditionsAreMet = false
+                break;
+            }
         }
         item.hide = !allConditionsAreMet
         if(allConditionsAreMet && this.jsonData.getValueFromWorkingObject(this.container, item.name) === null)
         {
-            this.jsonData.setObjectKeyByPath(this.container, item.name, item.value)
+            if(item.properties){
+                const valueObject = this.createObjectBaseOnConfig(item.properties)
+                this.jsonData.setObjectKeyByPath(this.container, item.name, valueObject)
+                listToSet.push({"name": item.name, "value": valueObject})
+            }
+            else{
+                this.jsonData.setObjectKeyByPath(this.container, item.name, item.defaultInput)
+                listToSet.push({"name": item.name, "value": item.defaultInput})
+            }
+            
         }
-        else{
+        else if(!allConditionsAreMet){
             this.jsonData.removeObjectKeyByPath(this.container, item.name)
         }
-        this.jsonDataBox.jsonDataChanged()
       })
+      listToSet.forEach(item =>this.jsonData.setObjectKeyByPath(this.container, item.name, item.value))
+      this.jsonDataBox.jsonDataChanged()
     }
+
+    createObjectBaseOnConfig = (config) => {
+        let result = {};
+        let currentObj = result;
+        for (const property of config) {
+          const key = this.configUtils.getLastPartOfTheName(property.name)
+          if(property.hasOwnProperty("properties"))
+          {
+            const createdObject = this.createObjectBaseOnConfig(property.properties, this.container)
+            currentObj[key] = createdObject
+          }
+          else if(property.inputType!=="empty" || property.hasOwnProperty("defaultInput")){
+            const value = this.jsonData.getValueFromWorkingObject(this.container, property.name)
+            if(value !== null){
+              currentObj[key] = value
+            }
+            else{
+              currentObj[key] = property.defaultInput !== undefined && property.defaultInput !== null ? property.defaultInput : '';
+              if(currentObj[key] === property.defaultSraj){
+                delete currentObj[key]
+              }
+            }
+          
+          }
+        }
+        return result
+      }
 
     hightligthsUsedExtraOption = () => {
         const items = this.findItemsByProperty(this.objectFormList, "extraOptions")
@@ -183,6 +225,16 @@ class ObjectFormModel{
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
             this.jsonDataBox.jsonDataChanged()
         }
+    }
+
+    unfocusInput = (id) => {
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        console.log("TEST");
+        if(targetProperty.validation){
+            this.propertyValidation(targetProperty)
+        }
+        this.hideAndRevealRequiredItems()
+        this.objectFormChanged(this.objectFormList)
     }
 
     checkOption = (id, value) => {
