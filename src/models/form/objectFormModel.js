@@ -163,7 +163,7 @@ class ObjectFormModel{
         this.addExpandedKey(targetProperty)
     }
 
-    enterValueInInput= (id, value) => {
+    enterValueInInput = (id, value) => {
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         const valueInGoodType = this.configUtils.getValueInGoodType(targetProperty.name, value)
         targetProperty.value = valueInGoodType

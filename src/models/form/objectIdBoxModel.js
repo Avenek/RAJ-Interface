@@ -1,9 +1,10 @@
 class ObjectIdBoxModel{
-    constructor(jsonData, container, jsonDataBox){
+    constructor(jsonData, container, jsonDataBox, objectForm){
         this.jsonData = jsonData
         this.container = container
         this.jsonDataBox = jsonDataBox
         this.hasList = true
+        this.objectForm = objectForm
         this.createObjectIdList()
     }
 
@@ -38,7 +39,9 @@ class ObjectIdBoxModel{
         this.uncheckedCurrentObject()
         this.objectIdList[index].isChecked = true
         this.jsonData.modulePathParams.objectId = index
+        this.jsonData.modulePathParams.workingObject = this.jsonData.modulePathParams.workingList[index]
         this.objectIdListChanged(this.objectIdList, this.hasList)
+        this.objectForm.createObjectFormList(this.objectForm.config)
     }
 
     addObjectId = () => {
@@ -48,6 +51,7 @@ class ObjectIdBoxModel{
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonData.addObject(this.container, name)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
+        this.objectForm.createObjectFormList(this.objectForm.config)
     }
 
     cloneObjectId = (index) => {
@@ -69,6 +73,7 @@ class ObjectIdBoxModel{
         this.jsonData.deleteObject(this.container, index)
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
+        this.objectForm.createObjectFormList(this.objectForm.config)
     }
 
     updateNameObjectId = (index, newName) => {
