@@ -60,7 +60,7 @@ class ObjectFormModel{
     }
 
     propertyValidation = (property) => {
-        const dataValidation = new DataValidation(property, this.jsonData, this.container)
+        const dataValidation = new DataValidation(property, this.jsonData, this.container, this.configUtils)
         const validateSummary = dataValidation.validateData()
         property.isValid = validateSummary.isValid
         property.errorMessage = validateSummary.errorMessage
@@ -229,7 +229,7 @@ class ObjectFormModel{
         }
         else if(valueInGoodType === targetProperty.defaultSraj){
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
-            targetProperty.value = ""
+            targetProperty.value = valueInGoodType
             this.jsonDataBox.jsonDataChanged()
         }
     }
@@ -240,6 +240,7 @@ class ObjectFormModel{
             this.propertyValidation(targetProperty)
         }
         this.hideAndRevealRequiredItems()
+        console.log(this.objectFormList);
         this.objectFormChanged(this.objectFormList)
     }
 

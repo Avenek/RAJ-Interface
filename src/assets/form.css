@@ -296,14 +296,14 @@ display: block;
   margin: 3px 5px;
 }
 
-.key-value input {
+.key-value-input {
     min-width: 200px;
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 2px solid #cfcfcf;
     border-radius: 3px;
 }
 
-.key-value input[type="number"] {
+.key-value-input[type="number"] {
   min-width: 80px;
 }
 
@@ -543,6 +543,11 @@ display: block;
   position: relative;
   background-image: linear-gradient(to bottom, #272727, #4d4b4b);
   overflow-y: auto;
+}
+
+.error-input {
+  background-color: rgba(255, 133, 133, 0.753);
+  border: 2px solid red;
 }
 
 .error-info {

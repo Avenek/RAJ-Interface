@@ -95,7 +95,7 @@ class DataValidation{
 
     minMaxValid = (value) => {
         const isValid = value >= this.property.min && value <= this.property.max
-        const errorMessage = isValid ? "" : `Wartość powinna zawierać się w przedziale od ${property.min} do ${property.max}!`   
+        const errorMessage = isValid ? "" : `Wartość powinna zawierać się w przedziale od ${this.property.min} do ${this.property.max}!` 
         return {"isValid": isValid, "errorMessage": errorMessage}
     }
       
