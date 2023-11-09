@@ -130,7 +130,6 @@ class JsonDataModel {
         }
       }
       else{
-        params.workingObject = null
         if(container === "module"){
           delete this.data[params.module]
         }

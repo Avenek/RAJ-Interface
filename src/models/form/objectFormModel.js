@@ -264,4 +264,9 @@ class ObjectFormModel{
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
         }
     }
+
+    clearForm = () => {
+        this.objectFormList = []
+        this.objectFormChanged(this.objectFormList)
+    }
 }

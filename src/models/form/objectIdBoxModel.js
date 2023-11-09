@@ -46,8 +46,10 @@ class ObjectIdBoxModel{
 
     addObjectId = () => {
         const name = this.pickDefaultUniqueName()
+        if(this.objectIdList.length > 0){
+            this.uncheckedCurrentObject()
+        }
         this.objectIdList.push({"name": name, "isChecked": true})
-        this.uncheckedCurrentObject()
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonData.addObject(this.container, name)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
@@ -68,11 +70,17 @@ class ObjectIdBoxModel{
         if(isChecked && this.objectIdList.length>0){
             this.objectIdList[0].isChecked = true
             this.jsonData.modulePathParams.objectId = 0
+            this.jsonData.modulePathParams.workingObject = this.jsonData.modulePathParams.workingList[0]
         }
         this.jsonData.deleteObject(this.container, index)
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
-        this.objectForm.createObjectFormList(this.objectForm.config)
+        if(this.objectIdList.length > 0){
+            this.objectForm.createObjectFormList(this.objectForm.config)
+        }
+        else{
+            this.objectForm.clearForm()
+        }
     }
 
     updateNameObjectId = (index, newName) => {
