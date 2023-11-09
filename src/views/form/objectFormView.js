@@ -46,7 +46,7 @@ class ObjectFormView extends View{
                 const isCollapsed = property.isCollapsed || ""
                 const isChecked = property.value ? ' slider-checked' : '';
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><div class="slider round${isChecked} id="${property.idInput}" name="${property.name}"></div>`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><div class="slider round${isChecked}" id="${property.idInput}" name="${property.name}"></div>`;
             }
             else if(property.inputType === "empty"){
                 const isCollapsed = property.isCollapsed || ""
@@ -213,4 +213,11 @@ class ObjectFormView extends View{
       })  
     }
     
+    bindCheckSlider = (handler) => {
+      this.moduleObjectForm.addEventListener("click", event => { 
+        if (event.target.classList.contains("slider")) {
+          handler(event.target.id)
+        }
+      })  
+    }
 }

@@ -8,6 +8,7 @@ class ObjectFormController {
         this.view.bindEnterValueInInput(this.handleEnterValueInInput)
         this.view.bindUnfocusInput(this.handleUnfocusInput)
         this.view.bindCheckOption(this.handleCheckOption)
+        this.view.bindCheckSlider(this.handleCheckSlider)
     }
     
     objectFormChanged = (objectFormList) => {
@@ -32,5 +33,9 @@ class ObjectFormController {
     
     handleCheckOption = (id, value) => {
         this.model.checkOption(id, value)
+    }
+
+    handleCheckSlider = (id) => {
+        this.model.checkSlider(id)
     }
   }

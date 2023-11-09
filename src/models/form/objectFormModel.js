@@ -222,16 +222,9 @@ class ObjectFormModel{
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         const valueInGoodType = this.configUtils.getValueInGoodType(targetProperty.name, value)
         targetProperty.value = valueInGoodType
-        if(valueInGoodType !== targetProperty.defaultSraj){
-            this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, valueInGoodType)
-            targetProperty.value = valueInGoodType
-            this.jsonDataBox.jsonDataChanged()
-        }
-        else if(valueInGoodType === targetProperty.defaultSraj){
-            this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
-            targetProperty.value = valueInGoodType
-            this.jsonDataBox.jsonDataChanged()
-        }
+        this.updateValueInJson(targetProperty, valueInGoodType)
+        targetProperty.value = valueInGoodType
+        this.jsonDataBox.jsonDataChanged()
     }
 
     unfocusInput = (id) => {
@@ -240,7 +233,6 @@ class ObjectFormModel{
             this.propertyValidation(targetProperty)
         }
         this.hideAndRevealRequiredItems()
-        console.log(this.objectFormList);
         this.objectFormChanged(this.objectFormList)
     }
 
@@ -248,17 +240,28 @@ class ObjectFormModel{
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         targetProperty.options.forEach(option => option.isChecked = false)
         targetProperty.options.find(option => option.name === value).isChecked = true;
+        this.updateValueInJson(targetProperty, value)
+        targetProperty.value = value
+        this.jsonDataBox.jsonDataChanged()
+        this.hideAndRevealRequiredItems()
+        this.objectFormChanged(this.objectFormList)
+    }
+
+    checkSlider = (id) => {
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        targetProperty.value = !targetProperty.value
+        this.updateValueInJson(targetProperty, targetProperty.value)
+        this.jsonDataBox.jsonDataChanged()
+        this.hideAndRevealRequiredItems()
+        this.objectFormChanged(this.objectFormList)
+    }
+
+    updateValueInJson = (targetProperty, value) => {
         if(value !== targetProperty.defaultSraj){
             this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, value)
-            targetProperty.value = value
-            this.jsonDataBox.jsonDataChanged()
         }
         else if(value === targetProperty.defaultSraj){
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
-            targetProperty.value = ""
-            this.jsonDataBox.jsonDataChanged()
         }
-        this.hideAndRevealRequiredItems()
-        this.objectFormChanged(this.objectFormList)
     }
 }
