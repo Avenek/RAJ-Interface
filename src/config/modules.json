@@ -10,7 +10,8 @@
     },
     {
       "name": "behaviorDynamicLightBehavior",
-      "hasList": true
+      "hasList": true,
+      "path": "object"
     },
     {
       "name": "callInstantBehaviorFakeNpc",
@@ -22,7 +23,8 @@
     },
     {
       "name": "case",
-      "hasList": true
+      "hasList": true,
+      "path": "object"
     },
     {
       "name": "characterEffect",
@@ -34,7 +36,8 @@
     },
     {
       "name": "color",
-      "hasList": false
+      "hasList": false,
+      "path": "object"
     },
     {
       "name": "dialogue",
@@ -62,7 +65,8 @@
     },
     {
       "name": "extraLightMaster",
-      "hasList": false
+      "hasList": false,
+      "path": "object"
     },
     {
       "name": "fakeNpc",
@@ -70,11 +74,13 @@
     },
     {
       "name": "fakeNpcBehavior",
-      "hasList": true
+      "hasList": true,
+      "path": "object"
     },
     {
       "name": "fakeNpcRandomFirstIndex",
-      "hasList": false
+      "hasList": false,
+      "path": "object"
     },
     {
       "name": "floatForeground",
@@ -86,19 +92,23 @@
     },
     {
       "name": "floatObjectBehavior",
-      "hasList": true
+      "hasList": true,
+      "path": "object"
     },
     {
       "name": "floatObjectRandomFirstIndex",
-      "hasList": true
+      "hasList": true,
+      "path": "object"
     },
     {
       "name": "getCharacterData",
-      "hasList": false
+      "hasList": false,
+      "path": "key"
     },
     {
       "name": "getRandom",
-      "hasList": false
+      "hasList": false,
+      "path": "key"
     },
     {
       "name": "weather",

@@ -8,14 +8,16 @@ class JsonDataModel {
         "objectId": null,
         "hasList": true,
         "workingList": null,
-        "workingObject": null
+        "workingObject": null,
+        "path": null
       }
       this.extraOptionPathParams = {
         "module": null,
         "objectId": null,
         "hasList": true,
         "workingList": null,
-        "workingObject": null
+        "workingObject": null,
+        "path": null
       }
     }
 
@@ -30,10 +32,12 @@ class JsonDataModel {
         })
     }
 
-    setParams = (container, module, id) => {
+    setParams = (container, module, id, key = "") => {
       if(container === "module"){
         this.modulePathParams.module = module
         this.modulePathParams.objectId = id
+        this.modulePathParams.path = this.moduleConfig.modules.find(object => object.name === module).path || "object"
+        this.modulePathParams.key = key
         this.modulePathParams.hasList = this.moduleConfig.modules.find(object => object.name === module).hasList
         try{
           if(this.modulePathParams.hasList){
@@ -49,6 +53,8 @@ class JsonDataModel {
       else{
         this.extraOptionPathParams.module = module
         this.extraOptionPathParams.objectId = id
+        this.extraOptionPathParams.path = this.moduleConfig.modules.find(object => object.name === module).path || "object"
+        this.extraOptionPathParams.key = key
         this.extraOptionPathParams.hasList = this.moduleConfig.modules.find(object => object.name === module).hasList
         try{
           if(this.extraOptionPathParams.hasList){
@@ -56,7 +62,13 @@ class JsonDataModel {
             this.extraOptionPathParams.workingObject = this.modulePathParams.workingObject[module].list[id]
           }
           else{
-            this.extraOptionPathParams.workingObject = this.modulePathParams.workingObject[module]
+            if(this.extraOptionPathParams.path === "object"){
+              this.extraOptionPathParams.workingObject = this.modulePathParams.workingObject[module]
+            }
+            else{
+              this.extraOptionPathParams.workingObject = this.getValueFromWorkingObject("module", key)
+            }
+            
           }
         }
         catch{}
@@ -100,8 +112,19 @@ class JsonDataModel {
         }
         else{
           params.workingList = null
-          params.workingObject = new moduleDict[params.module]()
-          this.modulePathParams.workingObject[params.module] = params.workingObject
+          if(this.extraOptionPathParams.path === "object"){
+            params.workingObject = new moduleDict[params.module]()
+            let path = params.key
+            const dotIndex = path.lastIndexOf('.');
+            path = dotIndex !== -1 ? path.substring(0, dotIndex) : path;
+            console.log(path);
+            this.setObjectKeyByPath("module", path, params.workingObject)
+          }
+          else{
+            params.workingObject = new moduleDict[params.module]()
+            this.setObjectKeyByPath("module", params.key, params.workingObject)
+          }
+        
         }
       }
       params.objectId = params.hasList ? params.workingList.length - 1 : 0

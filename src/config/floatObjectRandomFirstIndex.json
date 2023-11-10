@@ -1,13 +1,13 @@
 {
     "properties": [
         {
-            "name": "randomFirsIndex",
+            "name": "randomFirstIndex",
             "idInput": "menu",
             "tool-tip": "",
             "inputType": "key",
             "properties":[
                 {
-                    "name": "forActions",
+                    "name": "randomFirstIndex.forActions",
                     "idInput": "forActions",
                     "tool-tip": "Tablica stringów z nazwami zachowań, które ustawiamy jako filtr do wyszukania.",
                     "inputType": "string",

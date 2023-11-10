@@ -61,7 +61,7 @@ class ObjectFormView extends View{
               for (const option of property.extraOptions) {
                 const color = this.getExtraButtonColor(option.name)
                 const isUsed = option.isUsed ? " extra-option-active" : ""
-                html += `<div class="extra-option${isUsed}" style="--clr:${color}"><span>${option.name}</span><i></i></div>`;
+                html += `<div class="extra-option${isUsed}" id="${property.idInput}" style="--clr:${color}"><span>${option.name}</span><i></i></div>`;
                 }
             }
             if (property['tool-tip']) {

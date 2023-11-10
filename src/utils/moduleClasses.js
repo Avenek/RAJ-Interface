@@ -304,10 +304,12 @@ let moduleDict = {
   getCharacterData : class GetCharacterData {
     constructor(path)
     {
-      this.kind = "HERO"
-      this.toGet = path
-      this.modify = 0
-      this. rotation = {"x":0, "y":0}
+      this.getCharacterData = {
+       "kind" : "HERO",
+        "toGet" : path,
+        "modify" : 0,
+        "rotation" : {"x":0, "y":0}
+    }
     }
   },
   
@@ -316,6 +318,18 @@ let moduleDict = {
       this.resultType = "int"
       this.start = 0
       this.end = 1
+    }
+  },
+
+  fakeNpcRandomFirstIndex : class RandomFirstIndex {
+    constructor(){
+      this.randomFirstIndex = { "forActions": []}
+    }
+  },
+
+  floatObjectRandomFirstIndex : class RandomFirstIndex {
+    constructor(){
+      this.randomFirstIndex = { "forActions": []}
     }
   }
 }

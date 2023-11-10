@@ -10,7 +10,8 @@ class FormController {
       this.view.bindClickExtraOption(this.handleClickExtraOption)
     }
 
-    handleClickExtraOption = (extraOption) => {
+    handleClickExtraOption = (extraOption, id) => {
+      const path = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput").name
       this.model.moduleObjectFormModel.clickExtraOption()
       if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null){
         this.model.extraOptionObjectFormModel.clearForm()
@@ -18,7 +19,11 @@ class FormController {
         this.model.jsonData.extraOptionPathParams.workingObject = null
       }
       else{
-        this.model.jsonData.setParams("extraOption", extraOption, 0)
+        let extraOptionName = extraOption
+        if(extraOptionName === "behavior" || extraOptionName === "randomFirstIndex"){
+          extraOptionName = this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
+        }
+        this.model.jsonData.setParams("extraOption", extraOptionName, 0, path)
         this.view.extraOptionObjectIdBox = new ObjectIdBoxView(this.view.extraOptionIdBox)
         this.model.extraOptionObjectFormModel = new ObjectFormModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel)
         this.model.extraOptionObjectIdBoxModel = new ObjectIdBoxModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel, this.model.extraOptionObjectFormModel)

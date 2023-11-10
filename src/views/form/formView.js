@@ -38,6 +38,7 @@ class FormView extends View{
         this.moduleObjectFormView.moduleObjectForm.addEventListener("click", event => {
             if (event.target.classList.contains('extra-option')) {
                 const button = event.target
+                const key = event.target.parentElement.firstChild.textContent
                 let buttonName = button.textContent
                 if(buttonName.includes(" ")){
                     const nameArray = buttonName.split(" ")
@@ -46,7 +47,7 @@ class FormView extends View{
                     }
                     buttonName = nameArray.join("")
                 }
-                handler(buttonName)
+                handler(buttonName, button.id)
             }
         })  
     }
