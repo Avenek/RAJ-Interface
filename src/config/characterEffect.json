@@ -32,8 +32,7 @@
                     "inputType": "options",
                     "varType": ["string"],
                     "options": [{"name":"MAP"}],
-                    "defaultInput": "MAP",
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "defaultInput": "MAP"
                 },
                 {
                     "name": "effect",

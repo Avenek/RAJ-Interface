@@ -111,39 +111,42 @@
       "path": "key"
     },
     {
-      "name": "weather",
-      "hasList": true
+      "name": "light",
+      "hasList": false,
+      "path": "object"
     },
     {
       "name": "mapFilter",
       "hasList": false
     },
     {
+      "name": "mapMusic",
+      "hasList": true
+    },
+    {
       "name": "night",
       "hasList": false
     },
     {
-      "name": "zoom",
-      "hasList": false
-    },
-    {
-      "name": "screenEffects",
+      "name": "sequence",
       "hasList": true
     },
     {
-      "name": "programmer",
-      "hasList": false
-    },
-    {
-      "name": "mapEvents",
-      "hasList": false
+      "name": "sequenceBehavior",
+      "hasList": true,
+      "path": "object"
     },
     {
       "name": "sound",
       "hasList": true
     },
     {
-      "name": "mapMusic",
+      "name": "source",
+      "hasList": false,
+      "path": "object"
+    },
+    {
+      "name": "weather",
       "hasList": true
     },
     {
@@ -151,24 +154,8 @@
       "hasList": true
     },
     {
-      "name": "mapExternalPropertiesRefresh",
+      "name": "zoom",
       "hasList": false
-    },
-    {
-      "name": "interface_skin",
-      "hasList": false
-    },
-    {
-      "name": "template",
-      "hasList": false
-    },
-    {
-      "name": "windowEvents",
-      "hasList": false
-    },
-    {
-      "name": "sequence",
-      "hasList": true
     }
   ]
 }
