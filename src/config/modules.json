@@ -97,6 +97,10 @@
       "hasList": false
     },
     {
+      "name": "getRandom",
+      "hasList": false
+    },
+    {
       "name": "weather",
       "hasList": true
     },

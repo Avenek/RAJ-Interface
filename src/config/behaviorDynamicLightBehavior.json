@@ -108,7 +108,7 @@
                                     "canBeEmpty": true,
                                     "defaultInput":"",
                                     "defaultSraj": "",
-                                    "extraOptions": [{"name":"random"}],
+                                    "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
                                 },
                                 {
@@ -123,7 +123,7 @@
                                     "canBeEmpty": true,
                                     "defaultInput":"",
                                     "defaultSraj": "",
-                                    "extraOptions": [{"name":"random"}],
+                                    "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
                                 },
                                 {
@@ -138,7 +138,7 @@
                                     "canBeEmpty": true,
                                     "defaultInput":"",
                                     "defaultSraj": "",
-                                    "extraOptions": [{"name":"random"}],
+                                    "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
                                 },
                                 {
@@ -153,7 +153,7 @@
                                     "canBeEmpty": true,
                                     "defaultInput":"",
                                     "defaultSraj": "",
-                                    "extraOptions": [{"name":"random"}],
+                                    "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                                 }
                             ]

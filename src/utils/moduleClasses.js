@@ -9,14 +9,6 @@ class Case {
   }
 }
 
-class GetRandom {
-  constructor() {
-    this.resultType = "int"
-    this.start = 0
-    this.end = 1
-  }
-}
-
 class Light{
   constructor(){
     this.onlyNight = true,
@@ -317,6 +309,13 @@ let moduleDict = {
       this.modify = 0
       this. rotation = {"x":0, "y":0}
     }
-  }
+  },
   
+  getRandom : class GetRandom {
+    constructor() {
+      this.resultType = "int"
+      this.start = 0
+      this.end = 1
+    }
+  }
 }

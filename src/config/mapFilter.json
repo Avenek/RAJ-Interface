@@ -22,7 +22,7 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":0,
-                            "extraOptions": [{"name":"random"}],
+                            "extraOptions": [{"name":"get random"}],
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
@@ -35,7 +35,7 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":0,
-                            "extraOptions": [{"name":"random"}],
+                            "extraOptions": [{"name":"get random"}],
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
@@ -48,7 +48,7 @@
                             "inputType": "number",
                             "varType": ["int"],
                             "defaultInput":0,
-                            "extraOptions": [{"name":"random"}],
+                            "extraOptions": [{"name":"get random"}],
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
@@ -61,7 +61,7 @@
                             "inputType": "number",
                             "varType": ["float", "int"],
                             "defaultInput":1,
-                            "extraOptions": [{"name":"random"}],
+                            "extraOptions": [{"name":"get random"}],
                             "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         }
                     ]

@@ -84,7 +84,7 @@ class DataValidation{
                 validSummary = this.moreThanValid(valid, value)
                   break;
               case "lessThan":
-                validSummary = this.lessThanValid(valid, inputValue, container)
+                validSummary = this.lessThanValid(valid, value)
                   break;
               default:
                 break;
@@ -130,11 +130,11 @@ class DataValidation{
             errorMessage = isValid ? "" : `Wartość tego pola powinna być większa od wartości ${validObject.value}!`
         }
         else{
-            validValue = this.jsonData.getValueFromWorkingObject(this.container, validObject.value)
+            let validValue = this.jsonData.getValueFromWorkingObject(this.container, validObject.value)
             if(validValue === null || validValue === NaN || validValue === undefined){
-                validValue = this.configUtils.findObjectByProperty(this.configUtils.config, validObject.value, "name").defaultSraj
+                validValue = this.configUtils.findObjectByProperty(this.configUtils.config.properties, validObject.value, "name").defaultSraj
             }
-            const isValid = value > validValue
+            isValid = value > validValue
             errorMessage = isValid ? "" : `Wartość tego pola powinna być większa od wartości klucza ${validObject.value}!`
         }
 
@@ -149,14 +149,14 @@ class DataValidation{
             errorMessage = isValid ? "" : `Wartość tego pola powinna być mniejsza od wartości ${validObject.value}!`
         }
         else{
-            validValue = this.jsonData.getValueFromWorkingObject(this.container, validObject.value)
+            let validValue = this.jsonData.getValueFromWorkingObject(this.container, validObject.value)
+            console.log(validValue);
             if(validValue === null || validValue === NaN || validValue === undefined){
-                validValue = this.configUtils.findObjectByProperty(this.configUtils.config, validObject.value, "name").defaultSraj
+                validValue = this.configUtils.findObjectByProperty(this.configUtils.config.properties, validObject.value, "name").defaultSraj
             }
-            const isValid = value < validValue
+            isValid = value < validValue
             errorMessage = isValid ? "" : `Wartość tego pola powinna być mniejsza od wartości klucza ${validObject.value}!`
         }
-
         return {"isValid": isValid, "errorMessage": errorMessage}
     }
 }

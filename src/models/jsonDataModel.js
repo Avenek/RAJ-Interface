@@ -31,7 +31,6 @@ class JsonDataModel {
     }
 
     setParams = (container, module, id) => {
-      console.log(module);
       if(container === "module"){
         this.modulePathParams.module = module
         this.modulePathParams.objectId = id
