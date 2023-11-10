@@ -13,7 +13,7 @@ class ObjectIdBoxModel{
         const idList = []
         let ids
         if(params.hasList){
-            if(params.workingObject === null){
+            if(params.workingList === null || params.workingList.length === 0){
                 const name = this.pickDefaultUniqueName()
                 this.jsonData.addObject(this.container, name)
             }

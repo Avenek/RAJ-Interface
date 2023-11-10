@@ -12,17 +12,17 @@ class FormController {
 
     handleClickExtraOption = (extraOption, id) => {
       const path = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput").name
+      let extraOptionName = extraOption
+      if(extraOptionName === "behavior" || extraOptionName === "randomFirstIndex"){
+        extraOptionName = this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
+      }
       this.model.moduleObjectFormModel.clickExtraOption()
-      if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null){
+      if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null && this.model.jsonData.extraOptionPathParams.module === extraOptionName){
         this.model.extraOptionObjectFormModel.clearForm()
         this.model.extraOptionObjectIdBoxModel.clearBox()
         this.model.jsonData.extraOptionPathParams.workingObject = null
       }
       else{
-        let extraOptionName = extraOption
-        if(extraOptionName === "behavior" || extraOptionName === "randomFirstIndex"){
-          extraOptionName = this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
-        }
         this.model.jsonData.setParams("extraOption", extraOptionName, 0, path)
         this.view.extraOptionObjectIdBox = new ObjectIdBoxView(this.view.extraOptionIdBox)
         this.model.extraOptionObjectFormModel = new ObjectFormModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel)

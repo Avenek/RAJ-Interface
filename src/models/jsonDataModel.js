@@ -103,9 +103,16 @@ class JsonDataModel {
       else{
         if(params.hasList){
           if(params.workingList === null){
-            this.modulePathParams.workingObject[params.module]={}
-            this.modulePathParams.workingObject[params.module].list=[]
-            params.workingList = this.modulePathParams.workingObject[params.module].list
+            let keyName = params.module
+            if(keyName.endsWith("Behavior")){
+              keyName = "behavior"
+            }
+            else if(keyName.endsWith("RandomFirstIndex")){
+              keyName = "randomFirstIndex"
+            }
+            this.modulePathParams.workingObject[keyName]={}
+            this.modulePathParams.workingObject[keyName].list=[]
+            params.workingList = this.modulePathParams.workingObject[keyName].list
           }
           params.workingObject = new moduleDict[params.module](name)
           params.workingList.push(params.workingObject)
@@ -117,7 +124,6 @@ class JsonDataModel {
             let path = params.key
             const dotIndex = path.lastIndexOf('.');
             path = dotIndex !== -1 ? path.substring(0, dotIndex) : path;
-            console.log(path);
             this.setObjectKeyByPath("module", path, params.workingObject)
           }
           else{
