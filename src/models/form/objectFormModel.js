@@ -12,8 +12,8 @@ class ObjectFormModel{
     }
 
     fetchConfigAndCreateObjectFormList = () => {
-        const module = this.jsonData.modulePathParams.module
-        fetch(`config/${module}.json`)
+        const params = this.jsonData.getParams(this.container)
+        fetch(`config/${params.module}.json`)
         .then(response => response.json())
         .then(config => {
             this.config = config
@@ -225,6 +225,9 @@ class ObjectFormModel{
         this.updateValueInJson(targetProperty, valueInGoodType)
         targetProperty.value = valueInGoodType
         this.jsonDataBox.jsonDataChanged()
+        if(targetProperty.name === "id" || targetProperty.name === "name" || targetProperty.name === "kind" || targetProperty.name === "action"){
+            this.objectIdBox.updateNameObjectId(this.container)
+        }
     }
 
     unfocusInput = (id) => {
@@ -245,6 +248,9 @@ class ObjectFormModel{
         this.jsonDataBox.jsonDataChanged()
         this.hideAndRevealRequiredItems()
         this.objectFormChanged(this.objectFormList)
+        if(targetProperty.name === "id" || targetProperty.name === "name" || targetProperty.name === "kind" || targetProperty.name === "action"){
+            this.objectIdBox.updateNameObjectId(this.container)
+        }
     }
 
     checkSlider = (id) => {
@@ -253,6 +259,11 @@ class ObjectFormModel{
         this.updateValueInJson(targetProperty, targetProperty.value)
         this.jsonDataBox.jsonDataChanged()
         this.hideAndRevealRequiredItems()
+        this.objectFormChanged(this.objectFormList)
+    }
+
+    clickExtraOption = () => {
+        this.hightligthsUsedExtraOption()
         this.objectFormChanged(this.objectFormList)
     }
 

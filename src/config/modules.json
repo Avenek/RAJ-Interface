@@ -1,128 +1,160 @@
 {
-    "modules": [
-        {
-            "name": "characterEffect",
-            "hasList": true
-          },
-          {
-            "name": "fakeNpc",
-            "hasList": true
-          },
-          {
-            "name": "callInstantBehaviorFakeNpc",
-            "hasList": true
-          },
-          {
-            "name": "characterHide",
-            "hasList": true
-          },
-          {
-            "name": "battleEvents",
-            "hasList": false
-          },
-          {
-            "name": "emoDefinitions",
-            "hasList": true
-          },
-          {
-            "name": "emoActions",
-            "hasList": true
-          },
-          {
-            "name": "weather",
-            "hasList": true
-          },
-          {
-            "name": "earthQuake",
-            "hasList": false
-          },
-          {
-            "name": "mapFilter",
-            "hasList": false
-          },
-          {
-            "name": "night",
-            "hasList": false
-          },
-          {
-            "name": "extraLight",
-            "hasList": true
-          },
-          {
-            "name": "dynamicLight",
-            "hasList": true
-          },
-          {
-            "name": "behaviorDynamicLight",
-            "hasList": true
-          },
-          {
-            "name": "zoom",
-            "hasList": false
-          },
-          {
-            "name": "screenEffects",
-            "hasList": true
-          },
-          {
-            "name": "floatForeground",
-            "hasList": true
-          },
-          {
-            "name": "floatObject",
-            "hasList": true
-          },
-          {
-            "name": "programmer",
-            "hasList": false
-          },
-          {
-            "name": "mapEvents",
-            "hasList": false
-          },
-          {
-            "name": "sound",
-            "hasList": true
-          },
-          {
-            "name": "areaTrigger",
-            "hasList": true
-          },
-          {
-            "name": "mapMusic",
-            "hasList": true
-          },
-          {
-            "name": "dialogue",
-            "hasList": true
-          },
-          {
-            "name": "camera",
-            "hasList": false
-          },
-          {
-            "name": "yellowMessage",
-            "hasList": true
-          },
-          {
-            "name": "mapExternalPropertiesRefresh",
-            "hasList": false
-          },
-          {
-            "name": "interface_skin",
-            "hasList": false
-          },
-          {
-            "name": "template",
-            "hasList": false
-          },
-          {
-            "name": "windowEvents",
-            "hasList": false
-          },
-          {
-            "name": "sequence",
-            "hasList": true
-          }
-    ]
+  "modules": [
+    {
+      "name": "areaTrigger",
+      "hasList": true
+    },
+    {
+      "name": "behaviorDynamicLight",
+      "hasList": true
+    },
+    {
+      "name": "behaviorDynamicLightBehavior",
+      "hasList": true
+    },
+    {
+      "name": "callInstantBehaviorFakeNpc",
+      "hasList": true
+    },
+    {
+      "name": "camera",
+      "hasList": false
+    },
+    {
+      "name": "case",
+      "hasList": true
+    },
+    {
+      "name": "characterEffect",
+      "hasList": true
+    },
+    {
+      "name": "characterHide",
+      "hasList": true
+    },
+    {
+      "name": "color",
+      "hasList": false
+    },
+    {
+      "name": "dialogue",
+      "hasList": true
+    },
+    {
+      "name": "dynamicLight",
+      "hasList": true
+    },
+    {
+      "name": "earthQuake",
+      "hasList": false
+    },
+    {
+      "name": "emoActions",
+      "hasList": true
+    },
+    {
+      "name": "emoDefinitions",
+      "hasList": true
+    },
+    {
+      "name": "extraLight",
+      "hasList": true
+    },
+    {
+      "name": "extraLightMaster",
+      "hasList": false
+    },
+    {
+      "name": "fakeNpc",
+      "hasList": true
+    },
+    {
+      "name": "fakeNpcBehavior",
+      "hasList": true
+    },
+    {
+      "name": "fakeNpcRandomFirstIndex",
+      "hasList": false
+    },
+    {
+      "name": "floatForeground",
+      "hasList": true
+    },
+    {
+      "name": "floatObject",
+      "hasList": true
+    },
+    {
+      "name": "floatObjectBehavior",
+      "hasList": true
+    },
+    {
+      "name": "floatObjectRandomFirstIndex",
+      "hasList": true
+    },
+    {
+      "name": "getCharacterData",
+      "hasList": false
+    },
+    {
+      "name": "weather",
+      "hasList": true
+    },
+    {
+      "name": "mapFilter",
+      "hasList": false
+    },
+    {
+      "name": "night",
+      "hasList": false
+    },
+    {
+      "name": "zoom",
+      "hasList": false
+    },
+    {
+      "name": "screenEffects",
+      "hasList": true
+    },
+    {
+      "name": "programmer",
+      "hasList": false
+    },
+    {
+      "name": "mapEvents",
+      "hasList": false
+    },
+    {
+      "name": "sound",
+      "hasList": true
+    },
+    {
+      "name": "mapMusic",
+      "hasList": true
+    },
+    {
+      "name": "yellowMessage",
+      "hasList": true
+    },
+    {
+      "name": "mapExternalPropertiesRefresh",
+      "hasList": false
+    },
+    {
+      "name": "interface_skin",
+      "hasList": false
+    },
+    {
+      "name": "template",
+      "hasList": false
+    },
+    {
+      "name": "windowEvents",
+      "hasList": false
+    },
+    {
+      "name": "sequence",
+      "hasList": true
+    }
+  ]
 }

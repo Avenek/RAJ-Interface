@@ -11,8 +11,8 @@ class ObjectIdBoxController {
         this.view.bindUpdateNameObjectId(this.handleUpdateNameObjectId)
     }
     
-    objectIdListChanged = (objectIdList, hasList) => {
-        this.view.displayObjectIdBox(objectIdList, hasList)
+    objectIdListChanged = (objectIdList, hasList, addPlusButton = true) => {
+        this.view.displayObjectIdBox(objectIdList, hasList, addPlusButton)
     }
 
     handleCheckObjectId = (index) => {

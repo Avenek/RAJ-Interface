@@ -10,7 +10,7 @@ class DataValidation{
         const value = this.property.value
         let validSummary = {"isValid": true, "errorMessage": ""}
         if(this.property.inputType === "string" || this.property.inputType === "number"){
-            if(!this.property.canBeEmpty && value === ""){
+            if(!this.property.canBeEmpty && value.length === 0){
                 validSummary.isValid = false
                 validSummary.errorMessage = "Wartość tego pola nie może być pusta!"
                 return validSummary
@@ -40,7 +40,7 @@ class DataValidation{
 
     convertValueToArray = (value) => {
         const valuesArray = []
-        if(Array.isArray(value)){
+        if(value.length > 0 && Array.isArray(value)){
             valuesArray = value.split(";")
         }
         else{

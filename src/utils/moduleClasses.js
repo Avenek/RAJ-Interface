@@ -17,15 +17,6 @@ class GetRandom {
   }
 }
 
-class GetCharacterData {
-  constructor(path) {
-    this.kind = "HERO"
-    this.toGet = path
-    this.modify = 0
-    this. rotation = {"x":0, "y":0}
-  }
-}
-
 class Light{
   constructor(){
     this.onlyNight = true,
@@ -315,6 +306,16 @@ let moduleDict = {
       this.kind = "ON_IN"
       this.x = 0
       this.y = 0
+    }
+  },
+
+  getCharacterData : class GetCharacterData {
+    constructor(path)
+    {
+      this.kind = "HERO"
+      this.toGet = path
+      this.modify = 0
+      this. rotation = {"x":0, "y":0}
     }
   }
   

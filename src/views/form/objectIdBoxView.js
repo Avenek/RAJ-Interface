@@ -6,7 +6,7 @@ class ObjectIdBoxView extends View{
        this.plusButton.textContent = "+"
     }
 
-    displayObjectIdBox = (objectIdList, hasList) => {
+    displayObjectIdBox = (objectIdList, hasList, addPlusButton) => {
         this.objectIdBox.innerHTML = ""
         const titleElement = this.createElement("div", "container-title")
         titleElement.textContent = "Menu obiektów"
@@ -27,7 +27,7 @@ class ObjectIdBoxView extends View{
             }
             this.objectIdBox.append(containerElement)
         })
-        if(hasList || objectIdList.length === 0){
+        if((hasList || objectIdList.length === 0) && addPlusButton){
             this.objectIdBox.append(this.plusButton)
         }
     }

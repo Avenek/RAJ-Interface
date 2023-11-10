@@ -33,14 +33,14 @@ class ObjectFormView extends View{
                 const isError = property.errorMessage && property.errorMessage !== "" ? " error-input" : ""
                 const isExpanded = property.isExpanded ? "expanded" : ""
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><span class="error-info">${property.errorMessage || ""}</span>`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}">`;
             }
             else if(property.inputType === "number"){
                 const isCollapsed = property.isCollapsed || ""
                 const isError = property.isValid ? "" : " error-input"
                 const isExpanded = property.isExpanded ? "expanded" : ""
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="number" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" step=${property.step} min=${property.min} max=${property.max} value="${property.value}" name="${property.name}"><span class="error-info">${property.errorMessage || ""}</span>`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="number" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" step=${property.step} min=${property.min} max=${property.max} value="${property.value}" name="${property.name}">`;
             } 
             else if(property.inputType === "boolean"){
                 const isCollapsed = property.isCollapsed || ""
@@ -67,7 +67,7 @@ class ObjectFormView extends View{
             if (property['tool-tip']) {
               html += this.addToolTip(property)
             }
-            html+= "</div>"
+            html+= `<span class="error-info">${property.errorMessage || ""}</span></div>`
         }
         html += "</div>"
         return html

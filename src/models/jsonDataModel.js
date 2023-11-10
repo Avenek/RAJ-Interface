@@ -31,6 +31,7 @@ class JsonDataModel {
     }
 
     setParams = (container, module, id) => {
+      console.log(module);
       if(container === "module"){
         this.modulePathParams.module = module
         this.modulePathParams.objectId = id
@@ -52,11 +53,11 @@ class JsonDataModel {
         this.extraOptionPathParams.hasList = this.moduleConfig.modules.find(object => object.name === module).hasList
         try{
           if(this.extraOptionPathParams.hasList){
-            this.extraOptionParams.workingList=  this.modulePathParams.workingObject[module].list
-            this.extraOptionParams.workingObject =  this.modulePathParams.workingObject[module].list[id]
+            this.extraOptionPathParams.workingList = this.modulePathParams.workingObject[module].list
+            this.extraOptionPathParams.workingObject = this.modulePathParams.workingObject[module].list[id]
           }
           else{
-            this.extraOptionParams.workingObject =  this.modulePathParams.workingObject[module]
+            this.extraOptionPathParams.workingObject = this.modulePathParams.workingObject[module]
           }
         }
         catch{}

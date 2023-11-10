@@ -297,6 +297,7 @@ display: block;
 }
 
 .key-value-input {
+    display: inline-block;
     min-width: 200px;
     padding: 5px;
     border: 2px solid #cfcfcf;
@@ -415,7 +416,7 @@ display: block;
   }
 
  .extra-option {
-  display: inline-block;
+    display: inline-block;
     position: relative;
     background: #444;
     color: #fff;

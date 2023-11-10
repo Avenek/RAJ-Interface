@@ -13,11 +13,11 @@ class ObjectIdBoxModel{
         const idList = []
         let ids
         if(params.hasList){
-            if(this.jsonData.data[params.module] === undefined){
+            if(params.workingObject === null){
                 const name = this.pickDefaultUniqueName()
                 this.jsonData.addObject(this.container, name)
             }
-            ids = this.jsonData.data[params.module].list.map(item => item.id || item.name || item.kind || item.action);
+            ids = params.workingList.map(item => item.id || item.name || item.kind || item.action);
             ids.forEach(id => {
                 idList.push({"name": id, "isChecked": false})
             })
@@ -65,12 +65,16 @@ class ObjectIdBoxModel{
     }
 
     deleteObjectId = (index) => {
+        const params = this.jsonData.getParams(this.container)
         const isChecked = this.objectIdList[index].isChecked
         this.objectIdList.splice(index, 1)
         if(isChecked && this.objectIdList.length>0){
             this.objectIdList[0].isChecked = true
-            this.jsonData.modulePathParams.objectId = 0
-            this.jsonData.modulePathParams.workingObject = this.jsonData.modulePathParams.workingList[0]
+            params.objectId = 0
+            params.workingObject = params.workingList[0]
+        }
+        else{
+            params.workingObject = null
         }
         this.jsonData.deleteObject(this.container, index)
         this.objectIdListChanged(this.objectIdList, this.hasList)
@@ -79,13 +83,28 @@ class ObjectIdBoxModel{
             this.objectForm.createObjectFormList(this.objectForm.config)
         }
         else{
+            this.objectForm.hightligthsUsedExtraOption()
             this.objectForm.clearForm()
+            if(this.container === "extraOption"){
+                this.clearBox()
+            }
         }
     }
 
-    updateNameObjectId = (index, newName) => {
-        
-    }  
+    updateNameObjectId = (container) => {
+        const params = this.jsonData.getParams(container)
+        const keysInOrder = ['id', 'name', 'kind', 'action'];
+        let result = ""
+        for (const key of keysInOrder) {
+            if (params.workingObject[key] !== undefined) {
+              result = params.workingObject[key];
+              break;
+            }
+          }
+        const currentIndex = this.jsonData.getParams(this.container).objectId
+        this.objectIdList[currentIndex].name = result
+        this.objectIdListChanged(this.objectIdList, this.hasList)
+    }   
     
     uncheckedCurrentObject(){
         const currentIndex = this.jsonData.getParams(this.container).objectId
@@ -130,5 +149,10 @@ class ObjectIdBoxModel{
               break; 
         }  
         return defaultName      
+    }
+
+    clearBox = () => {
+        this.objectIdList = []
+        this.objectIdListChanged(this.objectIdList, this.hasList, false)
     }
 }

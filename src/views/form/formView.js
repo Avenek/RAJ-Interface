@@ -33,4 +33,21 @@ class FormView extends View{
         this.configurationContainer.append(this.headerPanel, this.formContainer)
         this.root.append(this.configurationContainer, this.jsonDataBox)
     }
+
+    bindClickExtraOption = (handler) => {
+        this.moduleObjectFormView.moduleObjectForm.addEventListener("click", event => {
+            if (event.target.classList.contains('extra-option')) {
+                const button = event.target
+                let buttonName = button.textContent
+                if(buttonName.includes(" ")){
+                    const nameArray = buttonName.split(" ")
+                    for(let i = 1 ; i < nameArray.length ; i++){
+                        nameArray[i] = nameArray[i].charAt(0).toUpperCase() + nameArray[i].slice(1)
+                    }
+                    buttonName = nameArray.join("")
+                }
+                handler(buttonName)
+            }
+        })  
+    }
 }
