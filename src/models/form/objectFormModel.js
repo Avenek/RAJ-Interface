@@ -111,15 +111,10 @@ class ObjectFormModel{
                 item.value = valueObject
             }
             else {
-                if(item.defaultInput !== item.defaultSraj){
-                    this.jsonData.setObjectKeyByPath(this.container, item.name, item.defaultInput)
-                    listToSet.push({"name": item.name,  "id": item.idInput, "value": item.defaultInput})
-                }
+                this.jsonData.setObjectKeyByPath(this.container, item.name, item.defaultInput)
+                listToSet.push({"name": item.name,  "id": item.idInput, "value": item.defaultInput})
                 item.value = item.defaultInput
             }
-           
-            
-            
         }
         else if(allConditionsAreMet){
             const value = this.jsonData.getValueFromWorkingObject(this.container, item.name)
@@ -135,6 +130,8 @@ class ObjectFormModel{
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
         targetProperty.value = key.value
       })
+      const params = this.jsonData.getParams(this.container)
+      this.removeDefaultValuesFromJson(params.workingObject)
       this.jsonDataBox.jsonDataChanged()
     }
 
@@ -221,6 +218,28 @@ class ObjectFormModel{
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         this.addExpandedKey(targetProperty)
     }
+
+    removeDefaultValuesFromJson(data, prefix = "") {
+        for (const key in data) {
+          const value = data[key];
+          const fullKey = prefix + key;
+          let foundObject
+          if (typeof value === "object") {
+            this.removeDefaultValuesFromJson(value, fullKey + ".");
+            if(Object.keys(value).length ===0){
+                delete data[key]
+            }
+          } 
+          else{
+            foundObject = this.configUtils.findObjectByProperty(this.objectFormList, fullKey, "name")
+            if(foundObject && foundObject.defaultSraj === data[key])
+            {
+              this.jsonData.removeObjectKeyByPath(this.container, fullKey)
+            }
+          }
+        }
+        this.jsonDataBox.jsonDataChanged()
+      }
 
     enterValue = (id, value) => {
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")

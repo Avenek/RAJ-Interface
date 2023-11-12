@@ -136,7 +136,7 @@ class JsonDataModel {
             this.setObjectKeyByPath("module", path, params.workingObject)
           }
           else{
-            params.workingObject = new moduleDict[params.module]()
+            params.workingObject = new moduleDict[params.module](params.key)
             this.setObjectKeyByPath("module", params.key, params.workingObject)
           }
         
