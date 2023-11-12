@@ -88,8 +88,8 @@
                     "inputType": "number",
                     "varType": ["float", "int", "string"],
                     "canBeEmpty": true,
-                    "defaultInput": "",
-                    "defaultSraj": "",
+                    "defaultInput": 4.9,
+                    "defaultSraj": 4.9,
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
                     "require": [{"name": "name", "value": ["WALK"]}]
                 },

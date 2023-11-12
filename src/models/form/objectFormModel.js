@@ -56,7 +56,6 @@ class ObjectFormModel{
         if(keyValue !== null && keyValue !== undefined){
             propertyObject.value = keyValue
         }
-        
     }
 
     propertyValidation = (property) => {
@@ -110,7 +109,7 @@ class ObjectFormModel{
                 this.jsonData.setObjectKeyByPath(this.container, item.name, valueObject)
                 listToSet.push({"name": item.name, "id": item.idInput, "value": valueObject})
             }
-            else{
+            else if(item.defaultInput !== item.defaultSraj){
                 this.jsonData.setObjectKeyByPath(this.container, item.name, item.defaultInput)
                 listToSet.push({"name": item.name,  "id": item.idInput, "value": item.defaultInput})
             }
