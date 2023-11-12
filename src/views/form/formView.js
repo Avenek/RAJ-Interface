@@ -37,8 +37,11 @@ class FormView extends View{
     bindClickExtraOption = (handler) => {
         this.moduleObjectFormView.moduleObjectForm.addEventListener("click", event => {
             if (event.target.classList.contains('extra-option')) {
+                this.extraOptionConfiguration.innerHTML = ''
+                this.extraOptionIdBox = this.createElement("div", "extra-option-id-box", "object-id-box")
+                this.extraOptionForm = this.createElement("div", "extra-option-form", "object-form")
+                this.extraOptionConfiguration.append(this.extraOptionIdBox, this.extraOptionForm)
                 const button = event.target
-                const key = event.target.parentElement.firstChild.textContent
                 let buttonName = button.textContent
                 if(buttonName.includes(" ")){
                     const nameArray = buttonName.split(" ")

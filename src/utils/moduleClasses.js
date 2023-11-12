@@ -180,7 +180,7 @@ let moduleDict = {
 
   fakeNpcRandomFirstIndex : class RandomFirstIndex {
     constructor(){
-      this.randomFirstIndex = { "forActions": []}
+      this.forActions = []
     }
   },
 

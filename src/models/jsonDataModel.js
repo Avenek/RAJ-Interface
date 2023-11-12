@@ -56,6 +56,12 @@ class JsonDataModel {
         this.extraOptionPathParams.path = this.moduleConfig.modules.find(object => object.name === module).path || "object"
         this.extraOptionPathParams.key = key
         this.extraOptionPathParams.hasList = this.moduleConfig.modules.find(object => object.name === module).hasList
+        if(module.endsWith("Behavior")){
+          module = "behavior"
+        }
+        else if(module.endsWith("RandomFirstIndex")){
+          module = "randomFirstIndex"
+        }
         try{
           if(this.extraOptionPathParams.hasList){
             this.extraOptionPathParams.workingList = this.modulePathParams.workingObject[module].list
@@ -63,7 +69,8 @@ class JsonDataModel {
           }
           else{
             if(this.extraOptionPathParams.path === "object"){
-              this.extraOptionPathParams.workingObject = this.modulePathParams.workingObject[module]
+              const path = this.getPathToKey(key)
+              this.extraOptionPathParams.workingObject = this.getValueFromWorkingObject("module", path+`.${module}`)
             }
             else{
               this.extraOptionPathParams.workingObject = this.getValueFromWorkingObject("module", key)
@@ -101,17 +108,21 @@ class JsonDataModel {
         }
       }
       else{
+        let keyName = params.module
+        if(keyName.endsWith("Behavior")){
+          keyName = "behavior"
+        }
+        else if(keyName.endsWith("RandomFirstIndex")){
+          keyName = "randomFirstIndex"
+        }
         if(params.hasList){
           if(params.workingList === null){
-            let keyName = params.module
-            if(keyName.endsWith("Behavior")){
-              keyName = "behavior"
+            if(this.modulePathParams.workingObject[keyName] === null){
+              this.modulePathParams.workingObject[keyName]={}
             }
-            else if(keyName.endsWith("RandomFirstIndex")){
-              keyName = "randomFirstIndex"
+            if(this.modulePathParams.workingObject[keyName].list === null){
+              this.modulePathParams.workingObject[keyName].list=[]
             }
-            this.modulePathParams.workingObject[keyName]={}
-            this.modulePathParams.workingObject[keyName].list=[]
             params.workingList = this.modulePathParams.workingObject[keyName].list
           }
           params.workingObject = new moduleDict[params.module](name)
@@ -121,9 +132,7 @@ class JsonDataModel {
           params.workingList = null
           if(this.extraOptionPathParams.path === "object"){
             params.workingObject = new moduleDict[params.module]()
-            let path = params.key
-            const dotIndex = path.lastIndexOf('.');
-            path = dotIndex !== -1 ? path.substring(0, dotIndex) : path;
+            let path = this.getPathToKey(params.key) + "." + keyName
             this.setObjectKeyByPath("module", path, params.workingObject)
           }
           else{
@@ -186,6 +195,12 @@ class JsonDataModel {
     getValueFromWorkingObject = (container, key) => {
       const params = this.getParams(container)
       return this.getValueFromObject(params.workingObject, key);
+    }
+
+    getPathToKey = (key) => {
+      const dotIndex = key.lastIndexOf('.');
+      const path = dotIndex !== -1 ? key.substring(0, dotIndex) : key;
+      return path
     }
 
     setObjectKeyByPath = (container, path, value) => {

@@ -108,11 +108,17 @@ class ObjectFormModel{
                 const valueObject = this.createObjectBaseOnConfig(item.properties)
                 this.jsonData.setObjectKeyByPath(this.container, item.name, valueObject)
                 listToSet.push({"name": item.name, "id": item.idInput, "value": valueObject})
+                item.value = valueObject
             }
-            else if(item.defaultInput !== item.defaultSraj){
-                this.jsonData.setObjectKeyByPath(this.container, item.name, item.defaultInput)
-                listToSet.push({"name": item.name,  "id": item.idInput, "value": item.defaultInput})
+            else {
+                if(item.defaultInput !== item.defaultSraj){
+                    this.jsonData.setObjectKeyByPath(this.container, item.name, item.defaultInput)
+                    listToSet.push({"name": item.name,  "id": item.idInput, "value": item.defaultInput})
+                }
+                item.value = item.defaultInput
             }
+           
+            
             
         }
         else if(allConditionsAreMet){
@@ -121,8 +127,7 @@ class ObjectFormModel{
         } 
         else if(!allConditionsAreMet){
             this.jsonData.removeObjectKeyByPath(this.container, item.name)
-            const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, item.idInput, "idInput")
-            targetProperty.value = ""
+            item.value = ""
         }
       })
       listToSet.forEach(key => {

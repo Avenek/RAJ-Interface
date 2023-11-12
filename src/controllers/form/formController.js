@@ -24,7 +24,6 @@ class FormController {
       }
       else{
         this.model.jsonData.setParams("extraOption", extraOptionName, 0, path)
-        this.view.extraOptionObjectIdBox = new ObjectIdBoxView(this.view.extraOptionIdBox)
         this.model.extraOptionObjectFormModel = new ObjectFormModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel)
         this.model.extraOptionObjectIdBoxModel = new ObjectIdBoxModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel, this.model.extraOptionObjectFormModel)
         this.model.extraOptionObjectFormModel.objectIdBox = this.model.extraOptionObjectIdBoxModel
