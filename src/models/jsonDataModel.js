@@ -117,10 +117,10 @@ class JsonDataModel {
         }
         if(params.hasList){
           if(params.workingList === null){
-            if(this.modulePathParams.workingObject[keyName] === null){
+            if(this.modulePathParams.workingObject[keyName] === undefined){
               this.modulePathParams.workingObject[keyName]={}
             }
-            if(this.modulePathParams.workingObject[keyName].list === null){
+            if(this.modulePathParams.workingObject[keyName].list === undefined){
               this.modulePathParams.workingObject[keyName].list=[]
             }
             params.workingList = this.modulePathParams.workingObject[keyName].list

@@ -31,7 +31,7 @@
                     "tool-tip": "Rodzaj obiektu. SPRITE - głównie chmurki zapisane w formacie .png, GIF - obiekty zapisane w formacie .gif, FAKE_NPC - obiekt może chodzić pod ukos i nie zwraca uwagi na kolizje. Grafika postaci w formacie .gif.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"SPRITE"}, {"name":"GIF"}, {"name":"FAKE_NPC"}],
+                    "options": [{"name":"SPRITE"}, {"name":"GIF"}, {"name":"FAKE_NPC"}, {"name":"IDLE_FAKE_NPC_FRAME"}],
                     "defaultInput": "SPRITE",
                     "defaultSraj": "SPRITE",
                     "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
@@ -63,6 +63,18 @@
                     "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
                     "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                },
+                {
+                    "name": "dir",
+                    "idInput": "dir",
+                    "tool-tip": "Klatka outfitu, którą będzie posiadał tworzony obiekt.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"N"}, {"name":"E"}, {"name":"S"}, {"name":"W"}],
+                    "defaultInput": "S",
+                    "defaultSraj": "S",
+                    "extraOptions": [{"name":"get character data"}],
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}, {"name": "kind", "value": ["IDLE_FAKE_NPC_FRAME"]}]
                 },
                 {
                     "name": "url",
