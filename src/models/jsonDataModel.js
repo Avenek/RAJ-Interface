@@ -47,8 +47,9 @@ class JsonDataModel {
     }
 
     setParams = (container, module, id, key = "") => {
-      this.modulePathParams.workingObject = null
-      this.modulePathParams.workingList = null
+      const params = this.getParams(container)
+      params.workingObject = null
+      params.workingList = null
       if(container === "module"){
         this.modulePathParams.module = module
         this.modulePathParams.objectId = id

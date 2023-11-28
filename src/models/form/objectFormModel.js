@@ -297,10 +297,58 @@ class ObjectFormModel{
         else if(value === targetProperty.defaultSraj){
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
         }
+        this.makeKeyOrder()
     }
 
     clearForm = () => {
         this.objectFormList = []
         this.objectFormChanged(this.objectFormList)
     }
+
+    makeKeyOrder = () => {
+        const params = this.jsonData.getParams("module")
+        if(params.workingObject.hasOwnProperty("behavior")){
+          this.moveToLastPlaceInJson("behavior", params.workingObject)
+          if(params.workingObject.behavior.hasOwnProperty("list")){
+            this.moveToLastPlaceInJson("behavior.list", params.workingObject)
+          }
+        }
+        if(params.workingObject.hasOwnProperty("d")){
+          this.moveToLastPlaceInJson("d", params.workingObject)
+          if(params.workingObject.d.hasOwnProperty("light")){
+            this.moveToLastPlaceInJson("d.light", params.workingObject)
+            if(params.workingObject.d.light.hasOwnProperty("color")){
+              this.moveToLastPlaceInJson("d.light.color", params.workingObject)
+            }
+          }
+          if(params.workingObject.d.hasOwnProperty("behavior")){
+            this.moveToLastPlaceInJson("d.behavior", params.workingObject)
+            if(params.workingObject.d.behavior.hasOwnProperty("list")){
+              this.moveToLastPlaceInJson("d.behavior.list", params.workingObject)
+            }
+          }
+        }
+        if(params.workingObject.hasOwnProperty("source")){
+          this.moveToLastPlaceInJson("source", params.workingObject)
+        }
+      }
+      
+    moveToLastPlaceInJson = (path, workingObject) => {
+        const keys = path.split('.');
+        let currentObj = workingObject
+      
+        for (let i = 0; i < keys.length - 1; i++) {
+          const currentKey = keys[i];
+          if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
+            console.error("Podana ścieżka jest nieprawidłowa. Nie znaleziono podanego klucza. " + path);
+            return
+          }
+          currentObj = currentObj[currentKey];
+        }
+          const lastKey = keys[keys.length - 1];
+          currentObj = currentObj[lastKey]
+          const temp = currentObj
+          this.jsonData.removeObjectKeyByPath(this.container, path)
+          this.jsonData.setObjectKeyByPath(this.container, path, temp)
+      }
 }

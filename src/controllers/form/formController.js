@@ -34,7 +34,6 @@ class FormController {
         this.jsonDataBox.model.extraOptionObjectFormModel = this.model.extraOptionObjectFormModel
         this.jsonDataBox.model.extraOptionObjectIdBoxModel = this.model.extraOptionObjectIdBoxModel
       }
-      
     }
 
   }
