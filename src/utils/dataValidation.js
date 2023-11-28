@@ -150,7 +150,6 @@ class DataValidation{
         }
         else{
             let validValue = this.jsonData.getValueFromWorkingObject(this.container, validObject.value)
-            console.log(validValue);
             if(validValue === null || validValue === NaN || validValue === undefined){
                 validValue = this.configUtils.findObjectByProperty(this.configUtils.config.properties, validObject.value, "name").defaultSraj
             }

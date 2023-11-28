@@ -6,6 +6,12 @@
       "bindId": "id"
     },
     {
+      "name": "behavior",
+      "hasList": true,
+      "bindId": "name",
+      "path": "object"
+    },
+    {
       "name": "behaviorDynamicLight",
       "hasList": true,
       "bindId": "id"
@@ -156,6 +162,12 @@
       "name": "night",
       "hasList": false,
       "bindId": "module"
+    },
+    {
+      "name": "randomFirstIndex",
+      "hasList": false,
+      "bindId": "module",
+      "path": "object"
     },
     {
       "name": "sequence",

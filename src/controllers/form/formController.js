@@ -32,8 +32,10 @@ class FormController {
         this.extraOptionObjectForm = new ObjectFormController(this.view.extraOptionObjectFormView, this.model.extraOptionObjectFormModel)
         this.jsonDataBox.model.extraOptionObjectFormModel = this.model.extraOptionObjectFormModel
         this.jsonDataBox.model.extraOptionObjectIdBoxModel = this.model.extraOptionObjectIdBoxModel
+        this.model.extraOptionObjectIdBoxModel.moduleObjectForm = this.model.moduleObjectFormModel
+        this.model.moduleObjectFormModel.extraOptionIdBox = this.model.extraOptionObjectIdBoxModel
       }
-      this.model.moduleObjectFormModel.clickExtraOption()
+      this.model.moduleObjectFormModel.changeStateExtraOption()
     }
 
   }

@@ -23,6 +23,13 @@ class ConfigUtils{
         return
       }
       let newValue = value
+      if(Array.isArray(configObject.defaultInput) && newValue.includes(";")){
+        newValue = value.split(";")
+        for(let i=0; i<newValue.length ; i++) {
+          newValue[i] = this.getValueInGoodType(key, newValue[i])
+        }
+          return newValue
+      }
       if(configObject.varType.includes("boolean")){
         if(newValue === "false")
         {
@@ -52,16 +59,6 @@ class ConfigUtils{
           newValue = value
         }
         return newValue
-      }
-
-      if(Array.isArray(configObject.defaultInput)){
-        newValue = value.split(";")
-        if(configObject.varType.includes("int")){
-          newValue.forEach(value => parseInt(value))
-        }
-        else if(configObject.varType.includes("float")){
-          newValue.forEach(value => parseFloat(value))
-        }
       }
       return newValue
     }

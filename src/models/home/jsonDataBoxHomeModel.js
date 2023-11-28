@@ -20,7 +20,7 @@ class JsonDataBoxHomeModel{
     }
 
     copyJsonData = () => {
-        const textToCopy = this.isBeautified ? JSON.stringify(jsonData, null, 2) : JSON.stringify(jsonData)
+        const textToCopy = this.isBeautified ? JSON.stringify(this.jsonData.data, null, 2) : JSON.stringify(this.jsonData.data)
         navigator.clipboard.writeText(textToCopy)
     }
 

@@ -170,7 +170,7 @@ class JsonDataModel {
       params.objectId = params.workingList.length - 1
     }
 
-    deleteObject = (container, index) => {
+    deleteObject = (container, index, defaultInput) => {
       const params = this.getParams(container)
       if(params.hasList){
         params.workingList.splice(index, 1)
@@ -188,6 +188,9 @@ class JsonDataModel {
       else{
         if(container === "module"){
           delete this.data[params.module]
+        }
+        else if(params.path === "key"){
+          this.setObjectKeyByPath("module", params.key, defaultInput)
         }
         else{
           delete this.modulePathParams.workingObject[params.module]

@@ -17,7 +17,8 @@ class ObjectIdBoxModel{
                 const name = this.pickDefaultUniqueName()
                 this.jsonData.addObject(this.container, name)
             }
-            ids = params.workingList.map(item => item.id || item.name || item.kind || item.action);
+            const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
+            ids = params.workingList.map(item => item[bindData]);
             ids.forEach(id => {
                 idList.push({"name": id, "isChecked": false})
             })
@@ -37,9 +38,10 @@ class ObjectIdBoxModel{
 
     checkObjectId = (index) => {
         this.uncheckedCurrentObject()
+        const params = this.jsonData.getParams(this.container)
         this.objectIdList[index].isChecked = true
-        this.jsonData.modulePathParams.objectId = index
-        this.jsonData.modulePathParams.workingObject = this.jsonData.modulePathParams.workingList[index]
+        params.objectId = index
+        params.workingObject = params.workingList[index]
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.objectForm.createObjectFormList(this.objectForm.config)
     }
@@ -76,25 +78,33 @@ class ObjectIdBoxModel{
         else{
             params.workingObject = null
         }
-        this.jsonData.deleteObject(this.container, index)
+        if(params.path === "key"){
+            const defaultInput = this.moduleObjectForm.configUtils.findObjectByProperty(this.moduleObjectForm.config.properties, params.key, "name").defaultInput
+            this.jsonData.deleteObject(this.container, index, defaultInput)
+        }
+        else{
+            this.jsonData.deleteObject(this.container, index, "")
+        }
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
         if(this.objectIdList.length > 0){
             this.objectForm.createObjectFormList(this.objectForm.config)
         }
         else{
-            this.objectForm.hightligthsUsedExtraOption()
             this.objectForm.clearForm()
             if(this.container === "extraOption"){
-                this.clearBox()
+                this.clearBox(false)
+                this.moduleObjectForm.changeStateExtraOption()
             }
         }
+        
     }
 
     updateNameObjectId = (container) => {
         const params = this.jsonData.getParams(container)
         const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
         let result = bindData === "module" ? params.module : this.jsonData.getValueFromWorkingObject(this.container, bindData)
+        console.log(result);
         const currentIndex = this.jsonData.getParams(this.container).objectId
         this.objectIdList[currentIndex].name = result
         this.objectIdListChanged(this.objectIdList, this.hasList)
@@ -126,6 +136,7 @@ class ObjectIdBoxModel{
                 break;
             default:
                 defaultName = this.jsonData.getValueFromWorkingObject(this.container, bindData)
+                console.log(defaultName);
                 break;
         }  
         return defaultName      
