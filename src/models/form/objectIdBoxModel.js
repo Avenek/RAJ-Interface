@@ -93,14 +93,8 @@ class ObjectIdBoxModel{
 
     updateNameObjectId = (container) => {
         const params = this.jsonData.getParams(container)
-        const keysInOrder = ['id', 'name', 'kind', 'action'];
-        let result = ""
-        for (const key of keysInOrder) {
-            if (params.workingObject[key] !== undefined) {
-              result = params.workingObject[key];
-              break;
-            }
-          }
+        const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
+        let result = bindData === "module" ? params.module : this.jsonData.getValueFromWorkingObject(this.container, bindData)
         const currentIndex = this.jsonData.getParams(this.container).objectId
         this.objectIdList[currentIndex].name = result
         this.objectIdListChanged(this.objectIdList, this.hasList)
@@ -113,31 +107,12 @@ class ObjectIdBoxModel{
 
     pickDefaultUniqueName(){
         let defaultName = ""
-        switch(this.module){
-            case "case":
-                defaultName = 'ARGUMENT'
-              break; 
-            case "behavior":
-                defaultName = 'IDLE'
-                break;
-            case "characterHide":
-                defaultName = "HERO"
-                break;
-            case "weather":
-                defaultName = "Rain"
-                break;
-                case "earthQuake":
-                case "camera":
-                case "zoom":
-                case "dialogue":
-                case "yellowMessage":
-                case "mapFilter":
-                    defaultName = container.name;
-                    break;
-            default:
-                let number
+        const params = this.jsonData.getParams(this.container)
+        const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
+        switch(bindData){
+            case "id":
                 if(this.objectIdList) {
-                    number = this.objectIdList.length
+                    let number = this.objectIdList.length
                     defaultName = `obiekt-${number}`
                     while(this.objectIdList.find(object => object.name === defaultName) !== undefined){
                         number+=1
@@ -145,14 +120,19 @@ class ObjectIdBoxModel{
                     }
                 }
                 else defaultName = `obiekt-0`
-                
-              break; 
+                break;
+            case "module":
+                defaultName = params.module
+                break;
+            default:
+                defaultName = this.jsonData.getValueFromWorkingObject(this.container, bindData)
+                break;
         }  
         return defaultName      
     }
 
-    clearBox = () => {
+    clearBox = (addPlusButton) => {
         this.objectIdList = []
-        this.objectIdListChanged(this.objectIdList, this.hasList, false)
+        this.objectIdListChanged(this.objectIdList, this.hasList, addPlusButton)
     }
 }

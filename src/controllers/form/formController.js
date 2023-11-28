@@ -5,21 +5,21 @@ class FormController {
       this.view.render()
       this.headerPanel = new HeaderPanelController(this.view.headerPanelView, this.model.headerPanelModel)
       this.moduleObjectIdBox = new ObjectIdBoxController(this.view.moduleObjectIdBoxView, this.model.moduleObjectIdBoxModel)
-      this.jsonDataBox = new JsonDataBoxFormController(this.view.jsonDataBoxView, this.model.jsonDataBoxModel)
       this.moduleObjectForm = new ObjectFormController(this.view.moduleObjectFormView, this.model.moduleObjectFormModel)
+      this.jsonDataBox = new JsonDataBoxFormController(this.view.jsonDataBoxView, this.model.jsonDataBoxModel, this.moduleObjectIdBox.model, this.moduleObjectForm.model)
       this.view.bindClickExtraOption(this.handleClickExtraOption)
     }
 
     handleClickExtraOption = (extraOption, id) => {
       const path = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput").name
       let extraOptionName = extraOption
-      if(extraOptionName === "behavior" || extraOptionName === "randomFirstIndex"){
+      if(extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master"){
         extraOptionName = this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
       }
       this.model.moduleObjectFormModel.clickExtraOption()
       if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null && this.model.jsonData.extraOptionPathParams.module === extraOptionName){
         this.model.extraOptionObjectFormModel.clearForm()
-        this.model.extraOptionObjectIdBoxModel.clearBox()
+        this.model.extraOptionObjectIdBoxModel.clearBox(false)
         this.model.jsonData.extraOptionPathParams.workingObject = null
       }
       else{
@@ -31,6 +31,8 @@ class FormController {
         this.view.extraOptionObjectIdBoxView = new ObjectIdBoxView(this.view.extraOptionIdBox)
         this.extraOptionObjectIdBox = new ObjectIdBoxController(this.view.extraOptionObjectIdBoxView, this.model.extraOptionObjectIdBoxModel)
         this.extraOptionObjectForm = new ObjectFormController(this.view.extraOptionObjectFormView, this.model.extraOptionObjectFormModel)
+        this.jsonDataBox.model.extraOptionObjectFormModel = this.model.extraOptionObjectFormModel
+        this.jsonDataBox.model.extraOptionObjectIdBoxModel = this.model.extraOptionObjectIdBoxModel
       }
       
     }

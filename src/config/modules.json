@@ -2,160 +2,197 @@
   "modules": [
     {
       "name": "areaTrigger",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "behaviorDynamicLight",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "behaviorDynamicLightBehavior",
       "hasList": true,
+      "bindId": "id",
       "path": "object"
     },
     {
       "name": "callInstantBehaviorFakeNpc",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "camera",
-      "hasList": false
+      "hasList": false,
+      "bindId": "module"
     },
     {
       "name": "case",
       "hasList": true,
+      "bindId": "kind",
       "path": "object"
     },
     {
       "name": "characterEffect",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "characterHide",
-      "hasList": true
+      "hasList": true,
+      "bindId": "kind"
     },
     {
       "name": "color",
       "hasList": false,
+      "bindId": "module",
       "path": "object"
     },
     {
       "name": "dialogue",
-      "hasList": true
+      "hasList": true,
+      "bindId": "module"
     },
     {
       "name": "dynamicLight",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "earthQuake",
-      "hasList": false
+      "hasList": false,
+      "bindId": "module"
     },
     {
       "name": "emoActions",
-      "hasList": true
+      "hasList": true,
+      "bindId": "name"
     },
     {
       "name": "emoDefinitions",
-      "hasList": true
+      "hasList": true,
+      "bindId": "name"
     },
     {
       "name": "extraLight",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "extraLightMaster",
       "hasList": false,
+      "bindId": "module",
       "path": "object"
     },
     {
       "name": "fakeNpc",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "fakeNpcBehavior",
       "hasList": true,
+      "bindId": "name",
       "path": "object"
     },
     {
       "name": "fakeNpcRandomFirstIndex",
       "hasList": false,
+      "bindId": "module",
       "path": "object"
     },
     {
       "name": "floatForeground",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "floatObject",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "floatObjectBehavior",
       "hasList": true,
+      "bindId": "name",
       "path": "object"
+
     },
     {
       "name": "floatObjectRandomFirstIndex",
       "hasList": true,
+      "bindId": "module",
       "path": "object"
     },
     {
       "name": "getCharacterData",
       "hasList": false,
+      "bindId": "module",
       "path": "key"
     },
     {
       "name": "getRandom",
       "hasList": false,
+      "bindId": "module",
       "path": "key"
     },
     {
       "name": "light",
       "hasList": false,
+      "bindId": "module",
       "path": "object"
     },
     {
       "name": "mapFilter",
-      "hasList": false
+      "hasList": false,
+      "bindId": "module"
     },
     {
       "name": "mapMusic",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "night",
-      "hasList": false
+      "hasList": false,
+      "bindId": "module"
     },
     {
       "name": "sequence",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "sequenceBehavior",
       "hasList": true,
+      "bindId": "name",
       "path": "object"
     },
     {
       "name": "sound",
-      "hasList": true
+      "hasList": true,
+      "bindId": "id"
     },
     {
       "name": "source",
       "hasList": false,
+      "bindId": "module",
       "path": "object"
     },
     {
       "name": "weather",
-      "hasList": true
+      "hasList": true,
+      "bindId": "name"
     },
     {
       "name": "yellowMessage",
-      "hasList": true
+      "hasList": true,
+      "bindId": "action"
     },
     {
       "name": "zoom",
-      "hasList": false
+      "hasList": false,
+      "bindId": "module"
     }
   ]
 }

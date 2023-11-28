@@ -2,6 +2,10 @@ class JsonDataBoxFormModel{
     constructor(jsonData){
         this.jsonData = jsonData
         this.isBeautified = true;
+        this.objectIdBoxModel = null
+        this.objectFormModel = null
+        this.extraOptionIdBoxModel = null
+        this.extraOptionFormModel = null
     }
 
     bindJsonDataChanged = (callback) => {
@@ -25,9 +29,16 @@ class JsonDataBoxFormModel{
 
     clearJsonData = () => {
         if (window.confirm("Czy na pewno chcesz wyczyścić pole Json?\nPS. Ctrl+z nie przywróci go już z powrotem.")) {
-            this.jsonData.data = {}
+            this.jsonData.clearData()
             localStorage.setItem('lastJson', this.jsonData);
             this.jsonDataChanged()
+            this.objectIdBoxModel.clearBox(true)
+            this.objectFormModel.clearForm()
+            if(this.extraOptionIdBoxModel && this.extraOptionFormModel){
+                this.extraOptionIdBoxModel.clearBox(false)
+                this.extraOptionFormModel.clearForm()
+            }
+
         }
     }
 }

@@ -192,6 +192,7 @@
                     "name": "rotationOffset",
                     "tool-tip": "Środek ciężkości obracanego obiektu. Domyślnie jest jest to środek obiektu (szerokość/2, wysokość/2)",
                     "inputType": "subkey",
+                    "varType": [],
                     "isCollapsed": "collapsed",
                     "properties": [
                         {

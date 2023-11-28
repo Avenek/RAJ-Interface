@@ -32,7 +32,23 @@ class JsonDataModel {
         })
     }
 
+    clearData = () => {
+      this.data = {}
+      this.modulePathParams.workingObject = null
+      this.modulePathParams.workingList = null
+      this.extraOptionPathParams = {
+        "module": null,
+        "objectId": null,
+        "hasList": true,
+        "workingList": null,
+        "workingObject": null,
+        "path": null
+      }
+    }
+
     setParams = (container, module, id, key = "") => {
+      this.modulePathParams.workingObject = null
+      this.modulePathParams.workingList = null
       if(container === "module"){
         this.modulePathParams.module = module
         this.modulePathParams.objectId = id
