@@ -14,7 +14,13 @@ class FormController {
       const path = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput").name
       let extraOptionName = extraOption
       if(extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master"){
-        extraOptionName = this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
+        if(this.model.jsonData.modulePathParams.module === "callInstantBehaviorFakeNpc"){
+          extraOptionName = "fakeNpc" + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
+        }
+        else{
+          extraOptionName = this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
+        }
+        
       }
       if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null && this.model.jsonData.extraOptionPathParams.module === extraOptionName){
         this.model.extraOptionObjectFormModel.clearForm()

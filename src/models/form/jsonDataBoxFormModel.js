@@ -4,8 +4,8 @@ class JsonDataBoxFormModel{
         this.isBeautified = true;
         this.objectIdBoxModel = null
         this.objectFormModel = null
-        this.extraOptionIdBoxModel = null
-        this.extraOptionFormModel = null
+        this.extraOptionObjectIdBoxModel = null
+        this.extraOptionObjectFormModel = null
     }
 
     bindJsonDataChanged = (callback) => {
@@ -34,9 +34,9 @@ class JsonDataBoxFormModel{
             this.jsonDataChanged()
             this.objectIdBoxModel.clearBox(true)
             this.objectFormModel.clearForm()
-            if(this.extraOptionIdBoxModel && this.extraOptionFormModel){
-                this.extraOptionIdBoxModel.clearBox(false)
-                this.extraOptionFormModel.clearForm()
+            if(this.extraOptionObjectFormModel && this.extraOptionObjectIdBoxModel){
+                this.extraOptionObjectIdBoxModel.clearBox(false)
+                this.extraOptionObjectFormModel.clearForm()
             }
 
         }

@@ -400,7 +400,7 @@ class ObjectFormModel{
           const lastKey = keys[keys.length - 1];
           currentObj = currentObj[lastKey]
           const temp = currentObj
-          this.jsonData.removeObjectKeyByPath(this.container, path)
-          this.jsonData.setObjectKeyByPath(this.container, path, temp)
+          this.jsonData.removeObjectKeyByPath("module", path)
+          this.jsonData.setObjectKeyByPath("module", path, temp)
       }
 }

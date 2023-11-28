@@ -136,7 +136,6 @@ class ObjectIdBoxModel{
                 break;
             default:
                 defaultName = this.jsonData.getValueFromWorkingObject(this.container, bindData)
-                console.log(defaultName);
                 break;
         }  
         return defaultName      

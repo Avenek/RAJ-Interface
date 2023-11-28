@@ -7,7 +7,7 @@
             "inputType": "key",
             "properties":[
                 {
-                    "name": "getCharacterData.kind",
+                    "name": "kind",
                     "idInput": "kind",
                     "tool-tip": "Obiekt, od którego chcemy pobrać dane. THIS_NPC_INSTANCE wymaga wpisania Sraja we własności NPC.",
                     "inputType": "options",
@@ -16,7 +16,7 @@
                     "defaultInput": "HERO"
                 },
                 {
-                    "name": "getCharacterData.modify",
+                    "name": "modify",
                     "idInput": "modify",
                     "tool-tip": "Możemy zmodyfikować pobrane dana o podaną wartość.",
                     "step":1,
@@ -27,17 +27,17 @@
                     "defaultInput":0,
                     "defaultSraj": 0,
                     "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "getCharacterData.toGet", "value": ["x", "y"]}, {"name": "getCharacterData.rotation.x", "value": [0]}, {"name": "getCharacterData.rotation.y", "value": [0]}]
+                    "require": [{"name": "toGet", "value": ["x", "y"]}, {"name": "rotation.x", "value": [0]}, {"name": "rotation.y", "value": [0]}]
                 },
                 {
-                    "name": "getCharacterData.rotation",
+                    "name": "rotation",
                     "idInput": "rotation",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": [{"name": "getCharacterData.toGet", "value": ["x", "y"]}, {"name": "getCharacterData.modify", "value": [0]}],
+                    "require": [{"name": "toGet", "value": ["x", "y"]}, {"name": "modify", "value": [0]}],
                     "properties": [
                         {
-                            "name": "getCharacterData.rotation.x",
+                            "name": "rotation.x",
                             "idInput": "rotation.x",
                             "tool-tip": "Zmieniamy pozycję x względem otrzymanych kordów. Dzięki temu zawsze obiekt będzie po danej stronie.",
                             "step":1,
@@ -50,7 +50,7 @@
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
-                            "name": "getCharacterData.rotation.y",
+                            "name": "rotation.y",
                             "idInput": "rotation.y",
                             "tool-tip": "Zmieniamy pozycję y względem otrzymanych kordów. Dzięki temu zawsze obiekt będzie po danej stronie.",
                             "step":1,

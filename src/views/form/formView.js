@@ -35,7 +35,7 @@ class FormView extends View{
     }
 
     bindClickExtraOption = (handler) => {
-        this.moduleObjectFormView.moduleObjectForm.addEventListener("click", event => {
+        this.moduleObjectFormView.moduleObjectForm.addEventListener("mousedown", event => {
             if (event.target.classList.contains('extra-option')) {
                 this.extraOptionConfiguration.innerHTML = ''
                 this.extraOptionIdBox = this.createElement("div", "extra-option-id-box", "object-id-box")

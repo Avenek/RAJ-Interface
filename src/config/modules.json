@@ -149,6 +149,12 @@
       "path": "object"
     },
     {
+      "name": "master",
+      "hasList": false,
+      "bindId": "module",
+      "path": "object"
+    },
+    {
       "name": "mapFilter",
       "hasList": false,
       "bindId": "module"

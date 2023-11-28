@@ -17,16 +17,16 @@ class ConfigUtils{
         }
       }
 
-    getValueInGoodType = (key, value) => {
+    getValueInGoodType = (key, value, isArray = true) => {
       const configObject = this.findObjectByProperty(this.config.properties, key, "name")
       if(configObject.inputType === "empty"){
         return
       }
       let newValue = value
-      if(Array.isArray(configObject.defaultInput) && newValue.includes(";")){
+      if(Array.isArray(configObject.defaultInput) && isArray){
         newValue = value.split(";")
         for(let i=0; i<newValue.length ; i++) {
-          newValue[i] = this.getValueInGoodType(key, newValue[i])
+          newValue[i] = this.getValueInGoodType(key, newValue[i], false)
         }
           return newValue
       }
