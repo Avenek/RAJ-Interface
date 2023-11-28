@@ -66,6 +66,23 @@ class ConfigUtils{
       return newValue
     }
 
+    formatToCamelCase = (inputString) => {
+      if (inputString.includes(' ')) {
+          const formattedArray = inputString.split(' ')
+          for(let i = 1; i< formattedArray.length ; i++){
+            formattedArray[i] = formattedArray[i].charAt(0).toUpperCase() + formattedArray[i].slice(1);
+          }
+          const formattedString = formattedArray.join('');
+  
+          return formattedString;
+      } 
+      else {
+          return inputString;
+      }
+  }
+
+  
+
     getLastPartOfTheName = (fullName) => {
       const dotIndex = fullName.lastIndexOf('.');
       const paramName = dotIndex !== -1 ? fullName.substring(dotIndex + 1) : fullName;

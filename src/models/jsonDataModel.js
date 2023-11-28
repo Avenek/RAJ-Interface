@@ -153,8 +153,9 @@ class JsonDataModel {
             this.setObjectKeyByPath("module", path, params.workingObject)
           }
           else{
+            let path = params.key + "." + keyName
             params.workingObject = new moduleDict[params.module](params.key)
-            this.setObjectKeyByPath("module", params.key, params.workingObject)
+            this.setObjectKeyByPath("module", path, params.workingObject)
           }
         
         }

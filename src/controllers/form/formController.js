@@ -16,7 +16,6 @@ class FormController {
       if(extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master"){
         extraOptionName = this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
       }
-      this.model.moduleObjectFormModel.clickExtraOption()
       if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null && this.model.jsonData.extraOptionPathParams.module === extraOptionName){
         this.model.extraOptionObjectFormModel.clearForm()
         this.model.extraOptionObjectIdBoxModel.clearBox(false)
@@ -34,6 +33,7 @@ class FormController {
         this.jsonDataBox.model.extraOptionObjectFormModel = this.model.extraOptionObjectFormModel
         this.jsonDataBox.model.extraOptionObjectIdBoxModel = this.model.extraOptionObjectIdBoxModel
       }
+      this.model.moduleObjectFormModel.clickExtraOption()
     }
 
   }

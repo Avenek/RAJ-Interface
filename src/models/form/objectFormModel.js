@@ -166,7 +166,9 @@ class ObjectFormModel{
         const items = this.findItemsByProperty(this.objectFormList, "extraOptions")
         items.forEach(item => {
             item.extraOptions.forEach(extraOption => {
-                let path = item.inputType === "empty" ? item.name + "." + extraOption.name : extraOption.name
+                const extraOptionName = this.configUtils.formatToCamelCase(extraOption.name)
+                const modulePath = this.jsonData.moduleConfig.modules.find(module => module.name === extraOptionName).path
+                const path = modulePath === "object" ? extraOptionName : item.name + "." + extraOptionName
                 const extraOptionValue = this.jsonData.getValueFromWorkingObject("module", path)
                 if(Array.isArray(extraOptionValue)){
                     extraOption.isUsed = extraOptionValue.length > 0
