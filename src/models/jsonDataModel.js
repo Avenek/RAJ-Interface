@@ -24,7 +24,7 @@ class JsonDataModel {
     }
 
     fetchConfig = () => {
-        fetch('config/modules.json')
+        fetch('/src/config/modules.json')
         .then(response => response.json())
         .then(config => {
           this.moduleConfig = config
