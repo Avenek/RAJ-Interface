@@ -6,14 +6,6 @@ class DragAndDrop{
         this.shadow = null
     }
 
-    handleDragOver = (event) => {
-        event.preventDefault();
-        if (this.draggedModule && this.draggedModule.classList.contains("dragging")) {
-            this.shadow.style.left = event.pageX + "px";
-            this.shadow.style.top = event.pageY + "px";
-        }
-    }
-
     createShadowButton = () => {
         this.shadow = this.draggedModule.cloneNode(true);
         this.shadow.classList.remove("dragging");

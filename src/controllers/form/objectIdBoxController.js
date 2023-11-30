@@ -9,6 +9,7 @@ class ObjectIdBoxController {
         this.view.bindAddObjectId(this.handleAddObjectId)
         this.view.bindCloneObjectId(this.handleCloneObjectId)
         this.view.bindUpdateNameObjectId(this.handleUpdateNameObjectId)
+        this.view.bindDragAndDrop(this.handleDragAndDrop)
     }
 
     objectIdListChanged = (objectIdList, hasList, addPlusButton = true) => {
@@ -33,5 +34,9 @@ class ObjectIdBoxController {
 
     handleUpdateNameObjectId = (index, newName) => {
         this.model.updateNameObjectId(index, newName)
+    }
+
+    handleDragAndDrop = (indexData) => {
+        this.model.dropElement(indexData)
     }
   }

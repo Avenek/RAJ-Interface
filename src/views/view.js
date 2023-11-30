@@ -3,10 +3,10 @@ class View{
         this.root = document.querySelector(".root")
     }
 
-    createElement = (tag, ...className) => {
+    createElement = (tag, ...classList) => {
         const element = document.createElement(tag)
-        if(className.length>0){
-          element.classList.add(...className)
+        if(classList.length>0){
+          element.classList.add(...classList)
         }
 
         return element
