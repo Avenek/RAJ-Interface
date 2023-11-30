@@ -11,24 +11,16 @@ class FormController {
     }
 
     handleClickExtraOption = (extraOption, id) => {
-      const path = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput").name
+      const key = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput").name
       let extraOptionName = extraOption
-      if(extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master"){
-        if(this.model.jsonData.modulePathParams.module === "callInstantBehaviorFakeNpc"){
-          extraOptionName = "fakeNpc" + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
-        }
-        else{
-          extraOptionName = this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1)
-        }
-        
-      }
+      const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
       if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null && this.model.jsonData.extraOptionPathParams.module === extraOptionName){
         this.model.extraOptionObjectFormModel.clearForm()
         this.model.extraOptionObjectIdBoxModel.clearBox(false)
         this.model.jsonData.extraOptionPathParams.workingObject = null
       }
       else{
-        this.model.jsonData.setParams("extraOption", extraOptionName, 0, path)
+        this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, key)
         this.model.extraOptionObjectFormModel = new ObjectFormModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel)
         this.model.extraOptionObjectIdBoxModel = new ObjectIdBoxModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel, this.model.extraOptionObjectFormModel)
         this.model.extraOptionObjectFormModel.objectIdBox = this.model.extraOptionObjectIdBoxModel
@@ -43,5 +35,4 @@ class FormController {
       }
       this.model.moduleObjectFormModel.changeStateExtraOption()
     }
-
   }

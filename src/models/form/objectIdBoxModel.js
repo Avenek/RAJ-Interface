@@ -47,14 +47,15 @@ class ObjectIdBoxModel{
     }
 
     addObjectId = () => {
-        const name = this.pickDefaultUniqueName()
+        let name = this.pickDefaultUniqueName()
         if(this.objectIdList.length > 0){
             this.uncheckedCurrentObject()
         }
-        this.objectIdList.push({"name": name, "isChecked": true})
-        this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonData.addObject(this.container, name)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
+        name = this.pickDefaultUniqueName()
+        this.objectIdList.push({"name": name, "isChecked": true})
+        this.objectIdListChanged(this.objectIdList, this.hasList)
         this.objectForm.createObjectFormList(this.objectForm.config)
     }
 
@@ -75,7 +76,7 @@ class ObjectIdBoxModel{
             params.objectId = 0
             params.workingObject = params.workingList[0]
         }
-        else{
+        else if(this.objectIdList.length === 0){
             params.workingObject = null
         }
         if(params.path === "key"){
@@ -104,7 +105,6 @@ class ObjectIdBoxModel{
         const params = this.jsonData.getParams(container)
         const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
         let result = bindData === "module" ? params.module : this.jsonData.getValueFromWorkingObject(this.container, bindData)
-        console.log(result);
         const currentIndex = this.jsonData.getParams(this.container).objectId
         this.objectIdList[currentIndex].name = result
         this.objectIdListChanged(this.objectIdList, this.hasList)

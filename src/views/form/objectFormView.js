@@ -190,7 +190,7 @@ class ObjectFormView extends View{
     }
 
     bindEnterValueInInput = (handler) => {
-      this.moduleObjectForm.addEventListener("keyup", event => { 
+      this.moduleObjectForm.addEventListener("input", event => { 
         if (event.target.tagName === 'INPUT') {
           handler(event.target.id, event.target.value)
         }

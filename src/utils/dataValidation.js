@@ -15,7 +15,7 @@ class DataValidation{
                 validSummary.errorMessage = "Wartość tego pola nie może być pusta!"
                 return validSummary
             }
-            else if(!this.property.canBeEmpty){
+            else if(!this.property.canBeEmpty && this.property.validation){
                 let valuesArray = this.convertValueToArray(value)
                 valuesArray.forEach(value => {
                     let valueType = this.checkValueType(value)

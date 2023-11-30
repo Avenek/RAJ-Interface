@@ -9,7 +9,7 @@
       "name": "behavior",
       "hasList": true,
       "bindId": "name",
-      "path": "object"
+      "path": "behavior.list"
     },
     {
       "name": "behaviorDynamicLight",
@@ -20,12 +20,18 @@
       "name": "behaviorDynamicLightBehavior",
       "hasList": true,
       "bindId": "id",
-      "path": "object"
+      "path": "behavior.list"
     },
     {
       "name": "callInstantBehaviorFakeNpc",
       "hasList": true,
       "bindId": "id"
+    },
+    {
+      "name": "callInstantBehaviorFakeNpcBehavior",
+      "hasList": true,
+      "bindId": "name",
+      "path": "list"
     },
     {
       "name": "camera",
@@ -36,7 +42,7 @@
       "name": "case",
       "hasList": true,
       "bindId": "kind",
-      "path": "object"
+      "path": "case.list"
     },
     {
       "name": "characterEffect",
@@ -52,12 +58,12 @@
       "name": "color",
       "hasList": false,
       "bindId": "module",
-      "path": "object"
+      "path": "color"
     },
     {
       "name": "dialogue",
       "hasList": true,
-      "bindId": "module"
+      "bindId": "action"
     },
     {
       "name": "dynamicLight",
@@ -88,7 +94,7 @@
       "name": "extraLightMaster",
       "hasList": false,
       "bindId": "module",
-      "path": "object"
+      "path": "master"
     },
     {
       "name": "fakeNpc",
@@ -99,13 +105,13 @@
       "name": "fakeNpcBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "object"
+      "path": "behavior.list"
     },
     {
       "name": "fakeNpcRandomFirstIndex",
       "hasList": false,
       "bindId": "module",
-      "path": "object"
+      "path": "behavior.randomFirstIndex"
     },
     {
       "name": "floatForeground",
@@ -121,14 +127,14 @@
       "name": "floatObjectBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "object"
+      "path": "behavior.list"
 
     },
     {
       "name": "floatObjectRandomFirstIndex",
       "hasList": true,
       "bindId": "module",
-      "path": "object"
+      "path": "behavior.randomFirstIndex"
     },
     {
       "name": "getCharacterData",
@@ -146,13 +152,13 @@
       "name": "light",
       "hasList": false,
       "bindId": "module",
-      "path": "object"
+      "path": "d.light"
     },
     {
       "name": "master",
       "hasList": false,
       "bindId": "module",
-      "path": "object"
+      "path": "master"
     },
     {
       "name": "mapFilter",
@@ -173,7 +179,7 @@
       "name": "randomFirstIndex",
       "hasList": false,
       "bindId": "module",
-      "path": "object"
+      "path": "behavior.randomFirstIndex"
     },
     {
       "name": "sequence",
@@ -184,7 +190,7 @@
       "name": "sequenceBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "object"
+      "path": "behavior"
     },
     {
       "name": "sound",
@@ -195,7 +201,7 @@
       "name": "source",
       "hasList": false,
       "bindId": "module",
-      "path": "object"
+      "path": "source"
     },
     {
       "name": "weather",

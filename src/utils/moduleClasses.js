@@ -34,7 +34,15 @@ let moduleDict = {
     constructor(id) {
     this.id = id
     this.repeat = 1
-    this.list = [new moduleDict["fakeNpcBehavior"]()]
+    this.list = [new moduleDict["callInstantBehaviorFakeNpcBehavior"]()]
+    }
+  },
+
+  callInstantBehaviorFakeNpcBehavior: class CallInstantBehaviorFakeNpcBehavior{
+    constructor(){
+      this.name = "WALK"
+      this.x = 0
+      this.y = 0
     }
   },
 
@@ -223,12 +231,10 @@ let moduleDict = {
   getCharacterData : class GetCharacterData {
     constructor(path)
     {
-      this.getCharacterData = {
-       "kind" : "HERO",
-        "toGet" : path,
-        "modify" : 0,
-        "rotation" : {"x":0, "y":0}
-      }
+      this.kind = "HERO",
+      this.toGet = path,
+      this.modify = 0,
+      this.rotation = {"x":0, "y":0}
     }
   },
 

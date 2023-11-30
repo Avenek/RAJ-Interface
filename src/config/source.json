@@ -15,8 +15,7 @@
                     "step":1,
                     "inputType": "number",
                     "varType": ["int"],
-                    "defaultInput": "",
-                    "defaultSraj": "",
+                    "defaultInput": 0,
                     "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
@@ -28,8 +27,7 @@
                     "step":1,
                     "inputType": "number",
                     "varType": ["int"],
-                    "defaultInput": "",
-                    "defaultSraj": "",
+                    "defaultInput": 0,
                     "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
@@ -41,8 +39,7 @@
                     "step":1,
                     "inputType": "number",
                     "varType": ["int"],
-                    "defaultInput": "",
-                    "defaultSraj": "",
+                    "defaultInput": 5,
                     "validation":[{"forType": "int", "name": "minMax"}]
                 }
             ]

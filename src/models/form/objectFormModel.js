@@ -14,7 +14,7 @@ class ObjectFormModel{
 
     fetchConfigAndCreateObjectFormList = () => {
         const params = this.jsonData.getParams(this.container)
-        fetch(`config/${params.module}.json`)
+        fetch(`config/${params.fileName}.json`)
         .then(response => response.json())
         .then(config => {
             this.config = config
@@ -36,6 +36,7 @@ class ObjectFormModel{
         this.hideAndRevealRequiredItems()
         this.hightligthsUsedExtraOption()
         this.objectFormChanged(this.objectFormList)
+        localStorage.setItem('lastJson', JSON.stringify(this.jsonData.data));
     }
 
     createObjectProperty = (property) => {
@@ -46,9 +47,7 @@ class ObjectFormModel{
             prop.hide = false
             this.fillPropertyValue(prop)
             this.addExpandedKey(prop)
-            if(prop.validation){
-                this.propertyValidation(prop)
-            }
+            this.propertyValidation(prop)
         } 
     }
 
@@ -60,21 +59,33 @@ class ObjectFormModel{
     }
 
     propertyValidation = (property) => {
-        const dataValidation = new DataValidation(property, this.jsonData, this.container, this.configUtils)
-        const validateSummary = dataValidation.validateData()
-        property.isValid = validateSummary.isValid
-        property.errorMessage = validateSummary.errorMessage
-        property.validation.forEach(validate => {
-            if(validate.value && typeof validate.value === "string"){
-                const property = this.configUtils.findObjectByProperty(this.objectFormList, validate.value, "name")
-                if(property){
-                    const dataValidation = new DataValidation(property, this.jsonData, this.container, this.configUtils)
-                    const validateSummary = dataValidation.validateData()
-                    property.isValid = validateSummary.isValid
-                    property.errorMessage = validateSummary.errorMessage
-                }
+        if(property.properties){
+            for(let prop of property.properties){
+                const dataValidation = new DataValidation(prop, this.jsonData, this.container, this.configUtils)
+                const validateSummary = dataValidation.validateData()
+                prop.isValid = validateSummary.isValid
+                prop.errorMessage = validateSummary.errorMessage
             }
-        })
+        }
+        else{
+            const dataValidation = new DataValidation(property, this.jsonData, this.container, this.configUtils)
+            const validateSummary = dataValidation.validateData()
+            property.isValid = validateSummary.isValid
+            property.errorMessage = validateSummary.errorMessage
+        }
+        if(property.validation){
+            property.validation.forEach(validate => {
+                if(validate.value && typeof validate.value === "string"){
+                    const property = this.configUtils.findObjectByProperty(this.objectFormList, validate.value, "name")
+                    if(property){
+                        const dataValidation = new DataValidation(property, this.jsonData, this.container, this.configUtils)
+                        const validateSummary = dataValidation.validateData()
+                        property.isValid = validateSummary.isValid
+                        property.errorMessage = validateSummary.errorMessage
+                    }
+                }
+            })
+        }
     }
 
     findItemsByProperty = (objectFormList, property) => {
@@ -149,13 +160,13 @@ class ObjectFormModel{
                 this.jsonData.removeObjectKeyByPath(this.container, item.name)
                 item.value = ""
             }
-           
         }
       })
       listToSet.forEach(key => {
         this.jsonData.setObjectKeyByPath(this.container, key.name, key.value)
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
         targetProperty.value = key.value
+        this.propertyValidation(targetProperty)
       })
       const params = this.jsonData.getParams(this.container)
       this.removeDefaultValuesFromJson(params.workingObject)
@@ -212,8 +223,9 @@ class ObjectFormModel{
         items.forEach(item => {
             item.extraOptions.forEach(extraOption => {
                 const extraOptionName = this.configUtils.formatToCamelCase(extraOption.name)
-                const modulePath = this.jsonData.moduleConfig.modules.find(module => module.name === extraOptionName).path
-                const path = modulePath === "object" ? extraOptionName : item.name + "." + extraOptionName
+                const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
+                const modulePath = this.jsonData.moduleConfig.modules.find(object => object.name === fileName).path
+                const path = modulePath === "key" ? item.name + "." + extraOptionName : modulePath
                 const extraOptionValue = this.jsonData.getValueFromWorkingObject("module", path)
                 if(Array.isArray(extraOptionValue)){
                     extraOption.isUsed = extraOptionValue.length > 0
@@ -293,8 +305,9 @@ class ObjectFormModel{
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         const valueInGoodType = this.configUtils.getValueInGoodType(targetProperty.name, value)
         targetProperty.value = valueInGoodType
-        if((targetProperty.inputType === "string" || targetProperty.inputType === "number") && targetProperty.extraOptions){
+        if((targetProperty.inputType === "string" || targetProperty.inputType === "number") && targetProperty.extraOptions && this.extraOptionIdBox){
             targetProperty.extraOptions.forEach(option => option.isUsed = false)
+            this.jsonData.extraOptionPathParams.workingObject = null
             this.extraOptionIdBox.clearBox(false)
             this.extraOptionIdBox.objectForm.clearForm()
         }
@@ -307,9 +320,7 @@ class ObjectFormModel{
 
     unfocusInput = (id) => {
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
-        if(targetProperty.validation){
-            this.propertyValidation(targetProperty)
-        }
+        this.propertyValidation(targetProperty)
         this.hideAndRevealRequiredItems(targetProperty)
         this.objectFormChanged(this.objectFormList)
     }
@@ -350,6 +361,7 @@ class ObjectFormModel{
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
         }
         this.makeKeyOrder()
+        localStorage.setItem('lastJson', JSON.stringify(this.jsonData.data));
     }
 
     clearForm = () => {
@@ -389,7 +401,7 @@ class ObjectFormModel{
         const keys = path.split('.');
         let currentObj = workingObject
       
-        for (let i = 0; i < keys.length - 1; i++) {
+        for (let i = 0; i < keys.length; i++) {
           const currentKey = keys[i];
           if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
             console.error("Podana ścieżka jest nieprawidłowa. Nie znaleziono podanego klucza. " + path);
@@ -397,10 +409,8 @@ class ObjectFormModel{
           }
           currentObj = currentObj[currentKey];
         }
-          const lastKey = keys[keys.length - 1];
-          currentObj = currentObj[lastKey]
-          const temp = currentObj
-          this.jsonData.removeObjectKeyByPath("module", path)
-          this.jsonData.setObjectKeyByPath("module", path, temp)
-      }
+        const temp = currentObj
+        this.jsonData.removeObjectKeyByPath("module", path)
+        this.jsonData.setObjectKeyByPath("module", path, temp)
+    }
 }

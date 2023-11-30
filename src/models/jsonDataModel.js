@@ -9,7 +9,8 @@ class JsonDataModel {
         "hasList": true,
         "workingList": null,
         "workingObject": null,
-        "path": null
+        "path": null,
+        "fileName": null
       }
       this.extraOptionPathParams = {
         "module": null,
@@ -17,7 +18,8 @@ class JsonDataModel {
         "hasList": true,
         "workingList": null,
         "workingObject": null,
-        "path": null
+        "path": null,
+        "fileName": null
       }
     }
 
@@ -42,14 +44,16 @@ class JsonDataModel {
         "hasList": true,
         "workingList": null,
         "workingObject": null,
-        "path": null
+        "path": null,
+        "fileName": null
       }
     }
 
-    setParams = (container, module, id, key = "") => {
+    setParams = (container, module, fileName, id, key = "") => {
       const params = this.getParams(container)
       params.workingObject = null
       params.workingList = null
+      params.fileName = fileName
       if(container === "module"){
         this.modulePathParams.module = module
         this.modulePathParams.objectId = id
@@ -70,19 +74,14 @@ class JsonDataModel {
       else{
         this.extraOptionPathParams.module = module
         this.extraOptionPathParams.objectId = id
-        this.extraOptionPathParams.path = this.moduleConfig.modules.find(object => object.name === module).path || "object"
+        this.extraOptionPathParams.path = this.moduleConfig.modules.find(object => object.name === fileName).path
         this.extraOptionPathParams.key = key
-        this.extraOptionPathParams.hasList = this.moduleConfig.modules.find(object => object.name === module).hasList
-        if(module.endsWith("Behavior")){
-          module = "behavior"
-        }
-        else if(module.endsWith("RandomFirstIndex")){
-          module = "randomFirstIndex"
-        }
+        this.extraOptionPathParams.hasList = this.moduleConfig.modules.find(object => object.name === fileName).hasList
         try{
           if(this.extraOptionPathParams.hasList){
-            this.extraOptionPathParams.workingList = this.modulePathParams.workingObject[module].list
-            this.extraOptionPathParams.workingObject = this.modulePathParams.workingObject[module].list[id]
+            const object = this.modulePathParams.workingObject[this.getPathToKey(params.path)]
+            this.extraOptionPathParams.workingList = Array.isArray(object) ? object : object.list
+            this.extraOptionPathParams.workingObject = this.extraOptionPathParams.workingList[id]
           }
           else{
             if(this.extraOptionPathParams.path === "object"){
@@ -125,40 +124,20 @@ class JsonDataModel {
         }
       }
       else{
-        let keyName = params.module
-        if(keyName.endsWith("Behavior")){
-          keyName = "behavior"
-        }
-        else if(keyName.endsWith("RandomFirstIndex")){
-          keyName = "randomFirstIndex"
-        }
-        if(params.hasList){
-          if(params.workingList === null){
-            if(this.modulePathParams.workingObject[keyName] === undefined){
-              this.modulePathParams.workingObject[keyName]={}
-            }
-            if(this.modulePathParams.workingObject[keyName].list === undefined){
-              this.modulePathParams.workingObject[keyName].list=[]
-            }
-            params.workingList = this.modulePathParams.workingObject[keyName].list
-          }
-          params.workingObject = new moduleDict[params.module](name)
-          params.workingList.push(params.workingObject)
-        }
-        else{
+        let keyName = params.path
           params.workingList = null
-          if(this.extraOptionPathParams.path === "object"){
-            params.workingObject = new moduleDict[params.module]()
-            let path = this.getPathToKey(params.key) + "." + keyName
+          if(keyName === "key"){
+            let path = params.key + "." + params.module
+            params.workingObject = new moduleDict[params.fileName](params.key)
             this.setObjectKeyByPath("module", path, params.workingObject)
           }
           else{
-            let path = params.key + "." + keyName
-            params.workingObject = new moduleDict[params.module](params.key)
+            params.workingObject = new moduleDict[params.fileName]()
+            let path = params.path
             this.setObjectKeyByPath("module", path, params.workingObject)
+            const listObject = this.getValueFromWorkingObject("module", path)
+            params.workingList = Array.isArray(listObject) ? listObject : null
           }
-        
-        }
       }
       params.objectId = params.hasList ? params.workingList.length - 1 : 0
     }
@@ -180,6 +159,10 @@ class JsonDataModel {
           if(container === "module"){
             delete this.data[params.module]
           }
+          else if(params.module === "behavior"){
+            const object = this.modulePathParams.workingObject[this.getPathToKey(params.path)]
+            delete object[params.module]
+          }
           else{
             delete this.modulePathParams.workingObject[params.module]
           }
@@ -193,7 +176,13 @@ class JsonDataModel {
           this.setObjectKeyByPath("module", params.key, defaultInput)
         }
         else{
-          delete this.modulePathParams.workingObject[params.module]
+          if(params.path.includes(".")){
+            const object = this.modulePathParams.workingObject[this.getPathToKey(params.path)]
+            delete object[params.module]
+          }
+          else{
+            delete this.modulePathParams.workingObject[params.module]
+          }
         }
       }
       
@@ -232,12 +221,31 @@ class JsonDataModel {
       for (let i = 0; i < keys.length - 1; i++) {
         const currentKey = keys[i];
         if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
-          currentObj[currentKey] = {};
+          if(currentKey === "list"){
+            currentObj[currentKey] = [];
+          }
+          else{
+            currentObj[currentKey] = {};
+          }
         }
         currentObj = currentObj[currentKey];
       }
       const lastKey = keys[keys.length - 1];
-      currentObj[lastKey] = value;
+      if(lastKey === "list"){
+        if(!Array.isArray(currentObj[lastKey])){
+          currentObj[lastKey] = []
+        }
+        if(!Array.isArray(value)){
+          currentObj[lastKey].push(value);
+        }
+        else{
+          currentObj[lastKey] = value;
+        }
+      }
+      else{
+        currentObj[lastKey] = value;
+      }
+      
     }
 
     removeObjectKeyByPath(container, path) {
@@ -263,7 +271,6 @@ class JsonDataModel {
         else{
           delete currentObj[lastKey];
         }
-        
       }
     }
 
