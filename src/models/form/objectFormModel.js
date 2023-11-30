@@ -14,7 +14,7 @@ class ObjectFormModel{
 
     fetchConfigAndCreateObjectFormList = () => {
         const params = this.jsonData.getParams(this.container)
-        fetch(`/src/config/${params.fileName}.json`)
+        fetch(`src/config/${params.fileName}.json`)
         .then(response => response.json())
         .then(config => {
             this.config = config
