@@ -22,7 +22,7 @@ class ModulesBoxView extends View{
                     <div class="tool-tip-icon">i</div>
                     <p class="tool-tip-info">${singleModule.tipInfo}</p>
                   </div>
-                <div class="glow-on-hover"><img src="assets/pictures/${singleModule.name.charAt(0).toLowerCase() + singleModule.name.slice(1)}.png" alt="${singleModule.name}"><br>${singleModule.name}</div>
+                <div class="glow-on-hover"><img src="src/assets/pictures/${singleModule.name.charAt(0).toLowerCase() + singleModule.name.slice(1)}.png" alt="${singleModule.name}"><br>${singleModule.name}</div>
             </div>\n`
             }
             containerDiv+="</div>"
