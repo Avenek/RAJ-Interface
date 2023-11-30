@@ -22,7 +22,7 @@
                     "tool-tip": "Typ obiektu, który chcemy schować.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"HERO"}, {"name":"NPC"}, {"name":"PET"},{"name":"FAKE_NPC"}],
+                    "options": [{"name":"HERO"}, {"name":"NPC"}, {"name":"THIS_NPC_INSTANCE"}, {"name":"PET"},{"name":"FAKE_NPC"}],
                     "defaultInput": "HERO"
                 },
                 {

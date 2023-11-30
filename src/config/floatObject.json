@@ -139,7 +139,7 @@
                     "tool-tip": "",
                     "inputType": "empty",
                     "extraOptions": [{"name":"color"}],
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}, {"name": "kind", "value": ["SPRITE", "GIF"]}]
                 },
                 {
                     "name": "order",
