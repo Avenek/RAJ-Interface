@@ -10,7 +10,7 @@ class ObjectIdBoxController {
         this.view.bindCloneObjectId(this.handleCloneObjectId)
         this.view.bindUpdateNameObjectId(this.handleUpdateNameObjectId)
     }
-    
+
     objectIdListChanged = (objectIdList, hasList, addPlusButton = true) => {
         this.view.displayObjectIdBox(objectIdList, hasList, addPlusButton)
     }
