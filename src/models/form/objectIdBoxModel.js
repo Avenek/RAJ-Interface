@@ -145,4 +145,30 @@ class ObjectIdBoxModel{
         this.objectIdList = []
         this.objectIdListChanged(this.objectIdList, this.hasList, addPlusButton)
     }
+
+    dropElement = (indexData) => {
+        if(indexData.moveTo >= this.objectIdList.length){
+            indexData.moveTo -=1
+        }
+        if(indexData.moveTo === indexData.fromDraggedModule) return
+        const draggedElement = this.objectIdList[indexData.fromDraggedModule]
+        this.objectIdList.splice(indexData.fromDraggedModule, 1);
+        this.objectIdList.splice(indexData.moveTo, 0, draggedElement);
+        const params = this.jsonData.getParams(this.container)
+        const draggedListElement =  params.workingList[indexData.fromDraggedModule]
+        params.workingList.splice(indexData.fromDraggedModule, 1);
+        params.workingList.splice(indexData.moveTo, 0, draggedListElement);
+        if(params.objectId === indexData.fromDraggedModule){
+            params.objectId = indexData.moveTo
+        }
+        else if(indexData.fromDraggedModule < params.objectId && indexData.moveTo >= params.objectId){
+            params.objectId -= 1
+        }
+        else if(indexData.fromDraggedModule > params.objectId && indexData.moveTo <= params.objectId){
+            params.objectId += 1
+        }
+        console.log(params.objectId);
+        this.objectIdListChanged(this.objectIdList, this.hasList)
+        this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
+    }
 }

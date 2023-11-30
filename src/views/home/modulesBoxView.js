@@ -42,7 +42,7 @@ class ModulesBoxView extends View{
 
     bindDeleteContainer = (handler) => {
         this.modulesBox.addEventListener("click", event => {
-            if (event.target.className === 'delete-button') {
+            if (event.target.classList.contains('delete-button')) {
             const container = event.target.parentElement
             const index = this.getIndexElement(this.modulesBox, "container", container)
                 handler(index)
@@ -52,7 +52,7 @@ class ModulesBoxView extends View{
 
     bindUpdateNameContainer = (handler) => {
         this.modulesBox.addEventListener("click", event => {
-            if (event.target.className === 'edit-button') {
+            if (event.target.classList.contains('edit-button')) {
                 this.settingForm(event, handler)
             }
         })
@@ -89,24 +89,31 @@ class ModulesBoxView extends View{
 
     bindDragAndDrop = (handler) => {
         this.modulesBox.addEventListener("mousedown", event => {
-            if (event.target.className === 'drag-button') {
+            if (event.target.classList.contains('drag-button')) {
                 this.handleDragStart(event)
-                this.dragAndDrop.handleDragOver(event)
+                this.handleDragOver(event)
             }
         })
         this.modulesBox.addEventListener("mousemove", event => {
-            this.dragAndDrop.handleDragOver(event)
+            this.handleDragOver(event)
         })
         this.modulesBox.addEventListener('mouseup', event => { 
             this.handleDrop(event, handler) 
         });
-        
     }
 
     handleDragStart = (event) => {
         this.dragAndDrop.draggedModule = event.target.parentElement;
         this.dragAndDrop.draggedModule.classList.add("dragging")
         this.dragAndDrop.createShadowButton()
+    }
+
+    handleDragOver = (event) => {
+        event.preventDefault();
+        if (this.dragAndDrop.draggedModule && this.dragAndDrop.draggedModule.classList.contains("dragging")) {
+            this.dragAndDrop.shadow.style.left = event.pageX + "px";
+            this.dragAndDrop.shadow.style.top = event.pageY + "px";
+        }
     }
 
     handleDrop = (event, handler) => {

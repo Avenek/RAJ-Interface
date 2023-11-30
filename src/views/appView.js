@@ -6,7 +6,7 @@ class AppView extends View{
 
     bindClickModule = (handler) =>{
         this.home.modulesBox.addEventListener("click", event => {
-            if (event.target.className === 'glow-on-hover') {
+            if (event.target.classList.contains('glow-on-hover')) {
                 const button = event.target
                 const buttonName = button.textContent.charAt(0).toLowerCase() + button.textContent.slice(1)
                 handler(buttonName)
@@ -14,11 +14,11 @@ class AppView extends View{
         })  
 
         this.home.dataObjectsBox.addEventListener("click", event => {
-            if (event.target.className === 'key-element') {
+            if (event.target.classList.contains('key-element')) {
                 const button = event.target
                 handler(button.textContent)
             }
-            else if(event.target.className === 'object-id-element'){
+            else if(event.target.classList.contains('object-id-element')){
                 const button = event.target
                 const module = button.parentElement.previousElementSibling
                 const index = this.getIndexElement(button.parentElement, "object-id-element", button)
