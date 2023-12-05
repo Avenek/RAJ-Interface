@@ -44,6 +44,9 @@ class ObjectIdBoxModel{
         params.workingObject = params.workingList[index]
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.objectForm.createObjectFormList(this.objectForm.config)
+        if(this.container === "module"){
+            this.clearExtraOption()
+        }
     }
 
     addObjectId = () => {
@@ -57,6 +60,9 @@ class ObjectIdBoxModel{
         this.objectIdList.push({"name": name, "isChecked": true})
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.objectForm.createObjectFormList(this.objectForm.config)
+        if(this.container === "module"){
+            this.clearExtraOption()
+        }
     }
 
     cloneObjectId = (index) => {
@@ -65,6 +71,9 @@ class ObjectIdBoxModel{
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonData.cloneObject(this.container, index)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
+        if(this.container === "module"){
+            this.clearExtraOption()
+        }
     }
 
     deleteObjectId = (index) => {
@@ -97,6 +106,9 @@ class ObjectIdBoxModel{
                 this.clearBox(false)
                 this.moduleObjectForm.changeStateExtraOption()
             }
+        }
+        if(this.container === "module"){
+            this.clearExtraOption()
         }
         
     }
@@ -167,8 +179,13 @@ class ObjectIdBoxModel{
         else if(indexData.fromDraggedModule > params.objectId && indexData.moveTo <= params.objectId){
             params.objectId += 1
         }
-        console.log(params.objectId);
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
+    }
+
+    clearExtraOption = () => {
+        this.jsonData.extraOptionPathParams.workingObject = null
+        this.extraOptionIdBox.clearBox(false)
+        this.extraOptionObjectForm.clearForm()
     }
 }
