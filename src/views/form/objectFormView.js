@@ -166,7 +166,7 @@ class ObjectFormView extends View{
       }
       return `<div class="property-tool-tip">
         <i class="property-tool-tip-icon">i</i>
-        <p class="property-tool-tip-info"><b>Typ zmiennej</b>: ${property.varType.join(", ")}<br><b>Wymagania</b>: ${requirementsInfo.substring(4) || "brak"}<br><b>Opis</b>: ${property['tool-tip']}</p>
+        <p class="property-tool-tip-info"><b>Typ zmiennej</b>: ${property.varType.join(", ")}<br><b>Domyślna wartość</b>: ${property.defaultSraj || "-"}<br><b>Wymagania</b>: ${requirementsInfo.substring(4) || "brak"}<br><b>Opis</b>: ${property['tool-tip']}</p>
       </div>`
     }
 
