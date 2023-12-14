@@ -71,6 +71,11 @@
       "bindId": "id"
     },
     {
+      "name": "dynamicDirCharacterLight",
+      "hasList": true,
+      "bindId": "id"
+    },
+    {
       "name": "earthQuake",
       "hasList": false,
       "bindId": "module"
@@ -176,6 +181,12 @@
       "bindId": "module"
     },
     {
+      "name": "parent",
+      "hasList": false,
+      "bindId": "module",
+      "path": "parent"
+    },
+    {
       "name": "randomFirstIndex",
       "hasList": false,
       "bindId": "module",
@@ -199,6 +210,18 @@
     },
     {
       "name": "source",
+      "hasList": false,
+      "bindId": "module",
+      "path": "source"
+    },
+    {
+      "name": "target",
+      "hasList": true,
+      "bindId": "id",
+      "path": "target.list"
+    },
+    {
+      "name": "tracking",
       "hasList": false,
       "bindId": "module",
       "path": "source"

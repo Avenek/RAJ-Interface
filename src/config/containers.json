@@ -26,6 +26,10 @@
         {
           "name": "EmoActions",
           "tipInfo": "Umożliwia podpięcie wcześniej zadeklarowanego dymku do NPC. Stosować tylko i wyłącznie w połączeniu z emoDefinitions."
+        },
+        {
+          "name": "DynamicDirCharacterLight",
+          "tipInfo": "Umożliwia stworzenie dziur oraz świateł, które będą zmieniały się w zależności od kierunku obrotu postaci. Pozwola to na oświetlenie atrybutów outfitu gracza, takich jak latarnia, czy pochodnia."
         }
       ]
     },
@@ -87,6 +91,10 @@
         {
           "name": "AreaTrigger",
           "tipInfo": "Umożliwia odpalenie wybranego Sraja po wejściu na dane kordy lub po wejściu w dany obszar."
+        },
+        {
+          "name": "Tracking",
+          "tipInfo": "Umożliwia odpalenie imitacji trackingu na dane kordy na mapie, na której wywołujemy Sraja. Można dodać dowolną ilość strzałek na dane kordy."
         }
       ]
     },

@@ -1,0 +1,54 @@
+{
+    "properties":[
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties":[
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Id strzałki",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "extraOptions": [{"name":"case"}],
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "name",
+                    "idInput": "name",
+                    "tool-tip": "Nazwa zachowania: IDLE - stanie w miejscu, WALK - dojście do konkretnego miejsca, TP - przeniesienie w konkretne miejsce, WALK_START - dojście do startowego miejsca z aktualnej pozycji, TP_START - przeniesienie do startowego miejsca, WALK_AND_TP_START - dojście do konkretnego miejsca z aktualnego miejsca i przeniesienie do startowego miejsca.",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": ""
+                },
+                {
+                    "name": "x",
+                    "idInput": "x",
+                    "tool-tip": "Wartość kordu x, na który ma prowadzić strzałka.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "y",
+                    "idInput": "y",
+                    "tool-tip": "Wartość kordu y, na który ma prowadzić strzałka.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                }
+            ]
+        }
+    ]
+}

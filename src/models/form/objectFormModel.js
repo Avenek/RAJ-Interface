@@ -247,8 +247,8 @@ class ObjectFormModel{
             keyCollapsed = ""
         }
         else{
-            targetProperty.isCollapsed = " collapsed"
-            keyCollapsed = " collapsed-key"
+            targetProperty.isCollapsed = "collapsed"
+            keyCollapsed = "collapsed-key"
         }
         targetProperty.properties.forEach(property => {
             property.isCollapsed = keyCollapsed
