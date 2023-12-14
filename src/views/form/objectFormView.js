@@ -5,6 +5,7 @@ class ObjectFormView extends View{
     }
 
     displayObjectForm = (objectFormList) => {
+      this.moduleObjectForm.innerHTML = ""
         this.moduleObjectForm.innerHTML = this.createObjectForm(objectFormList)
     }
 
