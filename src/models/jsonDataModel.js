@@ -132,7 +132,7 @@ class JsonDataModel {
             this.setObjectKeyByPath("module", path, params.workingObject)
           }
           else{
-            params.workingObject = new moduleDict[params.fileName]()
+            params.workingObject = new moduleDict[params.fileName](name)
             let path = params.path
             this.setObjectKeyByPath("module", path, params.workingObject)
             const listObject = this.getValueFromWorkingObject("module", path)

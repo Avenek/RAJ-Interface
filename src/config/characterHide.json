@@ -54,7 +54,7 @@
                     "inputType": "boolean",
                     "varType": ["boolean"],
                     "defaultInput": false,
-                    "defaultSraj": false,
+                    "defaultSraj": true,
                     "require": [{"name": "action", "value": ["CREATE"]}]
                 }
             ]

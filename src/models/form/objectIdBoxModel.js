@@ -185,7 +185,10 @@ class ObjectIdBoxModel{
 
     clearExtraOption = () => {
         this.jsonData.extraOptionPathParams.workingObject = null
-        this.extraOptionIdBox.clearBox(false)
-        this.extraOptionObjectForm.clearForm()
+        if(this.extraOptionIdBox){
+            this.extraOptionIdBox.clearBox(false)
+            this.extraOptionObjectForm.clearForm()
+        }
+
     }
 }

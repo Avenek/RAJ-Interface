@@ -104,6 +104,19 @@ let moduleDict = {
     }
   },
 
+  dynamicDirCharacterLight : class DynamicDirCharacterLight{
+    constructor (id) {
+      this.action = "CREATE"
+      this.id = id
+      this.master = {
+        "kind" : "HERO"
+      }
+      this.d = {
+        "base": {"r":50}
+      }
+    }
+  },
+
   dynamicLight : class DynamicLight{
     constructor (id) {
       this.action = "CREATE"
@@ -273,6 +286,12 @@ let moduleDict = {
     }
   },
 
+  parent : class Parent{
+    constructor(){
+      this.kind = "HERO"
+    }
+  },
+
   sequence : class Sequence{
     constructor(id){
       this.action = "CREATE_IF_NOT_EXIST"
@@ -301,6 +320,29 @@ let moduleDict = {
       this.x = 0
       this.y = 0
       this.range = 5
+    }
+  },
+
+  target : class Target{
+    constructor(id){
+      this.id = id
+      this.name = "",
+      this.x = 0,
+      this.y = 0
+    }
+  },
+
+  tracking : class Tracking{
+    constructor(){
+      this.parent = {"kind": "HERO"}
+      this.target = {"list":[ 
+        {
+          "id": "obiekt-0",
+        "name": "",
+        "x": 0,
+        "y": 0
+      }
+    ]}
     }
   },
 

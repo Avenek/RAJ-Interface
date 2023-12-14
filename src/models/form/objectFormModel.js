@@ -149,11 +149,13 @@ class ObjectFormModel{
                     listToSet.push({"name": item.name, "id": item.idInput, "value": valueObject})
                     item.value = valueObject
                 }
-                else if(item.options && item.options.some(value => value.name === value)){
+                else if((item.options && item.options.some(value => value.name === value)) || value !== null){
                     listToSet.push({"name": item.name, "id": item.idInput, "value": value})
+                    item.value = value
                 } 
                 else{
                     listToSet.push({"name": item.name, "id": item.idInput, "value": item.defaultInput})
+                    value !== item.defaultInput
                 } 
             } 
             else if(!allConditionsAreMet){
@@ -245,8 +247,8 @@ class ObjectFormModel{
             keyCollapsed = ""
         }
         else{
-            targetProperty.isCollapsed = " collapsed"
-            keyCollapsed = " collapsed-key"
+            targetProperty.isCollapsed = "collapsed"
+            keyCollapsed = "collapsed-key"
         }
         targetProperty.properties.forEach(property => {
             property.isCollapsed = keyCollapsed

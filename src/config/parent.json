@@ -1,0 +1,30 @@
+{
+    "properties": [
+        {
+            "name": "parent",
+            "idInput": "parent",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties":[
+                {
+                    "name": "kind",
+                    "idInput": "kind",
+                    "tool-tip": "Rodzaj rodzica, do którego zostanie przypięta strzałka.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"HERO"}, {"name":"FLOAT_OBJECT"}],
+                    "defaultInput":"HERO"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Id obiektu, do którego należy przypiąć strzałkę.",
+                    "inputType": "string",
+                    "varType": ["int", "string"],
+                    "defaultInput": "",
+                    "require": [{"name": "kind", "value": ["FLOAT_OBJECT"]}]
+                }
+            ]
+        }
+    ]
+}
