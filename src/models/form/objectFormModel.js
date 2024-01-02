@@ -149,7 +149,8 @@ class ObjectFormModel{
         item.hide = !allConditionsAreMet
         if(targetProperty === null || item.require.some(obj => obj.name === targetProperty.name))
         {
-            if(allConditionsAreMet && this.jsonData.getValueFromWorkingObject(this.container, item.name) === null)
+            const value = this.jsonData.getValueFromWorkingObject(this.container, item.name)
+            if(allConditionsAreMet && value === null)
             {
                 if(item.properties){
                     const valueObject = this.createObjectBaseOnConfig(item.properties)
@@ -164,9 +165,11 @@ class ObjectFormModel{
                 }
             }
             else if(allConditionsAreMet){
-                const value = this.jsonData.getValueFromWorkingObject(this.container, item.name)
-                if(item.properties && this.isObjectCompatibleWithConfig(value, item.properties)){
-                    const valueObject = this.createObjectBaseOnConfig(item.properties)
+                if(item.properties){
+                    let valueObject = value
+                    if(!this.isObjectCompatibleWithConfig(value, item.properties)){
+                        valueObject = this.createObjectBaseOnConfig(item.properties)
+                    }
                     this.jsonData.setObjectKeyByPath(this.container, item.name, valueObject)
                     listToSet.push({"name": item.name, "id": item.idInput, "value": valueObject})
                     item.value = valueObject
@@ -180,7 +183,7 @@ class ObjectFormModel{
                     value !== item.defaultInput
                 } 
             } 
-            else if(!allConditionsAreMet){
+            else if(!allConditionsAreMet && this.isObjectCompatibleWithConfig(value, item.properties)){
                 listToRemove.push({"name": item.name, "id": item.idInput})
             }
         }
@@ -206,13 +209,13 @@ class ObjectFormModel{
     
         for(let key in currentObj) {
             const currentKey = key;
-            if (typeof currentObj[currentKey] == 'object') {
-                this.isObjectCompatibleWithConfig(currentObj[currentKey], config)
-            }
-            else{
-                if (!config.some(obj => obj.name.includes(key))){
+            if (!Array.isArray(currentObj[currentKey]) && typeof currentObj[currentKey] == 'object') {
+                if(!this.isObjectCompatibleWithConfig(currentObj[currentKey], config.find(obj => obj.name.includes("."+currentKey)).properties)){
                     return false
                 }
+            }
+            else if (!config.some(obj => obj.name.includes("."+key))){
+                return false
             }
         }
         return true
@@ -232,15 +235,20 @@ class ObjectFormModel{
           else if(property.inputType!=="empty" || property.hasOwnProperty("defaultInput")){
             const value = this.jsonData.getValueFromWorkingObject(this.container, property.name)
             if(value !== null){
-              currentObj[key] = value
+                const targetProperty = this.configUtils.findObjectByProperty(config, property.name, "name")
+                targetProperty.value = value
+                currentObj[key] = value
             }
             else{
               currentObj[key] = property.defaultInput !== undefined && property.defaultInput !== null ? property.defaultInput : '';
+              const targetProperty = this.configUtils.findObjectByProperty(config, property.name, "name")
+              targetProperty.value = currentObj[key]
             }
             if(currentObj[key] === property.defaultSraj){
                 delete currentObj[key]
-              }
-          
+                const targetProperty = this.configUtils.findObjectByProperty(config, property.name, "name")
+                targetProperty.value = property.defaultSraj
+            }
           }
         }
         return result
@@ -369,8 +377,8 @@ class ObjectFormModel{
         targetProperty.options.find(option => option.name === value).isChecked = true;
         this.updateValueInJson(targetProperty, value)
         targetProperty.value = value
-        this.jsonDataBox.jsonDataChanged()
         this.hideAndRevealRequiredItems(targetProperty)
+        this.jsonDataBox.jsonDataChanged()
         this.objectFormChanged(this.objectFormList)
         if(targetProperty.name === "id" || targetProperty.name === "name" || targetProperty.name === "kind" || targetProperty.name === "action"){
             this.objectIdBox.updateNameObjectId(this.container)
@@ -411,6 +419,14 @@ class ObjectFormModel{
         this.updateValueInJson(targetProperty.properties[0], targetProperty.properties[0].value)
         this.updateValueInJson(targetProperty.properties[1], targetProperty.properties[1].value)
         this.updateValueInJson(targetProperty.properties[2], targetProperty.properties[2].value)
+        if(this.extraOptionIdBox){
+            targetProperty.properties[0].extraOptions.forEach(option => option.isUsed = false)
+            targetProperty.properties[1].extraOptions.forEach(option => option.isUsed = false)
+            targetProperty.properties[2].extraOptions.forEach(option => option.isUsed = false)
+            this.jsonData.extraOptionPathParams.workingObject = null
+            this.extraOptionIdBox.clearBox(false)
+            this.extraOptionIdBox.objectForm.clearForm()
+        }
         this.jsonDataBox.jsonDataChanged()
         this.hideAndRevealRequiredItems(targetProperty)
         this.objectFormChanged(this.objectFormList)
