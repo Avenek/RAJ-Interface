@@ -360,8 +360,8 @@
                                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                                 },
                                 {
-                                    "name": "params.colorPicker",
-                                    "idInput": "tint.colorPicker",
+                                    "name": "params.color.colorPicker",
+                                    "idInput": "tint.color.colorPicker",
                                     "tool-tip": "Kolor w formacie RGB.",
                                     "inputType": "color",
                                     "varType": ["color"],
@@ -569,8 +569,8 @@
                                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                                 },
                                 {
-                                    "name": "params.colorPicker",
-                                    "idInput": "text.colorPicker",
+                                    "name": "params.color.colorPicker",
+                                    "idInput": "text.color.colorPicker",
                                     "tool-tip": "Kolor w formacie RGBA.",
                                     "inputType": "color",
                                     "varType": ["color"],

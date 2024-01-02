@@ -341,7 +341,7 @@ class ObjectFormModel{
         }
         if(targetProperty.varType.includes("color")){
             const dotIndex = id.lastIndexOf('.');
-            const prefix = dotIndex !== -1 ? id.substring(dotIndex + 1) : ""
+            const prefix = dotIndex !== -1 ? id.substring(0, dotIndex + 1) : ""
             const r = this.configUtils.findObjectByProperty(this.objectFormList, prefix + "r", "idInput").value
             const g = this.configUtils.findObjectByProperty(this.objectFormList, prefix + "g", "idInput").value
             const b = this.configUtils.findObjectByProperty(this.objectFormList, prefix + "b", "idInput").value
@@ -401,7 +401,9 @@ class ObjectFormModel{
         const r = (bigint >> 16) & 255
         const g = (bigint >> 8) & 255
         const b = bigint & 255
-        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        const dotIndex = id.lastIndexOf('.');
+        const prefix = dotIndex !== -1 ? id.substring(0, dotIndex) : "color"
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, prefix, "idInput")
         targetProperty.properties[0].value = r,
         targetProperty.properties[1].value = g,
         targetProperty.properties[2].value = b,

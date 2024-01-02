@@ -157,8 +157,8 @@
                                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                                 },
                                 {
-                                    "name": "light.colorPicker",
-                                    "idInput": "light.colorPicker",
+                                    "name": "light.color.colorPicker",
+                                    "idInput": "light.color.colorPicker",
                                     "tool-tip": "Kolor w formacie RGB.",
                                     "inputType": "color",
                                     "varType": ["color"],
