@@ -315,7 +315,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": ["int"],
+                                    "varType": ["int", "color"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
@@ -328,7 +328,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": ["int"],
+                                    "varType": ["int", "color"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
@@ -341,7 +341,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": ["int"],
+                                    "varType": ["int", "color"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
@@ -360,8 +360,8 @@
                                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                                 },
                                 {
-                                    "name": "params.color",
-                                    "idInput": "tint.color",
+                                    "name": "params.colorPicker",
+                                    "idInput": "tint.colorPicker",
                                     "tool-tip": "Kolor w formacie RGB.",
                                     "inputType": "color",
                                     "varType": ["color"],
@@ -524,7 +524,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": ["int"],
+                                    "varType": ["int", "color"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
@@ -537,7 +537,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": ["int"],
+                                    "varType": ["int", "color"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
@@ -550,7 +550,7 @@
                                     "min":0,
                                     "max":255,
                                     "inputType": "number",
-                                    "varType": ["int"],
+                                    "varType": ["int", "color"],
                                     "defaultInput":0,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
@@ -569,8 +569,8 @@
                                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                                 },
                                 {
-                                    "name": "params.color",
-                                    "idInput": "text.color",
+                                    "name": "params.colorPicker",
+                                    "idInput": "text.colorPicker",
                                     "tool-tip": "Kolor w formacie RGBA.",
                                     "inputType": "color",
                                     "varType": ["color"],

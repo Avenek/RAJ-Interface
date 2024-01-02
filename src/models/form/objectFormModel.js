@@ -339,6 +339,16 @@ class ObjectFormModel{
             this.extraOptionIdBox.clearBox(false)
             this.extraOptionIdBox.objectForm.clearForm()
         }
+        if(targetProperty.varType.includes("color")){
+            const dotIndex = id.lastIndexOf('.');
+            const prefix = dotIndex !== -1 ? id.substring(dotIndex + 1) : ""
+            const r = this.configUtils.findObjectByProperty(this.objectFormList, prefix + "r", "idInput").value
+            const g = this.configUtils.findObjectByProperty(this.objectFormList, prefix + "g", "idInput").value
+            const b = this.configUtils.findObjectByProperty(this.objectFormList, prefix + "b", "idInput").value
+            const hexColor = this.rgbToHex(r, g, b);
+            const colorProperty = this.configUtils.findObjectByProperty(this.objectFormList, prefix + "colorPicker" || "colorPicker", "idInput")
+            colorProperty.value = hexColor
+        }
         this.updateValueInJson(targetProperty, valueInGoodType)
         this.jsonDataBox.jsonDataChanged()
         if(targetProperty.name === "id" || targetProperty.name === "name" || targetProperty.name === "kind" || targetProperty.name === "action"){

@@ -306,11 +306,19 @@ display: block;
 .key-value-input[type="number"] {
   min-width: 80px;
 }
-
+.key-value-input[type="color"]{
+  min-width: 10px;
+  padding: 0px;
+  border: none;
+  display: inline-block;inline-size: 40px;
+  block-size: 25px;
+}
 
 .key-value-input[type="file"]:hover{
   background: #757474;
 }
+
+
 
 .file-upload {
   background: #363232;

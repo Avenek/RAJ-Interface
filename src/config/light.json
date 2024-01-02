@@ -41,7 +41,7 @@
                             "min":0,
                             "max":255,
                             "inputType": "number",
-                            "varType": ["int"],
+                            "varType": ["int", "color"],
                             "defaultInput":0,
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
@@ -53,7 +53,7 @@
                             "min":0,
                             "max":255,
                             "inputType": "number",
-                            "varType": ["int"],
+                            "varType": ["int", "color"],
                             "defaultInput":0,
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
@@ -65,7 +65,7 @@
                             "min":0,
                             "max":255,
                             "inputType": "number",
-                            "varType": ["int"],
+                            "varType": ["int", "color"],
                             "defaultInput":0,
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
@@ -82,8 +82,8 @@
                             "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
-                            "name": "color",
-                            "idInput": "color",
+                            "name": "colorPicker",
+                            "idInput": "colorPicker",
                             "tool-tip": "Kolor w formacie RGB.",
                             "inputType": "color",
                             "varType": ["color"],
