@@ -10,6 +10,7 @@ class ObjectFormController {
         this.view.bindCheckOption(this.handleCheckOption)
         this.view.bindCheckSlider(this.handleCheckSlider)
         this.view.bindChooseFile(this.handleChooseFile)
+        this.view.bindPickColor(this.handlePickColor)
     }
     
     objectFormChanged = (objectFormList) => {
@@ -42,5 +43,9 @@ class ObjectFormController {
 
     handleChooseFile = (id, fileName) => {
         this.model.chooseFile(id, fileName)
+    }
+
+    handlePickColor = (id, color) => {
+        this.model.pickColor(id, color)
     }
   }

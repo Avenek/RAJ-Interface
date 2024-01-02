@@ -558,6 +558,14 @@
                                     "defaultInput":1,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color",
+                                    "idInput": "text.color",
+                                    "tool-tip": "Kolor w formacie RGBA.",
+                                    "inputType": "color",
+                                    "varType": ["color"],
+                                    "canBeEmpty": true
                                 }
                             ]
                         }

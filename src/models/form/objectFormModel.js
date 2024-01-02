@@ -45,18 +45,39 @@ class ObjectFormModel{
                 this.createObjectProperty(prop)
             }
             prop.hide = false
-            this.fillPropertyValue(prop)
+            this.fillPropertyValue(prop, property)
             this.addExpandedKey(prop)
             this.propertyValidation(prop)
         } 
     }
 
-    fillPropertyValue = (propertyObject) => {
-        let keyValue = this.jsonData.getValueFromWorkingObject(this.container, propertyObject.name) || propertyObject.defaultSraj || propertyObject.defaultInput
-        if(keyValue !== null && keyValue !== undefined){
-            propertyObject.value = keyValue
+    fillPropertyValue = (propertyObject, parentProperty) => {
+        if(propertyObject.inputType !== "color"){
+            let keyValue = this.jsonData.getValueFromWorkingObject(this.container, propertyObject.name) || propertyObject.defaultSraj || propertyObject.defaultInput
+            if(keyValue !== null && keyValue !== undefined){
+                propertyObject.value = keyValue
+            }
+        }
+        else{
+            const r = parentProperty.properties[0].value
+            const g = parentProperty.properties[1].value
+            const b = parentProperty.properties[2].value
+            const hexColor = this.rgbToHex(r, g, b);
+            propertyObject.value = hexColor
         }
     }
+
+    rgbToHex = (r, g, b) => {
+        const toHex = (value) => {
+          const hex = value.toString(16);
+          return hex.length === 1 ? '0' + hex : hex;
+        };
+        const hexR = toHex(r);
+        const hexG = toHex(g);
+        const hexB = toHex(b);
+        return `#${hexR}${hexG}${hexB}`;
+    }
+
 
     propertyValidation = (property) => {
         if(property.properties){
@@ -357,6 +378,24 @@ class ObjectFormModel{
         this.jsonDataBox.jsonDataChanged()
         this.hideAndRevealRequiredItems(targetProperty)
         this.resizeIfIsTooLongValue(id)
+        this.objectFormChanged(this.objectFormList)
+    }
+
+    pickColor = (id, color) => {
+        const bigint = parseInt(color.substring(1), 16)
+        const r = (bigint >> 16) & 255
+        const g = (bigint >> 8) & 255
+        const b = bigint & 255
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        targetProperty.properties[0].value = r,
+        targetProperty.properties[1].value = g,
+        targetProperty.properties[2].value = b,
+        targetProperty.properties[4].value = color,
+        this.updateValueInJson(targetProperty.properties[0], targetProperty.properties[0].value)
+        this.updateValueInJson(targetProperty.properties[1], targetProperty.properties[1].value)
+        this.updateValueInJson(targetProperty.properties[2], targetProperty.properties[2].value)
+        this.jsonDataBox.jsonDataChanged()
+        this.hideAndRevealRequiredItems(targetProperty)
         this.objectFormChanged(this.objectFormList)
     }
 

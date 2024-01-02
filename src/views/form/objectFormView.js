@@ -45,6 +45,14 @@ class ObjectFormView extends View{
               const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
               html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><label class="file-upload"><input type="file" id="${property.idInput}" accept="${property.acceptFiles}" name="${property.name}"/>Wybierz plik</label>`;
             }
+            else if(property.inputType === "color"){
+              let isCollapsed = ""
+              if(property.isCollapsed){
+                isCollapsed = " " + property.isCollapsed
+              }
+              const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
+              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="color" class="key-value-input" id="${property.idInput}" value="${property.value || "#ffffff"}" name="${property.name}">`;
+            }
             else if(property.inputType === "string"){
               let isCollapsed = ""
               if(property.isCollapsed){
@@ -260,6 +268,15 @@ class ObjectFormView extends View{
           const input = event.target
           const fileName = input.files[0].name
           handler(input.id, fileName);
+        }
+      })  
+    }
+
+    bindPickColor = (handler) => {
+      this.moduleObjectForm.addEventListener("change", event => { 
+        if (event.target.tagName === 'INPUT' && event.target.type === "color") {
+          const color = event.target.value
+          handler(event.target.id, color);
         }
       })  
     }
