@@ -95,7 +95,9 @@
                             "name": "params.gifUrl",
                             "idInput": "animation.gifUrl",
                             "tool-tip": "Ścieżka do pliku znajdującego się w katalogu grafikiRaj. Przykład: characterEffects/kup23-pnacza.gif",
-                            "inputType": "string",
+                            "inputType": "file",
+                            "acceptFiles": ".gif",
+                            "directory": "characterEffects/",
                             "varType": ["string"],
                             "defaultInput": "characterEffects/.gif"
                         },
