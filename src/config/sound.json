@@ -56,7 +56,9 @@
                     "name": "url",
                     "idInput": "url",
                     "tool-tip": "Nazwa pliku dźwiękowego się w katalogu  /grafikiRaj/sounds o rozszerzeniu .mp3.",
-                    "inputType": "string",
+                    "inputType": "file",
+                    "acceptFiles": ".mp3",
+                    "directory": "",
                     "varType": ["string"],
                     "defaultInput": "burza01.mp3",
                     "require": [{"name": "action", "value": ["CREATE"]}]

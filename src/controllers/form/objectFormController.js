@@ -9,6 +9,7 @@ class ObjectFormController {
         this.view.bindUnfocusInput(this.handleUnfocusInput)
         this.view.bindCheckOption(this.handleCheckOption)
         this.view.bindCheckSlider(this.handleCheckSlider)
+        this.view.bindChooseFile(this.handleChooseFile)
     }
     
     objectFormChanged = (objectFormList) => {
@@ -37,5 +38,9 @@ class ObjectFormController {
 
     handleCheckSlider = (id) => {
         this.model.checkSlider(id)
+    }
+
+    handleChooseFile = (id, fileName) => {
+        this.model.chooseFile(id, fileName)
     }
   }

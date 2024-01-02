@@ -348,6 +348,16 @@ class ObjectFormModel{
         this.objectFormChanged(this.objectFormList)
     }
 
+    chooseFile = (id, fileName) => {
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        targetProperty.value = `${targetProperty.directory}${fileName}`
+        this.updateValueInJson(targetProperty, targetProperty.value)
+        this.jsonDataBox.jsonDataChanged()
+        this.hideAndRevealRequiredItems(targetProperty)
+        this.resizeIfIsTooLongValue(id)
+        this.objectFormChanged(this.objectFormList)
+    }
+
     changeStateExtraOption = () => {
         this.hightligthsUsedExtraOption()
         this.objectFormChanged(this.objectFormList)

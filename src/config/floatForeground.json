@@ -57,7 +57,9 @@
                     "name": "url",
                     "idInput": "url",
                     "tool-tip": "Ścieżka do grafiki wzorca. Przykład: chmury/mgla1.png",
-                    "inputType": "string",
+                    "inputType": "file",
+                    "acceptFiles": ".png",
+                    "directory": "chmury/",
                     "varType": ["string"],
                     "defaultInput": "chmury/mgla1.png",
                     "require": [{"name": "action", "value": ["CREATE"]}]

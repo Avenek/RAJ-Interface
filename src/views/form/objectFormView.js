@@ -27,11 +27,19 @@ class ObjectFormView extends View{
                   html += `<div class="radio-button${isChecked}" id="${property.idInput}">${option.name}</div>`;
                 }
             }
+            else if(property.inputType === "file"){
+              const isCollapsed = property.isCollapsed || ""
+              const placeholder = property.inputPlaceholder || ""
+              const isError = property.errorMessage && property.errorMessage !== "" ? " error-input" : ""
+              const isExpanded = property.isExpanded ? " expanded" : ""
+              const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
+              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><label class="file-upload"><input type="file" id="${property.idInput}" accept="${property.acceptFiles}" name="${property.name}"/>Wybierz plik</label>`;
+          }
             else if(property.inputType === "string"){
                 const isCollapsed = property.isCollapsed || ""
                 const placeholder = property.inputPlaceholder || ""
                 const isError = property.errorMessage && property.errorMessage !== "" ? " error-input" : ""
-                const isExpanded = property.isExpanded ? "expanded" : ""
+                const isExpanded = property.isExpanded ? " expanded" : ""
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
                 html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}">`;
             }
@@ -188,10 +196,9 @@ class ObjectFormView extends View{
         }
       })  
     }
-
     bindEnterValueInInput = (handler) => {
       this.moduleObjectForm.addEventListener("input", event => { 
-        if (event.target.tagName === 'INPUT') {
+        if (event.target.tagName === 'INPUT' && event.target.type != "file") {
           handler(event.target.id, event.target.value)
         }
       })  
@@ -199,7 +206,7 @@ class ObjectFormView extends View{
 
     bindUnfocusInput = (handler) => {
       this.moduleObjectForm.addEventListener("focusout", event => { 
-        if (event.target.tagName === 'INPUT') {
+        if (event.target.tagName === 'INPUT'&& event.target.type != "file") {
           handler(event.target.id)
         }
       })  
@@ -218,6 +225,14 @@ class ObjectFormView extends View{
         if (event.target.classList.contains("slider")) {
           handler(event.target.id)
         }
+      })  
+    }
+
+    bindChooseFile = (handler) => {
+      this.moduleObjectForm.addEventListener("change", event => { 
+          const input = event.target
+          const fileName = input.files[0].name
+          handler(input.id, fileName);
       })  
     }
 }

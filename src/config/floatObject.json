@@ -80,9 +80,11 @@
                     "name": "url",
                     "idInput": "url",
                     "tool-tip": "Ścieżka do grafiki do grafiki obiektu.",
-                    "inputType": "string",
+                    "inputType": "file",
+                    "acceptFiles": ".gif",
+                    "directory": "object/",
                     "varType": ["string"],
-                    "defaultInput": "chmury/obj1.png",
+                    "defaultInput": "object/.gif",
                     "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
                 {

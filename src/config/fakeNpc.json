@@ -69,9 +69,11 @@
                     "name": "img",
                     "idInput": "img",
                     "tool-tip": "Ścieżka do grafiki dla fakeNPC. Grafiki są pobierane z katalogu /postacie.",
-                    "inputType": "string",
+                    "inputType": "file",
+                    "acceptFiles": ".gif",
+                    "directory": "npc/",
                     "varType": ["string"],
-                    "defaultInput": "/npc/test.gif",
+                    "defaultInput": "npc/test.gif",
                     "extraOptions": [{"name":"get character data"}],
                     "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
                 },
