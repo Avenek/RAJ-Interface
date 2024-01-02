@@ -1,0 +1,36 @@
+{
+    "properties": [
+        {
+            "name": "tracking",
+            "idInput": "tracking",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "parent",
+                    "idInput": "parent",
+                    "inputType": "empty",
+                    "varType": ["parent"],
+                    "tool-tip": "Rodzic, do którego ma być przypięta strzałka",
+                    "extraOptions": [{"name":"parent"}, {"name":"case"}]
+                },
+                {
+                    "name": "target",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "target.list",
+                            "idInput": "target.list",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": [],
+                            "tool-tip": "Lista obiektów, które będą reprezontować strzałki trackingowe.",
+                            "extraOptions": [{"name":"target"}]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
