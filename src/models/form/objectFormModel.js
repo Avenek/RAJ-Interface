@@ -126,6 +126,7 @@ class ObjectFormModel{
 
     hideAndRevealRequiredItems = (targetProperty = null) => {
     const listToSet = []
+    const listToRemove = []
       this.requiredItems.forEach(item => {
         let allConditionsAreMet = true
           for(let i = 0 ; i < item.require.length ; i++) {
@@ -180,10 +181,14 @@ class ObjectFormModel{
                 } 
             } 
             else if(!allConditionsAreMet){
-                this.jsonData.removeObjectKeyByPath(this.container, item.name)
-                item.value = ""
+                listToRemove.push({"name": item.name, "id": item.idInput})
             }
         }
+      })
+      listToRemove.forEach(key => {
+        this.jsonData.removeObjectKeyByPath(this.container, key.name)
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
+        targetProperty.value = ""
       })
       listToSet.forEach(key => {
         this.jsonData.setObjectKeyByPath(this.container, key.name, key.value)
@@ -422,6 +427,12 @@ class ObjectFormModel{
 
     makeKeyOrder = () => {
         const params = this.jsonData.getParams("module")
+        if(params.workingObject.hasOwnProperty("params")){
+            this.moveToLastPlaceInJson("params", params.workingObject)
+            if(params.workingObject.params.hasOwnProperty("color")){
+              this.moveToLastPlaceInJson("params.color", params.workingObject)
+            }
+          }
         if(params.workingObject.hasOwnProperty("behavior")){
           this.moveToLastPlaceInJson("behavior", params.workingObject)
           if(params.workingObject.behavior.hasOwnProperty("list")){

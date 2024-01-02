@@ -155,6 +155,15 @@
                                     "defaultSraj": "",
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "light.color",
+                                    "idInput": "light.color",
+                                    "tool-tip": "Kolor w formacie RGB.",
+                                    "inputType": "color",
+                                    "varType": ["color"],
+                                    "defaultSraj": "",
+                                    "canBeEmpty": true
                                 }
                             ]
                         }

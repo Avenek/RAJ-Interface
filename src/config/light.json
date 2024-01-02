@@ -80,6 +80,15 @@
                             "varType": ["float", "int"],
                             "defaultInput":1,
                             "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "color",
+                            "idInput": "color",
+                            "tool-tip": "Kolor w formacie RGB.",
+                            "inputType": "color",
+                            "varType": ["color"],
+                            "defaultSraj": "",
+                            "canBeEmpty": true
                         }
                     ]
                 }

@@ -57,6 +57,15 @@
                     "defaultInput":1,
                     "extraOptions": [{"name":"get random"}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "color",
+                    "idInput": "color",
+                    "tool-tip": "Kolor w formacie RGB.",
+                    "inputType": "color",
+                    "varType": ["color"],
+                    "defaultSraj": "",
+                    "canBeEmpty": true
                 }
             ]
         }     

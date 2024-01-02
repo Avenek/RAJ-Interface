@@ -23,9 +23,13 @@ class ObjectIdBoxModel{
                 idList.push({"name": id, "isChecked": false})
             })
         }
-        else{
+        else if(params.workingObject === undefined || params.workingObject === null){
             this.jsonData.addObject(this.container)
             idList.push({"name": params.module, "isChecked": true})
+        }
+        else{
+            idList.push({"name": params.module, "isChecked": true})
+            params.objectId = 0
         }
         idList[params.objectId].isChecked = true
         this.objectIdList = idList
