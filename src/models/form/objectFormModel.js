@@ -72,10 +72,13 @@ class ObjectFormModel{
           const hex = value.toString(16);
           return hex.length === 1 ? '0' + hex : hex;
         };
-        const hexR = toHex(r);
-        const hexG = toHex(g);
-        const hexB = toHex(b);
-        return `#${hexR}${hexG}${hexB}`;
+        if(typeof r != "object" && typeof g != "object" && typeof b != "object"){
+            const hexR = toHex(r)
+            const hexG = toHex(g)
+            const hexB = toHex(b)
+            return `#${hexR}${hexG}${hexB}`
+        }
+        return ""
     }
 
 
@@ -209,8 +212,10 @@ class ObjectFormModel{
     
         for(let key in currentObj) {
             const currentKey = key;
-            if (!Array.isArray(currentObj[currentKey]) && typeof currentObj[currentKey] == 'object') {
-                if(!this.isObjectCompatibleWithConfig(currentObj[currentKey], config.find(obj => obj.name.includes("."+currentKey)).properties)){
+            if(key.startsWith("get")) continue
+            else if (!Array.isArray(currentObj[currentKey]) && typeof currentObj[currentKey] == 'object') {
+                const newConfig = config.find(obj => obj.name.includes("."+currentKey)).properties || config
+                if(!this.isObjectCompatibleWithConfig(currentObj[currentKey], newConfig)){
                     return false
                 }
             }

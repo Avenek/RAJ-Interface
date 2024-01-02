@@ -51,7 +51,7 @@ class ObjectFormView extends View{
                 isCollapsed = " " + property.isCollapsed
               }
               const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="color" class="key-value-input" id="${property.idInput}" value="${property.value}" name="${property.name}">`;
+              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="color" class="key-value-input" id="${property.idInput}" value="${property.value || "#ffffff"}" name="${property.name}">`;
             }
             else if(property.inputType === "string"){
               let isCollapsed = ""
@@ -69,10 +69,11 @@ class ObjectFormView extends View{
               if(property.isCollapsed){
                 isCollapsed = " " + property.isCollapsed
               }
+                const value = typeof property.value == "object" ? property.defaultInput : property.value
                 const isError = property.isValid ? "" : " error-input"
                 const isExpanded = property.isExpanded ? "expanded" : ""
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="number" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" step=${property.step} min=${property.min} max=${property.max} value="${property.value}" name="${property.name}">`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="number" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" step=${property.step} min=${property.min} max=${property.max} value="${value}" name="${property.name}">`;
             } 
             else if(property.inputType === "boolean"){
               let isCollapsed = ""

@@ -89,7 +89,7 @@ class JsonDataModel {
               this.extraOptionPathParams.workingObject = this.getValueFromWorkingObject("module", path+`.${module}`)
             }
             else{
-              const value = this.getValueFromWorkingObject("module", key)
+              const value = this.getValueFromWorkingObject("module", key+"."+module)
               this.extraOptionPathParams.workingObject = typeof value == "object" ? value : null
             }
             

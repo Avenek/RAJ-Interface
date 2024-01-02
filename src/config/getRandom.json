@@ -8,7 +8,7 @@
         "properties":[
           {
             "name": "resultType",
-            "idInput": "rZXesultType",
+            "idInput": "resultType",
             "tool-tip": "Typ zmiennej, która ma zostać wylosowana.",
             "inputType": "options",
             "varType": ["string"],

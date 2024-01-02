@@ -27,7 +27,7 @@ class DataValidation{
                             }
                         }
                     }
-                    else{
+                    else if(valueType !== "object"){
                         validSummary.isValid = false
                         validSummary.errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${this.property.varType.join(", ")}`
                         return validSummary
