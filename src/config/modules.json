@@ -9,7 +9,7 @@
       "name": "behavior",
       "hasList": true,
       "bindId": "name",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "behaviorDynamicLight",
@@ -20,7 +20,7 @@
       "name": "behaviorDynamicLightBehavior",
       "hasList": true,
       "bindId": "id",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "callInstantBehaviorFakeNpc",
@@ -58,7 +58,7 @@
       "name": "color",
       "hasList": false,
       "bindId": "module",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "dialogue",
@@ -99,7 +99,7 @@
       "name": "extraLightMaster",
       "hasList": false,
       "bindId": "module",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "fakeNpc",
@@ -110,7 +110,7 @@
       "name": "fakeNpcBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "fakeNpcRandomFirstIndex",
@@ -132,7 +132,7 @@
       "name": "floatObjectBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "key"
+      "path": "fromId"
 
     },
     {
@@ -157,13 +157,13 @@
       "name": "light",
       "hasList": false,
       "bindId": "module",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "master",
       "hasList": false,
       "bindId": "module",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "mapFilter",
@@ -184,7 +184,7 @@
       "name": "parent",
       "hasList": false,
       "bindId": "module",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "randomFirstIndex",
@@ -201,7 +201,7 @@
       "name": "sequenceBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "sound",
@@ -212,13 +212,13 @@
       "name": "source",
       "hasList": false,
       "bindId": "module",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "target",
       "hasList": true,
       "bindId": "id",
-      "path": "key"
+      "path": "fromId"
     },
     {
       "name": "tracking",

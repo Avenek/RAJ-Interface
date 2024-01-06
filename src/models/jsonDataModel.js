@@ -76,7 +76,7 @@ class JsonDataModel {
         this.extraOptionPathParams.objectId = id
         this.extraOptionPathParams.key = key
         const configPath = this.moduleConfig.modules.find(object => object.name === fileName).path
-        this.extraOptionPathParams.path = configPath === "key" ? key : configPath
+        this.extraOptionPathParams.path = configPath === "fromId" ? key : configPath
         this.extraOptionPathParams.hasList = this.moduleConfig.modules.find(object => object.name === fileName).hasList
         try{
           if(this.extraOptionPathParams.hasList){

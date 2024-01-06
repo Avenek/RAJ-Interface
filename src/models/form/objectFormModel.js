@@ -157,9 +157,7 @@ class ObjectFormModel{
             {
                 if(item.properties){
                     const valueObject = this.createObjectBaseOnConfig(item.properties)
-                    this.jsonData.setObjectKeyByPath(this.container, item.name, valueObject)
                     listToSet.push({"name": item.name, "id": item.idInput, "value": valueObject})
-                    item.value = valueObject
                 }
                 else {
                     this.jsonData.setObjectKeyByPath(this.container, item.name, item.defaultInput)
@@ -173,9 +171,7 @@ class ObjectFormModel{
                     if(!this.isObjectCompatibleWithConfig(value, item.properties)){
                         valueObject = this.createObjectBaseOnConfig(item.properties)
                     }
-                    this.jsonData.setObjectKeyByPath(this.container, item.name, valueObject)
                     listToSet.push({"name": item.name, "id": item.idInput, "value": valueObject})
-                    item.value = valueObject
                 }
                 else if((item.options && item.options.some(value => value.name === value)) || value !== null){
                     listToSet.push({"name": item.name, "id": item.idInput, "value": value})
@@ -216,6 +212,7 @@ class ObjectFormModel{
     }
 
     isObjectCompatibleWithConfig = (object, config) => {
+        const extraOptionWords = ['getCharacterData', "getRandom", "case", "getFor", "getFunc", "getRandom", "ligth", "master", "randomFirstIndex", "source", "parent", "target"]
         if(object == null || object == undefined || config == null || config == undefined)
         {
             return false
@@ -224,9 +221,12 @@ class ObjectFormModel{
     
         for(let key in currentObj) {
             const currentKey = key;
-            if(key.startsWith("get")) continue
+            if(extraOptionWords.includes(key)) continue
             else if (!Array.isArray(currentObj[currentKey]) && typeof currentObj[currentKey] == 'object') {
-                const newConfig = config.find(obj => obj.name.endsWith(currentKey)).properties || config
+                let newConfig = config.find(obj => obj.name.endsWith(currentKey))
+                if(newConfig){
+                    newConfig = newConfig.properties || config
+                }
                 if(!this.isObjectCompatibleWithConfig(currentObj[currentKey], newConfig)){
                     return false
                 }
@@ -278,7 +278,16 @@ class ObjectFormModel{
                 const extraOptionName = this.configUtils.formatToCamelCase(extraOption.name)
                 const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
                 const modulePath = this.jsonData.moduleConfig.modules.find(object => object.name === fileName).path
-                const path = modulePath === "key" ? item.name + "." + extraOptionName : modulePath
+                const path = (() => {
+                    switch (modulePath) {
+                        case 'key':
+                            return item.name;
+                        case 'fromId':
+                            return item.idInput;
+                        default:
+                            return modulePath;
+                    }
+                })()
                 const extraOptionValue = this.jsonData.getValueFromWorkingObject("module", path)
                 if(Array.isArray(extraOptionValue)){
                     extraOption.isUsed = extraOptionValue.length > 0

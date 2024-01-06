@@ -139,7 +139,7 @@
                             "properties": [
                                 {
                                     "name": "d.behavior.repeat",
-                                    "idInput": "behavior.repeat",
+                                    "idInput": "d.behavior.repeat",
                                     "tool-tip": "Ilość powtórzeń całej tablicy zachowań, jeżeli damy wartość true to nieskończoność.",
                                     "inputType": "string",
                                     "varType": ["int", "boolean"],
@@ -151,7 +151,7 @@
                                 },
                                 {
                                     "name": "d.behavior.list",
-                                    "idInput": "behavior.list",
+                                    "idInput": "d.behavior.list",
                                     "inputType": "empty",
                                     "varType": ["list"],
                                     "defaultInput": [],
