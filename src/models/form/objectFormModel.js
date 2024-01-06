@@ -186,8 +186,16 @@ class ObjectFormModel{
                     value !== item.defaultInput
                 } 
             } 
-            else if(!allConditionsAreMet && this.isObjectCompatibleWithConfig(value, item.properties)){
-                listToRemove.push({"name": item.name, "id": item.idInput})
+            else if(!allConditionsAreMet){
+                if(value != null && value != undefined && typeof value == "object"){
+                    if(this.isObjectCompatibleWithConfig(value, item.properties)){
+                        listToRemove.push({"name": item.name, "id": item.idInput})
+                    }
+                }
+                else{
+                    listToRemove.push({"name": item.name, "id": item.idInput})
+                }
+                
             }
         }
       })
@@ -208,13 +216,17 @@ class ObjectFormModel{
     }
 
     isObjectCompatibleWithConfig = (object, config) => {
+        if(object == null || object == undefined || config == null || config == undefined)
+        {
+            return false
+        }
         let currentObj = object;
     
         for(let key in currentObj) {
             const currentKey = key;
             if(key.startsWith("get")) continue
             else if (!Array.isArray(currentObj[currentKey]) && typeof currentObj[currentKey] == 'object') {
-                const newConfig = config.find(obj => obj.name.includes("."+currentKey)).properties || config
+                const newConfig = config.find(obj => obj.name.endsWith(currentKey)).properties || config
                 if(!this.isObjectCompatibleWithConfig(currentObj[currentKey], newConfig)){
                     return false
                 }
