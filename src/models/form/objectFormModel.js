@@ -281,7 +281,7 @@ class ObjectFormModel{
                 const path = (() => {
                     switch (modulePath) {
                         case 'key':
-                            return item.name;
+                            return item.idInput;
                         case 'fromId':
                             return item.idInput;
                         default:
@@ -289,11 +289,12 @@ class ObjectFormModel{
                     }
                 })()
                 const extraOptionValue = this.jsonData.getValueFromWorkingObject("module", path)
+                extraOption.isUsed = false
                 if(Array.isArray(extraOptionValue)){
                     extraOption.isUsed = extraOptionValue.length > 0
                 }
-                else{
-                    extraOption.isUsed = extraOptionValue ? true : false
+                else if(extraOptionValue){
+                    extraOption.isUsed = typeof extraOptionValue == "object" ? true : false
                 }
             }) 
         })
