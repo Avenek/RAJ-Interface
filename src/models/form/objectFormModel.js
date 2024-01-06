@@ -5,6 +5,7 @@ class ObjectFormModel{
         this.jsonDataBox = jsonDataBox
         this.objectFormList = []
         this.extraOptionIdBox = null
+        this.extraOptionWords = ['getCharacterData', "getRandom", "case", "getFor", "getFunc", "getRandom", "light", "master", "randomFirstIndex", "source", "parent", "target"]
         this.fetchConfigAndCreateObjectFormList()
     }
 
@@ -212,7 +213,6 @@ class ObjectFormModel{
     }
 
     isObjectCompatibleWithConfig = (object, config) => {
-        const extraOptionWords = ['getCharacterData', "getRandom", "case", "getFor", "getFunc", "getRandom", "ligth", "master", "randomFirstIndex", "source", "parent", "target"]
         if(object == null || object == undefined || config == null || config == undefined)
         {
             return false
@@ -221,7 +221,7 @@ class ObjectFormModel{
     
         for(let key in currentObj) {
             const currentKey = key;
-            if(extraOptionWords.includes(key)) continue
+            if(this.extraOptionWords.includes(key)) continue
             else if (!Array.isArray(currentObj[currentKey]) && typeof currentObj[currentKey] == 'object') {
                 let newConfig = config.find(obj => obj.name.endsWith(currentKey))
                 if(newConfig){
