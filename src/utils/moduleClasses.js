@@ -263,7 +263,7 @@ let moduleDict = {
     constructor(){
       this.onlyNight = true,
       this.r = 20
-      this.color = [new moduleDict["color"]()]
+      this.color = new moduleDict["color"]()
     }
   },
 
