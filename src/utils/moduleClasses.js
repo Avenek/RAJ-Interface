@@ -26,7 +26,6 @@ let moduleDict = {
   behaviorDynamicLightBehavior : class BehaviorDynamicLightBehavior{
     constructor(){
       this.name = "IDLE"
-      this.duration = 5
     }
   },
   

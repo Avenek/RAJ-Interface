@@ -80,7 +80,7 @@ class JsonDataModel {
         this.extraOptionPathParams.hasList = this.moduleConfig.modules.find(object => object.name === fileName).hasList
         try{
           if(this.extraOptionPathParams.hasList){
-            const object = this.modulePathParams.workingObject[this.getPathToKey(params.path)]
+            const object = this.getValueFromWorkingObject("module", params.path)
             this.extraOptionPathParams.workingList = Array.isArray(object) ? object : object.list
             this.extraOptionPathParams.workingObject = this.extraOptionPathParams.workingList[id]
           }
