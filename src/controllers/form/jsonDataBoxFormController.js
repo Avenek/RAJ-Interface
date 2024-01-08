@@ -8,6 +8,7 @@ class JsonDataBoxFormController extends JsonDataBoxController{
     }
 
     jsonDataChanged = () => {
+        localStorage.setItem('lastJson', JSON.stringify(this.model.jsonData.data));
         this.view.updateJsonData(this.model.jsonData, this.model.isBeautified)
     }
 }

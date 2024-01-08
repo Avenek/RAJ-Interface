@@ -54,6 +54,10 @@ class ObjectFormView extends View{
               html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="color" class="key-value-input" id="${property.idInput}" value="${property.value || "#ffffff"}" name="${property.name}">`;
             }
             else if(property.inputType === "string"){
+              let value = property.value
+              if(Array.isArray(value)){
+                value = value.join(";")
+              }
               let isCollapsed = ""
               if(property.isCollapsed){
                 isCollapsed = " " + property.isCollapsed
@@ -62,7 +66,7 @@ class ObjectFormView extends View{
                 const isError = property.errorMessage && property.errorMessage !== "" ? " error-input" : ""
                 const isExpanded = property.isExpanded ? " expanded" : ""
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}">`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${value}" name="${property.name}" placeholder="${placeholder}">`;
             }
             else if(property.inputType === "number"){
               let isCollapsed = ""
@@ -162,7 +166,7 @@ class ObjectFormView extends View{
               }
               break;
             case "notEqual":
-              message = `Wartość tego pola dla typu ${valid.forType} powinna być różna od ${valid.value}!`
+              message = `Wartość tego pola dla typu ${valid.forType} powinna być różna od ${valid.value.join(', ')}!`
               if(!requirementsInfo.includes(message)){
                 requirementsInfo += '<br>'+ message
               }
@@ -172,7 +176,7 @@ class ObjectFormView extends View{
                 message = `Wartość tego pola dla typu ${valid.forType} powinna być pusta!`
               }
               else{
-                message = `Wartość tego pola dla typu ${valid.forType} powinna być równa ${valid.value}!`
+                message = `Wartość tego pola dla typu ${valid.forType} powinna być równa ${valid.value.join(', ')}!`
               }
               if(!requirementsInfo.includes(message)){
                 requirementsInfo += '<br>'+ message

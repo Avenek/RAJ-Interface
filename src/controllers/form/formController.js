@@ -14,7 +14,7 @@ class FormController {
       const key = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput").name
       let extraOptionName = extraOption
       const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
-      if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null && this.model.jsonData.extraOptionPathParams.module === extraOptionName){
+      if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null && this.model.jsonData.extraOptionPathParams.path === key){
         this.model.extraOptionObjectFormModel.clearForm()
         this.model.extraOptionObjectIdBoxModel.clearBox(false)
         this.model.jsonData.extraOptionPathParams.workingObject = null

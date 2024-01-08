@@ -78,11 +78,16 @@ class ConfigUtils{
       }
   }
 
-  
-
     getLastPartOfTheName = (fullName) => {
       const dotIndex = fullName.lastIndexOf('.');
       const paramName = dotIndex !== -1 ? fullName.substring(dotIndex + 1) : fullName;
+    
+      return paramName
+    }
+
+    getKeyNameFromPath = (fullName) => {
+      const dotIndex = fullName.lastIndexOf('.');
+      const paramName = dotIndex !== -1 ? fullName.substring(0, dotIndex) : fullName;
     
       return paramName
     }

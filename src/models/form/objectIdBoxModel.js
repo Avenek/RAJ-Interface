@@ -5,6 +5,7 @@ class ObjectIdBoxModel{
         this.jsonDataBox = jsonDataBox
         this.hasList = true
         this.objectForm = objectForm
+        this.configUtils = new ConfigUtils()
         this.createObjectIdList()
     }
 
@@ -92,13 +93,10 @@ class ObjectIdBoxModel{
         else if(this.objectIdList.length === 0){
             params.workingObject = null
         }
-        if(params.path === "key"){
-            const defaultInput = this.moduleObjectForm.configUtils.findObjectByProperty(this.moduleObjectForm.config.properties, params.key, "name").defaultInput
-            this.jsonData.deleteObject(this.container, index, defaultInput)
-        }
-        else{
-            this.jsonData.deleteObject(this.container, index, "")
-        }
+        const path = this.configUtils.getKeyNameFromPath(params.path)
+        const property = this.moduleObjectForm.configUtils.findObjectByProperty(this.moduleObjectForm.config.properties, path, "name")
+        const defaultInput = property ? property.defaultInput : null
+        this.jsonData.deleteObject(this.container, index, defaultInput)
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
         if(this.objectIdList.length > 0){

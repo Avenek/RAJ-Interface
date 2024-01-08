@@ -15,13 +15,13 @@ class DataValidation{
                 validSummary.errorMessage = "Wartość tego pola nie może być pusta!"
                 return validSummary
             }
-            else if(!this.property.canBeEmpty && this.property.validation){
+            else if(!this.property.canBeEmpty || this.property.validation){
                 let valuesArray = this.convertValueToArray(value)
                 valuesArray.forEach(value => {
                     let valueType = this.checkValueType(value)
                     if(this.property.varType.includes(valueType) && valueType !== "object"){
                         for(const valid of this.property.validation){
-                            validSummary = this.checkCondition(valid, this.property)
+                            validSummary = this.checkCondition(valid, this.property, value)
                             if(!validSummary.isValid){
                                 return validSummary
                             }
@@ -39,9 +39,9 @@ class DataValidation{
     }
 
     convertValueToArray = (value) => {
-        const valuesArray = []
+        let valuesArray = []
         if(value.length > 0 && Array.isArray(value)){
-            valuesArray = value.split(";")
+            valuesArray = value
         }
         else{
             valuesArray.push(value)
@@ -62,8 +62,7 @@ class DataValidation{
         return value === Math.floor(value);
     }
 
-    checkCondition = (valid, property) => {
-        const value = property.value
+    checkCondition = (valid, property, value) => {
         const valueType = this.checkValueType(value)
         let validSummary = {"isValid": true, "errorMessage": ""}
         if(valid.forType === valueType){

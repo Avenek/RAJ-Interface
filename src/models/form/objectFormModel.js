@@ -281,9 +281,9 @@ class ObjectFormModel{
                 const path = (() => {
                     switch (modulePath) {
                         case 'key':
-                            return item.idInput;
+                            return item.name;
                         case 'fromId':
-                            return item.idInput;
+                            return item.name;
                         default:
                             return modulePath;
                     }

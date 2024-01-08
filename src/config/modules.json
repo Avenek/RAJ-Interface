@@ -137,7 +137,7 @@
     },
     {
       "name": "floatObjectRandomFirstIndex",
-      "hasList": true,
+      "hasList": false,
       "bindId": "module",
       "path": "behavior.randomFirstIndex"
     },
@@ -190,7 +190,7 @@
       "name": "randomFirstIndex",
       "hasList": false,
       "bindId": "module",
-      "path": "behavior.randomFirstIndex"
+      "path": "behavior"
     },
     {
       "name": "sequence",

@@ -236,7 +236,7 @@ let moduleDict = {
 
   floatObjectRandomFirstIndex : class RandomFirstIndex {
     constructor(){
-      this.randomFirstIndex = { "forActions": []}
+      this.forActions = []
     }
   },
 
@@ -251,7 +251,8 @@ let moduleDict = {
   },
 
   getRandom : class GetRandom {
-    constructor() {
+    constructor() 
+    {
       this.resultType = "int"
       this.start = 0
       this.end = 1

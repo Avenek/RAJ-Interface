@@ -8,6 +8,7 @@ class JsonDataBoxHomeController extends JsonDataBoxController{
     }
 
     jsonDataChanged = (jsonData, isBeautified, errorMode) => {
+        localStorage.setItem('lastJson', JSON.stringify(this.model.jsonData.data));
         this.view.updateJsonData(jsonData, isBeautified, errorMode)
         this.dataObjectsBox.model.jsonData = this.model.jsonData
         this.dataObjectsBox.model.dataObjectsListChanged()

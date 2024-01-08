@@ -30,7 +30,6 @@ class JsonDataBoxFormModel{
     clearJsonData = () => {
         if (window.confirm("Czy na pewno chcesz wyczyścić pole Json?\nPS. Ctrl+z nie przywróci go już z powrotem.")) {
             this.jsonData.clearData()
-            localStorage.setItem('lastJson', JSON.stringify(this.jsonData.data));
             this.jsonDataChanged()
             this.objectIdBoxModel.clearBox(true)
             this.objectFormModel.clearForm()
