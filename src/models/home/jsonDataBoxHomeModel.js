@@ -27,7 +27,6 @@ class JsonDataBoxHomeModel{
     clearJsonData = () => {
         if (window.confirm("Czy na pewno chcesz wyczyścić pole Json?\nPS. Ctrl+z nie przywróci go już z powrotem.")) {
             this.jsonData.data = {}
-            localStorage.setItem('lastJson', JSON.stringify(this.jsonData.data));
             this.jsonDataChanged(this.jsonData, this.isBeautified, this.errorMode)
         }
     }
@@ -35,7 +34,6 @@ class JsonDataBoxHomeModel{
     modifyJsonData = (jsonData) => {
         try {
             this.jsonData.data = JSON.parse(jsonData)
-            localStorage.setItem('lastJson', JSON.stringify(this.jsonData.data));
             this.errorMode = false
         }
         catch{
@@ -44,6 +42,5 @@ class JsonDataBoxHomeModel{
         }
         this.jsonDataChanged(this.jsonData, this.isBeautified, this.errorMode)
     }
-
 
 }

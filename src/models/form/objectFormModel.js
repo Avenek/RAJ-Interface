@@ -37,7 +37,6 @@ class ObjectFormModel{
         this.hideAndRevealRequiredItems()
         this.hightligthsUsedExtraOption()
         this.objectFormChanged(this.objectFormList)
-        localStorage.setItem('lastJson', JSON.stringify(this.jsonData.data));
     }
 
     createObjectProperty = (property) => {
@@ -472,7 +471,6 @@ class ObjectFormModel{
             this.jsonData.removeObjectKeyByPath(this.container, targetProperty.name)
         }
         this.makeKeyOrder()
-        localStorage.setItem('lastJson', JSON.stringify(this.jsonData.data));
     }
 
     clearForm = () => {
