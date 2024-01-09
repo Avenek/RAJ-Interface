@@ -275,7 +275,7 @@ class ObjectFormModel{
         items.forEach(item => {
             item.extraOptions.forEach(extraOption => {
                 const extraOptionName = this.configUtils.formatToCamelCase(extraOption.name)
-                const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
+                const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.jsonData.getParams("module").module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
                 const modulePath = this.jsonData.moduleConfig.modules.find(object => object.name === fileName).path
                 const path = (() => {
                     switch (modulePath) {
@@ -369,7 +369,7 @@ class ObjectFormModel{
         targetProperty.value = valueInGoodType
         if((targetProperty.inputType === "string" || targetProperty.inputType === "number") && targetProperty.extraOptions && this.extraOptionIdBox){
             targetProperty.extraOptions.forEach(option => option.isUsed = false)
-            this.jsonData.extraOptionPathParams.workingObject = null
+            this.jsonData.getParams("extraOption").workingObject = null
             this.extraOptionIdBox.clearBox(false)
             this.extraOptionIdBox.objectForm.clearForm()
         }
@@ -445,11 +445,12 @@ class ObjectFormModel{
         this.updateValueInJson(targetProperty.properties[0], targetProperty.properties[0].value)
         this.updateValueInJson(targetProperty.properties[1], targetProperty.properties[1].value)
         this.updateValueInJson(targetProperty.properties[2], targetProperty.properties[2].value)
-        if(this.extraOptionIdBox){
+        const params = this.jsonData.getParams("extraOption")
+        if(this.extraOptionIdBox && this.configUtils.getKeyNameFromPath(params.path).startsWith(this.configUtils.getKeyNameFromPath(targetProperty.name))){
             targetProperty.properties[0].extraOptions.forEach(option => option.isUsed = false)
             targetProperty.properties[1].extraOptions.forEach(option => option.isUsed = false)
             targetProperty.properties[2].extraOptions.forEach(option => option.isUsed = false)
-            this.jsonData.extraOptionPathParams.workingObject = null
+            params.workingObject = null
             this.extraOptionIdBox.clearBox(false)
             this.extraOptionIdBox.objectForm.clearForm()
         }

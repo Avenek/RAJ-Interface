@@ -94,7 +94,7 @@ class ObjectIdBoxModel{
             params.workingObject = null
         }
         const path = this.configUtils.getKeyNameFromPath(params.path)
-        const property = this.moduleObjectForm.configUtils.findObjectByProperty(this.moduleObjectForm.config.properties, path, "name")
+        const property = this.container === "extraOption" ? this.moduleObjectForm.configUtils.findObjectByProperty(this.moduleObjectForm.config.properties, path, "name") : null
         const defaultInput = property ? property.defaultInput : null
         this.jsonData.deleteObject(this.container, index, defaultInput)
         this.objectIdListChanged(this.objectIdList, this.hasList)
@@ -186,7 +186,7 @@ class ObjectIdBoxModel{
     }
 
     clearExtraOption = () => {
-        this.jsonData.extraOptionPathParams.workingObject = null
+        this.jsonData.getParams("extraOption").workingObject = null
         if(this.extraOptionIdBox){
             this.extraOptionIdBox.clearBox(false)
             this.extraOptionObjectForm.clearForm()

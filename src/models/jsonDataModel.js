@@ -1,27 +1,22 @@
+class ObjectParams {
+  constructor(){
+    this.module = null,
+    this.objectId = null,
+    this.hasList = true,
+    this.workingList = null,
+    this.workingObject = null,
+    this.path = null,
+    this.fileName = null
+  }
+}
+
 class JsonDataModel {
     constructor() {
       this.data = JSON.parse(localStorage.getItem('lastJson')) || {};
       this.moduleConfig = null
       this.configUtils = new ConfigUtils()
       this.fetchConfig()
-      this.modulePathParams = {
-        "module": null,
-        "objectId": null,
-        "hasList": true,
-        "workingList": null,
-        "workingObject": null,
-        "path": null,
-        "fileName": null
-      }
-      this.extraOptionPathParams = {
-        "module": null,
-        "objectId": null,
-        "hasList": true,
-        "workingList": null,
-        "workingObject": null,
-        "path": null,
-        "fileName": null
-      }
+      this.objectsParams = []
     }
 
     fetchConfig = () => {
@@ -37,17 +32,7 @@ class JsonDataModel {
 
     clearData = () => {
       this.data = {}
-      this.modulePathParams.workingObject = null
-      this.modulePathParams.workingList = null
-      this.extraOptionPathParams = {
-        "module": null,
-        "objectId": null,
-        "hasList": true,
-        "workingList": null,
-        "workingObject": null,
-        "path": null,
-        "fileName": null
-      }
+      this.objectsParams = []
     }
 
     setParams = (container, module, fileName, id, key = "") => {
@@ -55,27 +40,25 @@ class JsonDataModel {
       params.workingObject = null
       params.workingList = null
       params.fileName = fileName
+      params.module = module
+      params.objectId = id
       if(container === "module"){
-        this.modulePathParams.module = module
-        this.modulePathParams.objectId = id
-        this.modulePathParams.path = this.moduleConfig.modules.find(object => object.name === module).path || "object"
-        this.modulePathParams.hasList = this.moduleConfig.modules.find(object => object.name === module).hasList
+        params.path = this.moduleConfig.modules.find(object => object.name === module).path || "object"
+        params.hasList = this.moduleConfig.modules.find(object => object.name === module).hasList
         try{
-          if(this.modulePathParams.hasList){
-            this.modulePathParams.workingList = this.data[module].list
-            this.modulePathParams.workingObject = this.data[module].list[id]
+          if(params.hasList){
+            params.workingList = this.data[module].list
+            params.workingObject = this.data[module].list[id]
           }
           else{
-            this.modulePathParams.workingObject = this.data[module]
+            params.workingObject = this.data[module]
           }
         }
         catch{}
       }
       else{
-        this.extraOptionPathParams.module = module
-        this.extraOptionPathParams.objectId = id
         const configPath = this.moduleConfig.modules.find(object => object.name === fileName).path
-        this.extraOptionPathParams.path = (() => {
+        params.path = (() => {
           switch (configPath) {
               case 'key':
                   return key + "." + module
@@ -85,16 +68,16 @@ class JsonDataModel {
                   return configPath;
             }
           })()
-        this.extraOptionPathParams.hasList = this.moduleConfig.modules.find(object => object.name === fileName).hasList
+        params.hasList = this.moduleConfig.modules.find(object => object.name === fileName).hasList
         try{
-          if(this.extraOptionPathParams.hasList){
+          if(params.hasList){
             const object = this.getValueFromWorkingObject("module", params.path)
-            this.extraOptionPathParams.workingList = Array.isArray(object) ? object : object.list
-            this.extraOptionPathParams.workingObject = this.extraOptionPathParams.workingList[id]
+            params.workingList = Array.isArray(object) ? object : object.list
+            params.workingObject = params.workingList[id]
           }
           else{
-            const value = this.getValueFromWorkingObject("module", this.extraOptionPathParams.path)
-            this.extraOptionPathParams.workingObject = typeof value == "object" ? value : null
+            const value = this.getValueFromWorkingObject("module", params.path)
+            params.workingObject = typeof value == "object" ? value : null
           }
         }
         catch{}
@@ -103,10 +86,47 @@ class JsonDataModel {
 
     getParams = (container) => {
       if(container === "module"){
-        return this.modulePathParams
+        if (this.objectsParams.length === 0){
+          const params = new ObjectParams()
+          this.objectsParams.push(params)
+          return this.objectsParams[0];
+        }
+        else if (this.objectsParams.length === 1) {
+          return this.objectsParams[0];
+        } 
+        else {
+            return this.objectsParams[this.objectsParams.length - 2];
+        }
       }
-      return this.extraOptionPathParams
+      else{
+        if(this.objectsParams.length === 1){
+          const params = new ObjectParams()
+          this.objectsParams.push(params)
+        }
+        return this.objectsParams[this.objectsParams.length - 1]
+      }
     }
+
+    deleteParams = (container) => {
+      if(container === "module"){
+        if (this.objectsParams.length === 0){
+          return
+        }
+        else if (this.objectsParams.length === 1) {
+          this.objectsParams.splice(0,1)
+        } 
+        else {
+            this.objectsParams.splice(this.objectsParams.length - 2, 1)
+        }
+      }
+      else{
+        if(this.objectsParams.length < 2){
+          return
+        }
+        this.objectsParams.splice(this.objectsParams.length - 1, 1)
+      }
+    }
+
 
     addObject = (container, name = "") => {
       const params = this.getParams(container)
@@ -160,6 +180,7 @@ class JsonDataModel {
           }
           else if(params.module !== "behavior"){
             this.removeObjectKeyByPath("module", params.path)
+            this.deleteParams(container)
           }
         }
       }
@@ -173,6 +194,7 @@ class JsonDataModel {
         }
         else{
           this.removeObjectKeyByPath("module", params.path)
+          this.deleteParams(container)
         }
       }
       

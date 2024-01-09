@@ -13,11 +13,13 @@ class FormController {
     handleClickExtraOption = (extraOption, id) => {
       const key = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput").name
       let extraOptionName = extraOption
-      const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.model.jsonData.modulePathParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
-      if(this.extraOptionObjectForm && this.model.jsonData.extraOptionPathParams.workingObject !== null && this.model.jsonData.extraOptionPathParams.path === key){
+      const moduleParams = this.model.jsonData.getParams("module")
+      const extraOptionParams = this.model.jsonData.getParams("extraOption")
+      const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? moduleParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
+      if(this.extraOptionObjectForm && extraOptionParams.workingObject !== null && extraOptionParams.path.includes(extraOptionName)){
         this.model.extraOptionObjectFormModel.clearForm()
         this.model.extraOptionObjectIdBoxModel.clearBox(false)
-        this.model.jsonData.extraOptionPathParams.workingObject = null
+        extraOptionParams.workingObject = null
       }
       else{
         this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, key)
