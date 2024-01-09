@@ -49,6 +49,7 @@ class ObjectFormModel{
             this.addExpandedKey(prop)
             this.propertyValidation(prop)
         } 
+        
     }
 
     fillPropertyValue = (propertyObject, parentProperty) => {
@@ -204,6 +205,10 @@ class ObjectFormModel{
         this.jsonData.setObjectKeyByPath(this.container, key.name, key.value)
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
         targetProperty.value = key.value
+        this.propertyValidation(targetProperty)
+      })
+      listToSet.forEach(key => {
+        const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
         this.propertyValidation(targetProperty)
       })
       const params = this.jsonData.getParams(this.container)
