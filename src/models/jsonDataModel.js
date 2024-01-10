@@ -36,7 +36,8 @@ class JsonDataModel {
     }
 
     setParams = (container, module, fileName, id, key = "") => {
-      const params = this.getParams(container)
+      const params = new ObjectParams()
+      this.objectsParams.push(params)
       params.workingObject = null
       params.workingList = null
       params.fileName = fileName
@@ -86,10 +87,8 @@ class JsonDataModel {
 
     getParams = (container) => {
       if(container === "module"){
-        if (this.objectsParams.length === 0){
-          const params = new ObjectParams()
-          this.objectsParams.push(params)
-          return this.objectsParams[0];
+        if(this.objectsParams.length === 0){
+          return null
         }
         else if (this.objectsParams.length === 1) {
           return this.objectsParams[0];
@@ -100,33 +99,24 @@ class JsonDataModel {
       }
       else{
         if(this.objectsParams.length === 1){
-          const params = new ObjectParams()
-          this.objectsParams.push(params)
+          return null
         }
         return this.objectsParams[this.objectsParams.length - 1]
       }
     }
 
-    deleteParams = (container) => {
-      if(container === "module"){
-        if (this.objectsParams.length === 0){
-          return
-        }
-        else if (this.objectsParams.length === 1) {
-          this.objectsParams.splice(0,1)
-        } 
-        else {
-            this.objectsParams.splice(this.objectsParams.length - 2, 1)
-        }
+    deleteParams = () => {
+      if(this.objectsParams.length < 2){
+        return
       }
-      else{
-        if(this.objectsParams.length < 2){
-          return
-        }
-        this.objectsParams.splice(this.objectsParams.length - 1, 1)
-      }
+      this.objectsParams.splice(this.objectsParams.length - 1, 1)
     }
 
+    addParams = () => {
+      const params = new ObjectParams()
+      this.objectsParams.push(params)
+      return params
+    }
 
     addObject = (container, name = "") => {
       const params = this.getParams(container)
@@ -180,7 +170,7 @@ class JsonDataModel {
           }
           else if(params.module !== "behavior"){
             this.removeObjectKeyByPath("module", params.path)
-            this.deleteParams(container)
+            this.deleteParams()
           }
         }
       }
@@ -194,7 +184,7 @@ class JsonDataModel {
         }
         else{
           this.removeObjectKeyByPath("module", params.path)
-          this.deleteParams(container)
+          this.deleteParams()
         }
       }
       

@@ -22,6 +22,7 @@ class AppController {
     this.view.home = new HomeView()
     this.model.home = new HomeModel(this.model.jsonData)
     this.home = new HomeController(this.view.home, this.model.home)
+    this.model.jsonData.objectsParams = []
     this.view.bindClickModule(this.handleClickModule)
   }
 }

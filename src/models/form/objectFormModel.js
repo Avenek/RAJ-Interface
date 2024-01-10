@@ -15,6 +15,10 @@ class ObjectFormModel{
 
     fetchConfigAndCreateObjectFormList = () => {
         const params = this.jsonData.getParams(this.container)
+        if(params == null){
+            this.clearForm()
+            return
+        }
         fetch(`src/config/${params.fileName}.json`)
         .then(response => response.json())
         .then(config => {
@@ -280,7 +284,7 @@ class ObjectFormModel{
         items.forEach(item => {
             item.extraOptions.forEach(extraOption => {
                 const extraOptionName = this.configUtils.formatToCamelCase(extraOption.name)
-                const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.jsonData.getParams("module").module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
+                const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.jsonData.getParams(this.container).module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
                 const modulePath = this.jsonData.moduleConfig.modules.find(object => object.name === fileName).path
                 const path = (() => {
                     switch (modulePath) {
@@ -292,7 +296,7 @@ class ObjectFormModel{
                             return modulePath;
                     }
                 })()
-                const extraOptionValue = this.jsonData.getValueFromWorkingObject("module", path)
+                const extraOptionValue = this.jsonData.getValueFromWorkingObject(this.container, path)
                 extraOption.isUsed = false
                 if(Array.isArray(extraOptionValue)){
                     extraOption.isUsed = extraOptionValue.length > 0
@@ -372,12 +376,6 @@ class ObjectFormModel{
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         const valueInGoodType = this.configUtils.getValueInGoodType(targetProperty.name, value)
         targetProperty.value = valueInGoodType
-        if((targetProperty.inputType === "string" || targetProperty.inputType === "number") && targetProperty.extraOptions && this.extraOptionIdBox){
-            targetProperty.extraOptions.forEach(option => option.isUsed = false)
-            this.jsonData.getParams("extraOption").workingObject = null
-            this.extraOptionIdBox.clearBox(false)
-            this.extraOptionIdBox.objectForm.clearForm()
-        }
         if(targetProperty.varType.includes("color")){
             const dotIndex = id.lastIndexOf('.');
             const prefix = dotIndex !== -1 ? id.substring(0, dotIndex + 1) : ""
@@ -389,6 +387,13 @@ class ObjectFormModel{
             colorProperty.value = hexColor
         }
         this.updateValueInJson(targetProperty, valueInGoodType)
+        const params = this.jsonData.getParams("extraOption")
+        if((targetProperty.inputType === "string" || targetProperty.inputType === "number") && targetProperty.extraOptions && this.extraOptionIdBox && this.configUtils.getKeyNameFromPath(params.path).startsWith(this.configUtils.getKeyNameFromPath(targetProperty.name))){
+            this.extraOptionIdBox.clearBox(false)
+            this.extraOptionIdBox.objectForm.clearForm()
+            targetProperty.extraOptions.forEach(option => option.isUsed = false)
+            this.jsonData.deleteParams("extraOption")
+        }
         this.jsonDataBox.jsonDataChanged()
         if(targetProperty.name === "id" || targetProperty.name === "name" || targetProperty.name === "kind" || targetProperty.name === "action"){
             this.objectIdBox.updateNameObjectId(this.container)
@@ -455,7 +460,7 @@ class ObjectFormModel{
             targetProperty.properties[0].extraOptions.forEach(option => option.isUsed = false)
             targetProperty.properties[1].extraOptions.forEach(option => option.isUsed = false)
             targetProperty.properties[2].extraOptions.forEach(option => option.isUsed = false)
-            params.workingObject = null
+            this.jsonData.deleteParams("extraOption")
             this.extraOptionIdBox.clearBox(false)
             this.extraOptionIdBox.objectForm.clearForm()
         }

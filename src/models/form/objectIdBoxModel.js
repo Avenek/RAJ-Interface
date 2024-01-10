@@ -11,6 +11,10 @@ class ObjectIdBoxModel{
 
     createObjectIdList = () => {
         const params = this.jsonData.getParams(this.container)
+        if(params == null){
+            this.clearBox(false)
+            return
+        }
         const idList = []
         let ids
         if(params.hasList){
@@ -131,7 +135,10 @@ class ObjectIdBoxModel{
 
     pickDefaultUniqueName(){
         let defaultName = ""
-        const params = this.jsonData.getParams(this.container)
+        let params = this.jsonData.getParams(this.container)
+        if(params == null){
+            params = this.jsonData.addParams()
+        }
         const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
         switch(bindData){
             case "id":
@@ -186,11 +193,15 @@ class ObjectIdBoxModel{
     }
 
     clearExtraOption = () => {
-        this.jsonData.getParams("extraOption").workingObject = null
-        if(this.extraOptionIdBox){
-            this.extraOptionIdBox.clearBox(false)
-            this.extraOptionObjectForm.clearForm()
+        const params = this.jsonData.getParams("extraOption")
+        if(params){
+            if(this.extraOptionIdBox){
+                this.extraOptionIdBox.clearBox(false)
+                this.extraOptionObjectForm.clearForm()
+            }
         }
+        params.workingObject = null
+
 
     }
 }

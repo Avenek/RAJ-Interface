@@ -39,7 +39,7 @@
                             "inputType": "string",
                             "varType": ["string"],
                             "defaultInput": "HERO",
-                            "validation":[{"forType": "string", "name": "equal", "value": "HERO"}]
+                            "validation":[{"forType": "string", "name": "equal", "value": ["HERO"]}]
                         }
                     ]
                 },

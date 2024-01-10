@@ -1,12 +1,12 @@
 class ObjectFormView extends View{
-    constructor(moduleObjectForm){
+    constructor(objectForm){
         super()
-       this.moduleObjectForm = moduleObjectForm
+       this.objectForm = objectForm
     }
 
     displayObjectForm = (objectFormList) => {
-      this.moduleObjectForm.innerHTML = ""
-        this.moduleObjectForm.innerHTML = this.createObjectForm(objectFormList)
+      this.objectForm.innerHTML = ""
+        this.objectForm.innerHTML = this.createObjectForm(objectFormList)
     }
 
     createObjectForm = (objectFormList) => {
@@ -218,7 +218,7 @@ class ObjectFormView extends View{
     }
 
    bindCollapseProperty = (handler) => {
-      this.moduleObjectForm.addEventListener("mousedown", event => {
+      this.objectForm.addEventListener("mousedown", event => {
         const targetClasses = event.target.classList
         if (targetClasses.contains('key') || targetClasses.contains('subkey') || targetClasses.contains('subSubkey')) {
             handler(event.target.id)
@@ -227,7 +227,7 @@ class ObjectFormView extends View{
     }
 
     bindResizeIfIsTooLongValue = (handler) => {
-      this.moduleObjectForm.addEventListener("keyup", event => { 
+      this.objectForm.addEventListener("keyup", event => { 
         if (event.target.type === "text") {
           const isTooLong = event.target.value.length > 30
           isTooLong ? event.target.classList.add("expanded") : event.target.classList.remove("expanded")
@@ -236,7 +236,7 @@ class ObjectFormView extends View{
       })  
     }
     bindEnterValueInInput = (handler) => {
-      this.moduleObjectForm.addEventListener("input", event => { 
+      this.objectForm.addEventListener("input", event => { 
         if (event.target.tagName === 'INPUT' && event.target.type != "file" && event.target.type != "color") {
           handler(event.target.id, event.target.value)
         }
@@ -244,7 +244,7 @@ class ObjectFormView extends View{
     }
 
     bindUnfocusInput = (handler) => {
-      this.moduleObjectForm.addEventListener("focusout", event => { 
+      this.objectForm.addEventListener("focusout", event => { 
         if (event.target.tagName === 'INPUT' && event.target.type != "file" && event.target.type != "color") {
           handler(event.target.id)
         }
@@ -252,7 +252,7 @@ class ObjectFormView extends View{
     }
 
     bindCheckOption = (handler) => {
-      this.moduleObjectForm.addEventListener("mousedown", event => { 
+      this.objectForm.addEventListener("mousedown", event => { 
         if (event.target.classList.contains("radio-button")) {
           handler(event.target.id, event.target.textContent)
         }
@@ -260,7 +260,7 @@ class ObjectFormView extends View{
     }
     
     bindCheckSlider = (handler) => {
-      this.moduleObjectForm.addEventListener("mousedown", event => { 
+      this.objectForm.addEventListener("mousedown", event => { 
         if (event.target.classList.contains("slider")) {
           handler(event.target.id)
         }
@@ -268,7 +268,7 @@ class ObjectFormView extends View{
     }
 
     bindChooseFile = (handler) => {
-      this.moduleObjectForm.addEventListener("change", event => { 
+      this.objectForm.addEventListener("change", event => { 
         if (event.target.tagName === 'INPUT' && event.target.type === "file") {
           const input = event.target
           const fileName = input.files[0].name
@@ -278,7 +278,7 @@ class ObjectFormView extends View{
     }
 
     bindPickColor = (handler) => {
-      this.moduleObjectForm.addEventListener("change", event => { 
+      this.objectForm.addEventListener("change", event => { 
         if (event.target.tagName === 'INPUT' && event.target.type === "color") {
           const color = event.target.value
           handler(event.target.id, color);

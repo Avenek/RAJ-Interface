@@ -10,6 +10,8 @@ class FormView extends View{
         this.moduleObjectIdBoxView = new ObjectIdBoxView(this.moduleObjectIdBox)
         this.jsonDataBoxView = new JsonDataBoxFormView(this.jsonDataBox)
         this.moduleObjectFormView = new ObjectFormView(this.moduleObjectForm)
+        this.extraOptionObjectFormView = new ObjectFormView(this.extraOptionForm)
+        this.extraOptionObjectIdBoxView = new ObjectIdBoxView(this.extraOptionIdBox)
     }
 
     createPageElements = () =>{
@@ -34,13 +36,26 @@ class FormView extends View{
         this.root.append(this.configurationContainer, this.jsonDataBox)
     }
 
-    bindClickExtraOption = (handler) => {
-        this.moduleObjectFormView.moduleObjectForm.addEventListener("mousedown", event => {
+    bindClickExtraOptionModuleForm = (handler) => {
+        this.moduleObjectFormView.objectForm.addEventListener("mousedown", event => {
             if (event.target.classList.contains('extra-option')) {
-                this.extraOptionConfiguration.innerHTML = ''
-                this.extraOptionIdBox = this.createElement("div", "extra-option-id-box", "object-id-box")
-                this.extraOptionForm = this.createElement("div", "extra-option-form", "object-form")
-                this.extraOptionConfiguration.append(this.extraOptionIdBox, this.extraOptionForm)
+                const button = event.target
+                let buttonName = button.textContent
+                if(buttonName.includes(" ")){
+                    const nameArray = buttonName.split(" ")
+                    for(let i = 1 ; i < nameArray.length ; i++){
+                        nameArray[i] = nameArray[i].charAt(0).toUpperCase() + nameArray[i].slice(1)
+                    }
+                    buttonName = nameArray.join("")
+                }
+                handler(buttonName, button.id)
+            }
+        })  
+    }
+
+    bindClickExtraOptionExtraOptionForm = (handler) => {
+        this.extraOptionObjectFormView.objectForm.addEventListener("mousedown", event => {
+            if (event.target.classList.contains('extra-option')) {
                 const button = event.target
                 let buttonName = button.textContent
                 if(buttonName.includes(" ")){
