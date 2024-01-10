@@ -199,9 +199,7 @@ class ObjectIdBoxModel{
                 this.extraOptionIdBox.clearBox(false)
                 this.extraOptionObjectForm.clearForm()
             }
+            this.jsonData.deleteParams()
         }
-        params.workingObject = null
-
-
     }
 }

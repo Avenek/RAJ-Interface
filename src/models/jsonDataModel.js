@@ -32,7 +32,9 @@ class JsonDataModel {
 
     clearData = () => {
       this.data = {}
-      this.objectsParams = []
+      this.objectsParams.splice(1);
+      this.objectsParams[0].workingObject = null;
+      this.objectsParams[0].workingList = null;
     }
 
     setParams = (container, module, fileName, id, key = "") => {
