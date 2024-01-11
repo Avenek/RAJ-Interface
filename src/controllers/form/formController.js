@@ -20,8 +20,10 @@ class FormController {
       if(this.extraOptionObjectForm && extraOptionParams && extraOptionParams.workingObject !== null && extraOptionParams.path.includes(extraOptionName)){
         this.model.jsonData.deleteParams()
         this.model.extraOptionObjectIdBoxModel.createObjectIdList()
+        this.model.extraOptionObjectIdBoxModel.objectIdListChanged(this.model.extraOptionObjectIdBoxModel.objectIdList,  this.model.extraOptionObjectIdBoxModel.hasList)
         this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
         this.model.moduleObjectIdBoxModel.createObjectIdList()
+        this.model.moduleObjectIdBoxModel.objectIdListChanged(this.model.moduleObjectIdBoxModel.objectIdList,  this.model.moduleObjectIdBoxModel.hasList)
         this.model.moduleObjectFormModel.fetchConfigAndCreateObjectFormList()
       }
       else{
@@ -50,17 +52,20 @@ class FormController {
       if(this.extraOptionObjectForm && extraOptionParams && extraOptionParams.workingObject !== null && extraOptionParams.path.includes(extraOptionName)){
         this.model.jsonData.deleteParams()
         this.model.extraOptionObjectIdBoxModel.createObjectIdList()
+        this.model.extraOptionObjectIdBoxModel.objectIdListChanged(this.model.extraOptionObjectIdBoxModel.objectIdList,  this.model.extraOptionObjectIdBoxModel.hasList)
         this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
         this.model.moduleObjectIdBoxModel.createObjectIdList()
+        this.model.moduleObjectIdBoxModel.objectIdListChanged(this.model.moduleObjectIdBoxModel.objectIdList,  this.model.moduleObjectIdBoxModel.hasList)
         this.model.moduleObjectFormModel.fetchConfigAndCreateObjectFormList()
       }
       else{
         this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, key)
         this.model.extraOptionObjectIdBoxModel.createObjectIdList()
+        this.model.extraOptionObjectIdBoxModel.objectIdListChanged(this.model.extraOptionObjectIdBoxModel.objectIdList,  this.model.extraOptionObjectIdBoxModel.hasList)
         this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
         this.model.moduleObjectIdBoxModel.createObjectIdList()
+        this.model.moduleObjectIdBoxModel.objectIdListChanged(this.model.moduleObjectIdBoxModel.objectIdList,  this.model.moduleObjectIdBoxModel.hasList)
         this.model.moduleObjectFormModel.fetchConfigAndCreateObjectFormList()
-        this.model.moduleObjectFormModel.changeStateExtraOption()
       }
     }
   }
