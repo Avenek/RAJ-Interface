@@ -479,7 +479,7 @@ class ObjectFormModel{
     }
 
     updateValueInJson = (targetProperty, value) => {
-        if(this.container == "module"){
+        if(this.container == "module" && this.extraOptionIdBox){
             this.extraOptionIdBox.clearBox(false)
             this.extraOptionIdBox.objectForm.clearForm()
         }
