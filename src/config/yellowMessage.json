@@ -22,7 +22,8 @@
                     "tool-tip": "Tekst, który ma się wyświetlić. Nie wolno używać znaków z backslashem, np. \n",
                     "inputType": "string",
                     "varType": ["string"],
-                    "defaultInput": ""
+                    "defaultInput": "",
+                    "validation":[{"forType": "string", "name": "notEqual", "value": [""]}]
                 }
             ]
         }
