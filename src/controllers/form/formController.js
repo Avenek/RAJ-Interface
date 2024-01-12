@@ -28,14 +28,27 @@ class FormController {
       }
       else{
         this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, key)
-        this.model.extraOptionObjectFormModel = new ObjectFormModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel)
-        this.model.extraOptionObjectIdBoxModel = new ObjectIdBoxModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel, this.model.extraOptionObjectFormModel)
+        if(this.model.extraOptionObjectFormModel == null || this.model.extraOptionObjectFormModel == undefined){
+          this.model.extraOptionObjectFormModel = new ObjectFormModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel)
+          this.model.extraOptionObjectIdBoxModel = new ObjectIdBoxModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel, this.model.extraOptionObjectFormModel)
+        }
+        else{
+          this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
+          this.model.extraOptionObjectIdBoxModel.createObjectIdList()
+
+        }
         this.model.extraOptionObjectFormModel.objectIdBox = this.model.extraOptionObjectIdBoxModel
-        this.extraOptionObjectIdBox = new ObjectIdBoxController(this.view.extraOptionObjectIdBoxView, this.model.extraOptionObjectIdBoxModel)
-        this.extraOptionObjectForm = new ObjectFormController(this.view.extraOptionObjectFormView, this.model.extraOptionObjectFormModel)
+        if(this.extraOptionObjectIdBox == null || this.extraOptionObjectIdBox == undefined){
+          this.extraOptionObjectIdBox = new ObjectIdBoxController(this.view.extraOptionObjectIdBoxView, this.model.extraOptionObjectIdBoxModel)
+          this.extraOptionObjectForm = new ObjectFormController(this.view.extraOptionObjectFormView, this.model.extraOptionObjectFormModel)
+        }
+        else{
+          this.extraOptionObjectIdBox.objectIdListChanged(this.extraOptionObjectIdBox.model.objectIdList, this.extraOptionObjectIdBox.model.hasList)
+        }
         this.jsonDataBox.model.extraOptionObjectFormModel = this.model.extraOptionObjectFormModel
         this.jsonDataBox.model.extraOptionObjectIdBoxModel = this.model.extraOptionObjectIdBoxModel
         this.model.extraOptionObjectIdBoxModel.moduleObjectForm = this.model.moduleObjectFormModel
+        this.model.extraOptionObjectIdBoxModel.moduleObjectIdBox = this.model.moduleObjectIdBoxModel
         this.model.moduleObjectFormModel.extraOptionIdBox = this.model.extraOptionObjectIdBoxModel
         this.model.moduleObjectFormModel.extraOptionObjectForm = this.model.extraOptionObjectFormModel
         this.model.moduleObjectIdBoxModel.extraOptionIdBox = this.model.extraOptionObjectIdBoxModel

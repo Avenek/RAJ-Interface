@@ -94,9 +94,6 @@ class ObjectIdBoxModel{
             params.objectId = 0
             params.workingObject = params.workingList[0]
         }
-        else if(this.objectIdList.length === 0){
-            params.workingObject = null
-        }
         const path = this.configUtils.getKeyNameFromPath(params.path)
         const property = this.container === "extraOption" ? this.moduleObjectForm.configUtils.findObjectByProperty(this.moduleObjectForm.config.properties, path, "name") : null
         const defaultInput = property ? property.defaultInput : null
@@ -107,16 +104,35 @@ class ObjectIdBoxModel{
             this.objectForm.createObjectFormList(this.objectForm.config)
         }
         else{
-            this.objectForm.clearForm()
-            if(this.container === "extraOption"){
-                this.clearBox(false)
-                this.moduleObjectForm.changeStateExtraOption()
+            if(this.container == "module"){
+                if(this.jsonData.getParams("extraOption")){
+                    this.jsonData.deleteParams()
+                }
+                this.jsonData.deleteParams()
+                if(this.extraOptionIdBox){
+                    this.extraOptionIdBox.createObjectIdList()
+                    this.extraOptionIdBox.objectIdListChanged(this.extraOptionIdBox.objectIdList,  this.extraOptionIdBox.hasList, false)
+                    this.extraOptionObjectForm.fetchConfigAndCreateObjectFormList()
+                }
             }
+           else{
+                this.jsonData.deleteParams()
+                this.moduleObjectForm.changeStateExtraOption()
+                this.moduleObjectIdBox.createObjectIdList()
+                this.moduleObjectIdBox.objectIdListChanged(this.moduleObjectIdBox.objectIdList,  this.moduleObjectIdBox.hasList)
+                this.moduleObjectForm.fetchConfigAndCreateObjectFormList()
+           }
+           if(this.jsonData.getParams("module").workingObject == null){
+            this.clearBox()
+            this.objectForm.clearForm()
+           }
+           else{
+            this.objectForm.fetchConfigAndCreateObjectFormList()
+            this.createObjectIdList()
+            this.objectIdListChanged(this.objectIdList,  this.hasList, false)
+           }
+
         }
-        if(this.container === "module"){
-            this.clearExtraOption()
-        }
-        
     }
 
     updateNameObjectId = (container) => {

@@ -107,11 +107,35 @@ class JsonDataModel {
       }
     }
 
+    getParentParams = (container) => {
+      if(container === "module"){
+        if(this.objectsParams.length === 0){
+          return null
+        }
+        else if (this.objectsParams.length === 1) {
+          null
+        } 
+        else if (this.objectsParams.length === 2){
+            return this.objectsParams[0];
+        }
+        else{
+          return this.objectsParams[this.objectsParams.length - 3];
+        }
+      }
+      else{
+        return this.getParams("module")
+      }
+    }
+
     deleteParams = () => {
       if(this.objectsParams.length < 2){
-        return
+        this.objectsParams[0].workingList = null
+        this.objectsParams[0].workingObject = null
       }
-      this.objectsParams.splice(this.objectsParams.length - 1, 1)
+      else{
+        this.objectsParams.splice(this.objectsParams.length - 1, 1)
+      }
+
     }
 
     addParams = () => {
@@ -168,17 +192,28 @@ class JsonDataModel {
           params.workingObject = null
           params.workingList = null
           if(container === "module"){
-            delete this.data[params.module]
+            if(this.objectsParams.length > 2){
+              const parentObject = this.getParentParams(container).workingObject
+              delete parentObject[params.module]
+            }
+            else{
+              delete this.data[params.module]
+            }
           }
           else if(params.module !== "behavior"){
             this.removeObjectKeyByPath("module", params.path)
-            this.deleteParams()
           }
         }
       }
       else{
         if(container === "module"){
-          delete this.data[params.module]
+          if(this.objectsParams.length > 2){
+            const parentObject = this.getParentParams(container).workingObject
+            delete parentObject[params.module]
+          }
+          else{
+            delete this.data[params.module]
+          }
         }
         else if(defaultInput !== null && defaultInput !== undefined){
           const path = this.configUtils.getKeyNameFromPath(params.path)
@@ -186,7 +221,6 @@ class JsonDataModel {
         }
         else{
           this.removeObjectKeyByPath("module", params.path)
-          this.deleteParams()
         }
       }
       

@@ -202,8 +202,8 @@ class ObjectFormModel{
         }
       })
       listToRemove.forEach(key => {
-        this.jsonData.removeObjectKeyByPath(this.container, key.name)
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
+        this.jsonData.removeObjectKeyByPath(this.container, key.name)
         targetProperty.value = ""
       })
       listToSet.forEach(key => {
@@ -479,6 +479,10 @@ class ObjectFormModel{
     }
 
     updateValueInJson = (targetProperty, value) => {
+        if(this.container == "module"){
+            this.extraOptionIdBox.clearBox(false)
+            this.extraOptionIdBox.objectForm.clearForm()
+        }
         if(value !== targetProperty.defaultSraj){
             this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, value)
         }
