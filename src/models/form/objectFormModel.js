@@ -38,6 +38,7 @@ class ObjectFormModel{
             this.objectFormList.push(property)
         }
         this.requiredItems = this.findItemsByProperty(this.objectFormList, "require")
+        this.validationItems = this.findItemsByProperty(this.objectFormList, "validation")
         this.hideAndRevealRequiredItems()
         this.hightligthsUsedExtraOption()
         this.objectFormChanged(this.objectFormList)
@@ -209,7 +210,6 @@ class ObjectFormModel{
         this.jsonData.setObjectKeyByPath(this.container, key.name, key.value)
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
         targetProperty.value = key.value
-        this.propertyValidation(targetProperty)
       })
       listToSet.forEach(key => {
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
@@ -402,7 +402,11 @@ class ObjectFormModel{
 
     unfocusInput = (id) => {
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        const validationProperty = this.validationItems.find(property => property.validation.some(validate => validate.value === targetProperty.name))
         this.propertyValidation(targetProperty)
+        if(validationProperty){
+            this.propertyValidation(validationProperty)
+        }
         this.hideAndRevealRequiredItems(targetProperty)
         this.objectFormChanged(this.objectFormList)
     }
