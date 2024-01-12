@@ -86,11 +86,11 @@
                     "max":10,
                     "step":0.1,
                     "inputType": "number",
-                    "varType": ["float", "string"],
+                    "varType": ["int", "float", "string"],
                     "canBeEmpty": true,
                     "defaultInput": 2,
                     "defaultSraj": 2,
-                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
                     "require": [{"name": "name", "value": ["MOVE_TO_CORDS"]}]
                 },
                 {
@@ -151,11 +151,11 @@
                     "max":10,
                     "step":0.1,
                     "inputType": "number",
-                    "varType": ["float", "string"],
+                    "varType": ["int", "float", "string"],
                     "canBeEmpty": true,
                     "defaultInput": 2,
                     "defaultSraj": 2,
-                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
                     "require": [{"name": "name", "value": ["FOLLOW"]}]
                 },
                 {
@@ -232,11 +232,11 @@
                     "max":10,
                     "step":0.1,
                     "inputType": "number",
-                    "varType": ["float", "int"],
+                    "varType": ["int", "float", "string"],
                     "canBeEmpty": true,
                     "defaultInput": 0.5,
                     "defaultSraj": 0.5,
-                    "validation":[{"forType": "float", "name": "minMax"},{"forType": "int", "name": "minMax"}],
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
                     "require": [{"name": "name", "value": ["ROTATION"]}]
                 },
                 {
