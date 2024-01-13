@@ -36,6 +36,7 @@
                     "varType": ["float", "int"],
                     "defaultInput": 0.2,
                     "defaultSraj": 0.2,
+                    "extraOptions": [{"name":"get random"}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}],
                     "require": [{"name": "action", "value": ["CREATE"]}]
                 },
@@ -50,6 +51,7 @@
                     "varType": ["float", "int"],
                     "defaultInput": -0.1,
                     "defaultSraj": -0.1,
+                    "extraOptions": [{"name":"get random"}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}],
                     "require": [{"name": "action", "value": ["CREATE"]}]
                 },

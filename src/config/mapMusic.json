@@ -13,6 +13,7 @@
                     "inputType": "options",
                     "varType": ["string"],
                     "options": [{"name":"CREATE"}],
+                    "extraOptions": [{"name":"case"}],
                     "defaultInput": "CREATE"
                 },
                 {

@@ -18,6 +18,7 @@
                     "defaultInput": 0,
                     "defaultSraj": 0,
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}],
+                    "extraOptions": [{"name":"case"}],
                     "require": [{"name": "clear", "value": [false]}]
                 },
                 {

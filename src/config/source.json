@@ -16,6 +16,7 @@
                     "inputType": "number",
                     "varType": ["int"],
                     "defaultInput": 0,
+                    "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
@@ -28,6 +29,7 @@
                     "inputType": "number",
                     "varType": ["int"],
                     "defaultInput": 0,
+                    "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {

@@ -50,6 +50,7 @@
                     "varType": ["string"],
                     "options": [{"name":"N"}, {"name":"E"}, {"name":"S"}, {"name":"W"}],
                     "defaultInput": "S",
+                    "extraOptions": [{"name":"get character data"}],
                     "require": [{"name": "name", "value": ["IDLE"]}]
                 },
                 {
@@ -63,6 +64,7 @@
                     "varType": ["int"],
                     "defaultInput": 0,
                     "validation":[{"forType": "int", "name": "minMax"}],
+                    "extraOptions": [{"name":"get character data"}],
                     "require": [{"name": "name", "value": ["WALK", "WALK_AND_TP_START"]}]
                 },
                 {
@@ -76,6 +78,7 @@
                     "varType": ["int"],
                     "defaultInput": 0,
                     "validation":[{"forType": "int", "name": "minMax"}],
+                    "extraOptions": [{"name":"get character data"}],
                     "require": [{"name": "name", "value": ["WALK", "WALK_AND_TP_START"]}]
                 },
                 {
@@ -104,6 +107,7 @@
                     "varType": ["int"],
                     "defaultInput": 0,
                     "validation":[{"forType": "int", "name": "minMax"}],
+                    "extraOptions": [{"name":"get character data"}],
                     "require": [{"name": "name", "value": ["TP"]}]
                 },
                 {
@@ -117,6 +121,7 @@
                     "varType": ["int"],
                     "defaultInput": 0,
                     "validation":[{"forType": "int", "name": "minMax"}],
+                    "extraOptions": [{"name":"get character data"}],
                     "require": [{"name": "name", "value": ["TP"]}]
                 }
                 

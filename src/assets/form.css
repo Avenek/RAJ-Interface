@@ -29,6 +29,7 @@ body {
     padding: 10px;
     display: flex; 
     align-items: center; 
+    user-select: none;
 }
 
 .home-button{
@@ -460,16 +461,17 @@ display: block;
     border: rgb(143, 143, 143) solid 1px;
     letter-spacing: 0.1rem;
     font-size: 1rem;
-    padding: 0.3rem 3rem;
+    padding: 0.3rem 2rem;
     transition: 0.2s;
-    margin-left: 50px;
+    margin-left: 40px;
+    margin-right: 20px;
     cursor: pointer;
   }
   
  .extra-option:hover {
     border: none;
     letter-spacing: 0.1rem;
-    padding: 0.4rem 3rem;
+    padding: 0.4rem 2rem;
     background: var(--clr);
     color: var(--clr);
     animation: box 3s infinite;
@@ -534,7 +536,7 @@ display: block;
   .extra-option-active{
     border: none;
     letter-spacing: 0.1rem;
-    padding: 0.4rem 3rem;
+    padding: 0.4rem 2rem;
     background: var(--clr);
     color: var(--clr);
     animation: box 3s infinite;

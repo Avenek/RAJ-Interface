@@ -19,7 +19,7 @@ class DataValidation{
                 let valuesArray = this.convertValueToArray(value)
                 valuesArray.forEach(value => {
                     let valueType = this.checkValueType(value)
-                    if(this.property.varType.includes(valueType) && valueType !== "object"){
+                    if(this.property.varType.includes(valueType) && valueType !== "object" && this.property.validation){
                         for(const valid of this.property.validation){
                             validSummary = this.checkCondition(valid, this.property, value)
                             if(!validSummary.isValid){
@@ -27,7 +27,7 @@ class DataValidation{
                             }
                         }
                     }
-                    else if(valueType !== "object"){
+                    else if(valueType !== "object" && !this.property.varType.includes(valueType)){
                         validSummary.isValid = false
                         validSummary.errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${this.property.varType.join(", ")}`
                         return validSummary
