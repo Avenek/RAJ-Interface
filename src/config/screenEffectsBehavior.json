@@ -1,0 +1,288 @@
+{
+    "properties":[
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties":[
+                {
+                    "name": "mode",
+                    "idInput": "mode",
+                    "tool-tip": "Do wyboru mamy opcję 'static' - bez żadnej przemiany oraz 'transition' - przemiana koloru albo przemieszczenie się dziury",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"static"}, {"name":"transition"}],
+                    "defaultInput": "static"
+                },
+                {
+                    "name": "repeat",
+                    "idInput": "repeat",
+                    "tool-tip": "Ilość powtórzeń zachowania, jeżeli damy wartość true to nieskończoność.",
+                    "inputType": "string",
+                    "min":1,
+                    "max":100,
+                    "varType": ["int", "boolean"],
+                    "defaultInput": 1,
+                    "defaultSraj": 1,
+                    "require": [{"name": "mode", "value": ["transition"]}],
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                },
+                {
+                    "name": "duration",
+                    "idInput": "duration",
+                    "tool-tip": "Czas, jak długo ma trwać dany efekt.",
+                    "step":1,
+                    "min":0,
+                    "max":999,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput":5,
+                    "defaultSraj": 5,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "data",
+                    "idInput": "data",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties":[
+                        {
+                            "name": "data.color",
+                            "idInput": "data.color",
+                            "tool-tip": "",
+                            "inputType": "subSubkey",
+                            "properties": [
+                                {
+                                    "name": "data.color.r",
+                                    "idInput": "data.color.r",
+                                    "tool-tip": "Zmienna r koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color.g",
+                                    "idInput": "data.color.g",
+                                    "tool-tip": "Zmienna g koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color.b",
+                                    "idInput": "data.color.b",
+                                    "tool-tip": "Zmienna b koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color.a",
+                                    "idInput": "data.color.a",
+                                    "tool-tip": "Zmienna a koloru w formacie RGBA - przeźroczystość.",
+                                    "step":0.1,
+                                    "min":0,
+                                    "max":1,
+                                    "inputType": "number",
+                                    "varType": ["float", "int"],
+                                    "defaultInput":1,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color.colorPicker",
+                                    "idInput": "data.color.colorPicker",
+                                    "tool-tip": "Kolor w formacie RGBA.",
+                                    "inputType": "color",
+                                    "varType": ["color"],
+                                    "defaultSraj": "",
+                                    "canBeEmpty": true
+                                }
+                            ],
+                            "require": [{"name": "mode", "value": ["static"]}]
+                        },
+                        {
+                            "name": "data.holes",
+                            "idInput": "data.holes",
+                            "tool-tip": "Lista dziur, które mają zostać stworzone na ekranie.",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": [],
+                            "defaultSraj": [],
+                            "extraOptions": [{"name":"static holes"}],
+                            "require": [{"name": "mode", "value": ["static"]}]
+                        },
+                        {
+                            "name": "data.color0",
+                            "idInput": "data.color0",
+                            "tool-tip": "",
+                            "inputType": "subSubkey",
+                            "properties": [
+                                {
+                                    "name": "data.color0.r",
+                                    "idInput": "data.color0.r",
+                                    "tool-tip": "Zmienna r koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color0.g",
+                                    "idInput": "data.color0.g",
+                                    "tool-tip": "Zmienna g koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color0.b",
+                                    "idInput": "data.color0.b",
+                                    "tool-tip": "Zmienna b koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color0.a",
+                                    "idInput": "data.color0.a",
+                                    "tool-tip": "Zmienna a koloru w formacie RGBA - przeźroczystość.",
+                                    "step":0.1,
+                                    "min":0,
+                                    "max":1,
+                                    "inputType": "number",
+                                    "varType": ["float", "int"],
+                                    "defaultInput":1,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color0.colorPicker",
+                                    "idInput": "data.color0.colorPicker",
+                                    "tool-tip": "Kolor w formacie RGBA.",
+                                    "inputType": "color",
+                                    "varType": ["color"],
+                                    "defaultSraj": "",
+                                    "canBeEmpty": true
+                                }
+                            ],
+                            "require": [{"name": "mode", "value": ["transition"]}]
+                        },
+                        {
+                            "name": "data.color1",
+                            "idInput": "data.color1",
+                            "tool-tip": "",
+                            "inputType": "subSubkey",
+                            "properties": [
+                                {
+                                    "name": "data.color1.r",
+                                    "idInput": "data.color1.r",
+                                    "tool-tip": "Zmienna r koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color1.g",
+                                    "idInput": "data.color1.g",
+                                    "tool-tip": "Zmienna g koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color1.b",
+                                    "idInput": "data.color1.b",
+                                    "tool-tip": "Zmienna b koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color1.a",
+                                    "idInput": "data.color1.a",
+                                    "tool-tip": "Zmienna a koloru w formacie RGBA - przeźroczystość.",
+                                    "step":0.1,
+                                    "min":0,
+                                    "max":1,
+                                    "inputType": "number",
+                                    "varType": ["float", "int"],
+                                    "defaultInput":1,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "data.color1.colorPicker",
+                                    "idInput": "data.color1.colorPicker",
+                                    "tool-tip": "Kolor w formacie RGBA.",
+                                    "inputType": "color",
+                                    "varType": ["color"],
+                                    "defaultSraj": "",
+                                    "canBeEmpty": true
+                                }
+                            ],
+                            "require": [{"name": "mode", "value": ["transition"]}]
+                        },
+                        {
+                            "name": "data.holes",
+                            "idInput": "data.holes",
+                            "tool-tip": "Lista dziur, które mają zostać stworzone na ekranie.",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": [],
+                            "defaultSraj": [],
+                            "extraOptions": [{"name":"transition holes"}],
+                            "require": [{"name": "mode", "value": ["transition"]}]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+            

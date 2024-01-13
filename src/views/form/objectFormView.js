@@ -122,8 +122,8 @@ class ObjectFormView extends View{
           return "#FF3131"
         case "table":
           return "#0FF0FC"
-        case "random":
-          return "#FFF01F"
+        case "get random":
+          return "#FF1493"
         case "random first index":
           return "#CCFF00"
         case "behavior":
@@ -131,7 +131,7 @@ class ObjectFormView extends View{
         case "get character data":
           return "#8A2BE2"
         case "master":
-          return"#c0c0c0"
+          return"#686868"
         case "light":
           return "#FFA500"
         case "color":
@@ -142,8 +142,11 @@ class ObjectFormView extends View{
           return"#c0c0c0"
         case "target":
           return "#E7EE4F"
+        case "static holes":
+        case "transition holes":
+          return "#FFFFFF"
         default:
-          return "#FF1493"
+          return "#FFF01F"
       }
     }
 

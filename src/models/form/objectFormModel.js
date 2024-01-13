@@ -353,16 +353,17 @@ class ObjectFormModel{
         for (const key in data) {
           const value = data[key];
           const fullKey = prefix + key;
-          let foundObject
-          if (Array.isArray(value)){}
-          else if (typeof value === "object") {
+          let foundObject = this.configUtils.findObjectByProperty(this.objectFormList, fullKey, "name")
+          if (Array.isArray(value) && value.length === 0 && Array.isArray(foundObject.defaultSraj)){
+            this.jsonData.removeObjectKeyByPath(this.container, fullKey)
+          }
+          else if (typeof value === "object" && !Array.isArray(value)) {
             this.removeDefaultValuesFromJson(value, fullKey + ".");
             if(Object.keys(value).length ===0){
                 delete data[key]
             }
           }
           else{
-            foundObject = this.configUtils.findObjectByProperty(this.objectFormList, fullKey, "name")
             if(foundObject && foundObject.defaultSraj === data[key])
             {
               this.jsonData.removeObjectKeyByPath(this.container, fullKey)
@@ -395,9 +396,7 @@ class ObjectFormModel{
             this.jsonData.deleteParams("extraOption")
         }
         this.jsonDataBox.jsonDataChanged()
-        if(targetProperty.name === "id" || targetProperty.name === "name" || targetProperty.name === "kind" || targetProperty.name === "action"){
-            this.objectIdBox.updateNameObjectId(this.container)
-        }
+        this.objectIdBox.updateNameObjectId(this.container)
     }
 
     unfocusInput = (id) => {
@@ -499,6 +498,7 @@ class ObjectFormModel{
 
     makeKeyOrder = () => {
         const params = this.jsonData.getParams("module")
+        console.log(params.workingObject);
         if(params.workingObject.hasOwnProperty("params")){
             this.moveToLastPlaceInJson("params", params.workingObject)
             if(params.workingObject.params.hasOwnProperty("color")){
@@ -509,7 +509,7 @@ class ObjectFormModel{
           this.moveToLastPlaceInJson("behavior", params.workingObject)
           if(params.workingObject.behavior.hasOwnProperty("list")){
             this.moveToLastPlaceInJson("behavior.list", params.workingObject)
-          }
+            }
         }
         if(params.workingObject.hasOwnProperty("d")){
           this.moveToLastPlaceInJson("d", params.workingObject)
@@ -528,6 +528,12 @@ class ObjectFormModel{
         }
         if(params.workingObject.hasOwnProperty("source")){
           this.moveToLastPlaceInJson("source", params.workingObject)
+        }
+        if(params.workingObject.hasOwnProperty("data")){
+            this.moveToLastPlaceInJson("data", params.workingObject)
+            if(params.workingObject.data.hasOwnProperty("holes")){
+                this.moveToLastPlaceInJson("data.holes", params.workingObject)
+            }   
         }
       }
       

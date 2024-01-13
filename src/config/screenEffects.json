@@ -1,0 +1,74 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca efekt. Umożliwia późniejsze jego usunięciu.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "order",
+                    "idInput": "order",
+                    "tool-tip": "Jeżeli tworzymy kilka efektów, to trzeba podać ich hierarchię (który ma się nakładać na który).",
+                    "step":1,
+                    "min":0,
+                    "max":100,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput":0,
+                    "defaultSraj": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "action", "value": ["CREATE"]}]
+                },
+                {
+                    "name": "behavior",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "behavior.repeat",
+                            "idInput": "behavior.repeat",
+                            "tool-tip": "Ilość powtórzeń całej tablicy zachowań, jeżeli damy wartość true to nieskończoność.",
+                            "inputType": "string",
+                            "varType": ["int", "boolean"],
+                            "min":1,
+                            "max":100,
+                            "defaultInput": 1,
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                        },
+                        {
+                            "name": "behavior.list",
+                            "idInput": "behavior.list",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": "",
+                            "tool-tip": "Tablica zachowań, którę będą się odgrywały na ekranie gracza.",
+                            "extraOptions": [{"name":"behavior"}]
+                        }
+                    ],
+                    "require": [{"name": "action", "value": ["CREATE"]}]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,105 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "x",
+                    "idInput": "x",
+                    "tool-tip": "Wartość kordu x, na którym należy wyciąć dziurę w nocy.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "require": [{"name": "master.kind", "value": [null]}],
+                    "extraOptions": [{"name":"get character data"}],
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "y",
+                    "idInput": "y",
+                    "tool-tip": "Wartość kordu y, na którym należy wyciąć dziurę w nocy.",
+                    "min":0,
+                    "max":100,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "require": [{"name": "master.kind", "value": [null]}],
+                    "extraOptions": [{"name":"get character data"}],
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "r",
+                    "idInput": "r",
+                    "tool-tip": "Promień dziury, która ma zostać wycięta.",
+                    "min":0,
+                    "max":400,
+                    "step":10,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 30,
+                    "defaultSraj": 30,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "offsetX",
+                    "idInput": "offsetX",
+                    "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
+                    "step":1,
+                    "min":-64,
+                    "max":64,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput":0,
+                    "defaultSraj": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "offsetY",
+                    "idInput": "offsetY",
+                    "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
+                    "step":1,
+                    "min":-64,
+                    "max":64,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput":0,
+                    "defaultSraj": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "gradientPercent1",
+                    "idInput": "gradientPercent1",
+                    "tool-tip": "Jeden z dwóch gradientów. Określa, jak mocno miga światło.",
+                    "step":5,
+                    "min":0,
+                    "max":100,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput":40,
+                    "defaultSraj": 40,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "gradientPercent2",
+                    "idInput": "gradientPercent2",
+                    "tool-tip": "Jeden z dwóch gradientów. Określa, jak mocno miga światło.",
+                    "step":5,
+                    "min":0,
+                    "max":100,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput":40,
+                    "defaultSraj": 40,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                }
+            ]
+        }
+    ]
+}

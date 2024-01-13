@@ -1,0 +1,216 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "hole0",
+                    "idInput": "hole0",
+                    "tool-tip": "",
+                    "inputType": "key",
+                    "properties": [
+                        {
+                            "name": "hole0.x",
+                            "idInput": "hole0.x",
+                            "tool-tip": "Wartość kordu x, na którym należy wyciąć dziurę w nocy.",
+                            "min":0,
+                            "max":100,
+                            "step":1,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "require": [{"name": "master.kind", "value": [null]}],
+                            "extraOptions": [{"name":"get character data"}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole0.y",
+                            "idInput": "hole0.y",
+                            "tool-tip": "Wartość kordu y, na którym należy wyciąć dziurę w nocy.",
+                            "min":0,
+                            "max":100,
+                            "step":1,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "require": [{"name": "master.kind", "value": [null]}],
+                            "extraOptions": [{"name":"get character data"}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole0.r",
+                            "idInput": "hole0.r",
+                            "tool-tip": "Promień dziury, która ma zostać wycięta.",
+                            "min":0,
+                            "max":400,
+                            "step":10,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 30,
+                            "defaultSraj": 30,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole0.offsetX",
+                            "idInput": "offsetX",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole0.offsetY",
+                            "idInput": "offsetY",
+                            "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole0.gradientPercent1",
+                            "idInput": "gradientPercent1",
+                            "tool-tip": "Jeden z dwóch gradientów. Określa, jak mocno miga światło.",
+                            "step":5,
+                            "min":0,
+                            "max":100,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":40,
+                            "defaultSraj": 40,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole0.gradientPercent2",
+                            "idInput": "hole0.gradientPercent2",
+                            "tool-tip": "Jeden z dwóch gradientów. Określa, jak mocno miga światło.",
+                            "step":5,
+                            "min":0,
+                            "max":100,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":40,
+                            "defaultSraj": 40,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        }
+                    ]
+                },
+                {
+                    "name": "hole1",
+                    "idInput": "hole1",
+                    "tool-tip": "",
+                    "inputType": "key",
+                    "properties": [
+                        {
+                            "name": "hole1.x",
+                            "idInput": "hole1.x",
+                            "tool-tip": "Wartość kordu x, na którym należy wyciąć dziurę w nocy.",
+                            "min":0,
+                            "max":100,
+                            "step":1,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "require": [{"name": "master.kind", "value": [null]}],
+                            "extraOptions": [{"name":"get character data"}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole1.y",
+                            "idInput": "hole1.y",
+                            "tool-tip": "Wartość kordu y, na którym należy wyciąć dziurę w nocy.",
+                            "min":0,
+                            "max":100,
+                            "step":1,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "require": [{"name": "master.kind", "value": [null]}],
+                            "extraOptions": [{"name":"get character data"}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole1.r",
+                            "idInput": "hole1.r",
+                            "tool-tip": "Promień dziury, która ma zostać wycięta.",
+                            "min":0,
+                            "max":400,
+                            "step":10,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 30,
+                            "defaultSraj": 30,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole1.offsetX",
+                            "idInput": "offsetX",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole1.offsetY",
+                            "idInput": "offsetY",
+                            "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole1.gradientPercent1",
+                            "idInput": "gradientPercent1",
+                            "tool-tip": "Jeden z dwóch gradientów. Określa, jak mocno miga światło.",
+                            "step":5,
+                            "min":0,
+                            "max":100,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":40,
+                            "defaultSraj": 40,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "hole1.gradientPercent2",
+                            "idInput": "hole1.gradientPercent2",
+                            "tool-tip": "Jeden z dwóch gradientów. Określa, jak mocno miga światło.",
+                            "step":5,
+                            "min":0,
+                            "max":100,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":40,
+                            "defaultSraj": 40,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        }
+                    ]
+                }
+
+            ]
+            
+        }
+    ]
+}

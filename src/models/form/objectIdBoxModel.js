@@ -22,8 +22,13 @@ class ObjectIdBoxModel{
                 const name = this.pickDefaultUniqueName()
                 this.jsonData.addObject(this.container, name)
             }
-            const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
-            ids = params.workingList.map(item => item[bindData]);
+            const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.fileName).bindId
+            if(Array.isArray(bindData)){
+                ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(item, bindData[1]));
+            }
+            else{
+                ids = params.workingList.map(item => item[bindData]);
+            }
             ids.forEach(id => {
                 idList.push({"name": id, "isChecked": false})
             })
@@ -138,7 +143,13 @@ class ObjectIdBoxModel{
     updateNameObjectId = (container) => {
         const params = this.jsonData.getParams(container)
         const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
-        let result = bindData === "module" ? params.module : this.jsonData.getValueFromWorkingObject(this.container, bindData)
+        let result
+        if(Array.isArray(bindData)){
+            result = this.jsonData.getValueFromWorkingObject(this.container, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(this.container, bindData[1])
+        }
+        else{
+            result = bindData === "module" ? params.module : this.jsonData.getValueFromWorkingObject(this.container, bindData)
+        }
         const currentIndex = this.jsonData.getParams(this.container).objectId
         this.objectIdList[currentIndex].name = result
         this.objectIdListChanged(this.objectIdList, this.hasList)
@@ -172,7 +183,13 @@ class ObjectIdBoxModel{
                 defaultName = params.module
                 break;
             default:
-                defaultName = this.jsonData.getValueFromWorkingObject(this.container, bindData)
+                if(Array.isArray(bindData)){
+                    defaultName = this.jsonData.getValueFromWorkingObject(this.container, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(this.container, bindData[1])
+                }
+                else{
+                    defaultName = this.jsonData.getValueFromWorkingObject(this.container, bindData)
+                }
+
                 break;
         }  
         return defaultName      

@@ -292,6 +292,30 @@ let moduleDict = {
     }
   },
 
+  screenEffects : class ScreenEffects {
+    constructor(id) {
+      this.action = "CREATE";
+      this.id = id
+      this.behavior = {
+        "list" : [new moduleDict["screenEffectsBehavior"]()]
+      }
+    }
+  },
+
+  screenEffectsBehavior: class ScreenEffectsBehavior{
+    constructor(){
+      this.mode = "static",
+      this.data = {
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 1
+        }
+      }
+    }
+  },
+
   sequence : class Sequence{
     constructor(id){
       this.action = "CREATE_IF_NOT_EXIST"
@@ -323,6 +347,19 @@ let moduleDict = {
     }
   },
 
+  transitionHoles : class TransitionHoles{
+    constructor(){
+      this.hole0 = {
+        "x": 0,
+        "y": 0
+      },
+      this.hole1 = {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+
   target : class Target{
     constructor(id){
       this.id = id
@@ -346,6 +383,13 @@ let moduleDict = {
     }
   },
 
+  staticHoles : class StaticHoles{
+    constructor(){
+      this.x = 0,
+      this.y = 0
+    }
+  },
+  
   weather : class Weather{
     constructor(){
       this.action = "CREATE"

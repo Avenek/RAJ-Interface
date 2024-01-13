@@ -193,6 +193,17 @@
       "path": "behavior"
     },
     {
+      "name": "screenEffects",
+      "hasList": true,
+      "bindId": "id"
+    },
+    {
+      "name": "screenEffectsBehavior",
+      "hasList": true,
+      "bindId": "mode",
+      "path": "fromId"
+    },
+    {
       "name": "sequence",
       "hasList": true,
       "bindId": "id"
@@ -215,6 +226,12 @@
       "path": "fromId"
     },
     {
+      "name": "staticHoles",
+      "hasList": true,
+      "bindId": ["x", "y"],
+      "path": "fromId"
+    },
+    {
       "name": "target",
       "hasList": true,
       "bindId": "id",
@@ -225,6 +242,12 @@
       "hasList": false,
       "bindId": "module",
       "path": "source"
+    },
+    {
+      "name": "transitionHoles",
+      "hasList": true,
+      "bindId": ["hole0.x", "hole0.y"],
+      "path": "fromId"
     },
     {
       "name": "weather",
