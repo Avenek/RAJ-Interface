@@ -498,7 +498,6 @@ class ObjectFormModel{
 
     makeKeyOrder = () => {
         const params = this.jsonData.getParams("module")
-        console.log(params.workingObject);
         if(params.workingObject.hasOwnProperty("params")){
             this.moveToLastPlaceInJson("params", params.workingObject)
             if(params.workingObject.params.hasOwnProperty("color")){

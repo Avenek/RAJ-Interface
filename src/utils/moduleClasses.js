@@ -259,6 +259,13 @@ let moduleDict = {
     }
   },
 
+  interfaceSkin : class InterfaceSkin {
+    constructor()
+    {
+      this.name = "grayscale"
+    }
+  },
+
   light : class Light{
     constructor(){
       this.onlyNight = true,

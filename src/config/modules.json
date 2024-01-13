@@ -154,6 +154,11 @@
       "path": "key"
     },
     {
+      "name": "interfaceSkin",
+      "hasList": false,
+      "bindId": "module"
+    },
+    {
       "name": "light",
       "hasList": false,
       "bindId": "module",

@@ -117,6 +117,10 @@
         {
           "name": "Sequence",
           "tipInfo": "Umożliwia łańcuchowe wywoływanie efektów po sobie na podstawie czasu. W momencie minięcia duration danego zachowania sekwencja przechodzi do kolejnego lub powtarza aktualne."
+        },
+        {
+          "name": "InterfaceSkin",
+          "tipInfo": " Zmienia kolor interfejsu (są problemy z grafiką niektórych elementów - korzystanie niezalecane)"
         }
       ]
     }

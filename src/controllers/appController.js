@@ -26,11 +26,17 @@ class AppController {
     this.view.bindClickModule(this.handleClickModule)
   }
 }
-
-  if(localStorage.getItem("lastClear") === null || (localStorage.getItem("lastClear") && localStorage.getItem("lastClear") !== "2023-12-14")){
-    localStorage.clear()
-    localStorage.setItem("lastClear", "2023-12-14")
+//localStorage.clear()
+  if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-13"){
+    const toAdd =  JSON.parse(localStorage.getItem("containerConfig"))
+    const interfaceSkin = {
+        "name": "InterfaceSkin",
+        "tipInfo": " Zmienia kolor interfejsu (są problemy z grafiką niektórych elementów - korzystanie niezalecane)"
+    }
+    toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(interfaceSkin)))
+    console.log(toAdd.containers[0].modules);
+    localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+    localStorage.setItem("lastClear", "2024-01-13")
   }
 
-  //localStorage.setItem("lastJson", JSON.stringify({"characterEffect":{"list":[{"action":"CREATE_IF_NOT_EXIST","id":"obiekt-0","windowTarget":"MAP","target":{"kind":"HERO"},"effect":"ANIMATION","params":{"gifUrl":"characterEffects/.gif","position":"CENTER"}}]},"fakeNpc":{"list":[{"action":"CREATE_IF_NOT_EXIST","id":"obiekt-0","x":0,"y":0,"img":"/npc/test.gif","behavior":{"list":[{"name":"IDLE","duration":5,"dir":"S"}]}},{"action":"CREATE_IF_NOT_EXIST","id":"obiekt-1","x":0,"y":0,"img":"/npc/test.gif","behavior":{"list":[{"name":"IDLE","duration":5,"dir":"S"}]}},{"action":"CREATE_IF_NOT_EXIST","id":"obiekt-2","x":0,"y":0,"img":"/npc/test.gif","behavior":{"list":[{"name":"IDLE","duration":5,"dir":"S"}]}}]}}))
   const app = new AppController(new AppView(), new AppModel())

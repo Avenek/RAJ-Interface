@@ -300,7 +300,7 @@ class JsonDataModel {
 
       const lastKey = keys[keys.length - 1];
       if (currentObj && typeof currentObj === 'object' && lastKey in currentObj) {
-        if(Object.keys(currentObj).length===1)
+        if(Object.keys(currentObj).length===1 && path.lastIndexOf(".")>0)
         {
           const lastDotIndex = path.lastIndexOf(".");
           const penultimate = path.substring(0, lastDotIndex);

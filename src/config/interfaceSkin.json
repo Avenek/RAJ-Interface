@@ -1,0 +1,32 @@
+{
+    "properties": [
+        {
+            "name": "interfaceSkin",
+            "idInput": "interfaceSkin",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "name",
+                    "idInput": "name",
+                    "tool-tip": "Kolor, na jaki należy zmienić komponenty interfejsu.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"grayscale"}, {"name":"redscale"}, {"name":"bluescale"}, {"name":"greenscale"}, {"name":"pinkscale"}, {"name":"yellowscale"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "grayscale",
+                    "require": [{"name": "clear", "value": [false]}]
+                },
+                {
+                    "name": "clear",
+                    "idInput": "clear",
+                    "tool-tip": "Flaga, która ustawiona na true czyści niestandardowy kolor interfejsu.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
+                }
+            ]
+        }
+    ]
+}
