@@ -13,8 +13,9 @@ class ObjectIdBoxModel{
         const params = this.jsonData.getParams(this.container)
         if(params == null){
             this.clearBox(false)
-            return
+            return false
         }
+
         const idList = []
         let ids
         if(params.hasList){
@@ -22,7 +23,7 @@ class ObjectIdBoxModel{
                 const name = this.pickDefaultUniqueName()
                 this.jsonData.addObject(this.container, name)
             }
-            const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.fileName).bindId
+            const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.fileName && module.type === params.type).bindId
             if(Array.isArray(bindData)){
                 ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(item, bindData[1]));
             }
@@ -57,7 +58,7 @@ class ObjectIdBoxModel{
         params.objectId = index
         params.workingObject = params.workingList[index]
         this.objectIdListChanged(this.objectIdList, this.hasList)
-        this.objectForm.createObjectFormList(this.objectForm.config)
+        this.objectForm.createObjectFormList(params.config)
         if(this.container === "module"){
             this.clearExtraOption()
         }
@@ -73,7 +74,8 @@ class ObjectIdBoxModel{
         name = this.pickDefaultUniqueName()
         this.objectIdList.push({"name": name, "isChecked": true})
         this.objectIdListChanged(this.objectIdList, this.hasList)
-        this.objectForm.createObjectFormList(this.objectForm.config)
+        const params = this.jsonData.getParams(this.container)
+        this.objectForm.createObjectFormList(params.config)
         if(this.container === "module"){
             this.clearExtraOption()
         }
@@ -100,13 +102,13 @@ class ObjectIdBoxModel{
             params.workingObject = params.workingList[0]
         }
         const path = this.configUtils.getKeyNameFromPath(params.path)
-        const property = this.container === "extraOption" ? this.moduleObjectForm.configUtils.findObjectByProperty(this.moduleObjectForm.config.properties, path, "name") : null
+        const property = this.container === "extraOption" ? this.moduleObjectForm.configUtils.findObjectByProperty(params.config.properties, path, "name") : null
         const defaultInput = property ? property.defaultInput : null
         this.jsonData.deleteObject(this.container, index, defaultInput)
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
         if(this.objectIdList.length > 0){
-            this.objectForm.createObjectFormList(this.objectForm.config)
+            this.objectForm.createObjectFormList(params.config)
         }
         else{
             if(this.container == "module"){
@@ -142,7 +144,7 @@ class ObjectIdBoxModel{
 
     updateNameObjectId = (container) => {
         const params = this.jsonData.getParams(container)
-        const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
+        const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module && module.type === params.type).bindId
         let result
         if(Array.isArray(bindData)){
             result = this.jsonData.getValueFromWorkingObject(this.container, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(this.container, bindData[1])
@@ -166,7 +168,7 @@ class ObjectIdBoxModel{
         if(params == null){
             params = this.jsonData.addParams()
         }
-        const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module).bindId
+        const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.module && module.type === params.type).bindId
         switch(bindData){
             case "id":
                 if(this.objectIdList) {

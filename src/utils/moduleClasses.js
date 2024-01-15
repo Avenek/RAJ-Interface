@@ -65,6 +65,15 @@ let moduleDict = {
     }
   },
 
+  caseContainer : class Case {
+    constructor() {
+      this.kind = "ARGUMENT";
+      this.key = "QUEST"
+      this.name = "ACTIVE"
+      this.params = []
+    }
+  },
+
   characterEffect : class CharacterEffect {
       constructor(id) {
         this.action = "CREATE_IF_NOT_EXIST";

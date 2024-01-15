@@ -2,11 +2,14 @@ class ObjectParams {
   constructor(){
     this.module = null,
     this.objectId = null,
+    this.form = null
     this.hasList = true,
     this.workingList = null,
     this.workingObject = null,
     this.path = null,
     this.fileName = null
+    this.type = null
+    this.config = null
   }
 }
 
@@ -37,7 +40,7 @@ class JsonDataModel {
       this.objectsParams[0].workingList = null;
     }
 
-    setParams = (container, module, fileName, id, key = "") => {
+    setParams = (container, module, fileName, id, type, form, key = "") => {
       const params = new ObjectParams()
       this.objectsParams.push(params)
       params.workingObject = null
@@ -45,9 +48,12 @@ class JsonDataModel {
       params.fileName = fileName
       params.module = module
       params.objectId = id
+      params.type = type
+      params.form = form
+      const propertyConfig = this.moduleConfig.modules.find(object => object.name === fileName && object.type === type)
       if(container === "module"){
-        params.path = this.moduleConfig.modules.find(object => object.name === module).path || "object"
-        params.hasList = this.moduleConfig.modules.find(object => object.name === module).hasList
+        params.path = propertyConfig.path || "object"
+        params.hasList = propertyConfig.hasList
         try{
           if(params.hasList){
             params.workingList = this.data[module].list
@@ -60,7 +66,7 @@ class JsonDataModel {
         catch{}
       }
       else{
-        const configPath = this.moduleConfig.modules.find(object => object.name === fileName).path
+        const configPath = propertyConfig.path
         params.path = (() => {
           switch (configPath) {
               case 'key':
@@ -71,7 +77,7 @@ class JsonDataModel {
                   return configPath;
             }
           })()
-        params.hasList = this.moduleConfig.modules.find(object => object.name === fileName).hasList
+        params.hasList = propertyConfig.hasList
         try{
           if(params.hasList){
             const object = this.getValueFromWorkingObject("module", params.path)

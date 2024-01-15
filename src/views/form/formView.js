@@ -41,13 +41,6 @@ class FormView extends View{
             if (event.target.classList.contains('extra-option')) {
                 const button = event.target
                 let buttonName = button.textContent
-                if(buttonName.includes(" ")){
-                    const nameArray = buttonName.split(" ")
-                    for(let i = 1 ; i < nameArray.length ; i++){
-                        nameArray[i] = nameArray[i].charAt(0).toUpperCase() + nameArray[i].slice(1)
-                    }
-                    buttonName = nameArray.join("")
-                }
                 handler(buttonName, button.id)
             }
         })  
@@ -58,13 +51,6 @@ class FormView extends View{
             if (event.target.classList.contains('extra-option')) {
                 const button = event.target
                 let buttonName = button.textContent
-                if(buttonName.includes(" ")){
-                    const nameArray = buttonName.split(" ")
-                    for(let i = 1 ; i < nameArray.length ; i++){
-                        nameArray[i] = nameArray[i].charAt(0).toUpperCase() + nameArray[i].slice(1)
-                    }
-                    buttonName = nameArray.join("")
-                }
                 handler(buttonName, button.id)
             }
         })  

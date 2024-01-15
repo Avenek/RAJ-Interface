@@ -10,7 +10,7 @@ class AppController {
       try{
         JSON.parse(JSON.stringify(this.model.jsonData.data))
         this.view.form = new FormView()
-        this.model.jsonData.setParams("module", module, module, id)
+        this.model.jsonData.setParams("module", module, module, id, "out", "module")
         this.model.form = new FormModel(this.model.jsonData)
         this.form = new FormController(this.view.form, this.model.form)
         this.form.view.headerPanelView.bindClickHome(this.handleClickHome)
@@ -34,7 +34,6 @@ class AppController {
         "tipInfo": " Zmienia kolor interfejsu (są problemy z grafiką niektórych elementów - korzystanie niezalecane)"
     }
     toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(interfaceSkin)))
-    console.log(toAdd.containers[0].modules);
     localStorage.setItem("containerConfig", JSON.stringify(toAdd))
     localStorage.setItem("lastClear", "2024-01-13")
   }

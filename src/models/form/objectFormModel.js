@@ -22,9 +22,9 @@ class ObjectFormModel{
         fetch(`src/config/${params.fileName}.json`)
         .then(response => response.json())
         .then(config => {
-            this.config = config
+            params.config = config
             this.configUtils = new ConfigUtils(config)
-            this.createObjectFormList(this.config)
+            this.createObjectFormList(config)
         })
         .catch(error => {
         console.error('Błąd pobierania:', error);
@@ -41,6 +41,7 @@ class ObjectFormModel{
         this.validationItems = this.findItemsByProperty(this.objectFormList, "validation")
         this.hideAndRevealRequiredItems()
         this.hightligthsUsedExtraOption()
+        this.makeKeyOrder()
         this.objectFormChanged(this.objectFormList)
     }
 
@@ -134,14 +135,15 @@ class ObjectFormModel{
     }
 
     hideAndRevealRequiredItems = (targetProperty = null) => {
-    const listToSet = []
-    const listToRemove = []
-      this.requiredItems.forEach(item => {
+        const params = this.jsonData.getParams(this.container)
+        const listToSet = []
+        const listToRemove = []
+        this.requiredItems.forEach(item => {
         let allConditionsAreMet = true
           for(let i = 0 ; i < item.require.length ; i++) {
             const requireItem = item.require[i]
             const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, requireItem.name)
-            const requireObject = this.configUtils.findObjectByProperty(this.config.properties, requireItem.name, "name")
+            const requireObject = this.configUtils.findObjectByProperty(params.config.properties, requireItem.name, "name")
             if(valueInObject && !requireItem.value.includes(valueInObject)){
                 allConditionsAreMet = false
                 break;
@@ -215,8 +217,8 @@ class ObjectFormModel{
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, key.id, "idInput")
         this.propertyValidation(targetProperty)
       })
-      const params = this.jsonData.getParams(this.container)
       this.removeDefaultValuesFromJson(params.workingObject)
+      this.makeKeyOrder()
       this.jsonDataBox.jsonDataChanged()
     }
 
@@ -284,8 +286,9 @@ class ObjectFormModel{
         items.forEach(item => {
             item.extraOptions.forEach(extraOption => {
                 const extraOptionName = this.configUtils.formatToCamelCase(extraOption.name)
-                const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? this.jsonData.getParams(this.container).module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
-                const modulePath = this.jsonData.moduleConfig.modules.find(object => object.name === fileName).path
+                const params = this.jsonData.getParams(this.container)
+                const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? params.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
+                const modulePath = extraOption.type ? this.jsonData.moduleConfig.modules.find(object => object.name === fileName && object.type === extraOption.type).path : this.jsonData.moduleConfig.modules.find(object => object.name === fileName).path
                 const path = (() => {
                     switch (modulePath) {
                         case 'key':
@@ -354,7 +357,7 @@ class ObjectFormModel{
           const value = data[key];
           const fullKey = prefix + key;
           let foundObject = this.configUtils.findObjectByProperty(this.objectFormList, fullKey, "name")
-          if (Array.isArray(value) && value.length === 0 && Array.isArray(foundObject.defaultSraj)){
+          if (Array.isArray(value) && value.length === 0 && foundObject && Array.isArray(foundObject.defaultSraj)){
             this.jsonData.removeObjectKeyByPath(this.container, fullKey)
           }
           else if (typeof value === "object" && !Array.isArray(value)) {
@@ -533,6 +536,9 @@ class ObjectFormModel{
             if(params.workingObject.data.hasOwnProperty("holes")){
                 this.moveToLastPlaceInJson("data.holes", params.workingObject)
             }   
+        }
+        if(params.workingObject.hasOwnProperty("case")){
+            this.moveToLastPlaceInJson("case", params.workingObject)
         }
       }
       

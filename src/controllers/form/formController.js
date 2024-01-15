@@ -12,22 +12,26 @@ class FormController {
     }
 
     handleClickExtraOptionModuleForm = (extraOption, id) => {
-      const key = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput").name
-      let extraOptionName = extraOption
+      const property = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.moduleObjectFormModel.objectFormList, id, "idInput")
+      const type = property.extraOptions.find(option => option.name === extraOption).type || "out"
+      const key = property.name
+      let extraOptionName = this.makeCamelCase(extraOption)
       const moduleParams = this.model.jsonData.getParams("module")
       const extraOptionParams = this.model.jsonData.getParams("extraOption")
       const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? moduleParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
-      if(this.extraOptionObjectForm && extraOptionParams && extraOptionParams.workingObject !== null && extraOptionParams.path.includes(extraOptionName)){
+      if(this.extraOptionObjectForm && extraOptionParams  && extraOptionParams.form === "module" && extraOptionParams.workingObject !== null && extraOptionParams.fileName === fileName){
         this.model.jsonData.deleteParams()
-        this.model.extraOptionObjectIdBoxModel.createObjectIdList()
-        this.model.extraOptionObjectIdBoxModel.objectIdListChanged(this.model.extraOptionObjectIdBoxModel.objectIdList,  this.model.extraOptionObjectIdBoxModel.hasList)
+        if(this.model.extraOptionObjectIdBoxModel.createObjectIdList()){
+          this.model.extraOptionObjectIdBoxModel.objectIdListChanged(this.model.extraOptionObjectIdBoxModel.objectIdList,  this.model.extraOptionObjectIdBoxModel.hasList)
+        }
         this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
-        this.model.moduleObjectIdBoxModel.createObjectIdList()
-        this.model.moduleObjectIdBoxModel.objectIdListChanged(this.model.moduleObjectIdBoxModel.objectIdList,  this.model.moduleObjectIdBoxModel.hasList)
+        if(this.model.moduleObjectIdBoxModel.createObjectIdList()){
+          this.model.moduleObjectIdBoxModel.objectIdListChanged(this.model.moduleObjectIdBoxModel.objectIdList,  this.model.moduleObjectIdBoxModel.hasList)
+        }
         this.model.moduleObjectFormModel.fetchConfigAndCreateObjectFormList()
       }
       else{
-        this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, key)
+        this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, type, "module", key)
         if(this.model.extraOptionObjectFormModel == null || this.model.extraOptionObjectFormModel == undefined){
           this.model.extraOptionObjectFormModel = new ObjectFormModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel)
           this.model.extraOptionObjectIdBoxModel = new ObjectIdBoxModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel, this.model.extraOptionObjectFormModel)
@@ -35,7 +39,6 @@ class FormController {
         else{
           this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
           this.model.extraOptionObjectIdBoxModel.createObjectIdList()
-
         }
         this.model.extraOptionObjectFormModel.objectIdBox = this.model.extraOptionObjectIdBoxModel
         if(this.extraOptionObjectIdBox == null || this.extraOptionObjectIdBox == undefined){
@@ -58,11 +61,13 @@ class FormController {
     }
 
     handleClickExtraOptionExtraOptionForm = (extraOption, id) => {
-      const key = this.model.extraOptionObjectFormModel.configUtils.findObjectByProperty(this.model.extraOptionObjectFormModel.objectFormList, id, "idInput").name
-      let extraOptionName = extraOption
+      const property = this.model.moduleObjectFormModel.configUtils.findObjectByProperty(this.model.extraOptionObjectFormModel.objectFormList, id, "idInput")
+      const type = property.extraOptions.find(option => option.name === extraOption).type || "out"
+      const key = property.name
+      let extraOptionName = this.makeCamelCase(extraOption)
       const extraOptionParams = this.model.jsonData.getParams("extraOption")
       const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? extraOptionParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
-      if(this.extraOptionObjectForm && extraOptionParams && extraOptionParams.workingObject !== null && extraOptionParams.path.includes(extraOptionName)){
+      if(this.extraOptionObjectForm && extraOptionParams && extraOptionParams.form === "extraOption" && extraOptionParams.workingObject !== null && extraOptionParams.fileName === fileName){
         this.model.jsonData.deleteParams()
         this.model.extraOptionObjectIdBoxModel.createObjectIdList()
         this.model.extraOptionObjectIdBoxModel.objectIdListChanged(this.model.extraOptionObjectIdBoxModel.objectIdList,  this.model.extraOptionObjectIdBoxModel.hasList)
@@ -72,13 +77,26 @@ class FormController {
         this.model.moduleObjectFormModel.fetchConfigAndCreateObjectFormList()
       }
       else{
-        this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, key)
-        this.model.extraOptionObjectIdBoxModel.createObjectIdList()
-        this.model.extraOptionObjectIdBoxModel.objectIdListChanged(this.model.extraOptionObjectIdBoxModel.objectIdList,  this.model.extraOptionObjectIdBoxModel.hasList)
+        this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, type, "module", key)
+        if(this.model.extraOptionObjectIdBoxModel.createObjectIdList()){
+          this.model.extraOptionObjectIdBoxModel.objectIdListChanged(this.model.extraOptionObjectIdBoxModel.objectIdList,  this.model.extraOptionObjectIdBoxModel.hasList)
+        }
         this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
-        this.model.moduleObjectIdBoxModel.createObjectIdList()
-        this.model.moduleObjectIdBoxModel.objectIdListChanged(this.model.moduleObjectIdBoxModel.objectIdList,  this.model.moduleObjectIdBoxModel.hasList)
+        if(this.model.moduleObjectIdBoxModel.createObjectIdList()){
+          this.model.moduleObjectIdBoxModel.objectIdListChanged(this.model.moduleObjectIdBoxModel.objectIdList,  this.model.moduleObjectIdBoxModel.hasList)
+        }
         this.model.moduleObjectFormModel.fetchConfigAndCreateObjectFormList()
       }
+    }
+
+    makeCamelCase = (name) => {
+      if(name.includes(" ")){
+        const nameArray = name.split(" ")
+        for(let i = 1 ; i < nameArray.length ; i++){
+            nameArray[i] = nameArray[i].charAt(0).toUpperCase() + nameArray[i].slice(1)
+        }
+        name = nameArray.join("")
+      }
+      return name
     }
   }

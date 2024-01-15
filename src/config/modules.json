@@ -3,271 +3,327 @@
     {
       "name": "areaTrigger",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "behavior",
       "hasList": true,
       "bindId": "name",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "behaviorDynamicLight",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "behaviorDynamicLightBehavior",
       "hasList": true,
       "bindId": "id",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "callInstantBehaviorFakeNpc",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "callInstantBehaviorFakeNpcBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "list"
+      "path": "list",
+      "type": "out"
     },
     {
       "name": "camera",
       "hasList": false,
-      "bindId": "module"
+      "bindId": "module",
+      "type": "out"
     },
     {
       "name": "case",
       "hasList": true,
       "bindId": "kind",
-      "path": "case.list"
+      "path": "case.list",
+      "type": "out"
+    },
+    {
+      "name": "case",
+      "hasList": true,
+      "bindId": "kind",
+      "path": "list",
+      "type": "in"
     },
     {
       "name": "characterEffect",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "characterHide",
       "hasList": true,
-      "bindId": "kind"
+      "bindId": "kind",
+      "type": "out"
     },
     {
       "name": "color",
       "hasList": false,
       "bindId": "module",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "dialogue",
       "hasList": true,
-      "bindId": "action"
+      "bindId": "action",
+      "type": "out"
     },
     {
       "name": "dynamicLight",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "dynamicDirCharacterLight",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "earthQuake",
       "hasList": false,
-      "bindId": "module"
+      "bindId": "module",
+      "type": "out"
     },
     {
       "name": "emoActions",
       "hasList": true,
-      "bindId": "name"
+      "bindId": "name",
+      "type": "out"
     },
     {
       "name": "emoDefinitions",
       "hasList": true,
-      "bindId": "name"
+      "bindId": "name",
+      "type": "out"
     },
     {
       "name": "extraLight",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "extraLightMaster",
       "hasList": false,
       "bindId": "module",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "fakeNpc",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "fakeNpcBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "fakeNpcRandomFirstIndex",
       "hasList": false,
       "bindId": "module",
-      "path": "behavior.randomFirstIndex"
+      "path": "behavior.randomFirstIndex",
+      "type": "out"
     },
     {
       "name": "floatForeground",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "floatObject",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "floatObjectBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
 
     },
     {
       "name": "floatObjectRandomFirstIndex",
       "hasList": false,
       "bindId": "module",
-      "path": "behavior.randomFirstIndex"
+      "path": "behavior.randomFirstIndex",
+      "type": "out"
     },
     {
       "name": "getCharacterData",
       "hasList": false,
       "bindId": "module",
-      "path": "key"
+      "path": "key",
+      "type": "out"
     },
     {
       "name": "getRandom",
       "hasList": false,
       "bindId": "module",
-      "path": "key"
+      "path": "key",
+      "type": "out"
     },
     {
       "name": "interfaceSkin",
       "hasList": false,
-      "bindId": "module"
+      "bindId": "module",
+      "type": "out"
     },
     {
       "name": "light",
       "hasList": false,
       "bindId": "module",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "master",
       "hasList": false,
       "bindId": "module",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "mapFilter",
       "hasList": false,
-      "bindId": "module"
+      "bindId": "module",
+      "type": "out"
     },
     {
       "name": "mapMusic",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "night",
       "hasList": false,
-      "bindId": "module"
+      "bindId": "module",
+      "type": "out"
     },
     {
       "name": "parent",
       "hasList": false,
       "bindId": "module",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "randomFirstIndex",
       "hasList": false,
       "bindId": "module",
-      "path": "behavior"
+      "path": "behavior",
+      "type": "out"
     },
     {
       "name": "screenEffects",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "screenEffectsBehavior",
       "hasList": true,
       "bindId": "mode",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "sequence",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "sequenceBehavior",
       "hasList": true,
       "bindId": "name",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "sound",
       "hasList": true,
-      "bindId": "id"
+      "bindId": "id",
+      "type": "out"
     },
     {
       "name": "source",
       "hasList": false,
       "bindId": "module",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "staticHoles",
       "hasList": true,
       "bindId": ["x", "y"],
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "target",
       "hasList": true,
       "bindId": "id",
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "tracking",
       "hasList": false,
       "bindId": "module",
-      "path": "source"
+      "path": "source",
+      "type": "out"
     },
     {
       "name": "transitionHoles",
       "hasList": true,
       "bindId": ["hole0.x", "hole0.y"],
-      "path": "fromId"
+      "path": "fromId",
+      "type": "out"
     },
     {
       "name": "weather",
       "hasList": true,
-      "bindId": "name"
+      "bindId": "name",
+      "type": "out"
     },
     {
       "name": "yellowMessage",
       "hasList": true,
-      "bindId": "action"
+      "bindId": "action",
+      "type": "out"
     },
     {
       "name": "zoom",
       "hasList": false,
-      "bindId": "module"
+      "bindId": "module",
+      "type": "out"
     }
   ]
 }

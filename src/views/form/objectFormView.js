@@ -119,6 +119,7 @@ class ObjectFormView extends View{
     getExtraButtonColor = (name) => {
       switch(name){
         case "case":
+        case "case container":
           return "#FF3131"
         case "table":
           return "#0FF0FC"

@@ -12,7 +12,7 @@
                     "tool-tip": "Możemy zdefiniować jeden z trzech obiektów: ARGUMENT - służy do podania warunku, CONNECTOR - służy do podania operacji logicznej (or - lub, and - i), CONTAINER - elementy zawarte tutaj w liście traktujemy, jakby były zapisane w nawiasie.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"ARGUMENT"}, {"name":"CONNECTOR"}],
+                    "options": [{"name":"ARGUMENT"}, {"name":"CONNECTOR"}, {"name":"CONTAINER"}],
                     "defaultInput": "ARGUMENT"
                 },
                 {
@@ -84,8 +84,9 @@
                     "min":1,
                     "max": 15000,
                     "defaultInput": [],
+                    "defaultSraj": [],
                     "inputPlaceholder": "Wartości rozdzielić średnikiem!",
-                    "require": [{"name": "kind", "value": ["ARGUMENT"]}, {"name": "kind", "value": ["ARGUMENT"]}],
+                    "require": [{"name": "kind", "value": ["ARGUMENT"]}],
                     "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
@@ -97,6 +98,16 @@
                     "options": [{"name":"AND"}, {"name":"OR"}],
                     "defaultInput": "AND",
                     "require": [{"name": "kind", "value": ["CONNECTOR"]}]
+                },
+                {
+                    "name": "list",
+                    "idInput": "container.list",
+                    "inputType": "empty",
+                    "varType": ["list"],
+                    "defaultInput": [],
+                    "tool-tip": "Elemnty w tej liście są traktowane, jakby były w nawiasie.",
+                    "extraOptions": [{"name":"case", "type": "in"}],
+                    "require": [{"name": "kind", "value": ["CONTAINER"]}]
                 }
             ]
         }
