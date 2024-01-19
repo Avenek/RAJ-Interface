@@ -12,7 +12,7 @@
                     "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
                     "defaultInput": "CREATE"
                 },
@@ -37,7 +37,7 @@
                     "defaultInput":0,
                     "defaultSraj": 0,
                     "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "behavior",
@@ -66,7 +66,7 @@
                             "extraOptions": [{"name":"behavior"}]
                         }
                     ],
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 }
             ]
         }

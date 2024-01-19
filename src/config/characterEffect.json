@@ -12,7 +12,7 @@
                     "tool-tip": "Efekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE_IF_NOT_EXIST"}, {"name":"REMOVE_IF_EXIST"}],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
                     "defaultInput": "CREATE_IF_NOT_EXIST"
                 },
@@ -42,7 +42,7 @@
                     "varType": ["string"],
                     "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}],
                     "defaultInput": "ANIMATION",
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "target",
@@ -82,14 +82,14 @@
                             "require": [{"name": "target.kind", "value": ["FAKE_NPC"]}]
                         }
                     ],
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "params",
                     "idInput": "animation.params",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": [{"name": "effect", "value": ["ANIMATION"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
+                    "require": [{"name": "effect", "value": ["ANIMATION"]}, {"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "properties": [
                         {
                             "name": "params.gifUrl",
@@ -212,7 +212,7 @@
                     "idInput": "tint.params",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": [{"name": "effect", "value": ["TINT"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
+                    "require": [{"name": "effect", "value": ["TINT"]}, {"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "properties": [
                         {
                             "name": "params.duration",
@@ -379,7 +379,7 @@
                     "idInput": "text.params",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": [{"name": "effect", "value": ["TEXT"]}, {"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}],
+                    "require": [{"name": "effect", "value": ["TEXT"]}, {"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "properties": [
                         {
                             "name": "params.text",

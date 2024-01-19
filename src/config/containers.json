@@ -12,10 +12,6 @@
           "tipInfo": "Umożliwia tworzenie poruszających się npc w konkretnych miejscach, wykonujących konkretne zachowania."
         },
         {
-          "name": "CallInstantBehaviorFakeNpc",
-          "tipInfo": "Umożliwia nadpisanie aktualnego zachowania FakeNpc. Po jego wykonaniu fakeNpc powróci do swojego orygianlnego zachowania."
-        },
-        {
           "name": "CharacterHide",
           "tipInfo": "Umożliwia ukrywanie fakeNPC, HERO, Peta, NPC na mapie, minimapie oraz opcjonalnie ich tipu po najechaniu na chowany obiekt."
         },

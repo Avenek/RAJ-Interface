@@ -7,16 +7,6 @@
             "inputType": "key",
             "properties": [
                 {
-                    "name": "action",
-                    "idInput": "action",
-                    "tool-tip": "Przybliżenie możemy tworzyć albo usuwać - ekran powróci do standardowej wielkości.",
-                    "inputType": "options",
-                    "varType": ["string"],
-                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
-                    "extraOptions": [{"name":"case"}],
-                    "defaultInput": "CREATE"
-                },
-                {
                     "name": "duration",
                     "idInput": "duration",
                     "tool-tip": "Czas trwania zoomowanego ekranu w sekundach. Wartość true oznacza, że przybliżenie się samoistnie nie usunie.",
@@ -27,7 +17,7 @@
                     "varType": ["float", "int", "boolean"],
                     "defaultInput": true,
                     "defaultSraj": true,
-                    "require": [{"name": "action", "value": ["CREATE"]}],
+                    "require": [{"name": "action", "value": ["CREATE"]}, {"name": "clear", "value": [false]}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
                 },
                 {
@@ -40,7 +30,7 @@
                     "inputType": "number",
                     "varType": ["int", "float"],
                     "defaultInput": 2,
-                    "require": [{"name": "action", "value": ["CREATE"]}],
+                    "require": [{"name": "action", "value": ["CREATE"]}, {"name": "clear", "value": [false]}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                 },
                 {
@@ -53,8 +43,17 @@
                     "inputType": "number",
                     "varType": ["float", "int"],
                     "defaultInput": 2,
-                    "require": [{"name": "action", "value": ["CREATE"]}],
+                    "require": [{"name": "action", "value": ["CREATE"]}, {"name": "clear", "value": [false]}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "clear",
+                    "idInput": "clear",
+                    "tool-tip": "Flaga, która ustawiona na true kończy trzęsienie ziemi.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
                 }
             ]
         }

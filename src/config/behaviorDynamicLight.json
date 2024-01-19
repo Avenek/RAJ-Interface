@@ -12,7 +12,7 @@
                     "tool-tip": "Światło możemy tworzyć, jeżeli nie istnieje żadne o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
                     "defaultInput": "CREATE"
                 },
@@ -30,7 +30,7 @@
                     "idInput": "d",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": [{"name": "action", "value": ["CREATE"]}],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "properties": [
                         {
                             "name": "d.x",
@@ -159,7 +159,7 @@
                                     "extraOptions": [{"name":"behavior"}]
                                 }
                             ],
-                            "require": [{"name": "action", "value": ["CREATE"]}]
+                            "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                         }
                     ]
                 }

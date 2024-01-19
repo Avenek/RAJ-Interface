@@ -17,7 +17,8 @@
                     "varType": ["float", "int"],
                     "defaultInput": 0.1,
                     "extraOptions": [{"name":"get random"}, {"name":"case"}],
-                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "clear", "value": [false]}]
                 },
                 {
                     "name": "quantity",
@@ -30,7 +31,8 @@
                     "varType": ["int"],
                     "defaultInput": 5,
                     "extraOptions": [{"name":"get random"}],
-                    "validation":[{"forType": "int", "name": "minMax"}]
+                    "validation":[{"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "clear", "value": [false]}]
                 },
                 {
                     "name": "frequency",
@@ -43,7 +45,8 @@
                     "varType": ["float", "int"],
                     "defaultInput": 0.7,
                     "extraOptions": [{"name":"get random"}],
-                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "clear", "value": [false]}]
                 },
                 {
                     "name": "power",
@@ -57,7 +60,17 @@
                     "defaultInput": 10,
                     "defaultSraj": 10,
                     "extraOptions": [{"name":"get random"}],
-                    "validation":[{"forType": "int", "name": "minMax"}]
+                    "validation":[{"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "clear", "value": [false]}]
+                },
+                {
+                    "name": "clear",
+                    "idInput": "clear",
+                    "tool-tip": "Flaga, która ustawiona na true kończy trzęsienie ziemi.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
                 }
             ]
         }

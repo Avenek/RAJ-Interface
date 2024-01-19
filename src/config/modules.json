@@ -27,19 +27,6 @@
       "type": "out"
     },
     {
-      "name": "callInstantBehaviorFakeNpc",
-      "hasList": true,
-      "bindId": "id",
-      "type": "out"
-    },
-    {
-      "name": "callInstantBehaviorFakeNpcBehavior",
-      "hasList": true,
-      "bindId": "name",
-      "path": "list",
-      "type": "out"
-    },
-    {
       "name": "camera",
       "hasList": false,
       "bindId": "module",
@@ -68,7 +55,7 @@
     {
       "name": "characterHide",
       "hasList": true,
-      "bindId": "kind",
+      "bindId": "target.kind",
       "type": "out"
     },
     {

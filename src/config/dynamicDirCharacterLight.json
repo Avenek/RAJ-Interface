@@ -12,7 +12,7 @@
                     "tool-tip": "Światło możemy tworzyć, jeżeli nie istnieje żadne o podanym id albo usuwać.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
                     "defaultInput": "CREATE"
                 },
@@ -30,7 +30,7 @@
                     "idInput": "master",
                     "inputType": "subkey",
                     "tool-tip": "",
-                    "require": [{"name": "action", "value": ["CREATE"]}],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "properties": [
                         {
                             "name": "master.kind",
@@ -48,7 +48,7 @@
                     "idInput": "d",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": [{"name": "action", "value": ["CREATE"]}],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "properties": [
                         {
                             "name": "d.base",
@@ -148,7 +148,7 @@
                             "tool-tip": "",
                             "inputType": "subSubkey",
                            "isCollapsed": "collapsed",
-                            "require": [{"name": "action", "value": ["CREATE"]}],
+                            "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                             "properties": [
                                 {
                                     "name": "d.N.r",
@@ -242,8 +242,7 @@
                                     "isCollapsed": "collapsed-key",
                                     "varType": ["light"],
                                     "tool-tip": "Opcjonalnie możemy zdefiniować światło, które pojawi się wewnątrz wyciętej dziury.",
-                                    "extraOptions": [{"name":"light"}],
-                                    "require": [{"name": "action", "value": ["CREATE"]}]
+                                    "extraOptions": [{"name":"light"}]
                                 }
                             ]   
                         },
@@ -253,7 +252,7 @@
                             "tool-tip": "",
                             "inputType": "subSubkey",
                            "isCollapsed": "collapsed",
-                            "require": [{"name": "action", "value": ["CREATE"]}],
+                            "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                             "properties": [
                                 {
                                     "name": "d.E.r",
@@ -347,8 +346,7 @@
                                     "isCollapsed": "collapsed-key",
                                     "varType": ["light"],
                                     "tool-tip": "Opcjonalnie możemy zdefiniować światło, które pojawi się wewnątrz wyciętej dziury.",
-                                    "extraOptions": [{"name":"light"}],
-                                    "require": [{"name": "action", "value": ["CREATE"]}]
+                                    "extraOptions": [{"name":"light"}]
                                 }
                             ]   
                         },
@@ -358,7 +356,7 @@
                             "tool-tip": "",
                             "inputType": "subSubkey",
                            "isCollapsed": "collapsed",
-                            "require": [{"name": "action", "value": ["CREATE"]}],
+                            "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                             "properties": [
                                 {
                                     "name": "d.S.r",
@@ -452,8 +450,7 @@
                                     "isCollapsed": "collapsed-key",
                                     "varType": ["light"],
                                     "tool-tip": "Opcjonalnie możemy zdefiniować światło, które pojawi się wewnątrz wyciętej dziury.",
-                                    "extraOptions": [{"name":"light"}],
-                                    "require": [{"name": "action", "value": ["CREATE"]}]
+                                    "extraOptions": [{"name":"light"}]
                                 }
                             ]   
                         },
@@ -463,7 +460,7 @@
                             "tool-tip": "",
                             "inputType": "subSubkey",
                            "isCollapsed": "collapsed",
-                            "require": [{"name": "action", "value": ["CREATE"]}],
+                            "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                             "properties": [
                                 {
                                     "name": "d.W.r",
@@ -557,8 +554,7 @@
                                     "isCollapsed": "collapsed-key",
                                     "varType": ["light"],
                                     "tool-tip": "Opcjonalnie możemy zdefiniować światło, które pojawi się wewnątrz wyciętej dziury.",
-                                    "extraOptions": [{"name":"light"}],
-                                    "require": [{"name": "action", "value": ["CREATE"]}]
+                                    "extraOptions": [{"name":"light"}]
                                 }
                             ]   
                         }

@@ -12,7 +12,7 @@
                     "tool-tip": "Światło możemy tworzyć, jeżeli nie istnieje żadne o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE"}, {"name":"REMOVE_IF_EXIST"}],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
                     "defaultInput": "CREATE"
                 },
@@ -32,14 +32,14 @@
                     "varType": ["master"],
                     "tool-tip": "Opcjonalnie możemy zdefiniować mastera. Aktualnie można użyć tylko: THIS_NPC_INSTANCE. Oznacza to, że w momencie zabicia naszego mastera, światło również zniknie. Gdy on się odrodzi, to światło również.",
                     "extraOptions": [{"name":"master"}],
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "d",
                     "idInput": "d",
                     "tool-tip": "",
                     "inputType": "subkey",
-                    "require": [{"name": "action", "value": ["CREATE"]}],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "properties": [
                         {
                             "name": "d.x",
@@ -140,8 +140,7 @@
                             "inputType": "empty",
                             "varType": ["light"],
                             "tool-tip": "Opcjonalnie możemy zdefiniować światło, które pojawi się wewnątrz wyciętej dziury.",
-                            "extraOptions": [{"name":"light"}],
-                            "require": [{"name": "action", "value": ["CREATE"]}]
+                            "extraOptions": [{"name":"light"}]
                         }
                     ]
                 }

@@ -12,7 +12,7 @@
                     "tool-tip": "Obszar możemy tworzyć albo usuwać.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"},{"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
                     "defaultInput": "CREATE"
                 },
@@ -33,7 +33,7 @@
                     "varType": ["string"],
                     "options": [{"name":"ON_IN"}, {"name":"ON_OUT"}],
                     "defaultInput": "ON_IN",
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "x",
@@ -46,7 +46,7 @@
                     "varType": ["int"],
                     "defaultInput": 0,
                     "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "y",
@@ -59,7 +59,7 @@
                     "varType": ["int"],
                     "defaultInput": 0,
                     "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "cols",
@@ -73,7 +73,7 @@
                     "defaultInput": 1,
                     "defaultSraj": 1,
                     "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "rows",
@@ -87,7 +87,7 @@
                     "defaultInput": 1,
                     "defaultSraj": 1,
                     "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "behavior.repeat",
@@ -99,7 +99,7 @@
                     "max":100,
                     "defaultInput": 1,
                     "defaultSraj": 1,
-                    "require": [{"name": "action", "value": ["CREATE"]}],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
                 },
                 {
@@ -110,7 +110,7 @@
                     "varType": ["boolean"],
                     "defaultInput": false,
                     "defaultSraj": false,
-                    "require": [{"name": "action", "value": ["CREATE"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 }
             ]
         }

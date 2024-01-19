@@ -28,22 +28,6 @@ let moduleDict = {
       this.name = "IDLE"
     }
   },
-  
-  callInstantBehaviorFakeNpc : class CallInstantBehaviorFakeNpc{
-    constructor(id) {
-    this.id = id
-    this.repeat = 1
-    this.list = [new moduleDict["callInstantBehaviorFakeNpcBehavior"]()]
-    }
-  },
-
-  callInstantBehaviorFakeNpcBehavior: class CallInstantBehaviorFakeNpcBehavior{
-    constructor(){
-      this.name = "WALK"
-      this.x = 0
-      this.y = 0
-    }
-  },
 
   camera : class Camera{
     constructor(){
@@ -91,7 +75,9 @@ let moduleDict = {
   characterHide : class CharacterHide{
     constructor() {
       this.action = "CREATE"
-      this.kind = "HERO"
+      this.target = {
+        "kind" : "HERO"
+      }
       this.showTip = false
     }
   },
@@ -188,7 +174,7 @@ let moduleDict = {
 
   fakeNpc: class FakeNpc {
     constructor(id) {
-      this.action = "CREATE_IF_NOT_EXIST";
+      this.action = "CREATE";
       this.id = id
       this.x = 0
       this.y = 0
@@ -225,7 +211,7 @@ let moduleDict = {
 
   floatObject : class FloatObject{
     constructor(id){
-      this.action="CREATE_IF_NOT_EXIST"
+      this.action="CREATE"
       this.id = id
       this.x = 0
       this.y = 0
@@ -334,7 +320,7 @@ let moduleDict = {
 
   sequence : class Sequence{
     constructor(id){
-      this.action = "CREATE_IF_NOT_EXIST"
+      this.action = "CREATE"
       this.id = id
       this.behavior = {
         "list" : [new moduleDict["sequenceBehavior"]()]

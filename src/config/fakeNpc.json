@@ -12,9 +12,9 @@
                     "tool-tip": "FakeNpc możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE_IF_NOT_EXIST"}, {"name":"REMOVE_IF_EXIST"}],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}, {"name":"UPDATE"}],
                     "extraOptions": [{"name":"case"}],
-                    "defaultInput": "CREATE_IF_NOT_EXIST"
+                    "defaultInput": "CREATE"
                 },
                 {
                     "name": "id",
@@ -37,7 +37,7 @@
                     "defaultInput": 0,
                     "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "y",
@@ -51,7 +51,7 @@
                     "defaultInput": 0,
                     "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "dir",
@@ -63,7 +63,7 @@
                     "defaultInput": "S",
                     "defaultSraj": "S",
                     "extraOptions": [{"name":"get character data"}],
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "img",
@@ -75,7 +75,7 @@
                     "varType": ["string"],
                     "defaultInput": "npc/test.gif",
                     "extraOptions": [{"name":"get character data"}],
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "speed",
@@ -89,7 +89,7 @@
                     "defaultInput": 4.9,
                     "defaultSraj": 4.9,
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "ignoreUpdateCollisionAndStartEndPos",
@@ -99,7 +99,7 @@
                     "varType": ["boolean"],
                     "defaultInput": false,
                     "defaultSraj": false,
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "instantCreateFadeIn",
@@ -109,7 +109,7 @@
                     "varType": ["boolean"],
                     "defaultInput": false,
                     "defaultSraj": false,
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "instantRemoveFadeOut",
@@ -119,7 +119,7 @@
                     "varType": ["boolean"],
                     "defaultInput": false,
                     "defaultSraj": false,
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "behavior",
@@ -148,7 +148,36 @@
                             "extraOptions": [{"name":"random first index"}, {"name":"behavior"}]
                         }
                     ],
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                },
+                {
+                    "name": "callInstantBehavior",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "callInstantBehavior.repeat",
+                            "idInput": "callInstantBehavior.repeat",
+                            "tool-tip": "Ilość powtórzeń całej tablicy zachowań, jeżeli damy wartość true to nieskończoność.",
+                            "inputType": "string",
+                            "varType": ["int", "boolean"],
+                            "min":1,
+                            "max":100,
+                            "defaultInput": 1,
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                        },
+                        {
+                            "name": "callInstantBehavior.list",
+                            "idInput": "callInstantBehavior.list",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": [],
+                            "tool-tip": "Tablica zachowań, które nadpiszą aktualne. Po ich zakończeniu, FakeNPC wróci do aktualnych.",
+                            "extraOptions": [{"name":"behavior"}]
+                        }
+                    ],
+                    "require": [{"name": "action", "value": ["UPDATE"]}]
                 }
             ]
         }

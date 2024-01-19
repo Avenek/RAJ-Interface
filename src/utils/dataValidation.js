@@ -27,7 +27,7 @@ class DataValidation{
                             }
                         }
                     }
-                    else if(valueType !== "object" && !this.property.varType.includes(valueType)){
+                    else if(valueType !== "object" && !this.property.varType.includes(valueType) && !this.property.canBeEmpty){
                         validSummary.isValid = false
                         validSummary.errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${this.property.varType.join(", ")}`
                         return validSummary

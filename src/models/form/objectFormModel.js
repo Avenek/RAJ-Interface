@@ -422,7 +422,7 @@ class ObjectFormModel{
         this.hideAndRevealRequiredItems(targetProperty)
         this.jsonDataBox.jsonDataChanged()
         this.objectFormChanged(this.objectFormList)
-        if(targetProperty.name === "id" || targetProperty.name === "name" || targetProperty.name === "kind" || targetProperty.name === "action"){
+        if(targetProperty.name === "id" || targetProperty.name === "name" || targetProperty.name.includes("kind") || targetProperty.name === "action"){
             this.objectIdBox.updateNameObjectId(this.container)
         }
     }

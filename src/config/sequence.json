@@ -12,9 +12,9 @@
                     "tool-tip": "Sekwencje możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"CREATE_IF_NOT_EXIST"}, {"name":"REMOVE_IF_EXIST"}],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
-                    "defaultInput": "CREATE_IF_NOT_EXIST"
+                    "defaultInput": "CREATE"
                 },
                 {
                     "name": "id",
@@ -52,7 +52,7 @@
                             "extraOptions": [{"name":"behavior"}]
                         }
                     ],
-                    "require": [{"name": "action", "value": ["CREATE_IF_NOT_EXIST"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 }
             ]
         }

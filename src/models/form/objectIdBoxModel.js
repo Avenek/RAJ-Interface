@@ -28,7 +28,7 @@ class ObjectIdBoxModel{
                 ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(item, bindData[1]));
             }
             else{
-                ids = params.workingList.map(item => item[bindData]);
+                ids = params.workingList.map(item => this.jsonData.getValueFromWorkingObject(item, bindData));
             }
             ids.forEach(id => {
                 idList.push({"name": id, "isChecked": false})
