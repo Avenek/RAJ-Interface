@@ -93,7 +93,6 @@ let moduleDict = {
 
   dialogue : class Dialogue{
     constructor(){
-      this.action = "UPDATE"
       this.header = {"text": ""}
     }
   },

@@ -67,8 +67,8 @@
     },
     {
       "name": "dialogue",
-      "hasList": true,
-      "bindId": "action",
+      "hasList": false,
+      "bindId": "header.text",
       "type": "out"
     },
     {
