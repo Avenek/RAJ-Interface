@@ -19,17 +19,17 @@
                             "varType": ["string"],
                             "defaultInput": "",
                             "require": [{"name": "header.clear", "value": [false]}]
-                        },
-                        {
-                            "name": "header.clear",
-                            "idInput": "header.clear",
-                            "tool-tip": "Flaga, która ustawiona na true czyści niestandardowe ustawienie kamery i ustawia ją z powrotem na środek.",
-                            "inputType": "boolean",
-                            "varType": ["boolean"],
-                            "defaultInput": false,
-                            "defaultSraj": false
                         }
                     ]
+                },
+                {
+                    "name": "clear",
+                    "idInput": "clear",
+                    "tool-tip": "Flaga, która ustawiona na true czyści niestandardowe ustawienie kamery i ustawia ją z powrotem na środek.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
                 }
             ]
         }
