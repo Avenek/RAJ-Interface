@@ -3,7 +3,6 @@ class ObjectIdBoxController {
         this.view = view
         this.model = model
         this.model.bindObjectIdListChanged(this.objectIdListChanged)
-        this.model.objectIdListChanged(this.model.objectIdList, this.model.hasList)
         this.view.bindCheckObjectId(this.handleCheckObjectId)
         this.view.bindDeleteObjectId(this.handleDeleteObjectId)
         this.view.bindAddObjectId(this.handleAddObjectId)

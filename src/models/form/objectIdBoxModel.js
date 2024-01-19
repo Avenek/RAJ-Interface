@@ -6,7 +6,6 @@ class ObjectIdBoxModel{
         this.hasList = true
         this.objectForm = objectForm
         this.configUtils = new ConfigUtils()
-        this.createObjectIdList()
     }
 
     createObjectIdList = () => {
@@ -28,7 +27,7 @@ class ObjectIdBoxModel{
                 ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(item, bindData[1]));
             }
             else{
-                ids = params.workingList.map(item => this.jsonData.getValueFromWorkingObject(item, bindData));
+                ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData));
             }
             ids.forEach(id => {
                 idList.push({"name": id, "isChecked": false})
@@ -45,6 +44,7 @@ class ObjectIdBoxModel{
         idList[params.objectId].isChecked = true
         this.objectIdList = idList
         this.hasList = params.hasList
+        this.objectIdListChanged(this.objectIdList,  this.hasList)
     }
 
     bindObjectIdListChanged = (callback) => {

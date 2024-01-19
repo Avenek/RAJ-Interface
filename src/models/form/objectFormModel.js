@@ -6,7 +6,6 @@ class ObjectFormModel{
         this.objectFormList = []
         this.extraOptionIdBox = null
         this.extraOptionWords = ['getCharacterData', "getRandom", "case", "getFor", "getFunc", "getRandom", "light", "master", "randomFirstIndex", "source", "parent", "target"]
-        this.fetchConfigAndCreateObjectFormList()
     }
 
     bindObjectFormChanged = (callback) => {

@@ -13,9 +13,13 @@ class AppController {
         this.model.jsonData.setParams("module", module, module, id, "out", "module")
         this.model.form = new FormModel(this.model.jsonData)
         this.form = new FormController(this.view.form, this.model.form)
+        this.model.form.moduleObjectFormModel.fetchConfigAndCreateObjectFormList()
+        this.model.form.moduleObjectIdBoxModel.createObjectIdList()
         this.form.view.headerPanelView.bindClickHome(this.handleClickHome)
       }
-      catch{}     
+      catch (e) {
+        console.log(e);
+      }
   }
 
   handleClickHome = () => {
@@ -27,7 +31,12 @@ class AppController {
   }
 }
 //localStorage.clear()
-  if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-13"){
+if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-19"){
+  localStorage.clear()
+  localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+  localStorage.setItem("lastClear", "2024-01-13")
+}
+  /*if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-13"){
     const toAdd =  JSON.parse(localStorage.getItem("containerConfig"))
     const interfaceSkin = {
         "name": "InterfaceSkin",
@@ -36,6 +45,6 @@ class AppController {
     toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(interfaceSkin)))
     localStorage.setItem("containerConfig", JSON.stringify(toAdd))
     localStorage.setItem("lastClear", "2024-01-13")
-  }
+  }*/
 
   const app = new AppController(new AppView(), new AppModel())
