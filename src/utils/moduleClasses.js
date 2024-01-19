@@ -60,7 +60,7 @@ let moduleDict = {
 
   characterEffect : class CharacterEffect {
       constructor(id) {
-        this.action = "CREATE_IF_NOT_EXIST";
+        this.action = "CREATE";
         this.id = id
         this.windowTarget = "MAP"
         this.target = {"kind" : "HERO"}
