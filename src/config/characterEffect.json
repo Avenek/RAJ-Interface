@@ -14,7 +14,7 @@
                     "varType": ["string"],
                     "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}],
                     "extraOptions": [{"name":"case"}],
-                    "defaultInput": "CREATE_IF_NOT_EXIST"
+                    "defaultInput": "CREATE"
                 },
                 {
                     "name": "id",

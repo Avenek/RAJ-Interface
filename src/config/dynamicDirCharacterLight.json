@@ -36,10 +36,19 @@
                             "name": "master.kind",
                             "idInput": "master.kind",
                             "tool-tip": "Obiekt, do którego zostanie przypięte światło. Aktualnie można je przypiąć tylko do postaci gracza.",
-                            "inputType": "string",
+                            "inputType": "options",
                             "varType": ["string"],
-                            "defaultInput": "HERO",
-                            "validation":[{"forType": "string", "name": "equal", "value": ["HERO"]}]
+                            "options": [{"name":"HERO"}, {"name":"FAKE_NPC"}],
+                            "defaultInput": "HERO"
+                        },
+                        {
+                            "name": "master.id",
+                            "idInput": "master.id",
+                            "tool-tip": "ID fakeNpc, do któego chcemy przypiąć światło.",
+                            "inputType": "string",
+                            "varType": ["int", "string"],
+                            "defaultInput": "",
+                            "require": [{"name": "master.kind", "value": ["FAKE_NPC"]}]
                         }
                     ]
                 },

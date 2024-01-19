@@ -33,7 +33,6 @@ class AppController {
 //localStorage.clear()
 if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-19"){
   localStorage.clear()
-  localStorage.setItem("containerConfig", JSON.stringify(toAdd))
   localStorage.setItem("lastClear", "2024-01-13")
 }
   /*if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-13"){
