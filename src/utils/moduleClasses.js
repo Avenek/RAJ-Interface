@@ -409,7 +409,6 @@ let moduleDict = {
 
   zoom : class Zoom{
     constructor(){
-      this.action = "CREATE"
       this.duration = true
       this.zoom = 2
       this.speed = 2
