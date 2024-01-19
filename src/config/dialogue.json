@@ -7,16 +7,6 @@
             "inputType": "key",
             "properties": [
                 {
-                    "name": "action",
-                    "idInput": "action",
-                    "tool-tip": "Header okna dialogowego możemy jedynie zupdatować.",
-                    "inputType": "options",
-                    "varType": ["string"],
-                    "options": [{"name":"UPDATE"}],
-                    "extraOptions": [{"name":"case"}],
-                    "defaultInput": "UPDATE"
-                },
-                {
                     "name": "header",
                     "tool-tip": "",
                     "inputType": "subkey",
