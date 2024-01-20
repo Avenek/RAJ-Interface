@@ -99,7 +99,7 @@ class ObjectIdBoxModel{
         if(isChecked && this.objectIdList.length>0){
             this.objectIdList[0].isChecked = true
             params.objectId = 0
-            params.workingObject = params.workingList[0]
+            params.workingObject = index == 0 ? params.workingList[1] : params.workingList[0]
         }
         const path = this.configUtils.getKeyNameFromPath(params.path)
         const property = this.container === "extraOption" ? this.moduleObjectForm.configUtils.findObjectByProperty(params.config.properties, path, "name") : null
