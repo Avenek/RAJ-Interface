@@ -1,5 +1,6 @@
 class FormController {
-    constructor(view, model) {
+    constructor(view, model, appController) {
+      this.appController = appController
       this.model = model
       this.view = view
       this.view.render()
@@ -11,6 +12,15 @@ class FormController {
       this.model.extraOptionObjectIdBoxModel = new ObjectIdBoxModel(this.model.jsonData, "extraOption", this.model.jsonDataBoxModel, this.model.extraOptionObjectFormModel)
       this.extraOptionObjectIdBox = new ObjectIdBoxController(this.view.extraOptionObjectIdBoxView, this.model.extraOptionObjectIdBoxModel)
       this.extraOptionObjectForm = new ObjectFormController(this.view.extraOptionObjectFormView, this.model.extraOptionObjectFormModel)
+      this.model.extraOptionObjectFormModel.objectIdBox = this.model.extraOptionObjectIdBoxModel
+      this.jsonDataBox.model.extraOptionObjectFormModel = this.model.extraOptionObjectFormModel
+      this.jsonDataBox.model.extraOptionObjectIdBoxModel = this.model.extraOptionObjectIdBoxModel
+      this.model.extraOptionObjectIdBoxModel.moduleObjectForm = this.model.moduleObjectFormModel
+      this.model.extraOptionObjectIdBoxModel.moduleObjectIdBox = this.model.moduleObjectIdBoxModel
+      this.model.moduleObjectFormModel.extraOptionIdBox = this.model.extraOptionObjectIdBoxModel
+      this.model.moduleObjectFormModel.extraOptionObjectForm = this.model.extraOptionObjectFormModel
+      this.model.moduleObjectIdBoxModel.extraOptionIdBox = this.model.extraOptionObjectIdBoxModel
+      this.model.moduleObjectIdBoxModel.extraOptionObjectForm = this.model.extraOptionObjectFormModel
       this.view.bindClickExtraOptionModuleForm(this.handleClickExtraOptionModuleForm)
       this.view.bindClickExtraOptionExtraOptionForm(this.handleClickExtraOptionExtraOptionForm)
     }
@@ -30,20 +40,14 @@ class FormController {
         this.model.moduleObjectIdBoxModel.createObjectIdList()
         this.model.moduleObjectFormModel.fetchConfigAndCreateObjectFormList()
       }
+      else if(extraOptionName === "externalProperties"){
+        this.handleClickExternalProperties("module", key)
+      }
       else{
         this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, type, "module", key)
         this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
         this.model.extraOptionObjectIdBoxModel.createObjectIdList()
-        this.model.extraOptionObjectFormModel.objectIdBox = this.model.extraOptionObjectIdBoxModel
         this.extraOptionObjectIdBox.objectIdListChanged(this.extraOptionObjectIdBox.model.objectIdList, this.extraOptionObjectIdBox.model.hasList)
-        this.jsonDataBox.model.extraOptionObjectFormModel = this.model.extraOptionObjectFormModel
-        this.jsonDataBox.model.extraOptionObjectIdBoxModel = this.model.extraOptionObjectIdBoxModel
-        this.model.extraOptionObjectIdBoxModel.moduleObjectForm = this.model.moduleObjectFormModel
-        this.model.extraOptionObjectIdBoxModel.moduleObjectIdBox = this.model.moduleObjectIdBoxModel
-        this.model.moduleObjectFormModel.extraOptionIdBox = this.model.extraOptionObjectIdBoxModel
-        this.model.moduleObjectFormModel.extraOptionObjectForm = this.model.extraOptionObjectFormModel
-        this.model.moduleObjectIdBoxModel.extraOptionIdBox = this.model.extraOptionObjectIdBoxModel
-        this.model.moduleObjectIdBoxModel.extraOptionObjectForm = this.model.extraOptionObjectFormModel
         this.model.moduleObjectFormModel.changeStateExtraOption()
       }
     }
@@ -62,6 +66,9 @@ class FormController {
         this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
         this.model.moduleObjectIdBoxModel.createObjectIdList()
         this.model.moduleObjectFormModel.fetchConfigAndCreateObjectFormList()
+      }
+      else if(extraOptionName === "externalProperties"){
+        this.handleClickExternalProperties("extraOption", key)
       }
       else{
         this.model.jsonData.setParams("extraOption", extraOptionName, fileName, 0, type, "module", key)
@@ -82,5 +89,15 @@ class FormController {
         name = nameArray.join("")
       }
       return name
+    }
+
+    handleClickExternalProperties = (container, key) => {
+      this.appController.model.externalPropertiesButton.isExternalPropertiesActive = true
+      if(this.model.jsonData.getValueFromWorkingObject(container, key) === null){
+        this.model.jsonData.setObjectKeyByPath(container, key, {})
+      }
+      const workingObject = this.model.jsonData.getValueFromWorkingObject(container, key)
+      this.model.jsonData.workingData = workingObject
+      this.appController.handleClickHome()
     }
   }

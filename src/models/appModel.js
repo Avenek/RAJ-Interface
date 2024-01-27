@@ -1,6 +1,7 @@
 class AppModel {
     constructor() {
       this.jsonData = new JsonDataModel()
-      this.home = new HomeModel(this.jsonData)
+      this.externalPropertiesButton = new ExternalPropertiesButtonModel(false)
+      this.home = new HomeModel(this.jsonData, false)
     }
 }

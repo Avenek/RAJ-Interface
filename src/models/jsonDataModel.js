@@ -15,7 +15,8 @@ class ObjectParams {
 
 class JsonDataModel {
     constructor() {
-      this.data = JSON.parse(localStorage.getItem('lastJson')) || {};
+      this.displayData = JSON.parse(localStorage.getItem('lastJson')) || {};
+      this.workingData = this.displayData
       this.moduleConfig = null
       this.configUtils = new ConfigUtils()
       this.fetchConfig()
@@ -34,7 +35,8 @@ class JsonDataModel {
     }
 
     clearData = () => {
-      this.data = {}
+      this.displayData = {}
+      this.workingData = this.displayData
       this.objectsParams.splice(1);
       this.objectsParams[0].workingObject = null;
       this.objectsParams[0].workingList = null;
@@ -56,11 +58,11 @@ class JsonDataModel {
         params.hasList = propertyConfig.hasList
         try{
           if(params.hasList){
-            params.workingList = this.data[module].list
-            params.workingObject = this.data[module].list[id]
+            params.workingList = this.workingData[module].list
+            params.workingObject = this.workingData[module].list[id]
           }
           else{
-            params.workingObject = this.data[module]
+            params.workingObject = this.workingData[module]
           }
         }
         catch{}
@@ -155,9 +157,9 @@ class JsonDataModel {
       if(container === "module"){
         if(params.hasList){
           if(params.workingList === null){
-            this.data[params.module]={}
-            this.data[params.module].list=[]
-            params.workingList = this.data[params.module].list
+            this.workingData[params.module]={}
+            this.workingData[params.module].list=[]
+            params.workingList = this.workingData[params.module].list
           }
           params.workingObject = new moduleDict[params.module](name)
           params.workingList.push(params.workingObject)
@@ -165,7 +167,7 @@ class JsonDataModel {
         else{
           params.workingList = null
           params.workingObject = new moduleDict[params.module](name)
-          this.data[params.module] = params.workingObject
+          this.workingData[params.module] = params.workingObject
         }
       }
       else{
@@ -203,7 +205,7 @@ class JsonDataModel {
               delete parentObject[params.module]
             }
             else{
-              delete this.data[params.module]
+              delete this.workingData[params.module]
             }
           }
           else if(params.module !== "behavior"){
@@ -218,7 +220,7 @@ class JsonDataModel {
             delete parentObject[params.module]
           }
           else{
-            delete this.data[params.module]
+            delete this.workingData[params.module]
           }
         }
         else if(defaultInput !== null && defaultInput !== undefined){

@@ -1,8 +1,8 @@
 class HomeModel {
-    constructor(jsonData) {
+    constructor(jsonData, externalPropertiesButton) {
       this.jsonData = jsonData
       this.dataObjectsBoxModel = new DataObjectsBoxModel(jsonData)
       this.modulesBoxModel = new ModulesBoxModel()
-      this.jsonDataBoxModel = new JsonDataBoxHomeModel(jsonData)
+      this.jsonDataBoxModel = new JsonDataBoxHomeModel(jsonData, externalPropertiesButton)
     }
 }

@@ -3,7 +3,7 @@ class JsonDataBoxHomeView extends JsonDataBoxView{
         super(jsonDataBox)
     }
 
-    displayJsonDataBox = (jsonData, isBeautified, errorMode) => {
+    displayJsonDataBox = (jsonData, isBeautified, errorMode, isExternalPropertiesActive) => {
         this.beautifyButton.textContent = "Beautify"
         this.minifyButton.textContent = "Minify"
         this.copyButton.textContent = "Copy"
@@ -12,35 +12,41 @@ class JsonDataBoxHomeView extends JsonDataBoxView{
             this.jsonDataArea.classList.remove("error-json")
             if(isBeautified){
                 this.jsonDataArea.classList.remove("wrap-json")
-                this.jsonDataArea.value = JSON.stringify(jsonData.data, null, 2)
+                this.jsonDataArea.value = JSON.stringify(jsonData.displayData, null, 2)
             }
             else{
                 this.jsonDataArea.classList.add("wrap-json")
-                this.jsonDataArea.value = JSON.stringify(jsonData.data)
+                this.jsonDataArea.value = JSON.stringify(jsonData.displayData)
             }
         }
         else{
             this.jsonDataArea.classList.add("error-json")
+        }
+        if(isExternalPropertiesActive){
+            this.jsonDataArea.classList.add("external-properties-json")
         }
         this.buttonsContainer.append(this.beautifyButton, this.minifyButton, this.copyButton, this.clearButton)
         this.jsonDataContainer.append(this.jsonDataArea)
         this.jsonDataBox.append(this.buttonsContainer, this.jsonDataContainer)
     }
 
-    updateJsonData = (jsonData, isBeautified, errorMode) => {
+    updateJsonData = (jsonData, isBeautified, errorMode, isExternalPropertiesActive) => {
         if(!errorMode){
             this.jsonDataArea.classList.remove("error-json")
             if(isBeautified){
                 this.jsonDataArea.classList.remove("wrap-json")
-                this.jsonDataArea.value = JSON.stringify(jsonData.data, null, 2)
+                this.jsonDataArea.value = JSON.stringify(jsonData.displayData, null, 2)
             }
             else{
                 this.jsonDataArea.classList.add("wrap-json")
-                this.jsonDataArea.value = JSON.stringify(jsonData.data)
+                this.jsonDataArea.value = JSON.stringify(jsonData.displayData)
             }
         }
         else{
             this.jsonDataArea.classList.add("error-json")
+        }
+        if(isExternalPropertiesActive){
+            this.jsonDataArea.classList.add("external-properties-json")
         }
     }
 

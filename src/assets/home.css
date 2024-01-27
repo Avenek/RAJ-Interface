@@ -99,6 +99,21 @@ body {
     background-color: #444;
 }
 
+.external-properties{
+    padding: 10px;
+    color: rgb(2, 255, 2);
+    justify-content: center;
+    text-align: center;
+    border-radius: 6px;
+    border: #09f001 solid 2px;
+    background-color: #085f05a6;
+    font-weight: bold;
+    margin-left: 5px;
+    float: right;
+    cursor: pointer;
+    position: relative;
+}
+
 .container {
     border: 2px solid #808080;
     border-radius: 10px;
@@ -373,6 +388,11 @@ body {
 .error-json {
     background-color: rgb(240, 143, 143);
     border: 1px solid #ff0000;
+}
+
+.external-properties-json {
+    background-color: rgb(247, 253, 167);
+    border: 1px solid #daff09;
 }
 
 .dragging {

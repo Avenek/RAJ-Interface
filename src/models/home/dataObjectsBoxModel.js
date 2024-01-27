@@ -25,10 +25,17 @@ class DataObjectsBoxModel{
     createDataObjectsList = () => {
         const dataObjects = []
         try{
-            for(let key in this.jsonData.data){
-                const hasList = this.listConfig.modules.find(object => object.name === key).hasList;
+            for(let key in this.jsonData.workingData){
+                const hasList = this.listConfig.modules.find(module => module.name === key).hasList;
+                const bindData = this.listConfig.modules.find(module => module.name === key).bindId
+                let ids
                 if(hasList){
-                    const ids = this.jsonData.data[key].list.map(item => item.id || item.name || item.kind || item.action);
+                    if(Array.isArray(bindData)){
+                        ids = this.jsonData.workingData[key].list.map(item => this.jsonData.getValueFromObject(item, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(item, bindData[1]));
+                    }
+                    else{
+                        ids = this.jsonData.workingData[key].list.map(item => this.jsonData.getValueFromObject(item, bindData));
+                    }
                     dataObjects.push({"keyName": key, "objectNames": ids})
                 }
                 else{

@@ -1,7 +1,7 @@
 class HeaderPanelView extends View{
     constructor(headerPanel){
         super()
-       this.headerPanel = headerPanel
+        this.headerPanel = headerPanel
     }
 
     displayHeader = (module) => {

@@ -111,6 +111,14 @@
                     "defaultInput": false,
                     "defaultSraj": false,
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                },
+                {
+                    "name": "externalProperties",
+                    "idInput": "externalProperties",
+                    "tool-tip": "Obszar możemy tworzyć albo usuwać.",
+                    "inputType": "empty",
+                    "varType": ["empty"],
+                    "extraOptions": [{"name":"external properties"}]
                 }
             ]
         }

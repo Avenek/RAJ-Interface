@@ -1,7 +1,7 @@
 class DataObjectsBoxView extends View{
     constructor(dataObjectsBox){
         super()
-       this.dataObjectsBox = dataObjectsBox
+        this.dataObjectsBox = dataObjectsBox
     }
 
     displayDataObjects = (dataObjectsList) => {
@@ -21,6 +21,6 @@ class DataObjectsBoxView extends View{
                 keyMenu.append(objectIdsMenu)
             }
             this.dataObjectsBox.append(keyMenu);
-        })        
+        })
     }
 }

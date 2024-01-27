@@ -102,6 +102,13 @@
       "type": "out"
     },
     {
+      "name": "externalProperties",
+      "hasList": false,
+      "bindId": "id",
+      "path": "fromId",
+      "type": "out"
+    },
+    {
       "name": "extraLight",
       "hasList": true,
       "bindId": "id",

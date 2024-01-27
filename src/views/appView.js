@@ -2,6 +2,7 @@ class AppView extends View{
     constructor(){
         super()
         this.home = new HomeView();
+        this.externalPropertiesButton = new ExternalPropertiesButtonView()
     }
 
     bindClickModule = (handler) =>{
@@ -26,5 +27,21 @@ class AppView extends View{
 
             }
         })
+    }
+
+    bindClickHomeExternalPropertiesButton = (handler) =>{
+        this.home.dataObjectsBox.addEventListener("click", event => {
+            if (event.target.classList.contains('external-properties')) {
+                handler()
+            }
+        })   
+    }
+
+    bindClickFormExternalPropertiesButton = (handler) =>{
+        this.form.headerPanel.addEventListener("click", event => {
+            if (event.target.classList.contains('external-properties')) {
+                handler()
+            }
+        })   
     }
 }
