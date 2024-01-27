@@ -100,7 +100,7 @@ class DataValidation{
       
     uniqueValid = (value, key) => {
         const jsonDataParams = this.jsonData.getParams(this.container)
-        for(let i=0 ; i < jsonDataParams.workingList ; i++){
+        for(let i=0 ; i < jsonDataParams.workingList.length ; i++){
             let objectValue = this.jsonData.getValueFromObject(jsonDataParams.workingList[i], key)
             if(objectValue === value && i != jsonDataParams.objectId){
               return {"isValid": false, "errorMessage": "Wartość tego pola powinna być unikalna i nie może się powtarzać w innych obiektach!"}

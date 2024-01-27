@@ -82,10 +82,12 @@ class ObjectIdBoxModel{
     }
 
     cloneObjectId = (index) => {
+        const params = this.jsonData.getParams(this.container)
         this.objectIdList.push({"name": this.objectIdList[index].name, "isChecked": true})
         this.uncheckedCurrentObject()
         this.objectIdListChanged(this.objectIdList, this.hasList)
         this.jsonData.cloneObject(this.container, index)
+        this.objectForm.createObjectFormList(params.config)
         this.jsonDataBox.jsonDataChanged(this.jsonData, this.jsonDataBox.isBeautified)
         if(this.container === "module"){
             this.clearExtraOption()
