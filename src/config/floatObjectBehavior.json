@@ -301,6 +301,26 @@
                         }
                     ],
                     "require": [{"name": "name", "value": ["ROTATION"]}]
+                },
+                {
+                    "name": "attachMoveNoise",
+                    "idInput": "idle.attachMoveNoise",
+                    "tool-tip": "",
+                    "varType": ["attachMoveNoise"],
+                    "inputType": "subkey",
+                    "require": [{"name": "name", "value": ["IDLE"]}],
+                    "properties":[
+                        {
+                            "name": "attachMoveNoise.vals",
+                            "idInput": "attachMoveNoise.vals",
+                            "tool-tip": "Zawiera tablicę koordynatów, na które ma się przemieszczać obiekt, wraz z szybkością przemieszczenia. Możemy uzyskać efekt krążenia, turbulencji, czy potrząsania obiektem.",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": [],
+                            "defaultSraj": [],
+                            "extraOptions": [{"name":"move noise"}]
+                        }
+                    ]
                 }
             ]
         }

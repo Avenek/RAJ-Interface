@@ -224,7 +224,6 @@ let moduleDict = {
   floatObjectBehavior : class FloatObjectBehavior{
     constructor(){
       this.name = "IDLE"
-      this.duration = 5
     }
   },
 
@@ -279,11 +278,18 @@ let moduleDict = {
     }
   },
 
-  mapMusic: class MapMusic{
+  mapMusic : class MapMusic{
     constructor(id){
       this.action = "CREATE"
       this.id = id
       this.file = "burza01.mp3"
+    }
+  },
+
+  moveNoise : class MoveNoise{
+    constructor(){
+      this.x = 0
+      this.y = 0
     }
   },
 

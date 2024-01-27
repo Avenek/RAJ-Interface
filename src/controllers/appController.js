@@ -33,7 +33,7 @@ class AppController {
 //localStorage.clear()
 if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-19"){
   localStorage.clear()
-  localStorage.setItem("lastClear", "2024-01-13")
+  localStorage.setItem("lastClear", "2024-01-19")
 }
   /*if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-13"){
     const toAdd =  JSON.parse(localStorage.getItem("containerConfig"))

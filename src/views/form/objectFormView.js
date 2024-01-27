@@ -146,6 +146,8 @@ class ObjectFormView extends View{
         case "static holes":
         case "transition holes":
           return "#FFFFFF"
+        case "move noise":
+          return "#CCE5FF"
         default:
           return "#FFF01F"
       }
