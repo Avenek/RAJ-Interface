@@ -98,6 +98,7 @@ class FormController {
       }
       const workingObject = this.model.jsonData.getValueFromWorkingObject(container, key)
       this.model.jsonData.workingData = workingObject
+      this.model.jsonDataBoxModel.jsonDataChanged()
       this.appController.handleClickHome()
     }
   }

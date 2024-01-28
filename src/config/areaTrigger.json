@@ -115,7 +115,7 @@
                 {
                     "name": "external_properties",
                     "idInput": "external_properties",
-                    "tool-tip": "Obszar możemy tworzyć albo usuwać.",
+                    "tool-tip": "Definiujemy w tym miejscu, co ma się stać po wejściu/zejściu na dany obszar.",
                     "inputType": "empty",
                     "varType": ["empty"],
                     "extraOptions": [{"name":"external properties"}]

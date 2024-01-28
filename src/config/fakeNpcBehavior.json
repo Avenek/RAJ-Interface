@@ -123,8 +123,15 @@
                     "validation":[{"forType": "int", "name": "minMax"}],
                     "extraOptions": [{"name":"get character data"}],
                     "require": [{"name": "name", "value": ["TP"]}]
+                },
+                {
+                    "name": "external_properties",
+                    "idInput": "external_properties",
+                    "tool-tip": "Definiujemy w tym miejscu, czy mają się wykonać dodatkowe akcje, gdy fakeNPC jest w trakcie wykonywnaia tego zachowania.",
+                    "inputType": "empty",
+                    "varType": ["empty"],
+                    "extraOptions": [{"name":"external properties"}]
                 }
-                
             ]
         }
     ]

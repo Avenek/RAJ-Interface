@@ -30,7 +30,12 @@ class ObjectIdBoxModel{
                 ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData));
             }
             ids.forEach(id => {
-                idList.push({"name": id, "isChecked": false})
+                if(id){
+                    idList.push({"name": id, "isChecked": false})
+                }
+                else{
+                    idList.push({"name": "obiekt", "isChecked": false})
+                }
             })
         }
         else if(params.workingObject === undefined || params.workingObject === null){
@@ -191,7 +196,8 @@ class ObjectIdBoxModel{
                     defaultName = this.jsonData.getValueFromWorkingObject(this.container, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(this.container, bindData[1])
                 }
                 else{
-                    defaultName = this.jsonData.getValueFromWorkingObject(this.container, bindData)
+                    const value = this.jsonData.getValueFromWorkingObject(this.container, bindData)
+                    defaultName = value === null ? "obiekt" : value
                 }
 
                 break;

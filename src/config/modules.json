@@ -262,7 +262,7 @@
     {
       "name": "sequenceBehavior",
       "hasList": true,
-      "bindId": "name",
+      "bindId": "external_properties",
       "path": "fromId",
       "type": "out"
     },
