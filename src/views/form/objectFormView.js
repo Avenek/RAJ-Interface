@@ -148,6 +148,8 @@ class ObjectFormView extends View{
           return "#FFFFFF"
         case "move noise":
           return "#CCE5FF"
+        case "external properties":
+          return "#FF8000"
         default:
           return "#FFF01F"
       }
