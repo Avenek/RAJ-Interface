@@ -5,7 +5,6 @@ class AppController {
       this.home = new HomeController(this.view.home, this.model.home)
       this.externalPropertiesButton = new ExternalPropertiesButtonController(this.view.externalPropertiesButton, this.model.externalPropertiesButton, this)
       this.view.bindClickModule(this.handleClickModule)
-      this.view.bindClickHomeExternalPropertiesButton(this.handleClickExternalPropertiesButton)
     }
 
     handleClickModule = (module, id = 0) => {
@@ -27,12 +26,15 @@ class AppController {
   }
 
   handleClickHome = () => {
-    this.view.home = new HomeView()
-    this.model.home = new HomeModel(this.model.jsonData, this.externalPropertiesButton.model)
+    this.view.home.render()
+    this.model.home.dataObjectsBoxModel.createDataObjectsList()
+    this.view.home.dataObjectsBoxView.displayDataObjects(this.model.home.dataObjectsBoxModel.dataObjectsList)
+    this.view.home.modulesBoxView.displayModulesBox(this.model.home.modulesBoxModel.modulesList)
+    this.view.home.jsonDataBoxView.displayJsonDataBox(this.home.jsonDataBox.model.jsonData, this.home.jsonDataBox.model.isBeautified, this.home.jsonDataBox.model.errorMode, this.externalPropertiesButton.isExternalPropertiesActive)
+    this.model.jsonData.objectsParams = []
     this.home = new HomeController(this.view.home, this.model.home)
     this.externalPropertiesButton.displayButton(this.model.externalPropertiesButton.isExternalPropertiesActive)
     this.externalPropertiesButton.view.bindClickExternalPropertiesButton(this.externalPropertiesButton.handleClickExternalPropertiesButton)
-    this.model.jsonData.objectsParams = []
     this.view.bindClickModule(this.handleClickModule)
   }
 

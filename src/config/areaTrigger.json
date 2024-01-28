@@ -113,8 +113,8 @@
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
-                    "name": "externalProperties",
-                    "idInput": "externalProperties",
+                    "name": "external_properties",
+                    "idInput": "external_properties",
                     "tool-tip": "Obszar możemy tworzyć albo usuwać.",
                     "inputType": "empty",
                     "varType": ["empty"],

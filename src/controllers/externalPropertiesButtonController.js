@@ -5,6 +5,11 @@ class ExternalPropertiesButtonController {
         this.app = app
         this.displayButton(this.model.isExternalPropertiesActive)
         this.view.bindClickExternalPropertiesButton(this.handleClickExternalPropertiesButton)
+        this.model.bindButtonStateChanged(this.buttonStateChanged)
+    }
+    
+    buttonStateChanged = (isActive) => {
+        this.displayButton(isActive)
     }
     
     displayButton = () => {

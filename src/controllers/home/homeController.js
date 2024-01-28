@@ -2,7 +2,6 @@ class HomeController {
     constructor(view, model) {
       this.view = view
       this.model = model
-      this.view.render()
       this.dataObjectsBox = new DataObjectsBoxController(this.view.dataObjectsBoxView, this.model.dataObjectsBoxModel)
       this.modulesBox = new ModulesBoxController(this.view.modulesBoxView, this.model.modulesBoxModel)
       this.jsonDataBox = new JsonDataBoxHomeController(this.view.jsonDataBoxView, this.model.jsonDataBoxModel, this.dataObjectsBox)

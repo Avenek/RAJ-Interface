@@ -30,7 +30,7 @@ class JsonDataBoxFormModel{
 
     clearJsonData = () => {
         if (window.confirm("Czy na pewno chcesz wyczyścić pole Json?\nPS. Ctrl+z nie przywróci go już z powrotem.")) {
-            this.externalPropertiesButton.isExternalPropertiesActive = false
+            this.externalPropertiesButton.changeButtonState(false)
             this.jsonData.clearData()
             this.jsonDataChanged()
             this.objectIdBoxModel.clearBox(true)

@@ -25,6 +25,9 @@ class JsonDataBoxHomeView extends JsonDataBoxView{
         if(isExternalPropertiesActive){
             this.jsonDataArea.classList.add("external-properties-json")
         }
+        else{
+            this.jsonDataArea.classList.remove("external-properties-json")
+        }
         this.buttonsContainer.append(this.beautifyButton, this.minifyButton, this.copyButton, this.clearButton)
         this.jsonDataContainer.append(this.jsonDataArea)
         this.jsonDataBox.append(this.buttonsContainer, this.jsonDataContainer)
@@ -47,6 +50,9 @@ class JsonDataBoxHomeView extends JsonDataBoxView{
         }
         if(isExternalPropertiesActive){
             this.jsonDataArea.classList.add("external-properties-json")
+        }
+        else{
+            this.jsonDataArea.classList.remove("external-properties-json")
         }
     }
 

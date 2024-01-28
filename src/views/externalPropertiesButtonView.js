@@ -6,12 +6,15 @@ class ExternalPropertiesButtonView extends View{
     }
 
     displayButton = (isExternalPropertiesActive) => {
+        if(this.externalPropertiesButton){
+            this.externalPropertiesButton.remove()
+        }
         this.externalPropertiesButton = this.createElement("div", "external-properties")
         this.externalPropertiesButton.textContent = "EXTERNAL PROPERTIES"
         if(!isExternalPropertiesActive)  {
             this.externalPropertiesButton.classList.add("hide")
         }
-        this.root.firstChild.insertBefore(this.externalPropertiesButton, this.root.firstChild.firstChild.nextElementSibling);
+        this.root.firstChild.firstChild.append(this.externalPropertiesButton)
     }
 
     bindClickExternalPropertiesButton = (handler) =>{
