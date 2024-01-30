@@ -40,19 +40,15 @@ class AppController {
 
 }
 //localStorage.clear()
-if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-19"){
-  localStorage.clear()
-  localStorage.setItem("lastClear", "2024-01-19")
-}
-  /*if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-13"){
+  if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-30"){
     const toAdd =  JSON.parse(localStorage.getItem("containerConfig"))
-    const interfaceSkin = {
-        "name": "InterfaceSkin",
-        "tipInfo": " Zmienia kolor interfejsu (są problemy z grafiką niektórych elementów - korzystanie niezalecane)"
+    const randomCaller = {
+      "name": "RandomCaller",
+      "tipInfo": "Umożliwia wywołanie losowego Sraja. W options podajemy możliwe sraje do wyboru."
     }
-    toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(interfaceSkin)))
+    toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(randomCaller)))
     localStorage.setItem("containerConfig", JSON.stringify(toAdd))
-    localStorage.setItem("lastClear", "2024-01-13")
-  }*/
+    localStorage.setItem("lastClear", "2024-01-30")
+  }
 
   const app = new AppController(new AppView(), new AppModel())

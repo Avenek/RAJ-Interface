@@ -116,7 +116,11 @@
         },
         {
           "name": "InterfaceSkin",
-          "tipInfo": " Zmienia kolor interfejsu (są problemy z grafiką niektórych elementów - korzystanie niezalecane)"
+          "tipInfo": "Umożliwia zmianę koloru interfejsu (są problemy z grafiką niektórych elementów - korzystanie niezalecane)"
+        },
+        {
+          "name": "RandomCaller",
+          "tipInfo": "Umożliwia wywołanie losowego Sraja. W options podajemy możliwe sraje do wyboru."
         }
       ]
     }

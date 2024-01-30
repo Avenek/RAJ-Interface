@@ -235,17 +235,20 @@ class JsonDataModel {
     }
 
     getValueFromObject = (obj, key) => {
-      const keys = key.split('.');
-      let value = obj
-      for (const k of keys) {
-        if (value && value.hasOwnProperty(k)) {
-          value = value[k];
-        } 
-        else {
-          return null;
+      if(key){
+        const keys = key.split('.');
+        let value = obj
+        for (const k of keys) {
+          if (value && value.hasOwnProperty(k)) {
+            value = value[k];
+          } 
+          else {
+            return null;
+          }
         }
+        return value;
       }
-      return value;
+      return obj
     }
 
     getValueFromWorkingObject = (container, key) => {
@@ -267,7 +270,7 @@ class JsonDataModel {
       for (let i = 0; i < keys.length - 1; i++) {
         const currentKey = keys[i];
         if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
-          if(currentKey === "list" || currentKey === "holes" || currentKey === "vals"){
+          if(currentKey === "list" || currentKey === "holes" || currentKey === "vals" || currentKey === "options"){
             currentObj[currentKey] = [];
           }
           else{
@@ -277,7 +280,7 @@ class JsonDataModel {
         currentObj = currentObj[currentKey];
       }
       const lastKey = keys[keys.length - 1];
-      if(lastKey === "list" || lastKey === "holes" || lastKey === "vals"){
+      if(lastKey === "list" || lastKey === "holes" || lastKey === "vals" || lastKey === "options"){
         if(!Array.isArray(currentObj[lastKey])){
           currentObj[lastKey] = []
         }

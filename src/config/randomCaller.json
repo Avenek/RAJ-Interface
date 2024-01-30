@@ -1,0 +1,21 @@
+{
+    "properties": [
+        {
+            "name": "randomCaller",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "options",
+                    "idInput": "options",
+                    "inputType": "empty",
+                    "varType": ["list"],
+                    "defaultInput": [],
+                    "tool-tip": "Tablica, w której deklaruje sraje do wylosowania.",
+                    "extraOptions": [{"name":"options"}]
+                }
+            ]
+        }
+    ]
+}

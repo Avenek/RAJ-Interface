@@ -295,7 +295,17 @@ let moduleDict = {
 
   parent : class Parent{
     constructor(){
-      this.kind = "HERO"
+    }
+  },
+
+  options : class Options{
+    constructor(){
+    }
+  },
+
+  randomCaller : class RandomCaller{
+    constructor(){
+      this.options = []
     }
   },
 

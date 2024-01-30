@@ -227,10 +227,23 @@
       "type": "out"
     },
     {
+      "name": "options",
+      "hasList": true,
+      "bindId": "module",
+      "type": "out",
+      "path": "options"
+    },
+    {
       "name": "parent",
       "hasList": false,
       "bindId": "module",
       "path": "fromId",
+      "type": "out"
+    },
+    {
+      "name": "randomCaller",
+      "hasList": false,
+      "bindId": "module",
       "type": "out"
     },
     {
