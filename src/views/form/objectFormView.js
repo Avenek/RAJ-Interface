@@ -28,7 +28,7 @@ class ObjectFormView extends View{
                 isCollapsed = " " + property.isCollapsed
               }
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div>`
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div>`
                 for (const option of property.options) {
                   const isChecked = option.name === property.value ? ' option-checked' : '';
                   html += `<div class="radio-button${isChecked}" id="${property.idInput}">${option.name}</div>`;
@@ -43,7 +43,7 @@ class ObjectFormView extends View{
               const isError = property.errorMessage && property.errorMessage !== "" ? " error-input" : ""
               const isExpanded = property.isExpanded ? " expanded" : ""
               const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><label class="file-upload"><input type="file" id="${property.idInput}" accept="${property.acceptFiles}" name="${property.name}"/>Wybierz plik</label>`;
+              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><label class="file-upload"><input type="file" id="${property.idInput}" accept="${property.acceptFiles}" name="${property.name}"/>Wybierz plik</label>`;
             }
             else if(property.inputType === "color"){
               let isCollapsed = ""
@@ -51,7 +51,7 @@ class ObjectFormView extends View{
                 isCollapsed = " " + property.isCollapsed
               }
               const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="color" class="key-value-input" id="${property.idInput}" value="${property.value || "#ffffff"}" name="${property.name}">`;
+              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><input type="color" class="key-value-input" id="${property.idInput}" value="${property.value || "#ffffff"}" name="${property.name}">`;
             }
             else if(property.inputType === "string"){
               let value = property.value
@@ -66,7 +66,7 @@ class ObjectFormView extends View{
                 const isError = property.errorMessage && property.errorMessage !== "" ? " error-input" : ""
                 const isExpanded = property.isExpanded ? " expanded" : ""
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${value}" name="${property.name}" placeholder="${placeholder}">`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${value}" name="${property.name}" placeholder="${placeholder}">`;
             }
             else if(property.inputType === "number"){
               let isCollapsed = ""
@@ -77,7 +77,7 @@ class ObjectFormView extends View{
                 const isError = property.isValid ? "" : " error-input"
                 const isExpanded = property.isExpanded ? "expanded" : ""
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><input type="number" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" step=${property.step} min=${property.min} max=${property.max} value="${value}" name="${property.name}">`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><input type="number" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" step=${property.step} min=${property.min} max=${property.max} value="${value}" name="${property.name}">`;
             } 
             else if(property.inputType === "boolean"){
               let isCollapsed = ""
@@ -86,7 +86,7 @@ class ObjectFormView extends View{
               }
                 const isChecked = property.value ? ' slider-checked' : '';
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div><div class="slider round${isChecked}" id="${property.idInput}" name="${property.name}"></div>`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><div class="slider round${isChecked}" id="${property.idInput}" name="${property.name}"></div>`;
             }
             else if(property.inputType === "empty"){
               let isCollapsed = ""
@@ -94,7 +94,7 @@ class ObjectFormView extends View{
                 isCollapsed = " " + property.isCollapsed
               }
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}:</div>`;
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div>`;
             } 
             else {
                 continue
