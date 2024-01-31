@@ -9,7 +9,7 @@
                 {
                     "name": "",
                     "idInput": "external_properties",
-                    "tool-tip": "Definiujemy w tym miejscu, co ma się stać po wejściu/zejściu na dany obszar.",
+                    "tool-tip": "Definiujemy w tym miejscu sraja, któy może się wylosować i zostać wykonany.",
                     "inputType": "empty",
                     "varType": ["empty"],
                     "extraOptions": [{"name":"external properties"}]
