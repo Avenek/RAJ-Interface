@@ -353,11 +353,20 @@ class ObjectFormModel{
 
     removeDefaultValuesFromJson(data, prefix = "") {
         for (const key in data) {
-          const value = data[key];
+          let value = data[key];
           const fullKey = prefix + key;
           let foundObject = this.configUtils.findObjectByProperty(this.objectFormList, fullKey, "name")
-          if (Array.isArray(value) && value.length === 0 && foundObject && Array.isArray(foundObject.defaultSraj)){
-            this.jsonData.removeObjectKeyByPath(this.container, fullKey)
+          if(Array.isArray(value))
+          {
+            if (value.length === 0 && foundObject && Array.isArray(foundObject.defaultSraj)){
+                this.jsonData.removeObjectKeyByPath(this.container, fullKey)
+            }
+            else{
+                value = value.filter(function(value) {
+                    return value !== "";
+                  });
+                  this.jsonData.setObjectKeyByPath(this.container, fullKey, value)
+            }
           }
           else if (typeof value === "object" && !Array.isArray(value)) {
             this.removeDefaultValuesFromJson(value, fullKey + ".");

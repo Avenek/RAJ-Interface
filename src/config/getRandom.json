@@ -74,6 +74,7 @@
             "inputType": "string",
             "varType": ["int", "float", "string"],
             "defaultInput":[],
+            "defaultSraj": [],
             "inputPlaceholder": "Wartości rozdzielić średnikiem!",
             "require": [{"name": "resultType", "value": ["options"]}]
           }
