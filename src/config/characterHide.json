@@ -40,7 +40,7 @@
                             "step":1,
                             "varType": ["int"],
                             "defaultInput": 0,
-                            "require": [{"name": "kind", "value": ["NPC"]}],
+                            "require": [{"name": "target.kind", "value": ["NPC"]}],
                             "validation":[{"forType": "int", "name": "minMax"}]
                         },
                         {
@@ -50,7 +50,7 @@
                             "inputType": "string",
                             "varType": ["int", "string"],
                             "defaultInput": "",
-                            "require": [{"name": "kind", "value": ["FAKE_NPC"]}]
+                            "require": [{"name": "target.kind", "value": ["FAKE_NPC"]}]
                         }
                     ]
                 },
