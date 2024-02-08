@@ -8,6 +8,16 @@ body {
     overflow-x: hidden;
 }
 
+particle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
 .root {
     display: grid;
     grid-template-columns: calc(100% - 365px) 365px;
