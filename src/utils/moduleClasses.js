@@ -243,6 +243,14 @@ let moduleDict = {
     }
   },
 
+  getNpcId : class GetNpcId {
+    constructor()
+    {
+      this.kind = "THIS_NPC_INSTANCE",
+      this.toGet = "id"
+    }
+  },
+
   getRandom : class GetRandom {
     constructor() 
     {

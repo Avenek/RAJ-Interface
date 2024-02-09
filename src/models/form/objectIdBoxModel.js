@@ -30,7 +30,7 @@ class ObjectIdBoxModel{
                 ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData));
             }
             ids.forEach(id => {
-                if(id){
+                if(id && typeof id !== "object"){
                     idList.push({"name": id, "isChecked": false})
                 }
                 else{
@@ -158,6 +158,9 @@ class ObjectIdBoxModel{
         }
         else{
             result = bindData === "module" ? params.module : this.jsonData.getValueFromWorkingObject(this.container, bindData)
+            if(typeof result === "object"){
+                result = "obiekt"
+            }
         }
         const currentIndex = this.jsonData.getParams(this.container).objectId
         this.objectIdList[currentIndex].name = result

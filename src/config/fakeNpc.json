@@ -23,6 +23,7 @@
                     "inputType": "string",
                     "varType": ["string", "int"],
                     "defaultInput": "obiekt-id",
+                    "extraOptions": [{"name":"get npc id"}],
                     "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
                 },
                 {

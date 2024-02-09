@@ -294,6 +294,7 @@ class ObjectFormModel{
                             return item.name;
                         case 'fromId':
                             return item.name;
+
                         default:
                             return modulePath;
                     }
@@ -302,9 +303,11 @@ class ObjectFormModel{
                 extraOption.isUsed = false
                 if(Array.isArray(extraOptionValue)){
                     extraOption.isUsed = extraOptionValue.length > 0
+                    item.value = extraOptionValue
                 }
                 else if(extraOptionValue){
-                    extraOption.isUsed = typeof extraOptionValue == "object" ? true : false
+                    extraOption.isUsed = typeof extraOptionValue === "object" ? true : false
+                    item.value = extraOptionValue
                 }
             }) 
         })
@@ -400,7 +403,7 @@ class ObjectFormModel{
         }
         this.updateValueInJson(targetProperty, valueInGoodType)
         const params = this.jsonData.getParams("extraOption")
-        if((targetProperty.inputType === "string" || targetProperty.inputType === "number") && targetProperty.extraOptions && this.extraOptionIdBox && this.configUtils.getKeyNameFromPath(params.path).startsWith(this.configUtils.getKeyNameFromPath(targetProperty.name))){
+        if((targetProperty.inputType === "string" || targetProperty.inputType === "number") && targetProperty.extraOptions && this.extraOptionIdBox && params && this.configUtils.getKeyNameFromPath(params.path).startsWith(this.configUtils.getKeyNameFromPath(targetProperty.name))){
             this.extraOptionIdBox.clearBox(false)
             this.extraOptionIdBox.objectForm.clearForm()
             targetProperty.extraOptions.forEach(option => option.isUsed = false)
@@ -484,6 +487,7 @@ class ObjectFormModel{
     }
 
     changeStateExtraOption = () => {
+        this.objectIdBox.updateNameObjectId(this.container)
         this.hightligthsUsedExtraOption()
         this.objectFormChanged(this.objectFormList)
     }

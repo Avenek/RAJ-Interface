@@ -53,7 +53,7 @@ class AppController {
 
   const app = new AppController(new AppView(), new AppModel())
 
-  function pop (e) {
+  /*function pop (e) {
     let amount = 30;
     if (e.clientX === 0 && e.clientY === 0) {
       const bbox = e.target.getBoundingClientRect();
@@ -81,7 +81,7 @@ class AppController {
     
     switch (type) {
       case 'emoji':
-        particle.innerHTML = ['🍩'][Math.floor(Math.random() * 1)];
+        particle.innerHTML = ['❤','🧡','💛','💚','💙','💜','🤎'][Math.floor(Math.random() * 7)];
         `${Math.random() * 24 + 10}px`;
         width = height = 'auto';
         break;
@@ -110,4 +110,4 @@ function removeParticle (e) {
 e.srcElement.effect.target.remove();
 }
 
-  document.addEventListener('click', pop)
+  document.addEventListener('click', pop)*/

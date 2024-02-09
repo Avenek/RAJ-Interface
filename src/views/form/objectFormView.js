@@ -58,6 +58,9 @@ class ObjectFormView extends View{
               if(Array.isArray(value)){
                 value = value.join(";")
               }
+              if(typeof value === "object"){
+                value = ""
+              }
               let isCollapsed = ""
               if(property.isCollapsed){
                 isCollapsed = " " + property.isCollapsed
@@ -130,6 +133,7 @@ class ObjectFormView extends View{
         case "behavior":
           return "#0096FF"
         case "get character data":
+        case "get npc id":
           return "#8A2BE2"
         case "master":
           return"#686868"

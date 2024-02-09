@@ -1,0 +1,54 @@
+{
+    "properties": [
+        {
+            "name": "get character data",
+            "idInput": "menu",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties":[
+                {
+                    "name": "kind",
+                    "idInput": "kind",
+                    "tool-tip": "Obiekt, od którego chcemy pobrać dane. THIS_NPC_INSTANCE wymaga wpisania Sraja we własności NPC.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"THIS_NPC_INSTANCE"}],
+                    "defaultInput": "THIS_NPC_INSTANCE"
+                },
+                {
+                    "name": "toGet",
+                    "idInput": "toGet",
+                    "tool-tip": "Dana, którą pobieramy z obiektu.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"id"}],
+                    "defaultInput": "id"
+                },
+                {
+                    "name": "prefix",
+                    "idInput": "prefix",
+                    "tool-tip": "Możemy zmodyfikować pobrane id dodając mu dany prefix. Finalne id będzie złączeniem {prefix}{id}",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput":"",
+                    "defaultSraj": "",
+                    "canBeEmpty": true
+                },
+                {
+                    "name": "modify",
+                    "idInput": "modify",
+                    "tool-tip": "Możemy zmodyfikować pobrane dana o podaną wartość.",
+                    "step":1,
+                    "min":-96,
+                    "max":96,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput":0,
+                    "defaultSraj": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}],
+                    "require": [{"name": "toGet", "value": ["x", "y"]}, {"name": "rotation.x", "value": [0]}, {"name": "rotation.y", "value": [0]}]
+                }
+            ]
+        }
+    ]
+}
