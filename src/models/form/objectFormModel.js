@@ -37,11 +37,28 @@ class ObjectFormModel{
             this.objectFormList.push(property)
         }
         this.requiredItems = this.findItemsByProperty(this.objectFormList, "require")
+        this.requiredItems.sort(this.sortRequirementsList);
+        console.log(this.requiredItems);
         this.validationItems = this.findItemsByProperty(this.objectFormList, "validation")
         this.hideAndRevealRequiredItems()
         this.hightligthsUsedExtraOption()
         this.makeKeyOrder()
         this.objectFormChanged(this.objectFormList)
+    }
+
+    sortRequirementsList = (a, b) => {
+        var aIsObject = typeof a.value === 'object';
+        var bIsObject = typeof b.value === 'object';
+        
+        if (aIsObject && !bIsObject) {
+            return 1;
+        }
+        else if (!aIsObject && bIsObject) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
     }
 
     createObjectProperty = (property) => {
@@ -138,24 +155,7 @@ class ObjectFormModel{
         const listToSet = []
         const listToRemove = []
         this.requiredItems.forEach(item => {
-        let allConditionsAreMet = true
-          for(let i = 0 ; i < item.require.length ; i++) {
-            const requireItem = item.require[i]
-            const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, requireItem.name)
-            const requireObject = this.configUtils.findObjectByProperty(params.config.properties, requireItem.name, "name")
-            if(valueInObject && !requireItem.value.includes(valueInObject)){
-                allConditionsAreMet = false
-                break;
-            }
-            else if(requireObject && requireObject.defaultSraj && !requireItem.value.includes(requireObject.defaultSraj)){
-              allConditionsAreMet = false
-              break;
-            }
-            else if(valueInObject === null && requireObject && requireObject.defaultSraj === undefined){
-                allConditionsAreMet = false
-                break;
-            }
-        }
+        const allConditionsAreMet = this.checkIfPropertyMeetsRequirements(item)
         item.hide = !allConditionsAreMet
         if(targetProperty === null || item.require.some(obj => obj.name === targetProperty.name))
         {
@@ -179,24 +179,29 @@ class ObjectFormModel{
                         valueObject = this.createObjectBaseOnConfig(item.properties)
                     }
                     listToSet.push({"name": item.name, "id": item.idInput, "value": valueObject})
+                    this.jsonData.setObjectKeyByPath(this.container, item.name, valueObject)
                 }
                 else if((item.options && item.options.some(value => value.name === value)) || value !== null){
                     listToSet.push({"name": item.name, "id": item.idInput, "value": value})
+                    this.jsonData.setObjectKeyByPath(this.container, item.name, value)
                     item.value = value
                 } 
                 else{
                     listToSet.push({"name": item.name, "id": item.idInput, "value": item.defaultInput})
-                    value !== item.defaultInput
+                    this.jsonData.setObjectKeyByPath(this.container, item.name, item.defaultInput)
+                    item.value = item.defaultInput
                 } 
             } 
             else if(!allConditionsAreMet){
                 if(value != null && value != undefined && typeof value == "object"){
                     if(this.isObjectCompatibleWithConfig(value, item.properties)){
                         listToRemove.push({"name": item.name, "id": item.idInput})
+                        this.jsonData.removeObjectKeyByPath(this.container,item.name)
                     }
                 }
                 else{
                     listToRemove.push({"name": item.name, "id": item.idInput})
+                    this.jsonData.removeObjectKeyByPath(this.container,item.name)
                 }
                 
             }
@@ -219,6 +224,19 @@ class ObjectFormModel{
       this.removeDefaultValuesFromJson(params.workingObject)
       this.makeKeyOrder()
       this.jsonDataBox.jsonDataChanged()
+    }
+
+    checkIfPropertyMeetsRequirements = (property) => {
+        const params = this.jsonData.getParams(this.container)
+        for(let i = 0 ; i < property.require.length ; i++) {
+          const requireItem = property.require[i]
+          const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, requireItem.name)
+          const requireObject = this.configUtils.findObjectByProperty(params.config.properties, requireItem.name, "name")
+          if((valueInObject && !requireItem.value.includes(valueInObject)) || (requireObject && requireObject.defaultSraj && !requireItem.value.includes(requireObject.defaultSraj)) || (valueInObject === null && requireObject && requireObject.defaultSraj === undefined)){
+              return false
+          }
+      }
+      return true
     }
 
     isObjectCompatibleWithConfig = (object, config) => {
@@ -255,10 +273,13 @@ class ObjectFormModel{
           const key = this.configUtils.getLastPartOfTheName(property.name)
           if(property.hasOwnProperty("properties"))
           {
-            const createdObject = this.createObjectBaseOnConfig(property.properties, this.container)
+            const createdObject = this.createObjectBaseOnConfig(property.properties)
             currentObj[key] = createdObject
           }
-          else if(property.inputType!=="empty" || property.hasOwnProperty("defaultInput")){
+          else if((property.inputType!=="empty" || property.hasOwnProperty("defaultInput"))){
+            if(property.hasOwnProperty("require") && !this.checkIfPropertyMeetsRequirements(property)){
+                break;
+            }
             const value = this.jsonData.getValueFromWorkingObject(this.container, property.name)
             if(value !== null){
                 const targetProperty = this.configUtils.findObjectByProperty(config, property.name, "name")
@@ -489,6 +510,7 @@ class ObjectFormModel{
     changeStateExtraOption = () => {
         this.objectIdBox.updateNameObjectId(this.container)
         this.hightligthsUsedExtraOption()
+        this.hideAndRevealRequiredItems()
         this.objectFormChanged(this.objectFormList)
     }
 

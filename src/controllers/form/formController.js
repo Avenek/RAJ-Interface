@@ -33,8 +33,10 @@ class FormController {
       const moduleParams = this.model.jsonData.getParams("module")
       const extraOptionParams = this.model.jsonData.getParams("extraOption")
       const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? moduleParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
-      if(this.extraOptionObjectForm && extraOptionParams  && extraOptionParams.form === "module" && extraOptionParams.workingObject !== null && extraOptionParams.fileName === fileName){
+      if(this.extraOptionObjectForm && extraOptionParams && extraOptionParams.form === "module" && extraOptionParams.workingObject !== null){
         this.model.jsonData.deleteParams()
+      }
+      if(this.extraOptionObjectForm && extraOptionParams  && extraOptionParams.form === "module" && extraOptionParams.workingObject !== null && extraOptionParams.fileName === fileName){
         this.model.extraOptionObjectIdBoxModel.createObjectIdList()
         this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
         this.model.moduleObjectIdBoxModel.createObjectIdList()
@@ -59,8 +61,11 @@ class FormController {
       let extraOptionName = this.makeCamelCase(extraOption)
       const extraOptionParams = this.model.jsonData.getParams("extraOption")
       const fileName = (extraOptionName === "behavior" || extraOptionName === "randomFirstIndex" || extraOptionName === "master") ? extraOptionParams.module + extraOptionName.charAt(0).toUpperCase() + extraOptionName.slice(1) : extraOptionName
-      if(this.extraOptionObjectForm && extraOptionParams && extraOptionParams.form === "extraOption" && extraOptionParams.workingObject !== null && extraOptionParams.fileName === fileName){
+      if(this.extraOptionObjectForm && extraOptionParams && extraOptionParams.form === "extraOption" && extraOptionParams.workingObject !== null){
         this.model.jsonData.deleteParams()
+      }
+      if(this.extraOptionObjectForm && extraOptionParams && extraOptionParams.form === "extraOption" && extraOptionParams.workingObject !== null && extraOptionParams.fileName === fileName){
+
         this.model.extraOptionObjectIdBoxModel.createObjectIdList()
         this.model.extraOptionObjectIdBoxModel.objectIdListChanged(this.model.extraOptionObjectIdBoxModel.objectIdList,  this.model.extraOptionObjectIdBoxModel.hasList)
         this.model.extraOptionObjectFormModel.fetchConfigAndCreateObjectFormList()
