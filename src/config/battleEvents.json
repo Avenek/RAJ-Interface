@@ -1,0 +1,60 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Obszar możemy tworzyć albo usuwać.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"},{"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca obszar. Umożliwia późniejsze jego usunięciu.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "extraOptions": [{"name":"get npc id"}],
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "name",
+                    "idInput": "name",
+                    "tool-tip": "Do wyboru tylko ON_DIE_NPC - akcja wykonywania po zabiciu npc o podanym id.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"ON_DIE_NPC"}],
+                    "defaultInput": "ON_DIE_NPC",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                },
+                {
+                    "name": "npcId",
+                    "idInput": "npcId",
+                    "tool-tip": "Id npc po zabiciu którego wykona się dany sraj.",
+                    "inputType": "int",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "extraOptions": [{"name":"get npc id"}],
+                    "validation":[{"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "external_properties",
+                    "idInput": "external_properties",
+                    "tool-tip": "Definiujemy w tym miejscu, co ma się stać po zabiciu danego npc.",
+                    "inputType": "empty",
+                    "varType": ["empty"],
+                    "extraOptions": [{"name":"external properties"}]
+                }
+            ]
+        }
+    ]
+}

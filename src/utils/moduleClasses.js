@@ -9,6 +9,15 @@ let moduleDict = {
     }
   },
 
+  battleEvents : class battleEvents{
+    constructor(id){
+      this.action = "CREATE",
+      this.id = id,
+      this.name = "ON_DIE_NPC",
+      this.npcId = 0
+    }
+  },
+
   behaviorDynamicLight : class BehaviorDynamicLight{
     constructor(id) {
       this.action = "CREATE"
@@ -272,6 +281,15 @@ let moduleDict = {
       this.onlyNight = true,
       this.r = 20
       this.color = new moduleDict["color"]()
+    }
+  },
+
+  mapEvents : class mapEvents{
+    constructor(id){
+      this.action = "CREATE",
+      this.id = id,
+      this.name = "ON_DIE_NPC",
+      this.npcId = 0
     }
   },
 

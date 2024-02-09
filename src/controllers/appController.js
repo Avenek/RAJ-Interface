@@ -39,8 +39,13 @@ class AppController {
   }
 
 }
-//localStorage.clear()
-  if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "2024-01-30"){
+localStorage.clear()
+if(localStorage.getItem("lastClear") !== "0"){
+  localStorage.clear()
+  localStorage.setItem("lastClear", "0")
+}
+
+  /*if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "1"){
     const toAdd =  JSON.parse(localStorage.getItem("containerConfig"))
     const randomCaller = {
       "name": "RandomCaller",
@@ -48,9 +53,8 @@ class AppController {
     }
     toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(randomCaller)))
     localStorage.setItem("containerConfig", JSON.stringify(toAdd))
-    localStorage.setItem("lastClear", "2024-01-30")
-  }
-
+    localStorage.setItem("lastClear", "1")
+  }*/
   const app = new AppController(new AppView(), new AppModel())
 
   /*function pop (e) {

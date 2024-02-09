@@ -7,6 +7,12 @@
       "type": "out"
     },
     {
+      "name": "battleEvents",
+      "hasList": true,
+      "bindId": "id",
+      "type": "out"
+    },
+    {
       "name": "behavior",
       "hasList": true,
       "bindId": "name",
@@ -212,6 +218,12 @@
       "name": "mapFilter",
       "hasList": false,
       "bindId": "module",
+      "type": "out"
+    },
+    {
+      "name": "mapEvents",
+      "hasList": true,
+      "bindId": "id",
       "type": "out"
     },
     {
