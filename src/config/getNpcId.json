@@ -27,7 +27,7 @@
                 {
                     "name": "prefix",
                     "idInput": "prefix",
-                    "tool-tip": "Możemy zmodyfikować pobrane id dodając mu dany prefix. Finalne id będzie złączeniem {prefix}{id}",
+                    "tool-tip": "Możemy zmodyfikować pobrane id dodając mu na początek dany prefix. Finalne id będzie złączeniem {prefix}{id}{modify}",
                     "inputType": "string",
                     "varType": ["string"],
                     "defaultInput":"",
@@ -37,16 +37,12 @@
                 {
                     "name": "modify",
                     "idInput": "modify",
-                    "tool-tip": "Możemy zmodyfikować pobrane dana o podaną wartość.",
-                    "step":1,
-                    "min":-96,
-                    "max":96,
-                    "inputType": "number",
-                    "varType": ["int"],
-                    "defaultInput":0,
-                    "defaultSraj": 0,
-                    "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "toGet", "value": ["x", "y"]}, {"name": "rotation.x", "value": [0]}, {"name": "rotation.y", "value": [0]}]
+                    "tool-tip": "Możemy zmodyfikować pobrane id dodając mu na koniec dany postfix. Finalne id będzie złączeniem {prefix}{id}{mofidy}",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput":"",
+                    "defaultSraj": "",
+                    "canBeEmpty": true
                 }
             ]
         }
