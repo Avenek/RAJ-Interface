@@ -18,7 +18,7 @@
                             "inputType": "string",
                             "varType": ["string"],
                             "defaultInput": "",
-                            "require": [{"name": "header.clear", "value": [false]}]
+                            "require": [{"name": "clear", "value": [false]}]
                         }
                     ]
                 },
