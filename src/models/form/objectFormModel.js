@@ -5,7 +5,7 @@ class ObjectFormModel{
         this.jsonDataBox = jsonDataBox
         this.objectFormList = []
         this.extraOptionIdBox = null
-        this.extraOptionWords = ['getCharacterData', "getRandom", "case", "getFor", "getFunc", "getRandom", "light", "master", "randomFirstIndex", "source", "parent", "target"]
+        this.extraOptionWords = ['getCharacterData', "getRandom", "case", "getFor", "getFunc", "getRandom", "light", "master", "randomFirstIndex", "source", "parent", "target", "color"]
     }
 
     bindObjectFormChanged = (callback) => {
@@ -152,7 +152,7 @@ class ObjectFormModel{
 
     hideAndRevealRequiredItems = (targetProperty = null) => {
         const params = this.jsonData.getParams(this.container)
-        const listToSet = []
+        let listToSet = []
         const listToRemove = []
         this.requiredItems.forEach(item => {
         const allConditionsAreMet = this.checkIfPropertyMeetsRequirements(item)
@@ -242,10 +242,12 @@ class ObjectFormModel{
     isObjectCompatibleWithConfig = (object, config) => {
         if(object == null || object == undefined || config == null || config == undefined)
         {
+            if(config == undefined && Object.keys(object)[0] == "r" && Object.keys(object)[1] == "g"){
+                return true
+            } 
             return false
         }
         let currentObj = object;
-    
         for(let key in currentObj) {
             const currentKey = key;
             if(this.extraOptionWords.includes(key)) continue
