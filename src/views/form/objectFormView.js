@@ -230,7 +230,7 @@ class ObjectFormView extends View{
     }
 
    bindCollapseProperty = (handler) => {
-      this.objectForm.addEventListener("click", event => {
+      this.objectForm.addEventListener("mousedown", event => {
         const targetClasses = event.target.classList
         if (targetClasses.contains('key') || targetClasses.contains('subkey') || targetClasses.contains('subSubkey')) {
             handler(event.target.id)
@@ -264,7 +264,7 @@ class ObjectFormView extends View{
     }
 
     bindCheckOption = (handler) => {
-      this.objectForm.addEventListener("click", event => { 
+      this.objectForm.addEventListener("mousedown", event => { 
         if (event.target.classList.contains("radio-button")) {
           handler(event.target.id, event.target.textContent)
         }
@@ -272,7 +272,7 @@ class ObjectFormView extends View{
     }
     
     bindCheckSlider = (handler) => {
-      this.objectForm.addEventListener("click", event => { 
+      this.objectForm.addEventListener("mousedown", event => { 
         if (event.target.classList.contains("slider")) {
           handler(event.target.id)
         }

@@ -18,7 +18,7 @@ class ExternalPropertiesButtonView extends View{
     }
 
     bindClickExternalPropertiesButton = (handler) =>{
-        this.externalPropertiesButton.addEventListener("click", event => {
+        this.externalPropertiesButton.addEventListener("mousedown", event => {
             if (event.target.classList.contains('external-properties')) {
                 handler()
             }
