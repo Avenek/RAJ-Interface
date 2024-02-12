@@ -39,7 +39,7 @@ class AppController {
   }
 
 }
-localStorage.clear()
+//localStorage.clear()
 if(localStorage.getItem("lastClear") !== "0"){
   localStorage.clear()
   localStorage.setItem("lastClear", "0")
