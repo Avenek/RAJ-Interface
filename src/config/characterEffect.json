@@ -216,6 +216,16 @@
                     "require": [{"name": "effect", "value": ["TINT"]}, {"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "properties": [
                         {
+                            "name": "params.kind",
+                            "idInput": "tint.kind",
+                            "tool-tip": "Rodzaj tworzonego tintu: SHOW_AND_HIDE - duration odpowiada czasowi przejścia alfy koloru 0 -> 1 -> 0. SHOW_AND_STICK - duration odpowiada czasowi przejścia alfy koloru 0 -> 1 i zostaje do końca. HIDE - duration odpowiada czasowi przejścia alfy koloru 1 -> 0.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"SHOW_AND_HIDE"}, {"name":"SHOW_AND_STICK"},{"name":"HIDE"}],
+                            "defaultInput": "SHOW_AND_HIDE",
+                            "defaultSraj": "SHOW_AND_HIDE"
+                        },
+                        {
                             "name": "params.duration",
                             "idInput": "tint.duration",
                             "tool-tip": "Czas trwania efektu w sekundach.",
