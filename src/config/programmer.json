@@ -29,10 +29,10 @@
                 {
                     "name": "name",
                     "idInput": "name",
-                    "tool-tip": "Rodzaj typu programmera: NORMAL_DAY - codziennie, SPECIFIC_DAY - konkretny dzień, WEEK_DAY - konkretny dzień tygodnia, gdzie niedziela to 0, a sobota 6, LOOPER - pozwla zapętlić co dany okres czasu.",
+                    "tool-tip": "Rodzaj typu programmera: NORMAL_DAY - codziennie, SPECIFIC_DAY - konkretny dzień, WEEK_DAY - konkretny dzień tygodnia, gdzie niedziela to 0, a sobota 6, LOOPPER - pozwla zapętlić co dany okres czasu.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"NORMAL_DAY"}, {"name":"SPECIFIC_DAY"}, {"name":"WEEK_DAY"}, {"name":"LOOPER"}],
+                    "options": [{"name":"NORMAL_DAY"}, {"name":"SPECIFIC_DAY"}, {"name":"WEEK_DAY"}, {"name":"LOOPPER"}],
                     "defaultInput": "NORMAL_DAY",
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
@@ -67,7 +67,7 @@
                     "inputType": "time",
                     "varType": ["time"],
                     "defaultInput": "00:01:00",
-                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}, {"name": "name", "value": ["LOOPER"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}, {"name": "name", "value": ["LOOPPER"]}]
                 },
                 {
                     "name": "delay",
@@ -76,7 +76,7 @@
                     "inputType": "time",
                     "varType": ["time"],
                     "defaultInput": "00:02:00",
-                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}, {"name": "name", "value": ["LOOPER"]}]
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}, {"name": "name", "value": ["LOOPPER"]}]
                 },
                 {
                     "name": "start",

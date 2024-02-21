@@ -28,7 +28,7 @@
                 {
                     "name": "speedX",
                     "idInput": "speedX",
-                    "tool-tip": "prędkość w linii poziomej. Można podawać ujemne wartości, co spowoduje odwrotny kierunek poruszania się obiektów.",
+                    "tool-tip": "Prędkość w linii poziomej. Można podawać ujemne wartości, co spowoduje odwrotny kierunek poruszania się obiektów.",
                     "step":0.5,
                     "min":-5,
                     "max":5,
@@ -43,7 +43,7 @@
                 {
                     "name": "speedY",
                     "idInput": "speedY",
-                    "tool-tip": "prędkość w linii pionowej. Można podawać ujemne wartości, co spowoduje odwrotny kierunek poruszania się obiektów.",
+                    "tool-tip": "Prędkość w linii pionowej. Można podawać ujemne wartości, co spowoduje odwrotny kierunek poruszania się obiektów.",
                     "step":0.5,
                     "min":-5,
                     "max":5,
