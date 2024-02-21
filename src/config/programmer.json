@@ -103,7 +103,7 @@
                     ],
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
-                {
+         {
                     "name": "end",
                     "idInput": "end",
                     "tool-tip": "",

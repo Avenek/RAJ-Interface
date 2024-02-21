@@ -46,7 +46,7 @@
                     "max":1000000,
                     "step":1,
                     "defaultInput": 0,
-                    "extraOptions": [{"name":"get npc id"}],
+                    "extraOptions": [{"name":"get npc id", "type": "npcId"}],
                     "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {

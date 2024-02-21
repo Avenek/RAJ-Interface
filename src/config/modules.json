@@ -188,6 +188,13 @@
       "type": "out"
     },
     {
+      "name": "getNpcId",
+      "hasList": false,
+      "bindId": "module",
+      "path": "npcId.getCharacterData",
+      "type": "npcId"
+    },
+    {
       "name": "getRandom",
       "hasList": false,
       "bindId": "module",
