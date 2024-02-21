@@ -12,7 +12,7 @@
                     "tool-tip": "Nazwa zachowania: FADE_IN - pojawienie się obiektu, FADE_OUT - zniknięcie obiektu, IDLE - stanie w miejscu, MOVE_TO_CORDS - przelecenie do konkretnego miejsca, TP_TO_CORDS - przeniesienie w konkretne miejsce, MOVE_FROM_VECTOR - poruszanie się za pomocą wartości wektorów, TP_ON_OTHER_SIDE - przeniesienie na drugą stronę mapy, ROTATION - obrót obiektu o zadeklarowany kąt.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"FADE_IN"}, {"name":"FADE_OUT"}, {"name":"IDLE"}, {"name":"MOVE_TO_CORDS"}, {"name":"FOLLOW"}, {"name":"TP_TO_CORDS"}, {"name":"MOVE_FROM_VECTORS"}, {"name":"TP_ON_OTHER_SIDE"}, {"name":"ROTATION"}],
+                    "options": [{"name":"FADE_IN"}, {"name":"FADE_OUT"}, {"name":"IDLE"}, {"name":"MOVE_TO_CORDS"}, {"name":"FOLLOW"}, {"name":"TP_TO_CORDS"}, {"name":"MOVE_FROM_VECTORS"}, {"name":"TP_ON_OTHER_SIDE"}, {"name":"ROTATION"}, {"name":"IDLE_GIF_ANIMATION"}],
                     "defaultInput": "IDLE"
                 },
                 {
@@ -25,7 +25,7 @@
                     "varType": ["int", "boolean"],
                     "defaultInput": 1,
                     "defaultSraj": 1,
-                    "require": [{"name": "name", "value": ["FADE_IN", "FADE_OUT", "IDLE", "ROTATION"]}],
+                    "require": [{"name": "name", "value": ["FADE_IN", "FADE_OUT", "IDLE", "ROTATION", "IDLE_GIF_ANIMATION"]}],
                     "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
                 },
                 {
