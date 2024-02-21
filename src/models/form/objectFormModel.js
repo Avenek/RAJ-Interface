@@ -5,7 +5,7 @@ class ObjectFormModel{
         this.jsonDataBox = jsonDataBox
         this.objectFormList = []
         this.extraOptionIdBox = null
-        this.extraOptionWords = ['getCharacterData', "getRandom", "case", "getFor", "getFunc", "getRandom", "light", "master", "randomFirstIndex", "source", "parent", "target", "color"]
+        this.extraOptionWords = ['external_properties', 'getCharacterData', "getRandom", "case", "getFor", "getFunc", "getRandom", "light", "master", "randomFirstIndex", "source", "parent", "target", "color"]
     }
 
     bindObjectFormChanged = (callback) => {
@@ -38,7 +38,6 @@ class ObjectFormModel{
         }
         this.requiredItems = this.findItemsByProperty(this.objectFormList, "require")
         this.requiredItems.sort(this.sortRequirementsList);
-        console.log(this.requiredItems);
         this.validationItems = this.findItemsByProperty(this.objectFormList, "validation")
         this.hideAndRevealRequiredItems()
         this.hightligthsUsedExtraOption()
