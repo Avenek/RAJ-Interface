@@ -85,6 +85,9 @@ class DataValidation{
               case "lessThan":
                 validSummary = this.lessThanValid(valid, value)
                   break;
+              case "contains":
+                validSummary = this.containsValid(valid, value)
+                  break;
               default:
                 break;
             } 
@@ -155,6 +158,12 @@ class DataValidation{
             isValid = value < validValue
             errorMessage = isValid ? "" : `Wartość tego pola powinna być mniejsza od wartości klucza ${validObject.value}!`
         }
+        return {"isValid": isValid, "errorMessage": errorMessage}
+    }
+
+    containsValid = (containValue, value) => {
+        const isValid = value.includes(containValue.value)
+        const errorMessage = isValid ? "" : `Wartość powinna zawierać ${containValue.value}!` 
         return {"isValid": isValid, "errorMessage": errorMessage}
     }
 }

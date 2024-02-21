@@ -324,6 +324,20 @@ let moduleDict = {
     }
   },
 
+  programmer : class Programmer{
+    constructor(id){
+      this.action = "CREATE"
+      this.id = id,
+      this.name = "NORMAL_DAY",
+      this.start = {
+        "time": "00:00:01"
+      },
+      this.end = {
+        "time": "23:59:59"
+      }
+    }
+  },
+
   options : class Options{
     constructor(){
     }

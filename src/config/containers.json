@@ -129,6 +129,10 @@
         {
           "name": "RandomCaller",
           "tipInfo": "Umożliwia wywołanie losowego Sraja. W options podajemy możliwe sraje do wyboru."
+        },
+        {
+          "name": "Programmer",
+          "tipInfo": "Umożliwia wyzwolenie SRAJa w konkretnym momencie, o konkretnych godzinach, powtarzające się o danym czasie, itd."
         }
       ]
     }

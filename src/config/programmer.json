@@ -1,0 +1,134 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Obiekty możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca obiekt. Umożliwia późniejsze jego usunięciu.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "extraOptions": [{"name":"get npc id"}],
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "name",
+                    "idInput": "name",
+                    "tool-tip": "Rodzaj typu programmera: NORMAL_DAY - codziennie, SPECIFIC_DAY - konkretny dzień, WEEK_DAY - konkretny dzień tygodnia, gdzie niedziela to 0, a sobota 6, LOOPER - pozwla zapętlić co dany okres czasu.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"NORMAL_DAY"}, {"name":"SPECIFIC_DAY"}, {"name":"WEEK_DAY"}, {"name":"LOOPER"}],
+                    "defaultInput": "NORMAL_DAY",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                },
+                {
+                    "name": "weekDay",
+                    "idInput": "weekDay",
+                    "tool-tip": "Konkretny dzień tygodnia, gdzie niedziela to 0, a sobota 6",
+                    "step":1,
+                    "min":0,
+                    "max":6,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput":0,
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}, {"name": "name", "value": ["WEEK_DAY"]}],
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "specificDay",
+                    "idInput": "specificDay",
+                    "tool-tip": "Konkretny dzień w formacie dd.mm.",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "inputPlaceholder": "dd.mm",
+                    "defaultInput": "",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}, {"name": "name", "value": ["SPECIFIC_DAY"]}],
+                    "validation":[{"forType": "string", "name": "contains", "value":"."}]
+                },
+                {
+                    "name": "duration",
+                    "idInput": "duration",
+                    "tool-tip": "Czas trwania jednego cyklu.",
+                    "inputType": "time",
+                    "varType": ["time"],
+                    "defaultInput": "00:01:00",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}, {"name": "name", "value": ["LOOPER"]}]
+                },
+                {
+                    "name": "delay",
+                    "idInput": "delay",
+                    "tool-tip": "Czas, po którym cykl ma się powtórzyć. Liczy się od rozpoczęczia poprzedniego cyklu, a nie jego zakończenia",
+                    "inputType": "time",
+                    "varType": ["time"],
+                    "defaultInput": "00:02:00",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}, {"name": "name", "value": ["LOOPER"]}]
+                },
+                {
+                    "name": "start",
+                    "idInput": "start",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "start.time",
+                            "idInput": "start.time",
+                            "tool-tip": "Czas rozpoczęcia eventu. Pomiędzy godziną zadeklarowaną w start a end gracz po wejściu na mapę zobaczy event zadeklarowany w external_properties.",
+                            "inputType": "time",
+                            "varType": ["time"],
+                            "defaultInput": "00:00:01"
+                        },
+                        {
+                            "name": "start.external_properties",
+                            "idInput": "start.external_properties",
+                            "tool-tip": "Definiujemy w tym miejscu sraja, który ma się wywołać na starcie eventu",
+                            "inputType": "empty",
+                            "varType": ["empty"],
+                            "extraOptions": [{"name":"external properties"}]
+                        }
+                    ],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                },
+                {
+                    "name": "end",
+                    "idInput": "end",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "end.time",
+                            "idInput": "end.time",
+                            "tool-tip": "Czas zakończenia eventu. Do tej godziny będzie się odpalał event zadeklarowany w start, a wraz z nadejściem tej godziny wykona się event kończący zadeklarowany poniżej.",
+                            "inputType": "time",
+                            "varType": ["time"],
+                            "defaultInput": "23:59:59"
+                        },
+                        {
+                            "name": "end.external_properties",
+                            "idInput": "end.external_properties",
+                            "tool-tip": "Definiujemy w tym miejscu sraja, który ma się wywołać na zakończenie eventu",
+                            "inputType": "empty",
+                            "varType": ["empty"],
+                            "extraOptions": [{"name":"external properties"}]
+                        }
+                    ],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                }
+            ]
+        }
+    ]
+}

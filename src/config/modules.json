@@ -260,6 +260,12 @@
       "type": "out"
     },
     {
+      "name": "programmer",
+      "hasList": true,
+      "bindId": "id",
+      "type": "out"
+    },
+    {
       "name": "randomCaller",
       "hasList": false,
       "bindId": "module",

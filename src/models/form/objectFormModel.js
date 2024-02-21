@@ -576,6 +576,12 @@ class ObjectFormModel{
         if(params.workingObject.hasOwnProperty("case")){
             this.moveToLastPlaceInJson("case", params.workingObject)
         }
+        if(params.workingObject.hasOwnProperty("start")){
+            this.moveToLastPlaceInJson("start", params.workingObject)
+        }
+        if(params.workingObject.hasOwnProperty("end")){
+            this.moveToLastPlaceInJson("end", params.workingObject)
+        }
       }
       
     moveToLastPlaceInJson = (path, workingObject) => {

@@ -40,20 +40,21 @@ class AppController {
 
 }
 //localStorage.clear()
-if(localStorage.getItem("lastClear") !== "0"){
-  localStorage.clear()
-  localStorage.setItem("lastClear", "0")
-}
 
-  /*if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear") !== "1"){
-    const toAdd =  JSON.parse(localStorage.getItem("containerConfig"))
-    const randomCaller = {
-      "name": "RandomCaller",
-      "tipInfo": "Umożliwia wywołanie losowego Sraja. W options podajemy możliwe sraje do wyboru."
+
+  if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear")){
+    const lastClear = parseInt(localStorage.getItem("lastClear"))
+     const toAdd =  JSON.parse(localStorage.getItem("containerConfig"))
+    if(lastClear<1){
+      const randomCaller = {
+          "name": "Programmer",
+          "tipInfo": "Umożliwia wyzwolenie SRAJa w konkretnym momencie, o konkretnych godzinach, powtarzające się o danym czasie, itd."
+      }
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(randomCaller)))
+      localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+      localStorage.setItem("lastClear", "1")
     }
-    toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(randomCaller)))
-    localStorage.setItem("containerConfig", JSON.stringify(toAdd))
-    localStorage.setItem("lastClear", "1")
-  }*/
+
+  }
 
 const app = new AppController(new AppView(), new AppModel())

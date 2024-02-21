@@ -91,6 +91,14 @@ class ObjectFormView extends View{
                 const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
                 html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><div class="slider round${isChecked}" id="${property.idInput}" name="${property.name}"></div>`;
             }
+            else if(property.inputType === "time"){
+              let isCollapsed = ""
+              if(property.isCollapsed){
+                isCollapsed = " " + property.isCollapsed
+              }
+                const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
+                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><input type="time" class="key-value-input" id="${property.idInput}" step="1" value="${property.value || "00:00:01"}" name="${property.name}">`;
+            }
             else if(property.inputType === "empty"){
               let isCollapsed = ""
               if(property.isCollapsed){
@@ -247,9 +255,23 @@ class ObjectFormView extends View{
         }
       })  
     }
+
     bindEnterValueInInput = (handler) => {
       this.objectForm.addEventListener("input", event => { 
-        if (event.target.tagName === 'INPUT' && event.target.type != "file" && event.target.type != "color") {
+        if (event.target.tagName === 'INPUT' && event.target.type != "file" && event.target.type != "color" && event.target.type != "time") {
+          handler(event.target.id, event.target.value)
+        }
+      })  
+    }
+
+    bindEnterValueInTimeInput = (handler) => {
+      this.objectForm.addEventListener("input", event => { 
+        if (event.target.tagName === 'INPUT' && event.target.type === "time") {
+          var time = event.target.value.split(':');
+          if (time.length == 2) {
+            time.push('00');
+            event.target.value = time.join(':');
+          }
           handler(event.target.id, event.target.value)
         }
       })  

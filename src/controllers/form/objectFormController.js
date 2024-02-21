@@ -6,6 +6,7 @@ class ObjectFormController {
         this.view.bindCollapseProperty(this.handleCollapseProperty)
         this.view.bindResizeIfIsTooLongValue(this.handleResizeIfIsTooLongValue)
         this.view.bindEnterValueInInput(this.handleEnterValueInInput)
+        this.view.bindEnterValueInTimeInput(this.handleEnterValueInInput)
         this.view.bindUnfocusInput(this.handleUnfocusInput)
         this.view.bindCheckOption(this.handleCheckOption)
         this.view.bindCheckSlider(this.handleCheckSlider)
