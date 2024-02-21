@@ -32,7 +32,7 @@
                     "tool-tip": "Do wyboru tylko ON_DIE_NPC - akcja wykonywania po zabiciu npc o podanym id.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"ON_DIE_NPC"}],
+                    "options": [{"name":"ON_DIE_NPC"}, {"name": "ON_RESPAWN_NPC"}],
                     "defaultInput": "ON_DIE_NPC",
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
