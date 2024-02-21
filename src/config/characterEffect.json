@@ -250,19 +250,6 @@
                             "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
                         },
                         {
-                            "name": "params.tintPercent",
-                            "idInput": "tint.tintPercent",
-                            "tool-tip": "Procent przejrzystości koloru. Można podawać wartości od 0 do 100.",
-                            "min":0,
-                            "max":100,
-                            "step":5,
-                            "inputType": "number",
-                            "varType": ["int"],
-                            "defaultInput": 60,
-                            "defaultSraj": 60,
-                            "validation":[{"forType": "int", "name": "minMax"}]
-                        },
-                        {
                             "name": "params.offsetX",
                             "idInput": "tint.offsetX",
                             "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
