@@ -40,11 +40,14 @@
                     "name": "npcId",
                     "idInput": "npcId",
                     "tool-tip": "Id npc po zabiciu którego wykona się dany sraj.",
-                    "inputType": "int",
+                    "inputType": "number",
                     "varType": ["int"],
+                    "min":0,
+                    "max":1000000,
+                    "step":1,
                     "defaultInput": 0,
                     "extraOptions": [{"name":"get npc id"}],
-                    "validation":[{"forType": "int", "name": "moreThan", "value": -1}]
+                    "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
                     "name": "external_properties",
