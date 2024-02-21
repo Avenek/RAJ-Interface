@@ -42,7 +42,7 @@
                 },
                 {
                     "name": "speedY",
-                    "idInput": "speedX",
+                    "idInput": "speedY",
                     "tool-tip": "prędkość w linii pionowej. Można podawać ujemne wartości, co spowoduje odwrotny kierunek poruszania się obiektów.",
                     "step":0.5,
                     "min":-5,
