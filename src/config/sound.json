@@ -19,7 +19,7 @@
                 {
                     "name": "id",
                     "idInput": "id",
-                    "tool-tip": "Nazwa identyfikująca dźwięk. Umożliwia późniejsze jego usunięciu i zmianę głośności.",
+                    "tool-tip": "Nazwa identyfikująca dźwięk. Umożliwia późniejsze jego usunięcie i zmianę głośności.",
                     "inputType": "string",
                     "varType": ["string", "int"],
                     "defaultInput": "obiekt-id",

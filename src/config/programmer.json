@@ -19,7 +19,7 @@
                 {
                     "name": "id",
                     "idInput": "id",
-                    "tool-tip": "Nazwa identyfikująca obiekt. Umożliwia późniejsze jego usunięciu.",
+                    "tool-tip": "Nazwa identyfikująca obiekt. Umożliwia późniejsze jego usunięcie.",
                     "inputType": "string",
                     "varType": ["string", "int"],
                     "defaultInput": "obiekt-id",
