@@ -495,7 +495,7 @@ class ObjectFormModel{
         this.updateValueInJson(targetProperty.properties[1], targetProperty.properties[1].value)
         this.updateValueInJson(targetProperty.properties[2], targetProperty.properties[2].value)
         const params = this.jsonData.getParams("extraOption")
-        if(this.extraOptionIdBox && this.configUtils.getKeyNameFromPath(params.path).startsWith(this.configUtils.getKeyNameFromPath(targetProperty.name))){
+        if(params && this.configUtils.getKeyNameFromPath(params.path).startsWith(this.configUtils.getKeyNameFromPath(targetProperty.name))){
             targetProperty.properties[0].extraOptions.forEach(option => option.isUsed = false)
             targetProperty.properties[1].extraOptions.forEach(option => option.isUsed = false)
             targetProperty.properties[2].extraOptions.forEach(option => option.isUsed = false)
