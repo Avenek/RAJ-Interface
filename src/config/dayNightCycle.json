@@ -1,0 +1,44 @@
+{
+    "properties": [
+        {
+            "name": "dayNightCycle",
+            "idInput": "dayNightCycle",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "worldTime",
+                    "idInput": "worldTime",
+                    "tool-tip": "Zaznaczenie tej opcji powoduje branie pod uwagę czasu gry, a nie serwera.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false
+                },
+                {
+                    "name": "dayDuration",
+                    "idInput": "dayDuration",
+                    "tool-tip": "Ilość godzin, które definiują czas trwania doby w grze.",
+                    "inputType": "string",
+                    "min":24,
+                    "max":24,
+                    "varType": ["int"],
+                    "defaultInput": 24,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "minAlpha",
+                    "idInput": "minAlpha",
+                    "tool-tip": "Minimalna wartość, jaką alfa ma przyjąć w dzień. Czyli jeżeli mapa ma być już trochę w dzień przyciemniona, to definiujemy to tutaj.",
+                    "min":0,
+                    "max":1,
+                    "step":0.1,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput": 0,
+                    "defaultSraj": 0,
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                }
+            ]
+        }
+    ]
+}

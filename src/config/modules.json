@@ -72,6 +72,13 @@
       "type": "out"
     },
     {
+      "name": "dayNightCycle",
+      "hasList": false,
+      "bindId": "module",
+      "path": "fromId",
+      "type": "out"
+    },
+    {
       "name": "dialogue",
       "hasList": false,
       "bindId": "header.text",
@@ -211,6 +218,13 @@
       "name": "light",
       "hasList": false,
       "bindId": "module",
+      "path": "fromId",
+      "type": "out"
+    },
+    {
+      "name": "lightPoints",
+      "hasList": true,
+      "bindId": ["x", "y"],
       "path": "fromId",
       "type": "out"
     },

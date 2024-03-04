@@ -541,7 +541,12 @@ display: block;
     color: var(--clr);
     animation: box 3s infinite;
   }
-  
+
+  .night{
+    box-shadow: 0px 0px 25px 0px #1901f3;
+    animation: box 3s infinite;
+  }
+
   @keyframes move {
     0% {
       transform: translateX(0);

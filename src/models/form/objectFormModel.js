@@ -413,6 +413,10 @@ class ObjectFormModel{
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
         const valueInGoodType = this.configUtils.getValueInGoodType(targetProperty.name, value)
         targetProperty.value = valueInGoodType
+        if(targetProperty.specialAction){
+            this.handleSpecialAction(targetProperty.specialAction, value)
+            return
+        }
         if(targetProperty.varType.includes("color")){
             const dotIndex = id.lastIndexOf('.');
             const prefix = dotIndex !== -1 ? id.substring(0, dotIndex + 1) : ""
@@ -581,6 +585,9 @@ class ObjectFormModel{
         if(params.workingObject.hasOwnProperty("end")){
             this.moveToLastPlaceInJson("end", params.workingObject)
         }
+        if(params.workingObject.hasOwnProperty("list")){
+            this.moveToLastPlaceInJson("list", params.workingObject)
+        }
       }
       
     moveToLastPlaceInJson = (path, workingObject) => {
@@ -599,4 +606,13 @@ class ObjectFormModel{
         this.jsonData.removeObjectKeyByPath("module", path)
         this.jsonData.setObjectKeyByPath("module", path, temp)
     }
+
+    handleSpecialAction = async (metaAction, value) => {
+        switch (metaAction){
+          case "night":
+            const nightController = new NightUtils(this, value)
+            nightController.fetchConfigAndSetLightPointList()
+            break;
+        }
+      }
 }

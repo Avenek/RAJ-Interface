@@ -54,7 +54,15 @@ class AppController {
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
       localStorage.setItem("lastClear", "1")
     }
-
+    if(lastClear<2){
+      const randomCaller = {
+          "name": "Night",
+          "tipInfo": "Umożliwia przyciemnienie mapy, czy też stworzenie cyklu dobowego na niej."
+      }
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(randomCaller)))
+      localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+      localStorage.setItem("lastClear", "2")
+    }
   }
 
 const app = new AppController(new AppView(), new AppModel())
