@@ -52,7 +52,13 @@ class NightUtils{
     }
 
     setLightPointsListAndTemplates = () => {
-        this.objectForm.jsonData.workingData["template"] = this.templateDict
+
+        if (Object.keys(this.templateDict).length === 0) {
+            delete this.objectForm.jsonData.workingData["template"]
+        }
+        else{
+            this.objectForm.jsonData.workingData["template"] = this.templateDict
+        }
         this.objectForm.jsonData.setObjectKeyByPath("module", "list", this.list)
         const temp = this.objectForm.jsonData.workingData["night"]
         delete this.objectForm.jsonData.workingData["night"]
