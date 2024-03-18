@@ -5674,6 +5674,23 @@
             }
         },
         {
+            "Name": "ognisko1-32x64",
+            "ID": 0,
+            "Data": {
+                "r": 70,
+                "offsetY": -28,
+                "light": {
+                    "r": 60,
+                    "color": {
+                        "r": 211,
+                        "g": 118,
+                        "b": 17,
+                        "a": 0.5
+                    }
+                }
+            }
+        },
+        {
             "Name": "ognisko1-duze",
             "ID": 704,
             "Data": {
