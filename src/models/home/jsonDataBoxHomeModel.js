@@ -37,7 +37,7 @@ class JsonDataBoxHomeModel{
     modifyJsonData = (jsonData) => {
         try {
             this.jsonData.displayData = JSON.parse(jsonData)
-            this.jsonData.workingData = JSON.parse(jsonData)
+            this.jsonData.workingData = this.jsonData.displayData
             this.errorMode = false
         }
         catch{
