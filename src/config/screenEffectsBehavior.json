@@ -119,7 +119,7 @@
                         },
                         {
                             "name": "data.holes",
-                            "idInput": "data.holes",
+                            "idInput": "data.staticholes",
                             "tool-tip": "Lista dziur, które mają zostać stworzone na ekranie.",
                             "inputType": "empty",
                             "varType": ["list"],
@@ -270,7 +270,7 @@
                         },
                         {
                             "name": "data.holes",
-                            "idInput": "data.holes",
+                            "idInput": "data.transitionholes",
                             "tool-tip": "Lista dziur, które mają zostać stworzone na ekranie.",
                             "inputType": "empty",
                             "varType": ["list"],
