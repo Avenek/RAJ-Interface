@@ -53,6 +53,10 @@
           "tipInfo": "Umożliwia nałożenie filtru o danym kolorze na ekran gracza."
         },
         {
+          "name": "Night",
+          "tipInfo": "Umożliwia przyciemnienie mapy, czy też stworzenie cyklu dobowego na niej."
+        },
+        {
           "name": "ExtraLight",
           "tipInfo": "Umożliwia tworzenie dodatkowych dziur i świateł na mapie, które nie zostały zadeklarowane w kluczu night. To światło można również przypisać do danego npc."
         },

@@ -1,0 +1,111 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "color",
+                    "idInput": "color",
+                    "tool-tip": "",
+                    "inputType": "subSubkey",
+                    "properties": [
+                        {
+                            "name": "color.r",
+                            "idInput": "color.r",
+                            "tool-tip": "Zmienna r koloru w formacie RGBA.",
+                            "step":5,
+                            "min":0,
+                            "max":255,
+                            "inputType": "number",
+                            "varType": ["int", "color"],
+                            "defaultInput":0,
+                            "extraOptions": [{"name":"get random"}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "color.g",
+                            "idInput": "color.g",
+                            "tool-tip": "Zmienna g koloru w formacie RGBA.",
+                            "step":5,
+                            "min":0,
+                            "max":255,
+                            "inputType": "number",
+                            "varType": ["int", "color"],
+                            "defaultInput":0,
+                            "extraOptions": [{"name":"get random"}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "color.b",
+                            "idInput": "color.b",
+                            "tool-tip": "Zmienna b koloru w formacie RGBA.",
+                            "step":5,
+                            "min":0,
+                            "max":255,
+                            "inputType": "number",
+                            "varType": ["int", "color"],
+                            "defaultInput":0,
+                            "extraOptions": [{"name":"get random"}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "color.a",
+                            "idInput": "color.a",
+                            "tool-tip": "Zmienna a koloru w formacie RGBA - przeźroczystość.",
+                            "step":0.1,
+                            "min":0,
+                            "max":0.5,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":1,
+                            "extraOptions": [{"name":"get random"}],
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "color.colorPicker",
+                            "idInput": "color.colorPicker",
+                            "tool-tip": "Kolor w formacie RGBA.",
+                            "inputType": "color",
+                            "varType": ["color"],
+                            "defaultSraj": "",
+                            "canBeEmpty": true
+                        }
+                    ]
+                },
+                {
+                    "name": "dayNightCycle",
+                    "idInput": "dayNightCycle",
+                    "tool-tip": "Noc może posiadać włączony cykl dobowy - w dzień będzie jasno, a w noc ciemno.",
+                    "inputType": "empty",
+                    "varType": ["empty"],
+                    "extraOptions": [{"name":"day night cycle"}]
+                },
+                {
+                    "name": "json-list",
+                    "idInput": "json-list",
+                    "tool-tip": "Wpisujemy tutaj jsona, który jest automatycznie parsowany i tworzy listę nocy. Wszystkie światła z listy są kasowane i dodawane te z jsona.",
+                    "inputType": "string",
+                    "canBeEmpty": true,
+                    "placeholder": "Wklej tu jsona z WE",
+                    "specialAction": "night",
+                    "varType": ["json"],
+                    "defaultInput":"",
+                    "inputPlaceholder": "Wkleić jsona z obiektamy mapy.",
+                    "validation":[{"forType": "string", "name": "contains", "value":"{"}]
+                },
+                {
+                    "name": "list",
+                    "idInput": "list.list",
+                    "inputType": "empty",
+                    "varType": ["list"],
+                    "defaultInput": [],
+                    "tool-tip": "Definiujemy tutaj punkty świecące",
+                    "extraOptions": [{"name":"light points"}]
+                }
+            ]
+        }
+    ]
+}

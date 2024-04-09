@@ -100,6 +100,13 @@ let moduleDict = {
     }
   },
 
+  dayNightCycle : class DayNightCycle{
+    constructor() {
+      this.worldTime = false,
+      this.dayDuration = 24
+    }
+  },
+
   dialogue : class Dialogue{
     constructor(){
       this.header = {"text": ""}
@@ -284,6 +291,14 @@ let moduleDict = {
     }
   },
 
+  
+  lightPoints : class LightPoints{
+    constructor(){
+      this.x = 0,
+      this.y = 0
+    }
+  },
+
   mapEvents : class mapEvents{
     constructor(id){
       this.action = "CREATE",
@@ -316,6 +331,18 @@ let moduleDict = {
     constructor(){
       this.x = 0
       this.y = 0
+    }
+  },
+
+  night : class Night{
+    constructor(){
+      this.color = {
+        "r" : 0,
+        "g" : 0,
+        "b" : 0,
+        "a" : 0.5
+      },
+      this.list = []
     }
   },
 

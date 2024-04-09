@@ -243,11 +243,11 @@
                     "step":10,
                     "inputType": "number",
                     "varType": ["int", "string"],
-                    "canBeEmpty": true,
-                    "defaultInput": 90,
+                    "defaultInput": 0,
+                    "defaultSraj": 0,
                     "extraOptions": [{"name":"get random"}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
-                    "require": [{"name": "name", "value": ["ROTATION"]}, {"name": "addAngle", "value": [""]}]
+                    "require": [{"name": "name", "value": ["ROTATION"]}, {"name": "addAngle", "value": [0]}]
                 },
                 {
                     "name": "addAngle",
@@ -258,14 +258,15 @@
                     "step":10,
                     "inputType": "number",
                     "varType": ["int", "string"],
-                    "canBeEmpty": true,
                     "defaultInput": 90,
+                    "defaultSraj": 0,
                     "extraOptions": [{"name":"get random"}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
-                    "require": [{"name": "name", "value": ["ROTATION"]}, {"name": "setAngle", "value": [""]}]
+                    "require": [{"name": "name", "value": ["ROTATION"]}, {"name": "setAngle", "value": [0]}]
                 },
                 {
                     "name": "rotationOffset",
+                    "idInput": "rotation.rotationOffset",
                     "tool-tip": "Środek ciężkości obracanego obiektu. Domyślnie jest jest to środek obiektu (szerokość/2, wysokość/2)",
                     "inputType": "subkey",
                     "varType": [],

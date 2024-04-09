@@ -27,10 +27,12 @@ class DataValidation{
                             }
                         }
                     }
-                    else if(valueType !== "object" && !this.property.varType.includes(valueType) && !this.property.canBeEmpty){
-                        validSummary.isValid = false
-                        validSummary.errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${this.property.varType.join(", ")}`
-                        return validSummary
+                    else if(valueType !== "object" && !this.property.varType.includes(valueType)){
+                        if(!this.property.canBeEmpty || value.length>0){
+                            validSummary.isValid = false
+                            validSummary.errorMessage = `Wartość tego pola posiada zły typ! Dozwolone typy dla tego pola to: ${this.property.varType.join(", ")}`
+                            return validSummary
+                        }
                     }
                 })
             }
@@ -54,6 +56,15 @@ class DataValidation{
         let valueType = typeof value
         if(valueType === "number"){
           valueType =  this.isInteger(value) ? "int" : "float"
+        }
+        if (valueType === "string"){
+            try {
+                JSON.parse(value);
+                valueType = "json"
+            }
+            catch (e){
+                return valueType
+            }
         }
         return valueType
     }
@@ -134,7 +145,10 @@ class DataValidation{
         else{
             let validValue = this.jsonData.getValueFromWorkingObject(this.container, validObject.value)
             if(validValue === null || validValue === NaN || validValue === undefined){
-                validValue = this.configUtils.findObjectByProperty(this.configUtils.config.properties, validObject.value, "name").defaultSraj
+                const property = this.configUtils.findObjectByProperty(this.configUtils.config.properties, validObject.value, "name")
+                if(property.defaultSraj){
+                    validValue = this.configUtils.findObjectByProperty(this.configUtils.config.properties, validObject.value, "name").defaultSraj
+                }
             }
             isValid = value > validValue
             errorMessage = isValid ? "" : `Wartość tego pola powinna być większa od wartości klucza ${validObject.value}!`
@@ -153,7 +167,10 @@ class DataValidation{
         else{
             let validValue = this.jsonData.getValueFromWorkingObject(this.container, validObject.value)
             if(validValue === null || validValue === NaN || validValue === undefined){
-                validValue = this.configUtils.findObjectByProperty(this.configUtils.config.properties, validObject.value, "name").defaultSraj
+                const property = this.configUtils.findObjectByProperty(this.configUtils.config.properties, validObject.value, "name")
+                if(property.defaultSraj){
+                    validValue = this.configUtils.findObjectByProperty(this.configUtils.config.properties, validObject.value, "name").defaultSraj
+                }
             }
             isValid = value < validValue
             errorMessage = isValid ? "" : `Wartość tego pola powinna być mniejsza od wartości klucza ${validObject.value}!`

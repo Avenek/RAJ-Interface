@@ -65,11 +65,12 @@ class ObjectFormView extends View{
               if(property.isCollapsed){
                 isCollapsed = " " + property.isCollapsed
               }
-                const placeholder = property.inputPlaceholder || ""
-                const isError = property.errorMessage && property.errorMessage !== "" ? " error-input" : ""
-                const isExpanded = property.isExpanded ? " expanded" : ""
-                const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-                html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${value}" name="${property.name}" placeholder="${placeholder}">`;
+              const specialAction = " " + property.specialAction || ""
+              const placeholder = property.inputPlaceholder || ""
+              const isError = property.errorMessage && property.errorMessage !== "" ? " error-input" : ""
+              const isExpanded = property.isExpanded ? " expanded" : ""
+              const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
+              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><input type="text" class="key-value-input${isExpanded}${isError}${specialAction}" id="${property.idInput}" value="${value}" name="${property.name}" placeholder="${placeholder}" meta-action="${specialAction}">`;
             }
             else if(property.inputType === "number"){
               let isCollapsed = ""
@@ -162,6 +163,10 @@ class ObjectFormView extends View{
           return "#CCE5FF"
         case "external properties":
           return "#FF8000"
+        case "day night cycle":
+          return "#00B000"
+        case "light points":
+          return "#AAAB11"
         default:
           return "#FFF01F"
       }
