@@ -60,7 +60,7 @@
                     "max":100,
                     "step":1,
                     "inputType": "number",
-                    "varType": ["int"],
+                    "varType": ["int", "float"],
                     "defaultInput": 0,
                     "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
@@ -74,7 +74,7 @@
                     "max":100,
                     "step":1,
                     "inputType": "number",
-                    "varType": ["int"],
+                    "varType": ["int", "float"],
                     "defaultInput": 0,
                     "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
@@ -104,7 +104,7 @@
                     "max":100,
                     "step":1,
                     "inputType": "empty",
-                    "varType": ["int"],
+                    "varType": ["int", "float"],
                     "defaultInput": {
                         "getCharacterData": {
                           "kind": "HERO",
@@ -122,7 +122,7 @@
                     "max":100,
                     "step":1,
                     "inputType": "empty",
-                    "varType": ["int"],
+                    "varType": ["int", "float"],
                     "defaultInput": {
                         "getCharacterData": {
                           "kind": "HERO",
@@ -170,7 +170,7 @@
                     "max":100,
                     "step":1,
                     "inputType": "number",
-                    "varType": ["int"],
+                    "varType": ["int", "float"],
                     "defaultInput": 0,
                     "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
@@ -184,7 +184,7 @@
                     "max":100,
                     "step":1,
                     "inputType": "number",
-                    "varType": ["int"],
+                    "varType": ["int", "float"],
                     "defaultInput": 0,
                     "extraOptions": [{"name":"get character data"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
