@@ -91,8 +91,8 @@
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
-                    "name": "behavior.repeat",
-                    "idInput": "behavior.repeat",
+                    "name": "repeat",
+                    "idInput": "repeat",
                     "tool-tip": "Ilość wywołań zachowania. Każde wejscie/zejście z obszaru oznacza wywołanie efektu. True oznacza nieskończoność",
                     "inputType": "string",
                     "varType": ["int", "boolean"],
