@@ -2493,6 +2493,23 @@
             }
         },
         {
+            "Name": "poch-piramidy-czara-stoj1",
+            "ID": 7005,
+            "Data": {
+                "r": 40,
+                "offsetY": -14,
+                "light": {
+                "r": 30,
+                "color": {
+                    "r": 211,
+                    "g": 118,
+                    "b": 17,
+                    "a": 0.5
+                    }
+                }
+            }
+        },
+        {
             "Name": "czara-marlloth-plomien",
             "ID": 3950,
             "Data": {
