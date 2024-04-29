@@ -9,7 +9,7 @@ class NightUtils{
     fetchConfigAndSetLightPointList = () => {
         try {
             JSON.parse(this.value);
-        fetch(`src/config/night/lightPoints.json`)
+        fetch(`src/config/night/lightPoint.json`)
         .then(response => response.json())
         .then(config => {
             this.list = this.createLightPointListAndTemplateDict(config)
