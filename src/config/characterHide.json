@@ -27,7 +27,7 @@
                             "tool-tip": "Typ obiektu, który chcemy schować.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"HERO"}, {"name":"NPC"}, {"name":"THIS_NPC_INSTANCE"}, {"name":"PET"},{"name":"FAKE_NPC"}],
+                            "options": [{"name":"HERO"}, {"name":"NPC"}, {"name":"THIS_NPC_INSTANCE"}, {"name":"PET"}, {"name":"FAKE_NPC"}, {"name":"FLOAT_OBJECT"}],
                             "defaultInput": "HERO"
                         },
                         {
@@ -51,6 +51,15 @@
                             "varType": ["int", "string"],
                             "defaultInput": "",
                             "require": [{"name": "target.kind", "value": ["FAKE_NPC"]}]
+                        },
+                        {
+                            "name": "target.id",
+                            "idInput": "target.id.floatObject",
+                            "tool-tip": "ID floatObjectu, którego chcemy schować.",
+                            "inputType": "string",
+                            "varType": ["int", "string"],
+                            "defaultInput": "",
+                            "require": [{"name": "target.kind", "value": ["FLOAT_OBJECT"]}]
                         }
                     ]
                 },
