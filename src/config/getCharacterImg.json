@@ -12,8 +12,17 @@
                     "tool-tip": "Obiekt, od którego chcemy pobrać dane. THIS_NPC_INSTANCE wymaga wpisania Sraja we własności NPC.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"HERO"}, {"name":"THIS_NPC_INSTANCE"}],
+                    "options": [{"name":"HERO"}, {"name":"THIS_NPC_INSTANCE"}, {"name":"FLOAT_OBJECT"}],
                     "defaultInput": "HERO"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "ID floatObjectu, z którego chcemy pobrać grafikę.",
+                    "inputType": "string",
+                    "varType": ["int", "string"],
+                    "defaultInput": "",
+                    "require": [{"name": "kind", "value": ["FLOAT_OBJECT"]}]
                 },
                 {
                     "name": "toGet",
