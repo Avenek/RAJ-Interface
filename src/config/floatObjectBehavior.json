@@ -12,7 +12,7 @@
                     "tool-tip": "Nazwa zachowania: FADE_IN - pojawienie się obiektu, FADE_OUT - zniknięcie obiektu, IDLE - stanie w miejscu, MOVE_TO_CORDS - przelecenie do konkretnego miejsca, TP_TO_CORDS - przeniesienie w konkretne miejsce, MOVE_FROM_VECTOR - poruszanie się za pomocą wartości wektorów, TP_ON_OTHER_SIDE - przeniesienie na drugą stronę mapy, ROTATION - obrót obiektu o zadeklarowany kąt.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"FADE_IN"}, {"name":"FADE_OUT"}, {"name":"IDLE"}, {"name":"MOVE_TO_CORDS"}, {"name":"FOLLOW"}, {"name":"TP_TO_CORDS"}, {"name":"MOVE_FROM_VECTORS"}, {"name":"TP_ON_OTHER_SIDE"}, {"name":"ROTATION"}, {"name":"IDLE_GIF_ANIMATION"}],
+                    "options": [{"name":"FADE_IN"}, {"name":"FADE_OUT"}, {"name":"IDLE"}, {"name":"MOVE_TO_CORDS"}, {"name":"FOLLOW"}, {"name":"TP_TO_CORDS"}, {"name":"MOVE_FROM_VECTORS"}, {"name":"TP_ON_OTHER_SIDE"}, {"name":"ROTATION"}, {"name":"IDLE_GIF_ANIMATION"}, {"name":"CHANGE_IMG"}],
                     "defaultInput": "IDLE"
                 },
                 {
@@ -322,6 +322,36 @@
                             "extraOptions": [{"name":"move noise"}]
                         }
                     ]
+                },
+                {
+                    "name": "url",
+                    "idInput": "url",
+                    "tool-tip": "Ścieżka do grafiki do grafiki obiektu.",
+                    "inputType": "file",
+                    "acceptFiles": ".gif",
+                    "directory": "object/",
+                    "varType": ["string"],
+                    "defaultInput": "object/.gif",
+                    "require": [{"name": "name", "value": ["CHANGE_IMG"]}]
+                },
+                {
+                    "name": "kind",
+                    "idInput": "kind",
+                    "tool-tip": "Rodzaj obiektu. SPRITE - głównie chmurki zapisane w formacie .png, GIF - obiekty zapisane w formacie .gif, FAKE_NPC - obiekt może chodzić pod ukos i nie zwraca uwagi na kolizje. Grafika postaci w formacie .gif.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"SPRITE"}, {"name":"GIF"}, {"name":"FAKE_NPC"}, {"name":"IDLE_FAKE_NPC_FRAME"}],
+                    "defaultInput": "SPRITE",
+                    "defaultSraj": "SPRITE",
+                    "require": [{"name": "name", "value": ["CHANGE_IMG"]}]
+                },
+                {
+                    "name": "color",
+                    "idInput": "color",
+                    "tool-tip": "",
+                    "inputType": "empty",
+                    "extraOptions": [{"name":"color"}],
+                    "require": [{"name": "name", "value": ["CHANGE_IMG"]}, {"name": "kind", "value": ["SPRITE", "GIF"]}]
                 }
             ]
         }
