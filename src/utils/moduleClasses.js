@@ -259,6 +259,14 @@ let moduleDict = {
     }
   },
 
+  getCharacterImg : class GetCharacterData {
+    constructor()
+    {
+      this.kind = "HERO",
+      this.toGet = "img"
+    }
+  },
+
   getNpcId : class GetNpcId {
     constructor()
     {

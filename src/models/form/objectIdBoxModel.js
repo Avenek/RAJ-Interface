@@ -101,6 +101,7 @@ class ObjectIdBoxModel{
 
     deleteObjectId = (index) => {
         const params = this.jsonData.getParams(this.container)
+        const parentParams = this.jsonData.getParentParams(this.container)
         const isChecked = this.objectIdList[index].isChecked
         this.objectIdList.splice(index, 1)
         if(isChecked && this.objectIdList.length>0){
@@ -109,7 +110,7 @@ class ObjectIdBoxModel{
             params.workingObject = index == 0 ? params.workingList[1] : params.workingList[0]
         }
         const path = this.configUtils.getKeyNameFromPath(params.path)
-        const property = this.container === "extraOption" ? this.moduleObjectForm.configUtils.findObjectByProperty(params.config.properties, path, "name") : null
+        const property = this.container === "extraOption" ? this.moduleObjectForm.configUtils.findObjectByProperty(parentParams.config.properties, path, "name") : null
         const defaultInput = property ? property.defaultInput : null
         this.jsonData.deleteObject(this.container, index, defaultInput)
         this.objectIdListChanged(this.objectIdList, this.hasList)

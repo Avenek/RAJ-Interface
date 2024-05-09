@@ -188,6 +188,13 @@
       "type": "out"
     },
     {
+      "name": "getCharacterImg",
+      "hasList": false,
+      "bindId": "module",
+      "path": "key",
+      "type": "out"
+    },
+    {
       "name": "getNpcId",
       "hasList": false,
       "bindId": "module",

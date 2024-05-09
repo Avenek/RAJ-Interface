@@ -1,0 +1,30 @@
+{
+    "properties": [
+        {
+            "name": "get character data",
+            "idInput": "menu",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties":[
+                {
+                    "name": "kind",
+                    "idInput": "kind",
+                    "tool-tip": "Obiekt, od którego chcemy pobrać dane. THIS_NPC_INSTANCE wymaga wpisania Sraja we własności NPC.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"HERO"}, {"name":"THIS_NPC_INSTANCE"}],
+                    "defaultInput": "HERO"
+                },
+                {
+                    "name": "toGet",
+                    "idInput": "toGet",
+                    "tool-tip": "Dana, którą chcemy pobrać",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"img"}],
+                    "defaultInput": "img"
+                }
+            ]
+        }
+    ]
+}
