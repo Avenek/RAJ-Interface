@@ -63,6 +63,15 @@ class AppController {
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
       localStorage.setItem("lastClear", "2")
     }
+    if(lastClear<3){
+      const overrideDayNightCycle = {
+          "name": "OverrideDayNightCycle",
+          "tipInfo": "Umożliwia wpłynięcie na cykl dobowy pozostałych map i nadpisać jego wartość danym mnożnikiem."
+      }
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(overrideDayNightCycle)))
+      localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+      localStorage.setItem("lastClear", "3")
+    }
   }
 
 const app = new AppController(new AppView(), new AppModel())

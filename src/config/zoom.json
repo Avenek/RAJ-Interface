@@ -49,7 +49,7 @@
                 {
                     "name": "clear",
                     "idInput": "clear",
-                    "tool-tip": "Flaga, która ustawiona na true kończy trzęsienie ziemi.",
+                    "tool-tip": "Flaga, która ustawiona na true wyłącza zooma.",
                     "inputType": "boolean",
                     "varType": ["boolean"],
                     "defaultInput": false,

@@ -267,6 +267,12 @@
       "type": "out"
     },
     {
+      "name": "overrideDayNightCycle",
+      "hasList": false,
+      "bindId": "module",
+      "type": "out"
+    },
+    {
       "name": "options",
       "hasList": true,
       "bindId": "module",

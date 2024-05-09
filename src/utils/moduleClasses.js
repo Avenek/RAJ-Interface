@@ -346,6 +346,12 @@ let moduleDict = {
     }
   },
 
+  overrideDayNightCycle : class OverrideDayNightCycle{
+    constructor(){
+      this.alphaFactor = 1
+    }
+  },
+
   parent : class Parent{
     constructor(){
     }
