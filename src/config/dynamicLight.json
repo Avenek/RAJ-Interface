@@ -38,7 +38,7 @@
                             "tool-tip": "Należy zdefiniować tutaj obiekt, do którego będzie przypięte światło.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"HERO"}, {"name":"FAKE_NPC"}, {"name":"FLOAT_OBJECT"}],
+                            "options": [{"name":"HERO"}, {"name":"PET"}, {"name":"FAKE_NPC"}, {"name":"FLOAT_OBJECT"}],
                             "defaultInput": "CREATE"
                         },
                         {

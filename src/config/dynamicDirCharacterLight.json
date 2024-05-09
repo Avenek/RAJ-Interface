@@ -38,7 +38,7 @@
                             "tool-tip": "Obiekt, do którego zostanie przypięte światło. Aktualnie można je przypiąć tylko do postaci gracza.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"HERO"}, {"name":"FAKE_NPC"}],
+                            "options": [{"name":"HERO"}, {"name":"PET"}, {"name":"FAKE_NPC"}],
                             "defaultInput": "HERO"
                         },
                         {
