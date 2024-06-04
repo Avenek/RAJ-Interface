@@ -34,6 +34,10 @@
         {
           "name": "MapEvents",
           "tipInfo": "Umożliwia wykonanie danego sraja po zabiciu danego npc. MapEvents stosujemy tylko z npc, z którymi jest możliwość walki. Efekt jest widoczny dla każdego znajdującego się na mapie."
+        },
+        {
+          "name": "CharacterImageChanger",
+          "tipInfo": "Umożliwia zmianę grafiki npc na inną lub wykonanie danej animacji w momencie jego respawnu, śmierci bądź też bycia martwym."
         }
       ]
     },

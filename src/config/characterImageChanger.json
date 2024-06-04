@@ -1,0 +1,70 @@
+{
+    "properties": [
+        {
+            "name": "characterImageChanger",
+            "idInput": "characterImageChanger",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Obiekt możemy tworzyć albo usuwać.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE_FORCE"},{"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca obiekt. Umożliwia późniejsze jego usunięcie.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "extraOptions": [{"name":"get npc id"}],
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "target",
+                    "idInput": "target",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "target.kind",
+                            "idInput": "target.kind",
+                            "tool-tip": "Typ obiektu, który chcemy schować.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"THIS_NPC_INSTANCE"}, {"name":"NPC"}],
+                            "defaultInput": "THIS_NPC_INSTANCE"
+                        },
+                        {
+                            "name": "target.id",
+                            "idInput": "target.id.npc",
+                            "tool-tip": "ID NPC, którego chcemy schować.",
+                            "inputType": "number",
+                            "min":0,
+                            "max":500000,
+                            "step":1,
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "require": [{"name": "target.kind", "value": ["NPC"]}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        }
+                    ]
+                },
+                {
+                    "name": "list",
+                    "idInput": "list",
+                    "inputType": "empty",
+                    "varType": ["list"],
+                    "defaultInput": [],
+                    "tool-tip": "Definiujemy tutaj poszczególne stany, w których nasz obiekt ma przyjąć inną grafikę. Do wyboru: ON_RESPAWN - w momencie zrespienia, ON_DIE - w momencie umarcia, AFTER_DIE - gdy jest martwy.",
+                    "extraOptions": [{"name":"character image list"}]
+                }
+            ]
+        }
+    ]
+}

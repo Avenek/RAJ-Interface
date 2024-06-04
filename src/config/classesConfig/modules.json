@@ -53,6 +53,19 @@
       "type": "in"
     },
     {
+      "name": "characterImageChanger",
+      "hasList": true,
+      "bindId": "id",
+      "type": "out"
+    },
+    {
+      "name": "characterImageList",
+      "hasList": true,
+      "bindId": "kind",
+      "type": "out",
+      "path": "list"
+    },
+    {
       "name": "characterEffect",
       "hasList": true,
       "bindId": "id",

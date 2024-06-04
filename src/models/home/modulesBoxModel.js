@@ -6,7 +6,7 @@ class ModulesBoxModel{
     
     fetchContainersData = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open("GET", "src/config/containers.json", false);
+        xhr.open("GET", "src/config/classesConfig/containers.json", false);
         xhr.send(null);
     
         if (xhr.status === 200) {

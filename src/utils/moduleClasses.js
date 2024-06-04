@@ -67,6 +67,23 @@ let moduleDict = {
     }
   },
 
+  characterImageChanger : class CharacterImageChanger {
+    constructor(id) {
+      this.action = "CREATE";
+      this.id = id
+      this.target = { "kind" : "THIS_NPC_INSTANCE" }
+      this.list = []
+    }
+  },
+
+  characterImageList : class CharacterImageList {
+    constructor() {
+      this.url = "object/.gif";
+      this.kind = "ON_RESPAWN"
+    }
+  },
+
+
   characterEffect : class CharacterEffect {
       constructor(id) {
         this.action = "CREATE";

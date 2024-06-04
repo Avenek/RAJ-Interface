@@ -1,0 +1,102 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "kind",
+                    "idInput": "kind",
+                    "tool-tip": "Do wyboru: ON_RESPAWN - w momencie zrespienia, ON_DIE - w momencie umarcia, AFTER_DIE - gdy jest martwy.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"ON_RESPAWN"}, {"name":"ON_DIE"}, {"name":"AFTER_DIE"}],
+                    "defaultInput": "ON_RESPAWN"
+                },
+                {
+                    "name": "url",
+                    "idInput": "url",
+                    "tool-tip": "Ścieżka do grafiki do grafiki obiektu.",
+                    "inputType": "file",
+                    "acceptFiles": ".gif",
+                    "directory": "object/",
+                    "varType": ["string"],
+                    "defaultInput": "object/.gif"
+                },
+                {
+                    "name": "repeat",
+                    "idInput": "repeat",
+                    "tool-tip": "Ilość powtórzeń zachowania, jeżeli damy wartość true to nieskończoność.",
+                    "inputType": "string",
+                    "min":1,
+                    "max":100,
+                    "varType": ["int", "boolean"],
+                    "defaultInput": 1,
+                    "defaultSraj": 1,
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                },
+                {
+                    "name": "characterShow",
+                    "idInput": "characterShow",
+                    "tool-tip": "Flaga informująca o tym, czy obiekt w momencie wyzwalania tego zachowania ma być widoczny czy ukryty.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
+                },
+                {
+                    "name": "behind",
+                    "idInput": "behind",
+                    "tool-tip": "Flaga informująca o tym, czy animacja zmiany grafiki ma się wykonać za naszym obiektem czy przed nim.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "characterShow", "value": [true]}]
+                },
+                {
+                    "name": "order",
+                    "idInput": "order",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
+                    "properties": [
+                        {
+                            "name": "order.kind",
+                            "idInput": "order.kind",
+                            "tool-tip": "Rodzaj obiektu. FLOAT_OBJECT - obiekt dostaje order 200 czyli przysłania wszystkie obiekty typu MAP_OBJECT, MAP_OBJECT - obiekt zachowuje się jak obiekt mapy, czyli jego order jest ustawiany względem położenia y. Czyli jeżeli postać na mapie będzie niżej (będzie miała większe y) niż floatObject, to przysłoni floatObject.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"FLOAT_OBJECT"}, {"name":"MAP_OBJECT"}],
+                            "defaultInput": "FLOAT_OBJECT",
+                            "defaultSraj": "FLOAT_OBJECT"
+                        },
+                        {
+                            "name": "order.v",
+                            "idInput": "order.v",
+                            "tool-tip": "Jest to wartość jaka zostanie dodana do orderu. Można podać zarówno liczbę dodatnią (by zwiększyć order), bądź liczbę ujemną (by go zmniejszyć).",
+                            "step":5,
+                            "min":-100,
+                            "max":100,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        }
+                    ]
+                },
+                {
+                    "name": "external_properties",
+                    "idInput": "external_properties",
+                    "tool-tip": "Definiujemy w tym miejscu, dodatkowe rzeczy, które mają się wykonać w trakcie tego zachowania.",
+                    "inputType": "empty",
+                    "varType": ["empty"],
+                    "extraOptions": [{"name":"external properties"}]
+                }
+            ]
+        }
+    ]
+}

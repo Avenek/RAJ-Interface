@@ -11,7 +11,7 @@ class DataObjectsBoxModel{
       }
 
     fetchDataAndCreateDataObjectsList = () => {
-        fetch('src/config/modules.json')
+        fetch('src/config/classesConfig/modules.json')
         .then(response => response.json())
         .then(config => {
             this.listConfig = config
