@@ -79,7 +79,7 @@ class AppController {
       }
       toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(characterImageChanger)))
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
-      localStorage.setItem("lastClear", "3")
+      localStorage.setItem("lastClear", "4")
     }
     
   }
