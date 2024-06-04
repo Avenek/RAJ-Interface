@@ -72,6 +72,16 @@ class AppController {
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
       localStorage.setItem("lastClear", "3")
     }
+    if(lastClear<4){
+      const characterImageChanger = {
+        "name": "CharacterImageChanger",
+        "tipInfo": "Umożliwia zmianę grafiki npc na inną lub wykonanie danej animacji w momencie jego respawnu, śmierci bądź też bycia martwym."
+      }
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(characterImageChanger)))
+      localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+      localStorage.setItem("lastClear", "3")
+    }
+    
   }
 
 const app = new AppController(new AppView(), new AppModel())
