@@ -47,7 +47,7 @@
                     "inputType": "number",
                     "varType": ["int", "float"],
                     "defaultInput": 0,
-                    "extraOptions": [{"name":"get character data"}],
+                    "extraOptions": [{"name":"get character data"}, {"name":"get random"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
@@ -61,7 +61,7 @@
                     "inputType": "number",
                     "varType": ["int", "float"],
                     "defaultInput": 0,
-                    "extraOptions": [{"name":"get character data"}],
+                    "extraOptions": [{"name":"get character data"}, {"name":"get random"}],
                     "validation":[{"forType": "int", "name": "minMax"}],
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
