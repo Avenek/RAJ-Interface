@@ -1,0 +1,31 @@
+{
+    "properties": [
+        {
+            "name": "params",
+            "idInput": "params",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca obszar. Umożliwia późniejsze jego usunięcie.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": 1,
+                    "extraOptions": [{"name":"get npc id"}],
+                    "validation":[{"forType": "int", "name": "moreThan", "value": 0}]
+                },
+                {
+                    "name": "img",
+                    "idInput": "img",
+                    "tool-tip": "Ścieżka do grafiki obiektu.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "inputPlaceholder": "folder/nazwa_pliku.gif",
+                    "defaultInput": ""
+                }
+            ]
+        }
+    ]
+}

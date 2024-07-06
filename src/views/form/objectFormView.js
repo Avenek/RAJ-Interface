@@ -153,7 +153,7 @@ class ObjectFormView extends View{
         case "source":
           return "#964B00"
         case "parent":
-          return"#c0c0c0"
+          return "#c0c0c0"
         case "target":
           return "#E7EE4F"
         case "static holes":
@@ -167,6 +167,8 @@ class ObjectFormView extends View{
           return "#00B000"
         case "light points":
           return "#AAAB11"
+        case "params object outfit":
+          return "#B54CD1"
         default:
           return "#FFF01F"
       }

@@ -81,13 +81,22 @@
                     "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada składową z tablicy. Rozdzielać średnikiem!",
                     "inputType": "string",
                     "varType": ["int"],
-                    "min":1,
-                    "max": 15000,
                     "defaultInput": [],
                     "defaultSraj": [],
                     "inputPlaceholder": "Wartości rozdzielić średnikiem!",
-                    "require": [{"name": "kind", "value": ["ARGUMENT"]}],
-                    "validation":[{"forType": "int", "name": "minMax"}]
+                    "require": [{"name": "kind", "value": ["ARGUMENT"]}, {"name": "key", "value": ["QUEST", "TOWN", "OUTFIT", "PET", "EXIST_OBJ", "HERO_EQUIPMENT_ITEM_TPL"]}],
+                    "validation":[{"forType": "int", "name": "moreThan", "value": 0}]
+                },
+                {
+                    "name": "params",
+                    "idInput": "argument.params.existObjHaveOut",
+                    "tool-tip": "Sraj się wykona, jeżeli obiekt o podanym id posiada daną grafikę.",
+                    "inputType": "empty",
+                    "varType": ["list"],
+                    "defaultInput": [],
+                    "defaultSraj": [],
+                    "require": [{"name": "kind", "value": ["ARGUMENT"]}, {"name": "key", "value": ["EXIST_OBJ_HAVE_OUTFIT"]}],
+                    "extraOptions": [{"name":"params object outfit"}]
                 },
                 {
                     "name": "name",

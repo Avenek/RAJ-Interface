@@ -300,6 +300,13 @@
       "path": "options"
     },
     {
+      "name": "paramsObjectOutfit",
+      "hasList": true,
+      "bindId": "id",
+      "path": "fromId",
+      "type": "out"
+    },
+    {
       "name": "parent",
       "hasList": false,
       "bindId": "module",

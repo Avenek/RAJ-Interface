@@ -270,7 +270,7 @@ class JsonDataModel {
       for (let i = 0; i < keys.length - 1; i++) {
         const currentKey = keys[i];
         if (!currentObj[currentKey] || typeof currentObj[currentKey] !== 'object') {
-          if(currentKey === "list" || currentKey === "holes" || currentKey === "vals" || currentKey === "options"){
+          if(currentKey === "list" || currentKey === "holes" || currentKey === "vals" || currentKey === "options" || (currentKey === "params" && params.fileName === "case")){
             currentObj[currentKey] = [];
           }
           else{
@@ -280,7 +280,7 @@ class JsonDataModel {
         currentObj = currentObj[currentKey];
       }
       const lastKey = keys[keys.length - 1];
-      if(lastKey === "list" || lastKey === "holes" || lastKey === "vals" || lastKey === "options"){
+      if(lastKey === "list" || lastKey === "holes" || lastKey === "vals" || lastKey === "options" || (lastKey === "params" && params.fileName === "case")){
         if(!Array.isArray(currentObj[lastKey])){
           currentObj[lastKey] = []
         }

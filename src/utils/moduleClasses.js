@@ -371,9 +371,21 @@ let moduleDict = {
     }
   },
 
+  options : class Options{
+    constructor(){
+    }
+  },
+
+
   overrideDayNightCycle : class OverrideDayNightCycle{
     constructor(){
       this.alphaFactor = 1
+    }
+  },
+
+  paramsObjectOutfit : class ParamsObjectOutfit {
+    constructor() {
+      this.id = 1
     }
   },
 
@@ -393,11 +405,6 @@ let moduleDict = {
       this.end = {
         "time": "23:59:59"
       }
-    }
-  },
-
-  options : class Options{
-    constructor(){
     }
   },
 

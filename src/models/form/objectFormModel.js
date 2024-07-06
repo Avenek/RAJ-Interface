@@ -174,13 +174,13 @@ class ObjectFormModel{
             else if(allConditionsAreMet){
                 if(item.properties){
                     let valueObject = value
-                    if(!this.isObjectCompatibleWithConfig(value, item.properties)){
+                    if(!this.isObjectCompatibleWithConfig(value, item)){
                         valueObject = this.createObjectBaseOnConfig(item.properties)
                     }
                     listToSet.push({"name": item.name, "id": item.idInput, "value": valueObject})
                     this.jsonData.setObjectKeyByPath(this.container, item.name, valueObject)
                 }
-                else if((item.options && item.options.some(value => value.name === value)) || value !== null){
+                else if((item.options && item.options.some(value => value.name === value)) || value !== null && (!Array.isArray(value) || Array.isArray(value) && this.isObjectCompatibleWithConfig(value, item))){
                     listToSet.push({"name": item.name, "id": item.idInput, "value": value})
                     this.jsonData.setObjectKeyByPath(this.container, item.name, value)
                     item.value = value
@@ -193,7 +193,7 @@ class ObjectFormModel{
             } 
             else if(!allConditionsAreMet){
                 if(value != null && value != undefined && typeof value == "object"){
-                    if(this.isObjectCompatibleWithConfig(value, item.properties)){
+                    if(this.isObjectCompatibleWithConfig(value, item)){
                         listToRemove.push({"name": item.name, "id": item.idInput})
                         this.jsonData.removeObjectKeyByPath(this.container,item.name)
                     }
@@ -231,7 +231,8 @@ class ObjectFormModel{
           const requireItem = property.require[i]
           const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, requireItem.name)
           const requireObject = this.configUtils.findObjectByProperty(params.config.properties, requireItem.name, "name")
-          if((valueInObject && !requireItem.value.includes(valueInObject)) || (requireObject && requireObject.defaultSraj && !requireItem.value.includes(requireObject.defaultSraj)) || (valueInObject === null && requireObject && requireObject.defaultSraj === undefined)){
+          if((valueInObject && !requireItem.value.includes(valueInObject)) || (requireObject && requireObject.defaultSraj && !requireItem.value.includes(requireObject.defaultSraj)) 
+            || (valueInObject === null && requireObject && requireObject.defaultSraj === undefined) ){
               return false
           }
       }
@@ -239,9 +240,13 @@ class ObjectFormModel{
     }
 
     isObjectCompatibleWithConfig = (object, config) => {
-        if(object == null || object == undefined || config == null || config == undefined)
+        const propertiesConfig = config.properties
+        if(Array.isArray(object) && object.length > 0 && (typeof object[0] === "object" && config.varType.includes("list") || typeof object[0] !== "object" && !config.varType.includes("list"))){
+            return true;
+        }
+        if(object == null || object == undefined || propertiesConfig == null || propertiesConfig== undefined)
         {
-            if(config == undefined && Object.keys(object)[0] == "r" && Object.keys(object)[1] == "g"){
+            if(propertiesConfig == undefined && Object.keys(object)[0] == "r" && Object.keys(object)[1] == "g"){
                 return true
             } 
             return false
@@ -251,15 +256,15 @@ class ObjectFormModel{
             const currentKey = key;
             if(this.extraOptionWords.includes(key)) continue
             else if (!Array.isArray(currentObj[currentKey]) && typeof currentObj[currentKey] == 'object') {
-                let newConfig = config.find(obj => obj.name.endsWith(currentKey))
+                let newConfig = propertiesConfig.find(obj => obj.name.endsWith(currentKey))
                 if(newConfig){
-                    newConfig = newConfig.properties || config
+                    newConfig = newConfig.properties || config.properties
                 }
                 if(!this.isObjectCompatibleWithConfig(currentObj[currentKey], newConfig)){
                     return false
                 }
             }
-            else if (!config.some(obj => obj.name.includes("."+key))){
+            else if (!config.properties.some(obj => obj.name.includes("."+key))){
                 return false
             }
         }
