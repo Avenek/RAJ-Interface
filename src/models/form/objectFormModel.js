@@ -435,10 +435,8 @@ class ObjectFormModel{
         this.updateValueInJson(targetProperty, valueInGoodType)
         const params = this.jsonData.getParams("extraOption")
         if((targetProperty.inputType === "string" || targetProperty.inputType === "number") && targetProperty.extraOptions && this.extraOptionIdBox && params && this.configUtils.getKeyNameFromPath(params.path).startsWith(this.configUtils.getKeyNameFromPath(targetProperty.name))){
-            this.extraOptionIdBox.clearBox(false)
-            this.extraOptionIdBox.objectForm.clearForm()
+            this.objectIdBox.clearExtraOption()
             targetProperty.extraOptions.forEach(option => option.isUsed = false)
-            this.jsonData.deleteParams("extraOption")
         }
         this.jsonDataBox.jsonDataChanged()
         this.objectIdBox.updateNameObjectId(this.container)
@@ -446,6 +444,9 @@ class ObjectFormModel{
 
     unfocusInput = (id) => {
         const targetProperty = this.configUtils.findObjectByProperty(this.objectFormList, id, "idInput")
+        if(targetProperty === undefined || targetProperty === null){
+            return
+        }
         const validationProperty = this.validationItems.find(property => property.validation.some(validate => validate.value === targetProperty.name))
         this.propertyValidation(targetProperty)
         if(validationProperty){
@@ -525,10 +526,6 @@ class ObjectFormModel{
     }
 
     updateValueInJson = (targetProperty, value) => {
-        if(this.container == "module" && this.extraOptionIdBox){
-            this.extraOptionIdBox.clearBox(false)
-            this.extraOptionIdBox.objectForm.clearForm()
-        }
         if(value !== targetProperty.defaultSraj){
             this.jsonData.setObjectKeyByPath(this.container, targetProperty.name, value)
         }

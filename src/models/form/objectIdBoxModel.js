@@ -24,7 +24,7 @@ class ObjectIdBoxModel{
             }
             const bindData = this.jsonData.moduleConfig.modules.find(module => module.name === params.fileName && module.type === params.type).bindId
             if(Array.isArray(bindData)){
-                ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData[0]) + "," + this.jsonData.getValueFromWorkingObject(item, bindData[1]));
+                ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData[0]) + "," + this.jsonData.getValueFromObject(item, bindData[1]));
             }
             else{
                 ids = params.workingList.map(item => this.jsonData.getValueFromObject(item, bindData));
@@ -247,6 +247,12 @@ class ObjectIdBoxModel{
                 this.extraOptionObjectForm.clearForm()
             }
             this.jsonData.deleteParams()
+            this.extraOptionIdBox.createObjectIdList()
+            this.extraOptionIdBox.objectIdListChanged(this.extraOptionIdBox.objectIdList,  this.extraOptionIdBox.hasList)
+            this.extraOptionObjectForm.fetchConfigAndCreateObjectFormList()
+            this.createObjectIdList()
+            this.objectIdListChanged(this.objectIdList,  this.hasList)
+            this.objectForm.fetchConfigAndCreateObjectFormList()
         }
     }
 }

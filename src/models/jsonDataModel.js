@@ -107,6 +107,9 @@ class JsonDataModel {
             return this.objectsParams[this.objectsParams.length - 2];
         }
       }
+      else if(container === "parent"){
+        return this.getParentParams("module")
+      }
       else{
         if(this.objectsParams.length === 1){
           return null
@@ -154,14 +157,14 @@ class JsonDataModel {
 
     addObject = (container, name = "") => {
       const params = this.getParams(container)
-      if(container === "module"){
+      if(container === "module" && this.objectsParams.length < 3){
         if(params.hasList){
           if(params.workingList === null){
             this.workingData[params.module]={}
             this.workingData[params.module].list=[]
             params.workingList = this.workingData[params.module].list
           }
-          params.workingObject = new moduleDict[params.module](name)
+          params.workingObject = new moduleDict[params.fileName](name)
           params.workingList.push(params.workingObject)
         }
         else{
@@ -169,6 +172,16 @@ class JsonDataModel {
           params.workingObject = new moduleDict[params.module](name)
           this.workingData[params.module] = params.workingObject
         }
+      }
+      else if(container === "module"){
+        if(params.module === "getCharacterData"){
+          name = this.getPathToKey(params.path)
+        }
+        params.workingObject = new moduleDict[params.fileName](name)
+        let path = params.path
+        this.setObjectKeyByPath("parent", path, params.workingObject)
+        const listObject = this.getValueFromWorkingObject("parent", path)
+        params.workingList = Array.isArray(listObject) ? listObject : null 
       }
       else{
         params.workingList = null
@@ -179,8 +192,7 @@ class JsonDataModel {
         let path = params.path
         this.setObjectKeyByPath("module", path, params.workingObject)
         const listObject = this.getValueFromWorkingObject("module", path)
-        params.workingList = Array.isArray(listObject) ? listObject : null
-          
+        params.workingList = Array.isArray(listObject) ? listObject : null 
       }
       params.objectId = params.hasList ? params.workingList.length - 1 : 0
     }
