@@ -11,6 +11,7 @@
                     "idInput": "color",
                     "tool-tip": "",
                     "inputType": "subSubkey",
+                    "require": [{"name": "clear", "value": [false]}],
                     "properties": [
                         {
                             "name": "color.r",
@@ -60,7 +61,7 @@
                             "max":0.5,
                             "inputType": "number",
                             "varType": ["float", "int"],
-                            "defaultInput":1,
+                            "defaultInput":0.5,
                             "extraOptions": [{"name":"get random"}],
                             "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
@@ -81,7 +82,8 @@
                     "tool-tip": "Noc może posiadać włączony cykl dobowy - w dzień będzie jasno, a w noc ciemno.",
                     "inputType": "empty",
                     "varType": ["empty"],
-                    "extraOptions": [{"name":"day night cycle"}]
+                    "extraOptions": [{"name":"day night cycle"}],
+                    "require": [{"name": "clear", "value": [false]}]
                 },
                 {
                     "name": "json-list",
@@ -93,8 +95,10 @@
                     "specialAction": "night",
                     "varType": ["json"],
                     "defaultInput":"",
+                    "defaultSraj":"",
                     "inputPlaceholder": "Wkleić jsona z obiektamy mapy.",
-                    "validation":[{"forType": "string", "name": "contains", "value":"{"}]
+                    "validation":[{"forType": "string", "name": "contains", "value":"{"}],
+                    "require": [{"name": "clear", "value": [false]}]
                 },
                 {
                     "name": "list",
@@ -103,7 +107,17 @@
                     "varType": ["list"],
                     "defaultInput": [],
                     "tool-tip": "Definiujemy tutaj punkty świecące",
-                    "extraOptions": [{"name":"light points"}]
+                    "extraOptions": [{"name":"light points"}],
+                    "require": [{"name": "clear", "value": [false]}]
+                },
+                {
+                    "name": "clear",
+                    "idInput": "clear",
+                    "tool-tip": "Flaga, która ustawiona na true czyści usuwa noc.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
                 }
             ]
         }

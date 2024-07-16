@@ -241,7 +241,7 @@ class ObjectFormModel{
 
     isObjectCompatibleWithConfig = (object, config) => {
         const propertiesConfig = config.properties
-        if(Array.isArray(object) && object.length > 0 && (typeof object[0] === "object" && config.varType.includes("list") || typeof object[0] !== "object" && !config.varType.includes("list"))){
+        if(Array.isArray(object) && (object.length == 0 || object.length > 0 && (typeof object[0] === "object" && config.varType.includes("list") || typeof object[0] !== "object" && !config.varType.includes("list")))){
             return true;
         }
         if(object == null || object == undefined || propertiesConfig == null || propertiesConfig== undefined)
