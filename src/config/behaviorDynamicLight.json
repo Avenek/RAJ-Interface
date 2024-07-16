@@ -135,6 +135,7 @@
                         },
                         {
                             "name": "d.behavior",
+                            "idInput": "d.ehavior",
                             "tool-tip": "",
                             "inputType": "subkey",
                             "properties": [

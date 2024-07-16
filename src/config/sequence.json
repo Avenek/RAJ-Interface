@@ -28,6 +28,7 @@
                 },
                 {
                     "name": "behavior",
+                    "idInput": "behavior",
                     "tool-tip": "",
                     "inputType": "subkey",
                     "properties": [

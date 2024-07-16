@@ -132,6 +132,7 @@
                 },
                 {
                     "name": "behavior",
+                    "idInput": "behavior",
                     "tool-tip": "",
                     "inputType": "subkey",
                     "properties": [
@@ -161,6 +162,7 @@
                 },
                 {
                     "name": "callInstantBehavior",
+                    "idInput": "callInstantBehavior",
                     "tool-tip": "",
                     "inputType": "subkey",
                     "properties": [
