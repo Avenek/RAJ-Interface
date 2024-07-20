@@ -33,6 +33,13 @@
       "type": "out"
     },
     {
+      "name": "behaviorDynamicLightMaster",
+      "hasList": false,
+      "bindId": "module",
+      "path": "fromId",
+      "type": "out"
+    },
+    {
       "name": "camera",
       "hasList": false,
       "bindId": "module",

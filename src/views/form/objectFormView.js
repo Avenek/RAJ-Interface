@@ -168,7 +168,7 @@ class ObjectFormView extends View{
         case "light points":
           return "#AAAB11"
         case "params object outfit":
-          return "#B54CD1"
+          return "#fcba03"
         default:
           return "#FFF01F"
       }

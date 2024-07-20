@@ -38,6 +38,12 @@ let moduleDict = {
     }
   },
 
+  behaviorDynamicLightMaster : class BehaviorDynamicLightMaster{
+    constructor(){
+      this.kind = "THIS_NPC_INSTANCE"
+    }
+  },
+
   camera : class Camera{
     constructor(){
       this.duration = 0

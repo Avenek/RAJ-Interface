@@ -27,6 +27,15 @@
                     "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
                 },
                 {
+                    "name": "master",
+                    "idInput": "master",
+                    "inputType": "empty",
+                    "varType": ["master"],
+                    "tool-tip": "Opcjonalnie możemy zdefiniować mastera. Oznacza to, że w momencie zabicia naszego mastera, światło również zniknie. Gdy on się odrodzi, to światło również.",
+                    "extraOptions": [{"name":"master"}],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                },
+                {
                     "name": "d",
                     "idInput": "d",
                     "tool-tip": "",
