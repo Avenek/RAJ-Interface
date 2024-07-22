@@ -175,7 +175,7 @@ class JsonDataModel {
       }
       else if(container === "module"){
         if(params.module === "getCharacterData"){
-          name = this.getPathToKey(params.path)
+          name = this.getPenultimateKeyFromPath(params.path)
         }
         params.workingObject = new moduleDict[params.fileName](name)
         let path = params.path
@@ -186,7 +186,7 @@ class JsonDataModel {
       else{
         params.workingList = null
         if(params.module === "getCharacterData"){
-          name = this.getPathToKey(params.path)
+          name = this.getPenultimateKeyFromPath(params.path)
         }
         params.workingObject = new moduleDict[params.fileName](name)
         let path = params.path
@@ -272,6 +272,11 @@ class JsonDataModel {
       const dotIndex = key.lastIndexOf('.');
       const path = dotIndex !== -1 ? key.substring(0, dotIndex) : key;
       return path
+    }
+
+    getPenultimateKeyFromPath = (key) => {
+      const parts = key.split('.');
+      return parts.length > 1 ? parts[parts.length - 2] : parts[0];
     }
 
     setObjectKeyByPath = (container, path, value) => {
