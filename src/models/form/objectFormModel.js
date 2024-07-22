@@ -246,7 +246,7 @@ class ObjectFormModel{
         }
         if(object == null || object == undefined || propertiesConfig == null || propertiesConfig== undefined)
         {
-            if(propertiesConfig == undefined && Object.keys(object)[0] == "r" && Object.keys(object)[1] == "g"){
+            if(propertiesConfig == undefined && (Object.keys(object)[0] == "r" && Object.keys(object)[1] == "g") || Object.keys(object)[0] == "list"){
                 return true
             } 
             return false
