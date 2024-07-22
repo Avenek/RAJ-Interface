@@ -29,6 +29,18 @@
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                 },
                 {
+                    "name": "repeat",
+                    "idInput": "repeat",
+                    "tool-tip": "Ilość powtórzeń zachowania, jeżeli damy wartość true to nieskończoność.",
+                    "inputType": "string",
+                    "min":1,
+                    "max":100,
+                    "varType": ["int", "boolean"],
+                    "defaultInput": 1,
+                    "defaultSraj": 1,
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                },
+                {
                     "name": "x",
                     "idInput": "move.x",
                     "tool-tip": "Wartość kordu x, na który ma dojść fakeNpc.",
