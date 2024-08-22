@@ -142,7 +142,7 @@
                             "varType": ["light"],
                             "tool-tip": "Opcjonalnie możemy zdefiniować światło, które pojawi się wewnątrz wyciętej dziury.",
                             "extraOptions": [{"name":"light"}],
-                            "require": [{"name": "action", "value": ["CREATE"]}]
+                            "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                         },
                         {
                             "name": "d.behavior",
