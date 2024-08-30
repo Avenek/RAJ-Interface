@@ -27,6 +27,16 @@
                     "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
                 },
                 {
+                    "name": "configurationType",
+                    "idInput": "configurationType",
+                    "tool-tip": "Możliwość podpięcia obiektu do danej konfiguracja. Jeżeli będzie ona wyłączona u gracza w konfiguracji, wtedy obiekt ten nie będzie się wyświetlał",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"   "}, {"name":"NIGHT"}, {"name":"WEATHER"}, {"name":"SOUND"}],
+                    "defaultInput": "   ",
+                    "defaultSraj": "   "
+                },
+                {
                     "name": "kind",
                     "idInput": "kind",
                     "tool-tip": "Rodzaj obiektu. SPRITE - głównie chmurki zapisane w formacie .png, GIF - obiekty zapisane w formacie .gif, FAKE_NPC - obiekt może chodzić pod ukos i nie zwraca uwagi na kolizje. Grafika postaci w formacie .gif.",
