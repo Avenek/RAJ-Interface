@@ -283,7 +283,7 @@
     {
       "name": "moveNoise",
       "hasList": true,
-      "bindId": ["x", "y"],
+      "bindId": ["offsetX", "offsetY"],
       "path": "fromId",
       "type": "out"
     },

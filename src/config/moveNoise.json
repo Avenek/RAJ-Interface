@@ -7,48 +7,41 @@
             "inputType": "key",
             "properties": [
                 {
-                    "name": "x",
-                    "idInput": "x",
-                    "tool-tip": "Wartość kordu x, na który ma przelecieć obiekt.",
-                    "min":-100,
-                    "max":100,
+                    "name": "offsetX",
+                    "idInput": "offsetX",
+                    "tool-tip": "Wartość kordu x, gdzie ma się przesunąć obiekt.",
+                    "min":-1000,
+                    "max":1000,
                     "step":1,
                     "inputType": "number",
-                    "varType": ["int", "float"],
+                    "varType": ["int"],
                     "defaultInput": 0,
-                    "extraOptions": [{"name":"get character data"}],
-                    "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "name", "value": ["MOVE_TO_CORDS"]}]
+                    "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
-                    "name": "y",
-                    "idInput": "y",
-                    "tool-tip": "Wartość kordu y, na który ma przelecieć obiekt.",
-                    "min":-100,
-                    "max":100,
+                    "name": "offsetY",
+                    "idInput": "offsetY",
+                    "tool-tip": "Wartość kordu y, gdzie ma się przesunąć obiekt.",
+                    "min":-1000,
+                    "max":1000,
                     "step":1,
                     "inputType": "number",
-                    "varType": ["int", "float"],
+                    "varType": ["int"],
                     "defaultInput": 0,
-                    "extraOptions": [{"name":"get character data"}],
-                    "validation":[{"forType": "int", "name": "minMax"}],
-                    "require": [{"name": "name", "value": ["MOVE_TO_CORDS"]}]
+                    "validation":[{"forType": "int", "name": "minMax"}]
                 },
                 {
-                    "name": "speed",
-                    "idInput": "speed",
-                    "tool-tip": "Szybkość poruszania się obiektu.",
+                    "name": "duration",
+                    "idInput": "duration",
+                    "tool-tip": "Czas, w jakim ma się przemieścić obiekt w dane miejsce.",
                     "min":0,
                     "max":50,
                     "step":0.1,
                     "inputType": "number",
-                    "varType": ["int", "float", "string"],
-                    "canBeEmpty": true,
-                    "defaultInput": "",
-                    "defaultSraj": "",
+                    "varType": ["int", "float"],
+                    "defaultInput": 1,
                     "extraOptions": [{"name":"get random"}],
-                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
-                    "require": [{"name": "name", "value": ["MOVE_TO_CORDS"]}]
+                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "float", "name": "minMax"}]
                 }
             ]
         }

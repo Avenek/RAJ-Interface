@@ -360,8 +360,9 @@ let moduleDict = {
 
   moveNoise : class MoveNoise{
     constructor(){
-      this.x = 0
-      this.y = 0
+      this.offsetX = 0,
+      this.offsetY = 0,
+      this.duration = 1
     }
   },
 
