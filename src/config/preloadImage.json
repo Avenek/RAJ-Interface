@@ -12,9 +12,9 @@
                     "tool-tip": "Ścieżka pliku, który należy wcześniej wczytać.",
                     "inputType": "file",
                     "acceptFiles": [".png", ".jpg", ".gif", ".mp3"],
-                    "directory": "grafikiRaj/",
+                    "directory": "",
                     "varType": ["string"],
-                    "defaultInput": "path.png"
+                    "defaultInput": "folder/name.png"
                 },
                 {
                     "name": "type",
