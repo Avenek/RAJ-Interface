@@ -14,7 +14,7 @@
                     "acceptFiles": [".png", ".jpg", ".gif", ".mp3"],
                     "directory": "grafikiRaj/",
                     "varType": ["string"],
-                    "defaultInput": ""
+                    "defaultInput": "path.png"
                 },
                 {
                     "name": "type",

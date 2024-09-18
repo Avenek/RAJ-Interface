@@ -403,7 +403,7 @@ let moduleDict = {
 
   preloadImage : class PreloadImage{
     constructor(){
-      this.url = ""
+      this.url = "path.png"
     }
   },
 
