@@ -81,7 +81,15 @@ class AppController {
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
       localStorage.setItem("lastClear", "4")
     }
-    
+    if(lastClear<5){
+      const preloadImage = {
+        "name": "PreloadImage",
+        "tipInfo": "Umożliwia załadowanie grafiki wcześniej, aby w momencie wyzwolenia sraja z tą grafiką, klient nie musiał jej dopiero pobierać i załadowywać."
+      }
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(preloadImage)))
+      localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+      localStorage.setItem("lastClear", "5")
+    }
   }
 
 const app = new AppController(new AppView(), new AppModel())

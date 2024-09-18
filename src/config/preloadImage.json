@@ -1,0 +1,49 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "url",
+                    "idInput": "url",
+                    "tool-tip": "Ścieżka pliku, który należy wcześniej wczytać.",
+                    "inputType": "file",
+                    "acceptFiles": [".png", ".jpg", ".gif", ".mp3"],
+                    "directory": "grafikiRaj/",
+                    "varType": ["string"],
+                    "defaultInput": ""
+                },
+                {
+                    "name": "type",
+                    "idInput": "type",
+                    "tool-tip": "Folder nadrzędny, z którego ma zostać wczytana grafika, do wyboru odpowiednio RAJ_PATH - grafikiRaj, NPC_PATH - npc, OTHERS_PATH - other.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"RAJ_PATH"}, {"name":"NPC_PATH"}, {"name":"OTHERS_PATH"}],
+                    "defaultInput": "RAJ_PATH",
+                    "defaultSraj": "RAJ_PATH"
+                },
+                {
+                    "name": "gif",
+                    "idInput": "gif",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "gif.fast",
+                            "idInput": "gif.fast",
+                            "tool-tip": "Flaga, która ustawiona na true sprawia, że ładowanie pozostałych obiektów jest wstrzymywane, by jak najszybciej załadować ten obiekt.",
+                            "inputType": "boolean",
+                            "varType": ["boolean"],
+                            "defaultInput": false,
+                            "defaultSraj": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

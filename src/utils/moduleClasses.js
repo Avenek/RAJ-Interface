@@ -401,6 +401,12 @@ let moduleDict = {
     }
   },
 
+  preloadImage : class PreloadImage{
+    constructor(){
+      this.url = ""
+    }
+  },
+
   programmer : class Programmer{
     constructor(id){
       this.action = "CREATE"

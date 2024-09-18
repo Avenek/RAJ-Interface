@@ -43,7 +43,7 @@ class ObjectFormView extends View{
               const isError = property.errorMessage && property.errorMessage !== "" ? " error-input" : ""
               const isExpanded = property.isExpanded ? " expanded" : ""
               const keyName = property.name.substring(property.name.lastIndexOf(".")+1)
-              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><label class="file-upload"><input type="file" id="${property.idInput}" accept="${property.acceptFiles}" name="${property.name}"/>Wybierz plik</label>`;
+              html += `<div class="key-value${isCollapsed}${isHide}"><div class="key-name">${keyName}</div><input type="text" class="key-value-input${isExpanded}${isError}" id="${property.idInput}" value="${property.value}" name="${property.name}" placeholder="${placeholder}"><label class="file-upload"><input type="file" id="${property.idInput}" accept="${property.acceptFiles.join(", ")}" name="${property.name}"/>Wybierz plik</label>`;
             }
             else if(property.inputType === "color"){
               let isCollapsed = ""

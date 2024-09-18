@@ -340,7 +340,7 @@
                     "idInput": "url",
                     "tool-tip": "Ścieżka do grafiki do grafiki obiektu.",
                     "inputType": "file",
-                    "acceptFiles": ".gif",
+                    "acceptFiles": [".gif"],
                     "directory": "object/",
                     "varType": ["string"],
                     "defaultInput": "object/.gif",

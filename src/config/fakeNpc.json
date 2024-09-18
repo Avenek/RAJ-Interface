@@ -81,7 +81,7 @@
                     "idInput": "img",
                     "tool-tip": "Ścieżka do grafiki dla fakeNPC. Grafiki są pobierane z katalogu /postacie.",
                     "inputType": "file",
-                    "acceptFiles": ".gif",
+                    "acceptFiles": [".gif"],
                     "directory": "npc/",
                     "varType": ["string"],
                     "defaultInput": "npc/test.gif",

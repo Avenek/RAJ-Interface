@@ -321,6 +321,12 @@
       "type": "out"
     },
     {
+      "name": "preloadImage",
+      "hasList": true,
+      "bindId": "url",
+      "type": "out"
+    },
+    {
       "name": "programmer",
       "hasList": true,
       "bindId": "id",
