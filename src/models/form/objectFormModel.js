@@ -229,9 +229,9 @@ class ObjectFormModel{
         const params = this.jsonData.getParams(this.container)
         for(let i = 0 ; i < property.require.length ; i++) {
           const requireItem = property.require[i]
-          const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, requireItem.name)
-          const requireObject = this.configUtils.findObjectByProperty(params.config.properties, requireItem.name, "name")
-          if((valueInObject && !requireItem.value.includes(valueInObject)) || (requireObject && requireObject.defaultSraj && !requireItem.value.includes(requireObject.defaultSraj)) 
+          const requireObject = this.configUtils.findObjectByProperty(params.config.properties, requireItem.name, "name") 
+          const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, requireItem.name) || requireObject.defaultSraj
+          if((valueInObject != null && valueInObject != undefined && !requireItem.value.includes(valueInObject)) || (requireObject && requireObject.defaultSraj && !requireItem.value.includes(requireObject.defaultSraj)) 
             || (valueInObject === null && requireObject && requireObject.defaultSraj === undefined) ){
               return false
           }

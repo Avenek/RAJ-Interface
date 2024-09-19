@@ -29,19 +29,21 @@
                 {
                     "name": "gif",
                     "idInput": "gif",
-                    "tool-tip": "",
-                    "inputType": "subkey",
-                    "properties": [
-                        {
-                            "name": "gif.fast",
-                            "idInput": "gif.fast",
-                            "tool-tip": "Flaga, która ustawiona na true sprawia, że ładowanie pozostałych obiektów jest wstrzymywane, by jak najszybciej załadować ten obiekt.",
-                            "inputType": "boolean",
-                            "varType": ["boolean"],
-                            "defaultInput": false,
-                            "defaultSraj": false
-                        }
-                    ]
+                    "tool-tip": "Flaga, która definiuje, czy załączony plik jest gifem.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
+                },
+                {
+                    "name": "fast",
+                    "idInput": "fast",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że ładowanie pozostałych obiektów jest wstrzymywane, by jak najszybciej załadować ten obiekt.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "gif", "value": [true]}]
                 }
             ]
         }
