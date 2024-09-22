@@ -34,7 +34,8 @@
                     "varType": ["string"],
                     "options": [{"name":"   "}, {"name":"NIGHT"}, {"name":"WEATHER"}, {"name":"SOUND"}],
                     "defaultInput": "   ",
-                    "defaultSraj": "   "
+                    "defaultSraj": "   ",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "kind",
@@ -125,6 +126,16 @@
                     "defaultSraj": 0,
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "alwaysDraw",
+                    "idInput": "alwaysDraw",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że obiekt zawsze będzie rysowany, nawet jak pozycja początkowo, nie jest w obrębie canvasa (widoczności ekranu).",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "withCreateInstantFadeIn",

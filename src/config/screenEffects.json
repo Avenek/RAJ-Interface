@@ -34,7 +34,8 @@
                     "varType": ["string"],
                     "options": [{"name":"   "}, {"name":"NIGHT"}, {"name":"WEATHER"}, {"name":"SOUND"}],
                     "defaultInput": "   ",
-                    "defaultSraj": "   "
+                    "defaultSraj": "   ",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
                     "name": "order",
