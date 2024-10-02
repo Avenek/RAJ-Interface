@@ -19,7 +19,7 @@ class DataValidation{
                 let valuesArray = this.convertValueToArray(value)
                 valuesArray.forEach(value => {
                     let valueType = this.checkValueType(value)
-                    if(this.property.varType.includes(valueType) && valueType !== "object" && this.property.validation){
+                    if((this.property.varType.includes("string") || this.property.varType.includes(valueType)) && valueType !== "object" && this.property.validation){
                         for(const valid of this.property.validation){
                             validSummary = this.checkCondition(valid, this.property, value)
                             if(!validSummary.isValid){

@@ -233,6 +233,11 @@ class ObjectFormView extends View{
                 requirementsInfo += '<br>'+ message
               }
               break;
+              case "contains":
+              message = `Wartość tego pola powinna zawierać: ${valid.value}`
+              if(!requirementsInfo.includes(message)){
+                requirementsInfo += '<br>'+ message
+              }
             default:
               break;
           }
