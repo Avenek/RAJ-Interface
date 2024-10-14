@@ -69,7 +69,7 @@
                             "tool-tip": "Rodzaj obiektu. FLOAT_OBJECT - obiekt dostaje order 200 czyli przysłania wszystkie obiekty typu MAP_OBJECT, MAP_OBJECT - obiekt zachowuje się jak obiekt mapy, czyli jego order jest ustawiany względem położenia y. Czyli jeżeli postać na mapie będzie niżej (będzie miała większe y) niż floatObject, to przysłoni floatObject.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"FLOAT_OBJECT"}, {"name":"MAP_OBJECT"}],
+                            "options": [{"name":"FLOAT_OBJECT"}, {"name":"MAP_OBJECT"}, {"name":"GROUND_OBJECT"}],
                             "defaultInput": "FLOAT_OBJECT",
                             "defaultSraj": "FLOAT_OBJECT"
                         },
