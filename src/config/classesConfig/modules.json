@@ -287,6 +287,12 @@
       "type": "out"
     },
     {
+      "name": "massObjectHide",
+      "hasList": true,
+      "bindId": "name",
+      "type": "out"
+    },
+    {
       "name": "moveNoise",
       "hasList": true,
       "bindId": ["offsetX", "offsetY"],

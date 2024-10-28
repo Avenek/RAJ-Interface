@@ -1,0 +1,31 @@
+{
+    "properties": [
+        {
+            "name": "massObjectHide",
+            "idInput": "massObjectHide",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Możemy albo schować wszystkie obiekty, albo to schowanie usunąć.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "name",
+                    "idInput": "name",
+                    "tool-tip": "Rodzaj obiektów, których ma dotyczyć akcja.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"NPC"}, {"name":"OTHER"}],
+                    "defaultInput": "NPC"
+                }
+            ]
+        }
+    ]
+}

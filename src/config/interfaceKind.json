@@ -7,7 +7,7 @@
             "inputType": "key",
             "properties": [
                 {
-                    "name": "kins",
+                    "name": "kind",
                     "idInput": "kind",
                     "tool-tip": "Rodzaj interfejsu, na który zostanie zmieniony on graczowi.",
                     "inputType": "options",

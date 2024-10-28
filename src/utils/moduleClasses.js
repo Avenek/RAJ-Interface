@@ -365,6 +365,14 @@ let moduleDict = {
     }
   },
 
+  massObjectHide : class MassObjectHide {
+    constructor()
+    {
+      this.action = "CREATE",
+      this.name = "NPC"
+    }
+  },
+
   moveNoise : class MoveNoise{
     constructor(){
       this.offsetX = 0,

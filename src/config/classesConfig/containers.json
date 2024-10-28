@@ -38,6 +38,10 @@
         {
           "name": "CharacterImageChanger",
           "tipInfo": "Umożliwia zmianę grafiki npc na inną lub wykonanie danej animacji w momencie jego respawnu, śmierci bądź też bycia martwym."
+        },
+        {
+          "name": "MassObjectHide",
+          "tipInfo": "Umożliwia ukrycie wszystkich obiektów danego typu na mapie."
         }
       ]
     },
