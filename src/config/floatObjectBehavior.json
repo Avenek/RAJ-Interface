@@ -305,11 +305,11 @@
                 },
                 {
                     "name": "attachMoveNoise",
-                    "idInput": "idle.attachMoveNoise",
+                    "idInput": "behavior.attachMoveNoise",
                     "tool-tip": "",
                     "varType": ["attachMoveNoise"],
                     "inputType": "subkey",
-                    "require": [{"name": "name", "value": ["IDLE"]}],
+                    "require": [{"name": "name", "value": ["IDLE", "MOVE_TO_CORDS", "IDLE_GIF_ANIMATION", "MOVE_FROM_VECTORS", "FADE_IN", "FADE_OUT"]}],
                     "properties":[
                         {
                             "name": "attachMoveNoise.repeat",
@@ -364,6 +364,173 @@
                     "inputType": "empty",
                     "extraOptions": [{"name":"color"}],
                     "require": [{"name": "name", "value": ["CHANGE_IMG"]}, {"name": "kind", "value": ["SPRITE", "GIF"]}]
+                },
+                {
+                    "name": "attachRotation",
+                    "idInput": "behavior.attachRotation",
+                    "tool-tip": "",                            
+                    "varType": ["attachRotation"],
+                    "inputType": "subkey",
+                    "require": [{"name": "name", "value": ["IDLE", "MOVE_TO_CORDS", "IDLE_GIF_ANIMATION", "MOVE_FROM_VECTORS", "FADE_IN", "FADE_OUT"]}],
+                    "properties":[
+                        {
+                            "name": "attachRotation.speed",
+                            "idInput": "attachRotation.speed",
+                            "tool-tip": "Szybkość rotacji obiektu.",
+                            "min":0.1,
+                            "max":10,
+                            "step":0.1,
+                            "inputType": "number",
+                            "varType": ["int", "float", "string"],
+                            "canBeEmpty": true,
+                            "defaultInput": 0.5,
+                            "defaultSraj": 0.5,
+                            "extraOptions": [{"name":"get random"}],
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "float", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
+                        },
+                        {
+                            "name": "attachRotation.setAngle",
+                            "idInput": "attachRotation.setAngle",
+                            "tool-tip": "Ustawia kąt obrócenia obiektu na daną wartość w stopniach.",
+                            "min":-360,
+                            "max":360,
+                            "step":10,
+                            "inputType": "number",
+                            "varType": ["int", "string"],
+                            "defaultInput": 0,
+                            "defaultSraj": 0,
+                            "extraOptions": [{"name":"get random"}],
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
+                            "require": [{"name": "addAngle", "value": [0]}]
+                        },
+                        {
+                            "name": "attachRotation.addAngle",
+                            "idInput": "attachRotation.addAngle",
+                            "tool-tip": "Kąt w stopniach, o który należy obrócić obiekt zgodnie ze wskazówkami zegara. Można podać zarówno liczbę dodatnią (obrót w prawo) lub liczbę ujemną (obrót w lewo). Będzie dodawało podaną wartość do aktualnego obrócenia.",
+                            "min":-360,
+                            "max":360,
+                            "step":10,
+                            "inputType": "number",
+                            "varType": ["int", "string"],
+                            "defaultInput": 0,
+                            "defaultSraj": 0,
+                            "extraOptions": [{"name":"get random"}],
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}],
+                            "require": [{"name": "setAngle", "value": [0]}]
+                        },
+                        {
+                            "name": "attachRotation.rotationOffset",
+                            "idInput": "attachRotation.rotationOffset",
+                            "tool-tip": "",
+                            "inputType": "subkey",
+                            "varType": [],
+                            "isCollapsed": "collapsed",
+                            "properties": [
+                                {
+                                    "name": "attachRotation.rotationOffset.x",
+                                    "idInput": "attachRotation.rotationOffset.x",
+                                    "tool-tip": "Zmiana miejsca środka ciężkości w poziomie.",
+                                    "inputType": "string",
+                                    "varType": ["int"],
+                                    "isCollapsed": "collapsed-key",
+                                    "canBeEmpty": true,
+                                    "min":1,
+                                    "max":300,
+                                    "defaultInput": "",
+                                    "defaultSraj": "",
+                                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
+                                },
+                                {
+                                    "name": "attachRotation.rotationOffset.y",
+                                    "idInput": "attachRotation.rotationOffset.y",
+                                    "tool-tip": "Zmiana miejsca środka ciężkości w pionie",
+                                    "inputType": "string",
+                                    "varType": ["int"],
+                                    "isCollapsed": "collapsed-key",
+                                    "canBeEmpty": true,
+                                    "min":1,
+                                    "max":300,
+                                    "defaultInput": "",
+                                    "defaultSraj": "",
+                                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "attachScale",
+                    "idInput": "behavior.attachScale",
+                    "tool-tip": "",                            
+                    "varType": ["attachScale"],
+                    "inputType": "subkey",
+                    "require": [{"name": "name", "value": ["IDLE", "MOVE_TO_CORDS", "IDLE_GIF_ANIMATION", "MOVE_FROM_VECTORS", "FADE_IN", "FADE_OUT"]}],
+                    "properties":[
+                        {
+                            "name": "attachScale.scale",
+                            "idInput": "attachScale.scale",
+                            "tool-tip": "Mnożnik skalowania obiektu",
+                            "min":0.01,
+                            "max":50,
+                            "step":0.1,
+                            "inputType": "number",
+                            "varType": ["int", "float"],
+                            "defaultInput": 1,
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "float", "name": "minMax"}]
+                        },
+                        {
+                            "name": "attachScale.duration",
+                            "idInput": "attachScale.duration",
+                            "tool-tip": "Czas trwania skalowania.",
+                            "min":0,
+                            "max":360,
+                            "step":1,
+                            "inputType": "number",
+                            "varType": ["int", "float"],
+                            "defaultInput": 5,
+                            "defaultSraj": 5,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "attachScale.scaleOffset",
+                            "idInput": "attachScale.scaleOffset",
+                            "tool-tip": "",
+                            "inputType": "subkey",
+                            "varType": [],
+                            "isCollapsed": "collapsed",
+                            "properties": [
+                                {
+                                    "name": "attachRotation.scaleOffset.x",
+                                    "idInput": "attachRotation.scaleOffset.x",
+                                    "tool-tip": "Zmiana miejsca środka ciężkości w poziomie.",
+                                    "inputType": "string",
+                                    "varType": ["int"],
+                                    "isCollapsed": "collapsed-key",
+                                    "canBeEmpty": true,
+                                    "min":1,
+                                    "max":300,
+                                    "defaultInput": "",
+                                    "defaultSraj": "",
+                                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
+                                },
+                                {
+                                    "name": "attachRotation.scaleOffset.y",
+                                    "idInput": "attachRotation.scaleOffset.y",
+                                    "tool-tip": "Zmiana miejsca środka ciężkości w pionie",
+                                    "inputType": "string",
+                                    "varType": ["int"],
+                                    "isCollapsed": "collapsed-key",
+                                    "canBeEmpty": true,
+                                    "min":1,
+                                    "max":300,
+                                    "defaultInput": "",
+                                    "defaultSraj": "",
+                                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
