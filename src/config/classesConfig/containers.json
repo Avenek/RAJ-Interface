@@ -149,6 +149,10 @@
         {
           "name": "PreloadImage",
           "tipInfo": "Umożliwia załadowanie grafiki wcześniej, aby w momencie wyzwolenia sraja z tą grafiką, klient nie musiał jej dopiero pobierać i załadowywać."
+        },
+        {
+          "name": "InterfaceKind",
+          "tipInfo": "możliwia zmianę graczowi Starego Interfejsu na Nowy Interfejs. Działa wyłącznie na SI!"
         }
       ]
     }

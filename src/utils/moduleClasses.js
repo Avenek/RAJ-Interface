@@ -307,6 +307,13 @@ let moduleDict = {
     }
   },
 
+  interfaceKind : class InterfaceKind {
+    constructor()
+    {
+      this.kind = "NI"
+    }
+  },
+
   interfaceSkin : class InterfaceSkin {
     constructor()
     {

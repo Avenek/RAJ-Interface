@@ -236,6 +236,12 @@
       "type": "out"
     },
     {
+      "name": "interfaceKind",
+      "hasList": false,
+      "bindId": "module",
+      "type": "out"
+    },
+    {
       "name": "interfaceSkin",
       "hasList": false,
       "bindId": "module",

@@ -90,6 +90,15 @@ class AppController {
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
       localStorage.setItem("lastClear", "5")
     }
+    if(lastClear<6){
+      const interfaceKind =  {
+        "name": "InterfaceKind",
+        "tipInfo": "możliwia zmianę graczowi Starego Interfejsu na Nowy Interfejs. Działa wyłącznie na SI!"
+      }
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(interfaceKind )))
+      localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+      localStorage.setItem("lastClear", "6")
+    }
   }
 
 const app = new AppController(new AppView(), new AppModel())

@@ -1,0 +1,21 @@
+{
+    "properties": [
+        {
+            "name": "interfaceKind",
+            "idInput": "interfaceKind",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "kins",
+                    "idInput": "kind",
+                    "tool-tip": "Rodzaj interfejsu, na który zostanie zmieniony on graczowi.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"NI"}],
+                    "defaultInput": "NI"
+                }
+            ]
+        }
+    ]
+}
