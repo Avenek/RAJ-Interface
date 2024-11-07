@@ -1,0 +1,189 @@
+{
+    "properties": [
+        {
+            "name": "tutorial",
+            "idInput": "tutorial",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Id obiektu.",
+                    "inputType": "string",
+                    "varType": ["int"],
+                    "defaultInput": -1,
+                    "extraOptions": [{"name":"case"}],
+                    "validation":[{"forType": "int", "name": "unique"}, {"forType": "int", "name": "lessThan", "value": 0}]
+                },
+                {
+                    "name": "textPc",
+                    "idInput": "textPc",
+                    "tool-tip": "Treść, która ma się wyświetlić w kroku tutorialu dla wersji PC. Nie wolno używać znaków z backslashem, np. \n",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": ""
+                },
+                {
+                    "name": "textMobile",
+                    "idInput": "textMobile",
+                    "tool-tip": "Treść, która ma się wyświetlić w kroku tutorialu dla wersji mobile. Nie wolno używać znaków z backslashem, np. \n",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": ""
+                },
+                {
+                    "name": "headerPc",
+                    "idInput": "headerPc",
+                    "tool-tip": "Nagłówek kroku tutorialu, który ma się wyświetlić dla wersji PC. Nie wolno używać znaków z backslashem, np. \n",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": ""
+                },
+                {
+                    "name": "headerMobile",
+                    "idInput": "headerMobile",
+                    "tool-tip": "Nagłówek kroku tutorialu, który ma się wyświetlić dla wersji mobile. Nie wolno używać znaków z backslashem, np. \n",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": ""
+                },
+                {
+                    "name": "graphic",
+                    "idInput": "graphic",
+                    "tool-tip": "Url do grafiki tutoriala",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": "/img/gui/newTutorial/"
+                },
+                {
+                    "name": "draggableWnd",
+                    "idInput": "draggableWnd",
+                    "tool-tip": "Flaga, która ustawiona na true pozwala poruszać i zmienić pozycję okna tutoriala.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
+                },
+                {
+                    "name": "htmlPosition",
+                    "idInput": "htmlPosition",
+                    "tool-tip": "Pozycjonowanie do elementów html. Brak pozycjonowania oznacza wyśrodkowanie dymka",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput":"",
+                    "defaultSraj": "",
+                    "canBeEmpty": true
+                },
+                {
+                    "name": "htmlPositionOffset",
+                    "idInput": "htmlPositionOffset",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "htmlPositionOffset.left",
+                            "idInput": "htmlPositionOffset.left",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie względem elementu html wyrażone w pixelach.",
+                            "step":1,
+                            "min":-1024,
+                            "max":1024,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "htmlPositionOffset.top",
+                            "idInput": "htmlPositionOffset.top",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie względem elementu html wyrażone w pixelach.",
+                            "step":1,
+                            "min":-1024,
+                            "max":1024,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        }
+                    ]
+                },
+                {
+                    "name": "canvasPosition",
+                    "idInput": "canvasPosition",
+                    "tool-tip": "Pozycjonowanie do elementów canvasa. Można przyciąć dymek albo do postaci gracza, albo do danego npc.",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "canvasPosition.typeObject",
+                            "idInput": "canvasPosition.typeObject",
+                            "tool-tip": "Rodzaj obiektu, do którego ma zostać przypięty dymek.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"npc"}, {"name":"hero"}],
+                            "defaultInput": "",
+                            "defaultSraj": ""
+                        },
+                        {
+                            "name": "canvasPosition.id",
+                            "idInput": "canvasPosition.id",
+                            "tool-tip": "ID instancji NPC, do której chcemy przypiąć dymek.",
+                            "inputType": "number",
+                            "min":0,
+                            "max":500000,
+                            "step":1,
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "defaultSraj": 0,
+                            "require": [{"name": "canvasPosition.typeObject", "value": ["npc"]}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        }
+                    ]
+                },
+                {
+                    "name": "htmlFocus",
+                    "idInput": "htmlFocus",
+                    "tool-tip": "Podświetla wybrany element html wraz z przyciemnieniem reszty ekranu.",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput":"",
+                    "defaultSraj": "",
+                    "canBeEmpty": true
+                },
+                {
+                    "name": "canvasFocus",
+                    "idInput": "canvasFocus",
+                    "tool-tip": "Podświetla wybrany element canvasa wraz z przyciemnieniem reszty ekranu.",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "canvasFocus.typeObject",
+                            "idInput": "canvasFocus.typeObject",
+                            "tool-tip": "Rodzaj obiektu, do którego ma zostać przypięty dymek.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"npc"}, {"name":"hero"}],
+                            "defaultInput": "",
+                            "defaultSraj": ""
+                        },
+                        {
+                            "name": "canvasFocus.id",
+                            "idInput": "canvasFocus.id",
+                            "tool-tip": "ID instancji NPC, do której chcemy przypiąć dymek.",
+                            "inputType": "number",
+                            "min":0,
+                            "max":500000,
+                            "step":1,
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "defaultSraj": 0,
+                            "require": [{"name": "canvasFocus.typeObject", "value": ["npc"]}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        }
+                    ]
+                },
+            ]
+        }
+    ]
+}
