@@ -73,6 +73,12 @@ let moduleDict = {
     }
   },
 
+  canvasMultiGlow : class CanvasMultiGlow{
+    constructor(){
+      this.kind = "HERO"
+    }
+  },
+
   characterImageChanger : class CharacterImageChanger {
     constructor(id) {
       this.action = "CREATE";

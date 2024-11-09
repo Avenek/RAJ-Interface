@@ -60,6 +60,13 @@
       "type": "in"
     },
     {
+      "name": "canvasMultiGlow",
+      "hasList": true,
+      "bindId": "kind",
+      "path": "canvasMultiGlow.list",
+      "type": "out"
+    },
+    {
       "name": "characterImageChanger",
       "hasList": true,
       "bindId": "id",

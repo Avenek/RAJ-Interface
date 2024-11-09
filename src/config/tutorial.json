@@ -14,7 +14,7 @@
                     "varType": ["int"],
                     "defaultInput": -1,
                     "extraOptions": [{"name":"case"}],
-                    "validation":[{"forType": "int", "name": "unique"}, {"forType": "int", "name": "lessThan", "value": 0}]
+                    "validation":[{"forType": "int", "name": "lessThan", "value": 0}]
                 },
                 {
                     "name": "textPc",
@@ -113,6 +113,7 @@
                     "name": "canvasPosition",
                     "idInput": "canvasPosition",
                     "tool-tip": "Pozycjonowanie do elementów canvasa. Można przyciąć dymek albo do postaci gracza, albo do danego npc.",
+                    "varType": ["empty"],
                     "inputType": "subkey",
                     "properties": [
                         {
@@ -155,6 +156,7 @@
                     "name": "canvasFocus",
                     "idInput": "canvasFocus",
                     "tool-tip": "Podświetla wybrany element canvasa wraz z przyciemnieniem reszty ekranu.",
+                    "varType": ["empty"],
                     "inputType": "subkey",
                     "properties": [
                         {
@@ -189,6 +191,7 @@
                     "tool-tip": "Podświetlenie wybranych elementów html.",
                     "inputType": "string",
                     "varType": ["string"],
+                    "canBeEmpty": true,
                     "defaultInput": [],
                     "defaultSraj": [],
                     "inputPlaceholder": "Wartości rozdzielić średnikiem!"
@@ -197,7 +200,8 @@
                     "name": "canvasMultiGlow",
                     "idInput": "canvasMultiGlow",
                     "inputType": "empty",
-                    "varType": ["canvasMultiGlow"],
+                    "varType": ["list"],
+                    "defaultInput": [],
                     "tool-tip": "Możemy podświetlić jeden lub kilka elementów canvasu: danego npc, postać gracza lub przedmiot leżący na ziemi.",
                     "extraOptions": [{"name":"canvas multi glow"}]
                 },
@@ -270,6 +274,7 @@
                 {
                     "name": "onFinish",
                     "idInput": "onFinish",
+                    "varType": ["empty"],
                     "tool-tip": "Odpowiada za zakończenie danego kroku tutoriala. Może się on zakończyć powodzeniem (wykona wtedy przypisane external_properties) lub niepowodzeniem.",
                     "inputType": "subkey",
                     "properties": [

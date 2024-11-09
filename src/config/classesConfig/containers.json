@@ -157,6 +157,10 @@
         {
           "name": "InterfaceKind",
           "tipInfo": "możliwia zmianę graczowi Starego Interfejsu na Nowy Interfejs. Działa wyłącznie na SI!"
+        },
+        {
+          "name": "Tutorial",
+          "tipInfo": "Umożliwia tworzenie kroków tutorialu w kliencie."
         }
       ]
     }

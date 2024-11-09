@@ -1,0 +1,47 @@
+{
+    "properties": [
+        {
+            "name": "require",
+            "idInput": "require",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "kind",
+                    "idInput": "kind",
+                    "tool-tip": "Rodzaj obiektu, który należy podświetlić.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"HERO"}, {"name":"NPC"}, {"name":"GROUND_ITEM_COLLECTIONS"}],
+                    "defaultInput": "HERO"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Id NPC, którego należy podświetlić",
+                    "min":0,
+                    "max":1000000,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput":0,
+                    "defaultSraj": 0,
+                    "require": [{"name": "kind", "value": ["NPC"]}],
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "szablon",
+                    "idInput": "szablon",
+                    "tool-tip": "Id szablonu przedmiotu leżącego na ziemi, który należy podświetlić",
+                    "min":0,
+                    "max":1000000,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput":0,
+                    "defaultSraj": 0,
+                    "require": [{"name": "kind", "value": ["GROUND_ITEM_COLLECTIONS"]}],
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                }
+            ]
+        }
+    ]
+}
