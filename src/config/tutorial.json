@@ -116,12 +116,12 @@
                     "inputType": "subkey",
                     "properties": [
                         {
-                            "name": "canvasPosition.typeObject",
-                            "idInput": "canvasPosition.typeObject",
+                            "name": "canvasPosition.kind",
+                            "idInput": "canvasPosition.kind",
                             "tool-tip": "Rodzaj obiektu, do którego ma zostać przypięty dymek.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"npc"}, {"name":"hero"}],
+                            "options": [{"name":""}, {"name":"NPC"}, {"name":"HERO"}],
                             "defaultInput": "",
                             "defaultSraj": ""
                         },
@@ -136,7 +136,7 @@
                             "varType": ["int"],
                             "defaultInput": 0,
                             "defaultSraj": 0,
-                            "require": [{"name": "canvasPosition.typeObject", "value": ["npc"]}],
+                            "require": [{"name": "canvasPosition.kind", "value": ["NPC"]}],
                             "validation":[{"forType": "int", "name": "minMax"}]
                         }
                     ]
@@ -158,12 +158,12 @@
                     "inputType": "subkey",
                     "properties": [
                         {
-                            "name": "canvasFocus.typeObject",
-                            "idInput": "canvasFocus.typeObject",
+                            "name": "canvasFocus.kind",
+                            "idInput": "canvasFocus.kind",
                             "tool-tip": "Rodzaj obiektu, do którego ma zostać przypięty dymek.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"npc"}, {"name":"hero"}],
+                            "options": [{"name":""}, {"name":"NPC"}, {"name":"HERO"}],
                             "defaultInput": "",
                             "defaultSraj": ""
                         },
@@ -183,6 +183,136 @@
                         }
                     ]
                 },
+                {
+                    "name": "htmlMultiGlow",
+                    "idInput": "htmlMultiGlow",
+                    "tool-tip": "Podświetlenie wybranych elementów html.",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": [],
+                    "defaultSraj": [],
+                    "inputPlaceholder": "Wartości rozdzielić średnikiem!"
+                },
+                {
+                    "name": "canvasMultiGlow",
+                    "idInput": "canvasMultiGlow",
+                    "inputType": "empty",
+                    "varType": ["canvasMultiGlow"],
+                    "tool-tip": "Możemy podświetlić jeden lub kilka elementów canvasu: danego npc, postać gracza lub przedmiot leżący na ziemi.",
+                    "extraOptions": [{"name":"canvas multi glow"}]
+                },
+                {
+                    "name": "blink",
+                    "idInput": "blink",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że podświetlone elementy przez multiGlow migają.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
+                },
+                {
+                    "name": "idMaps",
+                    "idInput": "idMaps",
+                    "tool-tip": "Argument w postaci id map determinujący pokazanie się tutorialu.",
+                    "inputType": "int",
+                    "varType": ["int"],
+                    "defaultInput": [],
+                    "defaultSraj": [],
+                    "inputPlaceholder": "Wartości rozdzielić średnikiem!"
+                },
+                {
+                    "name": "hasQuestId",
+                    "idInput": "hasQuestId",
+                    "tool-tip": "Argument w postaci id questa determinujący pokazanie się tutorialu.",
+                    "min":0,
+                    "max":100000,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "defaultSraj": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "minLevel",
+                    "idInput": "minLevel",
+                    "tool-tip": "Argument w postaci minimalnego poziomu postaci determinujący pokazanie się tutorialu.",
+                    "min":0,
+                    "max":500,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "defaultSraj": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "maxLevel",
+                    "idInput": "maxLevel",
+                    "tool-tip": "Argument w postaci maksymalnego poziomu postaci determinujący pokazanie się tutorialu.",
+                    "min":0,
+                    "max":500,
+                    "step":1,
+                    "inputType": "number",
+                    "varType": ["int"],
+                    "defaultInput": 0,
+                    "defaultSraj": 0,
+                    "validation":[{"forType": "int", "name": "minMax"}]
+                },
+                {
+                    "name": "external_properties",
+                    "idInput": "external_properties",
+                    "tool-tip": "Definiujemy w tym miejscu sraja, który ma się wykonać przy rozpoczęciu kroku tutorialu.",
+                    "inputType": "empty",
+                    "varType": ["empty"],
+                    "extraOptions": [{"name":"external properties"}]
+                },
+                {
+                    "name": "onFinish",
+                    "idInput": "onFinish",
+                    "tool-tip": "Odpowiada za zakończenie danego kroku tutoriala. Może się on zakończyć powodzeniem (wykona wtedy przypisane external_properties) lub niepowodzeniem.",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "onFinish.require",
+                            "idInput": "onFinish.require",
+                            "tool-tip": "Atrybut zawiera wymagania, jakie muszą zostać spełnione do zakończenia korku tutoriala. Zakończenie z powodzeniem zostanie osiągnięte w momencie spełnienia wszystkich wymagań w require. Ten atrybut jest obligatoryjny!",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": [],
+                            "defaultSraj": [],
+                            "extraOptions": [{"name":"require"}]
+                        },
+                        {
+                            "name": "onFinish.absoluteFinish",
+                            "idInput": "onFinish.absoluteFinish",
+                            "tool-tip": "Atrybut ten to wyjątek dla atrybutu require. Powoduje on zakończenie kroku tutoriala z powodzeniem po wystąpieniu z jednego z zadeklarowanych elementów.",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": [],
+                            "defaultSraj": [],
+                            "validation":[{"forType": "string", "name": "equal", "value": ["HERO_END_BATTLE", "START_BATTLE", "CLOSE_BATTLE_WINDOW"]}]
+                        },
+                        {
+                            "name": "onFinish.break",
+                            "idInput": "onFinish.break",
+                            "tool-tip": "Atrybut ten to wyjątek dla atrybutu require. Powoduje on zakończenie kroku tutoriala z niepowodzeniem po wystąpieniu jednego z zadeklarowanych elementów.",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": [],
+                            "defaultSraj": [],
+                            "validation":[{"forType": "string", "name": "equal", "value": ["CLOSE_SHOP", "CLOSE_BARTER", "CLOSE_CRAFTING"]}]
+                        },
+                        {
+                            "name": "onFinish.external_properties",
+                            "idInput": "onFinish.external_properties",
+                            "tool-tip": "Definiujemy w tym miejscu sraja, który ma się wykonać po zakończeniu kroku tutoriala z powodzeniem.",
+                            "inputType": "empty",
+                            "varType": ["empty"],
+                            "extraOptions": [{"name":"external properties"}]
+                        }
+                    ]
+                }
             ]
         }
     ]

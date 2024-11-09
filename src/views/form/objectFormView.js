@@ -169,6 +169,10 @@ class ObjectFormView extends View{
           return "#AAAB11"
         case "params object outfit":
           return "#fcba03"
+        case "canvas multi glow":
+          return "#1FF0EC"
+        case "require":
+          return "#eee839"
         default:
           return "#FFF01F"
       }

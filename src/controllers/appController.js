@@ -90,6 +90,16 @@ class AppController {
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
       localStorage.setItem("lastClear", "5")
     }
+    if(lastClear<6){
+      const tutorial =         {
+        "name": "Tutorial",
+        "tipInfo": "Umożliwia tworzenie kroków tutorialu w kliencie."
+      }
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(tutorial)))
+      localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+      localStorage.setItem("lastClear", "6")
+    }
+
   }
 
 const app = new AppController(new AppView(), new AppModel())

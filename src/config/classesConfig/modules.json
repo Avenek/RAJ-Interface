@@ -346,6 +346,13 @@
       "type": "out"
     },
     {
+      "name": "require",
+      "hasList": true,
+      "bindId": "module",
+      "path": "fromId",
+      "type": "out"
+    },
+    {
       "name": "screenEffects",
       "hasList": true,
       "bindId": "id",
@@ -410,6 +417,12 @@
       "hasList": true,
       "bindId": ["hole0.x", "hole0.y"],
       "path": "fromId",
+      "type": "out"
+    },
+    {
+      "name": "tutorial",
+      "hasList": false,
+      "bindId": "module",
       "type": "out"
     },
     {

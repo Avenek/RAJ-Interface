@@ -518,6 +518,17 @@ let moduleDict = {
     }
   },
 
+  tutorial : class Tutorial{
+    constructor(){
+      this.id = -1
+    }
+  },
+
+  require : class Require{
+    constructor(){
+    }
+  },
+
   staticHoles : class StaticHoles{
     constructor(){
       this.x = 0,
