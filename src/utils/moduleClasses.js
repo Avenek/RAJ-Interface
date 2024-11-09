@@ -307,6 +307,13 @@ let moduleDict = {
     }
   },
 
+  interfaceKind : class InterfaceKind {
+    constructor()
+    {
+      this.kind = "NI"
+    }
+  },
+
   interfaceSkin : class InterfaceSkin {
     constructor()
     {
@@ -355,6 +362,14 @@ let moduleDict = {
       this.action = "CREATE"
       this.id = id
       this.file = "burza01.mp3"
+    }
+  },
+
+  massObjectHide : class MassObjectHide {
+    constructor()
+    {
+      this.action = "CREATE",
+      this.name = "NPC"
     }
   },
 

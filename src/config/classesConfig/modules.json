@@ -236,6 +236,12 @@
       "type": "out"
     },
     {
+      "name": "interfaceKind",
+      "hasList": false,
+      "bindId": "module",
+      "type": "out"
+    },
+    {
       "name": "interfaceSkin",
       "hasList": false,
       "bindId": "module",
@@ -278,6 +284,12 @@
       "name": "mapMusic",
       "hasList": true,
       "bindId": "id",
+      "type": "out"
+    },
+    {
+      "name": "massObjectHide",
+      "hasList": true,
+      "bindId": "name",
       "type": "out"
     },
     {
