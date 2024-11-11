@@ -614,10 +614,7 @@ class ObjectFormModel{
 
     handleSpecialAction = async (metaAction, value) => {
         switch (metaAction){
-          case "night":
-            const nightController = new NightUtils(this, value)
-            nightController.fetchConfigAndSetLightPointList()
-            break;
+
         }
       }
 }

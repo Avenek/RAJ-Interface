@@ -86,21 +86,6 @@
                     "require": [{"name": "clear", "value": [false]}]
                 },
                 {
-                    "name": "json-list",
-                    "idInput": "json-list",
-                    "tool-tip": "Wpisujemy tutaj jsona, który jest automatycznie parsowany i tworzy listę nocy. Wszystkie światła z listy są kasowane i dodawane te z jsona.",
-                    "inputType": "string",
-                    "canBeEmpty": true,
-                    "placeholder": "Wklej tu jsona z WE",
-                    "specialAction": "night",
-                    "varType": ["json"],
-                    "defaultInput":"",
-                    "defaultSraj":"",
-                    "inputPlaceholder": "Wkleić jsona z obiektamy mapy.",
-                    "validation":[{"forType": "string", "name": "contains", "value":"{"}],
-                    "require": [{"name": "clear", "value": [false]}]
-                },
-                {
                     "name": "list",
                     "idInput": "list.list",
                     "inputType": "empty",
