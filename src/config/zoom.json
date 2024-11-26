@@ -17,7 +17,7 @@
                     "varType": ["float", "int", "boolean"],
                     "defaultInput": true,
                     "defaultSraj": true,
-                    "require": [{"name": "action", "value": ["CREATE"]}, {"name": "clear", "value": [false]}],
+                    "require": [{"name": "clear", "value": [false]}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
                 },
                 {
@@ -30,7 +30,7 @@
                     "inputType": "number",
                     "varType": ["int", "float"],
                     "defaultInput": 2,
-                    "require": [{"name": "action", "value": ["CREATE"]}, {"name": "clear", "value": [false]}],
+                    "require": [{"name": "clear", "value": [false]}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                 },
                 {
@@ -43,7 +43,7 @@
                     "inputType": "number",
                     "varType": ["float", "int"],
                     "defaultInput": 2,
-                    "require": [{"name": "action", "value": ["CREATE"]}, {"name": "clear", "value": [false]}],
+                    "require": [{"name": "clear", "value": [false]}],
                     "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                 },
                 {
