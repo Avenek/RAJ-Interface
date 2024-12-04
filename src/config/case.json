@@ -57,16 +57,6 @@
                 },
                 {
                     "name": "name",
-                    "idInput": "existobj.name",
-                    "tool-tip": "Sraj się wykona, jeżeli podany obiekt istnieje.",
-                    "inputType": "options",
-                    "varType": ["string"],
-                    "options": [{"name":"FAKE_NPC"}, {"name":"NPC"}, {"name":"FLOAT_OBJECT"}],
-                    "defaultInput": "FAKE_NPC",
-                    "require": [{"name": "key", "value": ["EXIST_OBJ"]}, {"name": "kind", "value": ["ARGUMENT"]}]
-                },
-                {
-                    "name": "name",
                     "idInput": "existObjHaveOut.name",
                     "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada daną grafikę.",
                     "inputType": "options",
@@ -76,15 +66,60 @@
                     "require": [{"name": "key", "value": ["EXIST_OBJ_HAVE_OUTFIT"]}, {"name": "kind", "value": ["ARGUMENT"]}]
                 },
                 {
+                    "name": "name",
+                    "idInput": "existobj.name",
+                    "tool-tip": "Sraj się wykona, jeżeli podany obiekt istnieje.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"FAKE_NPC"}, {"name":"NPC"}, {"name":"FLOAT_OBJECT"}],
+                    "defaultInput": "FAKE_NPC",
+                    "require": [{"name": "key", "value": ["EXIST_OBJ"]}, {"name": "kind", "value": ["ARGUMENT"]}]
+                },
+                {
                     "name": "params",
-                    "idInput": "argument.params",
+                    "idInput": "argument.paramsInt",
                     "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada składową z tablicy. Rozdzielać średnikiem!",
                     "inputType": "string",
                     "varType": ["int"],
                     "defaultInput": [],
                     "defaultSraj": [],
                     "inputPlaceholder": "Wartości rozdzielić średnikiem!",
-                    "require": [{"name": "kind", "value": ["ARGUMENT"]}, {"name": "key", "value": ["QUEST", "TOWN", "OUTFIT", "PET", "EXIST_OBJ", "HERO_EQUIPMENT_ITEM_TPL"]}],
+                    "require": [{"name": "kind", "value": ["ARGUMENT"]}, {"name": "key", "value": ["QUEST", "TOWN", "HERO_EQUIPMENT_ITEM_TPL"]}],
+                    "validation":[{"forType": "int", "name": "moreThan", "value": 0}]
+                },
+                {
+                    "name": "params",
+                    "idInput": "argument.paramsString",
+                    "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada składową z tablicy. Rozdzielać średnikiem!",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": [],
+                    "defaultSraj": [],
+                    "inputPlaceholder": "Wartości rozdzielić średnikiem!",
+                    "require": [{"name": "kind", "value": ["ARGUMENT"]}, {"name": "key", "value": ["OUTFIT", "PET"]}]
+                },
+                {
+                    "name": "params",
+                    "idInput": "argument.paramsIntString",
+                    "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada składową z tablicy. Rozdzielać średnikiem!",
+                    "inputType": "string",
+                    "varType": ["int", "string"],
+                    "defaultInput": [],
+                    "defaultSraj": [],
+                    "inputPlaceholder": "Wartości rozdzielić średnikiem!",
+                    "require": [{"name": "kind", "value": ["ARGUMENT"]}, {"name": "key", "value": ["EXIST_OBJ"]}, {"name": "name", "value": ["FAKE_NPC", "FLOAT_OBJECT"]}],
+                    "validation":[{"forType": "int", "name": "moreThan", "value": 0}]
+                },
+                {
+                    "name": "params",
+                    "idInput": "argument.paramsIntExistObject",
+                    "tool-tip": "Sraj się wykona, jeżeli podany obiekt posiada składową z tablicy. Rozdzielać średnikiem!",
+                    "inputType": "string",
+                    "varType": ["int"],
+                    "defaultInput": [],
+                    "defaultSraj": [],
+                    "inputPlaceholder": "Wartości rozdzielić średnikiem!",
+                    "require": [{"name": "kind", "value": ["ARGUMENT"]}, {"name": "key", "value": ["EXIST_OBJ"]}, {"name": "name", "value": ["NPC"]}],
                     "validation":[{"forType": "int", "name": "moreThan", "value": 0}]
                 },
                 {
