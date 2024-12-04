@@ -232,7 +232,8 @@ class ObjectFormModel{
             const requireItem = property.require[i]
             const requireObject = this.configUtils.findObjectByProperty(params.config.properties, requireItem.name, "name") 
             const valueInObject = this.jsonData.getValueFromWorkingObject(this.container, requireItem.name) || requireObject?.defaultSraj;
-            if(valueInObject != null && valueInObject != undefined && requireItem.value.includes(valueInObject) ||
+            if(requireItem.value.includes(null) && requireObject === undefined && valueInObject === undefined ||
+                valueInObject != null && valueInObject != undefined && requireItem.value.includes(valueInObject) ||
                 requireObject && requireObject.defaultSraj && requireItem.value.includes(requireObject.defaultSraj))
             {
                 continue;
