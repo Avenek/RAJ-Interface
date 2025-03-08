@@ -79,6 +79,26 @@
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
+                    "name": "withCreateInstantFadeIn",
+                    "idInput": "withCreateInstantFadeIn",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że efekt pojawia się natychmiastowo bez efektu wyłaniania się.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                },
+                {
+                    "name": "withRemoveInstantFadeOut",
+                    "idInput": "withRemoveInstantFadeOut",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że efekt usuwa się natychmiastowo bez efektu chowania się.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "action", "value": ["REMOVE"]}]
+                },
+                {
                     "name": "color",
                     "idInput": "color",
                     "tool-tip": "",

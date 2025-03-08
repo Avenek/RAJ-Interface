@@ -116,7 +116,7 @@
                 {
                     "name": "instantCreateFadeIn",
                     "idInput": "instantCreateFadeIn",
-                    "tool-tip": "Flaga, która ustawiona na true sprawia, że fakeNpc pojawia się natychmiastowo bez efekty wyłaniania się. Stosować głównie, jeżeli tworzymy fakeNPC na kordach, gdzie już stoi dany NPC.",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że fakeNpc pojawia się natychmiastowo bez efektu wyłaniania się. Stosować głównie, jeżeli tworzymy fakeNPC na kordach, gdzie już stoi dany NPC.",
                     "inputType": "boolean",
                     "varType": ["boolean"],
                     "defaultInput": false,
@@ -126,7 +126,7 @@
                 {
                     "name": "instantRemoveFadeOut",
                     "idInput": "instantRemoveFadeOut",
-                    "tool-tip": "Flaga, która ustawiona na true sprawia, że fakeNpc usuwa się natychmiastowo bez efekty chowania się. Stosować głównie, jeżeli usuwamy fakeNPC na kordach, gdzie już stoi dany NPC.",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że fakeNpc usuwa się natychmiastowo bez efektu chowania się. Stosować głównie, jeżeli usuwamy fakeNPC na kordach, gdzie już stoi dany NPC.",
                     "inputType": "boolean",
                     "varType": ["boolean"],
                     "defaultInput": false,
