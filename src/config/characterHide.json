@@ -82,6 +82,16 @@
                     "defaultInput": false,
                     "defaultSraj": false,
                     "require": [{"name": "action", "value": ["CREATE"]}]
+                },
+                {
+                    "name": "displayEmo",
+                    "idInput": "displayEmo",
+                    "tool-tip": "Flaga informująca o tym, czy należy wyświetlać emotkę nad NPC pomimo jego schowania.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "action", "value": ["CREATE"]}]
                 }
             ]
         }
