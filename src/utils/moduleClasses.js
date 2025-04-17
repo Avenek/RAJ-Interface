@@ -114,7 +114,7 @@ let moduleDict = {
     constructor() {
       this.action = "CREATE"
       this.target = {
-        "kind" : "HERO"
+        "kind" : "NPC"
       }
       this.showTip = false
     }
