@@ -33,7 +33,7 @@
                             "tool-tip": "Typ obiektu, na którym chcemy skierować kamerę.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"MAP"}, {"name":"HERO"}, {"name":"PET"}, {"name":"FAKE_NPC"}, {"name":"FLOAT_OBJECT"}],
+                            "options": [{"name":"MAP"}, {"name":"PET"}, {"name":"FAKE_NPC"}, {"name":"FLOAT_OBJECT"}],
                             "defaultInput": "MAP"
                         },
                         {
