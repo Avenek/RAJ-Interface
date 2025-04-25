@@ -37,7 +37,7 @@
                             "tool-tip": "Typ obiektu, na którym chcemy wywołać dany efekt.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"NPC"}],
+                            "options": [{"name":"NPC"}, {"name":"THIS_NPC_INSTANCE"}],
                             "defaultInput": "NPC"
                         },
                         {
@@ -50,7 +50,8 @@
                             "step":1,
                             "varType": ["int"],
                             "defaultInput": 0,
-                            "validation":[{"forType": "int", "name": "minMax"}]
+                            "validation":[{"forType": "int", "name": "minMax"}],
+                            "require": [{"name": "target.kind", "value": ["NPC", "MAP"]}]
                         }
                     ]
                 }
