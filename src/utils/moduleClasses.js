@@ -193,7 +193,7 @@ let moduleDict = {
       this.name = "obiekt-0"
       this.priority = 90
       this.params = {
-        "action" : "onSelf",
+        "action" : "OnSelf",
         "filename" : "battle.gif"
       }
     }

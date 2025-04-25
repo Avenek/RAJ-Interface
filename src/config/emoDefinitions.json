@@ -36,11 +36,11 @@
                         {
                             "name": "params.action",
                             "idInput": "params.action",
-                            "tool-tip": "Na razie tylko opcja OnSelf jest dostępna i powoduje, że dymek pojawi się nad główką zadeklarowanego w emoActions NPC.",
+                            "tool-tip": "Opcja OnSelf jest dostępna i powoduje, że dymek pojawi się nad główką zadeklarowanego w emoActions NPC. Opcja StickToMap powoduje, że dymek pojawi się w konkretnym miejscu na mapie.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"onSelf"}],
-                            "defaultInput": "onSelf"
+                            "options": [{"name":"OnSelf"}, {"name":"StickToMap"}],
+                            "defaultInput": "OnSelf"
                         },
                         {
                             "name": "params.filename",
