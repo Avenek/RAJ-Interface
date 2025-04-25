@@ -37,13 +37,13 @@
                             "tool-tip": "Typ obiektu, na którym chcemy wywołać dany efekt.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"NPC"}, {"name":"THIS_NPC_INSTANCE"}],
+                            "options": [{"name":"NPC"}, {"name":"THIS_NPC_INSTANCE"}, {"name":"MAP"}],
                             "defaultInput": "NPC"
                         },
                         {
                             "name": "target.id",
                             "idInput": "target.id",
-                            "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
+                            "tool-tip": "ID obiektu/mapy, na którym/której chcemy wywołać dany efekt.",
                             "inputType": "number",
                             "min":0,
                             "max":500000,
@@ -52,6 +52,32 @@
                             "defaultInput": 0,
                             "validation":[{"forType": "int", "name": "minMax"}],
                             "require": [{"name": "target.kind", "value": ["NPC", "MAP"]}]
+                        },
+                        {
+                            "name": "target.x",
+                            "idInput": "target.x",
+                            "tool-tip": "Wartość kordu x, na którym ma się pojawić emotka.",
+                            "min":0,
+                            "max":100,
+                            "step":1,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}],
+                            "require": [{"name": "target.kind", "value": ["MAP"]}]
+                        },
+                        {
+                            "name": "target.y",
+                            "idInput": "target.y",
+                            "tool-tip": "Wartość kordu y, na którym ma się pojawić emotka.",
+                            "min":0,
+                            "max":100,
+                            "step":1,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}],
+                            "require": [{"name": "target.kind", "value": ["MAP"]}]
                         }
                     ]
                 }
