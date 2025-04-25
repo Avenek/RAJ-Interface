@@ -49,6 +49,32 @@
                             "inputType": "string",
                             "varType": ["string"],
                             "defaultInput": "battle.gif"
+                        },
+                        {
+                            "name": "params.offsetX",
+                            "idInput": "params.offsetX",
+                            "tool-tip": "Dodatkowe przesunięcie w poziomie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.offsetY",
+                            "idInput": "params.offsetY",
+                            "tool-tip": "Dodatkowe przesunięcie w pionie wyrażone w pixelach.",
+                            "step":1,
+                            "min":-64,
+                            "max":64,
+                            "inputType": "number",
+                            "varType": ["int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "int", "name": "minMax"}]
                         }
                     ]
                 }
