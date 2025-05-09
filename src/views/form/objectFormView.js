@@ -173,6 +173,10 @@ class ObjectFormView extends View{
           return "#1FF0EC"
         case "require":
           return "#eee839"
+        case "window element":
+          return "#ADE8F4"
+        case "button container":
+          return "#787346"
         default:
           return "#FFF01F"
       }

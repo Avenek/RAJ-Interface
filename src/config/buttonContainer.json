@@ -1,0 +1,55 @@
+{
+    "properties":[
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties":[
+                {
+                    "name": "name",
+                    "idInput": "name",
+                    "tool-tip": "Rodzaj elementu okna.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"BUTTON"}],
+                    "defaultInput": "IDLE"
+                },
+                {
+                    "name": "label",
+                    "idInput": "label",
+                    "tool-tip": "Tekst, który ma się wyświetlić na przycisku.",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput":"OK",
+                    "require": [{"name": "name", "value": ["BUTTON"]}]                          
+                },
+                {
+                    "name": "click",
+                    "idInput": "click",
+                    "inputType": "subkey",
+                    "require": [{"name": "name", "value": ["BUTTON"]}],
+                    "properties": [
+                        {
+                            "name": "click.function",
+                            "idInput": "click.function",
+                            "tool-tip": "Funkcja, która ma się wykonać po kliknięciu w przycisk.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"CLOSE"}],
+                            "defaultInput": "CLOSE"
+                        },
+                        {
+                            "name": "click.external_properties",
+                            "idInput": "click.function",
+                            "tool-tip": "Definiujemy w tym miejscu, czy mają się wykonać dodatkowe akcje, gdy przycisk zostanie kliknięty.",
+                            "inputType": "empty",
+                            "varType": ["empty"],
+                            "extraOptions": [{"name":"external properties"}]
+                        }
+                    ]
+                }          
+            ]
+        }
+    ]
+}

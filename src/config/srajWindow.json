@@ -1,0 +1,103 @@
+{
+    "properties": [
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Okienko możemy tworzyć albo usuwać.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"},{"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca obszar. Umożliwia późniejsze jego usunięcie.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "header",
+                    "idInput": "header",
+                    "tool-tip": "Tekst, który ma się wyświetlić w nagłówku okna.",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": "",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]         
+                },
+                {
+                    "name": "overlay",
+                    "idInput": "overlay",
+                    "tool-tip": "Flaga informująca o tym, czy stworzyć półprzeźroczysty overlay pod oknem.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                },
+                {
+                    "name": "position",
+                    "idInput": "position.targetContainter",
+                    "inputType": "subkey",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
+                    "properties": [
+                        {
+                            "name": "position.target.kind",
+                            "idInput": "position.target.kind",
+                            "tool-tip": "Typ obiektu, do którego chcemy przyczepić okno.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"HERO"},{"name":"NPC"}, {"name": ""}],
+                            "defaultInput": "",
+                            "defaultSraj": "",
+                            "require": [{"name": "position.htmlTarget", "value": [""]}]
+                        },
+                        {
+                            "name": "position.target.id",
+                            "idInput": "position.target.id.npc",
+                            "tool-tip": "ID NPC, którego chcemy schować.",
+                            "inputType": "number",
+                            "min":0,
+                            "max":500000,
+                            "step":1,
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "require": [{"name": "position.target.kind", "value": ["NPC"]}, {"name": "position.htmlTarget", "value": [""]}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "position.htmlTarget",
+                            "idInput": "position.htmlTarget",
+                            "tool-tip": "Selektor elementu html, do którego chcemy przyczepić okno.",
+                            "inputType": "string",
+                            "varType": ["string"],
+                            "canBeEmpty": true,
+                            "defaultInput": "",
+                            "defaultSraj": "",
+                            "require": [{"name": "position.target.kind", "value": [""]}]       
+                        }
+                    ]
+                },
+                {
+                    "name": "list",
+                    "idInput": "list.list",
+                    "inputType": "empty",
+                    "varType": ["list"],
+                    "defaultInput": [],
+                    "tool-tip": "Elementy, które mają się wyświetlić w oknie.",
+                    "extraOptions": [{"name":"window element"}],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                }    
+            ]
+        }
+    ]
+}

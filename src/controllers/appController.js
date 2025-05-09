@@ -117,6 +117,15 @@ class AppController {
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
       localStorage.setItem("lastClear", "8")
     }
+    if(lastClear<9){
+      const srajWindow =  {
+          "name": "SrajWindow",
+          "tipInfo": "Umożliwia wywołanie okienka z informacją dla gracza."
+        }
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(srajWindow)))
+      localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+      localStorage.setItem("lastClear", "9")
+    }
   }
 
 const app = new AppController(new AppView(), new AppModel())

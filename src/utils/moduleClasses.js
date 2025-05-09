@@ -44,6 +44,13 @@ let moduleDict = {
     }
   },
 
+  buttonContainer : class ButtonContainer{
+    constructor(){
+      this.name = "BUTTON",
+      this.label = "OK"
+    }
+  },
+
   camera : class Camera{
     constructor(){
       this.duration = 0
@@ -503,6 +510,15 @@ let moduleDict = {
     }
   },
 
+    
+  srajWindow : class SrajWindow{
+    constructor(id) {
+      this.action = "CREATE"
+      this.id = id,
+      this.list = []
+    }
+  },
+
   transitionHoles : class TransitionHoles{
     constructor(){
       this.hole0 = {
@@ -563,6 +579,13 @@ let moduleDict = {
       this.name = "Rain"
       this.speedX = 1
       this.speedY = 1
+    }
+  },
+
+    
+  windowElement : class WindowElement{
+    constructor(){
+      this.name = "TEXT"
     }
   },
 

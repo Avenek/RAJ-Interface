@@ -161,6 +161,10 @@
         {
           "name": "Tutorial",
           "tipInfo": "Umożliwia tworzenie kroków tutorialu w kliencie."
+        },
+        {
+          "name": "SrajWindow",
+          "tipInfo": "Umożliwia wywołanie okienka z informacją dla gracza."
         }
       ]
     }

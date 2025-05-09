@@ -40,6 +40,13 @@
       "type": "out"
     },
     {
+      "name": "buttonContainer",
+      "hasList": true,
+      "bindId": "kind",
+      "path": "fromId",
+      "type": "out"
+    },
+    {
       "name": "camera",
       "hasList": false,
       "bindId": "module",
@@ -411,6 +418,12 @@
       "type": "out"
     },
     {
+      "name": "srajWindow",
+      "hasList": true,
+      "bindId": "id",
+      "type": "out"
+    },
+    {
       "name": "staticHoles",
       "hasList": true,
       "bindId": ["x", "y"],
@@ -448,6 +461,13 @@
       "name": "weather",
       "hasList": true,
       "bindId": "name",
+      "type": "out"
+    },
+    {
+      "name": "windowElement",
+      "hasList": true,
+      "bindId": "name",
+      "path": "fromId",
       "type": "out"
     },
     {
