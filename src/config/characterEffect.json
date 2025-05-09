@@ -537,7 +537,7 @@
                                     "max":255,
                                     "inputType": "number",
                                     "varType": ["int", "color"],
-                                    "defaultInput":0,
+                                    "defaultInput":215,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
                                 },
@@ -550,7 +550,7 @@
                                     "max":255,
                                     "inputType": "number",
                                     "varType": ["int", "color"],
-                                    "defaultInput":0,
+                                    "defaultInput":215,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
                                 },
@@ -563,7 +563,7 @@
                                     "max":255,
                                     "inputType": "number",
                                     "varType": ["int", "color"],
-                                    "defaultInput":0,
+                                    "defaultInput":215,
                                     "extraOptions": [{"name":"get random"}],
                                     "validation":[{"forType": "int", "name": "minMax"}]
                                 },
