@@ -104,16 +104,6 @@
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
-                    "name": "ignoreUpdateCollisionAndStartEndPos",
-                    "idInput": "ignoreUpdateCollisionAndStartEndPos",
-                    "tool-tip": "Flaga, która ustawiona na true pozwala ignorować kolizje stworzone przez NPC przy tworzeniu fakeNPC, oraz przy docelowych kordach dla danego zachowania. Używamy jej, jeżeli chcemy zabić danego NPC i od razu stworzyć fakeNPC w jego miejsce.",
-                    "inputType": "boolean",
-                    "varType": ["boolean"],
-                    "defaultInput": false,
-                    "defaultSraj": false,
-                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
-                },
-                {
                     "name": "instantCreateFadeIn",
                     "idInput": "instantCreateFadeIn",
                     "tool-tip": "Flaga, która ustawiona na true sprawia, że fakeNpc pojawia się natychmiastowo bez efektu wyłaniania się. Stosować głównie, jeżeli tworzymy fakeNPC na kordach, gdzie już stoi dany NPC.",

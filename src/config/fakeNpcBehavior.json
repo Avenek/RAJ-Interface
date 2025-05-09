@@ -97,6 +97,26 @@
                     "require": [{"name": "name", "value": ["WALK"]}]
                 },
                 {
+                    "name": "ignoreStartCollision",
+                    "idInput": "ignoreStartCollision",
+                    "tool-tip": "Flaga, która ustawiona na true pozwala ignorować kolizje stworzone przez NPC w miejscu, w którym FakeNpc rozpoczyna zachowanie WALK.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "name", "value": ["WALK", "WALK_AND_TP_START"]}]
+                },
+                {
+                    "name": "ignoreEndCollision",
+                    "idInput": "ignoreEndCollision",
+                    "tool-tip": "Flaga, która ustawiona na true pozwala ignorować kolizje stworzone przez NPC w miejscu, w którym FakeNpc kończy zachowanie WALK.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "name", "value": ["WALK", "WALK_AND_TP_START"]}]
+                },
+                {
                     "name": "x",
                     "idInput": "tp.x",
                     "tool-tip": "Wartość kordu x, na który ma zostać przeniesiony fakeNpc.",
