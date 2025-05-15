@@ -32,7 +32,7 @@
                     "tool-tip": "Możliwość podpięcia obiektu do danej opcji w konfiguracji. Jeżeli będzie ona wyłączona u gracza w konfiguracji, wtedy obiekt ten nie będzie się wyświetlał",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"   "}, {"name":"NIGHT"}, {"name":"WEATHER"}, {"name":"SOUND"}],
+                    "options": [{"name":"   "}, {"name":"NIGHT"}, {"name":"WEATHER"}, {"name":"SOUND"}, {"name":"ANIMATION"}],
                     "defaultInput": "   ",
                     "defaultSraj": "   ",
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]

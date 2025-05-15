@@ -27,6 +27,17 @@
                     "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
                 },
                 {
+                    "name": "configurationType",
+                    "idInput": "configurationType",
+                    "tool-tip": "Możliwość podpięcia obiektu do danej opcji w konfiguracji. Jeżeli będzie ona wyłączona u gracza w konfiguracji, wtedy obiekt ten nie będzie się wyświetlał",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"   "}, {"name":"NIGHT"}, {"name":"WEATHER"}, {"name":"SOUND"}, {"name":"ANIMATION"}],
+                    "defaultInput": "   ",
+                    "defaultSraj": "   ",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                },
+                {
                     "name": "master",
                     "idInput": "master",
                     "inputType": "empty",
