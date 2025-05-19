@@ -141,7 +141,7 @@ class ObjectFormModel{
             objectsWithProperty.push(objectFormList);
           }
           for (let key in objectFormList) {
-            if (objectFormList.hasOwnProperty(key) && objectFormList[key] ) {
+            if (objectFormList.hasOwnProperty(key) && objectFormList[key] && key !== "value") {
               objectsWithProperty = objectsWithProperty.concat(this.findItemsByProperty(objectFormList[key], property));
             }
           }

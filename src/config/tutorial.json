@@ -279,22 +279,32 @@
                     "inputType": "subkey",
                     "properties": [
                         {
+                            "name": "onFinish.requireConnector",
+                            "idInput": "onFinish.requireConnector",
+                            "tool-tip": "Do wyboru OR - lub, AND - i. W przypadku OR wystarczy, że jeden z elementów w require zostanie spełniony, aby zakończyć krok tutoriala z powodzeniem. W przypadku AND wszystkie elementy muszą być spełnione.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":""}, {"name":"OR"}, {"name":"AND"}],
+                            "defaultInput": "",
+                            "defaultSraj": ""
+                        },
+                        {
                             "name": "onFinish.require",
                             "idInput": "onFinish.require",
                             "tool-tip": "Atrybut zawiera wymagania, jakie muszą zostać spełnione do zakończenia korku tutoriala. Zakończenie z powodzeniem zostanie osiągnięte w momencie spełnienia wszystkich wymagań w require. Ten atrybut jest obligatoryjny!",
                             "inputType": "empty",
                             "varType": ["list"],
                             "defaultInput": [],
-                            "defaultSraj": [],
                             "extraOptions": [{"name":"require"}]
                         },
                         {
                             "name": "onFinish.absoluteFinish",
                             "idInput": "onFinish.absoluteFinish",
                             "tool-tip": "Atrybut ten to wyjątek dla atrybutu require. Powoduje on zakończenie kroku tutoriala z powodzeniem po wystąpieniu z jednego z zadeklarowanych elementów.",
-                            "inputType": "empty",
-                            "varType": ["list"],
-                            "defaultInput": [],
+                            "inputType": "string",
+                            "canBeEmpty": true,
+                            "varType": ["string"],
+                            "defaultInput":[],
                             "defaultSraj": [],
                             "validation":[{"forType": "string", "name": "equal", "value": ["HERO_END_BATTLE", "START_BATTLE", "CLOSE_BATTLE_WINDOW"]}]
                         },
@@ -302,9 +312,10 @@
                             "name": "onFinish.break",
                             "idInput": "onFinish.break",
                             "tool-tip": "Atrybut ten to wyjątek dla atrybutu require. Powoduje on zakończenie kroku tutoriala z niepowodzeniem po wystąpieniu jednego z zadeklarowanych elementów.",
-                            "inputType": "empty",
-                            "varType": ["list"],
-                            "defaultInput": [],
+                            "inputType": "string",
+                            "canBeEmpty": true,
+                            "varType": ["string"],
+                            "defaultInput":[],
                             "defaultSraj": [],
                             "validation":[{"forType": "string", "name": "equal", "value": ["CLOSE_SHOP", "CLOSE_BARTER", "CLOSE_CRAFTING"]}]
                         },

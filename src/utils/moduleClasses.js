@@ -557,7 +557,8 @@ let moduleDict = {
 
   tutorial : class Tutorial{
     constructor(){
-      this.id = -1
+      this.id = -1,
+      this.onFinish = { require: [] }
     }
   },
 
