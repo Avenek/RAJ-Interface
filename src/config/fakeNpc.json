@@ -124,6 +124,14 @@
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
                 {
+                    "name": "click",
+                    "idInput": "click",
+                    "tool-tip": "Definiujemy w tym miejscu sraja, która ma się wykonać po kliknięciu myszką na fakeNpc.",
+                    "inputType": "empty",
+                    "varType": ["empty"],
+                    "extraOptions": [{"name":"external properties"}]
+                },
+                {
                     "name": "external_properties",
                     "idInput": "external_properties",
                     "tool-tip": "Definiujemy w tym miejscu, czy mają się wykonać dodatkowe akcje, gdy fakeNPC istnieje.",
