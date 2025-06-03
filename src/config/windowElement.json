@@ -61,7 +61,7 @@
                         },
                         {
                             "name": "click.external_properties",
-                            "idInput": "click.function",
+                            "idInput": "click.external_properties",
                             "tool-tip": "Definiujemy w tym miejscu, czy mają się wykonać dodatkowe akcje, gdy przycisk zostanie kliknięty.",
                             "inputType": "empty",
                             "varType": ["empty"],
