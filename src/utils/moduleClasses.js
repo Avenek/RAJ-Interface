@@ -426,6 +426,7 @@ let moduleDict = {
 
   parent : class Parent{
     constructor(){
+      this.kind = "FLOAT_OBJECT"
     }
   },
 
@@ -543,7 +544,6 @@ let moduleDict = {
 
   tracking : class Tracking{
     constructor(){
-      this.parent = {"kind": "HERO"}
       this.target = {"list":[ 
         {
           "id": "obiekt-0",

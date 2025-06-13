@@ -12,8 +12,7 @@
                     "tool-tip": "Rodzaj rodzica, do którego zostanie przypięta strzałka.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"HERO"}, {"name":"FLOAT_OBJECT"}],
-                    "defaultInput":"HERO"
+                    "options": [{"name":"FLOAT_OBJECT"}]
                 },
                 {
                     "name": "id",
