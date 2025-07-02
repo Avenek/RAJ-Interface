@@ -68,7 +68,7 @@
                             "tool-tip": "Typ obiektu, na którym chcemy wywołać dany efekt.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"HERO"}, {"name":"NPC"},{"name":"FAKE_NPC"}],
+                            "options": [{"name":"HERO"}, {"name":"NPC"}, {"name":"THIS_NPC_INSTANCE"},{"name":"FAKE_NPC"}],
                             "defaultInput": "HERO"
                         },
                         {
