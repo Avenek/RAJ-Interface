@@ -92,7 +92,7 @@
                     "varType": ["list"],
                     "defaultInput": [],
                     "tool-tip": "Definiujemy tutaj punkty świecące",
-                    "extraOptions": [{"name":"light points"}],
+                    "extraOptions": [{"name":"light points"}, {"name":"case"}],
                     "require": [{"name": "clear", "value": [false]}]
                 },
                 {
