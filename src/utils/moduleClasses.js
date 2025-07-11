@@ -88,7 +88,7 @@ let moduleDict = {
 
   characterImageChanger : class CharacterImageChanger {
     constructor(id) {
-      this.action = "CREATE";
+      this.action = "CREATE_FORCE";
       this.id = id
       this.target = { "kind" : "THIS_NPC_INSTANCE" }
       this.list = []

@@ -93,8 +93,7 @@
                             "defaultInput": "",
                             "require": [{"name": "target.kind", "value": ["FAKE_NPC"]}]
                         }
-                    ],
-                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                    ]
                 },
                 {
                     "name": "params",
