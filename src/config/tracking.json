@@ -12,7 +12,8 @@
                     "inputType": "empty",
                     "varType": ["parent"],
                     "tool-tip": "Rodzic, do którego ma być przypięta strzałka",
-                    "extraOptions": [{"name":"parent"}, {"name":"case"}]
+                    "extraOptions": [{"name":"parent"}, {"name":"case"}],
+                    "require": [{"name": "clear", "value": [false]}]
                 },
                 {
                     "name": "target",
@@ -28,7 +29,17 @@
                             "tool-tip": "Lista obiektów, które będą reprezontować strzałki trackingowe.",
                             "extraOptions": [{"name":"target"}]
                         }
-                    ]
+                    ],
+                    "require": [{"name": "clear", "value": [false]}]
+                },
+                {
+                    "name": "clear",
+                    "idInput": "clear",
+                    "tool-tip": "Flaga, która ustawiona na true usuwa wszystkie strzałki trackingu zadeklarowane SRAJ'em.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false
                 }
             ]
         }
