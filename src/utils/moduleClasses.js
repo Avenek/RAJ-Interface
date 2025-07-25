@@ -9,6 +9,13 @@ let moduleDict = {
     }
   },
 
+    attachScale : class attachScale{
+    constructor(){
+      this.scale = 1,
+      this.duration = 5
+    }
+  },
+
   battleEvents : class battleEvents{
     constructor(id){
       this.action = "CREATE",

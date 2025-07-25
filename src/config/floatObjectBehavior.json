@@ -366,6 +366,14 @@
                     "require": [{"name": "name", "value": ["CHANGE_IMG"]}, {"name": "kind", "value": ["SPRITE", "GIF"]}]
                 },
                 {
+                    "name": "external_properties",
+                    "idInput": "external_properties",
+                    "tool-tip": "Definiujemy w tym miejscu, czy mają się wykonać dodatkowe akcje, gdy obiekt jest w trakcie wykonywnaia tego zachowania.",
+                    "inputType": "empty",
+                    "varType": ["empty"],
+                    "extraOptions": [{"name":"external properties"}]
+                },
+                {
                     "name": "attachRotation",
                     "idInput": "behavior.attachRotation",
                     "tool-tip": "",                            
@@ -467,68 +475,14 @@
                     "require": [{"name": "name", "value": ["IDLE", "MOVE_TO_CORDS", "IDLE_GIF_ANIMATION", "MOVE_FROM_VECTORS", "FADE_IN", "FADE_OUT"]}],
                     "properties":[
                         {
-                            "name": "attachScale.scale",
-                            "idInput": "attachScale.scale",
-                            "tool-tip": "Mnożnik skalowania obiektu",
-                            "min":0.01,
-                            "max":50,
-                            "step":0.1,
-                            "inputType": "number",
-                            "varType": ["int", "float"],
-                            "defaultInput": 1,
-                            "defaultSraj": 1,
-                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "float", "name": "minMax"}]
-                        },
-                        {
-                            "name": "attachScale.duration",
-                            "idInput": "attachScale.duration",
-                            "tool-tip": "Czas trwania skalowania.",
-                            "min":0,
-                            "max":360,
-                            "step":1,
-                            "inputType": "number",
-                            "varType": ["int", "float"],
-                            "defaultInput": 5,
-                            "defaultSraj": 5,
-                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
-                        },
-                        {
-                            "name": "attachScale.scaleOffset",
-                            "idInput": "attachScale.scaleOffset",
-                            "tool-tip": "",
-                            "inputType": "subkey",
-                            "varType": [],
-                            "isCollapsed": "collapsed",
-                            "properties": [
-                                {
-                                    "name": "attachRotation.scaleOffset.x",
-                                    "idInput": "attachRotation.scaleOffset.x",
-                                    "tool-tip": "Zmiana miejsca środka ciężkości w poziomie.",
-                                    "inputType": "string",
-                                    "varType": ["int"],
-                                    "isCollapsed": "collapsed-key",
-                                    "canBeEmpty": true,
-                                    "min":1,
-                                    "max":300,
-                                    "defaultInput": "",
-                                    "defaultSraj": "",
-                                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
-                                },
-                                {
-                                    "name": "attachRotation.scaleOffset.y",
-                                    "idInput": "attachRotation.scaleOffset.y",
-                                    "tool-tip": "Zmiana miejsca środka ciężkości w pionie",
-                                    "inputType": "string",
-                                    "varType": ["int"],
-                                    "isCollapsed": "collapsed-key",
-                                    "canBeEmpty": true,
-                                    "min":1,
-                                    "max":300,
-                                    "defaultInput": "",
-                                    "defaultSraj": "",
-                                    "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
-                                }
-                            ]
+                            "name": "attachScale.vals",
+                            "idInput": "attachScale.vals",
+                            "tool-tip": "Zawiera tablicę tablicę zmian skalowania, które będą się po kolei wywoływać.",
+                            "inputType": "empty",
+                            "varType": ["list"],
+                            "defaultInput": [],
+                            "defaultSraj": [],
+                            "extraOptions": [{"name":"attach scale"}]
                         }
                     ]
                 }

@@ -6,6 +6,13 @@
       "bindId": "id",
       "type": "out"
     },
+        {
+      "name": "attachScale",
+      "hasList": true,
+      "bindId": "scale",
+      "path": "fromId",
+      "type": "out"
+    },
     {
       "name": "battleEvents",
       "hasList": true,
