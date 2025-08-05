@@ -7,8 +7,8 @@
             "inputType": "key",
             "properties": [
                 {
-                            "name": "attachScale.scale",
-                            "idInput": "attachScale.scale",
+                            "name": "scale",
+                            "idInput": "scale",
                             "tool-tip": "Mnożnik skalowania obiektu",
                             "min":0.01,
                             "max":50,
@@ -20,8 +20,8 @@
                             "validation":[{"forType": "int", "name": "minMax"}, {"forType": "float", "name": "minMax"}]
                         },
                         {
-                            "name": "attachScale.duration",
-                            "idInput": "attachScale.duration",
+                            "name": "duration",
+                            "idInput": "duration",
                             "tool-tip": "Czas trwania skalowania.",
                             "min":0,
                             "max":360,
@@ -33,16 +33,16 @@
                             "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
                         },
                         {
-                            "name": "attachScale.scaleOffset",
-                            "idInput": "attachScale.scaleOffset",
+                            "name": "scaleOffset",
+                            "idInput": "scaleOffset",
                             "tool-tip": "",
                             "inputType": "subkey",
                             "varType": [],
                             "isCollapsed": "collapsed",
                             "properties": [
                                 {
-                                    "name": "attachRotation.scaleOffset.x",
-                                    "idInput": "attachRotation.scaleOffset.x",
+                                    "name": "scaleOffset.x",
+                                    "idInput": "scaleOffset.x",
                                     "tool-tip": "Zmiana miejsca środka ciężkości w poziomie.",
                                     "inputType": "string",
                                     "varType": ["int"],
@@ -55,8 +55,8 @@
                                     "validation":[{"forType": "int", "name": "minMax"}, {"forType": "string", "name": "equal", "value": [""]}]
                                 },
                                 {
-                                    "name": "attachRotation.scaleOffset.y",
-                                    "idInput": "attachRotation.scaleOffset.y",
+                                    "name": "scaleOffset.y",
+                                    "idInput": "scaleOffset.y",
                                     "tool-tip": "Zmiana miejsca środka ciężkości w pionie",
                                     "inputType": "string",
                                     "varType": ["int"],
