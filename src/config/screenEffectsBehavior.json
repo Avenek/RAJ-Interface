@@ -9,10 +9,10 @@
                 {
                     "name": "mode",
                     "idInput": "mode",
-                    "tool-tip": "Do wyboru mamy opcję 'static' - bez żadnej przemiany oraz 'transition' - przemiana koloru albo przemieszczenie się dziury",
+                    "tool-tip": "Do wyboru mamy opcję 'static' - bez żadnej przemiany,'transition' - przemiana koloru albo przemieszczenie się dziury oraz 'IMAGE' - pozycjonuje konkretną grafikę w oknie gry",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"static"}, {"name":"transition"}],
+                    "options": [{"name":"static"}, {"name":"transition"}, {"name":"IMAGE"}],
                     "defaultInput": "static"
                 },
                 {
@@ -46,6 +46,7 @@
                     "idInput": "data",
                     "tool-tip": "",
                     "inputType": "subkey",
+                    "require": [{"name": "mode", "value": ["transition", "static"]}],
                     "properties":[
                         {
                             "name": "data.color",
@@ -280,6 +281,67 @@
                             "require": [{"name": "mode", "value": ["transition"]}]
                         }
                     ]
+                },
+                {
+                    "name": "kind",
+                    "idInput": "kind",
+                    "tool-tip": "Do wyboru mamy opcję w zależności od grafiki, odpowiednio SPRITE oraz GIF dla .png i .gif",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"SPRITE"}, {"name":"GIF"}],
+                    "defaultInput": "SPRITE",
+                    "require": [{"name": "mode", "value": ["IMAGE"]}]
+                },
+                {
+                    "name": "url",
+                    "idInput": "url",
+                    "tool-tip": "Ścieżka do grafiki. Grafiki są pobierane z katalogu /grafikiRaj.",
+                    "inputType": "file",
+                    "acceptFiles": [".png", ".gif"],
+                    "directory": "chmury/",
+                    "varType": ["string"],
+                    "defaultInput": "chmury/.png",
+                    "require": [{"name": "mode", "value": ["IMAGE"]}]
+                },
+                {
+                    "name": "withCreateInstantFadeIn",
+                    "idInput": "withCreateInstantFadeIn",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że obiekt pojawi się od razu z przeźroczystością 1 i nie będzie efektu wyłaniania się/mignięcia.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "mode", "value": ["IMAGE"]}]
+                },
+                {
+                    "name": "withRemoveInstantFadeOut",
+                    "idInput": "withRemoveInstantFadeOut",
+                    "tool-tip": "Flaga, która ustawiona na true sprawia, że obiekt zniknie od razu z przeźroczystością 0 i nie będzie efektu zanikania/mignięcia.",
+                    "inputType": "boolean",
+                    "varType": ["boolean"],
+                    "defaultInput": false,
+                    "defaultSraj": false,
+                    "require": [{"name": "mode", "value": ["IMAGE"]}]
+                },
+                {
+                    "name": "horizontal",
+                    "idInput": "horizontal",
+                    "tool-tip": "Pozycja pozioma na ekranie",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"LEFT"}, {"name":"CENTER"}, {"name":"RIGHT"}],
+                    "defaultInput": "CENTER",
+                    "require": [{"name": "mode", "value": ["IMAGE"]}]
+                },
+                {
+                    "name": "vertical",
+                    "idInput": "vertical",
+                    "tool-tip": "Pozycja pionowa na ekranie",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"TOP"}, {"name":"CENTER"}, {"name":"BOTTOM"}],
+                    "defaultInput": "CENTER",
+                    "require": [{"name": "mode", "value": ["IMAGE"]}]
                 }
             ]
         }
