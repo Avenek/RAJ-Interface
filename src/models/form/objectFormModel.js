@@ -151,6 +151,9 @@ class ObjectFormModel{
 
     hideAndRevealRequiredItems = (targetProperty = null) => {
         const params = this.jsonData.getParams(this.container)
+        if(!params){
+            return;
+        }
         let listToSet = []
         const listToRemove = []
         this.requiredItems.forEach(item => {
@@ -513,9 +516,6 @@ class ObjectFormModel{
             targetProperty.properties[0].extraOptions.forEach(option => option.isUsed = false)
             targetProperty.properties[1].extraOptions.forEach(option => option.isUsed = false)
             targetProperty.properties[2].extraOptions.forEach(option => option.isUsed = false)
-            this.jsonData.deleteParams("extraOption")
-            this.extraOptionIdBox.clearBox(false)
-            this.extraOptionIdBox.objectForm.clearForm()
         }
         this.jsonDataBox.jsonDataChanged()
         this.hideAndRevealRequiredItems(targetProperty)
