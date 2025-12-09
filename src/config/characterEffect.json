@@ -61,6 +61,7 @@
                     "idInput": "target",
                     "tool-tip": "",
                     "inputType": "subkey",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
                     "properties": [
                         {
                             "name": "target.kind",
