@@ -52,7 +52,7 @@
                     "tool-tip": "Rodzaj efektu. Animation stworzy animację na podstawie gifa. TEXT wyświetli boxa nad głową obiektu z zadeklarowanym tekstem. TINT powoduje nakładanie się kolorowego cienia na obiekt.",
                     "inputType": "options",
                     "varType": ["string"],
-                    "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}],
+                    "options": [{"name":"ANIMATION"}, {"name":"TEXT"}, {"name":"TINT"}, {"name":"GLOW"}],
                     "defaultInput": "ANIMATION",
                     "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
                 },
@@ -584,6 +584,143 @@
                                     "name": "params.color.colorPicker",
                                     "idInput": "text.color.colorPicker",
                                     "tool-tip": "Kolor w formacie RGBA.",
+                                    "inputType": "color",
+                                    "varType": ["color"],
+                                    "defaultSraj": "",
+                                    "canBeEmpty": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "params",
+                    "idInput": "glow.params",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "require": [{"name": "effect", "value": ["GLOW"]}, {"name": "action", "value": ["CREATE", "CREATE_FORCE"]}],
+                    "properties": [
+                        {
+                            "name": "params.behind",
+                            "idInput": "glow.behind",
+                            "tool-tip": "Zaznaczenie tej opcji powoduje renderowanie efektu za postacią.",
+                            "inputType": "boolean",
+                            "varType": ["boolean"],
+                            "defaultInput": false,
+                            "defaultSraj": false
+                        },
+                        {
+                            "name": "params.duration",
+                            "idInput": "glow.duration",
+                            "tool-tip": "Czas trwania efektu w sekundach.",
+                            "step":0.5,
+                            "min":0.1,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":5,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.repeat",
+                            "idInput": "glow.repeat",
+                            "tool-tip": "Ilość powtórzeń efektu, jeżeli damy wartość true to nieskończoność.",
+                            "inputType": "string",
+                            "varType": ["int", "boolean"],
+                            "min":1,
+                            "max":100,
+                            "defaultInput": 1,
+                            "defaultSraj": 1,
+                            "validation":[{"forType": "int", "name": "minMax"}, {"forType": "boolean", "name": "equal", "value": [true]}]
+                        },
+                        {
+                            "name": "params.delayBefore",
+                            "idInput": "glow.delayBefore",
+                            "tool-tip": "Opóźnia odpalenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.delayAfter",
+                            "idInput": "glow.delayAfter",
+                            "tool-tip": "Opóźnia zakończenie efektu o podaną liczbę sekund.",
+                            "step":1,
+                            "min":0,
+                            "max":999,
+                            "inputType": "number",
+                            "varType": ["float", "int"],
+                            "defaultInput":0,
+                            "defaultSraj": 0,
+                            "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "params.color",
+                            "idInput": "glow.color",
+                            "tool-tip": "",
+                            "inputType": "subSubkey",
+                            "properties": [
+                                {
+                                    "name": "params.color.r",
+                                    "idInput": "glow.color.r",
+                                    "tool-tip": "Zmienna r koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.g",
+                                    "idInput": "glow.color.g",
+                                    "tool-tip": "Zmienna g koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.b",
+                                    "idInput": "glow.color.b",
+                                    "tool-tip": "Zmienna b koloru w formacie RGBA.",
+                                    "step":5,
+                                    "min":0,
+                                    "max":255,
+                                    "inputType": "number",
+                                    "varType": ["int", "color"],
+                                    "defaultInput":0,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.a",
+                                    "idInput": "glow.color.a",
+                                    "tool-tip": "Zmienna a koloru w formacie RGBA - przeźroczystość.",
+                                    "step":0.1,
+                                    "min":0,
+                                    "max":1,
+                                    "inputType": "number",
+                                    "varType": ["float", "int"],
+                                    "defaultInput":1,
+                                    "extraOptions": [{"name":"get random"}],
+                                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                                },
+                                {
+                                    "name": "params.color.colorPicker",
+                                    "idInput": "glow.color.colorPicker",
+                                    "tool-tip": "Kolor w formacie RGB.",
                                     "inputType": "color",
                                     "varType": ["color"],
                                     "defaultSraj": "",
