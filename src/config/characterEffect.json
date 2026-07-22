@@ -69,7 +69,7 @@
                             "tool-tip": "Typ obiektu, na którym chcemy wywołać dany efekt.",
                             "inputType": "options",
                             "varType": ["string"],
-                            "options": [{"name":"HERO"}, {"name":"NPC"}, {"name":"THIS_NPC_INSTANCE"},{"name":"FAKE_NPC"}],
+                            "options": [{"name":"HERO"}, {"name":"NPC"}, {"name":"THIS_NPC_INSTANCE"},{"name":"FAKE_NPC"},{"name":"FLOAT_OBJECT"}],
                             "defaultInput": "HERO"
                         },
                         {
@@ -87,12 +87,12 @@
                         },
                         {
                             "name": "target.id",
-                            "idInput": "id.fakeNpc",
+                            "idInput": "id.object",
                             "tool-tip": "ID obiektu, na którym chcemy wywołać dany efekt.",
                             "inputType": "string",
                             "varType": ["int", "string"],
                             "defaultInput": "",
-                            "require": [{"name": "target.kind", "value": ["FAKE_NPC"]}]
+                            "require": [{"name": "target.kind", "value": ["FAKE_NPC", "FLOAT_OBJECT"]}]
                         }
                     ]
                 },
