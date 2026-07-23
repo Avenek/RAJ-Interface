@@ -22,6 +22,20 @@
                     "require": [{"name": "clear", "value": [false]}]
                 },
                 {
+                    "name": "speed",
+                    "idInput": "speed",
+                    "tool-tip": "Prędkość, z jaką należy przesunąć kamerę gry.",
+                    "step":1,
+                    "min":1,
+                    "max":10,
+                    "inputType": "number",
+                    "varType": ["float", "int"],
+                    "defaultInput": 5,
+                    "defaultSraj": 5,
+                    "require": [{"name": "clear", "value": [false]}],
+                    "validation":[{"forType": "float", "name": "minMax"}, {"forType": "int", "name": "minMax"}]
+                },
+                {
                     "name": "target",
                     "idInput": "target",
                     "tool-tip": "",
