@@ -87,6 +87,15 @@ let moduleDict = {
     }
   },
 
+    canvasFilter: class CanvasFilter {
+    constructor(id) {
+      this.action = "CREATE";
+      this.id = id
+      this.filter = "",
+      this.target= { "kind": "MAP"}
+    }
+  },  
+
   canvasMultiGlow : class CanvasMultiGlow{
     constructor(){
       this.kind = "HERO"

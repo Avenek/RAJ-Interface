@@ -74,6 +74,12 @@
       "type": "in"
     },
     {
+      "name": "canvasFilter",
+      "hasList": true,
+      "bindId": "id",
+      "type": "out"
+    },
+    {
       "name": "canvasMultiGlow",
       "hasList": true,
       "bindId": "kind",

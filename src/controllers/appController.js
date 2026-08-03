@@ -126,6 +126,15 @@ class AppController {
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
       localStorage.setItem("lastClear", "9")
     }
+    if(lastClear<10){
+      const canvasFilter =  {
+          "name": "CanvasFilter",
+          "tipInfo": "Umożliwia nałożenie filtru na wybrany obiekt."
+        }
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(canvasFilter)))
+      localStorage.setItem("containerConfig", JSON.stringify(toAdd))
+      localStorage.setItem("lastClear", "10")
+    }
   }
 
 const app = new AppController(new AppView(), new AppModel())

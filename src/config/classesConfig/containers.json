@@ -165,6 +165,10 @@
         {
           "name": "SrajWindow",
           "tipInfo": "Umożliwia wywołanie okienka z informacją dla gracza."
+        },
+        {
+          "name": "CanvasFilter",
+          "tipInfo": "Umożliwia nałożenie filtru na wybrany obiekt."
         }
       ]
     }

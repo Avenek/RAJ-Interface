@@ -1,0 +1,81 @@
+{
+    "properties":[
+        {
+            "name": "list",
+            "idInput": "list",
+            "tool-tip": "",
+            "inputType": "key",
+            "properties": [
+                {
+                    "name": "action",
+                    "idInput": "action",
+                    "tool-tip": "Filtr możemy tworzyć, jeżeli nie istnieje żaden o podanym id albo usuwać jeżeli istnieje o danym id.",
+                    "inputType": "options",
+                    "varType": ["string"],
+                    "options": [{"name":"CREATE"}, {"name":"CREATE_FORCE"}, {"name":"REMOVE"}],
+                    "extraOptions": [{"name":"case"}],
+                    "defaultInput": "CREATE"
+                },
+                {
+                    "name": "id",
+                    "idInput": "id",
+                    "tool-tip": "Nazwa identyfikująca filtr. Umożliwia późniejsze jego usunięcie.",
+                    "inputType": "string",
+                    "varType": ["string", "int"],
+                    "defaultInput": "obiekt-id",
+                    "extraOptions": [{"name":"get npc id"}],
+                    "validation":[{"forType": "string", "name": "unique"}, {"forType": "int", "name": "unique"}, {"forType": "int", "name": "moreThan", "value": -1}]
+                },
+                {
+                    "name": "filter",
+                    "idInput": "filter",
+                    "tool-tip": "filter (string) - string, która zawiera kombinację następujących parametrów: sepia (%), hue-rotate (deg), saturate (%), brightness (%), contrast (%), grayscale (%), blur (px)",
+                    "inputType": "string",
+                    "varType": ["string"],
+                    "defaultInput": "",
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]          
+                },
+                {
+                    "name": "target",
+                    "idInput": "target",
+                    "tool-tip": "",
+                    "inputType": "subkey",
+                    "properties": [
+                        {
+                            "name": "target.kind",
+                            "idInput": "target.kind",
+                            "tool-tip": "Typ obiektu, na którym chcemy zastosować filtr.",
+                            "inputType": "options",
+                            "varType": ["string"],
+                            "options": [{"name":"MAP"}, {"name":"HERO"}, {"name":"NPC"}, {"name":"FAKE_NPC"}, {"name":"FLOAT_OBJECT"}],
+                            "defaultInput": "MAP"
+                        },
+                        {
+                            "name": "target.id",
+                            "idInput": "id.npc",
+                            "tool-tip": "ID obiektu, na którym chcemy zastosować filtr.",
+                            "inputType": "number",
+                            "min":0,
+                            "max":500000,
+                            "step":1,
+                            "varType": ["int"],
+                            "defaultInput": 0,
+                            "require": [{"name": "target.kind", "value": ["NPC"]}],
+                            "validation":[{"forType": "int", "name": "minMax"}]
+                        },
+                        {
+                            "name": "target.id",
+                            "idInput": "id.fakeNpc",
+                            "tool-tip": "ID obiektu, na którym chcemy zastosować filtr.",
+                            "inputType": "string",
+                            "varType": ["int", "string"],
+                            "defaultInput": "",
+                            "require": [{"name": "target.kind", "value": ["FAKE_NPC", "FLOAT_OBJECT"]}]
+                        }
+                    ],
+                    "require": [{"name": "action", "value": ["CREATE", "CREATE_FORCE"]}]
+                }
+            ]
+        }
+    ]
+}
