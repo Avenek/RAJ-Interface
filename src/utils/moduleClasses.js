@@ -87,7 +87,7 @@ let moduleDict = {
     }
   },
 
-    canvasFilter: class CanvasFilter {
+    objectFilter: class ObjectFilter {
     constructor(id) {
       this.action = "CREATE";
       this.id = id

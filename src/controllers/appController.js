@@ -39,8 +39,6 @@ class AppController {
   }
 
 }
-//localStorage.clear()
-
 
   if(localStorage.getItem("containerConfig") && localStorage.getItem("lastClear")){
     const lastClear = parseInt(localStorage.getItem("lastClear"))
@@ -127,11 +125,11 @@ class AppController {
       localStorage.setItem("lastClear", "9")
     }
     if(lastClear<10){
-      const canvasFilter =  {
-          "name": "CanvasFilter",
+      const objectFilter =  {
+          "name": "ObjectFilter",
           "tipInfo": "Umożliwia nałożenie filtru na wybrany obiekt."
         }
-      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(canvasFilter)))
+      toAdd.containers[0].modules.push(JSON.parse(JSON.stringify(objectFilter)))
       localStorage.setItem("containerConfig", JSON.stringify(toAdd))
       localStorage.setItem("lastClear", "10")
     }

@@ -74,7 +74,7 @@
       "type": "in"
     },
     {
-      "name": "canvasFilter",
+      "name": "objectFilter",
       "hasList": true,
       "bindId": "id",
       "type": "out"

@@ -167,7 +167,7 @@
           "tipInfo": "Umożliwia wywołanie okienka z informacją dla gracza."
         },
         {
-          "name": "CanvasFilter",
+          "name": "ObjectFilter",
           "tipInfo": "Umożliwia nałożenie filtru na wybrany obiekt."
         }
       ]
